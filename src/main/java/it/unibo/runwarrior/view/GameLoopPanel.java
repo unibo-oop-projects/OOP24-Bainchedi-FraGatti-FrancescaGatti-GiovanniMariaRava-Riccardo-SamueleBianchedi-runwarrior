@@ -1,6 +1,8 @@
 package it.unibo.runwarrior.view;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -21,7 +23,18 @@ public class GameLoopPanel extends JPanel implements Runnable{
     }
 
     @Override
-    public void run() {
-        
+    public void run(){
+    
+    }
+
+    public void update(){
+
+    }
+
+    @Override
+    protected void paintComponent(Graphics gr){
+        super.paintComponent(gr);
+        Graphics2D gr2 = (Graphics2D) gr;
+        gr2.dispose();
     }
 }
