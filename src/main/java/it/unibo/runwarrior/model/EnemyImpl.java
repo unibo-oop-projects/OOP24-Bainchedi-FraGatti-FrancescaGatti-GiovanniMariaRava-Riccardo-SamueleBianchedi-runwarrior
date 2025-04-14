@@ -3,6 +3,7 @@ package it.unibo.runwarrior.model;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+
 public abstract class EnemyImpl implements Enemy{
     
 
@@ -13,33 +14,32 @@ public abstract class EnemyImpl implements Enemy{
     public int velocityX;
     public int velocityY;
 
+    public Handler handler;
+
     public BufferedImage image; 
 
     
-    public EnemyImpl(int x, int y, int width, int height, boolean solid) {
+    public EnemyImpl(int x, int y, int width, int height, boolean solid, Handler handler) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.solid = solid;
+        this.handler = handler;
     }
     @Override
     public void die() {
-        // TODO Auto-generated method stub
+        handler.removeEntity(this)
         
     }
 
     @Override
-    public void render(Graphics g) {
-        // TODO Auto-generated method stub
-        
-    }
+    public abstract void render(Graphics g);
 
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        
-    }
+    public abstract void update();
+
+
     public int getX() {
         return x;
     }
