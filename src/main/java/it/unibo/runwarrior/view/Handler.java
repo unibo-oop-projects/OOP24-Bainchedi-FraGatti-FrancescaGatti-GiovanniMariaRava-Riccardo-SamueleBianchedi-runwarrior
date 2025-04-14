@@ -15,7 +15,14 @@ public class Handler {
     public void update(){
         for (EnemyImpl enemy : enemies) enemy.update();
     }
+    
+    public void addEnemy(EnemyImpl en){
+        enemies.add(en);
+    }
 
+    public void removeEnemy(EnemyImpl en){
+        enemies.remove(en);
+    }
     
 
 }
