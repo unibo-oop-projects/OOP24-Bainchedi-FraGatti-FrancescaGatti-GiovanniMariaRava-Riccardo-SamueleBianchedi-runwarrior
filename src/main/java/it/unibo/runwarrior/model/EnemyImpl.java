@@ -3,6 +3,8 @@ package it.unibo.runwarrior.model;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import it.unibo.runwarrior.view.Handler;
+
 
 public abstract class EnemyImpl implements Enemy{
     
@@ -27,18 +29,11 @@ public abstract class EnemyImpl implements Enemy{
         this.solid = solid;
         this.handler = handler;
     }
+
     @Override
     public void die() {
-        handler.removeEntity(this)
-        
+        handler.removeEnemy(this);
     }
-
-    @Override
-    public abstract void render(Graphics g);
-
-    @Override
-    public abstract void update();
-
 
     public int getX() {
         return x;
