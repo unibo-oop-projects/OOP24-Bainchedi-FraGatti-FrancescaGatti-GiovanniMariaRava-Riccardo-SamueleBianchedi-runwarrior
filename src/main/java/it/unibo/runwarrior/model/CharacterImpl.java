@@ -70,7 +70,7 @@ public class CharacterImpl implements Character{
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(getClass().getResourceAsStream("/resources/WarriorImages/stopRightN.png"));
+            right0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopRightN.png"));
             right1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN1.png"));
             right2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN2.png"));
             left0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopLeftN.png"));
@@ -106,5 +106,4 @@ public class CharacterImpl implements Character{
     public int getScY() {
         return this.screenY;
     }
-    
 }
