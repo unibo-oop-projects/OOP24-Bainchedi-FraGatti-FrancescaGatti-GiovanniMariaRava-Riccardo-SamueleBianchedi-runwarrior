@@ -1,6 +1,10 @@
 package it.unibo.runwarrior.model;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.view.GameLoopPanel;
@@ -22,12 +26,14 @@ public class CharacterImpl implements Character{
     private int speedJumpUP = 13; 
     private int speedJumpDown = 8;
     private int groundX = 0;//variabile che permette lo scorrimento della mappa
+    private BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
     public GameLoopPanel glp;
     public CharacterComand cmd;
 
     public CharacterImpl(GameLoopPanel panel){
         this.glp = panel;
+        playerImage();
     }
 
     @Override
@@ -63,6 +69,18 @@ public class CharacterImpl implements Character{
 
     @Override
     public void playerImage() {
+        try {
+            right0 = ImageIO.read(getClass().getResourceAsStream("/images/stopRightN.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/images/goRightN1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/images/goRightN2.png"));
+            left0 = ImageIO.read(getClass().getResourceAsStream("/images/stopLeftN.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/images/goLeftN1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/images/goLeftN2.png"));
+            attackR = right0;
+            attackL = left0;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
