@@ -13,6 +13,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
     
     public static final int WIDTH = 960;
     public static final int HEIGHT = 672;
+    public static final int MLD = 1000000000;
+    public static final int FPS = 60;
 
     private Thread gameThread;
     public Character player;
@@ -30,11 +32,26 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     @Override
     public void run(){
-        
+        double timeFor1Frame = MLD/FPS; //16.666.666,67 in ns
+        long lastTime = System.nanoTime();
+        long currentTime;
+        double waitingTime = 0;
+
+        while(true){
+            currentTime = System.nanoTime();
+            waitingTime += (currentTime-lastTime);
+            lastTime = currentTime;
+            
+            if(waitingTime >= timeFor1Frame){
+                update();
+                repaint();
+                waitingTime  -= timeFor1Frame;
+            }
+        }
     }
 
     public void update(){
-
+        player.update();
     }
 
     @Override
