@@ -70,12 +70,12 @@ public class CharacterImpl implements Character{
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(getClass().getResourceAsStream("/images/stopRightN.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/images/goRightN1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/images/goRightN2.png"));
-            left0 = ImageIO.read(getClass().getResourceAsStream("/images/stopLeftN.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/images/goLeftN1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/images/goLeftN2.png"));
+            right0 = ImageIO.read(getClass().getResourceAsStream("/resources/WarriorImages/stopRightN.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN2.png"));
+            left0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopLeftN.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN2.png"));
             attackR = right0;
             attackL = left0;
         } catch (IOException e) {
