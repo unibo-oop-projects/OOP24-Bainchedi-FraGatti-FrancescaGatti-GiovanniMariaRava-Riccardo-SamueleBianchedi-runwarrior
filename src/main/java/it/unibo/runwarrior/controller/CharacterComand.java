@@ -7,6 +7,7 @@ public class CharacterComand implements KeyListener{
 
     private boolean right;
     private boolean left;
+    private JumpState jump = JumpState.STOP_JUMP;
     private boolean isJump;
     private boolean attack;
 
@@ -25,6 +26,10 @@ public class CharacterComand implements KeyListener{
         if(value == KeyEvent.VK_LEFT){
             left = true;
         }
+        if(value == KeyEvent.VK_UP && jump == JumpState.STOP_JUMP){
+            jump = JumpState.START_JUMP;
+            isJump = true;
+        }
     }
 
     @Override
@@ -37,6 +42,10 @@ public class CharacterComand implements KeyListener{
         if(value == KeyEvent.VK_LEFT){
             left = false;
         }
+        if(value == KeyEvent.VK_UP && jump == JumpState.START_JUMP){
+            jump = JumpState.MIN_JUMP;
+            isJump = true;
+        }
     }
 
     public boolean getRight(){
@@ -45,6 +54,14 @@ public class CharacterComand implements KeyListener{
 
     public boolean getLeft(){
         return left;
+    }
+
+    public JumpState getJump(){
+        return jump;
+    }
+
+    public boolean isJumping(){
+        return isJump;
     }
     
 }
