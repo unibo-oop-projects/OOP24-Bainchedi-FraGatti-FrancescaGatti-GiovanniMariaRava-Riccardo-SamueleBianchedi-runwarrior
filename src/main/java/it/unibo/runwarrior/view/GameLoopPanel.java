@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.CharacterImpl;
 
@@ -18,11 +19,14 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     private Thread gameThread;
     public Character player;
+    public CharacterComand commands;
 
     public GameLoopPanel(){
-        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        this.commands = new CharacterComand();
+        player = new CharacterImpl(this, commands);
 
-        player = new CharacterImpl(this);
+        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        this.addKeyListener(commands);
     }
 
     public void startGame(){

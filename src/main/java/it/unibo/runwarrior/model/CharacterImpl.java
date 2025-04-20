@@ -31,8 +31,9 @@ public class CharacterImpl implements Character{
     public GameLoopPanel glp;
     public CharacterComand cmd;
 
-    public CharacterImpl(GameLoopPanel panel){
+    public CharacterImpl(GameLoopPanel panel, CharacterComand commands){
         this.glp = panel;
+        this.cmd = commands;
         playerImage();
     }
 
