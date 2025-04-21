@@ -7,9 +7,9 @@ import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.view.Handler;
 
-public class Guardia extends EnemyImpl {
+public class Guard extends EnemyImpl {
 
-    public Guardia(int x, int y, int width, int height, boolean solid, Handler handler) {
+    public Guard(int x, int y, int width, int height, boolean solid, Handler handler) {
         super(x, y, width, height, solid, handler);
         try{
             image = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuardia.png"));
