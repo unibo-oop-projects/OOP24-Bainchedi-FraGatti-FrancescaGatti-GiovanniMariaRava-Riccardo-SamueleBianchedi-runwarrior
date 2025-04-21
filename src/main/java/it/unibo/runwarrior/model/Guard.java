@@ -10,7 +10,8 @@ import it.unibo.runwarrior.view.Handler;
 
 public class Guard extends EnemyImpl {
     public BufferedImage rightImage, leftImage;
-    public Guard(int x, int y, int width, int height, boolean solid, Handler handler) {
+    public int minX, maxX;
+    public Guard(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
         super(x, y, width, height, solid, handler);
         setVelocityX(2);
         try{
@@ -20,6 +21,8 @@ public class Guard extends EnemyImpl {
         }catch (IOException e){
             e.printStackTrace();
         }
+        this.minX = minX;
+        this.maxX = maxX;
     }
 
     @Override
@@ -29,7 +32,17 @@ public class Guard extends EnemyImpl {
 
     @Override
     public void update() {
-        x +=velocityX
+        x += velocityX;
+        
+        if(x<=minX | x>= maxX -width){
+            velocityX = -velocityX;
+
+            if(velocityX>0){
+                image=rightImage;
+            }else{
+                image = leftImage;
+            }
+        }
     }
 
 }
