@@ -11,6 +11,7 @@ public class Guard extends EnemyImpl {
 
     public Guard(int x, int y, int width, int height, boolean solid, Handler handler) {
         super(x, y, width, height, solid, handler);
+        setVelocityX(2);
         try{
             image = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuardia.png"));
         }catch (IOException e){
@@ -20,8 +21,7 @@ public class Guard extends EnemyImpl {
 
     @Override
     public void render(Graphics g) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'render'");
+        g.drawImage(image, x, y, width, height, null);
     }
 
     @Override
