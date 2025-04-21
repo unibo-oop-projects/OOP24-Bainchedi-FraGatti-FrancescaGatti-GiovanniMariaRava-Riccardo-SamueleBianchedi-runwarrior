@@ -12,7 +12,7 @@ public class Guardia extends EnemyImpl {
     public Guardia(int x, int y, int width, int height, boolean solid, Handler handler) {
         super(x, y, width, height, solid, handler);
         try{
-            image = ImageIO.read(getClass().getResourceAsStream(""));
+            image = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuardia.png"));
         }catch (IOException e){
             e.printStackTrace();
         }
