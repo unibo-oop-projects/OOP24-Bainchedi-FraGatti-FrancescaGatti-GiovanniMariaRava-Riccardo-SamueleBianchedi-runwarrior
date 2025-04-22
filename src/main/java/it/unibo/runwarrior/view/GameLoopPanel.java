@@ -29,7 +29,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         player = new CharacterImpl(this, commands);
 
         this.handler = new Handler();
-        handler.addEnemy(new Guard(300, 512, WIDTH, HEIGHT, true, handler, 100, 800));
+        handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800));
 
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(commands);
@@ -69,7 +69,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
     protected void paintComponent(Graphics gr){
         super.paintComponent(gr);
         Graphics2D gr2 = (Graphics2D) gr;
-        gr2.dispose();
+        
         handler.render(gr2);
+        gr2.dispose();
     }
 }
