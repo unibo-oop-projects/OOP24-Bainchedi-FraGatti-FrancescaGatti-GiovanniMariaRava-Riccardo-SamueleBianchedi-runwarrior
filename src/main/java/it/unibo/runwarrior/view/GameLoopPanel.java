@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.CharacterImpl;
+import it.unibo.runwarrior.model.Guard;
 
 public class GameLoopPanel extends JPanel implements Runnable{
     
@@ -20,10 +21,15 @@ public class GameLoopPanel extends JPanel implements Runnable{
     private Thread gameThread;
     public Character player;
     public CharacterComand commands;
+    
+    private Handler handler;
 
     public GameLoopPanel(){
         this.commands = new CharacterComand();
         player = new CharacterImpl(this, commands);
+
+        this.handler = new Handler();
+        handler.addEnemy(new Guard(300, 512, WIDTH, HEIGHT, true, handler, 100, 800));
 
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(commands);
@@ -56,6 +62,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public void update(){
         player.update();
+        handler.update();
     }
 
     @Override
@@ -63,5 +70,6 @@ public class GameLoopPanel extends JPanel implements Runnable{
         super.paintComponent(gr);
         Graphics2D gr2 = (Graphics2D) gr;
         gr2.dispose();
+        handler.render(gr2);
     }
 }
