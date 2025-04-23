@@ -10,6 +10,9 @@ import it.unibo.runwarrior.view.Handler;
 public class Snake extends EnemyImpl{
     public BufferedImage rightSnake, rightSnakeMoving, leftSnake, leftSnakeMoving;
     public int minX, maxX;
+    public int frameCounter = 0;
+    public boolean step = false;
+
     public Snake(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
         super(x, y, width, height, solid, handler);
         this.minX = minX;
@@ -33,8 +36,18 @@ public class Snake extends EnemyImpl{
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
+        x += velocityX;
 
+        // Cambia direzione se arriva ai limiti
+        if (x <= minX || x >= maxX - width) {
+            velocityX = -velocityX;
+        }
+
+        // Gestione "passo" animazione
+        frameCounter++;
+        if (frameCounter >= 20) { // cambia ogni 20 tick
+            step = !step;
+            frameCounter = 0;
+        }
+    }
 }
