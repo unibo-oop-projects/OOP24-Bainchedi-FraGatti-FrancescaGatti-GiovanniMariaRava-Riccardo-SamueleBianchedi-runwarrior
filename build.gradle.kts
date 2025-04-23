@@ -36,6 +36,7 @@ dependencies {
     // Example library: Guava. Add what you need (and use the latest version where appropriate).
     // implementation("com.google.guava:guava:28.1-jre")
 
+    /*
     // JavaFX: comment out if you do not need them
     val javaFxVersion = "23.0.2"
     implementation("org.openjfx:javafx:$javaFxVersion")
@@ -43,7 +44,7 @@ dependencies {
         for (module in javaFXModules) {
             implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")
         }
-    }
+    }*/
 
     // The BOM (Bill of Materials) synchronizes all the versions of Junit coherently.
     testImplementation(platform("org.junit:junit-bom:5.12.1"))
@@ -56,6 +57,15 @@ dependencies {
 tasks.withType<Test> {
     // Enables JUnit 5 Jupiter module
     useJUnitPlatform()
+}
+
+tasks.register<Copy>("resourcesToBin") {
+    from("src/main/resources")
+    into("bin")
+}
+
+tasks.named("build") {
+    dependsOn("resourcesToBin")
 }
 
 application {
