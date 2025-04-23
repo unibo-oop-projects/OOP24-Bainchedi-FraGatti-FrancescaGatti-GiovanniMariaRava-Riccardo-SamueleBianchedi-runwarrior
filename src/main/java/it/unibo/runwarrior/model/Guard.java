@@ -45,17 +45,22 @@ public class Guard extends EnemyImpl {
     }
 
     @Override
+    /*
+     * 
+     * 
+     * 
+     */
     public void update() {
         x += velocityX;
 
-        // Cambia direzione se arriva ai limiti
+        
         if (x <= minX || x >= maxX - width) {
             velocityX = -velocityX;
         }
 
-        // Gestione "passo" animazione
+        
         frameCounter++;
-        if (frameCounter >= 20) { // cambia ogni 20 tick
+        if (frameCounter >= 20) { 
             step = !step;
             frameCounter = 0;
         }

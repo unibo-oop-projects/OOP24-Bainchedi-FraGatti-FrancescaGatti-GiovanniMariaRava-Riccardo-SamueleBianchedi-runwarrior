@@ -8,21 +8,24 @@ import javax.imageio.ImageIO;
 import it.unibo.runwarrior.view.Handler;
 
 public class Snake extends EnemyImpl{
-    public BufferedImage rightSnake, rightSnakeMoving, leftSnake, leftSnakeMoving;
+    public BufferedImage rightSnake, rightSnakeMoving, leftSnake, leftSnakeMoving, poisonImage;
     public int minX, maxX;
     public int frameCounter = 0;
     public boolean step = false;
 
+    public boolean dead = false;
+    private int deathTimer = 0;
     public Snake(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
         super(x, y, width, height, solid, handler);
         this.minX = minX;
         this.maxX = maxX;
-        setVelocityX(3);
+        setVelocityX(1);
         try {
             rightSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnake.png"));
             rightSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnakeMoving.png"));
             leftSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnake.png"));
             leftSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnakeMoving.png"));
+            poisonImage = ImageIO.read(getClass().getResourceAsStream("/Snake/poison.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -30,32 +33,45 @@ public class Snake extends EnemyImpl{
 
     @Override
     public void render(Graphics g) {
+
         BufferedImage currentImage;
 
-        if (velocityX > 0) {
-            currentImage = step ? rightSnakeMoving : rightSnake;
+        if (dead) {
+            g.drawImage(poisonImage, x, y, width, height, null);
         } else {
-            currentImage = step ? leftSnakeMoving : leftSnake;
+            currentImage = velocityX > 0
+                ? (step ? rightSnakeMoving : rightSnake)
+                : (step ? leftSnakeMoving : leftSnake);
+    
+            g.drawImage(currentImage, x, y, width, height, null);
         }
-
-        g.drawImage(currentImage, x, y, width, height, null);
 
     }
 
     @Override
     public void update() {
-        x += velocityX;
-
-        // Cambia direzione se arriva ai limiti
-        if (x <= minX || x >= maxX - width) {
-            velocityX = -velocityX;
-        }
-
-        // Gestione "passo" animazione
-        frameCounter++;
-        if (frameCounter >= 20) { // cambia ogni 20 tick
-            step = !step;
-            frameCounter = 0;
+        if (!dead) {
+            x += velocityX;
+            if (x <= minX || x >= maxX - width) {
+                velocityX = -velocityX;
+            }
+            frameCounter++;
+            if (frameCounter >= 20) {
+                step = !step;
+                frameCounter = 0;
+            }
+        } else {
+            deathTimer++;
+            if (deathTimer > 120) {
+                handler.removeEnemy(this);
+            }
         }
     }
+
+    @Override
+    public void die(){
+        dead = true;
+        setVelocityX(0);
+    }
+
 }
