@@ -13,6 +13,8 @@ public class Snake extends EnemyImpl{
     public int frameCounter = 0;
     public boolean step = false;
 
+    public boolean dead = false;
+
     public Snake(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
         super(x, y, width, height, solid, handler);
         this.minX = minX;
@@ -59,4 +61,11 @@ public class Snake extends EnemyImpl{
             frameCounter = 0;
         }
     }
+
+    @Override
+    public void die(){
+        dead = true;
+        setVelocityX(0);
+    }
+
 }
