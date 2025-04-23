@@ -1,14 +1,26 @@
 package it.unibo.runwarrior.model;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.view.Handler;
 
 public class Snake extends EnemyImpl{
+    public BufferedImage rightSnake, rightSnakeMoving, leftSnake, leftSnakeMoving;
 
     public Snake(int x, int y, int width, int height, boolean solid, Handler handler) {
         super(x, y, width, height, solid, handler);
-        //TODO Auto-generated constructor stub
+        setVelocityX(3);
+        try {
+            rightSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnake.png"));
+            rightSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnakeMoving.png"));
+            leftSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnake.png"));
+            leftSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnakeMoving.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
