@@ -17,7 +17,7 @@ public class Snake extends EnemyImpl{
         super(x, y, width, height, solid, handler);
         this.minX = minX;
         this.maxX = maxX;
-        setVelocityX(3);
+        setVelocityX(1);
         try {
             rightSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnake.png"));
             rightSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnakeMoving.png"));
