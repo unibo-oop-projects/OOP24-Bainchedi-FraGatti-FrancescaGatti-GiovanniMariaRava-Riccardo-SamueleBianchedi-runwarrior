@@ -15,7 +15,7 @@ public class Guard extends EnemyImpl {
         super(x, y, width, height, solid, handler);
         setVelocityX(2);
         try{
-            rightImage = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuardia.png"));
+            rightImage = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuard.png"));
             leftImage = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftGuard.png"));
             image = rightImage;
         }catch (IOException e){
