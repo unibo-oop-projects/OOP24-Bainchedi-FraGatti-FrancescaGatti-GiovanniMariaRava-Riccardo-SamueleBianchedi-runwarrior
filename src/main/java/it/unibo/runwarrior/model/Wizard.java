@@ -16,6 +16,7 @@ public class Wizard extends EnemyImpl {
 
     public Wizard(int x, int y, int width, int height, boolean solid, Handler handler, int maxX, int minX) {
         super(x, y, width, height, solid, handler);
+        setVelocityX(2);
         try {
             rightWizard= ImageIO.read(getClass().getResourceAsStream("/Wizard/rightWizard.png"));
             rightWizardMoving= ImageIO.read(getClass().getResourceAsStream("/Wizard/rightWizardMoving.png"));
