@@ -33,15 +33,18 @@ public class Snake extends EnemyImpl{
 
     @Override
     public void render(Graphics g) {
+
         BufferedImage currentImage;
-
-        if (velocityX > 0) {
-            currentImage = step ? rightSnakeMoving : rightSnake;
+        
+        if (dead) {
+            g.drawImage(poisonImage, x, y, width, height, null);
         } else {
-            currentImage = step ? leftSnakeMoving : leftSnake;
+            currentImage = velocityX > 0
+                ? (step ? rightSnakeMoving : rightSnake)
+                : (step ? leftSnakeMoving : leftSnake);
+    
+            g.drawImage(currentImage, x, y, width, height, null);
         }
-
-        g.drawImage(currentImage, x, y, width, height, null);
 
     }
 
