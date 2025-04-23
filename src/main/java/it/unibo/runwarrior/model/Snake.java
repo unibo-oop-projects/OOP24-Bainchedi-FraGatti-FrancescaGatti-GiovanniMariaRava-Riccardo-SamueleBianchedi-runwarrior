@@ -30,8 +30,16 @@ public class Snake extends EnemyImpl{
 
     @Override
     public void render(Graphics g) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'render'");
+        BufferedImage currentImage;
+
+        if (velocityX > 0) {
+            currentImage = step ? rightSnakeMoving : rightSnake;
+        } else {
+            currentImage = step ? leftSnakeMoving : leftSnake;
+        }
+
+        g.drawImage(currentImage, x, y, width, height, null);
+
     }
 
     @Override
