@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import it.unibo.runwarrior.view.Handler;
 
 public class Snake extends EnemyImpl{
-    public BufferedImage rightSnake, rightSnakeMoving, leftSnake, leftSnakeMoving;
+    public BufferedImage rightSnake, rightSnakeMoving, leftSnake, leftSnakeMoving, poisonImage;
     public int minX, maxX;
     public int frameCounter = 0;
     public boolean step = false;
@@ -23,6 +23,7 @@ public class Snake extends EnemyImpl{
             rightSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnakeMoving.png"));
             leftSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnake.png"));
             leftSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnakeMoving.png"));
+            poisonImage = ImageIO.read(getClass().getResourceAsStream("/Snake/poison.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
