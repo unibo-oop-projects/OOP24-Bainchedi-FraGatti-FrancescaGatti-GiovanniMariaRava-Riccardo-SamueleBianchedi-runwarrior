@@ -14,7 +14,7 @@ public class Snake extends EnemyImpl{
     public boolean step = false;
 
     public boolean dead = false;
-
+    private int deathTimer = 0;
     public Snake(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
         super(x, y, width, height, solid, handler);
         this.minX = minX;
@@ -35,7 +35,7 @@ public class Snake extends EnemyImpl{
     public void render(Graphics g) {
 
         BufferedImage currentImage;
-        
+
         if (dead) {
             g.drawImage(poisonImage, x, y, width, height, null);
         } else {
@@ -50,18 +50,21 @@ public class Snake extends EnemyImpl{
 
     @Override
     public void update() {
-        x += velocityX;
-
-        // Cambia direzione se arriva ai limiti
-        if (x <= minX || x >= maxX - width) {
-            velocityX = -velocityX;
-        }
-
-        // Gestione "passo" animazione
-        frameCounter++;
-        if (frameCounter >= 20) { // cambia ogni 20 tick
-            step = !step;
-            frameCounter = 0;
+        if (!dead) {
+            x += velocityX;
+            if (x <= minX || x >= maxX - width) {
+                velocityX = -velocityX;
+            }
+            frameCounter++;
+            if (frameCounter >= 20) {
+                step = !step;
+                frameCounter = 0;
+            }
+        } else {
+            deathTimer++;
+            if (deathTimer > 120) {
+                handler.removeEnemy(this);
+            }
         }
     }
 
