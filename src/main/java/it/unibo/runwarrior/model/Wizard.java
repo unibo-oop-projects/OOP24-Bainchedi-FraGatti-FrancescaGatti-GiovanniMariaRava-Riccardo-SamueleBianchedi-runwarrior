@@ -14,7 +14,7 @@ public class Wizard extends EnemyImpl {
     public int frameCounter = 0;
     public int minX, maxX;
 
-    public Wizard(int x, int y, int width, int height, boolean solid, Handler handler, int maxX, int minX) {
+    public Wizard(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
         super(x, y, width, height, solid, handler);
         setVelocityX(2);
         try {
