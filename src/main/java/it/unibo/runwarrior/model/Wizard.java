@@ -10,7 +10,11 @@ import it.unibo.runwarrior.view.Handler;
 public class Wizard extends EnemyImpl {
     public BufferedImage rightWizard, rightWizardMoving, leftWizard, leftWizardMoving; 
 
-    public Wizard(int x, int y, int width, int height, boolean solid, Handler handler) {
+    public boolean step = false;
+    public int frameCounter = 0;
+    public int minX, maxX;
+
+    public Wizard(int x, int y, int width, int height, boolean solid, Handler handler, int maxX, int minX) {
         super(x, y, width, height, solid, handler);
         try {
             rightWizard= ImageIO.read(getClass().getResourceAsStream("/Wizard/rightWizard.png"));
@@ -20,17 +24,39 @@ public class Wizard extends EnemyImpl {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.minX = minX;
+        this.maxX = maxX;
     }
 
     @Override
     public void render(Graphics g) {
-       g.drawImage(rightWizard, x, y,width,height, null);
+        BufferedImage currentImage;
+
+        if (velocityX > 0) {
+            currentImage = step ? rightWizardMoving : rightWizard;
+        } else {
+            currentImage = step ? leftWizardMoving : leftWizard;
+        }
+
+        g.drawImage(currentImage, x, y, width, height, null);
+      
     }
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        x += velocityX;
+
+        // Cambia direzione se arriva ai limiti
+        if (x <= minX || x >= maxX - width) {
+            velocityX = -velocityX;
+        }
+
+        // Gestione "passo" animazione
+        frameCounter++;
+        if (frameCounter >= 20) { // cambia ogni 20 tick
+            step = !step;
+            frameCounter = 0;
+        }
     }
 
 }
