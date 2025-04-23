@@ -66,6 +66,9 @@ public class CharacterImpl implements Character{
 
     @Override
     public void drawPlayer(Graphics2D gr2) {
+        BufferedImage image;
+        image = right0;
+        gr2.drawImage(image, screenX, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
     }
 
     @Override

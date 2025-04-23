@@ -71,6 +71,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         super.paintComponent(gr);
         Graphics2D gr2 = (Graphics2D) gr;
         
+        player.drawPlayer(gr2);
         handler.render(gr2);
         gr2.dispose();
     }
