@@ -6,6 +6,7 @@ public interface Character {
 
     public void update();
     public void drawPlayer(Graphics2D gr2);
+    public void frameChanger();
     public void playerImage();
     public void setLocationAfterPowerup(int x, int y, int realx);
 

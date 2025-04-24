@@ -21,11 +21,16 @@ public abstract class CharacterImpl implements Character{
     private int playerY = START_Y;// * VERTICALE
     private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
     private int screenY = START_Y;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
+
     private boolean rightDirection;
     private int speed = 5;
     private int speedJumpUP = 13; 
     private int speedJumpDown = 8;
+    private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
+    private int changeFrame = 0;
     private int groundX = 0;//variabile che permette lo scorrimento della mappa
+    private boolean crossWalk = false;
+
     protected BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
     public GameLoopPanel glp;
@@ -62,13 +67,61 @@ public abstract class CharacterImpl implements Character{
             }
             minScreenX = groundX == 0 ? 0 : 180;
         }
+
+        frameChanger();
+    }
+
+    public void frameChanger(){
+        if((cmd.getRight() || cmd.getLeft()) && !cmd.isJumping()){
+            changeFrame++;
+            if(changeFrame > 8){
+                if(playerFrame == PlayerFrame.STOP_FRAME){
+                    playerFrame = crossWalk ? PlayerFrame.GO_FRAME1 : PlayerFrame.GO_FRAME2;
+                    crossWalk = !crossWalk;
+                }
+                else if(playerFrame == PlayerFrame.GO_FRAME1){
+                    playerFrame = PlayerFrame.STOP_FRAME;
+                }
+                else if(playerFrame == PlayerFrame.GO_FRAME2){
+                    playerFrame = PlayerFrame.STOP_FRAME;
+                }
+                changeFrame = 0;
+            }
+        }
+        else if(cmd.isJumping()){
+            playerFrame = PlayerFrame.GO_FRAME2;
+        }
+        else if(!cmd.getRight() && !cmd.getLeft() && !cmd.isJumping()){
+            playerFrame = PlayerFrame.STOP_FRAME;
+        }
     }
 
     @Override
     public void drawPlayer(Graphics2D gr2) {
-        BufferedImage image;
-        image = right0;
-        gr2.drawImage(image, screenX, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+        BufferedImage im = null;
+        if(rightDirection){
+            if(playerFrame == PlayerFrame.STOP_FRAME){
+                im = right0;
+            }
+            if(playerFrame == PlayerFrame.GO_FRAME1){
+                im = right1;
+            }
+            if(playerFrame == PlayerFrame.GO_FRAME2){
+                im = right2;
+            }
+        }
+        else{
+            if(playerFrame == PlayerFrame.STOP_FRAME){
+                im = left0;
+            }
+            if(playerFrame == PlayerFrame.GO_FRAME1){
+                im = left1;
+            }
+            if(playerFrame == PlayerFrame.GO_FRAME2){
+                im = left2;
+            }
+        }
+        gr2.drawImage(im, screenX, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
     }
 
     @Override
