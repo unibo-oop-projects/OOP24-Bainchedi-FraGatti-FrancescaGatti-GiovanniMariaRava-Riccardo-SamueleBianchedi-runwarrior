@@ -14,7 +14,7 @@ public class CharacterImpl implements Character{
     public static final int SIZE_CHARACTER = 96;
     public static final int START_Y = 387;
     public static final int START_X = 320;
-    public static final int maxScreenX = 550;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
+    public static final int maxScreenX = 760;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     public int minScreenX = 180;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO (se raggiunge l'inizio mappa diventa 0)
 
     private int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA

@@ -15,8 +15,8 @@ import it.unibo.runwarrior.model.Wizard;
 
 public class GameLoopPanel extends JPanel implements Runnable{
     
-    public static final int WIDTH = 960;
-    public static final int HEIGHT = 672;
+    public static final int WIDTH = 1200;
+    public static final int HEIGHT = 720;
     public static final int MLD = 1000000000;
     public static final int FPS = 60;
 
@@ -34,8 +34,10 @@ public class GameLoopPanel extends JPanel implements Runnable{
         //handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800));
         //handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
         handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
+
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(commands);
+        this.setFocusable(true);
     }
 
     public void startGame(){
