@@ -10,7 +10,7 @@ public class RunwarriorMain{
     public RunwarriorMain(){
         mainFrame = new JFrame("runwarrior");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLocationByPlatform(true);
+        mainFrame.setLocationByPlatform(false);
         mainFrame.setResizable(true);
 
         glp = new GameLoopPanel();

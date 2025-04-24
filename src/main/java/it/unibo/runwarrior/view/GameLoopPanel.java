@@ -7,9 +7,8 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import it.unibo.runwarrior.controller.CharacterComand;
-import it.unibo.runwarrior.model.ArmourWarrior;
+import it.unibo.runwarrior.controller.PowersHandler;
 import it.unibo.runwarrior.model.Character;
-import it.unibo.runwarrior.model.CharacterImpl;
 import it.unibo.runwarrior.model.Guard;
 import it.unibo.runwarrior.model.NakedWarrior;
 import it.unibo.runwarrior.model.Snake;
@@ -17,20 +16,22 @@ import it.unibo.runwarrior.model.Wizard;
 
 public class GameLoopPanel extends JPanel implements Runnable{
     
-    public static final int WIDTH = 1200;
-    public static final int HEIGHT = 720;
+    public static final int WIDTH = 1056;
+    public static final int HEIGHT = 672;
     public static final int MLD = 1000000000;
     public static final int FPS = 60;
 
     private Thread gameThread;
-    public Character player;
-    public CharacterComand commands;
+    private Character player;
+    private CharacterComand commands;
+    private PowersHandler powerUpsHandler;
     
     private Handler handler;
 
     public GameLoopPanel(){
         this.commands = new CharacterComand();
-        player = new ArmourWarrior(this, commands);
+        this.powerUpsHandler = new PowersHandler(this, commands);
+        initializePlayer();
 
         this.handler = new Handler();
         //handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800));
@@ -80,5 +81,13 @@ public class GameLoopPanel extends JPanel implements Runnable{
         player.drawPlayer(gr2);
         handler.render(gr2);
         gr2.dispose();
+    }
+
+    public void initializePlayer(){
+        player = new NakedWarrior(this, commands);
+    }
+
+    public void setPlayer(Character pl){
+        player = pl;
     }
 }
