@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.model.ArmourWarrior;
 import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.CharacterImpl;
 import it.unibo.runwarrior.model.Guard;
@@ -29,7 +30,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public GameLoopPanel(){
         this.commands = new CharacterComand();
-        player = new NakedWarrior(this, commands);
+        player = new ArmourWarrior(this, commands);
 
         this.handler = new Handler();
         //handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800));
