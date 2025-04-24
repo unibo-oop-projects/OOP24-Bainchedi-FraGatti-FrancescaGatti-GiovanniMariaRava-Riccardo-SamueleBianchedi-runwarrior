@@ -1,0 +1,32 @@
+package it.unibo.runwarrior.model;
+
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.view.GameLoopPanel;
+
+public class NakedWarrior extends CharacterImpl{
+
+    public NakedWarrior(GameLoopPanel panel, CharacterComand commands) {
+        super(panel, commands);
+    }
+
+    @Override
+    public void playerImage() {
+        try {
+            right0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopRightN.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN2.png"));
+            left0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopLeftN.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN2.png"));
+            attackR = right0;
+            attackL = left0;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+}

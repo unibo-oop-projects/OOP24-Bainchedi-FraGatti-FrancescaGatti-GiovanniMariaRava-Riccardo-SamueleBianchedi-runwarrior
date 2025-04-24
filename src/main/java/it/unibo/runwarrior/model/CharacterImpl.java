@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
-public class CharacterImpl implements Character{
+public abstract class CharacterImpl implements Character{
 
     public static final int SIZE_CHARACTER = 96;
     public static final int START_Y = 387;
@@ -26,7 +26,7 @@ public class CharacterImpl implements Character{
     private int speedJumpUP = 13; 
     private int speedJumpDown = 8;
     private int groundX = 0;//variabile che permette lo scorrimento della mappa
-    private BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
+    protected BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
     public GameLoopPanel glp;
     public CharacterComand cmd;
@@ -72,20 +72,7 @@ public class CharacterImpl implements Character{
     }
 
     @Override
-    public void playerImage() {
-        try {
-            right0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopRightN.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN2.png"));
-            left0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopLeftN.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN2.png"));
-            attackR = right0;
-            attackL = left0;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public abstract void playerImage();
 
     @Override
     public void setLocationAfterPowerup(int x, int y, int realx) {
