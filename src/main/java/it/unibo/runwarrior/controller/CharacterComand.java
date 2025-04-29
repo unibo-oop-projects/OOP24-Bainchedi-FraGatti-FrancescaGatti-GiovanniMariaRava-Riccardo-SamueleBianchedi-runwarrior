@@ -48,6 +48,13 @@ public class CharacterComand implements KeyListener{
         }
     }
 
+    public void setJump(JumpState stateJump){
+        this.jump = stateJump;
+        if(stateJump == JumpState.STOP_JUMP){
+            isJump = false;
+        }
+    }
+
     public boolean getRight(){
         return right;
     }

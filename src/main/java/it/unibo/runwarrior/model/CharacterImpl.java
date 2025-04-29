@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.JumpState;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 public abstract class CharacterImpl implements Character{
@@ -11,9 +12,11 @@ public abstract class CharacterImpl implements Character{
     public static final int SIZE_CHARACTER = 96;
     public static final int START_Y = 400;
     public static final int START_X = 320;
-    public static final int maxScreenX = 600;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
-    public int minScreenX = 180;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO (se raggiunge l'inizio mappa diventa 0)
-
+    private static int MAX_JUMP = START_Y - (SIZE_CHARACTER*5/2);
+    private static int MID_JUMP = START_Y - (SIZE_CHARACTER*3/2);
+    
+    private final int maxScreenX = 600;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
+    private final int minScreenX = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
     private int playerY = START_Y;// * VERTICALE
     private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
@@ -53,16 +56,39 @@ public abstract class CharacterImpl implements Character{
         }
         if(cmd.getLeft()){
             rightDirection = false;
-            if(screenX != 0){
+            if(screenX > 0){
                 playerX -= speed;
             }
             if(screenX > minScreenX){
                 screenX -= speed;
             }
-            if(screenX == minScreenX && groundX < 0){
-                groundX += speed;
+        }
+        if(cmd.getJump() == JumpState.START_JUMP){
+            if(playerY > MAX_JUMP){ 
+                playerY -= speedJumpUP;
             }
-            minScreenX = groundX == 0 ? 0 : 180;
+            if(playerY <= MAX_JUMP){
+                playerY = MAX_JUMP;
+                cmd.setJump(JumpState.DOWN_JUMP);
+            }
+        }
+        if(cmd.getJump() == JumpState.MIN_JUMP){
+            if(playerY > MID_JUMP){
+                playerY -= speedJumpUP;
+            } 
+            if(playerY <= MID_JUMP){
+                playerY = MID_JUMP;
+                cmd.setJump(JumpState.DOWN_JUMP);
+            }
+        }
+        if(cmd.getJump() == JumpState.DOWN_JUMP){
+            if(playerY < START_Y){
+                playerY += speedJumpDown;
+            }
+            if(playerY >= START_Y){
+                playerY = START_Y;
+                cmd.setJump(JumpState.STOP_JUMP);
+            }
         }
 
         frameChanger();
