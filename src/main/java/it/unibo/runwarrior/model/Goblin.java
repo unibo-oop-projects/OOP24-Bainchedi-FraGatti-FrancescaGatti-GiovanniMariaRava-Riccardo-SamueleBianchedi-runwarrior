@@ -3,13 +3,21 @@ package it.unibo.runwarrior.model;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+
 import it.unibo.runwarrior.view.Handler;
 
 public class Goblin extends EnemyImpl{
     public BufferedImage rightGoblin, leftGoblin, rightGoblinMoving, leftGoblinMoving; 
-    public Goblin(int x, int y, int width, int height, boolean solid, Handler handler) {
+    public int minX, maxX;
+    public Goblin(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
         super(x, y, width, height, solid, handler);
-        //TODO Auto-generated constructor stub
+        try {
+            rightGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/rightGoblin.png"));
+            leftGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/leftGoblin.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
