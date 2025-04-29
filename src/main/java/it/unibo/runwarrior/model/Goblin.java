@@ -18,6 +18,8 @@ public class Goblin extends EnemyImpl{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.minX = minX;
+        this.maxX = maxX;
     }
 
     @Override
