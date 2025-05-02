@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import it.unibo.runwarrior.view.Handler;
 
 public class Guard extends EnemyImpl {
-    public BufferedImage rightGuard, leftGuard, rightGuardMoving, leftGuardMoving;
+    public BufferedImage rightGuard, leftGuard, rightGuardMoving, leftGuardMoving, rightGuardRunning, leftGuardRunning;
     public int minX, maxX;
 
     public int frameCounter = 0;
@@ -23,6 +23,8 @@ public class Guard extends EnemyImpl {
             leftGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftGuard.png"));
             rightGuardMoving = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuardMoving.png"));
             leftGuardMoving = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftGuardMoving.png"));
+            rightGuardRunning = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightRunningGuard.png"));
+            leftGuardRunning = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftRunningGuard.png"));
             image = rightGuard;
         }catch (IOException e){
             e.printStackTrace();
@@ -34,11 +36,14 @@ public class Guard extends EnemyImpl {
     @Override
     public void render(Graphics g) {
         BufferedImage currentImage;
-
-        if (velocityX > 0) {
-            currentImage = step ? rightGuardMoving : rightGuard;
+        if (velocityX == 0){
+            currentImage = image;
+        }else if (velocityX > 0) {
+            currentImage = step ? rightGuardMoving : rightGuardRunning;
+            image = rightGuard;
         } else {
-            currentImage = step ? leftGuardMoving : leftGuard;
+            currentImage = step ? leftGuardMoving : leftGuardRunning;
+            image = leftGuard;
         }
 
         g.drawImage(currentImage, x, y, width, height, null);
