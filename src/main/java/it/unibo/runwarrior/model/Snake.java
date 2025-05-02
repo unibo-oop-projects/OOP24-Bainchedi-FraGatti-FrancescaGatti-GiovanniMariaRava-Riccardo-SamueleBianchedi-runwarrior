@@ -60,13 +60,7 @@ public class Snake extends EnemyImpl{
                 step = !step;
                 frameCounter = 0;
             }
-            if(deathTimer>100){
-                die();
-            }else{
-                deathTimer++;
-            }
         } else {
-
             deathTimer++;
             if (deathTimer > 120) {
                 handler.removeEnemy(this);
