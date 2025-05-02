@@ -39,8 +39,19 @@ public class Goblin extends EnemyImpl{
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        x += velocityX;
+
+        
+        if (x <= minX || x >= maxX - width) {
+            velocityX = -velocityX;
+        }
+
+        frameCounter++;
+        
+        if (frameCounter >= 20) { 
+            step = !step;
+            frameCounter = 0;
+        }
     }
 
 }
