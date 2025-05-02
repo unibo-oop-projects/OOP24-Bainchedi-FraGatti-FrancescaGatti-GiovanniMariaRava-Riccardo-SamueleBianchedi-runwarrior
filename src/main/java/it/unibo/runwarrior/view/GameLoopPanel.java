@@ -35,8 +35,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
         this.handler = new Handler();
         //handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800));
-        //handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
-        handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
+        handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
+        //handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
 
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(commands);
