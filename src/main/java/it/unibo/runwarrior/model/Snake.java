@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import it.unibo.runwarrior.view.Handler;
 
 public class Snake extends EnemyImpl{
+    private static final int TIME_AFTER_DEATH = 300;
     public BufferedImage rightSnake, rightSnakeMoving, leftSnake, leftSnakeMoving, poisonImage;
     public int minX, maxX;
     public int frameCounter = 0;
@@ -62,7 +63,7 @@ public class Snake extends EnemyImpl{
             }
         } else {
             deathTimer++;
-            if (deathTimer > 120) {
+            if (deathTimer > TIME_AFTER_DEATH) {
                 handler.removeEnemy(this);
             }
         }
