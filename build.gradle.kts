@@ -59,15 +59,6 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-tasks.register<Copy>("resourcesToBin") {
-    from("src/main/resources")
-    into("bin")
-}
-
-tasks.named("build") {
-    dependsOn("resourcesToBin")
-}
-
 application {
     // Define the main class for the application
     mainClass.set("it.unibo.runwarrior.view.RunwarriorMain")
