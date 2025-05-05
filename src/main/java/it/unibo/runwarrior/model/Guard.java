@@ -45,7 +45,9 @@ public class Guard extends EnemyImpl {
             currentImage = step ? leftGuardMoving : leftGuardRunning;
             image = leftGuard;
         }
-
+            
+        System.out.println("ciao");
+             
         g.drawImage(currentImage, x, y, width, height, null);
     }
 
