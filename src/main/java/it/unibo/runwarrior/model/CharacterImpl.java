@@ -15,8 +15,8 @@ public abstract class CharacterImpl implements Character{
     private static int MAX_JUMP = START_Y - (SIZE_CHARACTER*5/2);
     private static int MID_JUMP = START_Y - (SIZE_CHARACTER*3/2);
     
-    private final int maxScreenX = 600;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private final int minScreenX = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
+    private int maxScreenX;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
     private int playerY = START_Y;// * VERTICALE
     private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
@@ -30,6 +30,7 @@ public abstract class CharacterImpl implements Character{
     private int changeFrame = 0;
     private int groundX = 0;//variabile che permette lo scorrimento della mappa
     private boolean crossWalk = false;
+    private int useAttackMoving = 0;
 
     protected BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
@@ -44,7 +45,8 @@ public abstract class CharacterImpl implements Character{
 
     @Override
     public void update() {
-        if(cmd.getRight()){
+        maxScreenX = glp.getWidth() / 2;
+        if(cmd.getRight() && !cmd.getLeft()){
             rightDirection = true;
             playerX += speed;
             if(screenX < maxScreenX){
@@ -54,7 +56,7 @@ public abstract class CharacterImpl implements Character{
                 groundX -= speed;
             }
         }
-        if(cmd.getLeft()){
+        if(cmd.getLeft() && !cmd.getRight()){
             rightDirection = false;
             if(screenX > 0){
                 playerX -= speed;
@@ -95,10 +97,10 @@ public abstract class CharacterImpl implements Character{
     }
 
     public void frameChanger(){
-        if((cmd.getRight() || cmd.getLeft()) && !cmd.isJumping()){
+        if(!cmd.getStop() && !cmd.isJumping()){
             changeFrame++;
             if(changeFrame > 8){
-                if(playerFrame == PlayerFrame.STOP_FRAME){
+                if(playerFrame == PlayerFrame.STOP_FRAME || playerFrame == PlayerFrame.ATTACK_FRAME){
                     playerFrame = crossWalk ? PlayerFrame.GO_FRAME1 : PlayerFrame.GO_FRAME2;
                     crossWalk = !crossWalk;
                 }
@@ -110,11 +112,22 @@ public abstract class CharacterImpl implements Character{
                 }
                 changeFrame = 0;
             }
+            useAttackMoving++;
+            if(cmd.getAttack() && useAttackMoving > 60){ //numero di attacchi limitato se in movimento
+                playerFrame = PlayerFrame.ATTACK_FRAME;
+                useAttackMoving = 0;
+            }
         }
         else if(cmd.isJumping()){
             playerFrame = PlayerFrame.GO_FRAME2;
+            if(cmd.getAttack()){
+                playerFrame = PlayerFrame.ATTACK_FRAME;
+            }
         }
-        else if(!cmd.getRight() && !cmd.getLeft() && !cmd.isJumping()){
+        else if(cmd.getAttack()){
+            playerFrame = PlayerFrame.ATTACK_FRAME;
+        }
+        else if(cmd.getStop() && !cmd.isJumping() && !cmd.getAttack()){
             playerFrame = PlayerFrame.STOP_FRAME;
         }
     }
@@ -132,6 +145,10 @@ public abstract class CharacterImpl implements Character{
             if(playerFrame == PlayerFrame.GO_FRAME2){
                 im = right2;
             }
+            if(playerFrame == PlayerFrame.ATTACK_FRAME){
+                im = attackR;
+                gr2.drawImage(tipR, screenX + SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+            }
         }
         else{
             if(playerFrame == PlayerFrame.STOP_FRAME){
@@ -143,6 +160,10 @@ public abstract class CharacterImpl implements Character{
             if(playerFrame == PlayerFrame.GO_FRAME2){
                 im = left2;
             }
+            if(playerFrame == PlayerFrame.ATTACK_FRAME){
+                im = attackL;
+                gr2.drawImage(tipL, screenX - SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+            }
         }
         gr2.drawImage(im, screenX, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
     }
@@ -152,6 +173,10 @@ public abstract class CharacterImpl implements Character{
 
     @Override
     public void setLocationAfterPowerup(int x, int y, int realx) {
+    }
+
+    public int getGroundX(){
+        return groundX;
     }
 
     @Override

@@ -10,6 +10,7 @@ public interface Character {
     public void playerImage();
     public void setLocationAfterPowerup(int x, int y, int realx);
 
+    public int getGroundX();
     public int getPlX();
     public int getPlY();
     public int getScX();

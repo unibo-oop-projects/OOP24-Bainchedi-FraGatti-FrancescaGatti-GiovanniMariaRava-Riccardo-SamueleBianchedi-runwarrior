@@ -12,6 +12,7 @@ import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.Guard;
 import it.unibo.runwarrior.model.NakedWarrior;
 import it.unibo.runwarrior.model.Snake;
+import it.unibo.runwarrior.model.SwordWarrior;
 import it.unibo.runwarrior.model.Wizard;
 
 public class GameLoopPanel extends JPanel implements Runnable{
@@ -84,7 +85,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
     }
 
     public void initializePlayer(){
-        player = new NakedWarrior(this, commands);
+        player = new SwordWarrior(this, commands);
     }
 
     public void setPlayer(Character pl){

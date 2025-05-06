@@ -24,6 +24,8 @@ public class SwordWarrior extends CharacterImpl{
             left2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftS2.png"));
             attackR = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/attackRight.png"));
             attackL = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/attackLeft.png"));
+            tipR = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/tipRight.png"));
+            tipL = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/tipLeft.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
