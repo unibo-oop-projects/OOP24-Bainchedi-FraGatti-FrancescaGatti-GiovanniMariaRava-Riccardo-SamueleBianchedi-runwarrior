@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.model;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import it.unibo.runwarrior.controller.CharacterComand;
@@ -10,8 +11,8 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 public abstract class CharacterImpl implements Character{
 
     public static final int SIZE_CHARACTER = 96;
-    public static final int START_Y = 400;
-    public static final int START_X = 320;
+    public static final int START_Y = 384;
+    public static final int START_X = 240;
     private static int MAX_JUMP = START_Y - (SIZE_CHARACTER*5/2);
     private static int MID_JUMP = START_Y - (SIZE_CHARACTER*3/2);
     
@@ -21,6 +22,7 @@ public abstract class CharacterImpl implements Character{
     private int playerY = START_Y;// * VERTICALE
     private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
     private int screenY = START_Y;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
+    private Rectangle collisionArea;
 
     private boolean rightDirection;
     private int speed = 5;
@@ -40,6 +42,7 @@ public abstract class CharacterImpl implements Character{
     public CharacterImpl(GameLoopPanel panel, CharacterComand commands){
         this.glp = panel;
         this.cmd = commands;
+        collisionArea = new Rectangle(playerX + 30, playerY + 20, 38,73);
         playerImage();
     }
 
@@ -93,7 +96,22 @@ public abstract class CharacterImpl implements Character{
             }
         }
 
+        updatePlayerPosition();
         frameChanger();
+    }
+
+    private void updatePlayerPosition() {
+        collisionArea.setLocation(playerX + 30, playerY + 20);
+        if(playerFrame == PlayerFrame.ATTACK_FRAME && rightDirection && this.getClass().equals(SwordWarrior.class)){
+            collisionArea.setSize(162, 73);
+        }
+        if(playerFrame == PlayerFrame.ATTACK_FRAME && !rightDirection && this.getClass().equals(SwordWarrior.class)){
+            collisionArea.setLocation(playerX - SIZE_CHARACTER, playerY + 20);
+            collisionArea.setSize(164, 73);
+        }
+        if(!cmd.getAttack()){
+            collisionArea.setSize(38, 73);
+        }
     }
 
     public void frameChanger(){
@@ -166,6 +184,10 @@ public abstract class CharacterImpl implements Character{
             }
         }
         gr2.drawImage(im, screenX, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+    }
+
+    public void drawRectangle(Graphics2D gr){
+        gr.drawRect(collisionArea.x, collisionArea.y, collisionArea.width, collisionArea.height);//si sposta in avanti perchè segue playerX non screenX
     }
 
     @Override

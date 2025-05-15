@@ -91,5 +91,4 @@ public class CharacterComand implements KeyListener{
     public boolean getAttack(){
         return attack;
     }
-    
 }
