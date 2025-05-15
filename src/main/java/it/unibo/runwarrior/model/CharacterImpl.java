@@ -118,15 +118,12 @@ public abstract class CharacterImpl implements Character{
         if(!cmd.getStop() && !cmd.isJumping()){
             changeFrame++;
             if(changeFrame > 8){
-                if(playerFrame == PlayerFrame.STOP_FRAME || playerFrame == PlayerFrame.ATTACK_FRAME){
-                    playerFrame = crossWalk ? PlayerFrame.GO_FRAME1 : PlayerFrame.GO_FRAME2;
-                    crossWalk = !crossWalk;
-                }
-                else if(playerFrame == PlayerFrame.GO_FRAME1){
-                    playerFrame = PlayerFrame.STOP_FRAME;
-                }
-                else if(playerFrame == PlayerFrame.GO_FRAME2){
-                    playerFrame = PlayerFrame.STOP_FRAME;
+                switch(playerFrame){
+                    case STOP_FRAME, ATTACK_FRAME -> {
+                        playerFrame = crossWalk ? PlayerFrame.GO_FRAME1 : PlayerFrame.GO_FRAME2;
+                        crossWalk = !crossWalk;
+                    }
+                    case GO_FRAME1, GO_FRAME2 -> playerFrame = PlayerFrame.STOP_FRAME;
                 }
                 changeFrame = 0;
             }
