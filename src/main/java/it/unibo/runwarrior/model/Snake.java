@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.Handler;
 
 public class Snake extends EnemyImpl{
@@ -16,8 +17,8 @@ public class Snake extends EnemyImpl{
 
     public boolean dead = false;
     private int deathTimer = 0;
-    public Snake(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
-        super(x, y, width, height, solid, handler);
+    public Snake(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX, GameLoopPanel glp) {
+        super(x, y, width, height, solid, handler, glp);
         this.minX = minX;
         this.maxX = maxX;
         setVelocityX(1);

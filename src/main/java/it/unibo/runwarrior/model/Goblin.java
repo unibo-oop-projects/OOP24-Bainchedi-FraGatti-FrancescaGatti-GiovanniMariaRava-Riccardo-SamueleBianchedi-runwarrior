@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.Handler;
 
 public class Goblin extends EnemyImpl{
@@ -13,8 +14,8 @@ public class Goblin extends EnemyImpl{
 
     public int frameCounter = 0;
     public boolean step = false;
-    public Goblin(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
-        super(x, y, width, height, solid, handler);
+    public Goblin(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX, GameLoopPanel glp) {
+        super(x, y, width, height, solid, handler, glp);
         setVelocityX(2);
         try {
             rightGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/rightGoblin.png"));

@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.Handler;
 
 public class Guard extends EnemyImpl {
@@ -15,8 +16,8 @@ public class Guard extends EnemyImpl {
     public int frameCounter = 0;
     public boolean step = false;
 
-    public Guard(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX) {
-        super(x, y, width, height, solid, handler);
+    public Guard(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX, GameLoopPanel glp) {
+        super(x, y, width, height, solid, handler, glp);
         setVelocityX(2);
         try{
             rightGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuard.png"));
