@@ -3,6 +3,7 @@ package it.unibo.runwarrior.model;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.Handler;
 
 
@@ -18,20 +19,27 @@ public abstract class EnemyImpl implements Enemy{
 
     public Handler handler;
 
-    public BufferedImage image; 
+    public BufferedImage image;
+
+    public GameLoopPanel glp;
+    private PowerUpImpl powerUp;
 
     
-    public EnemyImpl(int x, int y, int width, int height, boolean solid, Handler handler) {
+    public EnemyImpl(int x, int y, int width, int height, boolean solid, Handler handler, GameLoopPanel glp) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.solid = solid;
         this.handler = handler;
+        
+        this.glp = glp;
     }
 
     @Override
     public void die() {
+        powerUp.setTouchArea(new Rectangle(x, y, width, height));
+        glp.getPowersFactory().PowerUpAppearance(powerUp);
         handler.removeEnemy(this);
     }
 
