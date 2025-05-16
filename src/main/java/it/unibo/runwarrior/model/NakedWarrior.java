@@ -28,5 +28,11 @@ public class NakedWarrior extends CharacterImpl{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateAttackCollision(){
+        //Cannot attack
+
+    };
     
 }

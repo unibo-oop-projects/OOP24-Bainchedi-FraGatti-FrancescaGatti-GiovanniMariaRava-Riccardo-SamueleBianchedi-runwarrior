@@ -30,5 +30,19 @@ public class SwordWarrior extends CharacterImpl{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateAttackCollision() {
+        if(playerFrame == PlayerFrame.ATTACK_FRAME && rightDirection){
+            collisionArea.setSize(162, 73);
+        }
+        if(playerFrame == PlayerFrame.ATTACK_FRAME && !rightDirection){
+            collisionArea.setLocation(playerX - SIZE_CHARACTER, playerY + 20);
+            collisionArea.setSize(164, 73);
+        }
+        if(!cmd.getAttack()){
+            collisionArea.setSize(38, 73);
+        }
+    }
     
 }

@@ -86,7 +86,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
     }
 
     public void initializePlayer(){
-        player = new SwordWarrior(this, commands);
+        player = new NakedWarrior(this, commands);
     }
 
     public void setPlayer(Character pl){

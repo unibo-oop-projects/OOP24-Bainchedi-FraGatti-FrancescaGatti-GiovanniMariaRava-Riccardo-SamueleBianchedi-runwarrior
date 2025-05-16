@@ -18,17 +18,17 @@ public abstract class CharacterImpl implements Character{
     
     private final int minScreenX = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private int maxScreenX;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
-    private int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
-    private int playerY = START_Y;// * VERTICALE
+    protected int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
+    protected int playerY = START_Y;// * VERTICALE
     private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
     private int screenY = START_Y;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
-    private Rectangle collisionArea;
+    protected Rectangle collisionArea;
 
-    private boolean rightDirection;
+    protected boolean rightDirection;
     private int speed = 5;
-    private int speedJumpUP = 13; 
-    private int speedJumpDown = 8;
-    private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
+    private int speedJumpUP = 12; 
+    private int speedJumpDown = 6;
+    protected PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
     private int changeFrame = 0;
     private int groundX = 0;//variabile che permette lo scorrimento della mappa
     private boolean crossWalk = false;
@@ -102,17 +102,10 @@ public abstract class CharacterImpl implements Character{
 
     private void updatePlayerPosition() {
         collisionArea.setLocation(playerX + 30, playerY + 20);
-        if(playerFrame == PlayerFrame.ATTACK_FRAME && rightDirection && this.getClass().equals(SwordWarrior.class)){
-            collisionArea.setSize(162, 73);
-        }
-        if(playerFrame == PlayerFrame.ATTACK_FRAME && !rightDirection && this.getClass().equals(SwordWarrior.class)){
-            collisionArea.setLocation(playerX - SIZE_CHARACTER, playerY + 20);
-            collisionArea.setSize(164, 73);
-        }
-        if(!cmd.getAttack()){
-            collisionArea.setSize(38, 73);
-        }
+        updateAttackCollision();
     }
+
+    public abstract void updateAttackCollision();
 
     public void frameChanger(){
         if(!cmd.getStop() && !cmd.isJumping()){
@@ -151,33 +144,25 @@ public abstract class CharacterImpl implements Character{
     public void drawPlayer(Graphics2D gr2) {
         BufferedImage im = null;
         if(rightDirection){
-            if(playerFrame == PlayerFrame.STOP_FRAME){
-                im = right0;
-            }
-            if(playerFrame == PlayerFrame.GO_FRAME1){
-                im = right1;
-            }
-            if(playerFrame == PlayerFrame.GO_FRAME2){
-                im = right2;
-            }
-            if(playerFrame == PlayerFrame.ATTACK_FRAME){
-                im = attackR;
-                gr2.drawImage(tipR, screenX + SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+            switch(playerFrame){
+                case STOP_FRAME -> im = right0;
+                case GO_FRAME1 -> im = right1;
+                case GO_FRAME2 -> im = right2;
+                case ATTACK_FRAME -> {
+                    im = attackR;
+                    gr2.drawImage(tipR, screenX + SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+                }
             }
         }
         else{
-            if(playerFrame == PlayerFrame.STOP_FRAME){
-                im = left0;
-            }
-            if(playerFrame == PlayerFrame.GO_FRAME1){
-                im = left1;
-            }
-            if(playerFrame == PlayerFrame.GO_FRAME2){
-                im = left2;
-            }
-            if(playerFrame == PlayerFrame.ATTACK_FRAME){
-                im = attackL;
-                gr2.drawImage(tipL, screenX - SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+            switch(playerFrame){
+                case STOP_FRAME -> im = left0;
+                case GO_FRAME1 -> im = left1;
+                case GO_FRAME2 -> im = left2;
+                case ATTACK_FRAME -> {
+                    im = attackR;
+                    gr2.drawImage(tipL, screenX - SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+                }
             }
         }
         gr2.drawImage(im, screenX, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
