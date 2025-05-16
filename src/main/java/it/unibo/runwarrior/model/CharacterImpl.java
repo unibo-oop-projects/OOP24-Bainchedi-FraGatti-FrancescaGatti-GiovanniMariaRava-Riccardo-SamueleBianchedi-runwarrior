@@ -177,6 +177,9 @@ public abstract class CharacterImpl implements Character{
 
     @Override
     public void setLocationAfterPowerup(int x, int y, int realx) {
+        this.playerY = y;
+        this.playerX = realx;
+        this.screenX = x;
     }
 
     public int getGroundX(){

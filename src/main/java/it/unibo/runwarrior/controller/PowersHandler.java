@@ -23,4 +23,8 @@ public class PowersHandler {
         this.index++;
         glp.setPlayer(everyPowerUp.get(index));
     }
+
+    public int getPowers(){
+        return this.index;
+    }
 }

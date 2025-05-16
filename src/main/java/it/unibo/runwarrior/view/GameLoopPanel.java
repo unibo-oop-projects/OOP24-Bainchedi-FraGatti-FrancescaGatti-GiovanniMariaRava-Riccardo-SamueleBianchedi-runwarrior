@@ -26,16 +26,18 @@ public class GameLoopPanel extends JPanel implements Runnable{
     private Character player;
     private CharacterComand commands;
     private PowersHandler powerUpsHandler;
+    private PowerUpFactoryImpl powersFactory;
     
     private Handler handler;
 
     public GameLoopPanel(){
         this.commands = new CharacterComand();
         this.powerUpsHandler = new PowersHandler(this, commands);
+        this.powersFactory = new PowerUpFactoryImpl(this);
         initializePlayer();
 
         this.handler = new Handler();
-        handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800));
+        handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800, this));
         //handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
         //handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
 
@@ -90,6 +92,14 @@ public class GameLoopPanel extends JPanel implements Runnable{
     }
 
     public void setPlayer(Character pl){
-        player = pl;
+        this.player = pl;
+    }
+
+    public PowersHandler getPowersHandler(){
+        return this.powerUpsHandler;
+    }
+
+    public PowerUpFactoryImpl getPowersFactory(){
+        return this.powersFactory;
     }
 }
