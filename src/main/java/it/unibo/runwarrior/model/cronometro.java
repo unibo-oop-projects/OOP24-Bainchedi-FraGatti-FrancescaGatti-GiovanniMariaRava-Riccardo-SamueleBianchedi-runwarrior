@@ -26,4 +26,11 @@ public class Cronometro {
             }
         });
     }
+    public void Avvia(){
+        tempoInizio = System.currentTimeMillis(); 
+        t.start();
+    }
+    public void Ferma(){
+        t.stop();
+    }
 }
