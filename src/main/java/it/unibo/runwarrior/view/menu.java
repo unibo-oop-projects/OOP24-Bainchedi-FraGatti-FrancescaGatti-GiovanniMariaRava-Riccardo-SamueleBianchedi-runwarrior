@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class menu {
+public class Menu {
     public static void main(String[] args){
         //creo il frame e imposto il titolo 
         final JFrame frameMenu = new JFrame(); 
