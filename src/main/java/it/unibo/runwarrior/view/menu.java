@@ -26,7 +26,7 @@ public class Menu {
         pannelloSfondoMenu.setLayout(null);
         pannelloSfondoMenu.setOpaque(false);
 
-        ImageIcon immagineSfondo = new ImageIcon("C:\\Users\\Utente\\Desktop\\OOP24-runwarrior\\src\\main\\resources\\Menu\\sfondoMenu.png"); 
+        ImageIcon immagineSfondo = new ImageIcon("\\Menu\\sfondoMenu.png"); 
         JLabel visualizzaSfondo = new JLabel(immagineSfondo); 
         visualizzaSfondo.setBounds(0,0,1280, 720); 
         pannelloSfondoMenu.add(visualizzaSfondo);  
