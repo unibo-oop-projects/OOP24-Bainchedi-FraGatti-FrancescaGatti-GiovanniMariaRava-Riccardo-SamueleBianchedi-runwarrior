@@ -20,8 +20,8 @@ public class VisualizzatoreMappa {
     private static final int RIGHE_MAPPA = 22;      // Numero di righe nella mappa
     private static final int COLONNE_MAPPA = 375;   // Numero di colonne nella mappa
 
-    private static final String PERCORSO_FILE_MAPPA = "/mappa.txt"; // Relativo a src
-    private static final String PERCORSO_CARTELLA_IMMAGINI = "/immagine/"; // Relativo a src
+    private static final String PERCORSO_FILE_MAPPA = "/Map_1/mappa.txt"; // Relativo a src
+    private static final String PERCORSO_CARTELLA_IMMAGINI = "/Map_1/"; // Relativo a src
 
     // Mappatura tra caratteri della mappa e nomi dei file immagine
     private static final Map<Character, String> NOMI_IMMAGINI = new HashMap<>();
