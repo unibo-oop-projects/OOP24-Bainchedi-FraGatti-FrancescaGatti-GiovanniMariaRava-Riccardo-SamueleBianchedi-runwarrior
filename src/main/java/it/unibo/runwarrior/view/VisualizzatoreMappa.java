@@ -20,8 +20,8 @@ public class VisualizzatoreMappa {
     private static final int RIGHE_MAPPA = 22;      // Numero di righe nella mappa
     private static final int COLONNE_MAPPA = 375;   // Numero di colonne nella mappa
 
-    private static final String PERCORSO_FILE_MAPPA = "/Map_1/mappa.txt"; // Relativo a src
-    private static final String PERCORSO_CARTELLA_IMMAGINI = "/Map_1/"; // Relativo a src
+    private static final String PERCORSO_FILE_MAPPA = "/Map_1/mappa.txt"; 
+    private static final String PERCORSO_CARTELLA_IMMAGINI = "/Map_1/"; 
 
     // Mappatura tra caratteri della mappa e nomi dei file immagine
     private static final Map<Character, String> NOMI_IMMAGINI = new HashMap<>();
@@ -29,10 +29,7 @@ public class VisualizzatoreMappa {
         NOMI_IMMAGINI.put('0', "sky.png");
         NOMI_IMMAGINI.put('1', "grass.png");
         NOMI_IMMAGINI.put('2', "terrain.png");
-        //NOMI_IMMAGINI.put('5', "fungo.png");
-        // Aggiungi altri blocchi se necessario
     }
-    // --- Fine Costanti ---
 
     private Map<Character, BufferedImage> immaginiBlocchi;
     private List<String> datiMappa;
