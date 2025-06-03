@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TimerGioco {
-    public static void main(String[] args){
+    public TimerGioco(){
         final JFrame frameCronometro = new JFrame(); 
         frameCronometro.setTitle("cronometro di gioco");
         frameCronometro.setBounds(100, 100, 450, 300);
@@ -42,3 +42,4 @@ public class TimerGioco {
         frameCronometro.setVisible(true);
     }
 }
+
