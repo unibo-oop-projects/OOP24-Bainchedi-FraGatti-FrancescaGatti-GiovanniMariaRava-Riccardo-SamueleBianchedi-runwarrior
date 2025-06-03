@@ -11,6 +11,7 @@ public class Menu extends JPanel{
         //creo il frame e imposto il titolo 
         final JFrame frameMenu = new JFrame();
         BufferedImage immagineSfondo = null;
+
         public Menu(){
             frameMenu.setTitle("RUN WARRIOR");
             frameMenu.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
