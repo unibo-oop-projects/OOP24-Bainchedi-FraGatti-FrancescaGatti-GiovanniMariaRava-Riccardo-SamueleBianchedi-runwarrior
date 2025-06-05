@@ -33,10 +33,10 @@ public class SwordWarrior extends CharacterImpl{
 
     @Override
     public void updateAttackCollision() {
-        if(playerFrame == PlayerFrame.ATTACK_FRAME && rightDirection){
+        if(animation.getFrame() == PlayerFrame.ATTACK_FRAME && rightDirection){
             collisionArea.setSize(162, 73);
         }
-        if(playerFrame == PlayerFrame.ATTACK_FRAME && !rightDirection){
+        if(animation.getFrame() == PlayerFrame.ATTACK_FRAME && !rightDirection){
             collisionArea.setLocation(playerX - SIZE_CHARACTER, playerY + 20);
             collisionArea.setSize(164, 73);
         }

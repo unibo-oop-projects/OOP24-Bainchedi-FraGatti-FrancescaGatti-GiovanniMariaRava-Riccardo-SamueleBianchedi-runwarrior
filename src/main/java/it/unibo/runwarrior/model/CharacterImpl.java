@@ -24,26 +24,25 @@ public abstract class CharacterImpl implements Character{
     private int screenY = START_Y;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
     protected Rectangle collisionArea;
 
-    protected boolean rightDirection;
+    protected boolean rightDirection = true;
     private int speed = 5;
     private int speedJumpUP = 12; 
     private int speedJumpDown = 6;
-    protected PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
-    private int changeFrame = 0;
     private int groundX = 0;//variabile che permette lo scorrimento della mappa
-    private boolean crossWalk = false;
-    private int useAttackMoving = 0;
 
     protected BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
     public GameLoopPanel glp;
     public CharacterComand cmd;
+    protected CharacterAnimation animation;
 
     public CharacterImpl(GameLoopPanel panel, CharacterComand commands){
         this.glp = panel;
         this.cmd = commands;
+        this.animation = new CharacterAnimation(commands);
         collisionArea = new Rectangle(playerX + 30, playerY + 20, 38,73);
         playerImage();
+        animation.setImages(right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
     }
 
     @Override
@@ -97,7 +96,7 @@ public abstract class CharacterImpl implements Character{
         }
 
         updatePlayerPosition();
-        frameChanger();
+        animation.frameChanger();
     }
 
     private void updatePlayerPosition() {
@@ -107,64 +106,13 @@ public abstract class CharacterImpl implements Character{
 
     public abstract void updateAttackCollision();
 
-    public void frameChanger(){
-        if(!cmd.getStop() && !cmd.isJumping()){
-            changeFrame++;
-            if(changeFrame > 8){
-                switch(playerFrame){
-                    case STOP_FRAME, ATTACK_FRAME -> {
-                        playerFrame = crossWalk ? PlayerFrame.GO_FRAME1 : PlayerFrame.GO_FRAME2;
-                        crossWalk = !crossWalk;
-                    }
-                    case GO_FRAME1, GO_FRAME2 -> playerFrame = PlayerFrame.STOP_FRAME;
-                }
-                changeFrame = 0;
-            }
-            useAttackMoving++;
-            if(cmd.getAttack() && useAttackMoving > 60){ //numero di attacchi limitato se in movimento
-                playerFrame = PlayerFrame.ATTACK_FRAME;
-                useAttackMoving = 0;
-            }
-        }
-        else if(cmd.isJumping()){
-            playerFrame = PlayerFrame.GO_FRAME2;
-            if(cmd.getAttack()){
-                playerFrame = PlayerFrame.ATTACK_FRAME;
-            }
-        }
-        else if(cmd.getAttack()){
-            playerFrame = PlayerFrame.ATTACK_FRAME;
-        }
-        else if(cmd.getStop() && !cmd.isJumping() && !cmd.getAttack()){
-            playerFrame = PlayerFrame.STOP_FRAME;
-        }
-    }
-
     @Override
     public void drawPlayer(Graphics2D gr2) {
         BufferedImage im = null;
-        if(rightDirection){
-            switch(playerFrame){
-                case STOP_FRAME -> im = right0;
-                case GO_FRAME1 -> im = right1;
-                case GO_FRAME2 -> im = right2;
-                case ATTACK_FRAME -> {
-                    im = attackR;
-                    gr2.drawImage(tipR, screenX + SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
-                }
-            }
-        }
-        else{
-            switch(playerFrame){
-                case STOP_FRAME -> im = left0;
-                case GO_FRAME1 -> im = left1;
-                case GO_FRAME2 -> im = left2;
-                case ATTACK_FRAME -> {
-                    im = attackR;
-                    gr2.drawImage(tipL, screenX - SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
-                }
-            }
-        }
+        BufferedImage tip = null;
+        im = animation.imagePlayer(rightDirection);
+        tip = animation.getTip(rightDirection);
+        gr2.drawImage(tip, screenX + SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
         gr2.drawImage(im, screenX, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
     }
 
@@ -182,8 +130,16 @@ public abstract class CharacterImpl implements Character{
         this.screenX = x;
     }
 
+    public Rectangle getCollisionArea(){
+        return collisionArea;
+    }
+
     public int getGroundX(){
         return groundX;
+    }
+
+    public int getSpeed(){
+        return speed;
     }
 
     @Override

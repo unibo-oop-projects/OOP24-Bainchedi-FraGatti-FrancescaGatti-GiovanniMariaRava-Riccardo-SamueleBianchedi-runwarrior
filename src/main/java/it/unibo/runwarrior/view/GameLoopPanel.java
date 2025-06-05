@@ -43,7 +43,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         //handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
         //handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
 
-        music = new GameMusic("gameMusic.wav", true);
+        //music = new GameMusic("gameMusic.wav", true);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(commands);
         this.setFocusable(true);
