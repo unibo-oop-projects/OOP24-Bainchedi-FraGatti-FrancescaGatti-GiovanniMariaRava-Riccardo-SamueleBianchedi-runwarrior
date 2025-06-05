@@ -11,6 +11,8 @@ public class Menu extends JPanel{
         //creo il frame e imposto il titolo 
         final JFrame frameMenu = new JFrame();
         BufferedImage immagineSfondo = null;
+        BufferedImage imgTastoPlay = null; 
+        BufferedImage imgTitolo = null; 
 
         public Menu(){
             frameMenu.setTitle("RUN WARRIOR");
@@ -30,6 +32,8 @@ public class Menu extends JPanel{
             //ImageIcon immagineSfondo = new ImageIcon("C:\Users\Utente\Desktop\OOP24-runwarrior\src\main\resources\Menu\sfondoMenu.png"); 
             try{
                 immagineSfondo = ImageIO.read(getClass().getResourceAsStream("/Menu/sfondoMenu.png"));
+                imgTitolo = ImageIO.read(getClass().getResourceAsStream("/Menu/titolo4.png"));
+                imgTastoPlay = ImageIO.read(getClass().getResourceAsStream("/Menu/tastoPlay.png"));
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -46,6 +50,9 @@ public class Menu extends JPanel{
             pannelloSfondoMenu.setLayout(null);
             pannelloSfondoMenu.setOpaque(true);
 
+            JLabel titoloLabel = new JLabel(new ImageIcon(imgTitolo)); 
+            titoloLabel.setBounds(440, 100, 400, 300);
+            pannelloSfondoMenu.add(titoloLabel);
             final JPanel pannelloTastoPlay = new JPanel(); 
             pannelloTastoPlay.setLayout(new FlowLayout(FlowLayout.CENTER));
             pannelloTastoPlay.setOpaque(false);
