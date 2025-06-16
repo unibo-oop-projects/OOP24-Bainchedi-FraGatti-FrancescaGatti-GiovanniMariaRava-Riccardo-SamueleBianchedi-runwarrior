@@ -1,0 +1,6 @@
+#file di configurazione delle immagini della mappa 1
+
+0=progetto_java/resources/map_1/forest_sky.png
+1=progetto_java/resources/map_1/forest_grass.png
+2=progetto_java/resources/map_1/forest_terrain.png
+4=progetto_java/resources/map_1/forest_mushroom.png
