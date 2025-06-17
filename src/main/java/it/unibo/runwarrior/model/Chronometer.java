@@ -4,12 +4,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class Timer {
+public class Chronometer {
     long tempoInizio; 
     JLabel labelTempo;
     Timer t; 
 
-    public Timer(JLabel l){
+    public Chronometer(JLabel l){
         labelTempo = l; 
         t = new Timer(100, new ActionListener(){
             @Override
