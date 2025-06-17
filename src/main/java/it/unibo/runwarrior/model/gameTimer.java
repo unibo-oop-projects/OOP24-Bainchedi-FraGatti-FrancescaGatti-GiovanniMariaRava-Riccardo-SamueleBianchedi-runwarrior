@@ -1,12 +1,11 @@
 package it.unibo.runwarrior.model;
-
 import javax.swing.*;
 //import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TimerGioco {
-    public TimerGioco(){
+public class gameTimer {
+    public gameTimer(){
         final JFrame frameCronometro = new JFrame(); 
         frameCronometro.setTitle("cronometro di gioco");
         frameCronometro.setBounds(100, 100, 450, 300);
