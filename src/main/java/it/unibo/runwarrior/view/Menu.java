@@ -85,7 +85,7 @@ public class Menu extends JPanel{
                     pannelloTastoPlay.validate();
                 }
             });
-            pannelloTastoPlay.add(playButton); 
+            pannelloTastoPlay.add(playButton, BorderLayout.CENTER); 
             pannelloSfondoMenu.add(pannelloTastoPlay);
             
             frameMenu.setContentPane(pannelloSfondoMenu);

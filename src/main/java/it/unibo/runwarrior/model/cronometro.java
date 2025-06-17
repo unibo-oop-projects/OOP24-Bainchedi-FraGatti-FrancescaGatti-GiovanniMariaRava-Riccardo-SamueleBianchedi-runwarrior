@@ -33,4 +33,7 @@ public class Cronometro {
     public void Ferma(){
         t.stop();
     }
+    public long getTimeElapsed(){ //metodo che chiamo in score Controller
+        return System.currentTimeMillis() - tempoInizio;
+    }
 }
