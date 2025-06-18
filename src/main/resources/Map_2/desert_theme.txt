@@ -3,6 +3,6 @@
 0=progetto_java/resources/map_2/desert_sky.png
 1=progetto_java/resources/map_2/desert_sand.png
 2=progetto_java/resources/map_2/desert_half_sand.png
-#3=progetto_java/resources/map_2/desert_sand_stone.png
-#4=progetto_java/resources/map_2/desert_cactus_top.png
-#5=progetto_java/resources/map_2/desert_cactus_body.png
+3=progetto_java/resources/map_2/desert_sandstone.png
+4=progetto_java/resources/map_2/desert_cactus_top.png
+5=progetto_java/resources/map_2/desert_cactus_body.png
