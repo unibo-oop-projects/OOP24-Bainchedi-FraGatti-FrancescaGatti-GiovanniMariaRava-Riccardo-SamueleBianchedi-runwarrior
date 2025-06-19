@@ -70,7 +70,8 @@ public class MapLoader {
 
                 for (int c = 0; c < expectedCols; c++) {
                     char blockChar = trimmedLine.charAt(c);
-                    int blockValue = Character.getNumericValue(blockChar);
+                    int blockValue = java.lang.Character.getNumericValue(blockChar);
+                    //notare se includere tutta il pacchetto o rinominare le classi Character per evitare conflitti
 
                     if (blockValue == -1) {
                          System.err.println("Errore: Valore non numerico ('" + blockChar + "') a riga " + currentRow +

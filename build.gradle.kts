@@ -19,6 +19,15 @@ repositories {
     mavenCentral()
 }
 
+//modifica per vedere se mi funziona la lettura dei char
+java {
+    toolchain {
+        // Imposta la versione di Java che vuoi che Gradle utilizzi per la compilazione.
+        // Dato che hai Java 17 installato, è consigliabile usare quella.
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 val javaFXModules = listOf(
     "base",
     "controls",
