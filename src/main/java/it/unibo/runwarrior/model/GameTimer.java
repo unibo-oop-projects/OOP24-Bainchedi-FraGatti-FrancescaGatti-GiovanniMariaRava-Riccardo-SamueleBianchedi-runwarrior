@@ -23,7 +23,7 @@ public class GameTimer {
         avvia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e1) {
-                c.Avvia();
+                c.StartTimer();
             }
         });
         avvia.setBounds(256, 115, 89, 76); 
@@ -33,7 +33,7 @@ public class GameTimer {
         ferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e2) {
-                c.Ferma();
+                c.StopTimer();
             }
         });
         ferma.setBounds(99, 115, 89, 76); 
