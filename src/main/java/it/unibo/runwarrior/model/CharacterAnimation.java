@@ -14,8 +14,18 @@ public class CharacterAnimation{
     private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
     private BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
-    public CharacterAnimation(CharacterComand cmd){
+    public CharacterAnimation(CharacterComand cmd, BufferedImage... im){
         this.cmd = cmd;
+        right0 = im[0];
+        right1 = im[1];
+        right2 = im[2];
+        left0 = im[3];
+        left1 = im[4];
+        left2 = im[5];
+        attackR = im[6];
+        attackL = im[7];
+        tipR = im[8];
+        tipL = im[9];
     }
 
     public void frameChanger(){
@@ -87,18 +97,5 @@ public class CharacterAnimation{
         else{
             return tipL;
         }
-    }
-
-    public void setImages(BufferedImage... im){
-        right0 = im[0];
-        right1 = im[1];
-        right2 = im[2];
-        left0 = im[3];
-        left1 = im[4];
-        left2 = im[5];
-        attackR = im[6];
-        attackL = im[7];
-        tipR = im[8];
-        tipL = im[9];
     }
 }

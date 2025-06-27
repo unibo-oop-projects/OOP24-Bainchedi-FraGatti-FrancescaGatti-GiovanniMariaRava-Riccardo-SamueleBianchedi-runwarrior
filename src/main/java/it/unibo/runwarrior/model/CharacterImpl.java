@@ -39,10 +39,9 @@ public abstract class CharacterImpl implements Character{
     public CharacterImpl(GameLoopPanel panel, CharacterComand commands){
         this.glp = panel;
         this.cmd = commands;
-        this.animation = new CharacterAnimation(commands);
         collisionArea = new Rectangle(playerX + 30, playerY + 20, 38,73);
         playerImage();
-        animation.setImages(right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
+        this.animation = new CharacterAnimation(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
     }
 
     @Override
