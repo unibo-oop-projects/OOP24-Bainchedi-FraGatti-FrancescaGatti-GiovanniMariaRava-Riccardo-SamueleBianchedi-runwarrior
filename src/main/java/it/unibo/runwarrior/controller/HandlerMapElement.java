@@ -69,7 +69,7 @@ public class HandlerMapElement {
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 BufferedImage img;
-                img = map[y][x] == 1 ? this.blocks.get(1).getImage() : this.blocks.get(0).getImage();
+                img = this.blocks.get(map[y][x]).getImage();
                 gr.drawImage(img, x * tileSize + shift, y * tileSize, tileSize, tileSize, null);
             }
         }
