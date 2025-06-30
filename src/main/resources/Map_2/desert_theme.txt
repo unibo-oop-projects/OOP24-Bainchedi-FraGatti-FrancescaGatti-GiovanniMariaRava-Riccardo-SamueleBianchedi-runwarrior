@@ -1,8 +1,9 @@
 #file di confirgurazione della mappa 2
 
-0=progetto_java/resources/map_2/desert_sky.png
-1=progetto_java/resources/map_2/desert_sand.png
-2=progetto_java/resources/map_2/desert_half_sand.png
-3=progetto_java/resources/map_2/desert_sandstone.png
+0=/map_2/desert_sky.png
+1=/map_2/desert_sand.png
+2=/map_2/desert_half_sand.png
+3=/map_2/portalBlock.png
+4=/map_2/centralPortalBlock.png
 4=progetto_java/resources/map_2/desert_cactus_top.png
 5=progetto_java/resources/map_2/desert_cactus_body.png
