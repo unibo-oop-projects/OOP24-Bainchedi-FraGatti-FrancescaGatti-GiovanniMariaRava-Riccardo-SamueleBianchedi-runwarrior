@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import it.unibo.runwarrior.controller.CharacterComand;
-import it.unibo.runwarrior.controller.CollisionDetection;
+//import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowersHandler;
 import it.unibo.runwarrior.model.Character;
@@ -30,20 +30,22 @@ public class GameLoopPanel extends JPanel implements Runnable{
     private CharacterComand commands;
     private PowersHandler powerUpsHandler;
     private PowerUpFactoryImpl powersFactory;
-    private CollisionDetection collisionDetection;
+   // private CollisionDetection collisionDetection;
     
     private HandlerMapElement mapHandler;
     private Handler handler;
+    private GameMap gameMap;
 
    // private GameMusic music;
 
     public GameLoopPanel(){
         this.commands = new CharacterComand();
-        this.collisionDetection = new CollisionDetection(null);
+        this.gameMap = GameMap.load("Map_1/map_1.txt", "Map_1/forest_theme.txt");
+        //this.collisionDetection = new CollisionDetection(null);
         this.powerUpsHandler = new PowersHandler(this, commands);
         this.powersFactory = new PowerUpFactoryImpl(this);
         initializePlayer();
-        this.mapHandler = new HandlerMapElement(null, player);
+        this.mapHandler = new HandlerMapElement(gameMap, player);
 
         this.handler = new Handler();
         handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800, this));
