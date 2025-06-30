@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.MapElement;
+import it.unibo.runwarrior.view.GameLoopPanel;
+
 import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 
 public class HandlerMapElement {
     
@@ -15,12 +19,14 @@ public class HandlerMapElement {
     private List<MapElement> blocks;
     private int[][] map;
     private Map<Integer, BufferedImage> mapBlock;
+    private int shift;
 
-    public HandlerMapElement(GameMap gamemap){
+    public HandlerMapElement(GameMap gamemap, Character player){
         blocks = new ArrayList<>();
         MapImage();
         this.mapBlock = gamemap.getBlockImages();
         this.map = gamemap.getMapData();
+        this.shift = player.getGroundX();
     }
 
     /**
@@ -52,5 +58,20 @@ public class HandlerMapElement {
             blocks.add(newElement);
 
         }
-    } 
+    }
+
+    public void printBlocks(Graphics2D gr){
+        int rows = map.length;
+        int cols = map[0].length;
+
+        int tileHeight = GameLoopPanel.HEIGHT / rows;
+        int tileSize = tileHeight;
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < cols; x++) {
+                BufferedImage img;
+                img = map[y][x] == 1 ? this.blocks.get(1).getImage() : this.blocks.get(0).getImage();
+                gr.drawImage(img, x * tileSize + shift, y * tileSize, tileSize, tileSize, null);
+            }
+        }
+    }
 }
