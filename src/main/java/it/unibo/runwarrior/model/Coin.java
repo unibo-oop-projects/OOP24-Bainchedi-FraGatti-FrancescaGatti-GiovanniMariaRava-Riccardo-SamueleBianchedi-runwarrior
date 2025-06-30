@@ -1,7 +1,25 @@
 package it.unibo.runwarrior.model;
-import java.awt.Graphics2D;
 
-public interface Coin {
-    boolean isCollected(); //medoto per controllare se la moneta è stata raccolta 
-    public void drawCoin(Graphics2D gr2); 
+public class Coin {
+    private int row; 
+    private int col; 
+    private boolean collected; 
+
+    public Coin(int row, int col){
+        this.row = row; 
+        this.col = col; 
+        this.collected = false; 
+    }
+    public int getRow(){
+        return row; 
+    }
+    public int getCol(){
+        return col; 
+    }
+    public boolean isCollected(){
+        return collected; 
+    }
+    public void collect(){
+        collected = true; 
+    }
 }
