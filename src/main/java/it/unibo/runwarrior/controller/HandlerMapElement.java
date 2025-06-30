@@ -23,10 +23,10 @@ public class HandlerMapElement {
 
     public HandlerMapElement(GameMap gamemap, Character player){
         blocks = new ArrayList<>();
-        MapImage();
         this.mapBlock = gamemap.getBlockImages();
         this.map = gamemap.getMapData();
         this.shift = player.getGroundX();
+        MapImage();
     }
 
     /**

@@ -1,8 +1,8 @@
 #file di configurazione delle immagini della mappa 1
 
-0=/map_1/forest_sky.png
-1=/map_1/forest_grass.png
-2=/map_1/forest_terrain.png
-3=/map_1/forest_terrain.png //da modificare con il nome del blocco che fa da contorno al portale
-4=/map_1/forest_grass.png   //da modificare con il nome del blocco che fa da centro al portale
-5=/map_1/forest_mushroom.png
+0=/Map_1/forest_sky.png
+1=/Map_1/forest_grass.png
+2=/Map_1/forest_terrain.png
+3=/Map_1/forest_terrain.png
+4=/Map_1/forest_grass.png
+5=/Map_1/forest_mushroom.png
