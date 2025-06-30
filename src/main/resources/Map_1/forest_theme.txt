@@ -3,6 +3,6 @@
 0=/map_1/forest_sky.png
 1=/map_1/forest_grass.png
 2=/map_1/forest_terrain.png
-3=/map_1/portalBlock.png
-4=/map_1/centralPortalBlock.png
+3=/map_1/forest_terrain.png //da modificare con il nome del blocco che fa da contorno al portale
+4=/map_1/forest_grass.png   //da modificare con il nome del blocco che fa da centro al portale
 5=/map_1/forest_mushroom.png
