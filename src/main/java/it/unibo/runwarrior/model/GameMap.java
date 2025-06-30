@@ -61,4 +61,7 @@ public class GameMap {
     public BufferedImage getBlockImage(int blockValue) {
         return blockImages.get(blockValue);
     }
+    public Map<Integer, BufferedImage> getBlockImages() {
+        return blockImages;
+    }
 }
