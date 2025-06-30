@@ -53,7 +53,7 @@ public abstract class CharacterImpl implements Character{
             if(screenX < maxScreenX){
                 screenX += speed;
             }
-            if(screenX >= maxScreenX){
+            else{
                 groundX -= speed;
             }
         }
