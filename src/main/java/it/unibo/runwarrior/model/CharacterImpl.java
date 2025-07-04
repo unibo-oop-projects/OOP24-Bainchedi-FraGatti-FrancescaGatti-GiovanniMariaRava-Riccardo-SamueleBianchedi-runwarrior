@@ -9,19 +9,19 @@ import it.unibo.runwarrior.controller.JumpState;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 public abstract class CharacterImpl implements Character{
-
-    public static final int SIZE_CHARACTER = 96;
-    public static final int START_Y = 384;
-    public static final int START_X = 240;
-    private static int MAX_JUMP = START_Y - (SIZE_CHARACTER*5/2);
-    private static int MID_JUMP = START_Y - (SIZE_CHARACTER*3/2);
+    public static final int START_X = 96;
+    private int startY;
+    private int maxJump;
+    private int midJump;
+    protected int sizeCharacter;
+    private int toTouchFloor = 2;
     
     private final int minScreenX = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private int maxScreenX;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     protected int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
-    protected int playerY = START_Y;// * VERTICALE
+    protected int playerY;// * VERTICALE
     private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
-    private int screenY = START_Y;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
+    private int screenY;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
     protected Rectangle collisionArea;
 
     protected boolean rightDirection = true;
@@ -39,9 +39,19 @@ public abstract class CharacterImpl implements Character{
     public CharacterImpl(GameLoopPanel panel, CharacterComand commands){
         this.glp = panel;
         this.cmd = commands;
-        collisionArea = new Rectangle(playerX + 30, playerY + 20, 38,73);
+        collisionArea = new Rectangle();
         playerImage();
         this.animation = new CharacterAnimation(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
+    }
+
+    public void setStartY(int y, int tileSize){
+        startY = y + toTouchFloor;
+        playerY = startY;
+        screenY = startY;
+        sizeCharacter = tileSize*2;
+        maxJump = startY - (sizeCharacter*5/2);
+        midJump = startY - (sizeCharacter*3/2);
+        collisionArea.setBounds(playerX+(sizeCharacter/4), playerY+(sizeCharacter/5), sizeCharacter/2, sizeCharacter-(sizeCharacter/5)-toTouchFloor);
     }
 
     @Override
@@ -67,29 +77,29 @@ public abstract class CharacterImpl implements Character{
             }
         }
         if(cmd.getJump() == JumpState.START_JUMP){
-            if(playerY > MAX_JUMP){ 
+            if(playerY > maxJump){ 
                 playerY -= speedJumpUP;
             }
-            if(playerY <= MAX_JUMP){
-                playerY = MAX_JUMP;
+            if(playerY <= maxJump){
+                playerY = maxJump;
                 cmd.setJump(JumpState.DOWN_JUMP);
             }
         }
         if(cmd.getJump() == JumpState.MIN_JUMP){
-            if(playerY > MID_JUMP){
+            if(playerY > midJump){
                 playerY -= speedJumpUP;
             } 
-            if(playerY <= MID_JUMP){
-                playerY = MID_JUMP;
+            if(playerY <= midJump){
+                playerY = midJump;
                 cmd.setJump(JumpState.DOWN_JUMP);
             }
         }
         if(cmd.getJump() == JumpState.DOWN_JUMP){
-            if(playerY < START_Y){
+            if(playerY < startY){
                 playerY += speedJumpDown;
             }
-            if(playerY >= START_Y){
-                playerY = START_Y;
+            if(playerY >= startY){
+                playerY = startY;
                 cmd.setJump(JumpState.STOP_JUMP);
             }
         }
@@ -99,7 +109,7 @@ public abstract class CharacterImpl implements Character{
     }
 
     private void updatePlayerPosition() {
-        collisionArea.setLocation(playerX + 30, playerY + 20);
+        collisionArea.setLocation(playerX + (sizeCharacter/4), playerY + (sizeCharacter/5));
         updateAttackCollision();
     }
 
@@ -111,8 +121,8 @@ public abstract class CharacterImpl implements Character{
         BufferedImage tip = null;
         im = animation.imagePlayer(rightDirection);
         tip = animation.getTip(rightDirection);
-        gr2.drawImage(tip, screenX + SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
-        gr2.drawImage(im, screenX, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+        gr2.drawImage(tip, screenX + sizeCharacter, playerY, sizeCharacter, sizeCharacter, null);
+        gr2.drawImage(im, screenX, playerY, sizeCharacter, sizeCharacter, null);
     }
 
     public void drawRectangle(Graphics2D gr){

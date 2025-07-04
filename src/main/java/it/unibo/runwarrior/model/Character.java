@@ -10,6 +10,7 @@ public interface Character {
     public void drawRectangle(Graphics2D gr2);
     public void playerImage();
     public void setLocationAfterPowerup(int x, int y, int realx);
+    public void setStartY(int y, int tileSize);
 
     public Rectangle getCollisionArea();
     public int getGroundX();

@@ -21,6 +21,7 @@ public class HandlerMapElement {
     private Map<Integer, BufferedImage> mapBlock;
     private Character player;
     private int shift;
+    private boolean setStart;
 
     public HandlerMapElement(GameMap gamemap, Character player){
         blocks = new ArrayList<>();
@@ -73,6 +74,11 @@ public class HandlerMapElement {
                 BufferedImage img;
                 img = this.blocks.get(map[y][x]).getImage();
                 gr.drawImage(img, x * tileSize + shift, y * tileSize, tileSize, tileSize, null);
+                if(x == 0 && map[y][x] == 1 && !setStart){
+                    player.setStartY((y*tileSize) - (tileSize*2), tileSize);
+                    setStart = true;
+                    System.out.println(y*tileSize);
+                }
             }
         }
     }
