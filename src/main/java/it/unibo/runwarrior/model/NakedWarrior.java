@@ -9,8 +9,8 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 
 public class NakedWarrior extends CharacterImpl{
 
-    public NakedWarrior(GameLoopPanel panel, CharacterComand commands) {
-        super(panel, commands);
+    public NakedWarrior(GameLoopPanel panel, CharacterComand commands, GameMap gameMap) {
+        super(panel, commands, gameMap);
     }
 
     @Override

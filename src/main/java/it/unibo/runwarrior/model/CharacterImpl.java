@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.JumpState;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
@@ -32,16 +33,18 @@ public abstract class CharacterImpl implements Character{
 
     protected BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
-    public GameLoopPanel glp;
-    public CharacterComand cmd;
-    protected CharacterAnimation animation;
+    private GameLoopPanel glp;
+    protected CharacterComand cmd;
+    protected CharacterAnimation animation;    
+    private CollisionDetection collisionDetection;
 
-    public CharacterImpl(GameLoopPanel panel, CharacterComand commands){
+    public CharacterImpl(GameLoopPanel panel, CharacterComand commands, GameMap gameMap){
         this.glp = panel;
         this.cmd = commands;
         collisionArea = new Rectangle();
         playerImage();
         this.animation = new CharacterAnimation(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
+        this.collisionDetection = new CollisionDetection(gameMap.getMapData());
     }
 
     public void setStartY(int y, int tileSize){

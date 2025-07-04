@@ -9,8 +9,8 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 
 public class SwordWarrior extends CharacterImpl{
 
-    public SwordWarrior(GameLoopPanel panel, CharacterComand commands) {
-        super(panel, commands);
+    public SwordWarrior(GameLoopPanel panel, CharacterComand commands, GameMap gameMap) {
+        super(panel, commands, gameMap);
     }
 
     @Override
