@@ -3,7 +3,8 @@ package it.unibo.runwarrior.controller;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
-//da creare il vettore bidimensionale e considerare i blocchi come degli oggetti (utile per capire se è solido o ostacoloCavaVita [booleani])
+
+import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.MapElement;
 
 public class CollisionDetection {
@@ -13,8 +14,14 @@ public class CollisionDetection {
     private ArrayList<String> directions = new ArrayList<>();
     private int playerSpeed;
 
-    public CollisionDetection(int map[][]){
+    public CollisionDetection(int map[][], List<MapElement> blocks){
         this.map = map;
+        this.blocks = blocks;
+    }
+
+    public String checkCollision(Character player){
+
+        return "";
     }
 
     public boolean touchSolid(int x, int y){

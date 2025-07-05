@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CollisionDetection;
+import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.JumpState;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
@@ -35,19 +36,22 @@ public abstract class CharacterImpl implements Character{
 
     private GameLoopPanel glp;
     protected CharacterComand cmd;
-    protected CharacterAnimation animation;    
+    protected CharacterAnimation animation;
+    private HandlerMapElement mapHandler;
     private CollisionDetection collisionDetection;
 
-    public CharacterImpl(GameLoopPanel panel, CharacterComand commands, GameMap gameMap){
+    public CharacterImpl(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler){
         this.glp = panel;
         this.cmd = commands;
         collisionArea = new Rectangle();
         playerImage();
         this.animation = new CharacterAnimation(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
-        this.collisionDetection = new CollisionDetection(gameMap.getMapData());
+        this.collisionDetection = collision;
+        this.mapHandler = mapHandler;
+        setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
     }
 
-    public void setStartY(int y, int tileSize){
+    private void setStartY(int y, int tileSize){
         startY = y + toTouchFloor;
         playerY = startY;
         screenY = startY;
@@ -60,6 +64,7 @@ public abstract class CharacterImpl implements Character{
     @Override
     public void update() {
         maxScreenX = glp.getWidth() / 2;
+
         if(cmd.getRight() && !cmd.getLeft()){
             rightDirection = true;
             playerX += speed;
@@ -68,6 +73,7 @@ public abstract class CharacterImpl implements Character{
             }
             else{
                 groundX -= speed;
+                mapHandler.setShift(groundX);
             }
         }
         if(cmd.getLeft() && !cmd.getRight()){
@@ -79,6 +85,7 @@ public abstract class CharacterImpl implements Character{
                 screenX -= speed;
             }
         }
+
         if(cmd.getJump() == JumpState.START_JUMP){
             if(playerY > maxJump){ 
                 playerY -= speedJumpUP;
@@ -144,10 +151,6 @@ public abstract class CharacterImpl implements Character{
 
     public Rectangle getCollisionArea(){
         return collisionArea;
-    }
-
-    public int getGroundX(){
-        return groundX;
     }
 
     public int getSpeed(){
