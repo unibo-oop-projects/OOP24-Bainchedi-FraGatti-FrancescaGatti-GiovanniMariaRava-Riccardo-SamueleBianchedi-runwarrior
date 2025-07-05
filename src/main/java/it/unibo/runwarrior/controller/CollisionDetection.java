@@ -11,23 +11,30 @@ public class CollisionDetection {
     
     private int map[][];
     private List<MapElement> blocks = new ArrayList<>();
+    private int tileSize;
     private ArrayList<String> directions = new ArrayList<>();
     private int playerSpeed;
 
-    public CollisionDetection(int map[][], List<MapElement> blocks){
+    public CollisionDetection(int map[][], List<MapElement> blocks, int tileSize){
         this.map = map;
         this.blocks = blocks;
+        this.tileSize = tileSize;
     }
 
     public String checkCollision(Character player){
-
-        return "";
+        playerSpeed = player.getSpeed();
+        String dir = "";
+        if(touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y) |
+            touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y + tileSize)){
+            dir = directions.getFirst();
+        }
+        return dir;
     }
 
     public boolean touchSolid(int x, int y){
         int[][] blockIndexes = map;
-        float indexXtile = x / 48;
-        float indexYtile = y / 48;
+        float indexXtile = x / tileSize;
+        float indexYtile = y / tileSize;
         int blockIndex = blockIndexes[(int) indexYtile][(int) indexXtile];
         if(blocks.get(blockIndex).getCollision()){
             this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile));
@@ -40,9 +47,9 @@ public class CollisionDetection {
 
     public String checkCollisionDirection(int x, int y, float indexXtile, float indexYtile){
         String direction = "";
-        int tileX = ((int) indexXtile) * 48;
-        int tileY = ((int) indexYtile) * 48;
-        Rectangle tileRec = new Rectangle(tileX, tileY, 48, 48);
+        int tileX = ((int) indexXtile) * tileSize;
+        int tileY = ((int) indexYtile) * tileSize;
+        Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
         if(y == tileRec.y && (x >= tileRec.x && x <= tileRec.x + tileRec.width)){
             direction = "up";
         }

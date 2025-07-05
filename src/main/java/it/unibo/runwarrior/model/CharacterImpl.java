@@ -64,16 +64,20 @@ public abstract class CharacterImpl implements Character{
     @Override
     public void update() {
         maxScreenX = glp.getWidth() / 2;
-
+        String collisionDir = "";
+        collisionDir = collisionDetection.checkCollision(this);
+        System.out.println(collisionDir);
         if(cmd.getRight() && !cmd.getLeft()){
             rightDirection = true;
-            playerX += speed;
-            if(screenX < maxScreenX){
-                screenX += speed;
-            }
-            else{
-                groundX -= speed;
-                mapHandler.setShift(groundX);
+            if(!collisionDir.equals("right")){
+                playerX += speed;
+                if(screenX < maxScreenX){
+                    screenX += speed;
+                }
+                else{
+                    groundX -= speed;
+                    mapHandler.setShift(groundX);
+                }
             }
         }
         if(cmd.getLeft() && !cmd.getRight()){

@@ -42,7 +42,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.gameMap = GameMap.load("Map_1/map_1.txt", "Map_1/forest_theme.txt");
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
-        this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks());
+        this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks(), mapHandler.getTileSize());
         this.powersFactory = new PowerUpFactoryImpl(this);
         this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler);
         initializePlayer();
