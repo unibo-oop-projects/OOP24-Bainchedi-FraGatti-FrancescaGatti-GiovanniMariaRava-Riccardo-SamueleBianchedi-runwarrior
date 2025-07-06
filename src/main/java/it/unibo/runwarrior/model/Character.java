@@ -11,7 +11,7 @@ public interface Character {
     public void playerImage();
     public void setLocationAfterPowerup(int x, int y, int realx);
 
-    public Rectangle getCollisionArea();
+    public Rectangle getArea();
     public int getSpeed();
     public int getPlX();
     public int getPlY();
