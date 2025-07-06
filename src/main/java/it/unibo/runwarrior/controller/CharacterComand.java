@@ -8,7 +8,6 @@ public class CharacterComand implements KeyListener{
     private boolean right;
     private boolean left;
     private boolean standing;
-    private JumpState jump = JumpState.STOP_JUMP;
     private boolean isJump;
     private boolean attack;
 
@@ -73,10 +72,6 @@ public class CharacterComand implements KeyListener{
             standing = false;
         }
         return standing;
-    }
-
-    public JumpState getJump(){
-        return jump;
     }
 
     public boolean isJumping(){
