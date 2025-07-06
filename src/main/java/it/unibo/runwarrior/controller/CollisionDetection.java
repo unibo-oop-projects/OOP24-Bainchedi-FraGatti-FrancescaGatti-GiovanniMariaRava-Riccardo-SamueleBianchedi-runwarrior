@@ -76,8 +76,9 @@ public class CollisionDetection {
     }
 
     public boolean isInAir(Character player){
-        if(!touchSolid(player.getArea().x, player.getArea().y + player.getArea().height) &&
-            !touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + player.getArea().height)){
+        int feetTollerance = 4;
+        if(!touchSolid(player.getArea().x + feetTollerance, player.getArea().y + player.getArea().height) &&
+            !touchSolid(player.getArea().x + player.getArea().width - feetTollerance, player.getArea().y + player.getArea().height)){
                 return true;
         }
         return false;
