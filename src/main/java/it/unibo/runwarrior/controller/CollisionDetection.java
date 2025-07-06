@@ -25,14 +25,14 @@ public class CollisionDetection {
         playerSpeed = player.getSpeed();
         String dir = "";
         this.directions.clear();
-        if(touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y) |
-            touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y + tileSize) |
-            touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y + player.getCollisionArea().height) |
-            touchSolid(player.getCollisionArea().x, player.getCollisionArea().y) |
-            touchSolid(player.getCollisionArea().x, player.getCollisionArea().y + tileSize) |
-            touchSolid(player.getCollisionArea().x, player.getCollisionArea().y + player.getCollisionArea().height)){
-            System.out.println(directions);
-            dir = directions.stream().filter(s -> s.equals("right") | s.equals("left")).distinct().findFirst().orElse("");
+        if(touchSolid(player.getArea().x + player.getArea().width, player.getArea().y) |
+            touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + tileSize) |
+            touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + player.getArea().height) |
+            touchSolid(player.getArea().x, player.getArea().y) |
+            touchSolid(player.getArea().x, player.getArea().y + tileSize) |
+            touchSolid(player.getArea().x, player.getArea().y + player.getArea().height)){
+                System.out.println(directions);
+                dir = directions.stream().filter(s -> s.equals("right") | s.equals("left")).distinct().findFirst().orElse("");
         }
         if(dir.isEmpty() && directions.contains("up")){
             dir = "up";
@@ -73,5 +73,13 @@ public class CollisionDetection {
             direction = "left";
         }
         return direction;
+    }
+
+    public boolean isInAir(Character player){
+        if(!touchSolid(player.getArea().x, player.getArea().y + player.getArea().height) &&
+            !touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + player.getArea().height)){
+                return true;
+        }
+        return false;
     }
 }
