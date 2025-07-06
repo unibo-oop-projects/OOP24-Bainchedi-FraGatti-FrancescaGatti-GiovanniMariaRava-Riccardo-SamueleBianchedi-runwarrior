@@ -27,10 +27,15 @@ public class CollisionDetection {
         this.directions.clear();
         if(touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y) |
             touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y + tileSize) |
+            touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y + player.getCollisionArea().height) |
             touchSolid(player.getCollisionArea().x, player.getCollisionArea().y) |
-            touchSolid(player.getCollisionArea().x, player.getCollisionArea().y + tileSize)){
+            touchSolid(player.getCollisionArea().x, player.getCollisionArea().y + tileSize) |
+            touchSolid(player.getCollisionArea().x, player.getCollisionArea().y + player.getCollisionArea().height)){
             System.out.println(directions);
             dir = directions.stream().filter(s -> s.equals("right") | s.equals("left")).distinct().findFirst().orElse("");
+        }
+        if(dir.isEmpty() && directions.contains("up")){
+            dir = "up";
         }
         return dir;
     }
@@ -54,6 +59,7 @@ public class CollisionDetection {
         int tileX = ((int) indexXtile) * tileSize;
         int tileY = ((int) indexYtile) * tileSize;
         Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
+        System.out.println(y + "  " + tileRec.y);
         if(y == tileRec.y && (x >= tileRec.x && x <= tileRec.x + tileRec.width)){
             direction = "up";
         }
