@@ -24,6 +24,7 @@ public abstract class CharacterImpl implements Character{
     private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
     private int screenY;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
     protected Rectangle collisionArea;
+    private boolean hitHead;
 
     protected boolean rightDirection = true;
     private int speed = 5;
@@ -50,13 +51,13 @@ public abstract class CharacterImpl implements Character{
     }
 
     private void setStartY(int y, int tileSize){
-        startY = y + toTouchFloor;
+        startY = y + toTouchFloor;//542
         playerY = startY;
         screenY = startY;
         sizeCharacter = tileSize*2;
         maxJump = startY - (sizeCharacter*5/2);
         midJump = startY - (sizeCharacter*3/2);
-        collisionArea = new Rectangle(playerX+(sizeCharacter/4), playerY+(sizeCharacter/5), sizeCharacter/2, sizeCharacter-(sizeCharacter/5)-toTouchFloor);
+        collisionArea = new Rectangle(playerX+(sizeCharacter/4), playerY+(sizeCharacter/4), sizeCharacter/2, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
     }
 
     @Override
@@ -64,7 +65,6 @@ public abstract class CharacterImpl implements Character{
         maxScreenX = glp.getWidth() / 2;
         String collisionDir = "";
         collisionDir = collisionDetection.checkCollision(this);
-        System.out.println(collisionDir);
         if(cmd.getRight() && !cmd.getLeft()){
             rightDirection = true;
             if(!collisionDir.equals("right")){
@@ -89,13 +89,17 @@ public abstract class CharacterImpl implements Character{
                 }
             }
         }
+        hitHead = collisionDir.equals("down") ? true : false;
+        if(hitHead){
+            cmd.setJump(false);
+        }
         jump(cmd.isJumping(), maxJump);
         updatePlayerPosition();
         animation.frameChanger();
     }
 
     private void updatePlayerPosition() {
-        collisionArea.setLocation(playerX + (sizeCharacter/4), playerY + (sizeCharacter/5));
+        collisionArea.setLocation(playerX + (sizeCharacter/4), playerY + (sizeCharacter/4));
         updateAttackCollision();
     }
 

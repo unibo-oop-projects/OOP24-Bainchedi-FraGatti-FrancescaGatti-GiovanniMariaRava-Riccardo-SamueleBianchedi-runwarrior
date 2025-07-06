@@ -14,6 +14,7 @@ public class CollisionDetection {
     private int tileSize;
     private ArrayList<String> directions = new ArrayList<>();
     private int playerSpeed;
+    int feetHeadToll = 4;
 
     public CollisionDetection(int map[][], List<MapElement> blocks, int tileSize){
         this.map = map;
@@ -37,6 +38,9 @@ public class CollisionDetection {
         if(dir.isEmpty() && directions.contains("up")){
             dir = "up";
         }
+        else if(dir.isEmpty() && directions.contains("down")){
+            dir = "down";
+        }
         return dir;
     }
 
@@ -59,11 +63,10 @@ public class CollisionDetection {
         int tileX = ((int) indexXtile) * tileSize;
         int tileY = ((int) indexYtile) * tileSize;
         Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
-        System.out.println(y + "  " + tileRec.y);
         if(y == tileRec.y && (x >= tileRec.x && x <= tileRec.x + tileRec.width)){
             direction = "up";
         }
-        else if((y == tileRec.y + tileRec.height - 1) && (x >= tileRec.x && x <= tileRec.x + tileRec.width)){
+        else if((y == tileRec.y + tileRec.height - feetHeadToll) && (x >= tileRec.x && x <= tileRec.x + tileRec.width)){
             direction = "down";
         }
         else if(x - playerSpeed < tileRec.x){
@@ -76,9 +79,8 @@ public class CollisionDetection {
     }
 
     public boolean isInAir(Character player){
-        int feetTollerance = 4;
-        if(!touchSolid(player.getArea().x + feetTollerance, player.getArea().y + player.getArea().height) &&
-            !touchSolid(player.getArea().x + player.getArea().width - feetTollerance, player.getArea().y + player.getArea().height)){
+        if(!touchSolid(player.getArea().x + feetHeadToll, player.getArea().y + player.getArea().height) &&
+            !touchSolid(player.getArea().x + player.getArea().width - feetHeadToll, player.getArea().y + player.getArea().height)){
                 return true;
         }
         return false;
