@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.controller.JumpState;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 public abstract class CharacterImpl implements Character{
@@ -43,7 +42,6 @@ public abstract class CharacterImpl implements Character{
     public CharacterImpl(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler){
         this.glp = panel;
         this.cmd = commands;
-        collisionArea = new Rectangle();
         playerImage();
         this.animation = new CharacterAnimation(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
         this.collisionDetection = collision;
@@ -58,7 +56,7 @@ public abstract class CharacterImpl implements Character{
         sizeCharacter = tileSize*2;
         maxJump = startY - (sizeCharacter*5/2);
         midJump = startY - (sizeCharacter*3/2);
-        collisionArea.setBounds(playerX+(sizeCharacter/4), playerY+(sizeCharacter/5), sizeCharacter/2, sizeCharacter-(sizeCharacter/5)-toTouchFloor);
+        collisionArea = new Rectangle(playerX+(sizeCharacter/4), playerY+(sizeCharacter/5), sizeCharacter/2, sizeCharacter-(sizeCharacter/5)-toTouchFloor);
     }
 
     @Override
@@ -91,35 +89,7 @@ public abstract class CharacterImpl implements Character{
                 }
             }
         }
-
-        if(cmd.getJump() == JumpState.START_JUMP){
-            if(playerY > maxJump){ 
-                playerY -= speedJumpUP;
-            }
-            if(playerY <= maxJump){
-                playerY = maxJump;
-                cmd.setJump(JumpState.DOWN_JUMP);
-            }
-        }
-        if(cmd.getJump() == JumpState.MIN_JUMP){
-            if(playerY > midJump){
-                playerY -= speedJumpUP;
-            } 
-            if(playerY <= midJump){
-                playerY = midJump;
-                cmd.setJump(JumpState.DOWN_JUMP);
-            }
-        }
-        if(cmd.getJump() == JumpState.DOWN_JUMP){
-            if(playerY < startY){
-                playerY += speedJumpDown;
-            }
-            if(playerY >= startY){
-                playerY = startY;
-                cmd.setJump(JumpState.STOP_JUMP);
-            }
-        }
-
+        jump(cmd.isJumping(), maxJump);
         updatePlayerPosition();
         animation.frameChanger();
     }
@@ -127,6 +97,29 @@ public abstract class CharacterImpl implements Character{
     private void updatePlayerPosition() {
         collisionArea.setLocation(playerX + (sizeCharacter/4), playerY + (sizeCharacter/5));
         updateAttackCollision();
+    }
+
+    public void jump(boolean isJump, int jumpHeight){
+        if(isJump){
+            if(playerY > jumpHeight){
+                playerY -= speedJumpUP;
+            }
+            else{
+                playerY = jumpHeight;
+                cmd.setJump(false);
+            }
+        }
+        else{
+            if(collisionDetection.isInAir(this)){
+                playerY += speedJumpDown;
+                updateJumpVariable();
+            }
+        }
+    }
+
+    public void updateJumpVariable(){
+        maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
+        midJump = (startY - (sizeCharacter*3/2)) + (playerY - startY);
     }
 
     public abstract void updateAttackCollision();
@@ -155,7 +148,7 @@ public abstract class CharacterImpl implements Character{
         this.screenX = x;
     }
 
-    public Rectangle getCollisionArea(){
+    public Rectangle getArea(){
         return collisionArea;
     }
 
