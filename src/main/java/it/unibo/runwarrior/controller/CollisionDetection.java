@@ -24,9 +24,13 @@ public class CollisionDetection {
     public String checkCollision(Character player){
         playerSpeed = player.getSpeed();
         String dir = "";
+        this.directions.clear();
         if(touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y) |
-            touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y + tileSize)){
-            dir = directions.getFirst();
+            touchSolid(player.getCollisionArea().x + player.getCollisionArea().width, player.getCollisionArea().y + tileSize) |
+            touchSolid(player.getCollisionArea().x, player.getCollisionArea().y) |
+            touchSolid(player.getCollisionArea().x, player.getCollisionArea().y + tileSize)){
+            System.out.println(directions);
+            dir = directions.stream().filter(s -> s.equals("right") | s.equals("left")).distinct().findFirst().orElse("");
         }
         return dir;
     }

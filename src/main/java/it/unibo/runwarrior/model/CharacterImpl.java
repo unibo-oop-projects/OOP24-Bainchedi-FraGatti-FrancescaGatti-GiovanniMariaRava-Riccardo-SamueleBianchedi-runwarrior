@@ -82,11 +82,13 @@ public abstract class CharacterImpl implements Character{
         }
         if(cmd.getLeft() && !cmd.getRight()){
             rightDirection = false;
-            if(screenX > 0){
-                playerX -= speed;
-            }
-            if(screenX > minScreenX){
-                screenX -= speed;
+            if(!collisionDir.equals("left")){
+                if(screenX > 0){
+                    playerX -= speed;
+                }
+                if(screenX > minScreenX){
+                    screenX -= speed;
+                }
             }
         }
 
