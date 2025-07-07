@@ -53,7 +53,7 @@ public abstract class CharacterImpl implements Character{
     }
 
     private void setStartY(int y, int tileSize){
-        startY = y + toTouchFloor;//542
+        startY = y + toTouchFloor;
         playerY = startY;
         screenY = startY;
         sizeCharacter = tileSize*2;
@@ -67,6 +67,7 @@ public abstract class CharacterImpl implements Character{
         maxScreenX = glp.getWidth() / 2;
         String collisionDir = "";
         collisionDir = collisionDetection.checkCollision(this);
+        System.out.println(collisionDir);
         if(cmd.getRight() && !cmd.getLeft()){
             rightDirection = true;
             if(!collisionDir.equals("right")){

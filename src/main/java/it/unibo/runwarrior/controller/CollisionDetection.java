@@ -63,10 +63,11 @@ public class CollisionDetection {
         int tileX = ((int) indexXtile) * tileSize;
         int tileY = ((int) indexYtile) * tileSize;
         Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
+        System.out.println(x + " " + y);
         if(y == tileRec.y && (x >= tileRec.x && x <= tileRec.x + tileRec.width)){
             direction = "up";
         }
-        else if(isInAir(player) && y == player.getArea().y && y <= tileRec.y + tileRec.height &&
+        else if(isInAir(player) && y == player.getArea().y && (tileRec.y + tileRec.height - y) < feetHeadToll &&
                 (x >= tileRec.x && x <= tileRec.x + tileRec.width) || y <= 0){
             direction = "down";
         }
