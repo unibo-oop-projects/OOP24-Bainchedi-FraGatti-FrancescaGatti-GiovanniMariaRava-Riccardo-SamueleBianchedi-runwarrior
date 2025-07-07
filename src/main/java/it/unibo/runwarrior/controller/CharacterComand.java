@@ -10,6 +10,7 @@ public class CharacterComand implements KeyListener{
     private boolean standing;
     private boolean isJump;
     private boolean attack;
+    private boolean handleDoubleJump;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -19,15 +20,15 @@ public class CharacterComand implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         int value = e.getKeyCode();
-        
         if(value == KeyEvent.VK_RIGHT){
             right = true;
         }
         if(value == KeyEvent.VK_LEFT){
             left = true;
         }
-        if(value == KeyEvent.VK_UP){
+        if(value == KeyEvent.VK_UP && !handleDoubleJump){
             isJump = true;
+            handleDoubleJump = true;
         }
         if(value == KeyEvent.VK_SHIFT){
             attack = true;
@@ -54,6 +55,10 @@ public class CharacterComand implements KeyListener{
 
     public void setJump(boolean i){
         this.isJump = i;
+    }
+
+    public void setDoubleJump(boolean i){
+        this.handleDoubleJump = i;
     }
 
     public boolean getRight(){

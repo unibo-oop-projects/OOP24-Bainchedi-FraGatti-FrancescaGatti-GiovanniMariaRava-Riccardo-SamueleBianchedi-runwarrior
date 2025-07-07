@@ -25,6 +25,8 @@ public abstract class CharacterImpl implements Character{
     private int screenY;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
     protected Rectangle collisionArea;
     private boolean hitHead;
+    private boolean jumpKill;
+    private boolean descend;
 
     protected boolean rightDirection = true;
     private int speed = 5;
@@ -94,6 +96,9 @@ public abstract class CharacterImpl implements Character{
             cmd.setJump(false);
         }
         jump(cmd.isJumping(), maxJump);
+        if(jumpKill){
+            jumpAfterKill();
+        }
         updatePlayerPosition();
         animation.frameChanger();
     }
@@ -104,7 +109,7 @@ public abstract class CharacterImpl implements Character{
     }
 
     public void jump(boolean isJump, int jumpHeight){
-        if(isJump){
+        if(isJump && !descend){
             if(playerY > jumpHeight){
                 playerY -= speedJumpUP;
             }
@@ -114,10 +119,31 @@ public abstract class CharacterImpl implements Character{
             }
         }
         else{
-            if(collisionDetection.isInAir(this)){
+            if(collisionDetection.isInAir(this) && !jumpKill){
+                descend = true;
                 playerY += speedJumpDown;
-                updateJumpVariable();
             }
+            else{
+                descend = false;
+                cmd.setDoubleJump(false);
+            }
+            updateJumpVariable();
+        }
+    }
+
+    //per uccisione nemici
+    public void setJumpKill(){
+        this.jumpKill = true;
+    }
+
+    public void jumpAfterKill(){
+        if(playerY > midJump){
+            playerY -= speedJumpUP;
+        }
+        else{
+            playerY = midJump;
+            jumpKill = false;
+            cmd.setJump(false);
         }
     }
 

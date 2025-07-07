@@ -31,7 +31,6 @@ public class CollisionDetection {
             touchSolid(player.getArea().x, player.getArea().y, player, true) |
             touchSolid(player.getArea().x, player.getArea().y + tileSize, player, true) |
             touchSolid(player.getArea().x, player.getArea().y + player.getArea().height, player, true)){
-                System.out.println(directions);
                 dir = directions.stream().filter(s -> s.equals("right") | s.equals("left")).distinct().findFirst().orElse("");
         }
         if(dir.isEmpty() && directions.contains("up")){
@@ -64,7 +63,6 @@ public class CollisionDetection {
         int tileX = ((int) indexXtile) * tileSize;
         int tileY = ((int) indexYtile) * tileSize;
         Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
-        System.out.println(x  + " " + tileRec.x + " " + y + " " + tileRec.y);
         if(y == tileRec.y && (x >= tileRec.x && x <= tileRec.x + tileRec.width)){
             direction = "up";
         }
