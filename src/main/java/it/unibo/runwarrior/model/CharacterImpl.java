@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import it.unibo.runwarrior.controller.CharacterAnimationHandler;
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
@@ -39,7 +40,7 @@ public abstract class CharacterImpl implements Character{
 
     private GameLoopPanel glp;
     protected CharacterComand cmd;
-    protected CharacterAnimation animation;
+    protected CharacterAnimationHandler animation;
     private HandlerMapElement mapHandler;
     private CollisionDetection collisionDetection;
 
@@ -47,7 +48,7 @@ public abstract class CharacterImpl implements Character{
         this.glp = panel;
         this.cmd = commands;
         playerImage();
-        this.animation = new CharacterAnimation(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
+        this.animation = new CharacterAnimationHandler(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
         this.collisionDetection = collision;
         this.mapHandler = mapHandler;
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
