@@ -25,20 +25,22 @@ public class CollisionDetection {
         playerSpeed = player.getSpeed();
         String dir = "";
         this.directions.clear();
-        if(touchSolid(player.getArea().x + player.getArea().width, player.getArea().y, player, true) |
+        if(touchSolid(player.getArea().x + player.getArea().width - (feetHeadToll+1), player.getArea().y, player, true) |
             touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + tileSize, player, true) |
             touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + player.getArea().height, player, true) |
-            touchSolid(player.getArea().x, player.getArea().y, player, true) |
+            touchSolid(player.getArea().x + (feetHeadToll+1), player.getArea().y, player, true) |
             touchSolid(player.getArea().x, player.getArea().y + tileSize, player, true) |
             touchSolid(player.getArea().x, player.getArea().y + player.getArea().height, player, true)){
-                dir = directions.stream().filter(s -> s.equals("right") | s.equals("left")).distinct().findFirst().orElse("");
+                dir = directions.stream().filter(s -> s.equals("down") | s.equals("right") | s.equals("left"))
+                        .distinct().findFirst().orElse("");
         }
         if(dir.isEmpty() && directions.contains("up")){
             dir = "up";
         }
-        else if(dir.isEmpty() && directions.contains("down")){
-            dir = "down";
-        }
+        // else if(dir.isEmpty() && directions.contains("down")){
+        //     dir = "down";
+        // } //nel caso della L rovesciata si incastra perchè c'è un istante in cui il player può andare a destra mentre cè "down"
+        System.out.println(directions);
         return dir;
     }
 

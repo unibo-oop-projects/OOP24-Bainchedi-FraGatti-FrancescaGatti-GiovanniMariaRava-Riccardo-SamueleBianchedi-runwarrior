@@ -27,6 +27,7 @@ public abstract class CharacterImpl implements Character{
     private boolean hitHead;
     private boolean jumpKill;
     private boolean descend;
+    private boolean handleDoubleCollision;
 
     protected boolean rightDirection = true;
     private int speed = 5;
@@ -68,9 +69,20 @@ public abstract class CharacterImpl implements Character{
         String collisionDir = "";
         collisionDir = collisionDetection.checkCollision(this);
         System.out.println(collisionDir);
+
+        hitHead = collisionDir.equals("down") ? true : false;
+        if(hitHead){
+            cmd.setJump(false);
+        }
+        jump(cmd.isJumping(), maxJump);
+        handleDoubleCollision = (collisionDir.equals("up") || collisionDir.equals("down")) && descend ? true : false;
+        if(jumpKill){
+            jumpAfterKill();
+        }
+
         if(cmd.getRight() && !cmd.getLeft()){
             rightDirection = true;
-            if(!collisionDir.equals("right")){
+            if(!collisionDir.equals("right") && !handleDoubleCollision){
                 playerX += speed;
                 if(screenX < maxScreenX){
                     screenX += speed;
@@ -83,7 +95,7 @@ public abstract class CharacterImpl implements Character{
         }
         if(cmd.getLeft() && !cmd.getRight()){
             rightDirection = false;
-            if(!collisionDir.equals("left")){
+            if(!collisionDir.equals("left") && !handleDoubleCollision){
                 if(screenX > 0){
                     playerX -= speed;
                 }
@@ -91,14 +103,6 @@ public abstract class CharacterImpl implements Character{
                     screenX -= speed;
                 }
             }
-        }
-        hitHead = collisionDir.equals("down") ? true : false;
-        if(hitHead){
-            cmd.setJump(false);
-        }
-        jump(cmd.isJumping(), maxJump);
-        if(jumpKill){
-            jumpAfterKill();
         }
         updatePlayerPosition();
         animation.frameChanger();
@@ -123,6 +127,7 @@ public abstract class CharacterImpl implements Character{
             if(collisionDetection.isInAir(this) && !jumpKill){
                 descend = true;
                 playerY += speedJumpDown;
+                System.out.println("scendo");
             }
             else{
                 descend = false;

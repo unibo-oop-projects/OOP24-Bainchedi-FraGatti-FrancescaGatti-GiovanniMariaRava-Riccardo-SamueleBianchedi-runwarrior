@@ -33,8 +33,7 @@ public class NakedWarrior extends CharacterImpl{
 
     @Override
     public void updateAttackCollision(){
-        //Cannot attack
-
-    };
+        
+    }
     
 }
