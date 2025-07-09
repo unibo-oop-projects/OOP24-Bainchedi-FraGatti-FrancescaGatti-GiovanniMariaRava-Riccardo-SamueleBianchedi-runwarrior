@@ -10,6 +10,7 @@ import it.unibo.runwarrior.controller.CharacterComand;
 //import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowersHandler;
+import it.unibo.runwarrior.controller.EnemyHandler;
 import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.Guard;
@@ -33,7 +34,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
    // private CollisionDetection collisionDetection;
     
     private HandlerMapElement mapHandler;
-    private Handler handler;
+    private EnemyHandler handler;
     private GameMap gameMap;
 
    // private GameMusic music;
@@ -47,8 +48,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
         initializePlayer();
         this.mapHandler = new HandlerMapElement(gameMap, player);
 
-        this.handler = new Handler();
-        handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800, this));
+        this.handler = new EnemyHandler();
+        handler.addEnemy(new Guard(300, 418, 64, 64, true, handler, 100, 800, this));
         //handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
         //handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
 

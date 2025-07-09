@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.view.Handler;
+import it.unibo.runwarrior.controller.EnemyHandler;
 
 
 public abstract class EnemyImpl implements Enemy{
@@ -17,7 +17,7 @@ public abstract class EnemyImpl implements Enemy{
     public int velocityX;
     public int velocityY;
 
-    public Handler handler;
+    public EnemyHandler enemyHandler;
 
     public BufferedImage image;
 
@@ -25,13 +25,13 @@ public abstract class EnemyImpl implements Enemy{
     private PowerUpImpl powerUp;
 
     
-    public EnemyImpl(int x, int y, int width, int height, boolean solid, Handler handler, GameLoopPanel glp) {
+    public EnemyImpl(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.solid = solid;
-        this.handler = handler;
+        this.enemyHandler = handler;
         
         this.glp = glp;
     }
@@ -40,7 +40,7 @@ public abstract class EnemyImpl implements Enemy{
     public void die() {
         powerUp.setTouchArea(new Rectangle(x, y, width, height));
         glp.getPowersFactory().PowerUpAppearance(powerUp);
-        handler.removeEnemy(this);
+        enemyHandler.removeEnemy(this);
     }
 
     public int getX() {
