@@ -44,7 +44,7 @@ public class Guard extends EnemyImpl {
             currentImage = step ? leftGuardMoving : leftGuardRunning;
             image = leftGuard;
         }
-             
+        int drawX = x+glp.getCameraShift();
         g.drawImage(currentImage, x, y, width, height, null);
     }
 
@@ -52,11 +52,7 @@ public class Guard extends EnemyImpl {
     public void update() {
         x += velocityX;
 
-        
-        if (x <= minX || x >= maxX - width) {
-            velocityX = -velocityX;
-        }
-
+        checkMapCollision(glp.getMapHandler().getCollisionRectagles());
         
         frameCounter++;
         if (frameCounter >= 20) { 
