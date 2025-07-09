@@ -49,7 +49,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         initializePlayer();
 
         this.handler = new EnemyHandler();
-        handler.addEnemy(new Guard(300, 418, 64, 64, true, handler, 100, 800, this));
+        handler.addEnemy(new Guard(300, 418, 64, 64, true, handler, this));
         //handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
         //handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
 
@@ -115,5 +115,13 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public PowerUpFactoryImpl getPowersFactory(){
         return this.powersFactory;
+    }
+
+    public int getCameraShift(){
+        return player.getPlX();
+    }
+    
+    public HandlerMapElement getMapHandler() {
+        return this.mapHandler;
     }
 }
