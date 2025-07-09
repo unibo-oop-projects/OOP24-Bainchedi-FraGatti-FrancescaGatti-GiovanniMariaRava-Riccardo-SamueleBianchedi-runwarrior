@@ -1,11 +1,11 @@
-package it.unibo.runwarrior.view;
+package it.unibo.runwarrior.controller;
 
 import java.awt.Graphics;
 import java.util.*;
 
 import it.unibo.runwarrior.model.EnemyImpl;
 
-public class Handler {
+public class EnemyHandler {
     public LinkedList<EnemyImpl> enemies = new LinkedList<>();
 
     public void render(Graphics g){
