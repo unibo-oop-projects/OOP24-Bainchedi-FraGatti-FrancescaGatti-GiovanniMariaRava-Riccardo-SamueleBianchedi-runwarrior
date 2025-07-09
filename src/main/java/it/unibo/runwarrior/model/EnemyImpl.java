@@ -2,6 +2,7 @@ package it.unibo.runwarrior.model;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
@@ -15,7 +16,6 @@ public abstract class EnemyImpl implements Enemy{
     public boolean solid;
 
     public int velocityX;
-    public int velocityY;
 
     public EnemyHandler enemyHandler;
 
@@ -42,18 +42,28 @@ public abstract class EnemyImpl implements Enemy{
         glp.getPowersFactory().PowerUpAppearance(powerUp);
         enemyHandler.removeEnemy(this);
     }
+    
+    public Rectangle getBounds(){
+        return new Rectangle(x,y,width,height);
+    }
+
+
+    public void CheckMapCollision(List<Rectangle> obastacles){
+        Rectangle enemyRectangle = getBounds();
+
+        for (Rectangle rectangle : obastacles) {
+            if(enemyRectangle.intersects(rectangle)){
+                velocityX = -velocityX;
+                return;
+            }
+        }
+    }
 
     public int getX() {
         return x;
     }
     public void setX(int x) {
         this.x = x;
-    }
-    public int getY() {
-        return y;
-    }
-    public void setY(int y) {
-        this.y = y;
     }
     public int getWidth() {
         return width;
@@ -78,12 +88,6 @@ public abstract class EnemyImpl implements Enemy{
     }
     public void setVelocityX(int velocityX) {
         this.velocityX = velocityX;
-    }
-    public int getVelocityY() {
-        return velocityY;
-    }
-    public void setVelocityY(int velocityY) {
-        this.velocityY = velocityY;
     }
     public BufferedImage getImage() {
         return image;
