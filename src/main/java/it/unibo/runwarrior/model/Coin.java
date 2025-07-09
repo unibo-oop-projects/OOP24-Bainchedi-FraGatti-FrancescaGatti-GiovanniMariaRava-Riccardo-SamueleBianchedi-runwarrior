@@ -9,7 +9,7 @@ public class Coin {
     private int row; 
     private int col; 
     private boolean collected; 
-    BufferedImage coinImage; 
+    public BufferedImage coinImage; 
 
     public Coin(int row, int col){
         this.row = row; 
