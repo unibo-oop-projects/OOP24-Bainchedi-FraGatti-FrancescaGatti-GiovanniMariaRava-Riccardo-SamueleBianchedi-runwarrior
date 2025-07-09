@@ -7,7 +7,6 @@ import java.util.Map;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.MapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.model.Character;
 
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
@@ -19,14 +18,15 @@ public class HandlerMapElement {
     private List<MapElement> blocks;
     private int[][] map;
     private Map<Integer, BufferedImage> mapBlock;
-    private Character player;
     private int shift;
+    private boolean setStart;
+    private int firstY;
+    private int tileSize;
 
-    public HandlerMapElement(GameMap gamemap, Character player){
+    public HandlerMapElement(GameMap gamemap){
         blocks = new ArrayList<>();
         this.mapBlock = gamemap.getBlockImages();
         this.map = gamemap.getMapData();
-        this.player = player;
         MapImage();
     }
 
@@ -65,9 +65,8 @@ public class HandlerMapElement {
         int rows = map.length;
         int cols = map[0].length;
 
-        shift = player.getGroundX();
         int tileHeight = GameLoopPanel.HEIGHT / rows;
-        int tileSize = tileHeight;
+        tileSize = tileHeight;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 BufferedImage img;
@@ -75,5 +74,34 @@ public class HandlerMapElement {
                 gr.drawImage(img, x * tileSize + shift, y * tileSize, tileSize, tileSize, null);
             }
         }
+    }
+
+    public List<MapElement> getBlocks(){
+        return this.blocks;
+    }
+
+    public void setShift(int slide){
+        shift = slide;
+    }
+
+    public int getTileSize(){
+        int rows = map.length;
+        tileSize = GameLoopPanel.HEIGHT / rows;
+        return tileSize;
+    }
+
+    public int getFirstY(){
+        int rows = map.length;
+        int cols = map[0].length;
+        tileSize = GameLoopPanel.HEIGHT / rows;
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < cols; x++) {
+                if(x == 0 && map[y][x] == 1 && !setStart){
+                    firstY = (y*tileSize) - (tileSize*2);
+                    setStart = true;
+                }
+            }
+        }
+        return firstY;
     }
 }

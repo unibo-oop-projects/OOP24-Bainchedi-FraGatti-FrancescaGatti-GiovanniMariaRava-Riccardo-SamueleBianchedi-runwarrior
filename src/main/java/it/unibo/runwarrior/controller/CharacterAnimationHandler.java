@@ -1,10 +1,10 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.controller;
 
 import java.awt.image.BufferedImage;
 
-import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.model.PlayerFrame;
 
-public class CharacterAnimation{
+public class CharacterAnimationHandler{
 
     public CharacterComand cmd;
 
@@ -14,7 +14,7 @@ public class CharacterAnimation{
     private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
     private BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
-    public CharacterAnimation(CharacterComand cmd, BufferedImage... im){
+    public CharacterAnimationHandler(CharacterComand cmd, BufferedImage... im){
         this.cmd = cmd;
         right0 = im[0];
         right1 = im[1];

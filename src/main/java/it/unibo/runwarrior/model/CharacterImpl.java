@@ -4,25 +4,31 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import it.unibo.runwarrior.controller.CharacterAnimationHandler;
 import it.unibo.runwarrior.controller.CharacterComand;
-import it.unibo.runwarrior.controller.JumpState;
+import it.unibo.runwarrior.controller.CollisionDetection;
+import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 public abstract class CharacterImpl implements Character{
-
-    public static final int SIZE_CHARACTER = 96;
-    public static final int START_Y = 384;
-    public static final int START_X = 240;
-    private static int MAX_JUMP = START_Y - (SIZE_CHARACTER*5/2);
-    private static int MID_JUMP = START_Y - (SIZE_CHARACTER*3/2);
+    public static final int START_X = 96;
+    private int startY;
+    private int maxJump;
+    private int midJump;
+    protected int sizeCharacter;
+    private int toTouchFloor = 2;
     
     private final int minScreenX = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private int maxScreenX;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     protected int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
-    protected int playerY = START_Y;// * VERTICALE
+    protected int playerY;// * VERTICALE
     private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
-    private int screenY = START_Y;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
+    private int screenY;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
     protected Rectangle collisionArea;
+    private boolean hitHead;
+    private boolean jumpKill;
+    private boolean descend;
+    private boolean handleDoubleCollision;
 
     protected boolean rightDirection = true;
     private int speed = 5;
@@ -32,75 +38,125 @@ public abstract class CharacterImpl implements Character{
 
     protected BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
-    public GameLoopPanel glp;
-    public CharacterComand cmd;
-    protected CharacterAnimation animation;
+    private GameLoopPanel glp;
+    protected CharacterComand cmd;
+    protected CharacterAnimationHandler animation;
+    private HandlerMapElement mapHandler;
+    private CollisionDetection collisionDetection;
 
-    public CharacterImpl(GameLoopPanel panel, CharacterComand commands){
+    public CharacterImpl(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler){
         this.glp = panel;
         this.cmd = commands;
-        collisionArea = new Rectangle(playerX + 30, playerY + 20, 38,73);
         playerImage();
-        this.animation = new CharacterAnimation(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
+        this.animation = new CharacterAnimationHandler(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
+        this.collisionDetection = collision;
+        this.mapHandler = mapHandler;
+        setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
+    }
+
+    private void setStartY(int y, int tileSize){
+        startY = y + toTouchFloor;
+        playerY = startY;
+        screenY = startY;
+        sizeCharacter = tileSize*2;
+        maxJump = startY - (sizeCharacter*5/2);
+        midJump = startY - (sizeCharacter*3/2);
+        collisionArea = new Rectangle(playerX+(sizeCharacter/4), playerY+(sizeCharacter/4), sizeCharacter/2, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
     }
 
     @Override
     public void update() {
         maxScreenX = glp.getWidth() / 2;
+        String collisionDir = "";
+        collisionDir = collisionDetection.checkCollision(this);
+        System.out.println(collisionDir);
+
+        hitHead = collisionDir.equals("down") ? true : false;
+        if(hitHead){
+            cmd.setJump(false);
+        }
+        jump(cmd.isJumping(), maxJump);
+        handleDoubleCollision = (collisionDir.equals("up") || collisionDir.equals("down")) && descend ? true : false;
+        if(jumpKill){
+            jumpAfterKill();
+        }
+
         if(cmd.getRight() && !cmd.getLeft()){
             rightDirection = true;
-            playerX += speed;
-            if(screenX < maxScreenX){
-                screenX += speed;
-            }
-            else{
-                groundX -= speed;
+            if(!collisionDir.equals("right") && !handleDoubleCollision){
+                playerX += speed;
+                if(screenX < maxScreenX){
+                    screenX += speed;
+                }
+                else{
+                    groundX -= speed;
+                    mapHandler.setShift(groundX);
+                }
             }
         }
         if(cmd.getLeft() && !cmd.getRight()){
             rightDirection = false;
-            if(screenX > 0){
-                playerX -= speed;
-            }
-            if(screenX > minScreenX){
-                screenX -= speed;
-            }
-        }
-        if(cmd.getJump() == JumpState.START_JUMP){
-            if(playerY > MAX_JUMP){ 
-                playerY -= speedJumpUP;
-            }
-            if(playerY <= MAX_JUMP){
-                playerY = MAX_JUMP;
-                cmd.setJump(JumpState.DOWN_JUMP);
+            if(!collisionDir.equals("left") && !handleDoubleCollision){
+                if(screenX > 0){
+                    playerX -= speed;
+                }
+                if(screenX > minScreenX){
+                    screenX -= speed;
+                }
             }
         }
-        if(cmd.getJump() == JumpState.MIN_JUMP){
-            if(playerY > MID_JUMP){
-                playerY -= speedJumpUP;
-            } 
-            if(playerY <= MID_JUMP){
-                playerY = MID_JUMP;
-                cmd.setJump(JumpState.DOWN_JUMP);
-            }
-        }
-        if(cmd.getJump() == JumpState.DOWN_JUMP){
-            if(playerY < START_Y){
-                playerY += speedJumpDown;
-            }
-            if(playerY >= START_Y){
-                playerY = START_Y;
-                cmd.setJump(JumpState.STOP_JUMP);
-            }
-        }
-
         updatePlayerPosition();
         animation.frameChanger();
     }
 
     private void updatePlayerPosition() {
-        collisionArea.setLocation(playerX + 30, playerY + 20);
+        collisionArea.setLocation(playerX + (sizeCharacter/4), playerY + (sizeCharacter/4));
         updateAttackCollision();
+    }
+
+    public void jump(boolean isJump, int jumpHeight){
+        if(isJump && !descend){
+            if(playerY > jumpHeight){
+                playerY -= speedJumpUP;
+            }
+            else{
+                playerY = jumpHeight;
+                cmd.setJump(false);
+            }
+        }
+        else{
+            if(collisionDetection.isInAir(this) && !jumpKill){
+                descend = true;
+                playerY += speedJumpDown;
+                System.out.println("scendo");
+            }
+            else{
+                descend = false;
+                cmd.setDoubleJump(false);
+            }
+            updateJumpVariable();
+        }
+    }
+
+    //per uccisione nemici
+    public void setJumpKill(){
+        this.jumpKill = true;
+    }
+
+    public void jumpAfterKill(){
+        if(playerY > midJump){
+            playerY -= speedJumpUP;
+        }
+        else{
+            playerY = midJump;
+            jumpKill = false;
+            cmd.setJump(false);
+        }
+    }
+
+    public void updateJumpVariable(){
+        maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
+        midJump = (startY - (sizeCharacter*3/2)) + (playerY - startY);
     }
 
     public abstract void updateAttackCollision();
@@ -111,8 +167,8 @@ public abstract class CharacterImpl implements Character{
         BufferedImage tip = null;
         im = animation.imagePlayer(rightDirection);
         tip = animation.getTip(rightDirection);
-        gr2.drawImage(tip, screenX + SIZE_CHARACTER, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
-        gr2.drawImage(im, screenX, playerY, SIZE_CHARACTER, SIZE_CHARACTER, null);
+        gr2.drawImage(tip, screenX + sizeCharacter, playerY, sizeCharacter, sizeCharacter, null);
+        gr2.drawImage(im, screenX, playerY, sizeCharacter, sizeCharacter, null);
     }
 
     public void drawRectangle(Graphics2D gr){
@@ -129,12 +185,8 @@ public abstract class CharacterImpl implements Character{
         this.screenX = x;
     }
 
-    public Rectangle getCollisionArea(){
+    public Rectangle getArea(){
         return collisionArea;
-    }
-
-    public int getGroundX(){
-        return groundX;
     }
 
     public int getSpeed(){
