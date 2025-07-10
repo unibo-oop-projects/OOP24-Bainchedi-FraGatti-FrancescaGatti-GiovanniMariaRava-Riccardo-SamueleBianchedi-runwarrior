@@ -27,6 +27,6 @@ public interface Enemy {
      * @param obstacles
      * Check whether the current enemy collides with any of the obstacles in the map
      */
-    public void CheckMapCollision(List<Rectangle> obstacles);
+    public void checkMapCollision(List<Rectangle> obstacles);
 
 }
