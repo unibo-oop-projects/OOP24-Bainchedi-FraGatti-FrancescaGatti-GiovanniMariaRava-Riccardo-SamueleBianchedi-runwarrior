@@ -1,15 +1,8 @@
 #file di configurazione delle immagini della mappa 1
 
-<<<<<<< HEAD
-0=src/main/resources/Map_1/forest_sky.png
-1=src/main/resources/Map_1/forest_grass.png
-2=src/main/resources/Map_1/forest_terrain.png
-4=src/main/resources/Map_1/forest_mushroom.png
-=======
 0=/Map_1/forest_sky.png
 1=/Map_1/forest_grass.png
 2=/Map_1/forest_terrain.png
 3=/Map_1/forest_terrain.png
 4=/Map_1/forest_grass.png
 5=/Map_1/forest_mushroom.png
->>>>>>> 2984add6130edee8b1070d6709531970812e9a05

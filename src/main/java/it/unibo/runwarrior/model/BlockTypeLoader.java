@@ -55,7 +55,7 @@ public class BlockTypeLoader {
 
                             BlockType type = new BlockType(id, name, isSolid, dealsDamage, image);
                             blockTypes.put(id, type);
-                            System.out.println("Caricato BlockType: " + type.getName() + " (ID: " + type.getId() + ")");
+                            //System.out.println("Caricato BlockType: " + type.getName() + " (ID: " + type.getId() + ")");
 
                         } else {
                             System.err.println("ERRORE (Riga " + lineNumber + "): Formato proprietà non valido. Atteso 'ID=Nome,isSolid,dealsDamage'. Riga: '" + trimmedLine + "'");
