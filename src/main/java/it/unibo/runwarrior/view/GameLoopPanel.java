@@ -105,7 +105,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public void update(){
         player.update();
-        enemyHandler.update();
+        enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
     }
 
     @Override

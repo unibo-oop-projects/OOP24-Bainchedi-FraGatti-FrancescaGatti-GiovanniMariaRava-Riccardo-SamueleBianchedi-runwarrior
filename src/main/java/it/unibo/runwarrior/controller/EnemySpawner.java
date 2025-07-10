@@ -38,7 +38,7 @@ public class EnemySpawner {
                 int x = Integer.parseInt(parts[1]);
                 int y = Integer.parseInt(parts[2]);
 
-                EnemyImpl enemy = createEnemyByType(type, x, y);
+                EnemyImpl enemy = createEnemyByType(type, x*36, y*36);
                 if (enemy != null) {
                     handler.addEnemy(enemy);
                     System.out.println("Caricato nemico: "+i);
