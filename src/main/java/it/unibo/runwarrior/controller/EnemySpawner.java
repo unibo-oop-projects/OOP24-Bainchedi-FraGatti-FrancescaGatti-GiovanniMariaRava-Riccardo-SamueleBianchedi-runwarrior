@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import it.unibo.runwarrior.model.EnemyImpl;
+import it.unibo.runwarrior.model.Goblin;
+import it.unibo.runwarrior.model.Guard;
+import it.unibo.runwarrior.model.Snake;
+import it.unibo.runwarrior.model.Wizard;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
 
@@ -42,8 +46,16 @@ public class EnemySpawner {
         } catch (IOException | NumberFormatException e) {
             System.err.println("Errore durante il caricamento dei nemici: " + e.getMessage());
         }
-        
-        
+    }
+
+    private EnemyImpl createEnemyByType(int type, int x, int y) {
+        switch (type) {
+            case 1: return new Guard(x, y, 64, 64, true, handler, glp);
+            //case 2: return new Snake(x, y, 64, 64, true, handler, glp);
+            case 3: return new Wizard(x, y, 64, 64, true, handler, y, y, glp);
+            case 4: return new Goblin(x, y, 64, 64, true, handler,y, y, glp);
+            default: return null;
+        }
     }
 
 }
