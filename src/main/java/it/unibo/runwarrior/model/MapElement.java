@@ -3,6 +3,7 @@ package it.unibo.runwarrior.model;
 import java.awt.image.BufferedImage;
 
 public class MapElement {
+    
     private BufferedImage image;
     private boolean collision;
     private boolean harmless;
@@ -31,3 +32,4 @@ public class MapElement {
         return harmless;
     }
 }
+

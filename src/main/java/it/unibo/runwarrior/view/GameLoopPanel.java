@@ -3,14 +3,18 @@ package it.unibo.runwarrior.view;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.List;
 
 import javax.swing.JPanel;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowerUpDetection;
 import it.unibo.runwarrior.controller.PowersHandler;
+import it.unibo.runwarrior.controller.EnemyHandler;
+import it.unibo.runwarrior.controller.EnemySpawner;
 import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.Guard;
@@ -34,9 +38,12 @@ public class GameLoopPanel extends JPanel implements Runnable{
     private CollisionDetection collisionDetection;
     private PowerUpDetection pUpDetection;
     
-    private Handler handler;
     private HandlerMapElement mapHandler;
+    private EnemyHandler enemyHandler;
+    private EnemySpawner enemySpawner;
     private GameMap gameMap;
+
+    private CoinController coinController;
 
    // private GameMusic music;
 
@@ -49,16 +56,29 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler);
         this.pUpDetection = new PowerUpDetection(this, powersFactory);
         initializePlayer();
+        // String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
+        // String mapTwoFileName = "src/main/resources/Map_2/map_2.txt";
+        // String imageConfigMapOne = "src/main/resources/Map_1/forest_theme.txt";
+        // String imageConfigMapTwo = "src/main/resources/Map_2/desert_theme.txt";
 
-        this.handler = new Handler();
-        handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800, this));
-        //handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
-        //handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
+        //GameMap levelOne = GameMap.load(mapOneFileName, imageConfigMapOne);
+        //GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
+
+        this.enemyHandler = new EnemyHandler();
+        this.enemySpawner = new EnemySpawner(enemyHandler, this);
+        //enemyHandler.addEnemy(new Guard(300, 418, 64, 64, true, enemyHandler, this));
+        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemies.txt"));
 
         //music = new GameMusic("gameMusic.wav", true);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(commands);
         this.setFocusable(true);
+
+        this.coinController = new CoinController();
+        List<int[]> coords = coinController.loadCoinFromFIle("CoinCoordinates_map1.txt");
+        for(int[] coord : coords){
+            coinController.addCoins(coord[0], coord[1]);
+        }
     }
 
     public void startGame(){
@@ -88,7 +108,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public void update(){
         player.update();
-        handler.update();
+        enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
     }
 
     @Override
@@ -99,8 +119,9 @@ public class GameLoopPanel extends JPanel implements Runnable{
         mapHandler.printBlocks(gr2);
         player.drawPlayer(gr2);
         player.drawRectangle(gr2);
-        handler.render(gr2);
+        enemyHandler.render(gr2);
         gr2.dispose();
+        coinController.drawAllCoins(gr2, mapHandler.getTileSize());
     }
 
     public void initializePlayer(){
@@ -117,5 +138,13 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public PowerUpFactoryImpl getPowersFactory(){
         return this.powersFactory;
+    }
+
+    public int getCameraShift(){
+        return player.getPlX();
+    }
+    
+    public HandlerMapElement getMapHandler() {
+        return this.mapHandler;
     }
 }

@@ -1,0 +1,6 @@
+0=sky,false,false
+1=sand,true,false
+2=halfsand,true,false
+3=sandstone,true,false
+4=cactusbody,false,true
+5=cactustop,false,true

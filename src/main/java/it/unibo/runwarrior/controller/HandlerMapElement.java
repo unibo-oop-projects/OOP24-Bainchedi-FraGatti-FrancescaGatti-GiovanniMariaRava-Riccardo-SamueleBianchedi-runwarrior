@@ -10,6 +10,7 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 public class HandlerMapElement {
     
@@ -103,5 +104,25 @@ public class HandlerMapElement {
             }
         }
         return firstY;
+    }
+
+    public List<Rectangle> getCollisionRectangles() {
+        List<Rectangle> collisionRects = new ArrayList<>();
+        int rows = map.length;
+        int cols = map[0].length;
+    
+        int tileHeight = GameLoopPanel.HEIGHT / rows;
+        int tileSize = tileHeight;
+    
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < cols; x++) {
+                if (blocks.get(map[y][x]).getCollision()) {
+                    Rectangle r = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
+                    collisionRects.add(r);
+                }
+            }
+        }
+    
+        return collisionRects;
     }
 }
