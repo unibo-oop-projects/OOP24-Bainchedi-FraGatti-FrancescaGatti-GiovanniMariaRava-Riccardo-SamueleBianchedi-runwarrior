@@ -13,48 +13,23 @@ import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 public abstract class CharacterImpl implements Character{
-    // public static final int START_X = 96;
-    // private int startY;
-    // private int maxJump;
-    // private int midJump;
     protected int sizeCharacter;
     protected int toTouchFloor = 2;
-    
-    // private final int minScreenX = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
-    // private int maxScreenX;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
-    // protected int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
-    // protected int playerY;// * VERTICALE
-    // private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
-    // private int screenY;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
     protected Rectangle collisionArea;
-    // private boolean hitHead;
-    // private boolean jumpKill;
-    // private boolean descend;
-    // private boolean handleDoubleCollision;
-
     protected boolean rightDirection;
     private int speed = 5;
-    // private int speedJumpUP = 12; 
-    // private int speedJumpDown = 6;
-    // private int groundX = 0;//variabile che permette lo scorrimento della mappa
 
     protected BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
-    private GameLoopPanel glp;
     protected CharacterComand cmd;
     protected CharacterAnimationHandler animation;
     protected CharacterMovementHandler movement;
-    private HandlerMapElement mapHandler;
-    private CollisionDetection collisionDetection;
     private List<Rectangle> enemies; // da mettere nel KillDetection
 
     public CharacterImpl(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler){
-        this.glp = panel;
         this.cmd = commands;
         playerImage();
         this.animation = new CharacterAnimationHandler(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
-        this.collisionDetection = collision;
-        this.mapHandler = mapHandler;
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
         this.movement = new CharacterMovementHandler(panel, this, commands, collision, mapHandler);
         collisionArea = new Rectangle(movement.getPlX()+(sizeCharacter/4), movement.getPlY()+(sizeCharacter/4),

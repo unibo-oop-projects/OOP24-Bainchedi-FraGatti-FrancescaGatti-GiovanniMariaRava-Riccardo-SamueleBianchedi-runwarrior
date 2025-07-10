@@ -140,9 +140,9 @@ public class GameLoopPanel extends JPanel implements Runnable{
         return this.powersFactory;
     }
 
-    public int getCameraShift(){
-        return player.getPlX();
-    }
+    // public int getCameraShift(){
+    //     return player.getPlX();
+    // }
     
     public HandlerMapElement getMapHandler() {
         return this.mapHandler;
