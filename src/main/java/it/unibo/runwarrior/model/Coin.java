@@ -1,5 +1,6 @@
 package it.unibo.runwarrior.model;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -23,6 +24,10 @@ public class Coin {
             }catch(IOException e){
                 e.printStackTrace();
             }
+    }
+
+    public Rectangle getRectangle(int tileSize){
+        return new Rectangle(col*tileSize, row*tileSize, tileSize, tileSize);
     }
 
     public int getRow(){
