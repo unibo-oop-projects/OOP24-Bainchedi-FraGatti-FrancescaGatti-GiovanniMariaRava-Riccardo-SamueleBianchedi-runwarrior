@@ -2,10 +2,14 @@ package it.unibo.runwarrior.model;
 
 import java.awt.image.BufferedImage;
 
-public class MapElement {
+public class BlockType {
     private BufferedImage image;
+    String name;
     private boolean collision;
     private boolean harmless;
+
+    public BlockType (int ID, String name, boolean isSolid, boolean dealsDamage, BufferedImage image){
+    }
 
     public void setImage(BufferedImage im){
         this.image = im;

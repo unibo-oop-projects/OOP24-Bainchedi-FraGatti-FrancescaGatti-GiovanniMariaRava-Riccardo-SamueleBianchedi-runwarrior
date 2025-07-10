@@ -6,19 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects; // Per il controllo di null più robusto
 
-/**
- * Carica le definizioni dei tipi di blocco (BlockType) da un file di
- * configurazione, associando ID numerici a proprietà come nome, solidità, danno
- * e immagine.
- *
- * Formato del file di configurazione delle proprietà:
- * ID=Nome,isSolid,dealsDamage Esempi: 0=Sky,false,false 1=Ground,true,false
- * 2=Wall,true,false 3=Water,false,false 4=Lava,false,true
- *
- * Le righe che iniziano con '#' o sono vuote vengono ignorate.
- */
 public class BlockTypeLoader {
 
     private final Map<Integer, BlockType> blockTypes;
@@ -28,7 +16,10 @@ public class BlockTypeLoader {
     }
 
     public boolean loadBlockTypesFromConfigFile(String propertiesFilePath, Map<Integer, BufferedImage> imagesMap) {
-        Objects.requireNonNull(imagesMap, "La mappa delle immagini non può essere null.");
+
+        if (imagesMap == null) {
+            throw new IllegalArgumentException("La mappa delle immagini non può essere null.");
+        }
 
         boolean allLoadedSuccessfully = true;
 

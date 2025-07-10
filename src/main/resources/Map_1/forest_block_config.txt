@@ -1,0 +1,4 @@
+0=sky,false,false
+1=grass,true,false
+2=terrain,true,false
+3=mushroom,false,true
