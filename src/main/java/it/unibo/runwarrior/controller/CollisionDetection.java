@@ -26,21 +26,21 @@ public class CollisionDetection {
         String dir = "";
         this.directions.clear();
         if(touchSolid(player.getArea().x + player.getArea().width - (feetHeadToll+1), player.getArea().y, player, true) |
-            touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + tileSize, player, true) |
+            touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + player.getArea().height/2, player, true) |
             touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + player.getArea().height, player, true) |
             touchSolid(player.getArea().x + (feetHeadToll+1), player.getArea().y, player, true) |
-            touchSolid(player.getArea().x, player.getArea().y + tileSize, player, true) |
+            touchSolid(player.getArea().x, player.getArea().y + player.getArea().height/2, player, true) |
             touchSolid(player.getArea().x, player.getArea().y + player.getArea().height, player, true)){
-                dir = directions.stream().filter(s -> s.equals("down") | s.equals("right") | s.equals("left"))
+                dir = directions.stream().filter(s -> s.equals("right") | s.equals("left"))
                         .distinct().findFirst().orElse("");
         }
+        System.out.println(directions);
         if(dir.isEmpty() && directions.contains("up")){
             dir = "up";
         }
-        // else if(dir.isEmpty() && directions.contains("down")){
-        //     dir = "down";
-        // } //nel caso della L rovesciata si incastra perchè c'è un istante in cui il player può andare a destra mentre cè "down"
-        System.out.println(directions);
+        if(directions.contains("down")){
+            dir = "down";
+        }
         return dir;
     }
 
@@ -56,8 +56,22 @@ public class CollisionDetection {
             return true;
         }
         else{
-            return false;
+            for(int i = player.getArea().width; i >= 0; i = i - player.getArea().width){
+                indexXtile = (player.getArea().x + i) / tileSize;
+                indexYtile = player.getArea().y / tileSize;
+                blockIndex = blockIndexes[(int) indexYtile][(int) indexXtile];
+                if(blocks.get(blockIndex).getCollision()){
+                    if(checkDirections){
+                        String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile, player);
+                        if(tempDir.equals("right") || tempDir.equals("left")){
+                            this.directions.add(tempDir);
+                            return true;
+                        }
+                    }
+                }
+            }
         }
+        return false;
     }
 
     public String checkCollisionDirection(int x, int y, float indexXtile, float indexYtile, Character player){
@@ -70,8 +84,8 @@ public class CollisionDetection {
             direction = "up";
         }
         else if(isInAir(player) && y == player.getArea().y && (tileRec.y + tileRec.height - y) < feetHeadToll &&
-                (x >= tileRec.x && x <= tileRec.x + tileRec.width) || y <= 0){
-            direction = "down";
+                 (x >= tileRec.x && x <= tileRec.x + tileRec.width) || y <= 0){
+                direction = "down";
         }
         else if(x - playerSpeed <= tileRec.x){
             direction = "right";
