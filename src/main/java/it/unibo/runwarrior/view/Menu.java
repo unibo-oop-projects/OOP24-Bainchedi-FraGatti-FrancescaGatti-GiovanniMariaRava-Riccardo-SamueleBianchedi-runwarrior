@@ -72,6 +72,7 @@ public class Menu extends JPanel{
                     glp = new GameLoopPanel();
                     glp.startGame();
                     
+                    
                     mainFrame.add(glp);
                     mainFrame.pack();
                     mainFrame.setVisible(true);

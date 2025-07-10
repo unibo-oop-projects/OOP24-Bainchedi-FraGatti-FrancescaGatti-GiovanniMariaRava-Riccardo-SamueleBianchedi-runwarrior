@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,9 +32,9 @@ public class ImageLoader {
         
         try {
 
-            File imageFile = new File(filePath);
+            //File imageFile = new File(filePath);
 
-            BufferedImage image = ImageIO.read(imageFile);
+            BufferedImage image = ImageIO.read(getClass().getResourceAsStream(filePath));
 
             if (image != null) {
                 blockImages.put(blockValue, image);
@@ -56,8 +58,9 @@ public class ImageLoader {
 
     public boolean loadImagesFromConfigFile(String configFilePath) {
         boolean allLoadedSuccessfully = true;
+        InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(configFilePath);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(configFilePath))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String trimmedLine = line.trim();

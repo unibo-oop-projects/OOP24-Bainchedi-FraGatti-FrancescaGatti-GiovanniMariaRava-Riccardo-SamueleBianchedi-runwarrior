@@ -7,7 +7,10 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.CollisionDetection;
+import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowersHandler;
+import it.unibo.runwarrior.controller.EnemyHandler;
 import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.Guard;
@@ -19,7 +22,7 @@ import it.unibo.runwarrior.model.NakedWarrior;
 public class GameLoopPanel extends JPanel implements Runnable{
     
     public static final int WIDTH = 1056;
-    public static final int HEIGHT = 672;
+    public static final int HEIGHT = 792;
     public static final int MLD = 1000000000;
     public static final int FPS = 60;
 
@@ -28,15 +31,21 @@ public class GameLoopPanel extends JPanel implements Runnable{
     private CharacterComand commands;
     private PowersHandler powerUpsHandler;
     private PowerUpFactoryImpl powersFactory;
+    private CollisionDetection collisionDetection;
     
-    private Handler handler;
+    private HandlerMapElement mapHandler;
+    private EnemyHandler handler;
+    private GameMap gameMap;
 
    // private GameMusic music;
 
     public GameLoopPanel(){
+        this.gameMap = GameMap.load("Map_1/map_1.txt", "Map_1/forest_theme.txt");
         this.commands = new CharacterComand();
-        this.powerUpsHandler = new PowersHandler(this, commands);
+        this.mapHandler = new HandlerMapElement(gameMap);
+        this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks(), mapHandler.getTileSize());
         this.powersFactory = new PowerUpFactoryImpl(this);
+        this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler);
         initializePlayer();
         String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
         String mapTwoFileName = "src/main/resources/Map_2/map_2.txt";
@@ -46,8 +55,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
         GameMap levelOne = GameMap.load(mapOneFileName, imageConfigMapOne);
         GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
 
-        this.handler = new Handler();
-        handler.addEnemy(new Guard(300, 512, 64, 64, true, handler, 100, 800, this));
+        this.handler = new EnemyHandler();
+        handler.addEnemy(new Guard(300, 418, 64, 64, true, handler, this));
         //handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
         //handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
 
@@ -92,6 +101,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         super.paintComponent(gr);
         Graphics2D gr2 = (Graphics2D) gr;
         
+        mapHandler.printBlocks(gr2);
         player.drawPlayer(gr2);
         player.drawRectangle(gr2);
         handler.render(gr2);
@@ -99,7 +109,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
     }
 
     public void initializePlayer(){
-        player = new NakedWarrior(this, commands);
+        player = new NakedWarrior(this, commands, collisionDetection, mapHandler);
     }
 
     public void setPlayer(Character pl){
@@ -112,5 +122,13 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public PowerUpFactoryImpl getPowersFactory(){
         return this.powersFactory;
+    }
+
+    public int getCameraShift(){
+        return player.getPlX();
+    }
+    
+    public HandlerMapElement getMapHandler() {
+        return this.mapHandler;
     }
 }

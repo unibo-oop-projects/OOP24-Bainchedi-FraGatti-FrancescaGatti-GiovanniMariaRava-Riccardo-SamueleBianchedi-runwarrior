@@ -8,9 +8,9 @@ public class CharacterComand implements KeyListener{
     private boolean right;
     private boolean left;
     private boolean standing;
-    private JumpState jump = JumpState.STOP_JUMP;
     private boolean isJump;
     private boolean attack;
+    private boolean handleDoubleJump;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -20,16 +20,15 @@ public class CharacterComand implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         int value = e.getKeyCode();
-        
         if(value == KeyEvent.VK_RIGHT){
             right = true;
         }
         if(value == KeyEvent.VK_LEFT){
             left = true;
         }
-        if(value == KeyEvent.VK_UP && jump == JumpState.STOP_JUMP){
-            jump = JumpState.START_JUMP;
+        if(value == KeyEvent.VK_UP && !handleDoubleJump){
             isJump = true;
+            handleDoubleJump = true;
         }
         if(value == KeyEvent.VK_SHIFT){
             attack = true;
@@ -46,20 +45,20 @@ public class CharacterComand implements KeyListener{
         if(value == KeyEvent.VK_LEFT){
             left = false;
         }
-        if(value == KeyEvent.VK_UP && jump == JumpState.START_JUMP){
-            jump = JumpState.MIN_JUMP;
-            isJump = true;
+        if(value == KeyEvent.VK_UP){
+            isJump = false;
         }
         if(value == KeyEvent.VK_SHIFT){
             attack = false;
         }
     }
 
-    public void setJump(JumpState stateJump){
-        this.jump = stateJump;
-        if(stateJump == JumpState.STOP_JUMP){
-            isJump = false;
-        }
+    public void setJump(boolean i){
+        this.isJump = i;
+    }
+
+    public void setDoubleJump(boolean i){
+        this.handleDoubleJump = i;
     }
 
     public boolean getRight(){
@@ -78,10 +77,6 @@ public class CharacterComand implements KeyListener{
             standing = false;
         }
         return standing;
-    }
-
-    public JumpState getJump(){
-        return jump;
     }
 
     public boolean isJumping(){

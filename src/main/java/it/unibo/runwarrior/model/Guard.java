@@ -7,7 +7,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.view.Handler;
+import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class Guard extends EnemyImpl {
     public BufferedImage rightGuard, leftGuard, rightGuardMoving, leftGuardMoving, rightGuardRunning, leftGuardRunning;
@@ -16,7 +16,7 @@ public class Guard extends EnemyImpl {
     public int frameCounter = 0;
     public boolean step = false;
 
-    public Guard(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX, GameLoopPanel glp) {
+    public Guard(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
         setVelocityX(2);
         try{
@@ -30,8 +30,6 @@ public class Guard extends EnemyImpl {
         }catch (IOException e){
             e.printStackTrace();
         }
-        this.minX = minX;
-        this.maxX = maxX;
     }
 
     @Override
@@ -46,24 +44,15 @@ public class Guard extends EnemyImpl {
             currentImage = step ? leftGuardMoving : leftGuardRunning;
             image = leftGuard;
         }
-             
+        int drawX = x+glp.getCameraShift();
         g.drawImage(currentImage, x, y, width, height, null);
     }
 
     @Override
-    /*
-     * 
-     * 
-     * 
-     */
     public void update() {
         x += velocityX;
 
-        
-        if (x <= minX || x >= maxX - width) {
-            velocityX = -velocityX;
-        }
-
+        checkMapCollision(glp.getMapHandler().getCollisionRectagles());
         
         frameCounter++;
         if (frameCounter >= 20) { 

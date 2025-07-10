@@ -5,12 +5,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.CollisionDetection;
+import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 public class NakedWarrior extends CharacterImpl{
 
-    public NakedWarrior(GameLoopPanel panel, CharacterComand commands) {
-        super(panel, commands);
+    public NakedWarrior(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler) {
+        super(panel, commands, collision, mapHandler);
     }
 
     @Override
@@ -31,8 +33,7 @@ public class NakedWarrior extends CharacterImpl{
 
     @Override
     public void updateAttackCollision(){
-        //Cannot attack
-
-    };
+        
+    }
     
 }

@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.view.Handler;
+import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class Wizard extends EnemyImpl {
     public BufferedImage rightWizard, rightWizardMoving, leftWizard, leftWizardMoving; 
@@ -15,7 +15,7 @@ public class Wizard extends EnemyImpl {
     public int frameCounter = 0;
     public int minX, maxX;
 
-    public Wizard(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX, GameLoopPanel glp) {
+    public Wizard(int x, int y, int width, int height, boolean solid, EnemyHandler handler, int minX, int maxX, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
         setVelocityX(2);
         try {

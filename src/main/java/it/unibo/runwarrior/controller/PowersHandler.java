@@ -14,9 +14,11 @@ public class PowersHandler {
     private int index = 0;
     public ArrayList<Character> everyPowerUp = new ArrayList<>();
 
-    public PowersHandler(GameLoopPanel glp, CharacterComand cmd){
+    public PowersHandler(GameLoopPanel glp, CharacterComand cmd, CollisionDetection coll, HandlerMapElement mapH){
         this.glp = glp;
-        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd), new ArmourWarrior(glp, cmd), new SwordWarrior(glp, cmd)));
+        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd, coll, mapH),
+         new ArmourWarrior(glp, cmd, coll, mapH),
+         new SwordWarrior(glp, cmd, coll, mapH)));
     }
 
     public void setPowers(){

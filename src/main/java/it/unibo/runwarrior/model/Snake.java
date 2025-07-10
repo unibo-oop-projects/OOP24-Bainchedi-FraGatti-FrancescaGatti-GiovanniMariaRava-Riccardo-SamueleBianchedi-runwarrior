@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.view.Handler;
+import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class Snake extends EnemyImpl{
     private static final int TIME_AFTER_DEATH = 300;
@@ -14,13 +14,14 @@ public class Snake extends EnemyImpl{
     public int minX, maxX;
     public int frameCounter = 0;
     public boolean step = false;
-
+    public EnemyHandler enemyHandler;
     public boolean dead = false;
     private int deathTimer = 0;
-    public Snake(int x, int y, int width, int height, boolean solid, Handler handler, int minX, int maxX, GameLoopPanel glp) {
+    public Snake(int x, int y, int width, int height, boolean solid, EnemyHandler handler, int minX, int maxX, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
         this.minX = minX;
         this.maxX = maxX;
+        this.enemyHandler = handler;
         setVelocityX(1);
         try {
             rightSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnake.png"));
@@ -65,7 +66,7 @@ public class Snake extends EnemyImpl{
         } else {
             deathTimer++;
             if (deathTimer > TIME_AFTER_DEATH) {
-                handler.removeEnemy(this);
+                enemyHandler.removeEnemy(this);
             }
         }
     }

@@ -31,4 +31,12 @@ public class ShopController {
         return this.shop;
     }
 
+    public int getCoinScore(){
+        return score.getCoinScore();
+    }
+
+    public List<Skin> getAllSkins(){
+        return shop.getAllSkins();
+    }
+
 }

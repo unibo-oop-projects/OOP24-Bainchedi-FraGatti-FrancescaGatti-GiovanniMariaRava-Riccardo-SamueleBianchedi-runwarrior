@@ -1,8 +1,9 @@
 package it.unibo.runwarrior.model;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class MapLoader {
 
@@ -45,8 +46,9 @@ public class MapLoader {
 
         int[][] mapData = new int[expectedRows][expectedCols];
         int currentRow = 0;
+        InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(mapFilePath);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(mapFilePath))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (currentRow >= expectedRows) {

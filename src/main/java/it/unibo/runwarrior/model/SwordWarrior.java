@@ -5,12 +5,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.CollisionDetection;
+import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 public class SwordWarrior extends CharacterImpl{
 
-    public SwordWarrior(GameLoopPanel panel, CharacterComand commands) {
-        super(panel, commands);
+    public SwordWarrior(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler) {
+        super(panel, commands, collision, mapHandler);
     }
 
     @Override
@@ -37,7 +39,7 @@ public class SwordWarrior extends CharacterImpl{
             collisionArea.setSize(162, 73);
         }
         if(animation.getFrame() == PlayerFrame.ATTACK_FRAME && !rightDirection){
-            collisionArea.setLocation(playerX - SIZE_CHARACTER, playerY + 20);
+            collisionArea.setLocation(playerX - sizeCharacter, playerY + 20);
             collisionArea.setSize(164, 73);
         }
         if(!cmd.getAttack()){
