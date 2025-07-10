@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
+import it.unibo.runwarrior.controller.PowerUpDetection;
 import it.unibo.runwarrior.controller.PowersHandler;
 import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.GameMap;
@@ -31,6 +32,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
     private PowersHandler powerUpsHandler;
     private PowerUpFactoryImpl powersFactory;
     private CollisionDetection collisionDetection;
+    private PowerUpDetection pUpDetection;
     
     private Handler handler;
     private HandlerMapElement mapHandler;
@@ -45,6 +47,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks(), mapHandler.getTileSize());
         this.powersFactory = new PowerUpFactoryImpl(this);
         this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler);
+        this.pUpDetection = new PowerUpDetection(this, powersFactory);
         initializePlayer();
 
         this.handler = new Handler();
