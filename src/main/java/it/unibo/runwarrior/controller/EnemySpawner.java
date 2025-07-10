@@ -30,6 +30,7 @@ public class EnemySpawner {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line;
             while ((line = br.readLine()) != null) {
+                int i=1;
                 String[] parts = line.trim().split(",");
                 if (parts.length != 3) continue;
 
@@ -40,7 +41,8 @@ public class EnemySpawner {
                 EnemyImpl enemy = createEnemyByType(type, x, y);
                 if (enemy != null) {
                     handler.addEnemy(enemy);
-                    
+                    System.out.println("Caricato nemico: "+i);
+                    i++;
                 }
             }
         } catch (IOException | NumberFormatException e) {

@@ -13,6 +13,7 @@ import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowersHandler;
 import it.unibo.runwarrior.controller.EnemyHandler;
+import it.unibo.runwarrior.controller.EnemySpawner;
 import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.Guard;
@@ -36,7 +37,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
     private CollisionDetection collisionDetection;
     
     private HandlerMapElement mapHandler;
-    private EnemyHandler handler;
+    private EnemyHandler enemyHandler;
+    private EnemySpawner enemySpawner;
     private GameMap gameMap;
 
     private CoinController coinController;
@@ -59,8 +61,9 @@ public class GameLoopPanel extends JPanel implements Runnable{
         //GameMap levelOne = GameMap.load(mapOneFileName, imageConfigMapOne);
         //GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
 
-        this.handler = new EnemyHandler();
-        handler.addEnemy(new Guard(300, 418, 64, 64, true, handler, this));
+        this.enemyHandler = new EnemyHandler();
+        this.enemySpawner = new EnemySpawner(enemyHandler, this);
+        enemyHandler.addEnemy(new Guard(300, 418, 64, 64, true, enemyHandler, this));
         //handler.addEnemy(new Snake(300, 512, 64, 64, true, handler, 30, 400) );
         //handler.addEnemy(new Wizard(300, 512, 64,64, true, handler, 200, 800));
 
@@ -103,7 +106,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public void update(){
         player.update();
-        handler.update();
+        enemyHandler.update();
     }
 
     @Override
@@ -114,7 +117,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         mapHandler.printBlocks(gr2);
         player.drawPlayer(gr2);
         player.drawRectangle(gr2);
-        handler.render(gr2);
+        enemyHandler.render(gr2);
         gr2.dispose();
         coinController.drawAllCoins(gr2, mapHandler.getTileSize());
     }
