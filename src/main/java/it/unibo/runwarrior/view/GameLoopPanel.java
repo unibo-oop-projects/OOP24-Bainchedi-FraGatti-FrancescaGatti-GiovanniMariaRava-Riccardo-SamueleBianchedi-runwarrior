@@ -51,13 +51,13 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.powersFactory = new PowerUpFactoryImpl(this);
         this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler);
         initializePlayer();
-        String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
-        String mapTwoFileName = "src/main/resources/Map_2/map_2.txt";
-        String imageConfigMapOne = "src/main/resources/Map_1/forest_theme.txt";
-        String imageConfigMapTwo = "src/main/resources/Map_2/desert_theme.txt";
+        // String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
+        // String mapTwoFileName = "src/main/resources/Map_2/map_2.txt";
+        // String imageConfigMapOne = "src/main/resources/Map_1/forest_theme.txt";
+        // String imageConfigMapTwo = "src/main/resources/Map_2/desert_theme.txt";
 
-        GameMap levelOne = GameMap.load(mapOneFileName, imageConfigMapOne);
-        GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
+        //GameMap levelOne = GameMap.load(mapOneFileName, imageConfigMapOne);
+        //GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
 
         this.handler = new EnemyHandler();
         handler.addEnemy(new Guard(300, 418, 64, 64, true, handler, this));
