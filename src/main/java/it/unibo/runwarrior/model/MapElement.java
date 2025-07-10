@@ -2,7 +2,7 @@ package it.unibo.runwarrior.model;
 
 import java.awt.image.BufferedImage;
 
-public class BlockType {
+public class MapElement {
 
     private int id; // Identificatore del blocco
     private String name;
@@ -10,7 +10,7 @@ public class BlockType {
     private boolean harmfull; // Indica se il blocco è dannoso (causa danni al giocatore)
     private BufferedImage image; // Immagine associata al blocco
 
-    public BlockType(int id, String name, boolean solid, boolean harmfull, BufferedImage image) {
+    public MapElement(int id, String name, boolean solid, boolean harmfull, BufferedImage image) {
         this.id = id;
         this.solid = solid;
         this.harmfull = harmfull;
