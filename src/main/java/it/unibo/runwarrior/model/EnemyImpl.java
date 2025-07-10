@@ -47,11 +47,11 @@ public abstract class EnemyImpl implements Enemy{
         return new Rectangle(x,y,width,height);
     }
 
-
-    public void CheckMapCollision(List<Rectangle> obastacles){
+    @Override
+    public void checkMapCollision(List<Rectangle> obstacles){
         Rectangle enemyRectangle = getBounds();
 
-        for (Rectangle rectangle : obastacles) {
+        for (Rectangle rectangle : obstacles) {
             if(enemyRectangle.intersects(rectangle)){
                 velocityX = -velocityX;
                 return;

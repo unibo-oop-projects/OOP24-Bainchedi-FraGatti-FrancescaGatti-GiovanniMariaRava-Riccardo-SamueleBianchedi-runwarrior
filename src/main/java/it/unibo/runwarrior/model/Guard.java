@@ -52,7 +52,7 @@ public class Guard extends EnemyImpl {
     public void update() {
         x += velocityX;
 
-        checkMapCollision(glp.getMapHandler().getCollisionRectagles());
+        checkMapCollision(glp.getMapHandler().getCollisionRectangles());
         
         frameCounter++;
         if (frameCounter >= 20) { 
