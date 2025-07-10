@@ -24,5 +24,4 @@ public class EnemyHandler {
         enemies.remove(en);
     }
     
-
 }
