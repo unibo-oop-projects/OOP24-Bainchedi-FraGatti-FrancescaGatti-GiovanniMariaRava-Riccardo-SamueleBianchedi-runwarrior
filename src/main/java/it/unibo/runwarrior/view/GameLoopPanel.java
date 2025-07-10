@@ -3,10 +3,12 @@ package it.unibo.runwarrior.view;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.List;
 
 import javax.swing.JPanel;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowersHandler;
@@ -37,6 +39,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
     private EnemyHandler handler;
     private GameMap gameMap;
 
+    private CoinController coinController;
+
    // private GameMusic music;
 
     public GameLoopPanel(){
@@ -57,6 +61,12 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(commands);
         this.setFocusable(true);
+
+        this.coinController = new CoinController();
+        List<int[]> coords = coinController.loadCoinFromFIle("CoinCoordinates_map1.txt");
+        for(int[] coord : coords){
+            coinController.addCoins(coord[0], coord[1]);
+        }
     }
 
     public void startGame(){
@@ -99,6 +109,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         player.drawRectangle(gr2);
         handler.render(gr2);
         gr2.dispose();
+        coinController.drawAllCoins(gr2, mapHandler.getTileSize());
     }
 
     public void initializePlayer(){
