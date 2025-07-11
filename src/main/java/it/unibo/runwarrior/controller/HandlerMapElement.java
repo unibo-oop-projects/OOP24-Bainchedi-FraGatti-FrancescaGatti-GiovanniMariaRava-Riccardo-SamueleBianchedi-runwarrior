@@ -38,6 +38,8 @@ public class HandlerMapElement {
      * 3 = blocchi portale
      * 4 = centro portale
      * 5 = ostacolo
+     * 6 = blocco1 per castello per mappa finale
+     * 7 = blocco2 per castello per mappa finale
      */
     public void MapImage() {
         for (var entry : mapBlock.entrySet()) {
