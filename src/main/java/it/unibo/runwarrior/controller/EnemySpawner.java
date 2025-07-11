@@ -35,10 +35,13 @@ public class EnemySpawner {
                 if (parts.length != 3) continue;
 
                 int type = Integer.parseInt(parts[0]);
-                int x = Integer.parseInt(parts[1]);
-                int y = Integer.parseInt(parts[2]);
+                int tilex = Integer.parseInt(parts[1]);
+                int tiley = Integer.parseInt(parts[2]);
 
-                EnemyImpl enemy = createEnemyByType(type, x*36, y*36);
+                int x=tilex*glp.getMapHandler().getTileSize();
+                int y = tiley *glp.getMapHandler().getTileSize();
+
+                EnemyImpl enemy = createEnemyByType(type, x, y);
                 if (enemy != null) {
                     handler.addEnemy(enemy);
                     System.out.println("Caricato nemico: "+i);
@@ -52,6 +55,7 @@ public class EnemySpawner {
 
     private EnemyImpl createEnemyByType(int type, int x, int y) {
         switch (type) {
+
             case 1: return new Guard(x, y, 64, 64, true, handler, glp);
             //case 2: return new Snake(x, y, 64, 64, true, handler, glp);
             case 3: return new Wizard(x, y, 64, 64, true, handler, y, y, glp);
