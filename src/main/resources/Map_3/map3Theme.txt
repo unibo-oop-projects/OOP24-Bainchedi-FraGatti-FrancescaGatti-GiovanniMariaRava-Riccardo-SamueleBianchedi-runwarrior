@@ -1,0 +1,10 @@
+#file di confirgurazione della mappa 3
+
+0=/Map_3/map3Sky.png
+1=/Map_3/map3Grass.png
+2=/Map_3/map3Terrain.png
+3=/Map_3/portal.png
+4=/Map_3/portalCenter.png
+5=/Map_3/chimney.png
+6=/Map_3/castelBlock1.png
+7=/Map_3/castelBlock2.png
