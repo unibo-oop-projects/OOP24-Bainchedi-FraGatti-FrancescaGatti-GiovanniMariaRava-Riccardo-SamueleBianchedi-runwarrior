@@ -29,9 +29,11 @@ public class EnemyHandler {
     }
     
     public void updateWithMap(List<Rectangle> mapObstacles){
+        System.out.println("Updating " + enemies.size() + " enemies");
         for (EnemyImpl enemy : enemies) {
             enemy.update();
             enemy.checkMapCollision(mapObstacles);
+            System.out.println("Enemy at: " + enemy.x + "," + enemy.y);
         }
     }
     
