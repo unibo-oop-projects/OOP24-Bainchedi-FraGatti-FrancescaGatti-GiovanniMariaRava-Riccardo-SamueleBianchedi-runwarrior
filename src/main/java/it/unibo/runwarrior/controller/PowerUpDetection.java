@@ -1,5 +1,6 @@
 package it.unibo.runwarrior.controller;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import it.unibo.runwarrior.model.PowerUpImpl;
@@ -17,5 +18,10 @@ public class PowerUpDetection {
         this.glp = glp;
         this.pFact = pUpFact;
         powerCollision.addAll(pFact.getPowerUps());
+    }
+
+    public boolean touch(Rectangle r1, Rectangle r2) {
+        Rectangle expanded = new Rectangle(r2.x - 1, r2.y - 1, r2.width + 2, r2.height + 2);
+        return expanded.intersects(r1);
     }
 }

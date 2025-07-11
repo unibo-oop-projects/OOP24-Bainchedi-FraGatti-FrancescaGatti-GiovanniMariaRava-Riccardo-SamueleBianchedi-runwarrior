@@ -52,8 +52,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
         this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks(), mapHandler.getTileSize());
-        this.powersFactory = new PowerUpFactoryImpl(this);
         this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler);
+        this.powersFactory = new PowerUpFactoryImpl(this, mapHandler, gameMap.getMapData());
         this.pUpDetection = new PowerUpDetection(this, powersFactory);
         initializePlayer();
         // String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
@@ -117,11 +117,12 @@ public class GameLoopPanel extends JPanel implements Runnable{
         Graphics2D gr2 = (Graphics2D) gr;
         
         mapHandler.printBlocks(gr2);
+        powersFactory.printPowerUp(gr2);
         player.drawPlayer(gr2);
         player.drawRectangle(gr2);
         enemyHandler.render(gr2);
-        gr2.dispose();
         coinController.drawAllCoins(gr2, mapHandler.getTileSize());
+        gr2.dispose();
     }
 
     public void initializePlayer(){

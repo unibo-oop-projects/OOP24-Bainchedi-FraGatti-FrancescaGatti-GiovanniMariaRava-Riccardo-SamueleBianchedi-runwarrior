@@ -131,4 +131,8 @@ public class HandlerMapElement {
     
         return collisionRects;
     }
+
+    public int getShift(){
+        return this.shift;
+    }
 }
