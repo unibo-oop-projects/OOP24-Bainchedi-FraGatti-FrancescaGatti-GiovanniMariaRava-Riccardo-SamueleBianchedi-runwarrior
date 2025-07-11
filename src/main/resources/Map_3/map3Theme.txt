@@ -1,4 +1,4 @@
-#file di confirgurazione della mappa 3
+#file di configurazione della mappa 3
 
 0=/Map_3/map3Sky.png
 1=/Map_3/map3Grass.png
