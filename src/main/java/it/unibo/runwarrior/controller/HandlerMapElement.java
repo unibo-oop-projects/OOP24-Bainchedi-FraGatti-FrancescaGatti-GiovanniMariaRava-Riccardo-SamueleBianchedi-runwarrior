@@ -40,6 +40,7 @@ public class HandlerMapElement {
      * 5 = ostacolo
      * 6 = blocco1 per castello per mappa finale
      * 7 = blocco2 per castello per mappa finale
+     * This method create a new MapElement using the map created in GameMap
      */
     public void MapImage() {
         for (var entry : mapBlock.entrySet()) {
@@ -108,6 +109,9 @@ public class HandlerMapElement {
         return firstY;
     }
 
+    /**
+     * @return the list with all the obstacle's rectangles
+     */
     public List<Rectangle> getCollisionRectangles() {
         List<Rectangle> collisionRects = new ArrayList<>();
         int rows = map.length;

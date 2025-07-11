@@ -22,9 +22,10 @@ public class EnemySpawner {
         this.handler = handler;
         this.glp = glp;
     }
-      /*
-     * sta classe dovrebbe leggere un file che ha le coordinate di tutti i nemici e che contiene tre numeri perriga:
-     * tipo di nemico, coordinata x, coordinata y.
+    
+    /**
+     * @param is
+     * This method read the file enemies*.txt in order to fill the List enemies so EnemyHandler can render them
      */
     public void loadEnemiesFromStream(InputStream is) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
@@ -53,6 +54,12 @@ public class EnemySpawner {
         }
     }
 
+    /**
+     * @param type
+     * @param x
+     * @param y
+     * @return a new Enemy Object depending on the number passed
+     */
     private EnemyImpl createEnemyByType(int type, int x, int y) {
         switch (type) {
 
