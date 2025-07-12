@@ -9,6 +9,7 @@ public class CharacterMovementHandler {
     private CollisionDetection collisionDetection;
     private Character player;
     private HandlerMapElement mapHandler;
+    private PowerUpDetection pUpDetection;
 
     public static final int START_X = 96;
     private int startY;

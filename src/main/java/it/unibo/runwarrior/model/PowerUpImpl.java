@@ -14,8 +14,8 @@ public class PowerUpImpl {
     private BufferedImage egg;
     private Rectangle touchArea;
     private GameLoopPanel glp;
-    private boolean powerTaken = false;
-    private boolean eggOpen = false;
+    private boolean powerTaken;
+    private boolean eggOpen;
 
     public PowerUpImpl(GameLoopPanel glp){
         this.glp = glp;
@@ -56,7 +56,7 @@ public class PowerUpImpl {
         return touchArea;
     }
 
-    public boolean getPower(){
+    public boolean isPowerTaken(){
         return powerTaken;
     }
 
@@ -64,7 +64,6 @@ public class PowerUpImpl {
         return eggOpen;
     }
 
-    //sarà usato da PowerUpDetection, in cui andrò a gestire il player coi powerUP
     public void takePower(){
         powerTaken = true;
     }

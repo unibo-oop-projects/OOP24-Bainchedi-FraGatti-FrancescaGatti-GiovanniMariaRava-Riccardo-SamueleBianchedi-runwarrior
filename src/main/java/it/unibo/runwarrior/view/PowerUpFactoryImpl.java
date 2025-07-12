@@ -46,8 +46,8 @@ public class PowerUpFactoryImpl {
             else{
                 im = p.getImage();
             }
-            if(!p.getPower()){
-                gr2.drawImage(im, p.getTouchArea().x + mapHandler.getShift(), p.getTouchArea().y, tileSize, tileSize, null);
+            if(!p.isPowerTaken()){
+                gr2.drawImage(im, p.getTouchArea().x + mapHandler.getShift(), p.getTouchArea().y, tileSize, p.getTouchArea().height, null);
             }
             else{
                 p.getTouchArea().setSize(0,0);
