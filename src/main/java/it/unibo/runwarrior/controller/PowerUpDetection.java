@@ -14,20 +14,22 @@ public class PowerUpDetection {
     private ArrayList<PowerUpImpl> powerCollision = new ArrayList<>();
     private int gotPower = 0;
     private long hitWaitTime;
+    private int toll = 6;
 
     public PowerUpDetection(GameLoopPanel glp, PowerUpFactoryImpl pUpFact){
         this.glp = glp;
         this.pFact = pUpFact;
-        powerCollision.addAll(pFact.getPowerUps());
     }
 
     public String checkCollisionWithPowers(Character player, CharacterMovementHandler move){
+        powerCollision.addAll(pFact.getPowerUps());
         Rectangle playerArea = player.getArea();
         String dir = "";
         for(PowerUpImpl pUp : powerCollision){
-            if(touch(playerArea, pUp.getTouchArea())){
-                if(playerArea.y == pUp.getTouchArea().y &&
-                    (playerArea.x >= pUp.getTouchArea().x && playerArea.x <= pUp.getTouchArea().y + pUp.getTouchArea().width)){
+            if(touch(playerArea, pUp.getTouchArea()) && !pUp.getTouchArea().isEmpty()){
+                if(playerArea.y + playerArea.height == pUp.getTouchArea().y &&
+                    ((playerArea.x >= pUp.getTouchArea().x+toll && playerArea.x <= pUp.getTouchArea().x + pUp.getTouchArea().width - toll) ||
+                    (playerArea.x + playerArea.width >= pUp.getTouchArea().x+toll && playerArea.x + playerArea.width <= pUp.getTouchArea().x + pUp.getTouchArea().width - toll))){
                     dir = "up";
                     if(pUp.isEggOpen() && !pUp.isPowerTaken() && System.currentTimeMillis() - hitWaitTime > 200){
                         glp.getPowersHandler().setPowers();
@@ -62,7 +64,7 @@ public class PowerUpDetection {
     }
 
     public boolean touch(Rectangle r1, Rectangle r2) {
-        Rectangle expanded = new Rectangle(r2.x - 1, r2.y - 1, r2.width + 2, r2.height + 2);
+        Rectangle expanded = new Rectangle(r2.x - 1, r2.y - 1, r2.width + 1, r2.height + 1);
         return expanded.intersects(r1);
     }
 }

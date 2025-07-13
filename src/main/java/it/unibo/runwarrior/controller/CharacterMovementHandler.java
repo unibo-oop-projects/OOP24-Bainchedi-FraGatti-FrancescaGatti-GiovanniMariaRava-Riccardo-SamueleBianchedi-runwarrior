@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.controller;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
+import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 import it.unibo.runwarrior.model.Character;
 
 public class CharacterMovementHandler {
@@ -23,7 +24,6 @@ public class CharacterMovementHandler {
     protected int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
     protected int playerY;// * VERTICALE
     private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
-    private int screenY;// * VERITCALE (NON USATA PERCHè LA POSIZIONE VERTICALE è DATA SOLO DAL SALTO)
     private boolean hitHead;
     private boolean jumpKill;
     private boolean descend;
@@ -35,29 +35,40 @@ public class CharacterMovementHandler {
     private int speedJumpDown = 6;
     private int groundX = 0;//variabile che permette lo scorrimento della mappa
 
-    public CharacterMovementHandler(GameLoopPanel panel, Character player, CharacterComand cmd, CollisionDetection collDet, HandlerMapElement hM){
+    public CharacterMovementHandler(GameLoopPanel panel, Character player, CharacterComand cmd, CollisionDetection collDet, HandlerMapElement hM, PowerUpFactoryImpl pFact){
         this.glp = panel;
         this.cmd = cmd;
         this.collisionDetection = collDet; 
         this.player = player;
         this.mapHandler = hM;
+        this.pUpDetection = new PowerUpDetection(panel, pFact);
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
     }
 
     private void setStartY(int y, int tileSize){
         startY = y + toTouchFloor;
         playerY = startY;
-        screenY = startY;
         sizeCharacter = tileSize*2;
         maxJump = startY - (sizeCharacter*5/2);
-        midJump = startY - (sizeCharacter*3/2);
+        midJump = startY - (sizeCharacter*4/2);
+    }
+
+    public void setLocationAfterPowerup(int x, int y, int realx, int groundX) {
+        this.screenX = x;
+        this.playerY = y;
+        this.playerX = realx;
+        this.groundX = groundX;
     }
 
     public void movePlayer(){
         maxScreenX = glp.getWidth() / 2;
         String collisionDir = "";
+        String tempDir = "";
         collisionDir = collisionDetection.checkCollision(player);
-        System.out.println(collisionDir);
+        tempDir = pUpDetection.checkCollisionWithPowers(player, this);
+        if(!tempDir.isEmpty()){
+            collisionDir = tempDir;
+        }
 
         hitHead = collisionDir.equals("down") ? true : false;
         if(hitHead){
@@ -122,6 +133,7 @@ public class CharacterMovementHandler {
 
     public void setJumpKill(){
         this.jumpKill = true;
+        cmd.setJump(true);
     }
 
     public void jumpAfterKill(){
@@ -137,17 +149,15 @@ public class CharacterMovementHandler {
 
     public void updateJumpVariable(){
         maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
-        midJump = (startY - (sizeCharacter*3/2)) + (playerY - startY);
-    }
-
-    public void setLocationAfterPowerup(int x, int y, int realx) {
-        this.playerY = y;
-        this.playerX = realx;
-        this.screenX = x;
+        midJump = (startY - (sizeCharacter*4/2)) + (playerY - startY);
     }
 
     public boolean getRightDirection(){
         return this.rightDirection;
+    }
+
+    public int getGroundX(){
+        return this.groundX;
     }
 
     public int getPlX() {
@@ -160,9 +170,5 @@ public class CharacterMovementHandler {
 
     public int getScX() {
         return this.screenX;
-    }
-
-    public int getScY() {
-        return this.screenY;
     }
 }

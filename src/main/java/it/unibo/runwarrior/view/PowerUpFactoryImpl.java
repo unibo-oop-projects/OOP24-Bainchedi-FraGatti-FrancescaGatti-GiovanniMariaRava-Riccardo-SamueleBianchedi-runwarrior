@@ -10,13 +10,11 @@ import it.unibo.runwarrior.model.PowerUpImpl;
 public class PowerUpFactoryImpl {
     
     private ArrayList<PowerUpImpl> powerUps = new ArrayList<>();
-    private GameLoopPanel glp;
     private HandlerMapElement mapHandler;
     private int tileSize;
     private int distance;
 
     public PowerUpFactoryImpl(GameLoopPanel glp, HandlerMapElement hM, int[][] map){
-        this.glp = glp;
         this.mapHandler = hM;
         this.tileSize = hM.getTileSize();
         distance = 55;
