@@ -11,6 +11,7 @@ import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
+import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public abstract class CharacterImpl implements Character{
     protected int sizeCharacter;
@@ -26,12 +27,12 @@ public abstract class CharacterImpl implements Character{
     protected CharacterMovementHandler movement;
     private List<Rectangle> enemies; // da mettere nel KillDetection
 
-    public CharacterImpl(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler){
+    public CharacterImpl(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact){
         this.cmd = commands;
         playerImage();
         this.animation = new CharacterAnimationHandler(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
-        this.movement = new CharacterMovementHandler(panel, this, commands, collision, mapHandler);
+        this.movement = new CharacterMovementHandler(panel, this, commands, collision, mapHandler, pFact);
         collisionArea = new Rectangle(movement.getPlX()+(sizeCharacter/4), movement.getPlY()+(sizeCharacter/4),
                                         sizeCharacter/2, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
     }
@@ -44,10 +45,10 @@ public abstract class CharacterImpl implements Character{
     public void update() {
         this.rightDirection = movement.getRightDirection();
         movement.movePlayer();
-        System.out.println((collisionArea.x + collisionArea.width));
         animation.frameChanger();
     }
 
+    @Override
     public void updatePlayerPosition() {
         collisionArea.setLocation(movement.getPlX() + (sizeCharacter/4), movement.getPlY() + (sizeCharacter/4));
         updateAttackCollision();
@@ -60,9 +61,11 @@ public abstract class CharacterImpl implements Character{
         BufferedImage im = null;
         BufferedImage tip = null;
         im = animation.imagePlayer(rightDirection);
-        tip = animation.getTip(rightDirection);
-        gr2.drawImage(tip, movement.getScX() + sizeCharacter, movement.getPlY(), sizeCharacter, sizeCharacter, null);
         gr2.drawImage(im, movement.getScX(), movement.getPlY(), sizeCharacter, sizeCharacter, null);
+        if(cmd.getAttack()){
+            tip = animation.getTip(rightDirection);
+            gr2.drawImage(tip, movement.getScX() + sizeCharacter, movement.getPlY(), sizeCharacter, sizeCharacter, null);
+        }
     }
 
     public void drawRectangle(Graphics2D gr){
@@ -73,16 +76,16 @@ public abstract class CharacterImpl implements Character{
     public abstract void playerImage();
 
     @Override
-    // public void setLocationAfterPowerup(int x, int y, int realx) {
-    //     this.playerY = y;
-    //     this.playerX = realx;
-    //     this.screenX = x;
-    // }
+    public CharacterMovementHandler getMovementHandler(){
+        return this.movement;
+    }
 
+    @Override
     public Rectangle getArea(){
         return collisionArea;
     }
 
+    @Override
     public int getSpeed(){
         return speed;
     }
