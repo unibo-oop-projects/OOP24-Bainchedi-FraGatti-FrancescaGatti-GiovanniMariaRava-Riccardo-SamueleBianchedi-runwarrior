@@ -8,11 +8,12 @@ import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
+import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public class ArmourWarrior extends CharacterImpl{
 
-    public ArmourWarrior(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler) {
-        super(panel, commands, collision, mapHandler);
+    public ArmourWarrior(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact) {
+        super(panel, commands, collision, mapHandler, pFact);
     }
 
     @Override
