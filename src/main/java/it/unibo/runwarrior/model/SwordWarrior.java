@@ -1,5 +1,6 @@
 package it.unibo.runwarrior.model;
 
+import java.awt.Rectangle;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -11,6 +12,8 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public class SwordWarrior extends CharacterImpl{
+
+    private int life = 3;
 
     public SwordWarrior(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact) {
         super(panel, commands, collision, mapHandler, pFact);
@@ -37,11 +40,14 @@ public class SwordWarrior extends CharacterImpl{
     @Override
     public void updateAttackCollision() {
         if(animation.getFrame() == PlayerFrame.ATTACK_FRAME && rightDirection){
-            collisionArea.setSize((sizeCharacter*7)/3, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
+            //collisionArea.setSize((sizeCharacter*7)/4, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
+            swordArea.setBounds(movement.getPlX() + sizeCharacter, movement.getPlY() + sizeCharacter/4,
+                                    sizeCharacter, movement.getPlY() + sizeCharacter/4);
         }
         if(animation.getFrame() == PlayerFrame.ATTACK_FRAME && !rightDirection){
-            collisionArea.setLocation(movement.getPlX() - sizeCharacter, movement.getPlY() + sizeCharacter/4);
-            collisionArea.setSize((sizeCharacter*7)/3, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
+            swordArea.setBounds(movement.getPlX() - sizeCharacter, movement.getPlY() + sizeCharacter/4,
+                                            sizeCharacter, movement.getPlY() + sizeCharacter/4);
+            //collisionArea.union(tip);
         }
         if(!cmd.getAttack()){
             collisionArea.setSize(sizeCharacter/2, sizeCharacter-(sizeCharacter/4)-toTouchFloor);

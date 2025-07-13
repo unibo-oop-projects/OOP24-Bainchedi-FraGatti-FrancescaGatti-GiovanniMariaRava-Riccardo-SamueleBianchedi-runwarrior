@@ -12,6 +12,8 @@ import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public class ArmourWarrior extends CharacterImpl{
 
+    private int life = 2;
+    
     public ArmourWarrior(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact) {
         super(panel, commands, collision, mapHandler, pFact);
     }
