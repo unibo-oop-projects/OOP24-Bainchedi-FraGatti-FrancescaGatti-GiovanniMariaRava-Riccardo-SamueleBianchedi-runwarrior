@@ -17,6 +17,7 @@ public abstract class CharacterImpl implements Character{
     protected int sizeCharacter;
     protected int toTouchFloor = 2;
     protected Rectangle collisionArea;
+    protected Rectangle swordArea;
     protected boolean rightDirection;
     private int speed = 5;
 
@@ -30,11 +31,12 @@ public abstract class CharacterImpl implements Character{
     public CharacterImpl(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact){
         this.cmd = commands;
         playerImage();
-        this.animation = new CharacterAnimationHandler(commands, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
         this.movement = new CharacterMovementHandler(panel, this, commands, collision, mapHandler, pFact);
+        this.animation = new CharacterAnimationHandler(commands, movement, right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL);
         collisionArea = new Rectangle(movement.getPlX()+(sizeCharacter/4), movement.getPlY()+(sizeCharacter/4),
                                         sizeCharacter/2, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
+        swordArea = new Rectangle();
     }
 
     private void setStartY(int y, int tileSize){
@@ -62,14 +64,15 @@ public abstract class CharacterImpl implements Character{
         BufferedImage tip = null;
         im = animation.imagePlayer(rightDirection);
         gr2.drawImage(im, movement.getScX(), movement.getPlY(), sizeCharacter, sizeCharacter, null);
-        if(cmd.getAttack()){
+        if(animation.isAttacking()){
             tip = animation.getTip(rightDirection);
-            gr2.drawImage(tip, movement.getScX() + sizeCharacter, movement.getPlY(), sizeCharacter, sizeCharacter, null);
+            int tipPos = rightDirection ? 1 : (-1);
+            gr2.drawImage(tip, movement.getScX() + (tipPos*sizeCharacter), movement.getPlY(), sizeCharacter, sizeCharacter, null);
         }
     }
 
     public void drawRectangle(Graphics2D gr){
-        gr.drawRect(collisionArea.x, collisionArea.y, collisionArea.width, collisionArea.height);//si sposta in avanti perchè segue playerX non screenX
+        gr.drawRect(movement.getScX(), collisionArea.y, collisionArea.width, collisionArea.height);//si sposta in avanti perchè segue playerX non screenX
     }
 
     @Override

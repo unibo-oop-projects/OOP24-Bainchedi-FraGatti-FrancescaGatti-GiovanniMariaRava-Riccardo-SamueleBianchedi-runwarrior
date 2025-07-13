@@ -6,7 +6,8 @@ import it.unibo.runwarrior.model.PlayerFrame;
 
 public class CharacterAnimationHandler{
 
-    public CharacterComand cmd;
+    private CharacterComand cmd;
+    private CharacterMovementHandler movement;
 
     private int changeFrame = 0;
     private boolean crossWalk = false;
@@ -14,8 +15,9 @@ public class CharacterAnimationHandler{
     private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
     private BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
-    public CharacterAnimationHandler(CharacterComand cmd, BufferedImage... im){
+    public CharacterAnimationHandler(CharacterComand cmd, CharacterMovementHandler move, BufferedImage... im){
         this.cmd = cmd;
+        this.movement = move;
         right0 = im[0];
         right1 = im[1];
         right2 = im[2];
@@ -42,18 +44,18 @@ public class CharacterAnimationHandler{
                 changeFrame = 0;
             }
             useAttackMoving++;
-            if(cmd.getAttack() && useAttackMoving > 60){ //numero di attacchi limitato se in movimento
+            if(cmd.getAttack() && movement.canAttack() && useAttackMoving > 60){ //numero di attacchi limitato se in movimento
                 playerFrame = PlayerFrame.ATTACK_FRAME;
                 useAttackMoving = 0;
             }
         }
         else if(cmd.isJumping()){
             playerFrame = PlayerFrame.GO_FRAME2;
-            if(cmd.getAttack()){
+            if(cmd.getAttack() && movement.canAttack()){
                 playerFrame = PlayerFrame.ATTACK_FRAME;
             }
         }
-        else if(cmd.getAttack()){
+        else if(cmd.getAttack() && movement.canAttack()){
             playerFrame = PlayerFrame.ATTACK_FRAME;
         }
         else{
@@ -88,6 +90,10 @@ public class CharacterAnimationHandler{
 
     public PlayerFrame getFrame(){
         return playerFrame;
+    }
+
+    public boolean isAttacking(){
+        return playerFrame == PlayerFrame.ATTACK_FRAME ? true : false;
     }
 
     public BufferedImage getTip(boolean rightDirection) {

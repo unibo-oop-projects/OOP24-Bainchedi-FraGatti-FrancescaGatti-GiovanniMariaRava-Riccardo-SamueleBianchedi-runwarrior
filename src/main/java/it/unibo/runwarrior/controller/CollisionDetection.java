@@ -12,6 +12,7 @@ public class CollisionDetection {
     private List<MapElement> blocks = new ArrayList<>();
     private int tileSize;
     private ArrayList<String> directions = new ArrayList<>();
+    private Rectangle playerArea;
     private int playerSpeed;
     private int feetHeadToll = 5;
 
@@ -21,16 +22,23 @@ public class CollisionDetection {
         this.tileSize = tileSize;
     }
 
-    public String checkCollision(Character player){
+    public String checkCollision(Character player, boolean attack){
         playerSpeed = player.getSpeed();
+        if(attack){
+            playerArea = new Rectangle(player.getMovementHandler().getPlX() - tileSize*2, player.getMovementHandler().getPlY() + tileSize*2/4,
+                                                    tileSize*6, tileSize*3/2 - 2);
+        }
+        else{
+            playerArea = player.getArea();
+        }
         String dir = "";
         this.directions.clear();
-        if(touchSolid(player.getArea().x + player.getArea().width - (feetHeadToll+1), player.getArea().y, player, true) |
-            touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + player.getArea().height/2, player, true) |
-            touchSolid(player.getArea().x + player.getArea().width, player.getArea().y + player.getArea().height, player, true) |
-            touchSolid(player.getArea().x + (feetHeadToll+1), player.getArea().y, player, true) |
-            touchSolid(player.getArea().x, player.getArea().y + player.getArea().height/2, player, true) |
-            touchSolid(player.getArea().x, player.getArea().y + player.getArea().height, player, true)){
+        if(touchSolid(playerArea.x + playerArea.width - (feetHeadToll+1), playerArea.y, player, true) |
+            touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height/2, player, true) |
+            touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height, player, true) |
+            touchSolid(playerArea.x + (feetHeadToll+1), playerArea.y, player, true) |
+            touchSolid(playerArea.x, playerArea.y + playerArea.height/2, player, true) |
+            touchSolid(playerArea.x, playerArea.y + playerArea.height, player, true)){
                 dir = directions.stream().filter(s -> s.equals("right") | s.equals("left"))
                         .distinct().findFirst().orElse("");
         }
@@ -55,9 +63,9 @@ public class CollisionDetection {
             return true;
         }
         else{
-            for(int i = player.getArea().width; i >= 0; i = i - player.getArea().width){
-                indexXtile = (player.getArea().x + i) / tileSize;
-                indexYtile = player.getArea().y / tileSize;
+            for(int i = playerArea.width; i >= 0; i = i - playerArea.width){
+                indexXtile = (playerArea.x + i) / tileSize;
+                indexYtile = playerArea.y / tileSize;
                 blockIndex = blockIndexes[(int) indexYtile][(int) indexXtile];
                 if(blocks.get(blockIndex).getCollision()){
                     if(checkDirections){
@@ -81,7 +89,7 @@ public class CollisionDetection {
         if(y == tileRec.y && (x >= tileRec.x && x <= tileRec.x + tileRec.width)){
             direction = "up";
         }
-        else if(isInAir(player) && y == player.getArea().y && (tileRec.y + tileRec.height - y) < feetHeadToll &&
+        else if(isInAir(player) && y == playerArea.y && (tileRec.y + tileRec.height - y) < feetHeadToll &&
                  (x >= tileRec.x && x <= tileRec.x + tileRec.width) || y <= 0){
                 direction = "down";
         }

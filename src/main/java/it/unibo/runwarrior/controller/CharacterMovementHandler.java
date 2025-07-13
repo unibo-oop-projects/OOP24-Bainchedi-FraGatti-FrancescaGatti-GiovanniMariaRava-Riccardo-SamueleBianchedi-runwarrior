@@ -28,6 +28,7 @@ public class CharacterMovementHandler {
     private boolean jumpKill;
     private boolean descend;
     private boolean handleDoubleCollision;
+    private boolean canAttack;
 
     private boolean rightDirection = true;
     private int speed = 5;
@@ -64,7 +65,7 @@ public class CharacterMovementHandler {
         maxScreenX = glp.getWidth() / 2;
         String collisionDir = "";
         String tempDir = "";
-        collisionDir = collisionDetection.checkCollision(player);
+        collisionDir = collisionDetection.checkCollision(player, false);
         tempDir = pUpDetection.checkCollisionWithPowers(player, this);
         if(!tempDir.isEmpty()){
             collisionDir = tempDir;
@@ -105,6 +106,7 @@ public class CharacterMovementHandler {
             }
         }
         player.updatePlayerPosition();
+        canAttack = (collisionDir.equals("right") || collisionDir.equals("left")) ? false : true;
     }
 
     public void jump(boolean isJump, int jumpHeight){
@@ -150,6 +152,10 @@ public class CharacterMovementHandler {
     public void updateJumpVariable(){
         maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
         midJump = (startY - (sizeCharacter*4/2)) + (playerY - startY);
+    }
+
+    public boolean canAttack(){
+        return this.canAttack;
     }
 
     public boolean getRightDirection(){

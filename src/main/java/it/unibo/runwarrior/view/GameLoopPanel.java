@@ -11,7 +11,6 @@ import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.controller.PowerUpDetection;
 import it.unibo.runwarrior.controller.PowersHandler;
 import it.unibo.runwarrior.controller.EnemyHandler;
 import it.unibo.runwarrior.controller.EnemySpawner;
@@ -36,7 +35,6 @@ public class GameLoopPanel extends JPanel implements Runnable{
     private PowersHandler powerUpsHandler;
     private PowerUpFactoryImpl powersFactory;
     private CollisionDetection collisionDetection;
-    private PowerUpDetection pUpDetection;
     
     private HandlerMapElement mapHandler;
     private EnemyHandler enemyHandler;
@@ -52,9 +50,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
         this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks(), mapHandler.getTileSize());
-        this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler);
         this.powersFactory = new PowerUpFactoryImpl(this, mapHandler, gameMap.getMapData());
-        this.pUpDetection = new PowerUpDetection(this, powersFactory);
+        this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler, powersFactory);
         initializePlayer();
         // String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
         // String mapTwoFileName = "src/main/resources/Map_2/map_2.txt";
@@ -126,11 +123,16 @@ public class GameLoopPanel extends JPanel implements Runnable{
     }
 
     public void initializePlayer(){
-        player = new NakedWarrior(this, commands, collisionDetection, mapHandler);
+        player = new NakedWarrior(this, commands, collisionDetection, mapHandler, powersFactory);
     }
 
-    public void setPlayer(Character pl){
+    public Character getPlayer(){
+        return this.player;
+    }
+
+    public void setPlayer(Character pl, int realX, int x, int y, int shift){
         this.player = pl;
+        this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift);
     }
 
     public PowersHandler getPowersHandler(){
