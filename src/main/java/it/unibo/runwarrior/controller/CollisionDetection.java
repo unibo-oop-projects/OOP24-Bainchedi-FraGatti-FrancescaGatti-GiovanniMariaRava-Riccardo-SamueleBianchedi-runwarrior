@@ -24,13 +24,13 @@ public class CollisionDetection {
 
     public String checkCollision(Character player, boolean attack){
         playerSpeed = player.getSpeed();
-        if(attack){
-            playerArea = new Rectangle(player.getMovementHandler().getPlX() - tileSize*2, player.getMovementHandler().getPlY() + tileSize*2/4,
-                                                    tileSize*6, tileSize*3/2 - 2);
-        }
-        else{
+        // if(attack){
+        //     playerArea = new Rectangle(player.getMovementHandler().getPlX() - tileSize*2, player.getMovementHandler().getPlY() + tileSize*2/4,
+        //                                             tileSize*6, tileSize*3/2 - 2);
+        // }
+        //else{
             playerArea = player.getArea();
-        }
+        //}
         String dir = "";
         this.directions.clear();
         if(touchSolid(playerArea.x + playerArea.width - (feetHeadToll+1), playerArea.y, player, true) |

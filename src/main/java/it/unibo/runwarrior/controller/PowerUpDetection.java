@@ -12,7 +12,6 @@ public class PowerUpDetection {
     private GameLoopPanel glp;
     private PowerUpFactoryImpl pFact;
     private ArrayList<PowerUpImpl> powerCollision = new ArrayList<>();
-    private int gotPower = 0;
     private long hitWaitTime;
     private int toll = 5;
 
@@ -33,7 +32,6 @@ public class PowerUpDetection {
                     dir = "up";
                     if(pUp.isEggOpen() && !pUp.isPowerTaken() && System.currentTimeMillis() - hitWaitTime > 200){
                         glp.getPowersHandler().setPowers();
-                        gotPower++;
                         pUp.takePower();
                     }
                     else if(!pUp.isEggOpen()){
@@ -46,7 +44,6 @@ public class PowerUpDetection {
                     dir = "right";
                     if(pUp.isEggOpen() && !pUp.isPowerTaken()){
                         glp.getPowersHandler().setPowers();
-                        gotPower++;
                         pUp.takePower();
                     }
                 }
@@ -54,7 +51,6 @@ public class PowerUpDetection {
                     dir = "left";
                     if(pUp.isEggOpen() && !pUp.isPowerTaken()){
                         glp.getPowersHandler().setPowers();
-                        gotPower++;
                         pUp.takePower();
                     }
                 }

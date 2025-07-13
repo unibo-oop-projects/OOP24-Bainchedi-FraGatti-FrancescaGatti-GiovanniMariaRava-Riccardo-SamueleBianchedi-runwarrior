@@ -124,6 +124,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public void initializePlayer(){
         player = new NakedWarrior(this, commands, collisionDetection, mapHandler, powersFactory);
+        powerUpsHandler.setIndex();
     }
 
     public Character getPlayer(){
