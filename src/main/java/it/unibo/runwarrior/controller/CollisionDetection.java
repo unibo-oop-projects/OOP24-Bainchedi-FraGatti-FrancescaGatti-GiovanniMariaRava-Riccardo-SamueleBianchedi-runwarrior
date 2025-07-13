@@ -34,7 +34,6 @@ public class CollisionDetection {
                 dir = directions.stream().filter(s -> s.equals("right") | s.equals("left"))
                         .distinct().findFirst().orElse("");
         }
-        System.out.println(directions);
         if(dir.isEmpty() && directions.contains("up")){
             dir = "up";
         }
@@ -79,7 +78,6 @@ public class CollisionDetection {
         int tileX = ((int) indexXtile) * tileSize;
         int tileY = ((int) indexYtile) * tileSize;
         Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
-        System.out.println(x + " " + y);
         if(y == tileRec.y && (x >= tileRec.x && x <= tileRec.x + tileRec.width)){
             direction = "up";
         }
