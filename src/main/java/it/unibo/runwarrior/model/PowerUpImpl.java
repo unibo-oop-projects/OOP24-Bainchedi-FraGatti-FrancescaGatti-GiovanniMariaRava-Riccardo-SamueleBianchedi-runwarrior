@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
 
-public class PowerUpImpl {
+public class PowerUpImpl implements PowerUp{
     
     private BufferedImage image;
     private BufferedImage egg;

@@ -13,6 +13,7 @@ public interface Character {
     public void playerImage();
     public CharacterMovementHandler getMovementHandler();
     public void updatePlayerPosition();
+    public Rectangle getSwordArea();
     public Rectangle getArea();
     public int getSpeed();
 }

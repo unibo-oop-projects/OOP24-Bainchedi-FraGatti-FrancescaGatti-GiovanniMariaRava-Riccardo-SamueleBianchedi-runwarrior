@@ -83,13 +83,17 @@ public abstract class CharacterImpl implements Character{
         return this.movement;
     }
 
+    public Rectangle getSwordArea(){
+        return this.swordArea;
+    }
+
     @Override
     public Rectangle getArea(){
-        return collisionArea;
+        return this.collisionArea;
     }
 
     @Override
     public int getSpeed(){
-        return speed;
+        return this.speed;
     }
 }
