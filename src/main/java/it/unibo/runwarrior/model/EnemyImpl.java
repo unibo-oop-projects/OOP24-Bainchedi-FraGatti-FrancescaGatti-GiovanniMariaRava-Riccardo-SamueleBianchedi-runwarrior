@@ -50,13 +50,20 @@ public abstract class EnemyImpl implements Enemy{
     @Override
     public void checkMapCollision(List<Rectangle> obstacles){
         Rectangle enemyRectangle = getBounds();
-
+        int newX = x + velocityX;
+        Rectangle futureBounds = new Rectangle(newX, y, width, height);
         for (Rectangle rectangle : obstacles) {
-            if(enemyRectangle.intersects(rectangle)){
+            if(futureBounds.intersects(rectangle)){
+                if(velocityX>0){
+                    x = rectangle.x - width;
+                }else if (velocityX < 0) { 
+                    x = rectangle.x + rectangle.width;
+                }
                 velocityX = -velocityX;
                 return;
             }
         }
+        x = newX;
     }
 
     public int getX() {
