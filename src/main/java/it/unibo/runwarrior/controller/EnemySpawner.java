@@ -4,13 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import it.unibo.runwarrior.model.EnemyImpl;
 import it.unibo.runwarrior.model.Goblin;
 import it.unibo.runwarrior.model.Guard;
 import it.unibo.runwarrior.model.Snake;
 import it.unibo.runwarrior.model.Wizard;
+import it.unibo.runwarrior.model.EnemySpawnPoints;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
 
@@ -18,9 +23,14 @@ public class EnemySpawner {
     private EnemyHandler handler;
     private GameLoopPanel glp;
     private List<EnemyImpl> enemies;
+    private final List<EnemySpawnPoints> spawnPoints;
+    private final Set<EnemySpawnPoints> spawnedEnemies;
+
     public EnemySpawner(EnemyHandler handler, GameLoopPanel glp) {
         this.handler = handler;
         this.glp = glp;
+        this.spawnPoints = new ArrayList<>();
+        this.spawnedEnemies = new HashSet();
     }
     
     /**
@@ -41,16 +51,49 @@ public class EnemySpawner {
 
                 int x=tilex*glp.getMapHandler().getTileSize();
                 int y = tiley *glp.getMapHandler().getTileSize();
-
-                EnemyImpl enemy = createEnemyByType(type, x, y);
-                if (enemy != null) {
-                    handler.addEnemy(enemy);
+                spawnPoints.add(new EnemySpawnPoints(type,x,y));
+                /*
+                 * Questa parte andrebbe tolta ma devo capire con riky come gestire i nemici quindi rimane qua per ora
+                 * EnemyImpl enemy = createEnemyByType(type, x, y);
+                 * if (enemy != null) {
+                 *     handler.addEnemy(enemy);
                     System.out.println("Caricato nemico: "+i);
                     i++;
                 }
+                 */
+                
             }
         } catch (IOException | NumberFormatException e) {
             System.err.println("Errore durante il caricamento dei nemici: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * This methods updates the enemy spawner by checking which enemies should be spawned based on current camera position.
+     */
+    public void update(){
+        int cameraX = glp.getPlayer().getArea().x;
+        int screenLeft = cameraX;
+        int screenRight = cameraX + GameLoopPanel.WIDTH;
+        
+
+        Iterator<EnemySpawnPoints> iterator = spawnPoints.iterator();
+        while (iterator.hasNext()) {
+            EnemySpawnPoints spawnPoint = iterator.next();
+            int enemyX = spawnPoint.x();
+            
+            if (enemyX >= screenLeft && enemyX <= screenRight && 
+                !spawnedEnemies.contains(spawnPoint)) {
+                
+                EnemyImpl enemy = createEnemyByType(spawnPoint.type(), enemyX, spawnPoint.y());
+                
+                if (enemy != null) {
+                    handler.addEnemy(enemy);
+                    spawnedEnemies.add(spawnPoint); 
+                }
+                
+                iterator.remove();
+            }
         }
     }
 
