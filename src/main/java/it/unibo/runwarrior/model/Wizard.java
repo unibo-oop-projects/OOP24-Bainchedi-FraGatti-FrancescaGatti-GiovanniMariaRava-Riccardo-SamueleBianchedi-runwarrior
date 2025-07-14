@@ -15,7 +15,7 @@ public class Wizard extends EnemyImpl {
     public int frameCounter = 0;
     public int minX, maxX;
 
-    public Wizard(int x, int y, int width, int height, boolean solid, EnemyHandler handler, int minX, int maxX, GameLoopPanel glp) {
+    public Wizard(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
         setVelocityX(2);
         try {
@@ -26,8 +26,6 @@ public class Wizard extends EnemyImpl {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.minX = minX;
-        this.maxX = maxX;
     }
 
     @Override

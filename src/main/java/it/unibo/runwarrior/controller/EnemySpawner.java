@@ -64,9 +64,9 @@ public class EnemySpawner {
         switch (type) {
 
             case 1: return new Guard(x, y, 64, 64, true, handler, glp);
-            //case 2: return new Snake(x, y, 64, 64, true, handler, glp);
-            case 3: return new Wizard(x, y, 64, 64, true, handler, y, y, glp);
-            case 4: return new Goblin(x, y, 64, 64, true, handler,y, y, glp);
+            case 2: return new Snake(x, y, 64, 64, true, handler, glp);
+            case 3: return new Wizard(x, y, 64, 64, true, handler,glp);
+            case 4: return new Goblin(x, y, 64, 64, true, handler,glp);
             default: return null;
         }
     }
