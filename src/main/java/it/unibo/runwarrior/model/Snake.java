@@ -17,10 +17,8 @@ public class Snake extends EnemyImpl{
     public EnemyHandler enemyHandler;
     public boolean dead = false;
     private int deathTimer = 0;
-    public Snake(int x, int y, int width, int height, boolean solid, EnemyHandler handler, int minX, int maxX, GameLoopPanel glp) {
+    public Snake(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
-        this.minX = minX;
-        this.maxX = maxX;
         this.enemyHandler = handler;
         setVelocityX(1);
         try {
@@ -53,21 +51,15 @@ public class Snake extends EnemyImpl{
 
     @Override
     public void update() {
-        if (!dead) {
-            x += velocityX;
-            if (x <= minX || x >= maxX - width) {
-                velocityX = -velocityX;
-            }
-            frameCounter++;
-            if (frameCounter >= 20) {
-                step = !step;
-                frameCounter = 0;
-            }
-        } else {
-            deathTimer++;
-            if (deathTimer > TIME_AFTER_DEATH) {
-                enemyHandler.removeEnemy(this);
-            }
+    
+        x += velocityX;
+
+        checkMapCollision(glp.getMapHandler().getCollisionRectangles());
+
+        frameCounter++;
+        if (frameCounter >= 20) {
+            step = !step;
+            frameCounter = 0;
         }
     }
 

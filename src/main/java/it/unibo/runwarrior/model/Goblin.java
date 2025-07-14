@@ -14,7 +14,7 @@ public class Goblin extends EnemyImpl{
 
     public int frameCounter = 0;
     public boolean step = false;
-    public Goblin(int x, int y, int width, int height, boolean solid, EnemyHandler handler, int minX, int maxX, GameLoopPanel glp) {
+    public Goblin(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
         setVelocityX(2);
         try {
@@ -23,8 +23,6 @@ public class Goblin extends EnemyImpl{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.minX = minX;
-        this.maxX = maxX;
     }
 
     @Override
@@ -42,10 +40,7 @@ public class Goblin extends EnemyImpl{
     public void update() {
         x += velocityX;
 
-        
-        if (x <= minX || x >= maxX - width) {
-            velocityX = -velocityX;
-        }
+        checkMapCollision(glp.getMapHandler().getCollisionRectangles());
 
         frameCounter++;
         
