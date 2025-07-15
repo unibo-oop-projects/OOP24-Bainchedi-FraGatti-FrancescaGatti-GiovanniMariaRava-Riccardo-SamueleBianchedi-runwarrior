@@ -44,8 +44,11 @@ public class Guard extends EnemyImpl {
             currentImage = step ? leftGuardMoving : leftGuardRunning;
             image = leftGuard;
         }
-        //int drawX = x+glp.getCameraShift();
-        g.drawImage(currentImage, x, y, width, height, null);
+        
+        int cameraX = glp.getPlayer().getArea().x;
+        int screenX = x - cameraX;  
+        g.drawImage(currentImage, screenX, y, width, height, null);
+        
     }
 
     @Override
