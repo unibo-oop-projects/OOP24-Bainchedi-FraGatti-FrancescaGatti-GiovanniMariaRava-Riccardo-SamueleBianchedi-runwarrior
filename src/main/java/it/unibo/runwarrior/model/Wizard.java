@@ -17,7 +17,7 @@ public class Wizard extends EnemyImpl {
 
     public Wizard(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
-        setVelocityX(2);
+        setVelocityX(1);
         try {
             rightWizard= ImageIO.read(getClass().getResourceAsStream("/Wizard/rightWizard.png"));
             rightWizardMoving= ImageIO.read(getClass().getResourceAsStream("/Wizard/rightWizardMoving.png"));
@@ -40,6 +40,7 @@ public class Wizard extends EnemyImpl {
 
         int cameraX = glp.getPlayer().getArea().x;
         int screenX = x - cameraX;  
+        //int newY = y - 10; 
         g.drawImage(currentImage, screenX, y, width, height, null);
         
       
