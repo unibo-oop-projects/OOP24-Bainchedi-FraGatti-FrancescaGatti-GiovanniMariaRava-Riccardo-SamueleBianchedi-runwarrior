@@ -38,13 +38,17 @@ public class Snake extends EnemyImpl{
         BufferedImage currentImage;
 
         if (dead) {
+            int cameraX = glp.getPlayer().getArea().x;
+            int screenX = x - cameraX;
             g.drawImage(poisonImage, x, y, width, height, null);
         } else {
             currentImage = velocityX > 0
                 ? (step ? rightSnakeMoving : rightSnake)
                 : (step ? leftSnakeMoving : leftSnake);
     
-            g.drawImage(currentImage, x, y, width, height, null);
+            int cameraX = glp.getPlayer().getArea().x;
+            int screenX = x - cameraX;  
+            g.drawImage(currentImage, screenX, y, width, height, null);
         }
 
     }
