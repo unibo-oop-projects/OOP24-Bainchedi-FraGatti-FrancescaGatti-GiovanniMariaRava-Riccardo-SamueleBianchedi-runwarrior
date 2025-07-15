@@ -20,6 +20,9 @@ public class Goblin extends EnemyImpl{
         try {
             rightGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/rightGoblin.png"));
             leftGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/leftGoblin.png"));
+            rightGoblinMoving = ImageIO.read(getClass().getResourceAsStream("/Goblin/rightGoblinMoving.png"));
+            leftGoblinMoving = ImageIO.read(getClass().getResourceAsStream("/Goblin/leftGoblinMoving.png"));
+            image = rightGoblin;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,12 +31,18 @@ public class Goblin extends EnemyImpl{
     @Override
     public void render(Graphics g) {
         BufferedImage currentImage;
-        if(velocityX>0){
+        if(velocityX == 0){
+            currentImage = image;
+        }else if(velocityX>0){
             currentImage = step ? rightGoblinMoving : rightGoblin;
         }else{
             currentImage = step ? leftGoblinMoving : leftGoblin;
         }
-        g.drawImage(currentImage, x, y,width, height, null);
+        
+        int cameraX = glp.getPlayer().getArea().x;
+        int screenX = x - cameraX;  
+        g.drawImage(currentImage, screenX, y, width, height, null);
+        
     }
 
     @Override
