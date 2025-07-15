@@ -10,30 +10,31 @@ import java.io.IOException;
 public class GameSaveManager {
     private static final String SAVE_FILE = "game_save.txt";
 
-    private int livelliCompletati;
-    private int moneteRaccolte;
-    private boolean skinPremiumSbloccata;
+    private int levelsCompleted;
+    private int coinCollected;
+    private boolean premiumSkinUnlocked;
 
     private static GameSaveManager instance;
 
     private GameSaveManager() {
-        livelliCompletati = 0;
-        moneteRaccolte = 0;
-        skinPremiumSbloccata = false;
+        levelsCompleted = 0;
+        coinCollected = 0;
+        premiumSkinUnlocked = false;
     }
 
     private void saveGame() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE))) {
-            writer.write(Integer.toString(livelliCompletati));
+            writer.write(Integer.toString(levelsCompleted));
             writer.newLine();
-            writer.write(Integer.toString(moneteRaccolte));
+            writer.write(Integer.toString(coinCollected));
             writer.newLine();
-            writer.write(Boolean.toString(skinPremiumSbloccata));
+            writer.write(Boolean.toString(premiumSkinUnlocked));
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     private static GameSaveManager loadFromFile(String filePath) {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -46,9 +47,9 @@ public class GameSaveManager {
 
             
             if ((line = reader.readLine()) != null) {
-                gsm.livelliCompletati = Integer.parseInt(line.trim());
-                gsm.moneteRaccolte = Integer.parseInt(line.trim());
-                gsm.skinPremiumSbloccata = Boolean.parseBoolean(line.trim());
+                gsm.levelsCompleted = Integer.parseInt(line.trim());
+                gsm.coinCollected = Integer.parseInt(line.trim());
+                gsm.premiumSkinUnlocked = Boolean.parseBoolean(line.trim());
             }
 
             return gsm;
@@ -57,4 +58,48 @@ public class GameSaveManager {
             return null;
         }
     }
+
+    public int getLevelsCompleted() {
+        return levelsCompleted;
+    }
+
+    public void setLevelsCompleted(int levelsCompleted) {
+        this.levelsCompleted = levelsCompleted;
+        saveGame();
+    }
+
+    public int getCoinCollected() {
+        return coinCollected;
+    }
+
+    public void setCoinCollected(int coinCollected) {
+        this.coinCollected = coinCollected;
+        saveGame();
+    }
+
+    public boolean isSkinPremiumSbloccata() {
+        return premiumSkinUnlocked;
+    }
+
+    public void setSkinPremiumSbloccata(boolean sbloccata) {
+        this.premiumSkinUnlocked = sbloccata;
+        saveGame();
+    }
+
+    public void addCoin(int quantity) {
+        this.coinCollected += quantity;
+        saveGame();
+    }
+
+    public void livelloCompletato(int level) {
+        if (level > levelsCompleted) {
+            this.levelsCompleted = level;
+            saveGame();
+        }
+    }
+
+    public void onGameExit() {
+        saveGame();
+    }
+
 }
