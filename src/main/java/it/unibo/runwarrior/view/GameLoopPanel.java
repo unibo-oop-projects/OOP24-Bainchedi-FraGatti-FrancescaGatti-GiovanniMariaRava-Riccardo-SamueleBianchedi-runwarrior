@@ -61,7 +61,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         //GameMap levelOne = GameMap.load(mapOneFileName, imageConfigMapOne);
         //GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
 
-        this.enemyHandler = new EnemyHandler();
+        this.enemyHandler = new EnemyHandler(this);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
         //enemyHandler.addEnemy(new Guard(300, 418, 64, 64, true, enemyHandler, this));
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemies.txt"));
@@ -105,6 +105,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
     public void update(){
         player.update();
+        enemySpawner.update();
         enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
     }
 
