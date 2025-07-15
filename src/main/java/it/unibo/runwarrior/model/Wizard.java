@@ -38,7 +38,10 @@ public class Wizard extends EnemyImpl {
             currentImage = step ? leftWizardMoving : leftWizard;
         }
 
-        g.drawImage(currentImage, x, y, width, height, null);
+        int cameraX = glp.getPlayer().getArea().x;
+        int screenX = x - cameraX;  
+        g.drawImage(currentImage, screenX, y, width, height, null);
+        
       
     }
 
