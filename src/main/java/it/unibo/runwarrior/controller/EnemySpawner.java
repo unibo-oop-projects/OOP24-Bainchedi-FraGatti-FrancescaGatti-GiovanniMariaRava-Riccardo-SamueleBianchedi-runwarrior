@@ -51,7 +51,7 @@ public class EnemySpawner {
 
                 int x=tilex*glp.getMapHandler().getTileSize();
                 int y = tiley *glp.getMapHandler().getTileSize();
-                spawnPoints.add(new EnemySpawnPoints(type,x,y));
+                spawnPoints.add(new EnemySpawnPoints(type,tilex,tiley));
                 /*
                  * Questa parte andrebbe tolta ma devo capire con riky come gestire i nemici quindi rimane qua per ora
                  * EnemyImpl enemy = createEnemyByType(type, x, y);
@@ -75,21 +75,21 @@ public class EnemySpawner {
         int cameraX = glp.getPlayer().getArea().x;
         int screenLeft = cameraX;
         int screenRight = cameraX + GameLoopPanel.WIDTH;
-        
+        int tileSize = glp.getMapHandler().getTileSize();
 
         Iterator<EnemySpawnPoints> iterator = spawnPoints.iterator();
         while (iterator.hasNext()) {
             EnemySpawnPoints spawnPoint = iterator.next();
-            int enemyX = spawnPoint.x();
+            int enemyX = spawnPoint.x()*tileSize;
             
-            if (enemyX >= screenLeft && enemyX <= screenRight && 
-                !spawnedEnemies.contains(spawnPoint)) {
+            if (enemyX >= screenLeft && enemyX <= screenRight && !spawnedEnemies.contains(spawnPoint)) {
                 
-                EnemyImpl enemy = createEnemyByType(spawnPoint.type(), enemyX, spawnPoint.y());
+                EnemyImpl enemy = createEnemyByType(spawnPoint.type(), enemyX, spawnPoint.y()*tileSize);
                 
                 if (enemy != null) {
                     handler.addEnemy(enemy);
                     spawnedEnemies.add(spawnPoint); 
+                    
                 }
                 
                 iterator.remove();
