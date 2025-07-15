@@ -72,6 +72,9 @@ public abstract class EnemyImpl implements Enemy{
     public void setX(int x) {
         this.x = x;
     }
+    public int getY(){
+        return y;
+    }
     public int getWidth() {
         return width;
     }
