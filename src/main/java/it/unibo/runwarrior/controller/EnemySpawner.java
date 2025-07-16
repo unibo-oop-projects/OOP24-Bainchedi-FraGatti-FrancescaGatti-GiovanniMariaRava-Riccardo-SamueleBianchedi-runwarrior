@@ -13,6 +13,7 @@ import java.util.Set;
 import it.unibo.runwarrior.model.EnemyImpl;
 import it.unibo.runwarrior.model.Goblin;
 import it.unibo.runwarrior.model.Guard;
+import it.unibo.runwarrior.model.Monkey;
 import it.unibo.runwarrior.model.Snake;
 import it.unibo.runwarrior.model.Wizard;
 import it.unibo.runwarrior.model.EnemySpawnPoints;
@@ -110,6 +111,7 @@ public class EnemySpawner {
             case 2: return new Snake(x, y, 64, 64, true, handler, glp);
             case 3: return new Wizard(x, y, 64, 64, true, handler,glp);
             case 4: return new Goblin(x, y, 64, 64, true, handler,glp);
+            case 5: return new Monkey(x, type, 64, 64, true, handler, glp);
             default: return null;
         }
     }
