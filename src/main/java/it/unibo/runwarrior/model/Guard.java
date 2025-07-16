@@ -26,7 +26,7 @@ public class Guard extends EnemyImpl {
     public Guard(int x, int y, final int width, final int height, final boolean solid,  
                 final EnemyHandler handler, final GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
-        setVelocityX(2);
+        setVelocityX(1);
         frameCounter = 0;
         step = false;
         try {
