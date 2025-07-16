@@ -10,16 +10,26 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class Guard extends EnemyImpl {
-    public BufferedImage rightGuard, leftGuard, rightGuardMoving, leftGuardMoving, rightGuardRunning, leftGuardRunning;
-    public int minX, maxX;
 
-    public int frameCounter = 0;
-    public boolean step = false;
+    private static final int NUM_FRAME_UPDATE = 20;
+    private BufferedImage rightGuard;
+    private BufferedImage leftGuard;
+    private BufferedImage rightGuardMoving;
+    private BufferedImage leftGuardMoving;
+    private BufferedImage rightGuardRunning;
+    private BufferedImage leftGuardRunning;
 
-    public Guard(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
+
+    private int frameCounter;
+    private boolean step;
+
+    public Guard(int x, int y, final int width, final int height, final boolean solid,  
+                final EnemyHandler handler, final GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
         setVelocityX(2);
-        try{
+        frameCounter = 0;
+        step = false;
+        try {
             rightGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuard.png"));
             leftGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftGuard.png"));
             rightGuardMoving = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuardMoving.png"));
@@ -27,41 +37,36 @@ public class Guard extends EnemyImpl {
             rightGuardRunning = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightRunningGuard.png"));
             leftGuardRunning = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftRunningGuard.png"));
             image = rightGuard;
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void render(Graphics g) {
+    public final void render(final Graphics g) {
         BufferedImage currentImage;
-        if (velocityX == 0){
+        if (velocityX == 0) {
             currentImage = image;
-        }else if (velocityX > 0) {
+        } else if (velocityX > 0) {
             currentImage = step ? rightGuardMoving : rightGuardRunning;
             image = rightGuard;
         } else {
             currentImage = step ? leftGuardMoving : leftGuardRunning;
             image = leftGuard;
         }
-        
         int cameraX = glp.getPlayer().getArea().x;
-        int screenX = x - cameraX;  
+        int screenX = x - cameraX;
         g.drawImage(currentImage, screenX, y, width, height, null);
-        
     }
 
     @Override
-    public void update() {
+    public final void update() {
         x += velocityX;
-
         checkMapCollision(glp.getMapHandler().getCollisionRectangles());
-        
         frameCounter++;
-        if (frameCounter >= 20) { 
+        if (frameCounter >= NUM_FRAME_UPDATE) { 
             step = !step;
             frameCounter = 0;
         }
     }
-
 }
