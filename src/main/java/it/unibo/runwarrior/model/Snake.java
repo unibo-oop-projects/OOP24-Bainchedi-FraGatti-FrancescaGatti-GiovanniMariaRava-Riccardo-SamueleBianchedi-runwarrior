@@ -34,8 +34,19 @@ public class Snake extends EnemyImpl{
 
     @Override
     public void render(Graphics g) {
-
         BufferedImage currentImage;
+
+        if (velocityX > 0) {
+            currentImage = step ? rightSnakeMoving : rightSnake;
+        } else {
+            currentImage = step ? leftSnakeMoving : leftSnake;
+        }
+
+        int cameraX = glp.getPlayer().getArea().x;
+        int screenX = x - cameraX;  
+        //int newY = y - 10; 
+        g.drawImage(currentImage, screenX, y, width, height, null);
+       /* BufferedImage currentImage;
 
         if (dead) {
             int cameraX = glp.getPlayer().getArea().x;
@@ -49,7 +60,7 @@ public class Snake extends EnemyImpl{
             int cameraX = glp.getPlayer().getArea().x;
             int screenX = x - cameraX;  
             g.drawImage(currentImage, screenX, y, width, height, null);
-        }
+        }*/
 
     }
 

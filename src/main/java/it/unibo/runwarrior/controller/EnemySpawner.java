@@ -80,7 +80,9 @@ public class EnemySpawner {
             EnemySpawnPoints spawnPoint = iterator.next();
             int enemyX = spawnPoint.x()*tileSize;
             if (enemyX >= screenLeft && enemyX <= screenRight && !spawnedEnemies.contains(spawnPoint)) {
+                System.out.println("Spawning enemy of type " + spawnPoint.type() + " at (" + enemyX + ", " + spawnPoint.y()*tileSize + ")");
                 EnemyImpl enemy = createEnemyByType(spawnPoint.type(), enemyX, spawnPoint.y()*tileSize);
+                System.out.println("Enemy created: " + enemy);
                 if (enemy != null) {
                     handler.addEnemy(enemy);
                     spawnedEnemies.add(spawnPoint);
@@ -102,7 +104,7 @@ public class EnemySpawner {
             case 2: return new Snake(x, y, 64, 64, true, handler, glp);
             case 3: return new Wizard(x, y, 64, 64, true, handler,glp);
             case 4: return new Goblin(x, y, 64, 64, true, handler,glp);
-            case 5: return new Monkey(x, type, 64, 64, true, handler, glp);
+            case 5: return new Monkey(x, y, 64, 64, true, handler, glp);
             default: return null;
         }
     }

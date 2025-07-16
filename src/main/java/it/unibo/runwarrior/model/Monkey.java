@@ -28,8 +28,8 @@ public class Monkey extends EnemyImpl {
             leftMonkey = ImageIO.read(getClass().getResourceAsStream("/Monkey/leftMonkey.png"));
             rightMonkeyMoving = ImageIO.read(getClass().getResourceAsStream("/Monkey/rightMonkeyMoving.png"));
             leftMonkeyMoving = ImageIO.read(getClass().getResourceAsStream("/Monkey/leftMonkeyMoving.png"));
-            rightMonkeyRunning = ImageIO.read(getClass().getResourceAsStream("/Monkey/rightRunningMonkey.png"));
-            leftMonkeyRunning = ImageIO.read(getClass().getResourceAsStream("/Monkey/leftRunningMonkey.png"));
+            rightMonkeyRunning = ImageIO.read(getClass().getResourceAsStream("/Monkey/rightMonkeyRunning.png"));
+            leftMonkeyRunning = ImageIO.read(getClass().getResourceAsStream("/Monkey/leftMonkeyRunning.png"));
             banana = ImageIO.read(getClass().getResourceAsStream("/Monkey/banana.png"));
             image = rightMonkey;
         }catch (IOException e){
