@@ -42,14 +42,13 @@ public class EnemySpawner {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line;
             while ((line = br.readLine()) != null) {
-                int i=1;
                 String[] parts = line.trim().split(",");
-                if (parts.length != 3) continue;
-
+                if (parts.length != 3) {
+                    continue;
+                }
                 int type = Integer.parseInt(parts[0]);
                 int tilex = Integer.parseInt(parts[1]);
                 int tiley = Integer.parseInt(parts[2]);
-
                 int x=tilex*glp.getMapHandler().getTileSize();
                 int y = tiley *glp.getMapHandler().getTileSize();
                 spawnPoints.add(new EnemySpawnPoints(type,tilex,tiley));
@@ -61,8 +60,7 @@ public class EnemySpawner {
                     System.out.println("Caricato nemico: "+i);
                     i++;
                 }
-                 */
-                
+                 */ 
             }
         } catch (IOException | NumberFormatException e) {
             System.err.println("Errore durante il caricamento dei nemici: " + e.getMessage());
@@ -72,27 +70,21 @@ public class EnemySpawner {
     /**
      * This methods updates the enemy spawner by checking which enemies should be spawned based on current camera position.
      */
-    public void update(){
+    public void update() {
         int cameraX = glp.getPlayer().getArea().x;
         int screenLeft = cameraX;
         int screenRight = cameraX + GameLoopPanel.WIDTH;
         int tileSize = glp.getMapHandler().getTileSize();
-
         Iterator<EnemySpawnPoints> iterator = spawnPoints.iterator();
         while (iterator.hasNext()) {
             EnemySpawnPoints spawnPoint = iterator.next();
             int enemyX = spawnPoint.x()*tileSize;
-            
             if (enemyX >= screenLeft && enemyX <= screenRight && !spawnedEnemies.contains(spawnPoint)) {
-                
                 EnemyImpl enemy = createEnemyByType(spawnPoint.type(), enemyX, spawnPoint.y()*tileSize);
-                
                 if (enemy != null) {
                     handler.addEnemy(enemy);
-                    spawnedEnemies.add(spawnPoint); 
-                    
+                    spawnedEnemies.add(spawnPoint);
                 }
-                
                 iterator.remove();
             }
         }
@@ -106,7 +98,6 @@ public class EnemySpawner {
      */
     private EnemyImpl createEnemyByType(int type, int x, int y) {
         switch (type) {
-
             case 1: return new Guard(x, y, 64, 64, true, handler, glp);
             case 2: return new Snake(x, y, 64, 64, true, handler, glp);
             case 3: return new Wizard(x, y, 64, 64, true, handler,glp);
