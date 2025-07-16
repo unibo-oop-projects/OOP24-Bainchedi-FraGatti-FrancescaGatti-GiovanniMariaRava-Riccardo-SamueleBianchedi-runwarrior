@@ -48,7 +48,11 @@ public class GameSaveManager {
             
             if ((line = reader.readLine()) != null) {
                 gsm.levelsCompleted = Integer.parseInt(line.trim());
+            }
+            if ((line = reader.readLine()) != null){
                 gsm.coinCollected = Integer.parseInt(line.trim());
+            }
+            if ((line = reader.readLine()) != null){
                 gsm.premiumSkinUnlocked = Boolean.parseBoolean(line.trim());
             }
 
