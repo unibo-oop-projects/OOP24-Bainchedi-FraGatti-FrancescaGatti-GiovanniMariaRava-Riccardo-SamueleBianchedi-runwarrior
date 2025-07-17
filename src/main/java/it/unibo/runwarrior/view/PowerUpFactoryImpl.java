@@ -26,7 +26,7 @@ public class PowerUpFactoryImpl {
             }
             p.getTouchArea().setBounds(distance*tileSize, (row-1)*tileSize, tileSize, tileSize);
             powerUps.add(p);
-            distance = distance + 20;
+            distance = distance + 25;
         }
     }
 

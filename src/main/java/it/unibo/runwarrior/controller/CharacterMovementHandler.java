@@ -44,7 +44,7 @@ public class CharacterMovementHandler {
         this.player = player;
         this.mapHandler = hM;
         this.pUpDetection = new PowerUpDetection(panel, pFact);
-        this.killDetection = new KillDetection(panel.getEnemyHandler(), panel.getPowersHandler());
+        this.killDetection = new KillDetection(panel);
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
     }
 

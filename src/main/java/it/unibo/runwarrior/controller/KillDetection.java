@@ -5,34 +5,39 @@ import java.util.List;
 
 import it.unibo.runwarrior.model.Character;
 import it.unibo.runwarrior.model.EnemyImpl;
+import it.unibo.runwarrior.view.GameLoopPanel;
 
 public class KillDetection {
-    private PowersHandler powerUpHandler;
-    private List<EnemyImpl> enemies;
+    private GameLoopPanel glp;
+    //private PowersHandler powerUpHandler; // vedi sotto
+    //private List<EnemyImpl> enemies; // commentato per ricordare che forse è meglio mantenerlo come variabile
     private Rectangle playerArea;
-    private int playerSpeed;
+    private long hitWaitTime;
     private int toll = 5;
 
-    public KillDetection(EnemyHandler eHandler, PowersHandler powerHandler) {
-        enemies = eHandler.getEnemies();
-        powerUpHandler = powerHandler;
+    public KillDetection(GameLoopPanel glp) {
+        this.glp = glp;
     }
 
     public void checkCollisionWithEnemeies(Character player) {
+        System.out.println("index "+glp.getPowersHandler().getPowers());
         playerArea = player.getArea();
-        for(EnemyImpl enemy : enemies){
-            if(playerArea.intersects(enemy.getBounds())){
+        for(EnemyImpl enemy : glp.getEnemyHandler().getEnemies()){
+            if(touch(playerArea, enemy.getBounds())){
                 if(playerArea.y + playerArea.height == enemy.getBounds().y &&
                     ((playerArea.x + toll >= enemy.getBounds().x && playerArea.x + toll <= enemy.getBounds().x + enemy.getBounds().width) ||
                      (playerArea.x + playerArea.width - toll >= enemy.getBounds().x && playerArea.x + playerArea.width - toll <= enemy.getBounds().x + enemy.getBounds().width))){
                     player.getMovementHandler().setJumpKill();
                     enemy.die();
                 }
-                else if((playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x)){
-                    powerUpHandler.losePower();
+                else if((playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x) &&
+                        System.currentTimeMillis() - hitWaitTime > 3000){
+                    hitWaitTime = System.currentTimeMillis();
+                    glp.getPowersHandler().losePower();
                 }
-                else if(playerArea.x <= enemy.getBounds().x + enemy.getBounds().width){
-                    powerUpHandler.losePower();
+                else if(playerArea.x <= enemy.getBounds().x + enemy.getBounds().width && System.currentTimeMillis() - hitWaitTime > 3000){
+                    hitWaitTime = System.currentTimeMillis();
+                    glp.getPowersHandler().losePower();
                 }
             }
             else if(player.getSwordArea().intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking()){
@@ -44,5 +49,10 @@ public class KillDetection {
                 }
             }
         }
+    }
+
+    public boolean touch(Rectangle r1, Rectangle r2) {
+        Rectangle expanded = new Rectangle(r2.x - 1, r2.y - 1, r2.width + 1, r2.height + 1);
+        return expanded.intersects(r1);
     }
 }

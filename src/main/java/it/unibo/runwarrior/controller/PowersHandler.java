@@ -36,7 +36,7 @@ public class PowersHandler {
     }
 
     public void setPowers(){
-        if(index < maxIndex){
+        if(index < maxIndex && index >= 0){
             this.index++;
             int realx = glp.getPlayer().getMovementHandler().getPlX();
             int x = glp.getPlayer().getMovementHandler().getScX();
@@ -48,11 +48,13 @@ public class PowersHandler {
 
     public void losePower(){
         this.index--;
-        int realx = glp.getPlayer().getMovementHandler().getPlX();
-        int x = glp.getPlayer().getMovementHandler().getScX();
-        int y = glp.getPlayer().getMovementHandler().getPlY();
-        int shift = glp.getPlayer().getMovementHandler().getGroundX();
-        glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift);
+        if(index >= 0){
+            int realx = glp.getPlayer().getMovementHandler().getPlX();
+            int x = glp.getPlayer().getMovementHandler().getScX();
+            int y = glp.getPlayer().getMovementHandler().getPlY();
+            int shift = glp.getPlayer().getMovementHandler().getGroundX();
+            glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift);
+        }
     }
 
     //utile quando si verifica il game over: se getPowers < 0
