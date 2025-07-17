@@ -65,6 +65,9 @@ public class HandlerMapElement {
         }
     }
 
+    /**
+     * @param gr
+     */
     public void printBlocks(Graphics2D gr){
         int rows = map.length;
         int cols = map[0].length;
