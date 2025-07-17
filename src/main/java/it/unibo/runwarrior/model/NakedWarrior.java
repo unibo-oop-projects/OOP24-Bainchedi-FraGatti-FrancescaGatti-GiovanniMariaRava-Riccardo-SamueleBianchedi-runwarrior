@@ -11,8 +11,6 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public class NakedWarrior extends CharacterImpl{
-
-    private int life = 1;
     
     public NakedWarrior(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact) {
         super(panel, commands, collision, mapHandler, pFact);
@@ -36,7 +34,6 @@ public class NakedWarrior extends CharacterImpl{
 
     @Override
     public void updateAttackCollision(){
-        
+        throw new UnsupportedOperationException("Unsupported method");
     }
-    
 }

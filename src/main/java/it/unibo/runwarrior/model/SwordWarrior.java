@@ -12,8 +12,6 @@ import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public class SwordWarrior extends CharacterImpl{
 
-    private int life = 3;
-
     public SwordWarrior(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact) {
         super(panel, commands, collision, mapHandler, pFact);
     }
@@ -52,5 +50,4 @@ public class SwordWarrior extends CharacterImpl{
             collisionArea.setSize(sizeCharacter/2, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
         }
     }
-    
 }
