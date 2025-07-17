@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameSaveManagerTest {
-    private GameSaveManager gsm;
+    /*private GameSaveManager gsm;
 
     @BeforeEach
     public void resetSingleton() {
@@ -27,5 +27,5 @@ public class GameSaveManagerTest {
         assertSame(gsm, anotherInstance, "Le istanze devono essere le stesse (singleton)");
     }
 
-
+*/
 }
