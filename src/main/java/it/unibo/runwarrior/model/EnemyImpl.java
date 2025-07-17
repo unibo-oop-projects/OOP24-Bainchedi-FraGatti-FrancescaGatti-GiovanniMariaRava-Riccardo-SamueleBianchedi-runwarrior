@@ -38,8 +38,8 @@ public abstract class EnemyImpl implements Enemy{
 
     @Override
     public void die() {
-        powerUp.setTouchArea(new Rectangle(x, y, width, height));
-        glp.getPowersFactory().PowerUpAppearance(powerUp);
+        // powerUp.setTouchArea(new Rectangle(x, y, width, height));
+        // glp.getPowersFactory().PowerUpAppearance(powerUp);
         enemyHandler.removeEnemy(this);
     }
     

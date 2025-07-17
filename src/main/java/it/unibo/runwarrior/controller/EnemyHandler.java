@@ -9,6 +9,7 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 
 public class EnemyHandler {
     public LinkedList<EnemyImpl> enemies;
+
     GameLoopPanel glp;
     public EnemyHandler (GameLoopPanel glp){
         this.glp = glp;
@@ -67,4 +68,7 @@ public class EnemyHandler {
         return enemyX + enemyWidth >= cameraX  && enemyX <= cameraX + GameLoopPanel.WIDTH;
     }
     
+    public LinkedList<EnemyImpl> getEnemies() {
+        return enemies;
+    }
 }

@@ -11,6 +11,7 @@ public class CharacterMovementHandler {
     private Character player;
     private HandlerMapElement mapHandler;
     private PowerUpDetection pUpDetection;
+    private KillDetection killDetection;
 
     public static final int START_X = 96;
     private int startY;
@@ -43,6 +44,7 @@ public class CharacterMovementHandler {
         this.player = player;
         this.mapHandler = hM;
         this.pUpDetection = new PowerUpDetection(panel, pFact);
+        this.killDetection = new KillDetection(panel.getEnemyHandler(), panel.getPowersHandler());
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
     }
 
@@ -70,6 +72,7 @@ public class CharacterMovementHandler {
         if(!tempDir.isEmpty()){
             collisionDir = tempDir;
         }
+        killDetection.checkCollisionWithEnemeies(player);
 
         hitHead = collisionDir.equals("down") ? true : false;
         if(hitHead){
@@ -80,7 +83,6 @@ public class CharacterMovementHandler {
         if(jumpKill){
             jumpAfterKill();
         }
-
         if(cmd.getRight() && !cmd.getLeft()){
             rightDirection = true;
             if(!collisionDir.equals("right") && !handleDoubleCollision){
@@ -123,7 +125,6 @@ public class CharacterMovementHandler {
             if(collisionDetection.isInAir(player) && !jumpKill){
                 descend = true;
                 playerY += speedJumpDown;
-                System.out.println("scendo");
             }
             else{
                 descend = false;

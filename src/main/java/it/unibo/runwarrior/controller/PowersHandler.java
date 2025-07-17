@@ -1,5 +1,6 @@
 package it.unibo.runwarrior.controller;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,9 +13,9 @@ import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public class PowersHandler {
     private GameLoopPanel glp;
-    private int index = 0;
+    private int index;
     private int maxIndex;
-    public ArrayList<Character> everyPowerUp = new ArrayList<>();
+    public List<Character> everyPowerUp = new ArrayList<>();
 
     public PowersHandler(GameLoopPanel glp, CharacterComand cmd, CollisionDetection coll, HandlerMapElement mapH, PowerUpFactoryImpl pFact){
         this.glp = glp;
@@ -25,14 +26,28 @@ public class PowersHandler {
 
     public void setIndex(){
         if(glp.getPlayer().getClass().equals(NakedWarrior.class)){
+            index = 0;
             maxIndex = 2;
         }
+        // if(glp.getPlayer().getClass().equals(NakedWizard.class)){
+        //     index = 3;
+        //     maxIndex = 5;
+        // }
     }
 
     public void setPowers(){
         if(index < maxIndex){
             this.index++;
+            int realx = glp.getPlayer().getMovementHandler().getPlX();
+            int x = glp.getPlayer().getMovementHandler().getScX();
+            int y = glp.getPlayer().getMovementHandler().getPlY();
+            int shift = glp.getPlayer().getMovementHandler().getGroundX();
+            glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift);
         }
+    }
+
+    public void losePower(){
+        this.index--;
         int realx = glp.getPlayer().getMovementHandler().getPlX();
         int x = glp.getPlayer().getMovementHandler().getScX();
         int y = glp.getPlayer().getMovementHandler().getPlY();
@@ -40,11 +55,7 @@ public class PowersHandler {
         glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift);
     }
 
-    //potrei fare che quando va negativo, fine gioco
-    public void losePower(){
-        this.index--;
-    }
-
+    //utile quando si verifica il game over: se getPowers < 0
     public int getPowers(){
         return this.index;
     }

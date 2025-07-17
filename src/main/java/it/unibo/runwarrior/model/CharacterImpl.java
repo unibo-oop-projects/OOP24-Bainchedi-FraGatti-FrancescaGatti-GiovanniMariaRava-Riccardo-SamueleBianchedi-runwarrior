@@ -3,7 +3,6 @@ package it.unibo.runwarrior.model;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.List;
 
 import it.unibo.runwarrior.controller.CharacterAnimationHandler;
 import it.unibo.runwarrior.controller.CharacterComand;
@@ -26,9 +25,8 @@ public abstract class CharacterImpl implements Character{
     protected CharacterComand cmd;
     protected CharacterAnimationHandler animation;
     protected CharacterMovementHandler movement;
-    private List<Rectangle> enemies; // da mettere nel KillDetection
 
-    public CharacterImpl(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact){
+    public CharacterImpl(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact) {
         this.cmd = commands;
         playerImage();
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
@@ -81,6 +79,10 @@ public abstract class CharacterImpl implements Character{
     @Override
     public CharacterMovementHandler getMovementHandler(){
         return this.movement;
+    }
+
+    public CharacterAnimationHandler getAnimationHandler() {
+        return this.animation;
     }
 
     public Rectangle getSwordArea(){

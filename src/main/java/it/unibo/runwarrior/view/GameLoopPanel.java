@@ -38,6 +38,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
     
     private HandlerMapElement mapHandler;
     private EnemyHandler enemyHandler;
+
     private EnemySpawner enemySpawner;
     private GameMap gameMap;
 
@@ -52,7 +53,6 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks(), mapHandler.getTileSize());
         this.powersFactory = new PowerUpFactoryImpl(this, mapHandler, gameMap.getMapData());
         this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler, powersFactory);
-        initializePlayer();
         // String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
         // String mapTwoFileName = "src/main/resources/Map_2/map_2.txt";
         // String imageConfigMapOne = "src/main/resources/Map_1/forest_theme.txt";
@@ -65,6 +65,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
         //enemyHandler.addEnemy(new Guard(300, 418, 64, 64, true, enemyHandler, this));
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemies.txt"));
+        initializePlayer();
 
         //music = new GameMusic("gameMusic.wav", true);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -151,5 +152,9 @@ public class GameLoopPanel extends JPanel implements Runnable{
     
     public HandlerMapElement getMapHandler() {
         return this.mapHandler;
+    }
+
+    public EnemyHandler getEnemyHandler() {
+        return this.enemyHandler;
     }
 }
