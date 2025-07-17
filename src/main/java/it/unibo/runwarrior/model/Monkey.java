@@ -22,7 +22,7 @@ public class Monkey extends EnemyImpl {
 
     public Monkey(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
-        setVelocityX(2);
+        setVelocityX(0);
         try{
             rightMonkey = ImageIO.read(getClass().getResourceAsStream("/Monkey/rightMonkey.png"));
             leftMonkey = ImageIO.read(getClass().getResourceAsStream("/Monkey/leftMonkey.png"));
@@ -43,18 +43,21 @@ public class Monkey extends EnemyImpl {
             
             BufferedImage currentImage;
             if (velocityX == 0){
+                setVelocityX(1);
                 currentImage = image;
             }else if (velocityX > 0) {
                 currentImage = step ? rightMonkeyMoving : rightMonkeyRunning;
-                image = rightMonkey;
+                image = rightMonkeyMoving;
             } else {
                 currentImage = step ? leftMonkeyMoving : leftMonkeyRunning;
-                image = leftMonkey;
+                image = leftMonkeyMoving;
             }
             
             int cameraX = glp.getPlayer().getArea().x;
+            int shift = glp.getMapHandler().getShift();
             int screenX = x - cameraX;  
-            g.drawImage(currentImage, screenX, y, width, height, null);
+            System.out.println("X:"+screenX+"Y"+y);
+            g.drawImage(currentImage, x+shift, y, width, height, null);
         }else{
 
             g.drawImage(banana, x, y, width, height, glp);
