@@ -34,6 +34,6 @@ public class ArmourWarrior extends CharacterImpl{
 
     @Override
     public void updateAttackCollision() {
-        throw new UnsupportedOperationException("Unsupported method");
+        // cannot attack
     }
 }
