@@ -41,7 +41,6 @@ public class EnemyHandler {
     
     public void updateWithMap(List<Rectangle> mapObstacles){
 
-        System.out.println("Updating " + enemies.size() + " enemies");
         Iterator<EnemyImpl> iterator = enemies.iterator();
         while (iterator.hasNext()) {
             EnemyImpl enemy = iterator.next();
