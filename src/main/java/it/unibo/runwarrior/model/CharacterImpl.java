@@ -70,7 +70,7 @@ public abstract class CharacterImpl implements Character{
     }
 
     public void drawRectangle(Graphics2D gr){
-        gr.drawRect(movement.getScX(), collisionArea.y, collisionArea.width, collisionArea.height);//si sposta in avanti perchè segue playerX non screenX
+        gr.drawRect(movement.getScX()+(sizeCharacter/4), collisionArea.y, collisionArea.width, collisionArea.height);//si sposta in avanti perchè segue playerX non screenX
     }
 
     @Override

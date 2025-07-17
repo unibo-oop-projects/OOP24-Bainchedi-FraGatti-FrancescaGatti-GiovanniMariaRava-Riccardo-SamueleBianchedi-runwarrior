@@ -22,10 +22,8 @@ public class KillDetection {
     public void checkCollisionWithEnemeies(Character player) {
         System.out.println("index "+glp.getPowersHandler().getPowers());
         playerArea = player.getArea();
-        Rectangle futureArea = new Rectangle(playerArea);
-        futureArea.translate(player.getSpeed(), player.getMovementHandler().getSpeedJumpDown());
         for(EnemyImpl enemy : glp.getEnemyHandler().getEnemies()){
-            if(futureArea.intersects(enemy.getBounds())){
+            if(futureArea(playerArea, player).intersects(enemy.getBounds())){
                 System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
                 if(playerArea.y + playerArea.height <= enemy.getBounds().y &&
                     ((playerArea.x + toll >= enemy.getBounds().x && playerArea.x + toll <= enemy.getBounds().x + enemy.getBounds().width) ||
@@ -54,8 +52,9 @@ public class KillDetection {
         }
     }
 
-    public boolean touch(Rectangle r1, Rectangle r2) {
-        Rectangle expanded = new Rectangle(r2.x - 1, r2.y - 1, r2.width + 1, r2.height + 1);
-        return expanded.intersects(r1);
+    public Rectangle futureArea(Rectangle r1, Character pl) {
+        Rectangle futureArea = new Rectangle(playerArea);
+        futureArea.translate(0, pl.getMovementHandler().getSpeedJumpDown());
+        return futureArea;
     }
 }
