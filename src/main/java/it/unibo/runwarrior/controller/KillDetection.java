@@ -22,9 +22,12 @@ public class KillDetection {
     public void checkCollisionWithEnemeies(Character player) {
         System.out.println("index "+glp.getPowersHandler().getPowers());
         playerArea = player.getArea();
+        Rectangle futureArea = new Rectangle(playerArea);
+        futureArea.translate(player.getSpeed(), player.getMovementHandler().getSpeedJumpDown());
         for(EnemyImpl enemy : glp.getEnemyHandler().getEnemies()){
-            if(touch(playerArea, enemy.getBounds())){
-                if(playerArea.y + playerArea.height == enemy.getBounds().y &&
+            if(futureArea.intersects(enemy.getBounds())){
+                System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
+                if(playerArea.y + playerArea.height <= enemy.getBounds().y &&
                     ((playerArea.x + toll >= enemy.getBounds().x && playerArea.x + toll <= enemy.getBounds().x + enemy.getBounds().width) ||
                      (playerArea.x + playerArea.width - toll >= enemy.getBounds().x && playerArea.x + playerArea.width - toll <= enemy.getBounds().x + enemy.getBounds().width))){
                     player.getMovementHandler().setJumpKill();

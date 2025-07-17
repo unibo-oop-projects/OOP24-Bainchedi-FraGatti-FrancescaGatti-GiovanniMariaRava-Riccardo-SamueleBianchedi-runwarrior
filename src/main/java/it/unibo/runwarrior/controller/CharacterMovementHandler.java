@@ -163,6 +163,10 @@ public class CharacterMovementHandler {
         return this.rightDirection;
     }
 
+     public int getSpeedJumpDown() {
+        return this.speedJumpDown;
+    }
+
     public int getGroundX(){
         return this.groundX;
     }
