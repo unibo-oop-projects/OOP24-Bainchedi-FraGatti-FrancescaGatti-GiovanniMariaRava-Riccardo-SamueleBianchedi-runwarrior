@@ -42,7 +42,7 @@ public class PowersHandler {
             int x = glp.getPlayer().getMovementHandler().getScX();
             int y = glp.getPlayer().getMovementHandler().getPlY();
             int shift = glp.getPlayer().getMovementHandler().getGroundX();
-            glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift);
+            glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift, 0);
         }
     }
 
@@ -53,7 +53,8 @@ public class PowersHandler {
             int x = glp.getPlayer().getMovementHandler().getScX();
             int y = glp.getPlayer().getMovementHandler().getPlY();
             int shift = glp.getPlayer().getMovementHandler().getGroundX();
-            glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift);
+            long lastHit = glp.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime();
+            glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift, lastHit);
         }
     }
 

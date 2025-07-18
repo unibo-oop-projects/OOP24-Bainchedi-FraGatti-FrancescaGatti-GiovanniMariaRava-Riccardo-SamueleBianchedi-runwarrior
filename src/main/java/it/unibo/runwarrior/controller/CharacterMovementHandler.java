@@ -56,11 +56,12 @@ public class CharacterMovementHandler {
         midJump = startY - (sizeCharacter*4/2);
     }
 
-    public void setLocationAfterPowerup(int x, int y, int realx, int groundX) {
+    public void setLocationAfterPowerup(int x, int y, int realx, int groundX, long lastHit) {
         this.screenX = x;
         this.playerY = y;
         this.playerX = realx;
         this.groundX = groundX;
+        this.killDetection.setHitWaitTime(lastHit);
     }
 
     public void movePlayer(){
@@ -157,6 +158,10 @@ public class CharacterMovementHandler {
 
     public boolean canAttack(){
         return this.canAttack;
+    }
+
+    public KillDetection getKillDetection() {
+        return this.killDetection;
     }
 
     public boolean getRightDirection(){

@@ -42,6 +42,8 @@ public class KillDetection {
                 }
             }
             else if(player.getSwordArea().intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking()){
+                System.out.println("----- "+ (player.getSwordArea().y + player.getSwordArea().height) + "---- "+ enemy.getBounds().y);
+                System.out.println("----- "+ (player.getSwordArea().x + player.getSwordArea().width) + "---- "+ enemy.getBounds().x);
                 if((player.getSwordArea().x + player.getSwordArea().width >= enemy.getBounds().x && player.getSwordArea().x < enemy.getBounds().x)){
                     enemy.die();
                 }
@@ -56,5 +58,13 @@ public class KillDetection {
         Rectangle futureArea = new Rectangle(playerArea);
         futureArea.translate(0, pl.getMovementHandler().getSpeedJumpDown());
         return futureArea;
+    }
+
+    public long getHitWaitTime() {
+        return this.hitWaitTime;
+    }
+
+    public void setHitWaitTime(long lastHit) {
+        hitWaitTime = lastHit;
     }
 }

@@ -66,6 +66,7 @@ public abstract class CharacterImpl implements Character{
             tip = animation.getTip(rightDirection);
             int tipPos = rightDirection ? 1 : (-1);
             gr2.drawImage(tip, movement.getScX() + (tipPos*sizeCharacter), movement.getPlY(), sizeCharacter, sizeCharacter, null);
+            gr2.drawRect(movement.getScX()+(tipPos*sizeCharacter), swordArea.y, swordArea.width, swordArea.height);
         }
     }
 

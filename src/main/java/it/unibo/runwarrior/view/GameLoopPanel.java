@@ -133,9 +133,9 @@ public class GameLoopPanel extends JPanel implements Runnable{
         return this.player;
     }
 
-    public void setPlayer(Character pl, int realX, int x, int y, int shift){
+    public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit){
         this.player = pl;
-        this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift);
+        this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
     }
 
     public PowersHandler getPowersHandler(){

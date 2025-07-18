@@ -39,11 +39,11 @@ public class SwordWarrior extends CharacterImpl{
         if(animation.getFrame() == PlayerFrame.ATTACK_FRAME && rightDirection){
             //collisionArea.setSize((sizeCharacter*7)/4, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
             swordArea.setBounds(movement.getPlX() + sizeCharacter, movement.getPlY() + sizeCharacter/4,
-                                    sizeCharacter, movement.getPlY() + sizeCharacter/4);
+                                    sizeCharacter, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
         }
         if(animation.getFrame() == PlayerFrame.ATTACK_FRAME && !rightDirection){
             swordArea.setBounds(movement.getPlX() - sizeCharacter, movement.getPlY() + sizeCharacter/4,
-                                            sizeCharacter, movement.getPlY() + sizeCharacter/4);
+                                            sizeCharacter, sizeCharacter-(sizeCharacter/4)-toTouchFloor);
             //collisionArea.union(tip);
         }
         if(!cmd.getAttack()){
