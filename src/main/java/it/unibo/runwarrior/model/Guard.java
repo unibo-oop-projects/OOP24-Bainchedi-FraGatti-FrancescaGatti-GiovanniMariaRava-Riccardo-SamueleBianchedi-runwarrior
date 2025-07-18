@@ -11,7 +11,6 @@ import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class Guard extends EnemyImpl {
 
-    private static final int NUM_FRAME_UPDATE = 20;
     private BufferedImage rightGuard;
     private BufferedImage leftGuard;
     private BufferedImage rightGuardMoving;
@@ -19,16 +18,10 @@ public class Guard extends EnemyImpl {
     private BufferedImage rightGuardRunning;
     private BufferedImage leftGuardRunning;
 
-
-    private int frameCounter;
-    private boolean step;
-
     public Guard(int x, int y, final int width, final int height, final boolean solid,  
                 final EnemyHandler handler, final GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
         setVelocityX(1);
-        frameCounter = 0;
-        step = false;
         try {
             rightGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuard.png"));
             leftGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftGuard.png"));
@@ -56,16 +49,5 @@ public class Guard extends EnemyImpl {
         }
         int shift = glp.getMapHandler().getShift();
         g.drawImage(currentImage, x + shift, y, width, height, null);
-    }
-
-    @Override
-    public final void update() {
-        x += velocityX;
-        checkMapCollision(glp.getMapHandler().getCollisionRectangles());
-        frameCounter++;
-        if (frameCounter >= NUM_FRAME_UPDATE) { 
-            step = !step;
-            frameCounter = 0;
-        }
     }
 }

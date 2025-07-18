@@ -9,7 +9,11 @@ import it.unibo.runwarrior.controller.EnemyHandler;
 
 
 public abstract class EnemyImpl implements Enemy{
-    public int x, y, width, height;
+    private final static int NUM_UPDATE_FRAME = 20;
+    public int x;
+    public int y;
+    public int width; 
+    public int height;
     public int frameCounter = 0;
     public boolean step = false;
 
@@ -35,17 +39,17 @@ public abstract class EnemyImpl implements Enemy{
         
         this.glp = glp;
     }
+
     @Override
     public void update() {
         x += velocityX;
-
         checkMapCollision(glp.getMapHandler().getCollisionRectangles());
-        
         frameCounter++;
-        if (frameCounter >= 20) { 
+        if (frameCounter >= NUM_UPDATE_FRAME) { 
             step = !step;
             frameCounter = 0;
         }
+        
     }
 
     @Override

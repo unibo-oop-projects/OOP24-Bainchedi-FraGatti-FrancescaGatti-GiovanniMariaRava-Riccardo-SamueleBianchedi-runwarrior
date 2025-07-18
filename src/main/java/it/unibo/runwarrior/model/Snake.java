@@ -9,9 +9,11 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class Snake extends EnemyImpl{
-    public BufferedImage rightSnake, rightSnakeMoving, leftSnake, leftSnakeMoving, poisonImage;
-    public int frameCounter = 0;
-    public boolean step = false;
+    private BufferedImage rightSnake;
+    private BufferedImage rightSnakeMoving;
+    private BufferedImage leftSnake;
+    private BufferedImage leftSnakeMoving;
+    private BufferedImage poisonImage;
     public EnemyHandler enemyHandler;
     public Snake(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
@@ -41,19 +43,5 @@ public class Snake extends EnemyImpl{
         int shift = glp.getMapHandler().getShift(); 
         g.drawImage(currentImage, x + shift , y, width, height, null);
 
-    }
-
-    @Override
-    public void update() {
-    
-        x += velocityX;
-
-        checkMapCollision(glp.getMapHandler().getCollisionRectangles());
-
-        frameCounter++;
-        if (frameCounter >= 20) {
-            step = !step;
-            frameCounter = 0;
-        }
     }
 }

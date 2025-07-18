@@ -9,10 +9,10 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class Wizard extends EnemyImpl {
-    public BufferedImage rightWizard, rightWizardMoving, leftWizard, leftWizardMoving; 
-
-    public boolean step = false;
-    public int frameCounter = 0;
+    private BufferedImage rightWizard;
+    private BufferedImage rightWizardMoving;
+    private BufferedImage leftWizard; 
+    private BufferedImage leftWizardMoving; 
 
     public Wizard(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
@@ -40,18 +40,4 @@ public class Wizard extends EnemyImpl {
         int shift = glp.getMapHandler().getShift(); 
         g.drawImage(currentImage, x + shift, y, width, height, null);
     }
-
-    @Override
-    public void update() {
-        x += velocityX;
-
-        checkMapCollision(glp.getMapHandler().getCollisionRectangles());
-        
-        frameCounter++;
-        if (frameCounter >= 20) { 
-            step = !step;
-            frameCounter = 0;
-        }
-    }
-
 }

@@ -9,14 +9,13 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class Goblin extends EnemyImpl{
-    public BufferedImage rightGoblin, leftGoblin, rightGoblinMoving, leftGoblinMoving; 
-    public int minX, maxX;
-
-    public int frameCounter = 0;
-    public boolean step = false;
+    private BufferedImage rightGoblin;
+    private BufferedImage leftGoblin;
+    private BufferedImage rightGoblinMoving;
+    private BufferedImage leftGoblinMoving; 
     public Goblin(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
-        setVelocityX(2);
+        setVelocityX(1);
         try {
             rightGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/rightGoblin.png"));
             leftGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/leftGoblin.png"));
@@ -43,19 +42,4 @@ public class Goblin extends EnemyImpl{
         g.drawImage(currentImage, x+shift, y, width, height, null);
         
     }
-
-    @Override
-    public void update() {
-        x += velocityX;
-
-        checkMapCollision(glp.getMapHandler().getCollisionRectangles());
-
-        frameCounter++;
-        
-        if (frameCounter >= 20) { 
-            step = !step;
-            frameCounter = 0;
-        }
-    }
-
 }
