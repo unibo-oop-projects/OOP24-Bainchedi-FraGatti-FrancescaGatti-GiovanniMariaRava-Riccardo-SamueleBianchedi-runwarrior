@@ -13,7 +13,6 @@ public class Wizard extends EnemyImpl {
 
     public boolean step = false;
     public int frameCounter = 0;
-    public int minX, maxX;
 
     public Wizard(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
@@ -38,12 +37,8 @@ public class Wizard extends EnemyImpl {
             currentImage = step ? leftWizardMoving : leftWizard;
         }
 
-        int cameraX = glp.getPlayer().getArea().x;
-        int screenX = x - cameraX;  
-        //int newY = y - 10; 
-        g.drawImage(currentImage, screenX, y, width, height, null);
-        
-      
+        int shift = glp.getMapHandler().getShift(); 
+        g.drawImage(currentImage, x + shift, y, width, height, null);
     }
 
     @Override

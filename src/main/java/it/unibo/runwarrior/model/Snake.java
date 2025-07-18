@@ -9,14 +9,10 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class Snake extends EnemyImpl{
-    private static final int TIME_AFTER_DEATH = 300;
     public BufferedImage rightSnake, rightSnakeMoving, leftSnake, leftSnakeMoving, poisonImage;
-    public int minX, maxX;
     public int frameCounter = 0;
     public boolean step = false;
     public EnemyHandler enemyHandler;
-    public boolean dead = false;
-    private int deathTimer = 0;
     public Snake(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
         super(x, y, width, height, solid, handler, glp);
         this.enemyHandler = handler;
@@ -42,25 +38,8 @@ public class Snake extends EnemyImpl{
             currentImage = step ? leftSnakeMoving : leftSnake;
         }
 
-        int cameraX = glp.getPlayer().getArea().x;
-        int screenX = x - cameraX;  
-        //int newY = y - 10; 
-        g.drawImage(currentImage, screenX, y, width, height, null);
-       /* BufferedImage currentImage;
-
-        if (dead) {
-            int cameraX = glp.getPlayer().getArea().x;
-            int screenX = x - cameraX;
-            g.drawImage(poisonImage, x, y, width, height, null);
-        } else {
-            currentImage = velocityX > 0
-                ? (step ? rightSnakeMoving : rightSnake)
-                : (step ? leftSnakeMoving : leftSnake);
-    
-            int cameraX = glp.getPlayer().getArea().x;
-            int screenX = x - cameraX;  
-            g.drawImage(currentImage, screenX, y, width, height, null);
-        }*/
+        int shift = glp.getMapHandler().getShift(); 
+        g.drawImage(currentImage, x + shift , y, width, height, null);
 
     }
 
@@ -77,11 +56,4 @@ public class Snake extends EnemyImpl{
             frameCounter = 0;
         }
     }
-
-    @Override
-    public void die(){
-        dead = true;
-        setVelocityX(0);
-    }
-
 }

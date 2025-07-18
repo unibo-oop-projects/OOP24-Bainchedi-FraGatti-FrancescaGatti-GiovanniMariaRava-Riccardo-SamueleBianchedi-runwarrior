@@ -39,9 +39,8 @@ public class Goblin extends EnemyImpl{
             currentImage = step ? leftGoblinMoving : leftGoblin;
         }
         
-        int cameraX = glp.getPlayer().getArea().x;
-        int screenX = x - cameraX;  
-        g.drawImage(currentImage, screenX, y, width, height, null);
+        int shift = glp.getMapHandler().getShift();  
+        g.drawImage(currentImage, x+shift, y, width, height, null);
         
     }
 
