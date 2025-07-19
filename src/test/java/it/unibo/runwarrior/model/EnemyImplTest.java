@@ -32,4 +32,22 @@ public class EnemyImplTest {
         assertEquals(16, bounds.height);
     }
 
+    /**
+     * Ensures that checkMapCollision inverts velocit
+     */
+    @Test
+    void testCheckMapCollisionBlocksMovement() {
+        Rectangle obstacle = new Rectangle(60, 100, 64, 64);
+        enemy.setVelocityX(2);
+        enemy.setVelocityY(0);
+        enemy.checkMapCollision(List.of(obstacle));
+        assertEquals(-5, enemy.getVelocityX());
+        /*
+         * sto cercando di fare un assert per controllare che non si infili nel blocco dal lato sinistro del blooc
+         * questo non è definitivo per ora
+         * assertTrue(enemy.getX() + enemy.getWidth() <= block.x);
+         */
+        
+    }
+
 }
