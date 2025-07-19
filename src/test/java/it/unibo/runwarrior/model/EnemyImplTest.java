@@ -1,10 +1,23 @@
 package it.unibo.runwarrior.model.enemy;
+/* i metodi non sono ancora ne public ne private perchè sto cercando di capire se riesco a far andare i test nel mio pc.
+ * Possibile problema: non trova il classpath
+ */
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.Rectangle;
+import java.util.Collections;
+import java.util.List;
+
+import it.unibo.runwarrior.controller.EnemyHandler;
+import it.unibo.runwarrior.view.GameLoopPanel;
 
 public class EnemyImplTest {
     private EnemyImpl enemy;
     private GameLoopPanel glp;
     private EnemyHandler enemyHandler;
-
+    
     /**
      * Sets up a new EnemyImpl instance.
      */
@@ -49,5 +62,8 @@ public class EnemyImplTest {
          */
         
     }
+
+    @Test 
+
 
 }
