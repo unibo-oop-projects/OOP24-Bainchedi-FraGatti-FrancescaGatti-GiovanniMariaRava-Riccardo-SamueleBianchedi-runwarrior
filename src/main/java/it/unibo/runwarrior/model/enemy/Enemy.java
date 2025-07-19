@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.enemy;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;

@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.enemy;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -41,6 +41,7 @@ public class Snake extends EnemyImpl{
         }
 
         int shift = glp.getMapHandler().getShift(); 
+        //System.out.println("SNAKE XS: " + (x+shift)+ "X:"+ x);
         g.drawImage(currentImage, x + shift , y, width, height, null);
 
     }
