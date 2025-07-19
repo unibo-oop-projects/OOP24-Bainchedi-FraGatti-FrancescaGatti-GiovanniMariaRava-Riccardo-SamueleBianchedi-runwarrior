@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.CharacterImpl;
 import it.unibo.runwarrior.model.MapElement;
 
 public class CollisionDetection {
@@ -13,17 +14,15 @@ public class CollisionDetection {
     private int tileSize;
     private ArrayList<String> directions = new ArrayList<>();
     private Rectangle playerArea;
-    private int playerSpeed;
     private int feetHeadToll = 5;
 
-    public CollisionDetection(int map[][], List<MapElement> blocks, int tileSize){
+    public CollisionDetection(final int map[][], final List<MapElement> blocks, final int tileSize) {
         this.map = map;
         this.blocks = blocks;
         this.tileSize = tileSize;
     }
 
-    public String checkCollision(Character player, boolean attack){
-        playerSpeed = player.getSpeed();
+    public String checkCollision(Character player, boolean attack) {
         // if(attack){
         //     playerArea = new Rectangle(player.getMovementHandler().getPlX() - tileSize*2, player.getMovementHandler().getPlY() + tileSize*2/4,
         //                                             tileSize*6, tileSize*3/2 - 2);
@@ -93,10 +92,10 @@ public class CollisionDetection {
                  (x >= tileRec.x && x <= tileRec.x + tileRec.width) || y <= 0){
                 direction = "down";
         }
-        else if(x - playerSpeed <= tileRec.x){
+        else if(x - CharacterImpl.SPEED <= tileRec.x){
             direction = "right";
         }
-        else if(x + playerSpeed >= tileRec.x + tileRec.width){
+        else if(x + CharacterImpl.SPEED >= tileRec.x + tileRec.width){
             direction = "left";
         }
         return direction;

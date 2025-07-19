@@ -59,9 +59,4 @@ public interface Character {
      * @return the collision are of the player
      */
     public Rectangle getArea();
-
-    /**
-     * @return the variable that represents player speed
-     */
-    public int getSpeed();
 }
