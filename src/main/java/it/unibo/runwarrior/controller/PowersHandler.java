@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import it.unibo.runwarrior.model.Character;
-import it.unibo.runwarrior.model.ArmourWarrior;
-import it.unibo.runwarrior.model.NakedWarrior;
-import it.unibo.runwarrior.model.SwordWarrior;
+import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.ArmourWarrior;
+import it.unibo.runwarrior.model.player.NakedWarrior;
+import it.unibo.runwarrior.model.player.SwordWarrior;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 

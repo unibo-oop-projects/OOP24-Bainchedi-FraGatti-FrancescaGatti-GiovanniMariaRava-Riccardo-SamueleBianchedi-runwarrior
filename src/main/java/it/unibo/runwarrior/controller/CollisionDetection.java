@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.runwarrior.model.Character;
+import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.MapElement;
 
 public class CollisionDetection {

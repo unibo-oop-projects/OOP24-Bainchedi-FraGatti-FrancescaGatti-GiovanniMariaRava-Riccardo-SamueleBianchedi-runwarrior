@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.player;
 
 public enum PlayerFrame {
     STOP_FRAME,

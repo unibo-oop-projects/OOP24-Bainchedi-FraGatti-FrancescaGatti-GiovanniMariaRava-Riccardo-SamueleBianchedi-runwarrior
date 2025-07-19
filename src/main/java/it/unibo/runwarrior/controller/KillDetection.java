@@ -3,7 +3,7 @@ package it.unibo.runwarrior.controller;
 import java.awt.Rectangle;
 import java.util.List;
 
-import it.unibo.runwarrior.model.Character;
+import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 

@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.player;
 
 import java.io.IOException;
 

@@ -2,7 +2,7 @@ package it.unibo.runwarrior.controller;
 
 import java.awt.image.BufferedImage;
 
-import it.unibo.runwarrior.model.PlayerFrame;
+import it.unibo.runwarrior.model.player.PlayerFrame;
 
 public class CharacterAnimationHandler{
 

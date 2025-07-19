@@ -2,7 +2,7 @@ package it.unibo.runwarrior.controller;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
-import it.unibo.runwarrior.model.Character;
+import it.unibo.runwarrior.model.player.Character;
 
 public class CharacterMovementHandler {
     private GameLoopPanel glp;
