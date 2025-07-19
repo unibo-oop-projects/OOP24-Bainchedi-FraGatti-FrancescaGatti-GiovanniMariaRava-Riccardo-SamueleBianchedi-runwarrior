@@ -10,13 +10,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import it.unibo.runwarrior.model.EnemyImpl;
-import it.unibo.runwarrior.model.Goblin;
-import it.unibo.runwarrior.model.Guard;
-import it.unibo.runwarrior.model.Monkey;
-import it.unibo.runwarrior.model.Snake;
-import it.unibo.runwarrior.model.Wizard;
-import it.unibo.runwarrior.model.EnemySpawnPoints;
+import it.unibo.runwarrior.model.enemy.EnemyImpl;
+import it.unibo.runwarrior.model.enemy.Goblin;
+import it.unibo.runwarrior.model.enemy.Guard;
+import it.unibo.runwarrior.model.enemy.Monkey;
+import it.unibo.runwarrior.model.enemy.Snake;
+import it.unibo.runwarrior.model.enemy.Wizard;
+import it.unibo.runwarrior.model.enemy.EnemySpawnPoints;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
 

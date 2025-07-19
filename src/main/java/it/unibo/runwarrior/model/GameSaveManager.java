@@ -63,6 +63,17 @@ public class GameSaveManager {
         }
     }
 
+    public static GameSaveManager getInstance() {
+        if (instance == null) {
+            instance = loadFromFile(SAVE_FILE);
+            if (instance == null) {
+                instance = new GameSaveManager();
+                instance.saveGame();
+            }
+        }
+        return instance;
+    }
+    
     public int getLevelsCompleted() {
         return levelsCompleted;
     }

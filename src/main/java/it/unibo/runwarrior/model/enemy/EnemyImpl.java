@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.enemy;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
+import it.unibo.runwarrior.model.PowerUpImpl;
 
 
 public abstract class EnemyImpl implements Enemy{
