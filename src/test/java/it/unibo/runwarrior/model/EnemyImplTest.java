@@ -20,4 +20,16 @@ public class EnemyImplTest {
         };
     }
 
+    /**
+     * Verifies that getBounds() returns the correct rectangle based on position and size.
+     */
+    @Test
+    void testGetBounds() {
+        Rectangle bounds = enemy.getBounds();
+        assertEquals(50, bounds.x);
+        assertEquals(100, bounds.y);
+        assertEquals(16, bounds.width);
+        assertEquals(16, bounds.height);
+    }
+
 }
