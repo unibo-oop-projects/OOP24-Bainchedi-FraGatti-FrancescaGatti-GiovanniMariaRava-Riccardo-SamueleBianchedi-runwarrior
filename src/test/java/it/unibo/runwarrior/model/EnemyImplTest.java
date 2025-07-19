@@ -24,7 +24,7 @@ public class EnemyImplTest {
     @BeforeEach
     void setUp() {
         glp = new GameLoopPanel();
-        enemyHandler = new EnemyHandler(mockPanel);
+        enemyHandler = new EnemyHandler(glp);
         enemy = new EnemyImpl(50, 100, 64, 64, true, enemyHandler, glp) {
             @Override
             public void update() {
@@ -63,7 +63,14 @@ public class EnemyImplTest {
         
     }
 
+    /**
+     * questo metodo devo ancora capire se è corretto averlo qui o dentro enemyhandlertest (del quale manca ancora implementazione)
+     */
     @Test 
-
-
+    void testDie(){
+        enemyHandler.addEnemy(enemy);
+        assertEquals(1, enemyHandler.getEnemies().size());
+        enemy.die();
+        assertEquals(0, enemyHandler.getEnemies().size());
+    }
 }
