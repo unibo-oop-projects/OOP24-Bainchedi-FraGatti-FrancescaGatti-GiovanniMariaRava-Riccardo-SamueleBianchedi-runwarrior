@@ -124,6 +124,10 @@ public class GameLoopPanel extends JPanel implements Runnable{
         gr2.dispose();
     }
 
+    /**
+     * Chooses one of the two player with whom the game starts.
+     * To be connected with the shop
+     */
     public void initializePlayer(){
         player = new NakedWarrior(this, commands, collisionDetection, mapHandler, powersFactory);
         powerUpsHandler.setIndex();

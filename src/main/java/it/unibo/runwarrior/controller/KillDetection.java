@@ -9,14 +9,16 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 
 public class KillDetection {
     private GameLoopPanel glp;
+    private HandlerMapElement hM;
     //private PowersHandler powerUpHandler; // vedi sotto
     //private List<EnemyImpl> enemies; // commentato per ricordare che forse è meglio mantenerlo come variabile
     private Rectangle playerArea;
     private long hitWaitTime;
     private int toll = 5;
 
-    public KillDetection(GameLoopPanel glp) {
+    public KillDetection(GameLoopPanel glp, HandlerMapElement hM) {
         this.glp = glp;
+        this.hM = hM;
     }
 
     public void checkCollisionWithEnemeies(Character player) {
@@ -41,7 +43,9 @@ public class KillDetection {
                     glp.getPowersHandler().losePower();
                 }
             }
-            else if(player.getSwordArea().intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking()){
+            else if(player.getSwordArea().intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking() &&
+                    !isBehindTile(player.getSwordArea().x + hM.getTileSize()/2, player.getSwordArea().y) &&
+                    !isBehindTile(player.getSwordArea().x + player.getSwordArea().width - hM.getTileSize()/2, player.getSwordArea().y)){
                 if((player.getSwordArea().x + player.getSwordArea().width >= enemy.getBounds().x && player.getSwordArea().x < enemy.getBounds().x)){
                     enemy.die();
                 }
@@ -56,6 +60,24 @@ public class KillDetection {
         Rectangle futureArea = new Rectangle(playerArea);
         futureArea.translate(0, pl.getMovementHandler().getSpeedJumpDown());
         return futureArea;
+    }
+
+    /**
+     * @param sword
+     * @return if the sword is touching a solid tile
+     * Controls that with 2 points inside of the sword area
+     */
+    public boolean isBehindTile(int x, int y){
+        float indexXtile = x / hM.getTileSize();
+        float indexYtile = y / hM.getTileSize();
+        System.out.println(indexXtile + " " + indexYtile);
+        int blockIndex = hM.getMap()[(int) indexYtile][(int) indexXtile];
+        if(hM.getBlocks().get(blockIndex).getCollision()){
+            System.out.println("si");
+            return true;
+        }
+        System.out.println("no");
+        return false;
     }
 
     public long getHitWaitTime() {

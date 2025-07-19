@@ -13,9 +13,6 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class HandlerMapElement {
-    
-    public static final int HEIGHT = 480;
-    public static final int TILE_SIZE = 48;
     private List<MapElement> blocks;
     private int[][] map;
     private Map<Integer, BufferedImage> mapBlock;
@@ -137,5 +134,9 @@ public class HandlerMapElement {
 
     public int getShift(){
         return this.shift;
+    }
+
+    public int[][] getMap() {
+        return map;
     }
 }
