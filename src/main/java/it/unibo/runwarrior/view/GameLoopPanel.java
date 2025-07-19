@@ -16,11 +16,8 @@ import it.unibo.runwarrior.controller.EnemyHandler;
 import it.unibo.runwarrior.controller.EnemySpawner;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.GameMap;
-import it.unibo.runwarrior.model.Guard;
 import it.unibo.runwarrior.model.player.NakedWarrior;
-//import it.unibo.runwarrior.model.Snake;
-//import it.unibo.runwarrior.model.SwordWarrior;
-//import it.unibo.runwarrior.model.Wizard;
+
 
 public class GameLoopPanel extends JPanel implements Runnable{
     
@@ -63,7 +60,6 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
         this.enemyHandler = new EnemyHandler(this);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
-        //enemyHandler.addEnemy(new Guard(300, 418, 64, 64, true, enemyHandler, this));
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemies.txt"));
         initializePlayer();
 
