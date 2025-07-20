@@ -34,9 +34,10 @@ public class PowerUpFactoryImpl {
         for (int i = 0; i < NUM_POWERUP; i++) {
             final PowerUpImpl p = new PowerUpImpl(glp);
             int row = 0;
-            while (map[row][distance] != 1) {
+            while (map[row][distance] != 2 && map[row][distance] != 1 && map[row][distance] != 3) {
                 row++;
             }
+            System.out.println(" -");
             p.getTouchArea().setBounds(distance * tileSize, (row - 1) * tileSize, tileSize, tileSize);
             powerUps.add(p);
             distance = distance + space;
@@ -70,7 +71,7 @@ public class PowerUpFactoryImpl {
             }
             if (!p.isPowerTaken()) {
                 gr2.drawImage(im, 
-                p.getTouchArea().x + mapHandler.getShift(), p.getTouchArea().y, tileSize, p.getTouchArea().height, null);
+                p.getTouchArea().x + mapHandler.getShift(), p.getTouchArea().y, tileSize, tileSize, null);
             } else {
                 p.getTouchArea().setSize(0, 0);
             }

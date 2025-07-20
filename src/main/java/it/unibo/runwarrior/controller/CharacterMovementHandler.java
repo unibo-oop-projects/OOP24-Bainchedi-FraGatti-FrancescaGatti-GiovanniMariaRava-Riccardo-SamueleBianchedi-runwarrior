@@ -68,7 +68,7 @@ public class CharacterMovementHandler {
         maxScreenX = glp.getWidth() / 2;
         String collisionDir = "";
         String tempDir = "";
-        collisionDir = collisionDetection.checkCollision(player, false);
+        collisionDir = collisionDetection.checkCollision(player);
         tempDir = pUpDetection.checkCollisionWithPowers(player, this);
         if(!tempDir.isEmpty()){
             collisionDir = tempDir;
