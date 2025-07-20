@@ -26,6 +26,8 @@ public class StickWizard extends CharacterImpl {
             left0 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/stopLeftSW.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goLeftSW1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goLeftSW2.png"));
+            jumpR = ImageIO.read(getClass().getResourceAsStream("/WizardImages/jumpRightSW.png"));
+            jumpL = ImageIO.read(getClass().getResourceAsStream("/WizardImages/jumpLeftSW.png"));
             attackR = ImageIO.read(getClass().getResourceAsStream("/WizardImages/attackRightW.png"));
             attackL = ImageIO.read(getClass().getResourceAsStream("/WizardImages/attackLeftW.png"));
             tipR = ImageIO.read(getClass().getResourceAsStream("/WizardImages/tipRightW.png"));

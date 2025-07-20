@@ -26,6 +26,8 @@ public class NakedWizard extends CharacterImpl{
             left0 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/stopLeftNW.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goLeftNW1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goLeftNW2.png"));
+            jumpR = ImageIO.read(getClass().getResourceAsStream("/WizardImages/jumpRightNW.png"));
+            jumpL = ImageIO.read(getClass().getResourceAsStream("/WizardImages/jumpLeftNW.png"));
             attackR = right0;
             attackL = left0;
         } catch (IOException e) {

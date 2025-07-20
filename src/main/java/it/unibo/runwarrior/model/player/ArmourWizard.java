@@ -26,6 +26,8 @@ public class ArmourWizard extends CharacterImpl {
             left0 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/stopLeftAW.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goLeftAW1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goLeftAW2.png"));
+            jumpR = ImageIO.read(getClass().getResourceAsStream("/WizardImages/jumpRightAW.png"));
+            jumpL = ImageIO.read(getClass().getResourceAsStream("/WizardImages/jumpLeftAW.png"));
             attackR = right0;
             attackL = left0;
         } catch (IOException e) {
