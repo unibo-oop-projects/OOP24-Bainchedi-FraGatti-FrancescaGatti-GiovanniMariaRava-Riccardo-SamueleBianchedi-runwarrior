@@ -18,6 +18,11 @@ import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.player.NakedWarrior;
 import it.unibo.runwarrior.view.enemy.EnemyViewFactory;
+import it.unibo.runwarrior.view.enemy.GoblinView;
+import it.unibo.runwarrior.view.enemy.GuardView;
+import it.unibo.runwarrior.view.enemy.MonkeyView;
+import it.unibo.runwarrior.view.enemy.SnakeView;
+import it.unibo.runwarrior.view.enemy.WizardView;
 
 
 public class GameLoopPanel extends JPanel implements Runnable{
@@ -157,5 +162,13 @@ private EnemyViewFactory enemyViewFactory;
 
     public EnemyHandler getEnemyHandler() {
         return this.enemyHandler;
+    }
+
+    private final void initializeEnemyViewFactory(){
+        enemyViewFactory.register(1, new GuardView(this));
+        enemyViewFactory.register(2, new SnakeView(this));
+        enemyViewFactory.register(3, new WizardView(this));
+        enemyViewFactory.register(4, new GoblinView(this));
+        enemyViewFactory.register(5, new MonkeyView(this));
     }
 }
