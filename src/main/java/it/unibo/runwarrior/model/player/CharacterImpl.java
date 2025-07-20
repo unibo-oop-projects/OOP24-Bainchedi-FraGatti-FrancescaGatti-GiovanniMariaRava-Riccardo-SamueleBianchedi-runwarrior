@@ -3,9 +3,9 @@ package it.unibo.runwarrior.model.player;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import it.unibo.runwarrior.controller.CharacterAnimationHandler;
+import it.unibo.runwarrior.controller.CharacterAnimationHandlerImpl;
 import it.unibo.runwarrior.controller.CharacterComand;
-import it.unibo.runwarrior.controller.CharacterMovementHandler;
+import it.unibo.runwarrior.controller.CharacterMovementHandlerImpl;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
@@ -33,8 +33,8 @@ public abstract class CharacterImpl implements Character {
     protected BufferedImage tipL;
 
     protected CharacterComand cmd;
-    protected CharacterAnimationHandler animation;
-    protected CharacterMovementHandler movement;
+    protected CharacterAnimationHandlerImpl animation;
+    protected CharacterMovementHandlerImpl movement;
 
     /**
      * Constructor of the player; set player images, first position, 
@@ -51,8 +51,8 @@ public abstract class CharacterImpl implements Character {
         this.cmd = commands;
         playerImage();
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
-        this.movement = new CharacterMovementHandler(panel, this, commands, collision, mapHandler, pFact);
-        this.animation = new CharacterAnimationHandler(commands, movement, right0, right1, right2, 
+        this.movement = new CharacterMovementHandlerImpl(panel, this, commands, collision, mapHandler, pFact);
+        this.animation = new CharacterAnimationHandlerImpl(commands, movement, right0, right1, right2, 
         left0, left1, left2, attackR, attackL, tipR, tipL);
         collisionArea = new Rectangle(movement.getPlX() + (sizeCharacter / 4), movement.getPlY() + (sizeCharacter / 4),
         sizeCharacter / 2, sizeCharacter - (sizeCharacter / 4) - TO_TOUCH_FLOOR);
@@ -111,12 +111,12 @@ public abstract class CharacterImpl implements Character {
     public abstract void playerImage();
 
     @Override
-    public CharacterMovementHandler getMovementHandler() {
+    public CharacterMovementHandlerImpl getMovementHandler() {
         return this.movement;
     }
 
     @Override
-    public CharacterAnimationHandler getAnimationHandler() {
+    public CharacterAnimationHandlerImpl getAnimationHandler() {
         return this.animation;
     }
 

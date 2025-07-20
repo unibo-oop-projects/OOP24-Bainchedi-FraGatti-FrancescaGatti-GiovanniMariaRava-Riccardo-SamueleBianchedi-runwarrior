@@ -20,7 +20,7 @@ public class PowerUpDetection {
         this.pFact = pUpFact;
     }
 
-    public String checkCollisionWithPowers(Character player, CharacterMovementHandler move){
+    public String checkCollisionWithPowers(Character player, CharacterMovementHandlerImpl move){
         powerCollision.addAll(pFact.getPowerUps());
         Rectangle playerArea = player.getArea();
         String dir = "";

@@ -3,8 +3,8 @@ package it.unibo.runwarrior.model.player;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import it.unibo.runwarrior.controller.CharacterAnimationHandler;
-import it.unibo.runwarrior.controller.CharacterMovementHandler;
+import it.unibo.runwarrior.controller.CharacterAnimationHandlerImpl;
+import it.unibo.runwarrior.controller.CharacterMovementHandlerImpl;
 
 public interface Character {
 
@@ -36,13 +36,13 @@ public interface Character {
      * @return the object that handles the player movement,
      * including the collisions with tiles, powerups and enemies
      */
-    public CharacterMovementHandler getMovementHandler();
+    public CharacterMovementHandlerImpl getMovementHandler();
 
     /**
      * @return the object that handles the player animation,
      * so how the player frames change
      */
-    public CharacterAnimationHandler getAnimationHandler();
+    public CharacterAnimationHandlerImpl getAnimationHandler();
 
     /**
      * Updates the collision area of the player,
