@@ -24,9 +24,7 @@ import it.unibo.runwarrior.view.enemy.MonkeyView;
 import it.unibo.runwarrior.view.enemy.SnakeView;
 import it.unibo.runwarrior.view.enemy.WizardView;
 
-
-public class GameLoopPanel extends JPanel implements Runnable{
-    
+public class GameLoopPanel extends JPanel implements Runnable {
     public static final int WIDTH = 1056;
     public static final int HEIGHT = 792;
     public static final int MLD = 1000000000;
@@ -41,7 +39,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
     
     private HandlerMapElement mapHandler;
     private EnemyHandler enemyHandler;
-private EnemyViewFactory enemyViewFactory;
+    private EnemyViewFactory enemyViewFactory;
     private EnemySpawner enemySpawner;
     private GameMap gameMap;
 
@@ -49,7 +47,7 @@ private EnemyViewFactory enemyViewFactory;
 
    // private GameMusic music;
 
-    public GameLoopPanel(){
+    public GameLoopPanel() {
         this.gameMap = GameMap.load("Map_1/map_1.txt", "Map_1/forest_theme.txt");
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
@@ -77,29 +75,29 @@ private EnemyViewFactory enemyViewFactory;
 
         this.coinController = new CoinController();
         List<int[]> coords = coinController.loadCoinFromFIle("CoinCoordinates_map1.txt");
-        for(int[] coord : coords){
+        for (int[] coord : coords) {
             coinController.addCoins(coord[0], coord[1]);
         }
     }
 
-    public void startGame(){
+    public void startGame() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
     @Override
-    public void run(){
+    public void run() {
         double timeFor1Frame = MLD/FPS; //16.666.666,67 in ns
         long lastTime = System.nanoTime();
         long currentTime;
         double waitingTime = 0;
 
-        while(true){
+        while (true) {
             currentTime = System.nanoTime();
             waitingTime += (currentTime-lastTime);
             lastTime = currentTime;
             
-            if(waitingTime >= timeFor1Frame){
+            if (waitingTime >= timeFor1Frame) {
                 update();
                 repaint();
                 waitingTime  -= timeFor1Frame;
@@ -107,14 +105,14 @@ private EnemyViewFactory enemyViewFactory;
         }
     }
 
-    public void update(){
+    public void update() {
         player.update();
         enemySpawner.update();
         enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
     }
 
     @Override
-    protected void paintComponent(Graphics gr){
+    protected void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         Graphics2D gr2 = (Graphics2D) gr;
         
@@ -131,25 +129,25 @@ private EnemyViewFactory enemyViewFactory;
      * Chooses one of the two player with whom the game starts.
      * To be connected with the shop
      */
-    public void initializePlayer(){
+    public void initializePlayer() {
         player = new NakedWarrior(this, commands, collisionDetection, mapHandler, powersFactory);
         powerUpsHandler.setIndex();
     }
 
-    public Character getPlayer(){
+    public Character getPlayer() {
         return this.player;
     }
 
-    public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit){
+    public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
         this.player = pl;
         this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
     }
 
-    public PowersHandler getPowersHandler(){
+    public PowersHandler getPowersHandler() {
         return this.powerUpsHandler;
     }
 
-    public PowerUpFactoryImpl getPowersFactory(){
+    public PowerUpFactoryImpl getPowersFactory() {
         return this.powersFactory;
     }
 
@@ -165,7 +163,10 @@ private EnemyViewFactory enemyViewFactory;
         return this.enemyHandler;
     }
 
-    private final void initializeEnemyViewFactory(){
+    /**
+     * Map the int type with the correct EnemyView
+     */
+    private final void initializeEnemyViewFactory() {
         enemyViewFactory.register(1, new GuardView(this));
         enemyViewFactory.register(2, new SnakeView(this));
         enemyViewFactory.register(3, new WizardView(this));
