@@ -5,11 +5,21 @@ import java.net.URL;
 
 import javax.sound.sampled.*;
 
+/**
+ * Class used to create and play the music of the game
+ */
 public class GameMusic {
     
     private Clip clip;
     
-    public GameMusic(String musicFile, boolean loop){
+    /**
+     * Constructor of the music during the game.
+     * It takes the music file, creates the audio stream, creates and open the clip and play it once or endlessly.
+     *
+     * @param musicFile music file wav
+     * @param loop boolean to play music costantly if it's true
+     */
+    public GameMusic(String musicFile, boolean loop) {
         try {
             URL musicURL = getClass().getResource("/Music/" + musicFile);
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicURL);
