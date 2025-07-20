@@ -43,6 +43,12 @@ public class PowerUpImpl implements PowerUp {
             if (glp.getPowersHandler().getPowers() == 1) {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/sword.png"));
             }
+            if (glp.getPowersHandler().getPowers() == 3) {
+                image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/cape.png"));
+            }
+            if (glp.getPowersHandler().getPowers() == 4) {
+                image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/stick.png"));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

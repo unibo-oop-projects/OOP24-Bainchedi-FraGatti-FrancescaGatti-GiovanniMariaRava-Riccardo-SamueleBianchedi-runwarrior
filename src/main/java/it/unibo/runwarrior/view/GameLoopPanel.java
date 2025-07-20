@@ -17,6 +17,7 @@ import it.unibo.runwarrior.controller.EnemySpawner;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.player.NakedWarrior;
+import it.unibo.runwarrior.model.player.NakedWizard;
 import it.unibo.runwarrior.view.enemy.EnemyViewFactory;
 import it.unibo.runwarrior.view.enemy.GoblinView;
 import it.unibo.runwarrior.view.enemy.GuardView;
@@ -130,7 +131,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * To be connected with the shop
      */
     public void initializePlayer() {
-        player = new NakedWarrior(this, commands, collisionDetection, mapHandler, powersFactory);
+        player = new NakedWizard(this, commands, collisionDetection, mapHandler, powersFactory);
         powerUpsHandler.setIndex();
     }
 
@@ -140,6 +141,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
         this.player = pl;
+        System.out.println(player.getClass());
         this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
     }
 
