@@ -60,7 +60,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
         this.enemyHandler = new EnemyHandler(this);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
-        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemies.txt"));
+        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemiesMap1.txt"));
         initializePlayer();
 
         //music = new GameMusic("gameMusic.wav", true);
