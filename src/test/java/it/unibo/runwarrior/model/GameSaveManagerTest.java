@@ -11,21 +11,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameSaveManagerTest {
-    /*private GameSaveManager gsm;
+    private GameSaveManager gsm;
 
     @BeforeEach
     public void resetSingleton() {
         gsm = GameSaveManager.getInstance();
-        gsm.setLivelliCompletati(0);
-        gsm.setMoneteRaccolte(0);
+        gsm.setLevelsCompleted(0);
+        gsm.setCoinCollected(0);
         gsm.setSkinPremiumSbloccata(false);
     }
 
+    /**
+     * Check if the pattern singleton is effective and there is only one saving file
+     */
     @Test
     public void testSingletonInstance() {
         GameSaveManager anotherInstance = GameSaveManager.getInstance();
         assertSame(gsm, anotherInstance, "Le istanze devono essere le stesse (singleton)");
     }
 
-*/
+    /**
+     * Test the correct loading of the variables from the file
+     */
+    @Test
+    public void testLoadFroamFile(){
+
+    }
+
+    /**
+     * Test if the game is saved in the right way
+     */
+    @Test 
+    public void testSaveGame(){
+        
+    }
 }
