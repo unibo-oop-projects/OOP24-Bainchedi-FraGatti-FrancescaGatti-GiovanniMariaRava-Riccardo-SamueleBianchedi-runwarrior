@@ -9,7 +9,7 @@ import it.unibo.runwarrior.controller.EnemyHandler;
 import it.unibo.runwarrior.model.PowerUpImpl;
 
 
-public abstract class EnemyImpl implements Enemy{
+public class EnemyImpl implements Enemy{
     private final static int NUM_UPDATE_FRAME = 20;
     public int x;
     public int y;
