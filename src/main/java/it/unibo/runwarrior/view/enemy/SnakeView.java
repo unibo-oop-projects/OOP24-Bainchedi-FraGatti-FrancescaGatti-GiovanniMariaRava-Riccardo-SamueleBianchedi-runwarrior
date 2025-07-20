@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
 import it.unibo.runwarrior.model.enemy.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
@@ -25,8 +27,11 @@ public class SnakeView implements EnemyView{
 
     @Override
     public void loadResources() throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadResources'");
+        rightSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnake.png"));
+        rightSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnakeMoving.png"));
+        leftSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnake.png"));
+        leftSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnakeMoving.png"));
+        poisonImage = ImageIO.read(getClass().getResourceAsStream("/Snake/poison.png"));
     }
 
     @Override
