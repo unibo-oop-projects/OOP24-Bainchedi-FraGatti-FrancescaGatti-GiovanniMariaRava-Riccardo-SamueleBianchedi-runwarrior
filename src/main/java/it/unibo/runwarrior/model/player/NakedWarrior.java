@@ -25,6 +25,8 @@ public class NakedWarrior extends CharacterImpl{
             left0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopLeftN.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN2.png"));
+            jumpR = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/jumpRightN.png"));
+            jumpL = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/jumpLeftN.png"));
             attackR = right0;
             attackL = left0;
         } catch (IOException e) {

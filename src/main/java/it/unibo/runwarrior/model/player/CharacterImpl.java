@@ -29,6 +29,8 @@ public abstract class CharacterImpl implements Character {
     protected BufferedImage left0;
     protected BufferedImage left1;
     protected BufferedImage left2;
+    protected BufferedImage jumpR;
+    protected BufferedImage jumpL;
     protected BufferedImage attackR;
     protected BufferedImage attackL;
     protected BufferedImage tipR;
@@ -55,7 +57,7 @@ public abstract class CharacterImpl implements Character {
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
         this.movement = new CharacterMovementHandlerImpl(panel, this, commands, collision, mapHandler, pFact);
         this.animation = new CharacterAnimationHandlerImpl(commands, movement, right0, right1, right2, 
-        left0, left1, left2, attackR, attackL, tipR, tipL);
+        left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL);
         collisionArea = new Rectangle(movement.getPlX() + (sizeCharacter / 4), movement.getPlY() + (sizeCharacter / 4),
         sizeCharacter / 2, sizeCharacter - (sizeCharacter / 4) - TO_TOUCH_FLOOR);
         swordArea = new Rectangle();

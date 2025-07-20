@@ -15,7 +15,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
     private boolean crossWalk = false;
     private int useAttackMoving = 0;
     private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
-    private BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
+    private BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
 
     public CharacterAnimationHandlerImpl(CharacterComand cmd, CharacterMovementHandler move, BufferedImage... im) {
         this.cmd = cmd;
@@ -26,10 +26,12 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
         left0 = im[3];
         left1 = im[4];
         left2 = im[5];
-        attackR = im[6];
-        attackL = im[7];
-        tipR = im[8];
-        tipL = im[9];
+        jumpR = im[6];
+        jumpL = im[7];
+        attackR = im[8];
+        attackL = im[9];
+        tipR = im[10];
+        tipL = im[11];
     }
 
     public void frameChanger() {
@@ -37,7 +39,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
             changeFrame++;
             if (changeFrame > TIME_TO_CHANGE) {
                 switch (playerFrame) {
-                    case STOP_FRAME, ATTACK_FRAME -> {
+                    case STOP_FRAME, ATTACK_FRAME, JUMP_FRAME -> {
                         playerFrame = crossWalk ? PlayerFrame.GO_FRAME1 : PlayerFrame.GO_FRAME2;
                         crossWalk = !crossWalk;
                     }
@@ -52,7 +54,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
             }
         }
         else if (cmd.isJumping()) {
-            playerFrame = PlayerFrame.GO_FRAME2;
+            playerFrame = PlayerFrame.JUMP_FRAME;
             if (cmd.getAttack() && movement.canAttack()) {
                 playerFrame = PlayerFrame.ATTACK_FRAME;
             }
@@ -72,6 +74,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
                 case STOP_FRAME -> im = right0;
                 case GO_FRAME1 -> im = right1;
                 case GO_FRAME2 -> im = right2;
+                case JUMP_FRAME -> im = jumpR;
                 case ATTACK_FRAME -> {
                     im = attackR;
                 }
@@ -81,6 +84,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
                 case STOP_FRAME -> im = left0;
                 case GO_FRAME1 -> im = left1;
                 case GO_FRAME2 -> im = left2;
+                case JUMP_FRAME -> im = jumpL;
                 case ATTACK_FRAME -> {
                     im = attackL;
                 }

@@ -25,6 +25,8 @@ public class ArmourWarrior extends CharacterImpl{
             left0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopLeftA.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftA1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftA2.png"));
+            jumpR = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/jumpRightA.png"));
+            jumpL = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/jumpLeftA.png"));
             attackR = right0;
             attackL = left0;
         } catch (IOException e) {
