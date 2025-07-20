@@ -67,7 +67,7 @@ public class PowerUpImpl implements PowerUp{
     public void takePower(){
         powerTaken = true;
     }
-    //mentre in KillDetection si gestirà il player con gli enemies, in cui verrà richiamato il metodo die() di EnemyImpl
+    
     public void openTheEgg(){
         eggOpen = true;
     }
