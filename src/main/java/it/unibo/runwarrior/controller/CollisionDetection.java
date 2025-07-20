@@ -118,7 +118,7 @@ public class CollisionDetection {
         if (y == tileRec.y && (x >= tileRec.x && x <= tileRec.x + tileRec.width)) {
             direction = "up";
         }
-        else if (isInAir(player) && y == playerArea.y && (tileRec.y + tileRec.height - y) < FEET_HEAD_TOLL &&
+        else if (isInAir(player) && y == playerArea.y && (tileRec.y + tileRec.height - y) < CharacterMovementHandler.SPEED_JUMP_UP &&
                 (x >= tileRec.x && x <= tileRec.x + tileRec.width) || y <= 0) {
                 direction = "down";
         }
