@@ -3,7 +3,11 @@ package it.unibo.runwarrior.controller;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.CharacterImpl;
 
+/**
+ * Class that handles player movement and his collisions
+ */
 public class CharacterMovementHandler {
     private GameLoopPanel glp;
     private CharacterComand cmd;
@@ -18,25 +22,33 @@ public class CharacterMovementHandler {
     private int maxJump;
     private int midJump;
     protected int sizeCharacter;
-    private int toTouchFloor = 2;
     
-    private final int minScreenX = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
+    private static final int MIN_SCREEN_X = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private int maxScreenX;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
-    protected int playerX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
+    protected int playerX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
     protected int playerY;// * VERTICALE
-    private int screenX = START_X;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
+    private int screenX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
     private boolean hitHead;
     private boolean jumpKill;
     private boolean descend;
     private boolean handleDoubleCollision;
     private boolean canAttack;
 
+    public static final int SPEED_JUMP_UP = 12; 
+    public static final int SPEED_JUMP_DOWN = 6;
     private boolean rightDirection = true;
-    private int speed = 5;
-    private int speedJumpUP = 12; 
-    private int speedJumpDown = 6;
-    private int groundX = 0;//variabile che permette lo scorrimento della mappa
+    private int groundX;//variabile che permette lo scorrimento della mappa
 
+    /**
+     * Constructor of player movemnt that sets the following parametres, the powerup and kill detection and the starting position
+     *
+     * @param panel game-loop panel
+     * @param player current player
+     * @param cmd keyboard handler
+     * @param collDet collision with map tiles
+     * @param hM object that prints tiles
+     * @param pFact object that prints powerups
+     */
     public CharacterMovementHandler(GameLoopPanel panel, Character player, CharacterComand cmd, CollisionDetection collDet, HandlerMapElement hM, PowerUpFactoryImpl pFact){
         this.glp = panel;
         this.cmd = cmd;
@@ -45,11 +57,14 @@ public class CharacterMovementHandler {
         this.mapHandler = hM;
         this.pUpDetection = new PowerUpDetection(panel, pFact);
         this.killDetection = new KillDetection(panel, hM);
+        playerX = START_X;
+        screenX = START_X;
+        groundX = 0;
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
     }
 
     private void setStartY(int y, int tileSize){
-        startY = y + toTouchFloor;
+        startY = y + CharacterImpl.TO_TOUCH_FLOOR;
         playerY = startY;
         sizeCharacter = tileSize*2;
         maxJump = startY - (sizeCharacter*5/2);
@@ -87,12 +102,12 @@ public class CharacterMovementHandler {
         if(cmd.getRight() && !cmd.getLeft()){
             rightDirection = true;
             if(!collisionDir.equals("right") && !handleDoubleCollision){
-                playerX += speed;
+                playerX += CharacterImpl.SPEED;
                 if(screenX < maxScreenX){
-                    screenX += speed;
+                    screenX += CharacterImpl.SPEED;
                 }
                 else{
-                    groundX -= speed;
+                    groundX -= CharacterImpl.SPEED;
                     mapHandler.setShift(groundX);
                 }
             }
@@ -101,10 +116,10 @@ public class CharacterMovementHandler {
             rightDirection = false;
             if(!collisionDir.equals("left") && !handleDoubleCollision){
                 if(screenX > 0){
-                    playerX -= speed;
+                    playerX -= CharacterImpl.SPEED;
                 }
-                if(screenX > minScreenX){
-                    screenX -= speed;
+                if(screenX > MIN_SCREEN_X){
+                    screenX -= CharacterImpl.SPEED;
                 }
             }
         }
@@ -115,7 +130,7 @@ public class CharacterMovementHandler {
     public void jump(boolean isJump, int jumpHeight){
         if(isJump && !descend){
             if(playerY > jumpHeight){
-                playerY -= speedJumpUP;
+                playerY -= SPEED_JUMP_UP;
             }
             else{
                 playerY = jumpHeight;
@@ -125,7 +140,7 @@ public class CharacterMovementHandler {
         else{
             if(collisionDetection.isInAir(player) && !jumpKill){
                 descend = true;
-                playerY += speedJumpDown;
+                playerY += SPEED_JUMP_DOWN;
             }
             else{
                 descend = false;
@@ -142,7 +157,7 @@ public class CharacterMovementHandler {
 
     public void jumpAfterKill(){
         if(playerY > midJump){
-            playerY -= speedJumpUP;
+            playerY -= SPEED_JUMP_UP;
         }
         else{
             playerY = midJump;
@@ -166,10 +181,6 @@ public class CharacterMovementHandler {
 
     public boolean getRightDirection(){
         return this.rightDirection;
-    }
-
-     public int getSpeedJumpDown() {
-        return this.speedJumpDown;
     }
 
     public int getGroundX(){

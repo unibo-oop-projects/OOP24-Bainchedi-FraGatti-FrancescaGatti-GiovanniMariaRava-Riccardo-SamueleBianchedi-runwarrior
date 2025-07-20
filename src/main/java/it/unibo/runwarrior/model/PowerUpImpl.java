@@ -7,8 +7,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
-
-public class PowerUpImpl implements PowerUp{
+/**
+ * Implementation of the powerup object
+ */
+public class PowerUpImpl implements PowerUp {
     
     private BufferedImage image;
     private BufferedImage egg;
@@ -17,7 +19,12 @@ public class PowerUpImpl implements PowerUp{
     private boolean powerTaken;
     private boolean eggOpen;
 
-    public PowerUpImpl(GameLoopPanel glp){
+    /**
+     * Constructor that creates powerup area and set the egg image
+     *
+     * @param glp game-loop panel
+     */
+    public PowerUpImpl(GameLoopPanel glp) {
         this.glp = glp;
         touchArea = new Rectangle();
         try {
@@ -27,12 +34,13 @@ public class PowerUpImpl implements PowerUp{
         }
     }
 
-    public void powerUpImage(){
+    @Override
+    public void powerUpImage() {
         try{
-            if(glp.getPowersHandler().getPowers() == 0){
+            if (glp.getPowersHandler().getPowers() == 0) {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/armour.png"));
             }
-            if(glp.getPowersHandler().getPowers() == 1){
+            if (glp.getPowersHandler().getPowers() == 1) {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/sword.png"));
             }
         } catch (IOException e) {
@@ -40,35 +48,43 @@ public class PowerUpImpl implements PowerUp{
         }
     }
 
-    public BufferedImage getImage(){
+    @Override
+    public BufferedImage getImage() {
         return this.image;
     }
 
-    public BufferedImage getEgg(){
+    @Override
+    public BufferedImage getEgg() {
         return this.egg;
     }
 
-    public void setTouchArea(Rectangle deathPosition){
+    @Override
+    public void setTouchArea(final Rectangle deathPosition) {
         this.touchArea = deathPosition;
     }
 
-    public Rectangle getTouchArea(){
+    @Override
+    public Rectangle getTouchArea() {
         return touchArea;
     }
 
-    public boolean isPowerTaken(){
+    @Override
+    public boolean isPowerTaken() {
         return powerTaken;
     }
 
-    public boolean isEggOpen(){
+    @Override
+    public boolean isEggOpen() {
         return eggOpen;
     }
 
-    public void takePower(){
+    @Override
+    public void takePower() {
         powerTaken = true;
     }
-    
-    public void openTheEgg(){
+
+    @Override
+    public void openTheEgg() {
         eggOpen = true;
     }
 }

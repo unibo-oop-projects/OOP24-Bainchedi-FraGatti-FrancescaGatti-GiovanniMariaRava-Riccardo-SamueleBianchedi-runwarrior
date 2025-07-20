@@ -80,7 +80,7 @@ public class KillDetection {
      */
     public Rectangle futureArea(Rectangle r1, Character pl) {
         Rectangle futureArea = new Rectangle(playerArea);
-        futureArea.translate(0, pl.getMovementHandler().getSpeedJumpDown());
+        futureArea.translate(0, CharacterMovementHandler.SPEED_JUMP_DOWN);
         return futureArea;
     }
 

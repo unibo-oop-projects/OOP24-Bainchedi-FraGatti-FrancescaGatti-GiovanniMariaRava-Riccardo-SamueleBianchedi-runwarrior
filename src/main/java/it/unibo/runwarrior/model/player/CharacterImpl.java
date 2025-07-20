@@ -14,7 +14,7 @@ import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 /**
  * Class that creates the player.
  */
-public abstract class CharacterImpl implements Character{
+public abstract class CharacterImpl implements Character {
     public static final int TO_TOUCH_FLOOR = 2;
     public static final int SPEED = 5;
     protected int sizeCharacter;
@@ -37,11 +37,14 @@ public abstract class CharacterImpl implements Character{
     protected CharacterMovementHandler movement;
 
     /**
-     * @param panel
-     * @param commands
-     * @param collision
-     * @param mapHandler
-     * @param pFact
+     * Constructor of the player; set player images, first position, 
+     * movement and animation handler and his area.
+     *
+     * @param panel game-loop panel
+     * @param commands object that handles the movement with the keyboard
+     * @param collision object that handles map tiles collision
+     * @param mapHandler object that prints tiles
+     * @param pFact object that prints powerups
      */
     public CharacterImpl(final GameLoopPanel panel, final CharacterComand commands, final CollisionDetection collision, 
     final HandlerMapElement mapHandler, final PowerUpFactoryImpl pFact) {
@@ -57,8 +60,10 @@ public abstract class CharacterImpl implements Character{
     }
 
     /**
-     * @param y
-     * @param tileSize
+     * Used to set the character size
+     *
+     * @param y y coordinate in pixel
+     * @param tileSize tile width and height
      */
     private void setStartY(int y, int tileSize){
         sizeCharacter = tileSize * 2;
@@ -78,7 +83,7 @@ public abstract class CharacterImpl implements Character{
     }
 
     /**
-     * 
+     * Used by SwordWarrior to update swordArea when attacking
      */
     public abstract void updateAttackCollision();
 
