@@ -17,6 +17,7 @@ import it.unibo.runwarrior.controller.EnemySpawner;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.player.NakedWarrior;
+import it.unibo.runwarrior.view.enemy.EnemyViewFactory;
 
 
 public class GameLoopPanel extends JPanel implements Runnable{
@@ -35,7 +36,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
     
     private HandlerMapElement mapHandler;
     private EnemyHandler enemyHandler;
-
+private EnemyViewFactory enemyViewFactory;
     private EnemySpawner enemySpawner;
     private GameMap gameMap;
 
@@ -57,7 +58,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
 
         //GameMap levelOne = GameMap.load(mapOneFileName, imageConfigMapOne);
         //GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
-
+        this.enemyViewFactory = new EnemyViewFactory();
         this.enemyHandler = new EnemyHandler(this);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemiesMap1.txt"));
