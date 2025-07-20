@@ -2,6 +2,8 @@ package it.unibo.runwarrior.controller;
 
 import java.awt.image.BufferedImage;
 
+import it.unibo.runwarrior.model.player.PlayerFrame;
+
 public interface CharacterAnimationHandler {
     
     /**
@@ -14,6 +16,11 @@ public interface CharacterAnimationHandler {
      * @return the player image based on the current frame the player has
      */
     public BufferedImage imagePlayer(boolean rightDirection);
+
+    /**
+     * @return the current frame of the player
+     */
+    public PlayerFrame getFrame();
 
     /**
      * @return true if the player is attacking, i.e. if is active the input from keyboard

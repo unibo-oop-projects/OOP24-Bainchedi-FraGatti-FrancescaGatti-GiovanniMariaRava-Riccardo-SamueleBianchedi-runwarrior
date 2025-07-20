@@ -3,8 +3,10 @@ package it.unibo.runwarrior.model.player;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import it.unibo.runwarrior.controller.CharacterAnimationHandler;
 import it.unibo.runwarrior.controller.CharacterAnimationHandlerImpl;
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.controller.CharacterMovementHandlerImpl;
 import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
@@ -33,8 +35,8 @@ public abstract class CharacterImpl implements Character {
     protected BufferedImage tipL;
 
     protected CharacterComand cmd;
-    protected CharacterAnimationHandlerImpl animation;
-    protected CharacterMovementHandlerImpl movement;
+    protected CharacterAnimationHandler animation;
+    protected CharacterMovementHandler movement;
 
     /**
      * Constructor of the player; set player images, first position, 
@@ -111,12 +113,12 @@ public abstract class CharacterImpl implements Character {
     public abstract void playerImage();
 
     @Override
-    public CharacterMovementHandlerImpl getMovementHandler() {
+    public CharacterMovementHandler getMovementHandler() {
         return this.movement;
     }
 
     @Override
-    public CharacterAnimationHandlerImpl getAnimationHandler() {
+    public CharacterAnimationHandler getAnimationHandler() {
         return this.animation;
     }
 

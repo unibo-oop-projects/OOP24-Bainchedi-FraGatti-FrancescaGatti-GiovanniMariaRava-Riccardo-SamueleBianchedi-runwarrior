@@ -7,7 +7,7 @@ import it.unibo.runwarrior.model.player.PlayerFrame;
 public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler {
 
     private CharacterComand cmd;
-    private CharacterMovementHandlerImpl movement;
+    private CharacterMovementHandler movement;
 
     private final int TIME_TO_CHANGE = 8;
     private final int LIMIT_ATTACK = 60;
@@ -17,7 +17,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
     private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
     private BufferedImage right0, right1, right2, left0, left1, left2, attackR, attackL, tipR, tipL;
 
-    public CharacterAnimationHandlerImpl(CharacterComand cmd, CharacterMovementHandlerImpl move, BufferedImage... im) {
+    public CharacterAnimationHandlerImpl(CharacterComand cmd, CharacterMovementHandler move, BufferedImage... im) {
         this.cmd = cmd;
         this.movement = move;
         right0 = im[0];
@@ -89,7 +89,9 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
         return im;
     }
 
-    
+    public PlayerFrame getFrame(){
+        return this.playerFrame;
+    }
 
     public boolean isAttacking() {
         return playerFrame == PlayerFrame.ATTACK_FRAME ? true : false;
