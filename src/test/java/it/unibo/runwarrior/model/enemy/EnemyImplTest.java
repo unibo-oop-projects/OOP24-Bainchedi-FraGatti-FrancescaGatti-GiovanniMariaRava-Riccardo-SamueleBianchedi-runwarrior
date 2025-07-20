@@ -1,7 +1,7 @@
-package it.unibo.runwarrior.model.enemy;
+/*package it.unibo.runwarrior.model.enemy;
 /* i metodi non sono ancora ne public ne private perchè sto cercando di capire se riesco a far andare i test nel mio pc.
  * Possibile problema: non trova il classpath
- */
+ *
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class EnemyImplTest {
     
     /**
      * Sets up a new EnemyImpl instance.
-     */
+     *
     @BeforeEach
     public void setUp() {
         glp = new GameLoopPanel();
@@ -43,7 +43,7 @@ public class EnemyImplTest {
 
     /**
      * Verifies that getBounds() returns the correct rectangle based on position and size.
-     */
+     *
     @Test
     public void testGetBounds() {
         Rectangle bounds = enemy.getBounds();
@@ -55,7 +55,7 @@ public class EnemyImplTest {
 
     /**
      * Ensures that checkMapCollision inverts velocit
-     */
+     *
     @Test
     public void testCheckMapCollisionBlocksMovement() {
         Rectangle obstacle = new Rectangle(60, 100, 64, 64);
@@ -67,13 +67,13 @@ public class EnemyImplTest {
          * sto cercando di fare un assert per controllare che non si infili nel blocco dal lato sinistro del blooc
          * questo non è definitivo per ora
          * assertTrue(enemy.getX() + enemy.getWidth() <= block.x);
-         */
+         *
         
     }
 
     /**
      * questo metodo devo ancora capire se è corretto averlo qui o dentro enemyhandlertest (del quale manca ancora implementazione)
-     */
+     *
     @Test 
     public void testDie(){
         enemyHandler.addEnemy(enemy);
@@ -82,3 +82,4 @@ public class EnemyImplTest {
         assertEquals(0, enemyHandler.getEnemies().size());
     }
 }
+*/

@@ -11,11 +11,6 @@ import java.util.List;
 import java.util.Set;
 
 import it.unibo.runwarrior.model.enemy.EnemyImpl;
-import it.unibo.runwarrior.model.enemy.Goblin;
-import it.unibo.runwarrior.model.enemy.Guard;
-import it.unibo.runwarrior.model.enemy.Monkey;
-import it.unibo.runwarrior.model.enemy.Snake;
-import it.unibo.runwarrior.model.enemy.Wizard;
 import it.unibo.runwarrior.model.enemy.EnemySpawnPoints;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
@@ -73,7 +68,7 @@ public class EnemySpawner {
             int enemyX = spawnPoint.x()*tileSize;
             if (enemyX >= screenLeft && enemyX <= screenRight && !spawnedEnemies.contains(spawnPoint)) {
                 System.out.println("Spawning enemy of type " + spawnPoint.type() + " at (" + enemyX + ", " + spawnPoint.y()*tileSize + ")");
-                EnemyImpl enemy = createEnemyByType(spawnPoint.type(), enemyX, (spawnPoint.y()*tileSize) + TO_TOUCH_FLOOR);
+                EnemyImpl enemy = new EnemyImpl(enemyX, (spawnPoint.y()*tileSize) + TO_TOUCH_FLOOR, 64,64, true, handler, glp, spawnPoint.type());
                 System.out.println("Enemy created: " + enemy);
                 if (enemy != null) {
                     handler.addEnemy(enemy);
@@ -81,23 +76,6 @@ public class EnemySpawner {
                 }
                 iterator.remove();
             }
-        }
-    }
-
-    /**
-     * @param type
-     * @param x
-     * @param y
-     * @return a new Enemy Object depending on the number passed
-     */
-    private EnemyImpl createEnemyByType(int type, int x, int y) {
-        switch (type) {
-            case 1: return new Guard(x, y, 64, 64, true, handler, glp);
-            case 2: return new Snake(x, y, 64, 64, true, handler, glp);
-            case 3: return new Wizard(x, y, 64, 64, true, handler,glp);
-            case 4: return new Goblin(x, y, 64, 64, true, handler,glp);
-            case 5: return new Monkey(x, y, 64, 64, true, handler, glp);
-            default: return null;
         }
     }
 

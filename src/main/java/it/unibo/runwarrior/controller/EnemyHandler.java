@@ -6,12 +6,15 @@ import java.util.*;
 
 import it.unibo.runwarrior.model.enemy.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
+import it.unibo.runwarrior.view.enemy.EnemyViewFactory;
 
 public class EnemyHandler {
-    public LinkedList<EnemyImpl> enemies;
+    private LinkedList<EnemyImpl> enemies;
+    private EnemyViewFactory viewFactory;
 
     GameLoopPanel glp;
-    public EnemyHandler (GameLoopPanel glp){
+    public EnemyHandler (GameLoopPanel glp, EnemyViewFactory viewFactory){
+        this.viewFactory = viewFactory;
         this.glp = glp;
         this.enemies = new LinkedList<>();
     }
@@ -19,7 +22,7 @@ public class EnemyHandler {
 
     public void render(Graphics g){
         for (EnemyImpl enemy : enemies) {
-            enemy.render(g);
+            viewFactory.get(enemy.getType()).render(g, enemy);
         }
     }
 

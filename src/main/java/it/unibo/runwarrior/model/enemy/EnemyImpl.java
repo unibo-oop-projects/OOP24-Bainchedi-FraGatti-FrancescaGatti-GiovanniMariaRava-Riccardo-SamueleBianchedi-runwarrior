@@ -9,12 +9,13 @@ import it.unibo.runwarrior.controller.EnemyHandler;
 import it.unibo.runwarrior.model.PowerUpImpl;
 
 
-public abstract class EnemyImpl implements Enemy{
+public class EnemyImpl implements Enemy{
     private final static int NUM_UPDATE_FRAME = 20;
     public int x;
     public int y;
     public int width; 
     public int height;
+    public int type;
     public int frameCounter = 0;
     public boolean step = false;
 
@@ -30,15 +31,16 @@ public abstract class EnemyImpl implements Enemy{
     private PowerUpImpl powerUp;
 
     
-    public EnemyImpl(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp) {
+    public EnemyImpl(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp, int type) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.solid = solid;
         this.enemyHandler = handler;
-        
+        this.type = type;
         this.glp = glp;
+        setVelocityX(1);
     }
 
     @Override
@@ -121,6 +123,9 @@ public abstract class EnemyImpl implements Enemy{
     }
     public void setImage(BufferedImage image) {
         this.image = image;
+    }
+    public int getType(){
+        return type;
     }
 
 
