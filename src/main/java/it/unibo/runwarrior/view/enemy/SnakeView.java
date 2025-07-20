@@ -36,8 +36,18 @@ public class SnakeView implements EnemyView{
 
     @Override
     public void render(Graphics g, EnemyImpl enemy) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'render'");
+        BufferedImage currentImage;
+
+        if (enemy.velocityX > 0) {
+            currentImage = enemy.step ? rightSnakeMoving : rightSnake;
+        } else {
+            currentImage = enemy.step ? leftSnakeMoving : leftSnake;
+        }
+
+        int shift = glp.getMapHandler().getShift(); 
+        //System.out.println("SNAKE XS: " + (x+shift)+ "X:"+ x);
+        g.drawImage(currentImage, enemy.x + shift , enemy.y, enemy.width, enemy.height, null);
+
     }
     
 }
