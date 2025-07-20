@@ -51,11 +51,11 @@ public class KillDetection {
                 else if ((playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x) &&
                         System.currentTimeMillis() - hitWaitTime > 3000) {
                     hitWaitTime = System.currentTimeMillis();
-                    glp.getPowersHandler().losePower();
+                    glp.getPowersHandler().losePower(true);
                 }
                 else if (playerArea.x <= enemy.getBounds().x + enemy.getBounds().width && System.currentTimeMillis() - hitWaitTime > 3000) {
                     hitWaitTime = System.currentTimeMillis();
-                    glp.getPowersHandler().losePower();
+                    glp.getPowersHandler().losePower(true);
                 }
             }
             else if (player.getSwordArea().intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking() &&

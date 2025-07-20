@@ -6,6 +6,7 @@ import java.util.List;
 
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.CharacterImpl;
+import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.model.MapElement;
 
 /**
@@ -18,6 +19,8 @@ public class CollisionDetection {
     private int tileSize;
     private ArrayList<String> directions = new ArrayList<>();
     private Rectangle playerArea;
+    private GameLoopPanel glp;
+    private long hitWaitTime;
 
     /**
      * Constructor of the collision detection.
@@ -26,10 +29,11 @@ public class CollisionDetection {
      * @param blocks list of the block types
      * @param tileSize size of the tile
      */
-    public CollisionDetection(final int map[][], final List<MapElement> blocks, final int tileSize) {
+    public CollisionDetection(final int map[][], final List<MapElement> blocks, final int tileSize, final GameLoopPanel glp) {
         this.map = map;
         this.blocks = blocks;
         this.tileSize = tileSize;
+        this.glp = glp;
     }
 
     /**
@@ -79,6 +83,11 @@ public class CollisionDetection {
         if (blocks.get(blockIndex).getCollision() || y <= 0){
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
+            }
+            if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > 3000){
+                player.getMovementHandler().setJumpKill();
+                hitWaitTime = System.currentTimeMillis();
+                glp.getPowersHandler().losePower(false);
             }
             return true;
         } else {
@@ -144,5 +153,9 @@ public class CollisionDetection {
                 return true;
         }
         return false;
+    }
+
+    public long getHitWaitTime() {
+        return this.hitWaitTime;
     }
 }

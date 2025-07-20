@@ -37,7 +37,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private PowersHandler powerUpsHandler;
     private PowerUpFactoryImpl powersFactory;
     private CollisionDetection collisionDetection;
-    
+
     private HandlerMapElement mapHandler;
     private EnemyHandler enemyHandler;
     private EnemyViewFactory enemyViewFactory;
@@ -52,7 +52,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.gameMap = GameMap.load("Map_1/map_1.txt", "Map_1/forest_theme.txt");
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
-        this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks(), mapHandler.getTileSize());
+        this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks(), mapHandler.getTileSize(), this);
         this.powersFactory = new PowerUpFactoryImpl(this, mapHandler, gameMap.getMapData());
         this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler, powersFactory);
         // String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
@@ -141,8 +141,11 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
         this.player = pl;
-        System.out.println(player.getClass());
         this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
+    }
+
+    public CollisionDetection getCollisionDetection() {
+        return this.collisionDetection;
     }
 
     public PowersHandler getPowersHandler() {

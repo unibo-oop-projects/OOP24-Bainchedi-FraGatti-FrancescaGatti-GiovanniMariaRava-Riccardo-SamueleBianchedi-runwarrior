@@ -43,7 +43,6 @@ public class PowersHandler {
 
     public void setPowers(){
         if(index < maxIndex && index >= 0){
-            System.out.println("ciao");
             this.index++;
             int realx = glp.getPlayer().getMovementHandler().getPlX();
             int x = glp.getPlayer().getMovementHandler().getScX();
@@ -53,14 +52,15 @@ public class PowersHandler {
         }
     }
 
-    public void losePower(){
+    public void losePower(boolean enemy){
         this.index--;
         if(index >= 0){
             int realx = glp.getPlayer().getMovementHandler().getPlX();
             int x = glp.getPlayer().getMovementHandler().getScX();
             int y = glp.getPlayer().getMovementHandler().getPlY();
             int shift = glp.getPlayer().getMovementHandler().getGroundX();
-            long lastHit = glp.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime();
+            long lastHit = enemy ? glp.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime() 
+            : glp.getCollisionDetection().getHitWaitTime();
             glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift, lastHit);
         }
     }
