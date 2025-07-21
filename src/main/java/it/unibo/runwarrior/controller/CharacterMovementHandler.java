@@ -48,6 +48,11 @@ public interface CharacterMovementHandler {
      */
     public boolean canAttack();
 
+     /**
+     * @return map tiles collision object
+     */
+    public CollisionDetection getCollisionDetection();
+
     /**
      * @return kill detection object
      */

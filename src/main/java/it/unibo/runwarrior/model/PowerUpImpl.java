@@ -3,10 +3,9 @@ package it.unibo.runwarrior.model;
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
 import it.unibo.runwarrior.view.GameLoopPanel;
+
 /**
  * Implementation of the powerup object
  */

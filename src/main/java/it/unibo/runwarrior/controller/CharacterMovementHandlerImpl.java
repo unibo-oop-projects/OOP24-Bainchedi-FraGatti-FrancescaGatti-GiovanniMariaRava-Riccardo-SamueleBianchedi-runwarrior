@@ -175,6 +175,10 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         return this.canAttack;
     }
 
+    public CollisionDetection getCollisionDetection() {
+        return this.collisionDetection;
+    }
+
     public KillDetection getKillDetection() {
         return this.killDetection;
     }
