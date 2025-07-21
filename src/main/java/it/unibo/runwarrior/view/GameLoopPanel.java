@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CoinController;
-import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowersHandler;
 import it.unibo.runwarrior.controller.EnemyHandler;
@@ -36,14 +35,12 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private CharacterComand commands;
     private PowersHandler powerUpsHandler;
     private PowerUpFactoryImpl powersFactory;
-    private CollisionDetection collisionDetection;
 
     private HandlerMapElement mapHandler;
     private EnemyHandler enemyHandler;
     private EnemyViewFactory enemyViewFactory;
     private EnemySpawner enemySpawner;
     private GameMap gameMap;
-
     private CoinController coinController;
 
    // private GameMusic music;
@@ -52,9 +49,8 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.gameMap = GameMap.load("Map_1/map_1.txt", "Map_1/forest_theme.txt");
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
-        this.collisionDetection = new CollisionDetection(gameMap.getMapData(), mapHandler.getBlocks(), mapHandler.getTileSize(), this);
         this.powersFactory = new PowerUpFactoryImpl(this, mapHandler, gameMap.getMapData());
-        this.powerUpsHandler = new PowersHandler(this, commands, collisionDetection, mapHandler, powersFactory);
+        this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powersFactory);
         // String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
         // String mapTwoFileName = "src/main/resources/Map_2/map_2.txt";
         // String imageConfigMapOne = "src/main/resources/Map_1/forest_theme.txt";
@@ -74,7 +70,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.addKeyListener(commands);
         this.setFocusable(true);
 
-        this.coinController = new CoinController();
+        this.coinController = new CoinController(player);
         List<int[]> coords = coinController.loadCoinFromFile("\\Coins\\CoinCoordinates_map1.txt");
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
@@ -131,7 +127,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * To be connected with the shop
      */
     public void initializePlayer() {
-        player = new NakedWizard(this, commands, collisionDetection, mapHandler, powersFactory);
+        player = new NakedWizard(this, commands, mapHandler, powersFactory);
         powerUpsHandler.setIndex();
     }
 
@@ -142,10 +138,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
     public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
         this.player = pl;
         this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
-    }
-
-    public CollisionDetection getCollisionDetection() {
-        return this.collisionDetection;
     }
 
     public PowersHandler getPowersHandler() {

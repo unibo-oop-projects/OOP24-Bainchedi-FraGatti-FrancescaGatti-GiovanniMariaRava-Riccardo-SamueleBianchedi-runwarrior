@@ -20,14 +20,14 @@ public class PowersHandler {
     private int maxIndex;
     public List<Character> everyPowerUp = new ArrayList<>();
 
-    public PowersHandler(GameLoopPanel glp, CharacterComand cmd, CollisionDetection coll, HandlerMapElement mapH, PowerUpFactoryImpl pFact){
+    public PowersHandler(GameLoopPanel glp, CharacterComand cmd, HandlerMapElement mapH, PowerUpFactoryImpl pFact){
         this.glp = glp;
-        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd, coll, mapH, pFact),
-        new ArmourWarrior(glp, cmd, coll, mapH, pFact),
-        new SwordWarrior(glp, cmd, coll, mapH, pFact), 
-        new NakedWizard(glp, cmd, coll, mapH, pFact), 
-        new ArmourWizard(glp, cmd, coll, mapH, pFact), 
-        new StickWizard(glp, cmd, coll, mapH, pFact)));
+        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd, mapH, pFact),
+        new ArmourWarrior(glp, cmd, mapH, pFact),
+        new SwordWarrior(glp, cmd, mapH, pFact), 
+        new NakedWizard(glp, cmd, mapH, pFact), 
+        new ArmourWizard(glp, cmd, mapH, pFact), 
+        new StickWizard(glp, cmd, mapH, pFact)));
     }
 
     public void setIndex(){
@@ -60,7 +60,7 @@ public class PowersHandler {
             int y = glp.getPlayer().getMovementHandler().getPlY();
             int shift = glp.getPlayer().getMovementHandler().getGroundX();
             long lastHit = enemy ? glp.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime() 
-            : glp.getCollisionDetection().getHitWaitTime();
+            : glp.getPlayer().getMovementHandler().getCollisionDetection().getHitWaitTime();
             glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift, lastHit);
         }
     }

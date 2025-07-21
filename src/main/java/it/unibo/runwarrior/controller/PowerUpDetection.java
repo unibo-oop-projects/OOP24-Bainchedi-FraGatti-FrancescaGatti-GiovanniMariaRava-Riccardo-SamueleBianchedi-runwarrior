@@ -20,15 +20,13 @@ public class PowerUpDetection {
         this.pFact = pUpFact;
     }
 
-    public String checkCollisionWithPowers(Character player, CharacterMovementHandlerImpl move){
+    public String checkCollisionWithPowers(Character player, CharacterMovementHandler move){
         powerCollision.addAll(pFact.getPowerUps());
         Rectangle playerArea = player.getArea();
         String dir = "";
         for(PowerUpImpl pUp : powerCollision){
-            if(touch(playerArea, pUp.getTouchArea()) && !pUp.getTouchArea().isEmpty()){
-                if(playerArea.y + playerArea.height == pUp.getTouchArea().y &&
-                    ((playerArea.x + toll >= pUp.getTouchArea().x && playerArea.x + toll <= pUp.getTouchArea().x + pUp.getTouchArea().width) ||
-                     (playerArea.x + playerArea.width - toll >= pUp.getTouchArea().x && playerArea.x + playerArea.width - toll <= pUp.getTouchArea().x + pUp.getTouchArea().width))){
+            if(futureArea(playerArea).intersects(pUp.getTouchArea()) && !pUp.getTouchArea().isEmpty()){
+                if(isTouchingUp(playerArea, pUp.getTouchArea())){
                     dir = "up";
                     if(pUp.isEggOpen() && !pUp.isPowerTaken() && System.currentTimeMillis() - hitWaitTime > 200){
                         glp.getPowersHandler().setPowers();
@@ -59,8 +57,22 @@ public class PowerUpDetection {
         return dir;
     }
 
-    public boolean touch(Rectangle r1, Rectangle r2) {
-        Rectangle expanded = new Rectangle(r2.x - 1, r2.y - 1, r2.width + 1, r2.height + 1);
-        return expanded.intersects(r1);
+    /**
+     * Creates the future area of the falling player
+     *
+     * @param r1 collision area
+     * @param pl player
+     * @return the collision area the player will have
+     */
+    public Rectangle futureArea(Rectangle r1) {
+        Rectangle futureArea = new Rectangle(r1);
+        futureArea.translate(0, CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
+        return futureArea;
+    }
+
+    public boolean isTouchingUp(Rectangle playerArea, Rectangle pUpArea){
+        return playerArea.y + playerArea.height <= pUpArea.y && 
+        ((playerArea.x + toll >= pUpArea.x && playerArea.x + toll <= pUpArea.x + pUpArea.width) ||
+        (playerArea.x + playerArea.width - toll >= pUpArea.x && playerArea.x + playerArea.width - toll <= pUpArea.x + pUpArea.width));
     }
 }

@@ -10,12 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.Coin;
+import it.unibo.runwarrior.view.GameLoopPanel;
 public class CoinController {
+    private Character player;
+    public int groundX;
     List<Coin> coinList;
-    public CoinController(){
+    public CoinController(Character player){
         coinList = new ArrayList<>(); 
+        this.player = player;
     }
 
     public List<int[]> loadCoinFromFile(String pathFile){
@@ -58,12 +62,14 @@ public class CoinController {
     }
 
     public void drawAllCoins(Graphics g, int tileSize){
+        groundX = player.getMovementHandler().getGroundX();
         for(Coin coin : coinList){
             if(!coin.isCollected()){
-                System.out.println("Disegno moneta a colonna " + coin.getCol() + ", riga " + coin.getRow());
                 int x = coin.getCol() * tileSize;
                 int y = coin.getRow() * tileSize;
-                g.drawImage(coin.coinImage, x, y, tileSize, tileSize, null);
+                if(x+tileSize > 0 && x < GameLoopPanel.WIDTH){
+                    g.drawImage(coin.coinImage, x + groundX, y, tileSize, tileSize, null);
+                }
             }
         }
     }

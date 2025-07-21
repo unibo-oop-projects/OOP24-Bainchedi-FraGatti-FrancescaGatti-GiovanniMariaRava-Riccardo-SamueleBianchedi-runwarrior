@@ -37,14 +37,12 @@ public class KillDetection {
      * @param player current player
      */
     public void checkCollisionWithEnemeies(Character player) {
-        System.out.println("index "+glp.getPowersHandler().getPowers());
         playerArea = player.getArea();
+        Rectangle swordArea = player.getSwordArea();
         for (EnemyImpl enemy : glp.getEnemyHandler().getEnemies()) {
-            if (futureArea(playerArea, player).intersects(enemy.getBounds())) {
+            if (futureArea(playerArea).intersects(enemy.getBounds())) {
                 System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
-                if (playerArea.y + playerArea.height <= enemy.getBounds().y &&
-                    ((playerArea.x + toll >= enemy.getBounds().x && playerArea.x + toll <= enemy.getBounds().x + enemy.getBounds().width) ||
-                     (playerArea.x + playerArea.width - toll >= enemy.getBounds().x && playerArea.x + playerArea.width - toll <= enemy.getBounds().x + enemy.getBounds().width))) {
+                if (isTouchingUp(playerArea, enemy.getBounds())) {
                     player.getMovementHandler().setJumpKill();
                     enemy.die();
                 }
@@ -58,13 +56,13 @@ public class KillDetection {
                     glp.getPowersHandler().losePower(true);
                 }
             }
-            else if (player.getSwordArea().intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking() &&
-                    !isBehindTile(player.getSwordArea().x + hM.getTileSize()/2, player.getSwordArea().y) &&
-                    !isBehindTile(player.getSwordArea().x + player.getSwordArea().width - hM.getTileSize()/2, player.getSwordArea().y)) {
-                if ((player.getSwordArea().x + player.getSwordArea().width >= enemy.getBounds().x && player.getSwordArea().x < enemy.getBounds().x)) {
+            else if (swordArea.intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking() &&
+                    !isBehindTile(swordArea.x + hM.getTileSize()/2, swordArea.y + (swordArea.height / 2)) &&
+                    !isBehindTile(swordArea.x + swordArea.width - hM.getTileSize()/2, swordArea.y + (swordArea.height / 2))) {
+                if ((swordArea.x + swordArea.width >= enemy.getBounds().x && swordArea.x < enemy.getBounds().x)) {
                     enemy.die();
                 }
-                else if (player.getSwordArea().x <= enemy.getBounds().x + enemy.getBounds().width) {
+                else if (swordArea.x <= enemy.getBounds().x + enemy.getBounds().width) {
                     enemy.die();
                 }
             }
@@ -78,10 +76,16 @@ public class KillDetection {
      * @param pl player
      * @return the collision area the player will have
      */
-    public Rectangle futureArea(Rectangle r1, Character pl) {
-        Rectangle futureArea = new Rectangle(playerArea);
+    public Rectangle futureArea(Rectangle r1) {
+        Rectangle futureArea = new Rectangle(r1);
         futureArea.translate(0, CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
         return futureArea;
+    }
+
+    public boolean isTouchingUp(Rectangle playerArea, Rectangle enemyArea){
+        return playerArea.y + playerArea.height <= enemyArea.y && 
+        ((playerArea.x + toll >= enemyArea.x && playerArea.x + toll <= enemyArea.x + enemyArea.width) ||
+        (playerArea.x + playerArea.width - toll >= enemyArea.x && playerArea.x + playerArea.width - toll <= enemyArea.x + enemyArea.width));
     }
 
     /**
@@ -94,13 +98,10 @@ public class KillDetection {
     public boolean isBehindTile(int x, int y) {
         float indexXtile = x / hM.getTileSize();
         float indexYtile = y / hM.getTileSize();
-        System.out.println(indexXtile + " " + indexYtile);
         int blockIndex = hM.getMap()[(int) indexYtile][(int) indexXtile];
         if (hM.getBlocks().get(blockIndex).getCollision()) {
-            System.out.println("si");
             return true;
         }
-        System.out.println("no");
         return false;
     }
 

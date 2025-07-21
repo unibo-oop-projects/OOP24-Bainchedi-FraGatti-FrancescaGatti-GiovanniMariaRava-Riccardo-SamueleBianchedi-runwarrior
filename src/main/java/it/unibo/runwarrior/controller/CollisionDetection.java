@@ -137,7 +137,7 @@ public class CollisionDetection {
         else if (x + CharacterImpl.SPEED >= tileRec.x + tileRec.width) {
             direction = "left";
         }
-        System.out.println("- " + x + " " + y + " - - " + direction + " - " + indexXtile + " " + indexYtile);
+        //System.out.println("- " + x + " " + y + " - - " + direction + " - " + indexXtile + " " + indexYtile);
         return direction;
     }
 

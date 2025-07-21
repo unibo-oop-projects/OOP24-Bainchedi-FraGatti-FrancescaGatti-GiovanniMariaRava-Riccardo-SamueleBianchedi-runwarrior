@@ -5,17 +5,31 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.controller.CharacterComand;
-import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
-public class NakedWarrior extends CharacterImpl{
-    
-    public NakedWarrior(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision, HandlerMapElement mapHandler, PowerUpFactoryImpl pFact) {
-        super(panel, commands, collision, mapHandler, pFact);
+/**
+ * Implementation of the warrior with cape and stick.
+ */
+public class NakedWarrior extends CharacterImpl {
+
+    /**
+     * Constructor of this skin.
+     *
+     * @param panel game-loop panel
+     * @param commands object that handles keyboard input
+     * @param mapHandler object that prints tiles
+     * @param pFact object that prints powerups
+     */
+    public NakedWarrior(final GameLoopPanel panel, final CharacterComand commands, 
+    final HandlerMapElement mapHandler, final PowerUpFactoryImpl pFact) {
+        super(panel, commands, mapHandler, pFact);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void playerImage() {
         try {
@@ -29,13 +43,16 @@ public class NakedWarrior extends CharacterImpl{
             jumpL = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/jumpLeftN.png"));
             attackR = right0;
             attackL = left0;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateAttackCollision(){
+    public void updateAttackCollision() {
         // cannot attack
     }
 }
