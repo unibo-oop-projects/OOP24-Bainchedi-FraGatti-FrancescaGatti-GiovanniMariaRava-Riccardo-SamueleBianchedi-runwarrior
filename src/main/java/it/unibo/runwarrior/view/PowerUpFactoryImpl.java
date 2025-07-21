@@ -37,7 +37,6 @@ public class PowerUpFactoryImpl {
             while (map[row][distance] != 2 && map[row][distance] != 1 && map[row][distance] != 3) {
                 row++;
             }
-            System.out.println(" -");
             p.getTouchArea().setBounds(distance * tileSize, (row - 1) * tileSize, tileSize, tileSize);
             powerUps.add(p);
             distance = distance + space;
