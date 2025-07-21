@@ -3,6 +3,8 @@ package it.unibo.runwarrior.view.enemy;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.unibo.runwarrior.view.enemy.api.EnemyView;
+
 public class EnemyViewFactory {
     private final Map<Integer, EnemyView> viewsByType = new HashMap<>();
 

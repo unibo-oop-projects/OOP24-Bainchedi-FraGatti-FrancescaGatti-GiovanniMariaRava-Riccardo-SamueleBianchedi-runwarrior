@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.model.enemy.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
+import it.unibo.runwarrior.view.enemy.api.EnemyView;
 
 public class GoblinView implements EnemyView{
     private BufferedImage rightGoblin;
