@@ -6,7 +6,7 @@ import java.util.List;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.model.enemy.EnemyImpl;
+import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 /**
