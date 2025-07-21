@@ -8,17 +8,18 @@ import java.util.List;
  */
 public interface EnemyHandler {
     /**
-     * update the enemies frame
+     * Update the enemies frame
      */
     public void update();
     /**
+     * Call the view part to render the enemies
      * @param g is graphics used in the rendering part
-     * call the view part to render the enemies
      */
     public void render(Graphics g);
     /**
-     * @param mapObstacles give the position of the obstacles
-     * update the enemies checking if the enemy is in the view and if it is not colliding
+     * Updates the state of all enemies and handles their collision with the map.
+     * Removes enemies that are not on the screen 
+     * @param mapObstacles a list of rectangular objects representing obstacles on the map
      */
     public void updateWithMap(List<Rectangle> mapObstacles);
 }
