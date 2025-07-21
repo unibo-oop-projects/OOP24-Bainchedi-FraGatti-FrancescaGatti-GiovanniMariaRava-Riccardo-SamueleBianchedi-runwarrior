@@ -7,51 +7,90 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
-
-public class PowerUpImpl {
+/**
+ * Implementation of the powerup object
+ */
+public class PowerUpImpl implements PowerUp {
     
     private BufferedImage image;
+    private BufferedImage egg;
     private Rectangle touchArea;
     private GameLoopPanel glp;
-    private boolean powerTaken = false;
+    private boolean powerTaken;
+    private boolean eggOpen;
 
-    public PowerUpImpl(GameLoopPanel glp){
+    /**
+     * Constructor that creates powerup area and set the egg image
+     *
+     * @param glp game-loop panel
+     */
+    public PowerUpImpl(GameLoopPanel glp) {
         this.glp = glp;
         touchArea = new Rectangle();
+        try {
+            egg = ImageIO.read(getClass().getResourceAsStream("/PowerUps/egg.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void powerUpImage(){
+    @Override
+    public void powerUpImage() {
         try{
-            if(glp.getPowersHandler().getPowers() == 0){
+            if (glp.getPowersHandler().getPowers() == 0) {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/armour.png"));
             }
-            if(glp.getPowersHandler().getPowers() == 1){
+            if (glp.getPowersHandler().getPowers() == 1) {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/sword.png"));
+            }
+            if (glp.getPowersHandler().getPowers() == 3) {
+                image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/cape.png"));
+            }
+            if (glp.getPowersHandler().getPowers() == 4) {
+                image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/stick.png"));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public BufferedImage getImage(){
+    @Override
+    public BufferedImage getImage() {
         return this.image;
     }
 
-    public void setTouchArea(Rectangle deathPosition){
+    @Override
+    public BufferedImage getEgg() {
+        return this.egg;
+    }
+
+    @Override
+    public void setTouchArea(final Rectangle deathPosition) {
         this.touchArea = deathPosition;
     }
 
-    public Rectangle getTouchArea(){
+    @Override
+    public Rectangle getTouchArea() {
         return touchArea;
     }
 
-    public boolean getPower(){
+    @Override
+    public boolean isPowerTaken() {
         return powerTaken;
     }
 
-    //sarà usato da PowerUpDetection, in cui andrò a gestire il player coi powerUP
-    public void takePower(){
+    @Override
+    public boolean isEggOpen() {
+        return eggOpen;
+    }
+
+    @Override
+    public void takePower() {
         powerTaken = true;
     }
-    //mentre in KillDetection si gestirà il player con gli enemies, in cui verrà richiamato il metodo die() di EnemyImpl
+
+    @Override
+    public void openTheEgg() {
+        eggOpen = true;
+    }
 }
