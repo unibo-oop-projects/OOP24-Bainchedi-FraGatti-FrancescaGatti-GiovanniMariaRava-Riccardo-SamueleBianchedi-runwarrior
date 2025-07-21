@@ -10,8 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import it.unibo.runwarrior.model.enemy.EnemyImpl;
-import it.unibo.runwarrior.model.enemy.EnemySpawnPoints;
+import it.unibo.runwarrior.model.enemy.api.EnemySpawnPoints;
+import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.controller.EnemyHandler;
 

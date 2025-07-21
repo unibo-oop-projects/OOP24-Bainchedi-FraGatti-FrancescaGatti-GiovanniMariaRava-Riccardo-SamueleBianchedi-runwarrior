@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import it.unibo.runwarrior.controller.EnemyHandler;
+import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.EnemyViewFactory;
 

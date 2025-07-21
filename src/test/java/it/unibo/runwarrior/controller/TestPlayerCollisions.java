@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.runwarrior.model.GameMap;
-import it.unibo.runwarrior.model.enemy.EnemyImpl;
+import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.ArmourWarrior;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.CharacterImpl;

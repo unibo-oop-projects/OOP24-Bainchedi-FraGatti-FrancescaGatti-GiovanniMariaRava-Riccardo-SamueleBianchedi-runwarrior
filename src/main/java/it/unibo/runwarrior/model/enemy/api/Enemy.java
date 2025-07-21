@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model.enemy;
+package it.unibo.runwarrior.model.enemy.api;
 
 import java.awt.Rectangle;
 import java.util.List;
