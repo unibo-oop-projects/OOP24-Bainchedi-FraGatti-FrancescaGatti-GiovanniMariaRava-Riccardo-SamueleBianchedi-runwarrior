@@ -17,7 +17,7 @@ import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.player.NakedWarrior;
 import it.unibo.runwarrior.model.player.NakedWizard;
-import it.unibo.runwarrior.view.enemy.EnemyViewFactory;
+import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
 import it.unibo.runwarrior.view.enemy.impl.GoblinView;
 import it.unibo.runwarrior.view.enemy.impl.GuardView;
 import it.unibo.runwarrior.view.enemy.impl.MonkeyView;
@@ -38,7 +38,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     private HandlerMapElement mapHandler;
     private EnemyHandler enemyHandler;
-    private EnemyViewFactory enemyViewFactory;
+    private EnemyViewFactoryImpl enemyViewFactory;
     private EnemySpawner enemySpawner;
     private GameMap gameMap;
     private CoinController coinController;
@@ -58,7 +58,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
         //GameMap levelOne = GameMap.load(mapOneFileName, imageConfigMapOne);
         //GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
-        this.enemyViewFactory = new EnemyViewFactory();
+        this.enemyViewFactory = new EnemyViewFactoryImpl();
         initializeEnemyViewFactory();
         this.enemyHandler = new EnemyHandler(this, this.enemyViewFactory);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
