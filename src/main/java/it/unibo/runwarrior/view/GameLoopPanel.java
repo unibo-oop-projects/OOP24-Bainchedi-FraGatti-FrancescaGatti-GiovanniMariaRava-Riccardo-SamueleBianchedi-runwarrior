@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowersHandler;
@@ -43,6 +44,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private GameMap gameMap;
 
     private CoinController coinController;
+    private CharacterMovementHandler characterMovementHandler;
 
    // private GameMusic music;
 
@@ -72,7 +74,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.addKeyListener(commands);
         this.setFocusable(true);
 
-        this.coinController = new CoinController();
+        this.coinController = new CoinController(player);
         List<int[]> coords = coinController.loadCoinFromFile("\\Coins\\CoinCoordinates_map1.txt");
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
