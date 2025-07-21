@@ -5,14 +5,21 @@ import java.util.Map;
 
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 import it.unibo.runwarrior.view.enemy.api.EnemyViewFactory;
-
-public class EnemyViewFactoryImpl implements EnemyViewFactory{
+/**
+ * Implements the ENemyViewFactory method and map the enemies
+ */
+public class EnemyViewFactoryImpl implements EnemyViewFactory {
     private final Map<Integer, EnemyView> viewsByType = new HashMap<>();
-
-    public void register(int type, EnemyView view) {
+    /**
+     *{@inheritDoc} 
+     */
+    public void register(final int type, final EnemyView view) {
         viewsByType.put(type, view);
     }
-    public EnemyView get(int type) {
+    /**
+     *{@inheritDoc} 
+     */
+    public EnemyView get(final int type) {
         return viewsByType.get(type);
     }
 }
