@@ -73,7 +73,7 @@ public class GameLoopPanel extends JPanel implements Runnable{
         this.setFocusable(true);
 
         this.coinController = new CoinController();
-        List<int[]> coords = coinController.loadCoinFromFIle("CoinCoordinates_map1.txt");
+        List<int[]> coords = coinController.loadCoinFromFile("CoinCoordinates_map1.txt");
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
         }
@@ -118,8 +118,8 @@ public class GameLoopPanel extends JPanel implements Runnable{
         player.drawPlayer(gr2);
         player.drawRectangle(gr2);
         enemyHandler.render(gr2);
-        gr2.dispose();
         coinController.drawAllCoins(gr2, mapHandler.getTileSize());
+        gr2.dispose();
     }
 
     public void initializePlayer(){

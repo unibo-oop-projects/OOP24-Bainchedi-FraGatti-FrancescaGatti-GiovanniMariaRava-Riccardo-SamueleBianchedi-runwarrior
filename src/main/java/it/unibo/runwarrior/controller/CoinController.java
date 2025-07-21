@@ -17,7 +17,7 @@ public class CoinController {
         coinList = new ArrayList<>(); 
     }
 
-    public List<int[]> loadCoinFromFIle(String pathFile){
+    public List<int[]> loadCoinFromFile(String pathFile){
         List<int[]> coinCoordinates = new ArrayList<>();
         try(BufferedReader fileReader = new BufferedReader(new FileReader(pathFile))){
             String line; 
@@ -37,7 +37,7 @@ public class CoinController {
     }
 
     public void initCoinsFromFile(String pathFile){
-        List<int[]> coords = loadCoinFromFIle("CoinCoordinates_map1.txt");
+        List<int[]> coords = loadCoinFromFile("CoinCoordinates_map1.txt");
         for(int[] coord : coords){
             int row = coord[0];
             int col = coord[1];
@@ -54,6 +54,7 @@ public class CoinController {
     public void drawAllCoins(Graphics g, int tileSize){
         for(Coin coin : coinList){
             if(!coin.isCollected()){
+                System.out.println("Disegno moneta a colonna " + coin.getCol() + ", riga " + coin.getRow());
                 int x = coin.getCol() * tileSize;
                 int y = coin.getRow() * tileSize;
                 g.drawImage(coin.coinImage, x, y, tileSize, tileSize, null);

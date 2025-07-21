@@ -21,6 +21,11 @@ public class Coin {
     public void loadCoinImage(){
         try{
                 coinImage = ImageIO.read(getClass().getResourceAsStream("/Coins/CoinSmall.png"));
+                if (coinImage == null) {
+                    System.out.println("Immagine moneta non trovata (coinImage è null)");
+                } else {
+                    System.out.println("Immagine moneta caricata correttamente");
+                }
             }catch(IOException e){
                 e.printStackTrace();
             }
