@@ -5,16 +5,15 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.controller.CharacterComand;
-import it.unibo.runwarrior.controller.CollisionDetection;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public class NakedWizard extends CharacterImpl{
 
-    public NakedWizard(GameLoopPanel panel, CharacterComand commands, CollisionDetection collision,
+    public NakedWizard(GameLoopPanel panel, CharacterComand commands,
             HandlerMapElement mapHandler, PowerUpFactoryImpl pFact) {
-        super(panel, commands, collision, mapHandler, pFact);
+        super(panel, commands, mapHandler, pFact);
     }
 
     @Override

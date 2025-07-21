@@ -35,7 +35,7 @@ public class TestPlayerCollisions {
         GameMap gameMap1 = GameMap.load(string1Map1, string2Map1);
         HandlerMapElement mapHandler1 = new HandlerMapElement(gameMap1);
         collisionTiles = new CollisionDetection(gameMap1.getMapData(), mapHandler1.getBlocks(), mapHandler1.getTileSize(), glp);
-        Character player = new NakedWarrior(glp, null, collisionTiles, mapHandler1, null);
+        Character player = new NakedWarrior(glp, null, mapHandler1, null);
         collisionTiles.checkCollision(player);
         assertTrue(collisionTiles.touchSolid((8 * mapHandler1.getTileSize()), (16 * mapHandler1.getTileSize()), player, false));
         assertFalse(collisionTiles.touchSolid((39 * mapHandler1.getTileSize()), (14 * mapHandler1.getTileSize()), player, false));

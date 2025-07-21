@@ -11,9 +11,9 @@ import it.unibo.runwarrior.model.player.CharacterImpl;
 public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private GameLoopPanel glp;
     private CharacterComand cmd;
-    private CollisionDetection collisionDetection;
     private Character player;
     private HandlerMapElement mapHandler;
+    private CollisionDetection collisionDetection;
     private PowerUpDetection pUpDetection;
     private KillDetection killDetection;
 
@@ -49,12 +49,14 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * @param hM object that prints tiles
      * @param pFact object that prints powerups
      */
-    public CharacterMovementHandlerImpl(GameLoopPanel panel, Character player, CharacterComand cmd, CollisionDetection collDet, HandlerMapElement hM, PowerUpFactoryImpl pFact){
+    public CharacterMovementHandlerImpl(GameLoopPanel panel, Character player, CharacterComand cmd,
+     HandlerMapElement hM, PowerUpFactoryImpl pFact) {
         this.glp = panel;
         this.cmd = cmd;
-        this.collisionDetection = collDet; 
+        //this.collisionDetection = collDet; 
         this.player = player;
         this.mapHandler = hM;
+        this.collisionDetection = new CollisionDetection(hM.getMap(), hM.getBlocks(), hM.getTileSize(), panel);
         this.pUpDetection = new PowerUpDetection(panel, pFact);
         this.killDetection = new KillDetection(panel, hM);
         playerX = START_X;
