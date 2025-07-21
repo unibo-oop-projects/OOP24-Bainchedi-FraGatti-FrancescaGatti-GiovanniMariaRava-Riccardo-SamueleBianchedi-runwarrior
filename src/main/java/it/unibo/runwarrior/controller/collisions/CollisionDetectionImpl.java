@@ -12,7 +12,7 @@ import it.unibo.runwarrior.model.MapElement;
 /**
  * Class that handles the collision between the player and the map tiles
  */
-public class CollisionDetectionImpl {
+public class CollisionDetectionImpl implements CollisionDetection {
     public static final int FEET_HEAD_TOLL = 5;
     private int map[][];
     private List<MapElement> blocks = new ArrayList<>();
@@ -37,13 +37,9 @@ public class CollisionDetectionImpl {
     }
 
     /**
-     * Controls the collision of the player with the map tiles.
-     * To do so it calls touchSolid for 6 points of the player area:
-     * top left, top right, mid left, mid right, bottom left, bottom right.
-     *
-     * @param player the player in the game panel
-     * @return the decisive direction of the collision 
+     * {@inheritDoc}
      */
+    @Override
     public String checkCollision(Character player) {
         playerArea = player.getArea();
         String dir = "";
@@ -67,14 +63,9 @@ public class CollisionDetectionImpl {
     }
 
     /**
-     * Controls if the player touches a solid tile in his position.
-     *
-     * @param x x coordinate in pixel of the player
-     * @param y y coordinate in pixel of the player
-     * @param player the player in the game panel
-     * @param checkDirections boolean to decide if the check of the direction is useful or not
-     * @return true if the player touches a solid tile
+     * {@inheritDoc}
      */
+    @Override
     public boolean touchSolid(int x, int y, Character player, boolean checkDirections) {
         int[][] blockIndexes = map;
         float indexXtile = x / tileSize;
@@ -110,15 +101,9 @@ public class CollisionDetectionImpl {
     }
 
     /**
-     * Controls in which direction the player collides with a tile.
-     *
-     * @param x x coordinate in pixel of the player
-     * @param y y coordinate in pixel of the player
-     * @param indexXtile row of the tile
-     * @param indexYtile column of the tile
-     * @param player the player in the game panel
-     * @return the string that specifies the direction of the collision
+     * {@inheritDoc}
      */
+    @Override
     public String checkCollisionDirection(int x, int y, float indexXtile, float indexYtile, Character player){
         String direction = "";
         int tileX = ((int) indexXtile) * tileSize;
@@ -143,11 +128,9 @@ public class CollisionDetectionImpl {
     }
 
     /**
-     * Controls if the given player is in air, so if he doesn't touch the ground.
-     *
-     * @param player the player in the game panel
-     * @return true if the player doesn't touch the ground
+     * {@inheritDoc}
      */
+    @Override
     public boolean isInAir(Character player) {
         if (!touchSolid(player.getArea().x + FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, player, false) &&
             !touchSolid(player.getArea().x + player.getArea().width - FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, player, false)){
@@ -156,6 +139,10 @@ public class CollisionDetectionImpl {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public long getHitWaitTime() {
         return this.hitWaitTime;
     }
