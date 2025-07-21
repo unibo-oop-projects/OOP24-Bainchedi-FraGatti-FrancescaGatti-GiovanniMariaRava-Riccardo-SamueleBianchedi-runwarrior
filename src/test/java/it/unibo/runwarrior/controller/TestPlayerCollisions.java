@@ -11,6 +11,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.PowerUpDetectionImpl;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.ArmourWarrior;
@@ -21,9 +24,9 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public class TestPlayerCollisions {
-    private CollisionDetection collisionTiles;
-    private PowerUpDetection collisionPowerups;
-    private KillDetection collisionEnemies;
+    private CollisionDetectionImpl collisionTiles;
+    private PowerUpDetectionImpl collisionPowerups;
+    private KillDetectionImpl collisionEnemies;
     private GameLoopPanel glp;
     private GameMap gameMap1;
     private HandlerMapElement mapHandler1;
@@ -43,7 +46,7 @@ public class TestPlayerCollisions {
         // String string2Map2 = "";
 
         Character player = new NakedWarrior(glp, null, mapHandler1, null);
-        collisionTiles = new CollisionDetection(gameMap1.getMapData(), mapHandler1.getBlocks(), mapHandler1.getTileSize(), glp);
+        collisionTiles = new CollisionDetectionImpl(gameMap1.getMapData(), mapHandler1.getBlocks(), mapHandler1.getTileSize(), glp);
 
         collisionTiles.checkCollision(player);
         assertTrue(collisionTiles.touchSolid((8 * mapHandler1.getTileSize()), (16 * mapHandler1.getTileSize()), player, false));
@@ -76,7 +79,7 @@ public class TestPlayerCollisions {
         PowerUpFactoryImpl pFact = new PowerUpFactoryImpl(glp, mapHandler1, mapHandler1.getMap());
         CharacterComand cmd = new CharacterComand();
         Character player = new ArmourWarrior(glp, cmd, mapHandler1, pFact);
-        collisionPowerups = new PowerUpDetection(glp, pFact);
+        collisionPowerups = new PowerUpDetectionImpl(glp, pFact);
 
         assertTrue(collisionPowerups.isTouchingUp(new Rectangle(50, 50, 50, 50), 
         new Rectangle(70, 100, 50, 50)));
@@ -100,7 +103,7 @@ public class TestPlayerCollisions {
         enemies.add(new EnemyImpl(1836, 576, 36, 36, true, glp.getEnemyHandler(), glp, 0));
         enemies.add(new EnemyImpl(2664, 576, 36, 36, true, glp.getEnemyHandler(), glp, 0));
         glp.getEnemyHandler().getEnemies().addAll(enemies);
-        collisionEnemies = new KillDetection(glp, mapHandler1);
+        collisionEnemies = new KillDetectionImpl(glp, mapHandler1);
 
         assertTrue(collisionEnemies.isBehindTile(11090, 585));
         assertFalse(collisionEnemies.isBehindTile(9360, 585));
