@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.view.enemy;
+package it.unibo.runwarrior.view.enemy.impl;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -10,14 +10,21 @@ import it.unibo.runwarrior.model.enemy.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 
-public class SnakeView implements EnemyView{
+/**
+ * Implementation of the enemy view with Guard enemy
+ */
+public class SnakeView implements EnemyView {
     private BufferedImage rightSnake;
     private BufferedImage rightSnakeMoving;
     private BufferedImage leftSnake;
     private BufferedImage leftSnakeMoving;
     private BufferedImage poisonImage;
-    private GameLoopPanel glp;
-    public SnakeView(GameLoopPanel glp) {
+    private final GameLoopPanel glp;
+    /**
+     * @param glp is the panel in which the guard need to be rendered
+     * Constructor of the SnakeView class
+     */
+    public SnakeView(final GameLoopPanel glp) {
         this.glp = glp;
         try {
             loadResources();
@@ -25,7 +32,9 @@ public class SnakeView implements EnemyView{
             e.printStackTrace();
         }
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void loadResources() throws IOException {
         rightSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnake.png"));
@@ -34,7 +43,9 @@ public class SnakeView implements EnemyView{
         leftSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnakeMoving.png"));
         poisonImage = ImageIO.read(getClass().getResourceAsStream("/Snake/poison.png"));
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics g, EnemyImpl enemy) {
         BufferedImage currentImage;
@@ -44,11 +55,7 @@ public class SnakeView implements EnemyView{
         } else {
             currentImage = enemy.step ? leftSnakeMoving : leftSnake;
         }
-
-        int shift = glp.getMapHandler().getShift(); 
-        //System.out.println("SNAKE XS: " + (x+shift)+ "X:"+ x);
+        final int shift = glp.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.x + shift , enemy.y, enemy.width, enemy.height, null);
-
     }
-    
 }
