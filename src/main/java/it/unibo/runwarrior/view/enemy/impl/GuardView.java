@@ -63,7 +63,7 @@ public class GuardView implements EnemyView {
             currentImage = enemy.step ? leftGuardMoving : leftGuardRunning;
             image = leftGuard;
         }
-        int shift = glp.getMapHandler().getShift();
+        final int shift = glp.getMapHandler().getShift();
         //System.out.println("SNAKE XS: " + (x+shift)+ "X:"+ x);
         g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
     }
