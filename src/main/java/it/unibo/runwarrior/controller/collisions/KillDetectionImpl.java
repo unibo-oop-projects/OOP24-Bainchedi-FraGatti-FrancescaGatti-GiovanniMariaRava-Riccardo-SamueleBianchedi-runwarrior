@@ -1,15 +1,16 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.collisions;
 
 import java.awt.Rectangle;
 import java.util.List;
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.model.enemy.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 /**
 * Class that detects the collision between the player and the enmies.
 */
-public class KillDetection {
+public class KillDetectionImpl {
     private GameLoopPanel glp;
     private HandlerMapElement hM;
     //private PowersHandler powerUpHandler; // vedi sotto
@@ -24,7 +25,7 @@ public class KillDetection {
      * @param glp game-loop panel
      * @param hM map handler
      */
-    public KillDetection(final GameLoopPanel glp, final HandlerMapElement hM) {
+    public KillDetectionImpl(final GameLoopPanel glp, final HandlerMapElement hM) {
         this.glp = glp;
         this.hM = hM;
     }
@@ -78,7 +79,7 @@ public class KillDetection {
      */
     public Rectangle futureArea(Rectangle r1) {
         Rectangle futureArea = new Rectangle(r1);
-        futureArea.translate(0, CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
+        futureArea.translate(0, it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
         return futureArea;
     }
 

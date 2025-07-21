@@ -1,21 +1,22 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.collisions;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.model.PowerUpImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
-public class PowerUpDetection {
+public class PowerUpDetectionImpl {
     private GameLoopPanel glp;
     private PowerUpFactoryImpl pFact;
     private ArrayList<PowerUpImpl> powerCollision = new ArrayList<>();
     private long hitWaitTime;
     private int toll = 5;
 
-    public PowerUpDetection(GameLoopPanel glp, PowerUpFactoryImpl pUpFact){
+    public PowerUpDetectionImpl(GameLoopPanel glp, PowerUpFactoryImpl pUpFact){
         this.glp = glp;
         this.pFact = pUpFact;
     }
@@ -66,7 +67,7 @@ public class PowerUpDetection {
      */
     public Rectangle futureArea(Rectangle r1) {
         Rectangle futureArea = new Rectangle(r1);
-        futureArea.translate(0, CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
+        futureArea.translate(0, it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
         return futureArea;
     }
 

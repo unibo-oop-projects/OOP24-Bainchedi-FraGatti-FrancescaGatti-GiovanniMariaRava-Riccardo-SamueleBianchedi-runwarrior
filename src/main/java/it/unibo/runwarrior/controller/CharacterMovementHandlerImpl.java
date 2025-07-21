@@ -2,6 +2,9 @@ package it.unibo.runwarrior.controller;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
+import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.PowerUpDetectionImpl;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.CharacterImpl;
 
@@ -13,9 +16,9 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private CharacterComand cmd;
     private Character player;
     private HandlerMapElement mapHandler;
-    private CollisionDetection collisionDetection;
-    private PowerUpDetection pUpDetection;
-    private KillDetection killDetection;
+    private CollisionDetectionImpl collisionDetection;
+    private PowerUpDetectionImpl pUpDetection;
+    private KillDetectionImpl killDetection;
 
     public static final int START_X = 96;
     private int startY;
@@ -56,15 +59,21 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         //this.collisionDetection = collDet; 
         this.player = player;
         this.mapHandler = hM;
-        this.collisionDetection = new CollisionDetection(hM.getMap(), hM.getBlocks(), hM.getTileSize(), panel);
-        this.pUpDetection = new PowerUpDetection(panel, pFact);
-        this.killDetection = new KillDetection(panel, hM);
+        this.collisionDetection = new CollisionDetectionImpl(hM.getMap(), hM.getBlocks(), hM.getTileSize(), panel);
+        this.pUpDetection = new PowerUpDetectionImpl(panel, pFact);
+        this.killDetection = new KillDetectionImpl(panel, hM);
         playerX = START_X;
         screenX = START_X;
         groundX = 0;
         setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
     }
 
+    /**
+     * Set the initial position of the player
+     *
+     * @param y y coordinate
+     * @param tileSize tile dimenssion
+     */
     private void setStartY(int y, int tileSize){
         startY = y + CharacterImpl.TO_TOUCH_FLOOR;
         playerY = startY;
@@ -177,11 +186,11 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         return this.canAttack;
     }
 
-    public CollisionDetection getCollisionDetection() {
+    public CollisionDetectionImpl getCollisionDetection() {
         return this.collisionDetection;
     }
 
-    public KillDetection getKillDetection() {
+    public KillDetectionImpl getKillDetection() {
         return this.killDetection;
     }
 
