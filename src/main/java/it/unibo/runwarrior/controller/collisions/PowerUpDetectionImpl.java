@@ -82,13 +82,10 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     }
 
     /**
-     * Control if the collision is from above the powerup.
-     *
-     * @param playerArea player collision area
-     * @param pUpArea powerup collision area
-     * @return true if the player touches the powerup with his feet
+     * {@inheritDoc}
      */
-    private boolean isTouchingUp(Rectangle playerArea, Rectangle pUpArea){
+    @Override
+    public boolean isTouchingUp(Rectangle playerArea, Rectangle pUpArea){
         return playerArea.y + playerArea.height <= pUpArea.y && 
         ((playerArea.x + toll >= pUpArea.x && playerArea.x + toll <= pUpArea.x + pUpArea.width) ||
         (playerArea.x + playerArea.width - toll >= pUpArea.x && playerArea.x + playerArea.width - toll <= pUpArea.x + pUpArea.width));

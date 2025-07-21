@@ -23,6 +23,24 @@ public interface KillDetection {
     public Rectangle futureArea(Rectangle r1);
 
     /**
+     * Control if the collision is from above the enemy.
+     *
+     * @param playerArea player collision area
+     * @param enemyArea enemy collision area
+     * @return true if the player touches the enemy in his head
+     */
+    public boolean isTouchingUp(Rectangle playerArea, Rectangle enemyArea);
+
+    /**
+     * Controls if the given point (x, y) is touching a solid tile.
+     *
+     * @param x x coordinate
+     * @param y y coordinate
+     * @return true if the point touches a solid tile
+     */
+    public boolean isBehindTile(int x, int y);
+
+    /**
      * @return the moment when the player was hit.
      */
     public long getHitWaitTime();

@@ -24,4 +24,13 @@ public interface PowerUpDetection {
      * @return the collision area the player will have
      */
     public Rectangle futureArea(Rectangle r1);
+
+    /**
+     * Control if the collision is from above the powerup.
+     *
+     * @param playerArea player collision area
+     * @param pUpArea powerup collision area
+     * @return true if the player touches the powerup with his feet
+     */
+    public boolean isTouchingUp(Rectangle playerArea, Rectangle pUpArea);
 }

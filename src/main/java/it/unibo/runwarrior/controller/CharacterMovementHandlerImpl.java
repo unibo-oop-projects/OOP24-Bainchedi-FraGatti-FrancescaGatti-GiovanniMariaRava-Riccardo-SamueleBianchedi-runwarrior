@@ -88,6 +88,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         this.playerX = realx;
         this.groundX = groundX;
         this.killDetection.setHitWaitTime(lastHit);
+        this.collisionDetection.setHitWaitTime(lastHit);
     }
 
     public void movePlayer(){
@@ -105,7 +106,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         if(hitHead){
             cmd.setJump(false);
         }
-        jump(cmd.isJumping(), maxJump);
+        jump(cmd.isJumping(), maxJump, player);
         handleDoubleCollision = (collisionDir.equals("up") || collisionDir.equals("down")) && descend ? true : false;
         if(jumpKill){
             jumpAfterKill();
@@ -138,9 +139,9 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         canAttack = (collisionDir.equals("right") || collisionDir.equals("left")) ? false : true;
     }
 
-    public void jump(boolean isJump, int jumpHeight){
+    public void jump(boolean isJump, int jumpHeight, Character player){
         if(isJump && !descend){
-            if(playerY > jumpHeight){
+            if(playerY > jumpHeight && !collisionDetection.checkCollision(player).equals("down")){
                 playerY -= SPEED_JUMP_UP;
             }
             else{
@@ -153,11 +154,11 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 descend = true;
                 playerY += SPEED_JUMP_DOWN;
             }
-            else{
+            else if(!jumpKill) {
                 descend = false;
                 cmd.setDoubleJump(false);
+                updateJumpVariable();
             }
-            updateJumpVariable();
         }
     }
 
@@ -167,19 +168,23 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     }
 
     public void jumpAfterKill(){
-        if(playerY > midJump){
+        if(playerY >= midJump){
+            cmd.setDoubleJump(true);
             playerY -= SPEED_JUMP_UP;
+            System.out.println("jumpkill");
         }
         else{
             playerY = midJump;
             jumpKill = false;
             cmd.setJump(false);
+            System.out.println("fine jump");
         }
     }
 
     public void updateJumpVariable(){
         maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
         midJump = (startY - (sizeCharacter*4/2)) + (playerY - startY);
+        System.out.println(maxJump + " " + midJump);
     }
 
     public boolean canAttack(){

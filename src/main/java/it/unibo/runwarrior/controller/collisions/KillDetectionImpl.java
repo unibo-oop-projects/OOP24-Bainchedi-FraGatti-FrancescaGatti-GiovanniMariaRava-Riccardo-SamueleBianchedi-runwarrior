@@ -78,26 +78,20 @@ public class KillDetectionImpl implements KillDetection {
     }
 
     /**
-     * Control if the collision is from above the enemy.
-     *
-     * @param playerArea player collision area
-     * @param enemyArea enemy collision area
-     * @return true if the player touches the enemy in his head
+     * {@inheritDoc}
      */
-    private boolean isTouchingUp(Rectangle playerArea, Rectangle enemyArea){
+    @Override
+    public boolean isTouchingUp(Rectangle playerArea, Rectangle enemyArea){
         return playerArea.y + playerArea.height <= enemyArea.y && 
         ((playerArea.x + toll >= enemyArea.x && playerArea.x + toll <= enemyArea.x + enemyArea.width) ||
         (playerArea.x + playerArea.width - toll >= enemyArea.x && playerArea.x + playerArea.width - toll <= enemyArea.x + enemyArea.width));
     }
 
     /**
-     * Controls if the given point (x, y) is touching a solid tile.
-     *
-     * @param x x coordinate
-     * @param y y coordinate
-     * @return true if the point touches a solid tile
+     * {@inheritDoc}
      */
-    private boolean isBehindTile(int x, int y) {
+    @Override
+    public boolean isBehindTile(int x, int y) {
         float indexXtile = x / hM.getTileSize();
         float indexYtile = y / hM.getTileSize();
         int blockIndex = hM.getMap()[(int) indexYtile][(int) indexXtile];

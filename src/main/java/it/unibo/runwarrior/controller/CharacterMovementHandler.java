@@ -2,6 +2,7 @@ package it.unibo.runwarrior.controller;
 
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
+import it.unibo.runwarrior.model.player.Character;
 
 public interface CharacterMovementHandler {
     
@@ -28,8 +29,9 @@ public interface CharacterMovementHandler {
      *
      * @param isJump true if the player is jumping
      * @param jumpHeight max height of the jump
+     * @param player current player
      */
-    public void jump(boolean isJump, int jumpHeight);
+    public void jump(boolean isJump, int jumpHeight, Character player);
 
     /**
      * Sets the jumpKill to true, used by powerup and kill detection when the player hit a egg or a enemy.

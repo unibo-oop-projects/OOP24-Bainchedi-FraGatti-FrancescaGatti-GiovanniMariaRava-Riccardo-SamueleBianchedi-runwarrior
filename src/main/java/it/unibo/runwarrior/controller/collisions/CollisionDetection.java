@@ -49,4 +49,11 @@ public interface CollisionDetection {
      * @return last time the player hit an obstacle
      */
     public long getHitWaitTime();
+
+    /**
+     * Set hitWaitTime
+     *
+     * @param lastHit last time of the player hitting an obstacle
+     */
+    public void setHitWaitTime(long lastHit);
 }
