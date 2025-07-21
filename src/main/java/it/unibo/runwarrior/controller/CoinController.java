@@ -3,8 +3,9 @@ package it.unibo.runwarrior.controller;
 
 import java.awt.Graphics;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +20,17 @@ public class CoinController {
 
     public List<int[]> loadCoinFromFile(String pathFile){
         List<int[]> coinCoordinates = new ArrayList<>();
-        try(BufferedReader fileReader = new BufferedReader(new FileReader(pathFile))){
-            String line; 
-            while((line = fileReader.readLine())!=null){
-                line=line.trim(); //Rimuove gli spazi bianchi iniziali e finali dalla stringa line.
+        try(InputStream is = getClass().getClassLoader().getResourceAsStream(pathFile);
+         BufferedReader fileReader = new BufferedReader(new InputStreamReader(is))){
+            if (is == null) {
+            System.err.println("File non trovato nel classpath: " + pathFile);
+            return coinCoordinates;
+            }
+            String line;
+            while((line = fileReader.readLine()) != null){
+                line = line.trim();
                 if(!line.isEmpty() && line.contains(",")){
-                    String[] parts = line.split(","); //Divide la stringa line in più parti, separandola ogni volta che trova una virgola
+                    String[] parts = line.split(",");
                     int row = Integer.parseInt(parts[0].trim());
                     int col = Integer.parseInt(parts[1].trim());
                     coinCoordinates.add(new int[]{row, col});
