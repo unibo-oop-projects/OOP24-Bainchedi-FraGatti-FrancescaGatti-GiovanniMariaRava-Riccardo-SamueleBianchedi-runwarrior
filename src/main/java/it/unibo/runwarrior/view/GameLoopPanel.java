@@ -18,10 +18,10 @@ import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.player.NakedWarrior;
 import it.unibo.runwarrior.model.player.NakedWizard;
 import it.unibo.runwarrior.view.enemy.EnemyViewFactory;
-import it.unibo.runwarrior.view.enemy.MonkeyView;
 import it.unibo.runwarrior.view.enemy.WizardView;
 import it.unibo.runwarrior.view.enemy.impl.GoblinView;
 import it.unibo.runwarrior.view.enemy.impl.GuardView;
+import it.unibo.runwarrior.view.enemy.impl.MonkeyView;
 import it.unibo.runwarrior.view.enemy.impl.SnakeView;
 
 public class GameLoopPanel extends JPanel implements Runnable {

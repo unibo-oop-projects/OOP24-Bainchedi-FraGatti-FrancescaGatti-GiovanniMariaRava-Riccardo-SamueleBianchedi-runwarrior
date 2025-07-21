@@ -11,7 +11,7 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 
 /**
- * Implementation of the enemy view with Guard enemy
+ * Implementation of the enemy view with Snake enemy
  */
 public class SnakeView implements EnemyView {
     private BufferedImage rightSnake;
@@ -47,7 +47,7 @@ public class SnakeView implements EnemyView {
      * {@inheritDoc}
      */
     @Override
-    public void render(Graphics g, EnemyImpl enemy) {
+    public void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
 
         if (enemy.velocityX > 0) {
