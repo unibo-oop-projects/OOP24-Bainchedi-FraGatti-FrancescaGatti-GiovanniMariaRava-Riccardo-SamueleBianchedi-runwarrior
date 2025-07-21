@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.view.enemy;
+package it.unibo.runwarrior.view.enemy.impl;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -9,15 +9,21 @@ import javax.imageio.ImageIO;
 import it.unibo.runwarrior.model.enemy.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
-
+/**
+ * Implementation of the enemy view with Wizard enemy
+ */
 public class WizardView implements EnemyView {
     private BufferedImage rightWizard;
     private BufferedImage rightWizardMoving;
     private BufferedImage leftWizard; 
     private BufferedImage leftWizardMoving; 
-    private GameLoopPanel glp;
+    private final GameLoopPanel glp;
 
-    public WizardView(GameLoopPanel glp) {
+    /**
+     * @param glp is the panel in which the guard need to be rendered
+     * Constructor of the class WizardView
+     */
+    public WizardView(final GameLoopPanel glp) {
         this.glp = glp;
         try {
             loadResources();
@@ -25,21 +31,23 @@ public class WizardView implements EnemyView {
             e.printStackTrace();
         }
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void render(Graphics g, EnemyImpl enemy) {
+    public void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
-
         if (enemy.velocityX > 0) {
             currentImage = enemy.step ? rightWizardMoving : rightWizard;
         } else {
             currentImage = enemy.step ? leftWizardMoving : leftWizard;
         }
-
-        int shift = glp.getMapHandler().getShift(); 
+        final int shift = glp.getMapHandler().getShift(); 
         g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void loadResources() throws IOException {
         rightWizard= ImageIO.read(getClass().getResourceAsStream("/Wizard/rightWizard.png"));
