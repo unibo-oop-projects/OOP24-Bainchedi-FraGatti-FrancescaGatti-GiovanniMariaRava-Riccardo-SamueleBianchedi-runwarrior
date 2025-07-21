@@ -9,13 +9,27 @@ import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
-public class NakedWizard extends CharacterImpl{
+/**
+ * Implementation of the wizard without powerups.
+ */
+public class NakedWizard extends CharacterImpl {
 
-    public NakedWizard(GameLoopPanel panel, CharacterComand commands,
-            HandlerMapElement mapHandler, PowerUpFactoryImpl pFact) {
+    /**
+     * Constructor of this skin.
+     *
+     * @param panel game-loop panel
+     * @param commands object that handles keyboard input
+     * @param mapHandler object that prints tiles
+     * @param pFact object that prints powerups
+     */
+    public NakedWizard(final GameLoopPanel panel, final CharacterComand commands,
+        final HandlerMapElement mapHandler, final PowerUpFactoryImpl pFact) {
         super(panel, commands, mapHandler, pFact);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void playerImage() {
         try {
@@ -29,11 +43,14 @@ public class NakedWizard extends CharacterImpl{
             jumpL = ImageIO.read(getClass().getResourceAsStream("/WizardImages/jumpLeftNW.png"));
             attackR = right0;
             attackL = left0;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateAttackCollision() {
         // cannot attack

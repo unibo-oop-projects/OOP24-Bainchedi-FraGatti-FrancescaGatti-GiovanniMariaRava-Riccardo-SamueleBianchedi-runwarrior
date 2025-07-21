@@ -3,52 +3,55 @@ package it.unibo.runwarrior.model;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+/**
+ * Powerup entity.
+ */
 public interface PowerUp {
 
     /**
-     * Loads the powerup images from resources
+     * Loads the powerup images from resources.
      */
-    public void powerUpImage();
+    void powerUpImage();
 
     /**
      * @return the image of the powerup object
      */
-    public BufferedImage getImage();
+    BufferedImage getImage();
 
     /**
      * @return the image of the egg that keeps the powerup inside
      */
-    public BufferedImage getEgg();
+    BufferedImage getEgg();
 
     /**
-     * @param deathPosition
-     * Set the area of the powerup if it comes from a dead enemy
+     * Set the area of the powerup if it comes from a dead enemy.
+     *
+     * @param deathPosition position of the dead enemy
      */
-    public void setTouchArea(Rectangle deathPosition);
+    void setTouchArea(Rectangle deathPosition);
 
     /**
      * @return the collision area of the powerup/egg
      */
-    public Rectangle getTouchArea();
+    Rectangle getTouchArea();
 
     /**
      * @return true if the powerup is taken by the player
      */
-    public boolean isPowerTaken();
+    boolean isPowerTaken();
 
     /**
-     * @return true if the egg is open,
-     * so it was hit by the player
+     * @return true if the egg is open, so if it was hit by the player
      */
-    public boolean isEggOpen();
+    boolean isEggOpen();
 
     /**
-     * Set the variable of the powerup taken at true
+     * Set the variable of the powerup taken at true.
      */
-    public void takePower();
+    void takePower();
 
     /**
-     * Set the variable at true when the egg is open
+     * Set the variable at true when the egg is open.
      */
-    public void openTheEgg();
+    void openTheEgg();
 }
