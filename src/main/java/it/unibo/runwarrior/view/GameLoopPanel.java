@@ -11,8 +11,8 @@ import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowersHandler;
-import it.unibo.runwarrior.controller.EnemyHandler;
-import it.unibo.runwarrior.controller.EnemySpawner;
+import it.unibo.runwarrior.controller.enemy.EnemySpawner;
+import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.player.NakedWarrior;
@@ -37,7 +37,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private PowerUpFactoryImpl powersFactory;
 
     private HandlerMapElement mapHandler;
-    private EnemyHandler enemyHandler;
+    private EnemyHandlerImpl enemyHandler;
     private EnemyViewFactoryImpl enemyViewFactory;
     private EnemySpawner enemySpawner;
     private GameMap gameMap;
@@ -60,7 +60,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         //GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
         this.enemyViewFactory = new EnemyViewFactoryImpl();
         initializeEnemyViewFactory();
-        this.enemyHandler = new EnemyHandler(this, this.enemyViewFactory);
+        this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemiesMap1.txt"));
         initializePlayer();
@@ -156,7 +156,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         return this.mapHandler;
     }
 
-    public EnemyHandler getEnemyHandler() {
+    public EnemyHandlerImpl getEnemyHandler() {
         return this.enemyHandler;
     }
 

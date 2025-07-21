@@ -1,19 +1,20 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.enemy.impl;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.*;
 
+import it.unibo.runwarrior.controller.enemy.api.EnemyHandler;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
 
-public class EnemyHandler {
+public class EnemyHandlerImpl implements EnemyHandler {
     private LinkedList<EnemyImpl> enemies;
     private EnemyViewFactoryImpl viewFactory;
 
     GameLoopPanel glp;
-    public EnemyHandler (GameLoopPanel glp, EnemyViewFactoryImpl viewFactory){
+    public EnemyHandlerImpl (GameLoopPanel glp, EnemyViewFactoryImpl viewFactory){
         this.viewFactory = viewFactory;
         this.glp = glp;
         this.enemies = new LinkedList<>();
