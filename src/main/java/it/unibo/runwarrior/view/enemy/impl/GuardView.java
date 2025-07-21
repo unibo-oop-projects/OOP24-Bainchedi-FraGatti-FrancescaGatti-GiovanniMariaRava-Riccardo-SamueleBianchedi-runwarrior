@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.view.enemy;
+package it.unibo.runwarrior.view.enemy.impl;
 
 import java.io.IOException;
 
