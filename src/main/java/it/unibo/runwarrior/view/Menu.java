@@ -64,26 +64,50 @@ public class Menu extends JPanel{
                 private GameLoopPanel glp;
                 public void actionPerformed(ActionEvent e){ 
                     pannelloTastoPlay.remove(playButton);
-                    mainFrame = new JFrame("runwarrior");
-                    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    mainFrame.setLocationByPlatform(false);
-                    mainFrame.setResizable(true);
+                    pannelloTastoPlay.revalidate();
+                    pannelloTastoPlay.repaint();
+                    JFrame levelFrame = new JFrame("Level Selection");
+                    levelFrame.setSize(300,200);
+                    levelFrame.setLocationRelativeTo(null);
 
-                    glp = new GameLoopPanel();
-                    glp.startGame();
-                    
-                    
-                    mainFrame.add(glp);
-                    mainFrame.pack();
-                    mainFrame.setVisible(true);
-                    //pannelloTastoPlay.add(new JButton("LIVELLO 1")); 
-                    //pannelloTastoPlay.add(new JButton("LIVELLO 2")); 
-                    //pannelloTastoPlay.add(new JButton("LIVELLO 3")); 
+                    JPanel panel = new JPanel();
+                    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+                    JButton level1 = new JButton("LEVEL 1");
+                    JButton level2 = new JButton("LEVEL 2");
+                    JButton level3 = new JButton("LEVEL 3");
+                    level1.setAlignmentX(JButton.CENTER_ALIGNMENT);
+                    level2.setAlignmentX(JButton.CENTER_ALIGNMENT);
+                    level3.setAlignmentX(JButton.CENTER_ALIGNMENT);
+
+                    level1.addActionListener(ev ->{
+                        levelFrame.dispose();
+
+                        mainFrame = new JFrame("runwarrior");
+                        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        mainFrame.setLocationByPlatform(false);
+                        mainFrame.setResizable(true);
+                        
+                        glp = new GameLoopPanel();
+                        glp.startGame();
+                        mainFrame.add(glp);
+                        mainFrame.pack();
+                        mainFrame.setVisible(true);
+                    });
+                    level2.addActionListener(ev -> JOptionPane.showMessageDialog(levelFrame, "manca la mappa"));
+                    level3.addActionListener(ev -> JOptionPane.showMessageDialog(levelFrame, "manca la mappa"));
+
+                    panel.add(Box.createVerticalStrut(20));
+                    panel.add(level1);
+                    panel.add(Box.createVerticalStrut(10));
+                    panel.add(level2);
+                    panel.add(Box.createVerticalStrut(10));
+                    panel.add(level3);
+                    levelFrame.getContentPane().add(panel);
+                    levelFrame.setVisible(true);
                     //final JButton pulsanteNegozio = new JButton("NEGOZIO"); 
                     //pulsanteNegozio.setBounds(1100, 20, 120, 40);  
                     //pannelloSfondoMenu.add(pulsanteNegozio); 
-                    pannelloTastoPlay.validate();
                 }
             });
             pannelloTastoPlay.add(playButton, BorderLayout.CENTER); 

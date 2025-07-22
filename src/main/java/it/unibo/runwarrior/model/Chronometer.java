@@ -8,7 +8,6 @@ public class Chronometer {
     long beginningTime; 
     JLabel timeLabel;
     Timer t; 
-    private boolean playerRunning = false; 
     private long timeElapsed = 0;
 
     public Chronometer(){ 
@@ -22,24 +21,15 @@ public class Chronometer {
     }
     public void StartTimer(){
         beginningTime = System.currentTimeMillis(); 
-        t.start();
-        playerRunning = true; 
+        t.start(); 
     }
     public void StopTimer(){
-        if(playerRunning){
             timeElapsed = System.currentTimeMillis() - beginningTime;
             t.stop();
-            playerRunning = false;
-        }
     }
     public long getTimeElapsed(){ //metodo che chiamo in score Controller
         return timeElapsed;
     }
-
-    public boolean isPlayerRunning(){
-        return playerRunning;
-    }
-
     public String getTimeString(){
         long time = getTimeElapsed();
         final int tenthsSec = (int) ((time % 1000) / 100); //decimi di secondo
