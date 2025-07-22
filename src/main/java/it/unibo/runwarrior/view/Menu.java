@@ -1,7 +1,9 @@
 package it.unibo.runwarrior.view;
 
 import javax.imageio.ImageIO;
-import javax.swing.*; 
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -54,11 +56,17 @@ public class Menu extends JPanel{
             titoloLabel.setBounds(440, 100, 400, 300);
             pannelloSfondoMenu.add(titoloLabel);
             final JPanel pannelloTastoPlay = new JPanel(); 
-            pannelloTastoPlay.setLayout(new FlowLayout(FlowLayout.CENTER));
+            pannelloTastoPlay.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
             pannelloTastoPlay.setOpaque(false);
-            pannelloTastoPlay.setBounds(430,300,400,100);
+            pannelloTastoPlay.setBounds(430, 300, 400, 250);
+            pannelloTastoPlay.setPreferredSize(new Dimension(200, 400));
 
             final JButton playButton = new JButton("PLAY");
+            Dimension buttonPlayDimension = new Dimension(150, 40);
+            playButton.setMaximumSize(buttonPlayDimension);
+            playButton.setPreferredSize(buttonPlayDimension);
+            playButton.setMinimumSize(buttonPlayDimension);
+
             playButton.addActionListener(new ActionListener() {
                 private JFrame mainFrame;
                 private GameLoopPanel glp;
@@ -66,22 +74,34 @@ public class Menu extends JPanel{
                     pannelloTastoPlay.remove(playButton);
                     pannelloTastoPlay.revalidate();
                     pannelloTastoPlay.repaint();
-                    JFrame levelFrame = new JFrame("Level Selection");
-                    levelFrame.setSize(300,200);
-                    levelFrame.setLocationRelativeTo(null);
 
                     JPanel panel = new JPanel();
                     panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+                    Dimension buttonLevelDimension = new Dimension(150,40);
+                    Font fontButton = new Font("Cooper Black", Font.BOLD, 16);
 
                     JButton level1 = new JButton("LEVEL 1");
                     JButton level2 = new JButton("LEVEL 2");
                     JButton level3 = new JButton("LEVEL 3");
                     level1.setAlignmentX(JButton.CENTER_ALIGNMENT);
+                    level1.setMaximumSize(buttonLevelDimension);
+                    level1.setPreferredSize(buttonLevelDimension);
+                    level1.setFont(fontButton);
+                    level1.setBackground(new Color(218, 165, 32));
+                    level1.setBorder(new LineBorder(new Color(180,130,25), 4));                    
                     level2.setAlignmentX(JButton.CENTER_ALIGNMENT);
+                    level2.setMaximumSize(buttonLevelDimension);
+                    level2.setPreferredSize(buttonLevelDimension);
+                    level2.setFont(fontButton);
+                    level2.setBackground(new Color(60, 179, 60));
+                    level2.setBorder(new LineBorder(new Color(40, 120, 40), 4));                    
                     level3.setAlignmentX(JButton.CENTER_ALIGNMENT);
-
-                    level1.addActionListener(ev ->{
-                        levelFrame.dispose();
+                    level3.setMaximumSize(buttonLevelDimension);
+                    level3.setPreferredSize(buttonLevelDimension);
+                    level3.setFont(fontButton);
+                    level3.setBackground(new Color(120, 124, 126));
+                    level3.setBorder(new LineBorder(new Color(85, 89, 91), 4));
+                    level1.addActionListener(level1Event ->{
 
                         mainFrame = new JFrame("runwarrior");
                         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,20 +114,21 @@ public class Menu extends JPanel{
                         mainFrame.pack();
                         mainFrame.setVisible(true);
                     });
-                    level2.addActionListener(ev -> JOptionPane.showMessageDialog(levelFrame, "manca la mappa"));
-                    level3.addActionListener(ev -> JOptionPane.showMessageDialog(levelFrame, "manca la mappa"));
-
-                    panel.add(Box.createVerticalStrut(20));
+                    level2.addActionListener(ev -> JOptionPane.showMessageDialog(null, "manca la mappa"));
+                    level3.addActionListener(ev -> JOptionPane.showMessageDialog(null,"manca la mappa"));
+                    panel.setOpaque(false);
+                    panel.add(Box.createVerticalStrut(10));
                     panel.add(level1);
                     panel.add(Box.createVerticalStrut(10));
                     panel.add(level2);
                     panel.add(Box.createVerticalStrut(10));
                     panel.add(level3);
-                    levelFrame.getContentPane().add(panel);
-                    levelFrame.setVisible(true);
-                    //final JButton pulsanteNegozio = new JButton("NEGOZIO"); 
-                    //pulsanteNegozio.setBounds(1100, 20, 120, 40);  
-                    //pannelloSfondoMenu.add(pulsanteNegozio); 
+                    pannelloTastoPlay.setPreferredSize(new Dimension(250, 400));
+                    pannelloTastoPlay.removeAll();
+                    pannelloTastoPlay.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+                    pannelloTastoPlay.add(panel);
+                    pannelloTastoPlay.revalidate();
+                    pannelloTastoPlay.repaint();
                 }
             });
             pannelloTastoPlay.add(playButton, BorderLayout.CENTER); 
