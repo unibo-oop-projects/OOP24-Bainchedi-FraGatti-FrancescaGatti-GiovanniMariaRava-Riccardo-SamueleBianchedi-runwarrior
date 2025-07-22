@@ -49,8 +49,8 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private boolean gameStarted = false;
    // private GameMusic music;
 
-    public GameLoopPanel(String mapPath, String themePath, String enemyPath, String coinPath) {
-        this.gameMap = GameMap.load(mapPath, themePath);
+    public GameLoopPanel() {
+        this.gameMap = GameMap.load("Map_1/map_1.txt", "Map_1/forest_theme.txt");
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
         this.powersFactory = new PowerUpFactoryImpl(this, mapHandler, gameMap.getMapData());
@@ -66,7 +66,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         initializeEnemyViewFactory();
         this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
-        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemyPath));
+        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemiesMap1.txt"));
         initializePlayer();
 
         //music = new GameMusic("gameMusic.wav", true);
@@ -75,7 +75,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         this.coinController = new CoinController(player);
-        List<int[]> coords = coinController.loadCoinFromFile(coinPath);
+        List<int[]> coords = coinController.loadCoinFromFile("/Coins/CoinCoordinates_map1.txt");
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
         }
