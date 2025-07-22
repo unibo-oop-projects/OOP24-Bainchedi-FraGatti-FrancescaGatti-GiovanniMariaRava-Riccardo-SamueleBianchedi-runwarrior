@@ -25,7 +25,7 @@ public class EnemyImplTest {
      */
     @BeforeEach
     public void setUp() {
-        glp = new GameLoopPanel();
+        glp = new GameLoopPanel("/Map1/map_1.txt", "/Map1/desert_theme.txt", "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
         enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
         enemy = new EnemyImpl(50, 100, 64, 64, true, enemyHandler, glp, 1); 
     }

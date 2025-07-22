@@ -35,7 +35,7 @@ public class TestPlayerCollisions {
 
     @BeforeEach
     public void initCollisions() {
-        glp = new GameLoopPanel();
+        glp = new GameLoopPanel("/Map1/map_1.txt", "/Map1/desert_theme.txt", "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
         gameMap1 = GameMap.load(string1Map1, string2Map1);
         mapHandler1 = new HandlerMapElement(gameMap1);
     }
