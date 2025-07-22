@@ -108,7 +108,7 @@ public class Menu extends JPanel{
                         mainFrame.setLocationByPlatform(false);
                         mainFrame.setResizable(true);
                         
-                        glp = new GameLoopPanel();
+                        glp = new GameLoopPanel("/Map1/map_1.txt", "/Map1/desert_theme.txt", "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
                         glp.startGame();
                         mainFrame.add(glp);
                         mainFrame.pack();
