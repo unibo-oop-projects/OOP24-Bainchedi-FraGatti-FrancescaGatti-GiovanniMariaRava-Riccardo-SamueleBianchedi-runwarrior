@@ -69,17 +69,17 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     }
 
     /**
-     * Set the initial position of the player
+     * Set the initial position of the player.
      *
      * @param y y coordinate
-     * @param tileSize tile dimenssion
+     * @param tileSize tile dimension
      */
     private void setStartY(int y, int tileSize){
-        startY = y + CharacterImpl.TO_TOUCH_FLOOR;
+        startY = y + CharacterImpl.TO_TOUCH_FLOOR; //542
         playerY = startY;
         sizeCharacter = tileSize*2;
-        maxJump = startY - (sizeCharacter*5/2);
-        midJump = startY - (sizeCharacter*4/2);
+        maxJump = startY - (sizeCharacter*5/2); //362
+        midJump = startY - (sizeCharacter*3/2);
     }
 
     public void setLocationAfterPowerup(int x, int y, int realx, int groundX, long lastHit) {
@@ -147,11 +147,11 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             if (collisionDetection.isInAir(player) && !jumpKill) {
                 descend = true;
                 playerY += SPEED_JUMP_DOWN;
+                updateJumpVariable();
             }
             else if (!jumpKill) {
                 descend = false;
                 cmd.setDoubleJump(false);
-                updateJumpVariable();
             }
         }
     }
@@ -176,7 +176,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
 
     public void updateJumpVariable() {
         maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
-        midJump = (startY - (sizeCharacter*4/2)) + (playerY - startY);
+        midJump = (startY - (sizeCharacter*3/2)) + (playerY - startY);
         System.out.println(maxJump + " " + midJump);
     }
 
