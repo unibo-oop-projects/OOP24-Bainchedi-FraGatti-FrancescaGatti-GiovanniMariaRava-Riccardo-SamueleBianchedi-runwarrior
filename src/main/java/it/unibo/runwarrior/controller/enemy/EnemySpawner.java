@@ -16,7 +16,7 @@ import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 public class EnemySpawner {
-    private final static int TO_TOUCH_FLOOR = 23;
+    private final static int TO_TOUCH_FLOOR = 8;
     private EnemyHandlerImpl handler;
     private GameLoopPanel glp;
     private List<EnemyImpl> enemies;
@@ -68,7 +68,7 @@ public class EnemySpawner {
             int enemyX = spawnPoint.x()*tileSize;
             if (enemyX >= screenLeft && enemyX <= screenRight && !spawnedEnemies.contains(spawnPoint)) {
                 System.out.println("Spawning enemy of type " + spawnPoint.type() + " at (" + enemyX + ", " + spawnPoint.y()*tileSize + ")");
-                EnemyImpl enemy = new EnemyImpl(enemyX, (spawnPoint.y()*tileSize) + TO_TOUCH_FLOOR, 48,48, true, handler, glp, spawnPoint.type());
+                EnemyImpl enemy = new EnemyImpl(enemyX, (spawnPoint.y()*tileSize) + TO_TOUCH_FLOOR, 64,64, true, handler, glp, spawnPoint.type());
                 System.out.println("Enemy created: " + enemy);
                 if (enemy != null) {
                     handler.addEnemy(enemy);
