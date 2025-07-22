@@ -1,8 +1,9 @@
 #file di confirgurazione della mappa 2
 
-0=src/main/resources/Map_2/desert_sky.png
-1=src/main/resources/Map_2/desert_sand.png
-2=src/main/resources/Map_2/desert_half_sand.png
-3=src/main/resources/Map_2/desert_sandstone.png
-4=src/main/resources/Map_2/desert_cactus_top.png
-5=src/main/resources/Map_2/desert_cactus_body.png
+0=/Map1/desert_sky.png
+1=/Map1/desert_sand.png
+2=/Map1/desert_sand.png
+3=/Portal/portal_internal.png
+4=/Portal/portal_wall.png
+5=/Map1/desert_cactus_top.png
+6=/Map1/desert_cactus_body.png

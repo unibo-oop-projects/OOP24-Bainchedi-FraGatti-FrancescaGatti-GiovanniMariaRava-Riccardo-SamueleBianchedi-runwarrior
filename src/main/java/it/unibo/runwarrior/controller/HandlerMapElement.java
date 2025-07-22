@@ -53,7 +53,7 @@ public class HandlerMapElement {
                     newElement.setHarmless(true);
                     newElement.setCollision(true);
                     break;
-                case 5:
+                case 5,6:
                     newElement.setHarmless(false);
                     newElement.setCollision(true);
                     break;
