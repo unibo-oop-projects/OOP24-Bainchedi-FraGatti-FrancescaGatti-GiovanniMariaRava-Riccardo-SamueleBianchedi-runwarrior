@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.enemy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,20 +10,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import it.unibo.runwarrior.model.enemy.EnemyImpl;
-import it.unibo.runwarrior.model.enemy.EnemySpawnPoints;
+import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
+import it.unibo.runwarrior.model.enemy.api.EnemySpawnPoints;
+import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.controller.EnemyHandler;
 
 public class EnemySpawner {
     private final static int TO_TOUCH_FLOOR = 23;
-    private EnemyHandler handler;
+    private EnemyHandlerImpl handler;
     private GameLoopPanel glp;
     private List<EnemyImpl> enemies;
     private final List<EnemySpawnPoints> spawnPoints;
     private final Set<EnemySpawnPoints> spawnedEnemies;
 
-    public EnemySpawner(EnemyHandler handler, GameLoopPanel glp) {
+    public EnemySpawner(EnemyHandlerImpl handler, GameLoopPanel glp) {
         this.handler = handler;
         this.glp = glp;
         this.spawnPoints = new ArrayList<>();

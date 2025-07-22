@@ -1,12 +1,13 @@
-package it.unibo.runwarrior.model.enemy;
+package it.unibo.runwarrior.model.enemy.impl;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.controller.EnemyHandler;
+import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.PowerUpImpl;
+import it.unibo.runwarrior.model.enemy.api.Enemy;
 
 
 public class EnemyImpl implements Enemy{
@@ -23,7 +24,7 @@ public class EnemyImpl implements Enemy{
 
     public int velocityX;
 
-    public EnemyHandler enemyHandler;
+    public EnemyHandlerImpl enemyHandler;
 
     public BufferedImage image;
 
@@ -31,7 +32,7 @@ public class EnemyImpl implements Enemy{
     private PowerUpImpl powerUp;
 
     
-    public EnemyImpl(int x, int y, int width, int height, boolean solid, EnemyHandler handler, GameLoopPanel glp, int type) {
+    public EnemyImpl(int x, int y, int width, int height, boolean solid, EnemyHandlerImpl handler, GameLoopPanel glp, int type) {
         this.x = x;
         this.y = y;
         this.width = width;

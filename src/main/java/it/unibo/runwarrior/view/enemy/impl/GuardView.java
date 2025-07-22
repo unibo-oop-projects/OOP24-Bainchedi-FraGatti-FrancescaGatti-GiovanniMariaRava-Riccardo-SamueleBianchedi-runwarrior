@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.view.enemy;
+package it.unibo.runwarrior.view.enemy.impl;
 
 import java.io.IOException;
 
@@ -7,10 +7,13 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import it.unibo.runwarrior.model.enemy.EnemyImpl;
+import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
+import it.unibo.runwarrior.view.enemy.api.EnemyView;
 
-
+/**
+ * Implementation of the enemy view with Guard enemy
+ */
 public class GuardView implements EnemyView {
     private BufferedImage rightGuard;
     private BufferedImage leftGuard;
@@ -19,8 +22,12 @@ public class GuardView implements EnemyView {
     private BufferedImage rightGuardRunning;
     private BufferedImage leftGuardRunning;
     private BufferedImage image;
-    private GameLoopPanel glp;
-    public GuardView(GameLoopPanel glp) {
+    private final GameLoopPanel glp;
+    /**
+     * @param glp is the panel in which the guard need to be renderd
+     * Constructor of the GuardView class
+     */
+    public GuardView(final GameLoopPanel glp) {
         this.glp = glp;
         try {
             loadResources();
@@ -28,7 +35,9 @@ public class GuardView implements EnemyView {
             e.printStackTrace();
         }
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void loadResources() throws IOException {
         rightGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuard.png"));
@@ -39,9 +48,11 @@ public class GuardView implements EnemyView {
         leftGuardRunning = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftRunningGuard.png"));
         image = rightGuard;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public final void render(final Graphics g, EnemyImpl enemy) {
+    public final void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
         if (enemy.velocityX == 0) {
             currentImage = image;
@@ -52,8 +63,7 @@ public class GuardView implements EnemyView {
             currentImage = enemy.step ? leftGuardMoving : leftGuardRunning;
             image = leftGuard;
         }
-        int shift = glp.getMapHandler().getShift();
-        //System.out.println("SNAKE XS: " + (x+shift)+ "X:"+ x);
+        final int shift = glp.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
     }
 }

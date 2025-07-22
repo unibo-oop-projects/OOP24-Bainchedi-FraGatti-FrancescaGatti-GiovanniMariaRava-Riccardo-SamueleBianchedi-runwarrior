@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model.enemy;
+package it.unibo.runwarrior.model.enemy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,15 +9,16 @@ import java.awt.Rectangle;
 import java.util.Collections;
 import java.util.List;
 
-import it.unibo.runwarrior.controller.EnemyHandler;
+import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
+import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.view.enemy.EnemyViewFactory;
+import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
 
 public class EnemyImplTest {
     private EnemyImpl enemy;
     private GameLoopPanel glp;
-    private EnemyHandler enemyHandler;
-    private EnemyViewFactory enemyViewFactory;
+    private EnemyHandlerImpl enemyHandler;
+    private EnemyViewFactoryImpl enemyViewFactory;
     
     /**
      * Sets up a new EnemyImpl instance.
@@ -25,7 +26,7 @@ public class EnemyImplTest {
     @BeforeEach
     public void setUp() {
         glp = new GameLoopPanel();
-        enemyHandler = new EnemyHandler(glp, enemyViewFactory);
+        enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
         enemy = new EnemyImpl(50, 100, 64, 64, true, enemyHandler, glp, 1); 
     }
 
