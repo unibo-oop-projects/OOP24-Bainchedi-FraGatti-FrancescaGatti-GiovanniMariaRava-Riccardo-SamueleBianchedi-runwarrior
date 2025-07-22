@@ -113,7 +113,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         super.paintComponent(gr);
         Graphics2D gr2 = (Graphics2D) gr;
         
-        mapHandler.printBlocks(gr2);
+        mapHandler.printBlocks(gr2, player);
         powersFactory.printPowerUp(gr2);
         player.drawPlayer(gr2);
         player.drawRectangle(gr2);

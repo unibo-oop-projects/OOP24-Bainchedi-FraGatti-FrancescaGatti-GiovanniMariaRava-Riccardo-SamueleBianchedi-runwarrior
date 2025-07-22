@@ -3,6 +3,7 @@ package it.unibo.runwarrior.controller.collisions;
 import java.awt.Rectangle;
 import java.util.List;
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.CharacterImpl;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.model.enemy.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
@@ -16,8 +17,9 @@ public class KillDetectionImpl implements KillDetection {
     //private PowersHandler powerUpHandler; // vedi sotto
     //private List<EnemyImpl> enemies; // commentato per ricordare che forse è meglio mantenerlo come variabile
     private Rectangle playerArea;
+    private Rectangle swordArea;
     private long hitWaitTime;
-    private int toll = 5;
+    private final int TOLL = CharacterImpl.SPEED;
 
     /**
      * Constructor
@@ -36,10 +38,10 @@ public class KillDetectionImpl implements KillDetection {
     @Override
     public void checkCollisionWithEnemeies(Character player) {
         playerArea = player.getArea();
-        Rectangle swordArea = player.getSwordArea();
+        swordArea = player.getSwordArea();
         for (EnemyImpl enemy : glp.getEnemyHandler().getEnemies()) {
             if (futureArea(playerArea).intersects(enemy.getBounds())) {
-                System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
+                //System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
                 if (isTouchingUp(playerArea, enemy.getBounds())) {
                     player.getMovementHandler().setJumpKill();
                     enemy.die();
@@ -55,14 +57,15 @@ public class KillDetectionImpl implements KillDetection {
                 }
             }
             else if (swordArea.intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking() &&
-                    !isBehindTile(swordArea.x + hM.getTileSize()/2, swordArea.y + (swordArea.height / 2)) &&
-                    !isBehindTile(swordArea.x + swordArea.width - hM.getTileSize()/2, swordArea.y + (swordArea.height / 2))) {
-                if ((swordArea.x + swordArea.width >= enemy.getBounds().x && swordArea.x < enemy.getBounds().x)) {
-                    enemy.die();
-                }
-                else if (swordArea.x <= enemy.getBounds().x + enemy.getBounds().width) {
-                    enemy.die();
-                }
+                    !isBehindTile(swordArea.x + hM.getTileSize() / 2, swordArea.y + (swordArea.height / 2)) &&
+                    !isBehindTile(swordArea.x + swordArea.width - hM.getTileSize() / 2, swordArea.y + (swordArea.height / 2)) ) {
+                // if ((swordArea.x + swordArea.width >= enemy.getBounds().x && swordArea.x < enemy.getBounds().x)) {
+                //     enemy.die();
+                // }
+                // else if (swordArea.x <= enemy.getBounds().x + enemy.getBounds().width) {
+                //     enemy.die();
+                // }
+                enemy.die();
             }
         }
     }
@@ -83,8 +86,8 @@ public class KillDetectionImpl implements KillDetection {
     @Override
     public boolean isTouchingUp(Rectangle playerArea, Rectangle enemyArea){
         return playerArea.y + playerArea.height <= enemyArea.y && 
-        ((playerArea.x + toll >= enemyArea.x && playerArea.x + toll <= enemyArea.x + enemyArea.width) ||
-        (playerArea.x + playerArea.width - toll >= enemyArea.x && playerArea.x + playerArea.width - toll <= enemyArea.x + enemyArea.width));
+        ((playerArea.x + TOLL >= enemyArea.x && playerArea.x + TOLL <= enemyArea.x + enemyArea.width) ||
+        (playerArea.x + playerArea.width - TOLL >= enemyArea.x && playerArea.x + playerArea.width - TOLL <= enemyArea.x + enemyArea.width));
     }
 
     /**

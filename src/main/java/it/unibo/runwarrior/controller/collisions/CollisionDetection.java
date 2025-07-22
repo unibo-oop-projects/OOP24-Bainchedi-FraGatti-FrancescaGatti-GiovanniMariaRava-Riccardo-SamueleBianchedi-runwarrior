@@ -16,6 +16,7 @@ public interface CollisionDetection {
 
     /**
      * Controls if the player touches a solid tile in his position.
+     * The second part controls that the player doesn't go through tiles while jumping.
      *
      * @param x x coordinate in pixel of the player
      * @param y y coordinate in pixel of the player
@@ -56,4 +57,9 @@ public interface CollisionDetection {
      * @param lastHit last time of the player hitting an obstacle
      */
     public void setHitWaitTime(long lastHit);
+
+    /**
+     * @return true if the game has to be stopped
+     */
+    public boolean gameOver();
 }

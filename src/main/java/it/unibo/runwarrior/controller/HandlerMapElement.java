@@ -6,6 +6,7 @@ import java.util.Map;
 
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.MapElement;
+import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 import java.awt.image.BufferedImage;
@@ -65,10 +66,10 @@ public class HandlerMapElement {
     /**
      * @param gr
      */
-    public void printBlocks(Graphics2D gr){
+    public void printBlocks(Graphics2D gr, Character player){
         int rows = map.length;
         int cols = map[0].length;
-
+        shift = player.getMovementHandler().getGroundX();
         int tileHeight = GameLoopPanel.HEIGHT / rows;
         tileSize = tileHeight;
         for (int y = 0; y < rows; y++) {

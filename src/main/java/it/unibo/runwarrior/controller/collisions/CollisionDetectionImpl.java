@@ -21,6 +21,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
     private Rectangle playerArea;
     private GameLoopPanel glp;
     private long hitWaitTime;
+    private int gameOverY;
 
     /**
      * Constructor of the collision detection.
@@ -67,33 +68,31 @@ public class CollisionDetectionImpl implements CollisionDetection {
      */
     @Override
     public boolean touchSolid(int x, int y, Character player, boolean checkDirections) {
-        int[][] blockIndexes = map;
+        gameOverY = y;
         float indexXtile = x / tileSize;
         float indexYtile = y / tileSize;
-        int blockIndex = blockIndexes[(int) indexYtile][(int) indexXtile];
+        int blockIndex = map[(int) indexYtile][(int) indexXtile];
         if (blocks.get(blockIndex).getCollision() || y <= 0){
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
             }
             if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > 3000){
-                System.out.println(System.currentTimeMillis() +  " " + hitWaitTime);
+                //System.out.println(System.currentTimeMillis() +  " " + hitWaitTime);
                 player.getMovementHandler().setJumpKill();
                 hitWaitTime = System.currentTimeMillis();
                 glp.getPowersHandler().losePower(false);
             }
             return true;
-        } else {
+         } else {
             for (int i = playerArea.width; i >= 0; i = i - playerArea.width) {
                 indexXtile = (playerArea.x + i) / tileSize;
                 indexYtile = playerArea.y / tileSize;
-                blockIndex = blockIndexes[(int) indexYtile][(int) indexXtile];
-                if (blocks.get(blockIndex).getCollision()) {
-                    if (checkDirections) {
-                        String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile, player);
-                        if (tempDir.equals("right") || tempDir.equals("left")) {
-                            this.directions.add(tempDir);
-                            return true;
-                        }
+                blockIndex = map[(int) indexYtile][(int) indexXtile];
+                if (blocks.get(blockIndex).getCollision() && checkDirections) {
+                    String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile, player);
+                    if (tempDir.equals("right") || tempDir.equals("left")) {
+                        this.directions.add(tempDir);
+                        return true;
                     }
                 }
             }
@@ -134,8 +133,9 @@ public class CollisionDetectionImpl implements CollisionDetection {
     @Override
     public boolean isInAir(Character player) {
         if (!touchSolid(player.getArea().x + FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, player, false) &&
-            !touchSolid(player.getArea().x + player.getArea().width - FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, player, false)){
-                return true;
+            !touchSolid(player.getArea().x + player.getArea().width - FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, 
+            player, false)) {
+            return true;
         }
         return false;
     }
@@ -154,5 +154,13 @@ public class CollisionDetectionImpl implements CollisionDetection {
     @Override
     public void setHitWaitTime(long lastHit) {
         hitWaitTime = lastHit;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean gameOver() {
+        return gameOverY >= glp.getHeight() ? true : false;
     }
 }

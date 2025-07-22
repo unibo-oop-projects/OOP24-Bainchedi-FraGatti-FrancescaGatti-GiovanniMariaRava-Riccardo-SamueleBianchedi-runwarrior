@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.CharacterImpl;
 import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.model.PowerUpImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
@@ -16,16 +17,18 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     private GameLoopPanel glp;
     private PowerUpFactoryImpl pFact;
     private ArrayList<PowerUpImpl> powerCollision = new ArrayList<>();
+    private Rectangle playerArea;
     private long hitWaitTime;
-    private int toll = 5;
+    private final int TOLL = CharacterImpl.SPEED;
+    private final int WAIT = 200;
 
     /**
-     * Constructor of powerup detection
+     * Constructor of powerup detection.
      *
      * @param glp game-loop panel
      * @param pUpFact obhect that prints powerups
      */
-    public PowerUpDetectionImpl(GameLoopPanel glp, PowerUpFactoryImpl pUpFact) {
+    public PowerUpDetectionImpl(final GameLoopPanel glp, final PowerUpFactoryImpl pUpFact) {
         this.glp = glp;
         this.pFact = pUpFact;
     }
@@ -36,32 +39,32 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     @Override
     public String checkCollisionWithPowers(Character player, CharacterMovementHandler move) {
         powerCollision.addAll(pFact.getPowerUps());
-        Rectangle playerArea = player.getArea();
+        playerArea = player.getArea();
         String dir = "";
-        for(PowerUpImpl pUp : powerCollision){
-            if(futureArea(playerArea).intersects(pUp.getTouchArea()) && !pUp.getTouchArea().isEmpty()){
+        for(PowerUpImpl pUp : powerCollision) {
+            if(futureArea(playerArea).intersects(pUp.getTouchArea()) && !pUp.getTouchArea().isEmpty()) {
                 if(isTouchingUp(playerArea, pUp.getTouchArea())){
                     dir = "up";
-                    if(pUp.isEggOpen() && !pUp.isPowerTaken() && System.currentTimeMillis() - hitWaitTime > 200){
+                    if(pUp.isEggOpen() && !pUp.isPowerTaken() && System.currentTimeMillis() - hitWaitTime > WAIT) {
                         glp.getPowersHandler().setPowers();
                         pUp.takePower();
                     }
-                    else if(!pUp.isEggOpen()){
+                    else if(!pUp.isEggOpen()) {
                         move.setJumpKill();
                         pUp.openTheEgg();
                         hitWaitTime = System.currentTimeMillis();
                     }
                 }
-                else if((playerArea.x + playerArea.width >= pUp.getTouchArea().x && playerArea.x < pUp.getTouchArea().x)){
+                else if((playerArea.x + playerArea.width >= pUp.getTouchArea().x && playerArea.x < pUp.getTouchArea().x)) {
                     dir = "right";
-                    if(pUp.isEggOpen() && !pUp.isPowerTaken()){
+                    if(pUp.isEggOpen() && !pUp.isPowerTaken()) {
                         glp.getPowersHandler().setPowers();
                         pUp.takePower();
                     }
                 }
-                else if(playerArea.x <= pUp.getTouchArea().x + pUp.getTouchArea().width){
+                else if(playerArea.x <= pUp.getTouchArea().x + pUp.getTouchArea().width) {
                     dir = "left";
-                    if(pUp.isEggOpen() && !pUp.isPowerTaken()){
+                    if(pUp.isEggOpen() && !pUp.isPowerTaken()) {
                         glp.getPowersHandler().setPowers();
                         pUp.takePower();
                     }
@@ -87,7 +90,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     @Override
     public boolean isTouchingUp(Rectangle playerArea, Rectangle pUpArea){
         return playerArea.y + playerArea.height <= pUpArea.y && 
-        ((playerArea.x + toll >= pUpArea.x && playerArea.x + toll <= pUpArea.x + pUpArea.width) ||
-        (playerArea.x + playerArea.width - toll >= pUpArea.x && playerArea.x + playerArea.width - toll <= pUpArea.x + pUpArea.width));
+        ((playerArea.x + TOLL >= pUpArea.x && playerArea.x + TOLL <= pUpArea.x + pUpArea.width) ||
+        (playerArea.x + playerArea.width - TOLL >= pUpArea.x && playerArea.x + playerArea.width - TOLL <= pUpArea.x + pUpArea.width));
     }
 }

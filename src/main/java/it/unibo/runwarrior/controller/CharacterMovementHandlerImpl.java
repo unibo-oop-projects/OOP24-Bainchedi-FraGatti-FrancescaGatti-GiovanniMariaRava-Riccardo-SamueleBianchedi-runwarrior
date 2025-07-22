@@ -2,6 +2,7 @@ package it.unibo.runwarrior.controller;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
+
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.PowerUpDetectionImpl;
@@ -15,7 +16,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private GameLoopPanel glp;
     private CharacterComand cmd;
     private Character player;
-    private HandlerMapElement mapHandler;
     private CollisionDetectionImpl collisionDetection;
     private PowerUpDetectionImpl pUpDetection;
     private KillDetectionImpl killDetection;
@@ -31,6 +31,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     protected int playerX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
     protected int playerY;// * VERTICALE
     private int screenX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
+    private String collisionDir;
+    private String tempDir;
     private boolean hitHead;
     private boolean jumpKill;
     private boolean descend;
@@ -52,20 +54,18 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * @param hM object that prints tiles
      * @param pFact object that prints powerups
      */
-    public CharacterMovementHandlerImpl(GameLoopPanel panel, Character player, CharacterComand cmd,
-     HandlerMapElement hM, PowerUpFactoryImpl pFact) {
+    public CharacterMovementHandlerImpl(final GameLoopPanel panel, final Character player, final CharacterComand cmd,
+    final HandlerMapElement hM, final PowerUpFactoryImpl pFact) {
         this.glp = panel;
         this.cmd = cmd;
-        //this.collisionDetection = collDet; 
         this.player = player;
-        this.mapHandler = hM;
         this.collisionDetection = new CollisionDetectionImpl(hM.getMap(), hM.getBlocks(), hM.getTileSize(), panel);
         this.pUpDetection = new PowerUpDetectionImpl(panel, pFact);
         this.killDetection = new KillDetectionImpl(panel, hM);
         playerX = START_X;
         screenX = START_X;
         groundX = 0;
-        setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
+        setStartY(hM.getFirstY(), hM.getTileSize());
     }
 
     /**
@@ -91,46 +91,42 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         this.collisionDetection.setHitWaitTime(lastHit);
     }
 
-    public void movePlayer(){
+    public void movePlayer() {
         maxScreenX = glp.getWidth() / 2;
-        String collisionDir = "";
-        String tempDir = "";
         collisionDir = collisionDetection.checkCollision(player);
         tempDir = pUpDetection.checkCollisionWithPowers(player, this);
-        if(!tempDir.isEmpty()){
+        if (!tempDir.isEmpty()) {
             collisionDir = tempDir;
         }
         killDetection.checkCollisionWithEnemeies(player);
 
         hitHead = collisionDir.equals("down") ? true : false;
-        if(hitHead){
+        if (hitHead) {
             cmd.setJump(false);
         }
         jump(cmd.isJumping(), maxJump, player);
         handleDoubleCollision = (collisionDir.equals("up") || collisionDir.equals("down")) && descend ? true : false;
-        if(jumpKill){
+        if (jumpKill) {
             jumpAfterKill();
         }
-        if(cmd.getRight() && !cmd.getLeft()){
+        if (cmd.getRight() && !cmd.getLeft()) {
             rightDirection = true;
-            if(!collisionDir.equals("right") && !handleDoubleCollision){
+            if (!collisionDir.equals("right") && !handleDoubleCollision) {
                 playerX += CharacterImpl.SPEED;
-                if(screenX < maxScreenX){
+                if (screenX < maxScreenX) {
                     screenX += CharacterImpl.SPEED;
-                }
-                else{
+                } else {
                     groundX -= CharacterImpl.SPEED;
-                    mapHandler.setShift(groundX);
                 }
             }
         }
-        if(cmd.getLeft() && !cmd.getRight()){
+        if (cmd.getLeft() && !cmd.getRight()) {
             rightDirection = false;
-            if(!collisionDir.equals("left") && !handleDoubleCollision){
-                if(screenX > 0){
+            if (!collisionDir.equals("left") && !handleDoubleCollision) {
+                if (screenX > 0) {
                     playerX -= CharacterImpl.SPEED;
                 }
-                if(screenX > MIN_SCREEN_X){
+                if (screenX > MIN_SCREEN_X) {
                     screenX -= CharacterImpl.SPEED;
                 }
             }
@@ -139,22 +135,20 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         canAttack = (collisionDir.equals("right") || collisionDir.equals("left")) ? false : true;
     }
 
-    public void jump(boolean isJump, int jumpHeight, Character player){
-        if(isJump && !descend){
+    public void jump (boolean isJump, int jumpHeight, Character player) {
+        if (isJump && !descend) {
             if(playerY > jumpHeight && !collisionDetection.checkCollision(player).equals("down")){
                 playerY -= SPEED_JUMP_UP;
-            }
-            else{
+            } else {
                 playerY = jumpHeight;
                 cmd.setJump(false);
             }
-        }
-        else{
-            if(collisionDetection.isInAir(player) && !jumpKill){
+        } else {
+            if (collisionDetection.isInAir(player) && !jumpKill) {
                 descend = true;
                 playerY += SPEED_JUMP_DOWN;
             }
-            else if(!jumpKill) {
+            else if (!jumpKill) {
                 descend = false;
                 cmd.setDoubleJump(false);
                 updateJumpVariable();
@@ -162,18 +156,17 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         }
     }
 
-    public void setJumpKill(){
+    public void setJumpKill() {
         this.jumpKill = true;
         cmd.setJump(true);
     }
 
     public void jumpAfterKill(){
-        if(playerY >= midJump){
+        if (playerY >= midJump) {
             cmd.setDoubleJump(true);
             playerY -= SPEED_JUMP_UP;
             System.out.println("jumpkill");
-        }
-        else{
+        } else {
             playerY = midJump;
             jumpKill = false;
             cmd.setJump(false);
@@ -181,13 +174,13 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         }
     }
 
-    public void updateJumpVariable(){
+    public void updateJumpVariable() {
         maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
         midJump = (startY - (sizeCharacter*4/2)) + (playerY - startY);
         System.out.println(maxJump + " " + midJump);
     }
 
-    public boolean canAttack(){
+    public boolean canAttack() {
         return this.canAttack;
     }
 
@@ -199,11 +192,11 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         return this.killDetection;
     }
 
-    public boolean getRightDirection(){
+    public boolean getRightDirection() {
         return this.rightDirection;
     }
 
-    public int getGroundX(){
+    public int getGroundX() {
         return this.groundX;
     }
 
