@@ -71,7 +71,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         this.coinController = new CoinController(player);
-        List<int[]> coords = coinController.loadCoinFromFile("\\Coins\\CoinCoordinates_map1.txt");
+        List<int[]> coords = coinController.loadCoinFromFile("/Coins/CoinCoordinates_map1.txt");
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
         }

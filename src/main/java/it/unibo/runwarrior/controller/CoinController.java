@@ -24,7 +24,7 @@ public class CoinController {
 
     public List<int[]> loadCoinFromFile(String pathFile){
         List<int[]> coinCoordinates = new ArrayList<>();
-        try(InputStream is = getClass().getClassLoader().getResourceAsStream(pathFile);
+        try(InputStream is = getClass().getResourceAsStream(pathFile);
          BufferedReader fileReader = new BufferedReader(new InputStreamReader(is))){
             if (is == null) {
             System.err.println("File non trovato nel classpath: " + pathFile);
