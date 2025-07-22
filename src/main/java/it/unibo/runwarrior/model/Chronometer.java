@@ -8,32 +8,45 @@ public class Chronometer {
     long beginningTime; 
     JLabel timeLabel;
     Timer t; 
+    private boolean playerRunning = false; 
+    private long timeElapsed = 0;
 
-    public Chronometer(JLabel l){
-        timeLabel = l; 
+    public Chronometer(){ 
         t = new Timer(100, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-               //azioni del timer 
-               long timeDifference = System.currentTimeMillis() - beginningTime; 
-               final int tenthsSec = (int) ((timeDifference % 1000) / 100); //decimi di secondo
-               final int seconds = (int) ((timeDifference/1000) % 60); 
-               int minutes = (int) (timeDifference/60000 % 60); 
-               int hours = (int) (timeDifference / 3600000); 
-               String s = String.format("%d:%2d:%2d:%d", hours, minutes, seconds, tenthsSec);
-               timeLabel.setText(s);
-               //ore : minuti : secondi : decimi secondo
+               timeElapsed = System.currentTimeMillis() - beginningTime;
+               
             }
         });
     }
     public void StartTimer(){
         beginningTime = System.currentTimeMillis(); 
         t.start();
+        playerRunning = true; 
     }
     public void StopTimer(){
-        t.stop();
+        if(playerRunning){
+            timeElapsed = System.currentTimeMillis() - beginningTime;
+            t.stop();
+            playerRunning = false;
+        }
     }
     public long getTimeElapsed(){ //metodo che chiamo in score Controller
-        return System.currentTimeMillis() - beginningTime;
+        return timeElapsed;
+    }
+
+    public boolean isPlayerRunning(){
+        return playerRunning;
+    }
+
+    public String getTimeString(){
+        long time = getTimeElapsed();
+        final int tenthsSec = (int) ((time % 1000) / 100); //decimi di secondo
+        final int seconds = (int) ((time/1000) % 60); 
+        int minutes = (int) (time/60000 % 60); 
+        int hours = (int) (time / 3600000); 
+         //ore : minuti : secondi : decimi secondo
+        return String.format("%d:%02d:%02d.%d", hours, minutes, seconds, tenthsSec);
     }
 }

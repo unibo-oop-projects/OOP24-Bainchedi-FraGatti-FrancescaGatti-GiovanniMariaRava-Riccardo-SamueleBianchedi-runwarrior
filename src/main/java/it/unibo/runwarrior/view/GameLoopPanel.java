@@ -1,6 +1,8 @@
 package it.unibo.runwarrior.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.List;
@@ -14,6 +16,7 @@ import it.unibo.runwarrior.controller.PowersHandler;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.Chronometer;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.player.NakedWarrior;
 import it.unibo.runwarrior.model.player.NakedWizard;
@@ -42,7 +45,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private EnemySpawner enemySpawner;
     private GameMap gameMap;
     private CoinController coinController;
-
+    private Chronometer chronometer;
+    private boolean gameStarted = false;
+    private boolean gameFinished = false;
    // private GameMusic music;
 
     public GameLoopPanel() {
@@ -75,6 +80,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
         }
+        this.chronometer = new Chronometer();
     }
 
     public void startGame() {
@@ -103,6 +109,10 @@ public class GameLoopPanel extends JPanel implements Runnable {
     }
 
     public void update() {
+        if(!gameStarted){
+            chronometer.StartTimer();
+            gameStarted = true;
+        }
         player.update();
         enemySpawner.update();
         enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
@@ -119,6 +129,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
         player.drawRectangle(gr2);
         enemyHandler.render(gr2);
         coinController.drawAllCoins(gr2, mapHandler.getTileSize());
+        gr2.setColor(Color.BLACK);
+        gr2.setFont(new Font("Arial", Font.BOLD, 20));
+        gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
         gr2.dispose();
     }
 
