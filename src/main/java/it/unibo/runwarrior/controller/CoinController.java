@@ -64,18 +64,21 @@ public class CoinController {
     public void drawAllCoins(Graphics g, int tileSize){
         groundX = player.getMovementHandler().getGroundX();  // offset della camera
 
-    for (Coin coin : coinList) {
-        if (!coin.isCollected()) {
-            int coinX = coin.getCol() * tileSize;
-            int coinY = coin.getRow() * tileSize;
+        for (Coin coin : coinList) {
+            if (!coin.isCollected()) {
+                int coinX = coin.getCol() * tileSize;
+                int coinY = coin.getRow() * tileSize;
 
-            int screenX = coinX + groundX;
+                int screenX = coinX + groundX;
 
-            // Disegna solo se visibile nello schermo
-            if (screenX + tileSize >= 0 && screenX <= GameLoopPanel.WIDTH) {
-                g.drawImage(coin.coinImage, screenX, coinY, tileSize, tileSize, null);
+                // Disegna solo se visibile nello schermo
+                if (screenX + tileSize >= 0 && screenX <= GameLoopPanel.WIDTH) {
+                    g.drawImage(coin.coinImage, screenX, coinY, tileSize, tileSize, null);
                 }
             }  
         }
+    }
+    public void updatePlayer(Character player){
+        this.player = player;
     }
 }
