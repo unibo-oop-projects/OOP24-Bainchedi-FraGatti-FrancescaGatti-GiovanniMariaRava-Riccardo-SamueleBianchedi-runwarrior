@@ -101,8 +101,8 @@ public class Menu extends JPanel{
                     level3.setFont(fontButton);
                     level3.setBackground(new Color(120, 124, 126));
                     level3.setBorder(new LineBorder(new Color(85, 89, 91), 4));
+                    
                     level1.addActionListener(level1Event ->{
-
                         mainFrame = new JFrame("runwarrior");
                         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         mainFrame.setLocationByPlatform(false);
@@ -114,7 +114,18 @@ public class Menu extends JPanel{
                         mainFrame.pack();
                         mainFrame.setVisible(true);
                     });
-                    level2.addActionListener(ev -> JOptionPane.showMessageDialog(null, "manca la mappa"));
+                    level2.addActionListener(ev -> {
+                        mainFrame = new JFrame("runwarrior");
+                        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        mainFrame.setLocationByPlatform(false);
+                        mainFrame.setResizable(true);
+                        
+                        glp = new GameLoopPanel("Map2/map2.txt", "Map2/forest_theme.txt", "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
+                        glp.startGame();
+                        mainFrame.add(glp);
+                        mainFrame.pack();
+                        mainFrame.setVisible(true);
+                    });
                     level3.addActionListener(ev -> JOptionPane.showMessageDialog(null,"manca la mappa"));
                     panel.setOpaque(false);
                     panel.add(Box.createVerticalStrut(10));
