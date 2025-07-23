@@ -34,9 +34,9 @@ public class PowerUpFactoryImpl {
         for (int i = 0; i < NUM_POWERUP; i++) {
             final PowerUpImpl p = new PowerUpImpl(glp);
             int row = 0;
-            while (map[row][distance] != 2 && map[row][distance] != 1 && map[row][distance] != 3) {
+            while (map[row][distance] != 2 && map[row][distance] != 1) {
                 row++;
-                if(row == map.length){
+                if(row == map.length || map[row][distance] == 5){
                     row = 0;
                     distance += tileSize;
                 }
