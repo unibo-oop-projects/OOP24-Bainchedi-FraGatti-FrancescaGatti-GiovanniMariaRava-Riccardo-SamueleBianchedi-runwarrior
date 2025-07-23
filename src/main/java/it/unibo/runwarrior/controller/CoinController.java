@@ -24,7 +24,7 @@ public class CoinController {
 
     public List<int[]> loadCoinFromFile(String pathFile){
         List<int[]> coinCoordinates = new ArrayList<>();
-        try(InputStream is = getClass().getClassLoader().getResourceAsStream(pathFile);
+        try(InputStream is = getClass().getResourceAsStream(pathFile);
          BufferedReader fileReader = new BufferedReader(new InputStreamReader(is))){
             if (is == null) {
             System.err.println("File non trovato nel classpath: " + pathFile);
@@ -67,11 +67,11 @@ public class CoinController {
             if(!coin.isCollected()){
                 int x = coin.getCol() * tileSize;
                 int y = coin.getRow() * tileSize;
-                if(x+tileSize > 0 && x < GameLoopPanel.WIDTH){
+
+                if (x + tileSize > 0 && x < GameLoopPanel.WIDTH) {
                     g.drawImage(coin.coinImage, x + groundX, y, tileSize, tileSize, null);
                 }
             }
         }
     }
-
 }

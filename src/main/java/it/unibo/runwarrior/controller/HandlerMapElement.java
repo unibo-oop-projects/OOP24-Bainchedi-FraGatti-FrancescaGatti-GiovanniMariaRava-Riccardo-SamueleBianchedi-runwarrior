@@ -12,7 +12,9 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-
+/**
+ * The class uses the gamemap to render the map and setcollision, and damages
+ */
 public class HandlerMapElement {
     private List<MapElement> blocks;
     private int[][] map;
@@ -22,22 +24,24 @@ public class HandlerMapElement {
     private int firstY;
     private int tileSize;
 
-    public HandlerMapElement(GameMap gamemap){
-        blocks = new ArrayList<>();
+    /**
+     * Constructor of the class HandlerMapElement
+     * @param gamemap
+     */
+    public HandlerMapElement(final GameMap gamemap) { 
+        this.blocks = new ArrayList<>();
         this.mapBlock = gamemap.getBlockImages();
         this.map = gamemap.getMapData();
         MapImage();
     }
-
     /**
      * 0 = sky
      * 1 = grass
      * 2 = terrain
-     * 3 = blocchi portale
-     * 4 = centro portale
+     * 3 = blocchi portale/castello
+     * 4 = centro portale/castello
      * 5 = ostacolo
-     * 6 = blocco1 per castello per mappa finale
-     * 7 = blocco2 per castello per mappa finale
+     * 6= presente solo nella prima
      * This method create a new MapElement using the map created in GameMap
      */
     public void MapImage() {
@@ -53,20 +57,19 @@ public class HandlerMapElement {
                     newElement.setHarmless(true);
                     newElement.setCollision(true);
                     break;
-                case 5:
+                case 5,6:
                     newElement.setHarmless(false);
                     newElement.setCollision(true);
                     break;
             }
             blocks.add(newElement);
-
         }
     }
 
     /**
      * @param gr
      */
-    public void printBlocks(Graphics2D gr, Character player){
+    public void printBlocks(Graphics2D gr, Character player) {
         int rows = map.length;
         int cols = map[0].length;
         shift = player.getMovementHandler().getGroundX();
@@ -81,27 +84,29 @@ public class HandlerMapElement {
         }
     }
 
-    public List<MapElement> getBlocks(){
+    public List<MapElement> getBlocks() {
         return this.blocks;
     }
 
-    public void setShift(int slide){
+    public void setShift(int slide) {
         shift = slide;
     }
-
-    public int getTileSize(){
+    /**
+     * @return the dimension of the tile
+     */
+    public int getTileSize() {
         int rows = map.length;
         tileSize = GameLoopPanel.HEIGHT / rows;
         return tileSize;
     }
 
-    public int getFirstY(){
+    public int getFirstY() {
         int rows = map.length;
         int cols = map[0].length;
         tileSize = GameLoopPanel.HEIGHT / rows;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
-                if(x == 0 && map[y][x] == 1 && !setStart){
+                if (x == 0 && map[y][x] == 1 && !setStart) {
                     firstY = (y*tileSize) - (tileSize*2);
                     setStart = true;
                 }
@@ -117,10 +122,8 @@ public class HandlerMapElement {
         List<Rectangle> collisionRects = new ArrayList<>();
         int rows = map.length;
         int cols = map[0].length;
-    
         int tileHeight = GameLoopPanel.HEIGHT / rows;
         int tileSize = tileHeight;
-    
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 if (blocks.get(map[y][x]).getCollision()) {
@@ -129,11 +132,10 @@ public class HandlerMapElement {
                 }
             }
         }
-    
         return collisionRects;
     }
 
-    public int getShift(){
+    public int getShift() {
         return this.shift;
     }
 

@@ -14,16 +14,22 @@ import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.enemy.api.EnemySpawnPoints;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
-
+/**
+ * EnemySpawner is the class that reads the file with enemies positions and fill the handler.enemies list
+ */
 public class EnemySpawner {
-    private final static int TO_TOUCH_FLOOR = 23;
+    private final static int TO_TOUCH_FLOOR = 8;
     private EnemyHandlerImpl handler;
-    private GameLoopPanel glp;
-    private List<EnemyImpl> enemies;
+    private final GameLoopPanel glp;
     private final List<EnemySpawnPoints> spawnPoints;
     private final Set<EnemySpawnPoints> spawnedEnemies;
 
-    public EnemySpawner(EnemyHandlerImpl handler, GameLoopPanel glp) {
+    /**
+     * Constructor of the class EnemySpawner
+     * @param handler where the enemies list is stored
+     * @param glp the panel in which enemies are shown
+     */
+    public EnemySpawner(final EnemyHandlerImpl handler, final GameLoopPanel glp) {
         this.handler = handler;
         this.glp = glp;
         this.spawnPoints = new ArrayList<>();
@@ -34,7 +40,7 @@ public class EnemySpawner {
      * @param is
      * This method read the file enemies*.txt in order to fill the List enemies so EnemyHandler can render them
      */
-    public void loadEnemiesFromStream(InputStream is) {
+    public void loadEnemiesFromStream(final InputStream is) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -45,8 +51,6 @@ public class EnemySpawner {
                 int type = Integer.parseInt(parts[0]);
                 int tilex = Integer.parseInt(parts[1]);
                 int tiley = Integer.parseInt(parts[2]);
-                int x=tilex*glp.getMapHandler().getTileSize();
-                int y = tiley *glp.getMapHandler().getTileSize();
                 spawnPoints.add(new EnemySpawnPoints(type,tilex,tiley)); 
             }
         } catch (IOException | NumberFormatException e) {
@@ -67,9 +71,7 @@ public class EnemySpawner {
             EnemySpawnPoints spawnPoint = iterator.next();
             int enemyX = spawnPoint.x()*tileSize;
             if (enemyX >= screenLeft && enemyX <= screenRight && !spawnedEnemies.contains(spawnPoint)) {
-                System.out.println("Spawning enemy of type " + spawnPoint.type() + " at (" + enemyX + ", " + spawnPoint.y()*tileSize + ")");
-                EnemyImpl enemy = new EnemyImpl(enemyX, (spawnPoint.y()*tileSize) + TO_TOUCH_FLOOR, 48,48, true, handler, glp, spawnPoint.type());
-                System.out.println("Enemy created: " + enemy);
+                EnemyImpl enemy = new EnemyImpl(enemyX, (spawnPoint.y()*tileSize) + TO_TOUCH_FLOOR, 64,64, true, handler, glp, spawnPoint.type());
                 if (enemy != null) {
                     handler.addEnemy(enemy);
                     spawnedEnemies.add(spawnPoint);
@@ -78,5 +80,4 @@ public class EnemySpawner {
             }
         }
     }
-
 }

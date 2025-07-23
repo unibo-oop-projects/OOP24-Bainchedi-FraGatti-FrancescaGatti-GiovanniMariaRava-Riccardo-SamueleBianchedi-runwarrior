@@ -1,6 +1,8 @@
 package it.unibo.runwarrior.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.List;
@@ -14,6 +16,7 @@ import it.unibo.runwarrior.controller.PowersHandler;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.Chronometer;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.player.NakedWarrior;
 import it.unibo.runwarrior.model.player.NakedWizard;
@@ -42,11 +45,12 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private EnemySpawner enemySpawner;
     private GameMap gameMap;
     private CoinController coinController;
-
+    private Chronometer chronometer;
+    private boolean gameStarted = false;
    // private GameMusic music;
 
-    public GameLoopPanel() {
-        this.gameMap = GameMap.load("Map_1/map_1.txt", "Map_1/forest_theme.txt");
+    public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath) {
+        this.gameMap = GameMap.load(mapPath, themePath);
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
         this.powersFactory = new PowerUpFactoryImpl(this, mapHandler, gameMap.getMapData());
@@ -62,7 +66,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         initializeEnemyViewFactory();
         this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
-        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream("/Map_1/enemiesMap1.txt"));
+        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
         initializePlayer();
 
         //music = new GameMusic("gameMusic.wav", true);
@@ -71,10 +75,11 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         this.coinController = new CoinController(player);
-        List<int[]> coords = coinController.loadCoinFromFile("\\Coins\\CoinCoordinates_map1.txt");
+        List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
         }
+        this.chronometer = new Chronometer();
     }
 
     public void startGame() {
@@ -103,6 +108,10 @@ public class GameLoopPanel extends JPanel implements Runnable {
     }
 
     public void update() {
+        if(!gameStarted){
+            chronometer.StartTimer();
+            gameStarted = true;
+        }
         player.update();
         enemySpawner.update();
         enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
@@ -119,6 +128,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
         player.drawRectangle(gr2);
         enemyHandler.render(gr2);
         coinController.drawAllCoins(gr2, mapHandler.getTileSize());
+        gr2.setColor(Color.BLACK);
+        gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
+        gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
         gr2.dispose();
     }
 

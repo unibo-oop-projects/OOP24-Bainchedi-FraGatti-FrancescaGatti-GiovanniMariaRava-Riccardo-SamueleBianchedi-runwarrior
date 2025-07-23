@@ -13,7 +13,7 @@ public class GameTimer {
         frameCronometro.getContentPane().setLayout(null);
 
         JLabel labelNumeriCronometro = new JLabel("0.0");
-        final Chronometer c = new Chronometer(labelNumeriCronometro); 
+        final Chronometer c = new Chronometer(); 
 
         labelNumeriCronometro.setHorizontalAlignment(SwingConstants.CENTER);
         labelNumeriCronometro.setBounds(99, 66, 246, 14);

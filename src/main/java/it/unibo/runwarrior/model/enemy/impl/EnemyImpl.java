@@ -64,7 +64,7 @@ public class EnemyImpl implements Enemy{
     }
     
     public Rectangle getBounds(){
-        return new Rectangle(x,y,width,height);
+        return new Rectangle(x,y,48,48);
     }
 
     @Override
