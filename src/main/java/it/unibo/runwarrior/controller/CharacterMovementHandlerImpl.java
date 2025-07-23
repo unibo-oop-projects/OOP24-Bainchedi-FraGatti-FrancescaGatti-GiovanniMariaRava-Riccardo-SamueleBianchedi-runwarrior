@@ -10,7 +10,7 @@ import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.CharacterImpl;
 
 /**
- * Class that handles player movement and his collisions
+ * Class that handles player movement and his collisions.
  */
 public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private GameLoopPanel glp;
@@ -46,7 +46,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private int groundX;//variabile che permette lo scorrimento della mappa
 
     /**
-     * Constructor of player movemnt that sets the following parametres, the powerup and kill detection and the starting position
+     * Constructor of player movemnt that sets the following parametres, the powerup and kill detection and the starting position.
      *
      * @param panel game-loop panel
      * @param player current player
@@ -67,16 +67,15 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         screenX = START_X;
         groundX = 0;
         endOfMap = ((hM.getMap()[0].length - 1) * hM.getTileSize()) - hM.getTileSize();
-        setStartY(hM.getFirstY(), hM.getTileSize());
+        sizeCharacter = hM.getTileSize() * 2;
+        this.startY = hM.getFirstY() + CharacterImpl.TO_TOUCH_FLOOR;
     }
 
     /**
-     * Set the initial position of the player.
-     *
-     * @param y y coordinate
-     * @param tileSize tile dimension
+     * {@inheritDoc}
      */
-    private void setStartY(int y, int tileSize){
+    @Override
+    public void setStartY(int y, int tileSize){
         startY = y + CharacterImpl.TO_TOUCH_FLOOR; //542
         playerY = startY;
         sizeCharacter = tileSize*2;
@@ -84,6 +83,10 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         midJump = startY - (sizeCharacter*3/2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setLocationAfterPowerup(int x, int y, int realx, int groundX, long lastHit) {
         this.screenX = x;
         this.playerY = y;
@@ -93,8 +96,13 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         this.collisionDetection.setHitWaitTime(lastHit);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void movePlayer() {
         maxScreenX = glp.getWidth() / 2;
+        player.updatePlayerPosition();
         collisionDir = collisionDetection.checkCollision(player);
         tempDir = pUpDetection.checkCollisionWithPowers(player, this);
         if (!tempDir.isEmpty()) {
@@ -133,12 +141,15 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 }
             }
         }
-        System.out.println("-- " + playerX);
-        player.updatePlayerPosition();
         canAttack = (collisionDir.equals("right") || collisionDir.equals("left")) ? false : true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void jump (boolean isJump, int jumpHeight) {
+        //System.out.println(isJump + "  " + descend);
         if (isJump && !descend) {
             if(playerY > jumpHeight){
                 playerY -= SPEED_JUMP_UP;
@@ -159,16 +170,25 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setJumpKill() {
         this.jumpKill = true;
-        cmd.setJump(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void jumpAfterKill(){
         if (playerY >= midJump && !hitHead) {
             cmd.setDoubleJump(true);
             playerY -= SPEED_JUMP_UP;
+            System.out.println("saltakill");
         } else {
+            System.out.println("fine");
             if(!hitHead){
                 playerY = midJump;
             }
@@ -177,39 +197,76 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void updateJumpVariable() {
         maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
         midJump = (startY - (sizeCharacter*3/2)) + (playerY - startY);
+        System.out.println(maxJump + " " + midJump);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean canAttack() {
         return this.canAttack;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public CollisionDetectionImpl getCollisionDetection() {
         return this.collisionDetection;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public KillDetectionImpl getKillDetection() {
         return this.killDetection;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean getRightDirection() {
         return this.rightDirection;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getGroundX() {
         return this.groundX;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getPlX() {
         return this.playerX;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getPlY() {
         return this.playerY;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getScX() {
         return this.screenX;
     }

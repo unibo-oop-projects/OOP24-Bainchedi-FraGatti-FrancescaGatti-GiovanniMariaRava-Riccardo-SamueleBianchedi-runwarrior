@@ -50,6 +50,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
                         pUp.takePower();
                     }
                     else if(!pUp.isEggOpen()) {
+                        System.out.println("boh");
                         move.setJumpKill();
                         pUp.openTheEgg();
                         hitWaitTime = System.currentTimeMillis();

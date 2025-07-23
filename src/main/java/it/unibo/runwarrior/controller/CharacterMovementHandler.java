@@ -6,6 +6,14 @@ import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
 public interface CharacterMovementHandler {
     
     /**
+     * Set the initial position of the player.
+     *
+     * @param y y coordinate
+     * @param tileSize tile dimension
+     */
+    public void setStartY(int y, int tileSize);
+    
+    /**
      * Sets the position of the new player when he takes powerups or loses them when he's hit by a enemy.
      * This include the change of the skin and life.
      *

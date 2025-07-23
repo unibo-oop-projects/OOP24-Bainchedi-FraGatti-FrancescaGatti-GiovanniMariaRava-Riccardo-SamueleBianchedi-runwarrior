@@ -78,7 +78,6 @@ public class CollisionDetectionImpl implements CollisionDetection {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
             }
             if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3){
-                player.getMovementHandler().setJumpKill();
                 hitWaitTime = System.currentTimeMillis();
                 glp.getPowersHandler().losePower(false);
             }

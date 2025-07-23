@@ -24,6 +24,12 @@ public class PowersHandler {
     private int y;
     private int shift;
 
+    /**
+     * @param glp
+     * @param cmd
+     * @param mapH
+     * @param pFact
+     */
     public PowersHandler(GameLoopPanel glp, CharacterComand cmd, HandlerMapElement mapH, PowerUpFactoryImpl pFact){
         this.glp = glp;
         everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd, mapH, pFact),
@@ -34,6 +40,9 @@ public class PowersHandler {
         new StickWizard(glp, cmd, mapH, pFact)));
     }
 
+    /**
+     * 
+     */
     public void setIndex(){
         if(glp.getPlayer().getClass().equals(NakedWarrior.class)){
             index = 0;
@@ -45,6 +54,9 @@ public class PowersHandler {
         }
     }
 
+    /**
+     * 
+     */
     public void setPowers(){
         if(index < maxIndex && index >= 0){
             this.index++;
@@ -53,6 +65,9 @@ public class PowersHandler {
         }
     }
 
+    /**
+     * @param enemy
+     */
     public void losePower(boolean enemy){
         this.index--;
         if(index >= 0){
@@ -63,6 +78,9 @@ public class PowersHandler {
         }
     }
 
+    /**
+     * 
+     */
     private void setPosition(){
         realx = glp.getPlayer().getMovementHandler().getPlX();
         x = glp.getPlayer().getMovementHandler().getScX();
@@ -70,10 +88,16 @@ public class PowersHandler {
         shift = glp.getPlayer().getMovementHandler().getGroundX();
     }
 
+    /**
+     * @return
+     */
     public int getPowers(){
         return this.index;
     }
 
+    /**
+     * @return
+     */
     public boolean gameOver(){
         if (maxIndex == 2 && index < 0) {
             return true;

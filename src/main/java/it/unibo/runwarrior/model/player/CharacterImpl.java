@@ -53,23 +53,13 @@ public abstract class CharacterImpl implements Character {
     final HandlerMapElement mapHandler, final PowerUpFactoryImpl pFact) {
         this.cmd = commands;
         playerImage();
-        setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
+        sizeCharacter = mapHandler.getTileSize() * 2;
         this.movement = new CharacterMovementHandlerImpl(panel, this, commands, mapHandler, pFact);
         this.animation = new CharacterAnimationHandlerImpl(commands, movement, right0, right1, right2, 
         left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL);
         collisionArea = new Rectangle(movement.getPlX() + (sizeCharacter / 4), movement.getPlY() + (sizeCharacter / 4),
         sizeCharacter / 2, sizeCharacter - (sizeCharacter / 4) - TO_TOUCH_FLOOR);
         swordArea = new Rectangle();
-    }
-
-    /**
-     * Used to set the character size
-     *
-     * @param y y coordinate in pixel
-     * @param tileSize tile width and height
-     */
-    private void setStartY(int y, int tileSize){
-        sizeCharacter = tileSize * 2;
     }
 
     @Override

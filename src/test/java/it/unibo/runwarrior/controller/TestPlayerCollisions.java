@@ -30,13 +30,14 @@ public class TestPlayerCollisions {
     private GameLoopPanel glp;
     private GameMap gameMap1;
     private HandlerMapElement mapHandler1;
-    private String string1Map1 = "Map_1/map_1.txt";
-    private String string2Map1 = "Map_1/forest_theme.txt";
+    private String string1Map2 = "/Map2/map2.txt";
+    private String string2Map2 = "/Map2/forest_theme.txt";
 
     @BeforeEach
     public void initCollisions() {
-        glp = new GameLoopPanel("/Map1/map_1.txt", "/Map1/desert_theme.txt", "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
-        gameMap1 = GameMap.load(string1Map1, string2Map1);
+        glp = new GameLoopPanel("/Map2/map2.txt", "/Map2/forest_theme.txt", 
+        "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
+        gameMap1 = GameMap.load(string1Map2, string2Map2);
         mapHandler1 = new HandlerMapElement(gameMap1);
     }
 

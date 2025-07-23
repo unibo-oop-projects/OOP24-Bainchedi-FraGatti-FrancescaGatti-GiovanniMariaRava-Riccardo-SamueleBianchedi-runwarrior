@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 
 import it.unibo.runwarrior.model.player.PlayerFrame;
 
+/**
+ * Class that handle player frames changing.
+ */
 public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler {
 
     private CharacterComand cmd;
@@ -17,6 +20,11 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
     private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
     private BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
 
+    /**
+     * @param cmd
+     * @param move
+     * @param im
+     */
     public CharacterAnimationHandlerImpl(CharacterComand cmd, CharacterMovementHandler move, BufferedImage... im) {
         this.cmd = cmd;
         this.movement = move;
@@ -34,6 +42,10 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
         tipL = im[11];
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void frameChanger() {
         if (!cmd.getStop() && !cmd.isJumping()) {
             changeFrame++;
@@ -48,7 +60,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
                 changeFrame = 0;
             }
             useAttackMoving++;
-            if (cmd.getAttack() && movement.canAttack() && useAttackMoving > LIMIT_ATTACK) { //numero di attacchi limitato se in movimento
+            if (cmd.getAttack() && movement.canAttack() && useAttackMoving > LIMIT_ATTACK) {
                 playerFrame = PlayerFrame.ATTACK_FRAME;
                 useAttackMoving = 0;
             }
@@ -67,6 +79,10 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public BufferedImage imagePlayer(boolean rightDirection) {
         BufferedImage im = null;
         if (rightDirection) {
@@ -93,14 +109,26 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
         return im;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public PlayerFrame getFrame(){
         return this.playerFrame;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isAttacking() {
         return playerFrame == PlayerFrame.ATTACK_FRAME ? true : false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public BufferedImage getTip(boolean rightDirection) {
         if (playerFrame == PlayerFrame.ATTACK_FRAME && rightDirection) {
             return tipR;
