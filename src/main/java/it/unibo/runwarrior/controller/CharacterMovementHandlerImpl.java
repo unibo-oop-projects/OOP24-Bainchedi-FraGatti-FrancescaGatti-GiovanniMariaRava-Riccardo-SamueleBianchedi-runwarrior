@@ -31,6 +31,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     protected int playerX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
     protected int playerY;// * VERTICALE
     private int screenX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
+    private int endOfMap;
     private String collisionDir;
     private String tempDir;
     private boolean hitHead;
@@ -65,21 +66,22 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         playerX = START_X;
         screenX = START_X;
         groundX = 0;
+        endOfMap = ((hM.getMap()[0].length - 1) * hM.getTileSize()) - hM.getTileSize();
         setStartY(hM.getFirstY(), hM.getTileSize());
     }
 
     /**
-     * Set the initial position of the player
+     * Set the initial position of the player.
      *
      * @param y y coordinate
-     * @param tileSize tile dimenssion
+     * @param tileSize tile dimension
      */
     private void setStartY(int y, int tileSize){
-        startY = y + CharacterImpl.TO_TOUCH_FLOOR;
+        startY = y + CharacterImpl.TO_TOUCH_FLOOR; //542
         playerY = startY;
         sizeCharacter = tileSize*2;
-        maxJump = startY - (sizeCharacter*5/2);
-        midJump = startY - (sizeCharacter*4/2);
+        maxJump = startY - (sizeCharacter*5/2); //362
+        midJump = startY - (sizeCharacter*3/2);
     }
 
     public void setLocationAfterPowerup(int x, int y, int realx, int groundX, long lastHit) {
@@ -104,14 +106,14 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         if (hitHead) {
             cmd.setJump(false);
         }
-        jump(cmd.isJumping(), maxJump, player);
+        jump(cmd.isJumping(), maxJump);
         handleDoubleCollision = (collisionDir.equals("up") || collisionDir.equals("down")) && descend ? true : false;
         if (jumpKill) {
             jumpAfterKill();
         }
         if (cmd.getRight() && !cmd.getLeft()) {
             rightDirection = true;
-            if (!collisionDir.equals("right") && !handleDoubleCollision) {
+            if (!collisionDir.equals("right") && !handleDoubleCollision && playerX < endOfMap) {
                 playerX += CharacterImpl.SPEED;
                 if (screenX < maxScreenX) {
                     screenX += CharacterImpl.SPEED;
@@ -131,13 +133,14 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 }
             }
         }
+        System.out.println("-- " + playerX);
         player.updatePlayerPosition();
         canAttack = (collisionDir.equals("right") || collisionDir.equals("left")) ? false : true;
     }
 
-    public void jump (boolean isJump, int jumpHeight, Character player) {
+    public void jump (boolean isJump, int jumpHeight) {
         if (isJump && !descend) {
-            if(playerY > jumpHeight && !collisionDetection.checkCollision(player).equals("down")){
+            if(playerY > jumpHeight){
                 playerY -= SPEED_JUMP_UP;
             } else {
                 playerY = jumpHeight;
@@ -147,11 +150,11 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             if (collisionDetection.isInAir(player) && !jumpKill) {
                 descend = true;
                 playerY += SPEED_JUMP_DOWN;
+                updateJumpVariable();
             }
             else if (!jumpKill) {
                 descend = false;
                 cmd.setDoubleJump(false);
-                updateJumpVariable();
             }
         }
     }
@@ -162,22 +165,21 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     }
 
     public void jumpAfterKill(){
-        if (playerY >= midJump) {
+        if (playerY >= midJump && !hitHead) {
             cmd.setDoubleJump(true);
             playerY -= SPEED_JUMP_UP;
-            System.out.println("jumpkill");
         } else {
-            playerY = midJump;
+            if(!hitHead){
+                playerY = midJump;
+            }
             jumpKill = false;
             cmd.setJump(false);
-            System.out.println("fine jump");
         }
     }
 
     public void updateJumpVariable() {
         maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
-        midJump = (startY - (sizeCharacter*4/2)) + (playerY - startY);
-        System.out.println(maxJump + " " + midJump);
+        midJump = (startY - (sizeCharacter*3/2)) + (playerY - startY);
     }
 
     public boolean canAttack() {

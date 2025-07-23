@@ -18,7 +18,11 @@ public class PowersHandler {
     private GameLoopPanel glp;
     private int index;
     private int maxIndex;
-    public List<Character> everyPowerUp = new ArrayList<>();
+    private List<Character> everyPowerUp = new ArrayList<>();
+    private int realx;
+    private int x;
+    private int y;
+    private int shift;
 
     public PowersHandler(GameLoopPanel glp, CharacterComand cmd, HandlerMapElement mapH, PowerUpFactoryImpl pFact){
         this.glp = glp;
@@ -44,10 +48,7 @@ public class PowersHandler {
     public void setPowers(){
         if(index < maxIndex && index >= 0){
             this.index++;
-            int realx = glp.getPlayer().getMovementHandler().getPlX();
-            int x = glp.getPlayer().getMovementHandler().getScX();
-            int y = glp.getPlayer().getMovementHandler().getPlY();
-            int shift = glp.getPlayer().getMovementHandler().getGroundX();
+            setPosition();
             glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift, 0);
         }
     }
@@ -55,14 +56,18 @@ public class PowersHandler {
     public void losePower(boolean enemy){
         this.index--;
         if(index >= 0){
-            int realx = glp.getPlayer().getMovementHandler().getPlX();
-            int x = glp.getPlayer().getMovementHandler().getScX();
-            int y = glp.getPlayer().getMovementHandler().getPlY();
-            int shift = glp.getPlayer().getMovementHandler().getGroundX();
+            setPosition();
             long lastHit = enemy ? glp.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime() 
             : glp.getPlayer().getMovementHandler().getCollisionDetection().getHitWaitTime();
             glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift, lastHit);
         }
+    }
+
+    private void setPosition(){
+        realx = glp.getPlayer().getMovementHandler().getPlX();
+        x = glp.getPlayer().getMovementHandler().getScX();
+        y = glp.getPlayer().getMovementHandler().getPlY();
+        shift = glp.getPlayer().getMovementHandler().getGroundX();
     }
 
     public int getPowers(){

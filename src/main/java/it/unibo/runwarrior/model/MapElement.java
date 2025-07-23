@@ -1,7 +1,9 @@
 package it.unibo.runwarrior.model;
 
 import java.awt.image.BufferedImage;
-
+/**
+ * This class rapresent each tile of the map, with its caratheristics
+ */
 public class MapElement {
     
     private BufferedImage image;

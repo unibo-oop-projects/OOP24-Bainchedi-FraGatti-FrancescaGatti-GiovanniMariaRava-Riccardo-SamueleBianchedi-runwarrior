@@ -34,12 +34,16 @@ public class PowerUpFactoryImpl {
         for (int i = 0; i < NUM_POWERUP; i++) {
             final PowerUpImpl p = new PowerUpImpl(glp);
             int row = 0;
-            while (map[row][distance] != 2 && map[row][distance] != 1 && map[row][distance] != 3) {
+            while (map[row][distance] != 2 && map[row][distance] != 1) {
                 row++;
+                if(row == map.length || map[row][distance] == 5){
+                    row = 0;
+                    distance += tileSize;
+                }
             }
             p.getTouchArea().setBounds(distance * tileSize, (row - 1) * tileSize, tileSize, tileSize);
             powerUps.add(p);
-            distance = distance + space;
+            distance += space;
         }
     }
 
