@@ -131,6 +131,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gr2.setColor(Color.BLACK);
         gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
         gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
+        gr2.drawString("COINS:", 20, 70);
         gr2.dispose();
     }
 
@@ -151,6 +152,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
         this.player = pl;
         this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
+        this.coinController.updatePlayer(pl);
     }
 
     public PowersHandler getPowersHandler() {
