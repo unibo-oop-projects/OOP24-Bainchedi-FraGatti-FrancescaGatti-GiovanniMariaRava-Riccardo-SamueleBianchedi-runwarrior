@@ -3,11 +3,11 @@ package it.unibo.runwarrior.controller.collisions;
 import java.awt.Rectangle;
 import java.util.List;
 
+import it.unibo.runwarrior.model.enemy.api.Enemy;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.CharacterImpl;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 /**
@@ -17,7 +17,7 @@ public class KillDetectionImpl implements KillDetection {
     private GameLoopPanel glp;
     private HandlerMapElement hM;
     //private PowersHandler powerUpHandler; // vedi sotto
-    //private List<EnemyImpl> enemies; // commentato per ricordare che forse è meglio mantenerlo come variabile
+    private EnemyImpl enemyToDie; // commentato per ricordare che forse è meglio mantenerlo come variabile
     private Rectangle playerArea;
     private Rectangle swordArea;
     private long hitWaitTime;
@@ -41,12 +41,13 @@ public class KillDetectionImpl implements KillDetection {
     public void checkCollisionWithEnemeies(Character player) {
         playerArea = player.getArea();
         swordArea = player.getSwordArea();
+        //ConcurrentModificationException
         for (EnemyImpl enemy : glp.getEnemyHandler().getEnemies()) {
             if (futureArea(playerArea).intersects(enemy.getBounds())) {
                 //System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
                 if (isTouchingUp(playerArea, enemy.getBounds())) {
                     player.getMovementHandler().setJumpKill();
-                    enemy.die();
+                    enemyToDie = enemy;
                 }
                 else if ((playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x) &&
                         System.currentTimeMillis() - hitWaitTime > 3000) {
@@ -61,15 +62,10 @@ public class KillDetectionImpl implements KillDetection {
             else if (swordArea.intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking() &&
                     !isBehindTile(swordArea.x + hM.getTileSize() / 2, swordArea.y + (swordArea.height / 2)) &&
                     !isBehindTile(swordArea.x + swordArea.width - hM.getTileSize() / 2, swordArea.y + (swordArea.height / 2)) ) {
-                // if ((swordArea.x + swordArea.width >= enemy.getBounds().x && swordArea.x < enemy.getBounds().x)) {
-                //     enemy.die();
-                // }
-                // else if (swordArea.x <= enemy.getBounds().x + enemy.getBounds().width) {
-                //     enemy.die();
-                // }
-                enemy.die();
+                enemyToDie = enemy;
             }
         }
+        glp.getEnemyHandler().removeEnemy(enemyToDie);
     }
 
     /**
