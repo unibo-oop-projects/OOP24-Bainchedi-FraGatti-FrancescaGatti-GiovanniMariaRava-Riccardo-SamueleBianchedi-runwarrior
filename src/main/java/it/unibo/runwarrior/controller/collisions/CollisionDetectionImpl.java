@@ -10,9 +10,10 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.model.MapElement;
 
 /**
- * Class that handles the collision between the player and the map tiles
+ * Class that handles the collision between the player and the map tiles.
  */
 public class CollisionDetectionImpl implements CollisionDetection {
+    public static final int SEC_3 = 3000;
     public static final int FEET_HEAD_TOLL = 5;
     private int map[][];
     private List<MapElement> blocks = new ArrayList<>();
@@ -76,8 +77,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
             }
-            if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > 3000){
-                //System.out.println(System.currentTimeMillis() +  " " + hitWaitTime);
+            if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3){
                 player.getMovementHandler().setJumpKill();
                 hitWaitTime = System.currentTimeMillis();
                 glp.getPowersHandler().losePower(false);
