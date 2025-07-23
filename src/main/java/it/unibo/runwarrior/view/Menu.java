@@ -66,6 +66,10 @@ public class Menu extends JPanel{
             playButton.setMaximumSize(buttonPlayDimension);
             playButton.setPreferredSize(buttonPlayDimension);
             playButton.setMinimumSize(buttonPlayDimension);
+            playButton.setBackground(new Color(120, 124, 126));
+            playButton.setFont(new Font("Cooper Black", Font.BOLD, 16));
+            playButton.setForeground(Color.BLACK);
+            playButton.setBorder(new LineBorder(new Color(85, 89, 91), 4));
 
             playButton.addActionListener(new ActionListener() {
                 private JFrame mainFrame;
@@ -88,20 +92,23 @@ public class Menu extends JPanel{
                     level1.setPreferredSize(buttonLevelDimension);
                     level1.setFont(fontButton);
                     level1.setBackground(new Color(218, 165, 32));
-                    level1.setBorder(new LineBorder(new Color(180,130,25), 4));                    
+                    level1.setBorder(new LineBorder(new Color(180,130,25), 4));  
+                    level1.setForeground(Color.BLACK);                  
                     level2.setAlignmentX(JButton.CENTER_ALIGNMENT);
                     level2.setMaximumSize(buttonLevelDimension);
                     level2.setPreferredSize(buttonLevelDimension);
                     level2.setFont(fontButton);
                     level2.setBackground(new Color(60, 179, 60));
-                    level2.setBorder(new LineBorder(new Color(40, 120, 40), 4));                    
+                    level2.setBorder(new LineBorder(new Color(40, 120, 40), 4));     
+                    level2.setForeground(Color.BLACK);               
                     level3.setAlignmentX(JButton.CENTER_ALIGNMENT);
                     level3.setMaximumSize(buttonLevelDimension);
                     level3.setPreferredSize(buttonLevelDimension);
                     level3.setFont(fontButton);
                     level3.setBackground(new Color(120, 124, 126));
                     level3.setBorder(new LineBorder(new Color(85, 89, 91), 4));
-                    
+                    level3.setForeground(Color.BLACK);
+
                     level1.addActionListener(level1Event ->{
                         mainFrame = new JFrame("runwarrior");
                         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
