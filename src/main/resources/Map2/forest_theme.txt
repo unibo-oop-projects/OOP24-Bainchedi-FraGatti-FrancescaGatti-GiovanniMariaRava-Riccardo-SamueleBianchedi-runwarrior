@@ -1,8 +1,8 @@
-#file di configurazione delle immagini della mappa 1
+#file di configurazione delle immagini della mappa 2
 
-0=/Map_1/forest_sky.png
-1=/Map_1/forest_grass.png
-2=/Map_1/forest_terrain.png
+0=/Map2/forest_sky.png
+1=/Map2/forest_grass.png
+2=/Map2/forest_terrain.png
 3=/Portal/portal_internal.png
 4=/Portal/portal_wall.png
-5=/Map_1/forest_mushroom.png
+5=/Map2/forest_mushroom.png
