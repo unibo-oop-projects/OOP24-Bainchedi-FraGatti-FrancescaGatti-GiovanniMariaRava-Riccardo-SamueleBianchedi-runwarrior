@@ -2,12 +2,15 @@ package it.unibo.runwarrior.controller.enemy.impl;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import it.unibo.runwarrior.controller.enemy.api.EnemyHandler;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
+
 /**
  * Implementes EnemyHandler interfaces to manage properly the enemies.
  */
@@ -15,8 +18,9 @@ public class EnemyHandlerImpl implements EnemyHandler {
     private LinkedList<EnemyImpl> enemies;
     private EnemyViewFactoryImpl viewFactory;
     private final GameLoopPanel glp;
+
     /**
-     * Constructor of the class EnemyHandlerImpl
+     * Constructor of the class EnemyHandlerImpl.
      * 
      * @param glp is the panel in which the enemy will be rendered
      * @param viewFactory contains the map with enemy type and 
@@ -57,6 +61,7 @@ public class EnemyHandlerImpl implements EnemyHandler {
     public void addEnemy(final EnemyImpl en) {
         enemies.add(en);
     }
+
     /**
      * Removed the enemy from the list.
      * 
