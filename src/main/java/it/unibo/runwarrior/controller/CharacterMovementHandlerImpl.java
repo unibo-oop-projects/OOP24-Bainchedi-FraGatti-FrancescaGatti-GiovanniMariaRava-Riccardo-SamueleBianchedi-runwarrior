@@ -75,7 +75,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void setStartY(int y, int tileSize){
+    public void setStartY(int y){
         playerY = y + CharacterImpl.TO_TOUCH_FLOOR;
         maxJump = playerY - (sizeCharacter*5/2); //362
         midJump = playerY - (sizeCharacter*3/2);

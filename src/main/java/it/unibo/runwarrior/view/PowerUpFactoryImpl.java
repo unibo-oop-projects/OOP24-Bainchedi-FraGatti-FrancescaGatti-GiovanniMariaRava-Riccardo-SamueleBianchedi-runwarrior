@@ -41,7 +41,8 @@ public class PowerUpFactoryImpl {
                     distance += tileSize;
                 }
             }
-            p.getTouchArea().setBounds(distance * tileSize, (row - 1) * tileSize, tileSize, tileSize);
+            p.getTouchArea().setBounds(distance * tileSize, (row - 1) * tileSize + (tileSize / 4), 
+            tileSize, tileSize - (tileSize / 4));
             powerUps.add(p);
             distance += space;
         }
@@ -73,8 +74,8 @@ public class PowerUpFactoryImpl {
                 im = p.getImage();
             }
             if (!p.isPowerTaken()) {
-                gr2.drawImage(im, 
-                p.getTouchArea().x + mapHandler.getShift(), p.getTouchArea().y, tileSize, tileSize, null);
+                gr2.drawImage(im, p.getTouchArea().x + mapHandler.getShift(), 
+                p.getTouchArea().y - (tileSize / 4), tileSize, tileSize, null);
             } else {
                 p.getTouchArea().setSize(0, 0);
             }
