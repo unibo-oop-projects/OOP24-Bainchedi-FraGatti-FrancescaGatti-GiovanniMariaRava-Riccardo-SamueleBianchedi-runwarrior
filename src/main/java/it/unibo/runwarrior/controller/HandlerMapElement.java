@@ -49,7 +49,7 @@ public class HandlerMapElement {
             MapElement newElement = new MapElement();
             newElement.setImage(entry.getValue());
             switch (entry.getKey()) {
-                case 0, 3:
+                case 0, 4:
                     newElement.setHarmless(true);
                     newElement.setCollision(false);
                     break;
@@ -57,8 +57,9 @@ public class HandlerMapElement {
                     newElement.setHarmless(true);
                     newElement.setCollision(true);
                     break;
-                case 4:
+                case 3:
                     newElement.setCollision(false);
+                    newElement.setHarmless(true);
                     newElement.setPortal(true);
                 case 5,6:
                     newElement.setHarmless(false);
