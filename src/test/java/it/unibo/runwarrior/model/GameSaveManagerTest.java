@@ -2,6 +2,7 @@ package it.unibo.runwarrior.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,8 @@ public class GameSaveManagerTest {
     @BeforeEach
     public void resetSingleton() {
         gsm = GameSaveManager.getInstance();
-        gsm.setLevelsCompleted(0);
-        gsm.setCoinCollected(0);
+        gsm.setLevelsCompleted(2);
+        gsm.setCoinCollected(100);
         gsm.setSkinPremiumSbloccata(false);
     }
 
@@ -35,14 +36,23 @@ public class GameSaveManagerTest {
      */
     @Test
     public void testLoadFroamFile(){
-
+        assertEquals(2, GameSaveManager.getInstance().getLevelsCompleted());
+        gsm.setLevelsCompleted(3);
+        assertEquals(3, GameSaveManager.getInstance().getLevelsCompleted());
+        assertEquals(100, GameSaveManager.getInstance().getCoinCollected());
+        gsm.setCoinCollected(115);
+        assertEquals(115, GameSaveManager.getInstance().getCoinCollected());
     }
 
     /**
      * Test if the game is saved in the right way
      */
     @Test 
-    public void testSaveGame(){
-        
+    public void testSaveGameOnExit(){
+    
+    }
+    @Test
+    public void testLoadFromInexistentFile(){
+       //assertNull();
     }
 }
