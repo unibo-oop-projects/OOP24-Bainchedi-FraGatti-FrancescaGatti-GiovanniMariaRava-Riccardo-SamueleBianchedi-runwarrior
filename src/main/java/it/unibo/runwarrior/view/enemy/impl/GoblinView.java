@@ -52,14 +52,14 @@ public class GoblinView implements EnemyView {
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
-        if (enemy.velocityX == 0) {
+        if (enemy.getVelocityX() == 0) {
             currentImage = image;
-        } else if (enemy.velocityX > 0) {
-            currentImage = enemy.step ? rightGoblinMoving : rightGoblin;
+        } else if (enemy.getVelocityX() > 0) {
+            currentImage = enemy.isStep() ? rightGoblinMoving : rightGoblin;
         } else {
-            currentImage = enemy.step ? leftGoblinMoving : leftGoblin;
+            currentImage = enemy.isStep() ? leftGoblinMoving : leftGoblin;
         }
         final int shift = glp.getMapHandler().getShift();
-        g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
+        g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
 }

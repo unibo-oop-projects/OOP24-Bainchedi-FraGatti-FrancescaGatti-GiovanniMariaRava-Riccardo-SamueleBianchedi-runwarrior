@@ -52,12 +52,12 @@ public class SnakeView implements EnemyView {
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
-        if (enemy.velocityX > 0) {
-            currentImage = enemy.step ? rightSnakeMoving : rightSnake;
+        if (enemy.getVelocityX() > 0) {
+            currentImage = enemy.isStep() ? rightSnakeMoving : rightSnake;
         } else {
-            currentImage = enemy.step ? leftSnakeMoving : leftSnake;
+            currentImage = enemy.isStep() ? leftSnakeMoving : leftSnake;
         }
         final int shift = glp.getMapHandler().getShift();
-        g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
+        g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
 }

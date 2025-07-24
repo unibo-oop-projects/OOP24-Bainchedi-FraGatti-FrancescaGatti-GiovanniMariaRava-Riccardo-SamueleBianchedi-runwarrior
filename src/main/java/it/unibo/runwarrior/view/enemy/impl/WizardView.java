@@ -39,13 +39,13 @@ public class WizardView implements EnemyView {
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
-        if (enemy.velocityX > 0) {
-            currentImage = enemy.step ? rightWizardMoving : rightWizard;
+        if (enemy.getVelocityX() > 0) {
+            currentImage = enemy.isStep() ? rightWizardMoving : rightWizard;
         } else {
-            currentImage = enemy.step ? leftWizardMoving : leftWizard;
+            currentImage = enemy.isStep() ? leftWizardMoving : leftWizard;
         }
         final int shift = glp.getMapHandler().getShift(); 
-        g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
+        g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
     /**
      * {@inheritDoc}

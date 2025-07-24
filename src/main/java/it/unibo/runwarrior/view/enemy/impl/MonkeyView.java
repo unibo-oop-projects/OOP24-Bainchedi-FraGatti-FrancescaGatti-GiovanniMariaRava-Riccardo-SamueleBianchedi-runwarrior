@@ -58,16 +58,16 @@ public class MonkeyView implements EnemyView {
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
-        if (enemy.velocityX == 0) {
+        if (enemy.getVelocityX() == 0) {
             currentImage = image;
-        } else if (enemy.velocityX > 0) {
-            currentImage = enemy.step ? rightMonkeyMoving : rightMonkeyRunning;
+        } else if (enemy.getVelocityX() > 0) {
+            currentImage = enemy.isStep() ? rightMonkeyMoving : rightMonkeyRunning;
             image = rightMonkey;
         } else {
-            currentImage = enemy.step ? leftMonkeyMoving : leftMonkeyRunning;
+            currentImage = enemy.isStep() ? leftMonkeyMoving : leftMonkeyRunning;
             image = leftMonkey;
         }
         final int shift = glp.getMapHandler().getShift();
-        g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
+        g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
 }

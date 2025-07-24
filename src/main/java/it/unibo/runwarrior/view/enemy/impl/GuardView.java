@@ -57,16 +57,16 @@ public class GuardView implements EnemyView {
     @Override
     public final void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
-        if (enemy.velocityX == 0) {
+        if (enemy.getVelocityX()== 0) {
             currentImage = image;
-        } else if (enemy.velocityX > 0) {
-            currentImage = enemy.step ? rightGuardMoving : rightGuardRunning;
+        } else if (enemy.getVelocityX() > 0) {
+            currentImage = enemy.isStep() ? rightGuardMoving : rightGuardRunning;
             image = rightGuard;
         } else {
-            currentImage = enemy.step ? leftGuardMoving : leftGuardRunning;
+            currentImage = enemy.isStep() ? leftGuardMoving : leftGuardRunning;
             image = leftGuard;
         }
         final int shift = glp.getMapHandler().getShift();
-        g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
+        g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
 }
