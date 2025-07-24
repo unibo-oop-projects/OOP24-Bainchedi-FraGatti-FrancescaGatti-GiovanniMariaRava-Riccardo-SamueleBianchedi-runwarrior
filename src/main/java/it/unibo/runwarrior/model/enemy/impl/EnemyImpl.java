@@ -1,7 +1,6 @@
 package it.unibo.runwarrior.model.enemy.impl;
 
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.util.List;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
@@ -10,11 +9,11 @@ import it.unibo.runwarrior.model.PowerUpImpl;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
 
 /**
- * Implementation of Enemy interfaces
+ * Implementation of Enemy interfaces.
  */
 public class EnemyImpl implements Enemy {
-    private final static int NUM_UPDATE_FRAME = 20;
-    private final static int COLLISION_HEIGHT_WIDTH = 48;
+    private static final int NUM_UPDATE_FRAME = 20;
+    private static final int COLLISION_HEIGHT_WIDTH = 48;
     private int x;
     private final int y;
     private final int width;
@@ -31,9 +30,9 @@ public class EnemyImpl implements Enemy {
 
     private final GameLoopPanel glp;
     private PowerUpImpl powerUp;
-    
     /**
-     * Constructor of the class
+     * Constructor of the class.
+     * 
      * @param x starting x
      * @param y starting y
      * @param width 
@@ -43,7 +42,8 @@ public class EnemyImpl implements Enemy {
      * @param glp panel in which enemies are shown
      * @param type of the enemy (Goblin, Guard, Snake, Monkey, Wizard)
      */
-    public EnemyImpl(int x, final int y, final int width, final int height, final boolean solid, final EnemyHandlerImpl handler, final GameLoopPanel glp, final int type) {
+    public EnemyImpl(int x, final int y, final int width, final int height, final boolean solid, 
+                    final EnemyHandlerImpl handler, final GameLoopPanel glp, final int type) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -64,10 +64,11 @@ public class EnemyImpl implements Enemy {
         checkMapCollision(glp.getMapHandler().getCollisionRectangles());
         frameCounter++;
         if (frameCounter >= NUM_UPDATE_FRAME) {
-            step =! step;
+            step = !step;
             frameCounter = 0;
         }
     }
+
     /**
      * {@inheritDoc}
      */
@@ -98,56 +99,96 @@ public class EnemyImpl implements Enemy {
         }
         x = newX;
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Rectangle getBounds() {
         return new Rectangle(x, y, COLLISION_HEIGHT_WIDTH, COLLISION_HEIGHT_WIDTH);
     }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getX() {
         return x;
     }
-
-    public void setX(int x) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setX(final int x) {
         this.x = x;
     }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getY(){
         return y;
     }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getWidth() {
         return width;
     }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getHeight() {
         return height;
     }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isSolid() {
         return solid;
     }
-
-    public void setSolid(boolean solid) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSolid(final boolean solid) {
         this.solid = solid;
     }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getVelocityX() {
         return velocityX;
     }
-
-    public void setVelocityX(int velocityX) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setVelocityX(final int velocityX) {
         this.velocityX = velocityX;
     }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getType() {
         return type;
     }
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isStep() {
         return step;
     }
-
-    public void setStep(boolean step) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setStep(final boolean step) {
         this.step = step;
     }
 }
