@@ -9,6 +9,7 @@ public class MapElement {
     private BufferedImage image;
     private boolean collision;
     private boolean harmless;
+    private boolean portal;
 
     public void setImage(BufferedImage im){
         this.image = im;
@@ -22,6 +23,10 @@ public class MapElement {
         this.harmless = harm;
     }
 
+    public void setPortal(boolean portal) {
+        this.portal = portal;
+    }
+
     public BufferedImage getImage(){
         return image;
     }
@@ -32,6 +37,10 @@ public class MapElement {
 
     public boolean getHarmless(){
         return harmless;
+    }
+
+    public boolean isPortal() {
+        return portal;
     }
 }
 

@@ -23,6 +23,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
     private GameLoopPanel glp;
     private long hitWaitTime;
     private int gameOverY;
+    private boolean end;
 
     /**
      * Constructor of the collision detection.
@@ -73,6 +74,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
         float indexXtile = x / tileSize;
         float indexYtile = y / tileSize;
         int blockIndex = map[(int) indexYtile][(int) indexXtile];
+        end = blocks.get(blockIndex).isPortal() ? true : false;
         if (blocks.get(blockIndex).getCollision() || y <= 0){
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
@@ -82,7 +84,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
                 glp.getPowersHandler().losePower(false);
             }
             return true;
-         } else {
+        } else {
             for (int i = playerArea.width; i >= 0; i = i - playerArea.width) {
                 indexXtile = (playerArea.x + i) / tileSize;
                 indexYtile = playerArea.y / tileSize;
@@ -160,6 +162,6 @@ public class CollisionDetectionImpl implements CollisionDetection {
      */
     @Override
     public boolean gameOver() {
-        return gameOverY >= glp.getHeight() ? true : false;
+        return (gameOverY >= glp.getHeight() || end) ? true : false;
     }
 }

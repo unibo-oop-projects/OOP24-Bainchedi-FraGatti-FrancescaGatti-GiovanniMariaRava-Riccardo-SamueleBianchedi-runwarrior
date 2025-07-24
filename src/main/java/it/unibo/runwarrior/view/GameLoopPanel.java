@@ -141,7 +141,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
      */
     public void initializePlayer() {
         player = new NakedWizard(this, commands, mapHandler, powersFactory);
-        player.getMovementHandler().setStartY(mapHandler.getFirstY(), mapHandler.getTileSize());
+        player.getMovementHandler().setStartY(mapHandler.getFirstY());
         powerUpsHandler.setIndex();
     }
 
