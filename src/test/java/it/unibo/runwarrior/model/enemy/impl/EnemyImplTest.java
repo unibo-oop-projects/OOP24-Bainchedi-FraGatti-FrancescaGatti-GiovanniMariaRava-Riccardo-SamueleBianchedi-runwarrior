@@ -1,6 +1,8 @@
 package it.unibo.runwarrior.model.enemy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,11 +27,10 @@ public class EnemyImplTest {
      */
     @BeforeEach
     public void setUp() {
-        glp = new GameLoopPanel("/Map1/map_1.txt", "/Map1/desert_theme.txt", "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
+        glp = new GameLoopPanel("/Map2/map_2.txt", "/Map2/foreste_theme.txt", "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
         enemy = new EnemyImpl(50, 100, 64, 64, true, enemyHandler, glp, 1); 
     }
-
     /**
      * Verifies that getBounds() returns the correct rectangle based on position and size.
      */
