@@ -42,13 +42,13 @@ public class MonkeyView implements EnemyView {
 
     @Override
     public void loadResources() throws IOException {
-        rightMonkey = ImageIO.read(getClass().getResourceAsStream("/Monkey/rightMonkey.png"));
-        leftMonkey = ImageIO.read(getClass().getResourceAsStream("/Monkey/leftMonkey.png"));
-        rightMonkeyMoving = ImageIO.read(getClass().getResourceAsStream("/Monkey/rightMonkeyMoving.png"));
-        leftMonkeyMoving = ImageIO.read(getClass().getResourceAsStream("/Monkey/leftMonkeyMoving.png"));
-        rightMonkeyRunning = ImageIO.read(getClass().getResourceAsStream("/Monkey/rightMonkeyRunning.png"));
-        leftMonkeyRunning = ImageIO.read(getClass().getResourceAsStream("/Monkey/leftMonkeyRunning.png"));
-        banana = ImageIO.read(getClass().getResourceAsStream("/Monkey/banana.png"));
+        rightMonkey = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/rightMonkey.png"));
+        leftMonkey = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/leftMonkey.png"));
+        rightMonkeyMoving = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/rightMonkeyMoving.png"));
+        leftMonkeyMoving = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/leftMonkeyMoving.png"));
+        rightMonkeyRunning = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/rightMonkeyRunning.png"));
+        leftMonkeyRunning = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/leftMonkeyRunning.png"));
+        banana = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/banana.png"));
         image = rightMonkey;
     }
     /**

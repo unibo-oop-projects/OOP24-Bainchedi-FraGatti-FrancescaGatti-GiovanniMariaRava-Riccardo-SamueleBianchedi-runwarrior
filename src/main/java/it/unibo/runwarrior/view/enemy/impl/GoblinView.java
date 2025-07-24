@@ -39,10 +39,10 @@ public class GoblinView implements EnemyView {
 
     @Override
     public void loadResources() throws IOException {
-        rightGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/rightGoblin.png"));
-        leftGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/leftGoblin.png"));
-        rightGoblinMoving = ImageIO.read(getClass().getResourceAsStream("/Goblin/rightGoblinMoving.png"));
-        leftGoblinMoving = ImageIO.read(getClass().getResourceAsStream("/Goblin/leftGoblinMoving.png"));
+        rightGoblin = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/rightGoblin.png"));
+        leftGoblin = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/leftGoblin.png"));
+        rightGoblinMoving = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/rightGoblinMoving.png"));
+        leftGoblinMoving = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/leftGoblinMoving.png"));
         image = rightGoblin;
     }
     /**

@@ -42,12 +42,12 @@ public class GuardView implements EnemyView {
 
     @Override
     public void loadResources() throws IOException {
-        rightGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuard.png"));
-        leftGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftGuard.png"));
-        rightGuardMoving = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuardMoving.png"));
-        leftGuardMoving = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftGuardMoving.png"));
-        rightGuardRunning = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightRunningGuard.png"));
-        leftGuardRunning = ImageIO.read(getClass().getResourceAsStream("/Guardia/leftRunningGuard.png"));
+        rightGuard = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/rightGuard.png"));
+        leftGuard = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/leftGuard.png"));
+        rightGuardMoving = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/rightGuardMoving.png"));
+        leftGuardMoving = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/leftGuardMoving.png"));
+        rightGuardRunning = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/rightRunningGuard.png"));
+        leftGuardRunning = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/leftRunningGuard.png"));
         image = rightGuard;
     }
     /**

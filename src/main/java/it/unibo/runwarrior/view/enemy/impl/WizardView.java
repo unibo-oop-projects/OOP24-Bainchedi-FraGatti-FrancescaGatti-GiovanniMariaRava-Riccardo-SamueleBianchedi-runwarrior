@@ -53,9 +53,9 @@ public class WizardView implements EnemyView {
 
     @Override
     public void loadResources() throws IOException {
-        rightWizard = ImageIO.read(getClass().getResourceAsStream("/Wizard/rightWizard.png"));
-        rightWizardMoving = ImageIO.read(getClass().getResourceAsStream("/Wizard/rightWizardMoving.png"));
-        leftWizard = ImageIO.read(getClass().getResourceAsStream("/Wizard/leftWizard.png"));
-        leftWizardMoving = ImageIO.read(getClass().getResourceAsStream("/Wizard/leftWizardMoving.png"));
+        rightWizard = ImageIO.read(WizardView.class.getResourceAsStream("/Wizard/rightWizard.png"));
+        rightWizardMoving = ImageIO.read(WizardView.class.getResourceAsStream("/Wizard/rightWizardMoving.png"));
+        leftWizard = ImageIO.read(WizardView.class.getResourceAsStream("/Wizard/leftWizard.png"));
+        leftWizardMoving = ImageIO.read(WizardView.class.getResourceAsStream("/Wizard/leftWizardMoving.png"));
     }
 }

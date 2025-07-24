@@ -39,11 +39,11 @@ public class SnakeView implements EnemyView {
 
     @Override
     public void loadResources() throws IOException {
-        rightSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnake.png"));
-        rightSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnakeMoving.png"));
-        leftSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnake.png"));
-        leftSnakeMoving = ImageIO.read(getClass().getResourceAsStream("/Snake/leftSnakeMoving.png"));
-        poisonImage = ImageIO.read(getClass().getResourceAsStream("/Snake/poison.png"));
+        rightSnake = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/rightSnake.png"));
+        rightSnakeMoving = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/rightSnakeMoving.png"));
+        leftSnake = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/leftSnake.png"));
+        leftSnakeMoving = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/leftSnakeMoving.png"));
+        poisonImage = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/poison.png"));
     }
     /**
      * {@inheritDoc}
