@@ -10,8 +10,9 @@ import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 /**
- * Implementation of the enemy view with Monkey enemy
+ * Implementation of the enemy view with Monkey enemy.
  */
+
 public class MonkeyView implements EnemyView {
     private BufferedImage rightMonkey;
     private BufferedImage leftMonkey;
@@ -23,9 +24,10 @@ public class MonkeyView implements EnemyView {
     private BufferedImage image;
     private final GameLoopPanel glp;
     /**
+     * Constructor of the class MonkeyView.
      * @param glp is the panel in which the monkey need to be renderd
-     * Constructor of the class MonkeyView
      */
+
     public MonkeyView(final GameLoopPanel glp) {
         this.glp = glp;
         try {
@@ -37,6 +39,7 @@ public class MonkeyView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+
     @Override
     public void loadResources() throws IOException {
         rightMonkey = ImageIO.read(getClass().getResourceAsStream("/Monkey/rightMonkey.png"));
@@ -51,6 +54,7 @@ public class MonkeyView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
@@ -64,6 +68,6 @@ public class MonkeyView implements EnemyView {
             image = leftMonkey;
         }
         final int shift = glp.getMapHandler().getShift();
-        g.drawImage(currentImage, enemy.x+shift, enemy.y, enemy.width, enemy.height, null);
-    }   
+        g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
+    }
 }

@@ -11,8 +11,9 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 
 /**
- * Implementation of the enemy view with Snake enemy
+ * Implementation of the enemy view with Snake enemy.
  */
+
 public class SnakeView implements EnemyView {
     private BufferedImage rightSnake;
     private BufferedImage rightSnakeMoving;
@@ -21,8 +22,8 @@ public class SnakeView implements EnemyView {
     private BufferedImage poisonImage;
     private final GameLoopPanel glp;
     /**
+     * Constructor of the SnakeView class.
      * @param glp is the panel in which the guard need to be rendered
-     * Constructor of the SnakeView class
      */
     public SnakeView(final GameLoopPanel glp) {
         this.glp = glp;
@@ -35,6 +36,7 @@ public class SnakeView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+
     @Override
     public void loadResources() throws IOException {
         rightSnake = ImageIO.read(getClass().getResourceAsStream("/Snake/rightSnake.png"));
@@ -46,16 +48,16 @@ public class SnakeView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
-
         if (enemy.velocityX > 0) {
             currentImage = enemy.step ? rightSnakeMoving : rightSnake;
         } else {
             currentImage = enemy.step ? leftSnakeMoving : leftSnake;
         }
         final int shift = glp.getMapHandler().getShift();
-        g.drawImage(currentImage, enemy.x + shift , enemy.y, enemy.width, enemy.height, null);
+        g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
     }
 }

@@ -12,7 +12,7 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 
 /**
- * Implementation of the enemy view with Guard enemy
+ * Implementation of the enemy view with Guard enemy.
  */
 public class GuardView implements EnemyView {
     private BufferedImage rightGuard;
@@ -24,9 +24,10 @@ public class GuardView implements EnemyView {
     private BufferedImage image;
     private final GameLoopPanel glp;
     /**
-     * @param glp is the panel in which the guard need to be renderd
-     * Constructor of the GuardView class
+     * Constructor of the GuardView class.
+     * @param glp is the panel in which the guard need to be renderd.
      */
+
     public GuardView(final GameLoopPanel glp) {
         this.glp = glp;
         try {
@@ -38,6 +39,7 @@ public class GuardView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+
     @Override
     public void loadResources() throws IOException {
         rightGuard = ImageIO.read(getClass().getResourceAsStream("/Guardia/rightGuard.png"));
@@ -51,6 +53,7 @@ public class GuardView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+    
     @Override
     public final void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;

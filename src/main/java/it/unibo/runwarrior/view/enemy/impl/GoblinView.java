@@ -10,8 +10,9 @@ import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 /**
- * Implementation of the enemy view with Goblin enemy
+ * Implementation of the enemy view with Goblin enemy.
  */
+
 public class GoblinView implements EnemyView {
     private BufferedImage rightGoblin;
     private BufferedImage leftGoblin;
@@ -20,20 +21,22 @@ public class GoblinView implements EnemyView {
     private BufferedImage image;
     private final GameLoopPanel glp;
     /**
-     * @param glp is the panel in which the goblin need to be renderd
-     * Constructor of the class
+     * Constructor of the class.
+     * @param glp is the panel in which the goblin need to be rendered.
      */
+
     public GoblinView(final GameLoopPanel glp) {
         this.glp = glp;
         try {
             loadResources();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         } 
     }
     /**
      * {@inheritDoc}
      */
+
     @Override
     public void loadResources() throws IOException {
         rightGoblin = ImageIO.read(getClass().getResourceAsStream("/Goblin/rightGoblin.png"));
@@ -45,6 +48,7 @@ public class GoblinView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         BufferedImage currentImage;
@@ -55,7 +59,7 @@ public class GoblinView implements EnemyView {
         } else {
             currentImage = enemy.step ? leftGoblinMoving : leftGoblin;
         }
-        final int shift = glp.getMapHandler().getShift();  
+        final int shift = glp.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.x + shift, enemy.y, enemy.width, enemy.height, null);
     }
 }
