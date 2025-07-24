@@ -9,33 +9,38 @@ import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
 /**
- * Implementes EnemyHandler interfaces to manage properly the enemies
+ * Implementes EnemyHandler interfaces to manage properly the enemies.
  */
 public class EnemyHandlerImpl implements EnemyHandler {
     private LinkedList<EnemyImpl> enemies;
     private EnemyViewFactoryImpl viewFactory;
     private final GameLoopPanel glp;
     /**
-     * @param glp is the panel in which the enemy will be rendered
-     * @param viewFactory contains the map<type,EnemyView>
      * Constructor of the class EnemyHandlerImpl
+     * 
+     * @param glp is the panel in which the enemy will be rendered
+     * @param viewFactory contains the map with enemy type and 
      */
-    public EnemyHandlerImpl (final GameLoopPanel glp, final EnemyViewFactoryImpl viewFactory) {
+    public EnemyHandlerImpl(final GameLoopPanel glp, final EnemyViewFactoryImpl viewFactory) {
         this.viewFactory = viewFactory;
         this.glp = glp;
         this.enemies = new LinkedList<>();
     }
+
     /**
      * {@inheritDoc}
      */
+    @Override
     public void render(final Graphics g) {
         for (EnemyImpl enemy : enemies) {
             viewFactory.get(enemy.getType()).render(g, enemy);
         }
     }
+
     /**
      * {@inheritDoc}
      */
+    @Override
     public void update() {
         Iterator<EnemyImpl> iterator = enemies.iterator();
         while (iterator.hasNext()) {
@@ -43,29 +48,34 @@ public class EnemyHandlerImpl implements EnemyHandler {
             enemy.update();
         }
     }
+
     /**
+     * Adds the enemy to the list.
+     * 
      * @param en the enemies to be added
-     * Adds the enemy to the list
      */
-    public void addEnemy(EnemyImpl en) {
+    public void addEnemy(final EnemyImpl en) {
         enemies.add(en);
     }
     /**
+     * Removed the enemy from the list.
+     * 
      * @param en the enemy to be removed
-     * Removed the enemy from the list
      */
-    public void removeEnemy(EnemyImpl en) {
+    public void removeEnemy(final EnemyImpl en) {
         enemies.remove(en);
     }
+
     /**
      * {@inheritDoc}
      */
+    @Override
     public void updateWithMap(final List<Rectangle> mapObstacles) {
         Iterator<EnemyImpl> iterator = enemies.iterator();
         while (iterator.hasNext()) {
             EnemyImpl enemy = iterator.next();
             if (enemy.getX() + enemy.getWidth() < glp.getPlayer().getArea().x - GameLoopPanel.WIDTH) {
-                iterator.remove(); 
+                iterator.remove();
                 continue;
             }
             enemy.update();
@@ -76,15 +86,18 @@ public class EnemyHandlerImpl implements EnemyHandler {
     }
     
     /**
+     * Checks if the enemyes in the visible screen part.
+     * 
      * @param enemy is the enemy that is being checked
      * @return whether the enemy is visible on the screen or too far on the left
      */
     private boolean isEnemyInView(final EnemyImpl enemy) {
-        int cameraX = glp.getPlayer().getArea().x;
-        int enemyX = enemy.getX();
-        int enemyWidth = enemy.getWidth();
-        return enemyX + enemyWidth >= cameraX  && enemyX <= cameraX + GameLoopPanel.WIDTH;
+        final int cameraX = glp.getPlayer().getArea().x;
+        final int enemyX = enemy.getX();
+        final int enemyWidth = enemy.getWidth();
+        return enemyX + enemyWidth >= cameraX && enemyX <= cameraX + GameLoopPanel.WIDTH;
     }
+
     /**
      * @return the list of the enemies
      */

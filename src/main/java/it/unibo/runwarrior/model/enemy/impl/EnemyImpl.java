@@ -30,6 +30,7 @@ public class EnemyImpl implements Enemy {
 
     private final GameLoopPanel glp;
     private PowerUpImpl powerUp;
+    
     /**
      * Constructor of the class.
      * 
@@ -78,14 +79,14 @@ public class EnemyImpl implements Enemy {
         // glp.getPowersFactory().PowerUpAppearance(powerUp);
         enemyHandler.removeEnemy(this);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void checkMapCollision(final List<Rectangle> obstacles) {
         int newX = x + velocityX;
-        Rectangle futureBounds = new Rectangle(newX, y, width, height);
+        final Rectangle futureBounds = new Rectangle(newX, y, width, height);
         for (Rectangle rectangle : obstacles) {
             if (futureBounds.intersects(rectangle)) {
                 if (velocityX > 0) {
@@ -99,7 +100,7 @@ public class EnemyImpl implements Enemy {
         }
         x = newX;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -107,6 +108,7 @@ public class EnemyImpl implements Enemy {
     public Rectangle getBounds() {
         return new Rectangle(x, y, COLLISION_HEIGHT_WIDTH, COLLISION_HEIGHT_WIDTH);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -114,6 +116,7 @@ public class EnemyImpl implements Enemy {
     public int getX() {
         return x;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -121,13 +124,15 @@ public class EnemyImpl implements Enemy {
     public void setX(final int x) {
         this.x = x;
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public int getY(){
+    public int getY() {
         return y;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -135,6 +140,7 @@ public class EnemyImpl implements Enemy {
     public int getWidth() {
         return width;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -142,6 +148,7 @@ public class EnemyImpl implements Enemy {
     public int getHeight() {
         return height;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -149,6 +156,7 @@ public class EnemyImpl implements Enemy {
     public boolean isSolid() {
         return solid;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -156,6 +164,7 @@ public class EnemyImpl implements Enemy {
     public void setSolid(final boolean solid) {
         this.solid = solid;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -163,6 +172,7 @@ public class EnemyImpl implements Enemy {
     public int getVelocityX() {
         return velocityX;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -170,6 +180,7 @@ public class EnemyImpl implements Enemy {
     public void setVelocityX(final int velocityX) {
         this.velocityX = velocityX;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -177,6 +188,7 @@ public class EnemyImpl implements Enemy {
     public int getType() {
         return type;
     }
+
     /**
      * {@inheritDoc}
      */
@@ -184,6 +196,7 @@ public class EnemyImpl implements Enemy {
     public boolean isStep() {
         return step;
     }
+
     /**
      * {@inheritDoc}
      */
