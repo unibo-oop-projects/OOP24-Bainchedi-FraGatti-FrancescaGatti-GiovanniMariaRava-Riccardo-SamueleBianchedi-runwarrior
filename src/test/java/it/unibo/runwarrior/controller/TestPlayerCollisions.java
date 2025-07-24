@@ -24,21 +24,24 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpFactoryImpl;
 
 public class TestPlayerCollisions {
+    private static final int TRY_TYLE = 36;
     private CollisionDetectionImpl collisionTiles;
     private PowerUpDetectionImpl collisionPowerups;
     private KillDetectionImpl collisionEnemies;
     private GameLoopPanel glp;
     private GameMap gameMap1;
     private HandlerMapElement mapHandler1;
-    private String string1Map2 = "/Map2/map2.txt";
-    private String string2Map2 = "/Map2/forest_theme.txt";
+    private int tileSize;
+    private String string1Map2 = "Map2/map2.txt";
+    private String string2Map2 = "Map2/forest_theme.txt";
 
     @BeforeEach
     public void initCollisions() {
-        glp = new GameLoopPanel("/Map2/map2.txt", "/Map2/forest_theme.txt", 
+        glp = new GameLoopPanel("Map2/map2.txt", "Map2/forest_theme.txt", 
         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         gameMap1 = GameMap.load(string1Map2, string2Map2);
         mapHandler1 = new HandlerMapElement(gameMap1);
+        tileSize = TRY_TYLE;
     }
 
     @Test
@@ -47,26 +50,26 @@ public class TestPlayerCollisions {
         // String string2Map2 = "";
 
         Character player = new NakedWarrior(glp, null, mapHandler1, null);
-        collisionTiles = new CollisionDetectionImpl(gameMap1.getMapData(), mapHandler1.getBlocks(), mapHandler1.getTileSize(), glp);
+        collisionTiles = new CollisionDetectionImpl(gameMap1.getMapData(), mapHandler1.getBlocks(), tileSize, glp);
 
         collisionTiles.checkCollision(player);
-        assertTrue(collisionTiles.touchSolid((8 * mapHandler1.getTileSize()), (16 * mapHandler1.getTileSize()), player, false));
-        assertFalse(collisionTiles.touchSolid((39 * mapHandler1.getTileSize()), (14 * mapHandler1.getTileSize()), player, false));
+        assertTrue(collisionTiles.touchSolid((8 * tileSize), (16 * tileSize), player, false));
+        assertFalse(collisionTiles.touchSolid((39 * tileSize), (14 * tileSize), player, false));
 
-        assertEquals("right", collisionTiles.checkCollisionDirection(435, 550, 
+        assertEquals("right", collisionTiles.checkCollisionDirection((12 * tileSize), 550, 
         12, 15, player));
-        assertEquals("up", collisionTiles.checkCollisionDirection(605, (12 * mapHandler1.getTileSize()), 
+        assertEquals("up", collisionTiles.checkCollisionDirection(605, (12 * tileSize), 
         16, 12, player));
         player.getArea().setLocation(9914, 500);
         assertEquals("down", collisionTiles.checkCollisionDirection(9914, 500, 
         275, 13, player));
 
-        player.getArea().setLocation(56 * mapHandler1.getTileSize(), 14 * mapHandler1.getTileSize());
+        player.getArea().setLocation(56 * tileSize, 14 * tileSize);
         assertTrue(collisionTiles.isInAir(player));
-        player.getArea().setLocation(75 * mapHandler1.getTileSize(), (15 * mapHandler1.getTileSize()) + (mapHandler1.getTileSize() / 2) + 
+        player.getArea().setLocation(75 * tileSize, (15 * tileSize) + (tileSize / 2) + 
         CharacterImpl.TO_TOUCH_FLOOR);
         assertFalse(collisionTiles.isInAir(player));
-        player.getArea().setLocation(1222, (15 * mapHandler1.getTileSize()) + (mapHandler1.getTileSize() / 2) + 
+        player.getArea().setLocation(1222, (15 * tileSize) + (tileSize / 2) + 
         CharacterImpl.TO_TOUCH_FLOOR);
         assertEquals("left", collisionTiles.checkCollision(player));
 
@@ -106,7 +109,7 @@ public class TestPlayerCollisions {
         glp.getEnemyHandler().getEnemies().addAll(enemies);
         collisionEnemies = new KillDetectionImpl(glp, mapHandler1);
 
-        assertTrue(collisionEnemies.isBehindTile(11090, 585));
+        assertTrue(collisionEnemies.isBehindTile(3564, 585));
         assertFalse(collisionEnemies.isBehindTile(9360, 585));
         assertEquals(2, glp.getEnemyHandler().getEnemies().size());
         player.getArea().setLocation(1838, 520);

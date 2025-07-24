@@ -66,9 +66,9 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         playerX = START_X;
         screenX = START_X;
         groundX = 0;
-        endOfMap = ((hM.getMap()[0].length - 1) * hM.getTileSize()) - hM.getTileSize();
         sizeCharacter = hM.getTileSize() * 2;
         this.startY = hM.getFirstY() + CharacterImpl.TO_TOUCH_FLOOR;
+        endOfMap = ((hM.getMap()[0].length - 1) * hM.getTileSize()) - hM.getTileSize();
     }
 
     /**
@@ -76,11 +76,9 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     public void setStartY(int y, int tileSize){
-        startY = y + CharacterImpl.TO_TOUCH_FLOOR; //542
-        playerY = startY;
-        sizeCharacter = tileSize*2;
-        maxJump = startY - (sizeCharacter*5/2); //362
-        midJump = startY - (sizeCharacter*3/2);
+        playerY = y + CharacterImpl.TO_TOUCH_FLOOR;
+        maxJump = playerY - (sizeCharacter*5/2); //362
+        midJump = playerY - (sizeCharacter*3/2);
     }
 
     /**
