@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class GameSaveManager {
     private static final String SAVE_FILE = "game_save.txt";
@@ -23,7 +24,7 @@ public class GameSaveManager {
     }
 
     private void saveGame() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE, StandardCharsets.UTF_8))) {
             writer.write(Integer.toString(levelsCompleted));
             writer.newLine();
             writer.write(Integer.toString(coinCollected));
@@ -42,7 +43,7 @@ public class GameSaveManager {
         }
 
         GameSaveManager gsm = new GameSaveManager();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
             String line;
 
             
