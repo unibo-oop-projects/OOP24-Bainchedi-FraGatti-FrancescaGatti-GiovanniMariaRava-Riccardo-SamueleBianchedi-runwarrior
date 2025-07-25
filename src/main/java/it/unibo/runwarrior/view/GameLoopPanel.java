@@ -37,7 +37,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private Character player;
     private CharacterComand commands;
     private PowersHandler powerUpsHandler;
-    private PowerUpFactoryImpl powersFactory;
+    private PowerUpManager powersManager;
 
     private HandlerMapElement mapHandler;
     private EnemyHandlerImpl enemyHandler;
@@ -53,8 +53,8 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.gameMap = GameMap.load(mapPath, themePath);
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
-        this.powersFactory = new PowerUpFactoryImpl(this, mapHandler, gameMap.getMapData());
-        this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powersFactory);
+        this.powersManager = new PowerUpManager(this, mapHandler, gameMap.getMapData());
+        this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powersManager);
         // String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
         // String mapTwoFileName = "src/main/resources/Map_2/map_2.txt";
         // String imageConfigMapOne = "src/main/resources/Map_1/forest_theme.txt";
@@ -123,7 +123,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         Graphics2D gr2 = (Graphics2D) gr;
         
         mapHandler.printBlocks(gr2, player);
-        powersFactory.printPowerUp(gr2);
+        powersManager.printPowerUp(gr2);
         player.drawPlayer(gr2);
         player.drawRectangle(gr2);
         enemyHandler.render(gr2);
@@ -140,7 +140,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * To be connected with the shop
      */
     public void initializePlayer() {
-        player = new NakedWizard(this, commands, mapHandler, powersFactory);
+        player = new NakedWizard(this, commands, mapHandler, powersManager);
         player.getMovementHandler().setStartY(mapHandler.getFirstY());
         powerUpsHandler.setIndex();
     }
@@ -159,8 +159,8 @@ public class GameLoopPanel extends JPanel implements Runnable {
         return this.powerUpsHandler;
     }
 
-    public PowerUpFactoryImpl getPowersFactory() {
-        return this.powersFactory;
+    public PowerUpManager getPowersManager() {
+        return this.powersManager;
     }
 
     // public int getCameraShift(){

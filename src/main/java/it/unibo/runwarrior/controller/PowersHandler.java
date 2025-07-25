@@ -12,8 +12,11 @@ import it.unibo.runwarrior.model.player.NakedWizard;
 import it.unibo.runwarrior.model.player.StickWizard;
 import it.unibo.runwarrior.model.player.SwordWarrior;
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.view.PowerUpFactoryImpl;
+import it.unibo.runwarrior.view.PowerUpManager;
 
+/**
+ * Class that handle the change of powerup during the game.
+ */
 public class PowersHandler {
     private GameLoopPanel glp;
     private int index;
@@ -25,23 +28,25 @@ public class PowersHandler {
     private int shift;
 
     /**
-     * @param glp
-     * @param cmd
-     * @param mapH
-     * @param pFact
+     * Constructor of the object that handles powerup chenging.
+     *
+     * @param glp game-loop panel
+     * @param cmd object that handles keyboard input
+     * @param mapH objects that prints map
+     * @param pMan object that prints powerups
      */
-    public PowersHandler(GameLoopPanel glp, CharacterComand cmd, HandlerMapElement mapH, PowerUpFactoryImpl pFact){
+    public PowersHandler(GameLoopPanel glp, CharacterComand cmd, HandlerMapElement mapH, PowerUpManager pMan){
         this.glp = glp;
-        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd, mapH, pFact),
-        new ArmourWarrior(glp, cmd, mapH, pFact),
-        new SwordWarrior(glp, cmd, mapH, pFact), 
-        new NakedWizard(glp, cmd, mapH, pFact), 
-        new ArmourWizard(glp, cmd, mapH, pFact), 
-        new StickWizard(glp, cmd, mapH, pFact)));
+        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd, mapH, pMan),
+        new ArmourWarrior(glp, cmd, mapH, pMan),
+        new SwordWarrior(glp, cmd, mapH, pMan), 
+        new NakedWizard(glp, cmd, mapH, pMan), 
+        new ArmourWizard(glp, cmd, mapH, pMan), 
+        new StickWizard(glp, cmd, mapH, pMan)));
     }
 
     /**
-     * 
+     * Set the index of the list based on the skin, warrior or wizard.
      */
     public void setIndex(){
         if(glp.getPlayer().getClass().equals(NakedWarrior.class)){
@@ -55,7 +60,7 @@ public class PowersHandler {
     }
 
     /**
-     * 
+     * The player gains a powerup, so it's created a new object from everyPowerUp list.
      */
     public void setPowers(){
         if(index < maxIndex && index >= 0){
@@ -66,7 +71,9 @@ public class PowersHandler {
     }
 
     /**
-     * @param enemy
+     * The player loses a powerup, so it's created a new object from everyPowerUp list.
+     *
+     * @param enemy true if the hit comes from a enemy
      */
     public void losePower(boolean enemy){
         this.index--;
@@ -79,7 +86,7 @@ public class PowersHandler {
     }
 
     /**
-     * 
+     * Set the player position when he gains or loses a powerup.
      */
     private void setPosition(){
         realx = glp.getPlayer().getMovementHandler().getPlX();
@@ -89,14 +96,14 @@ public class PowersHandler {
     }
 
     /**
-     * @return
+     * @return the current skin/powerup
      */
     public int getPowers(){
         return this.index;
     }
 
     /**
-     * @return
+     * @return true if the player is dead
      */
     public boolean gameOver(){
         if (maxIndex == 2 && index < 0) {
