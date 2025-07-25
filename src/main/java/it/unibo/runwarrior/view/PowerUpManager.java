@@ -9,7 +9,7 @@ import it.unibo.runwarrior.model.PowerUpImpl;
 /**
  * Class that creates powerup objects and print them on the panel.
  */
-public class PowerUpFactoryImpl {
+public class PowerUpManager {
     public static final int END_OF_POWERUP = 222;
     public static final int NUM_POWERUP = 6;
     public static final int FIRST_DISTANCE_POWERUP = 55;
@@ -26,7 +26,7 @@ public class PowerUpFactoryImpl {
      * @param hM map handler
      * @param map map
      */
-    public PowerUpFactoryImpl(final GameLoopPanel glp, final HandlerMapElement hM, final int[][] map) {
+    public PowerUpManager(final GameLoopPanel glp, final HandlerMapElement hM, final int[][] map) {
         this.mapHandler = hM;
         this.tileSize = hM.getTileSize();
         distance = FIRST_DISTANCE_POWERUP;

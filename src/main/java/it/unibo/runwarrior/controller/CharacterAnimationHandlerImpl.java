@@ -21,9 +21,11 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
     private BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
 
     /**
-     * @param cmd
-     * @param move
-     * @param im
+     * Constructor of the player animation handler that sets current player images.
+     *
+     * @param cmd keyboard handler
+     * @param move player movement handler
+     * @param im current player images
      */
     public CharacterAnimationHandlerImpl(CharacterComand cmd, CharacterMovementHandler move, BufferedImage... im) {
         this.cmd = cmd;

@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.view.PowerUpFactoryImpl;
+import it.unibo.runwarrior.view.PowerUpManager;
 
 /**
  * Implementation of the warrioir with armour.
@@ -20,11 +20,11 @@ public class ArmourWarrior extends CharacterImpl {
      * @param panel game-loop panel
      * @param commands object that handles keyboard input
      * @param mapHandler object that prints tiles
-     * @param pFact object that prints powerups
+     * @param pMan object that prints powerups
      */
     public ArmourWarrior(final GameLoopPanel panel, final CharacterComand commands, 
-    final HandlerMapElement mapHandler, final PowerUpFactoryImpl pFact) {
-        super(panel, commands, mapHandler, pFact);
+    final HandlerMapElement mapHandler, final PowerUpManager pMan) {
+        super(panel, commands, mapHandler, pMan);
     }
 
     /**
@@ -46,13 +46,5 @@ public class ArmourWarrior extends CharacterImpl {
         } catch (final IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateAttackCollision() {
-        // cannot attack
     }
 }

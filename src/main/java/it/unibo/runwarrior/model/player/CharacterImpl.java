@@ -10,7 +10,7 @@ import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.controller.CharacterMovementHandlerImpl;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.view.PowerUpFactoryImpl;
+import it.unibo.runwarrior.view.PowerUpManager;
 
 /**
  * Class that creates the player.
@@ -47,14 +47,14 @@ public abstract class CharacterImpl implements Character {
      * @param commands object that handles the movement with the keyboard
      * @param collision object that handles map tiles collision
      * @param mapHandler object that prints tiles
-     * @param pFact object that prints powerups
+     * @param pMan object that prints powerups
      */
     public CharacterImpl(final GameLoopPanel panel, final CharacterComand commands, 
-    final HandlerMapElement mapHandler, final PowerUpFactoryImpl pFact) {
+    final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         this.cmd = commands;
         playerImage();
         sizeCharacter = mapHandler.getTileSize() * 2;
-        this.movement = new CharacterMovementHandlerImpl(panel, this, commands, mapHandler, pFact);
+        this.movement = new CharacterMovementHandlerImpl(panel, this, commands, mapHandler, pMan);
         this.animation = new CharacterAnimationHandlerImpl(commands, movement, right0, right1, right2, 
         left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL);
         collisionArea = new Rectangle(movement.getPlX() + (sizeCharacter / 4), movement.getPlY() + (sizeCharacter / 4),
@@ -76,9 +76,11 @@ public abstract class CharacterImpl implements Character {
     }
 
     /**
-     * Used by SwordWarrior to update swordArea when attacking
+     * Used by SwordWarrior and StickWizard to update swordArea when attacking.
      */
-    public abstract void updateAttackCollision();
+    public void updateAttackCollision(){
+        //void for skin without a weapon
+    }
 
     @Override
     public void drawPlayer(Graphics2D gr2) {
@@ -90,7 +92,7 @@ public abstract class CharacterImpl implements Character {
             tip = animation.getTip(rightDirection);
             int tipPos = rightDirection ? 1 : (-1);
             gr2.drawImage(tip, movement.getScX() + (tipPos * sizeCharacter), movement.getPlY(), sizeCharacter, sizeCharacter, null);
-            gr2.drawRect(movement.getScX() + (tipPos * sizeCharacter), swordArea.y, swordArea.width, swordArea.height);
+            //gr2.drawRect(movement.getScX() + (tipPos * sizeCharacter), swordArea.y, swordArea.width, swordArea.height);
         }
     }
 

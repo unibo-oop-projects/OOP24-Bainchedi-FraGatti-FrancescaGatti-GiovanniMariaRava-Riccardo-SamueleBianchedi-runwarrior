@@ -1,7 +1,7 @@
 package it.unibo.runwarrior.controller;
 
 import it.unibo.runwarrior.view.GameLoopPanel;
-import it.unibo.runwarrior.view.PowerUpFactoryImpl;
+import it.unibo.runwarrior.view.PowerUpManager;
 
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
@@ -46,22 +46,23 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private int groundX;//variabile che permette lo scorrimento della mappa
 
     /**
-     * Constructor of player movemnt that sets the following parametres, the powerup and kill detection and the starting position.
+     * Constructor of player movemnt that sets the following parametres, the collision with tiles, powerup and enemies
+     * and the starting position.
      *
      * @param panel game-loop panel
      * @param player current player
      * @param cmd keyboard handler
      * @param collDet collision with map tiles
      * @param hM object that prints tiles
-     * @param pFact object that prints powerups
+     * @param pMan object that prints powerups
      */
     public CharacterMovementHandlerImpl(final GameLoopPanel panel, final Character player, final CharacterComand cmd,
-    final HandlerMapElement hM, final PowerUpFactoryImpl pFact) {
+    final HandlerMapElement hM, final PowerUpManager pMan) {
         this.glp = panel;
         this.cmd = cmd;
         this.player = player;
         this.collisionDetection = new CollisionDetectionImpl(hM.getMap(), hM.getBlocks(), hM.getTileSize(), panel);
-        this.pUpDetection = new PowerUpDetectionImpl(panel, pFact);
+        this.pUpDetection = new PowerUpDetectionImpl(panel, pMan);
         this.killDetection = new KillDetectionImpl(panel, hM);
         playerX = START_X;
         screenX = START_X;
@@ -117,6 +118,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         if (jumpKill) {
             jumpAfterKill();
         }
+
         if (cmd.getRight() && !cmd.getLeft()) {
             rightDirection = true;
             if (!collisionDir.equals("right") && !handleDoubleCollision && playerX < endOfMap) {
@@ -147,7 +149,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     public void jump (boolean isJump, int jumpHeight) {
-        //System.out.println(isJump + "  " + descend);
         if (isJump && !descend) {
             if(playerY > jumpHeight){
                 playerY -= SPEED_JUMP_UP;
@@ -184,9 +185,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         if (playerY >= midJump && !hitHead) {
             cmd.setDoubleJump(true);
             playerY -= SPEED_JUMP_UP;
-            System.out.println("saltakill");
         } else {
-            System.out.println("fine");
             if(!hitHead){
                 playerY = midJump;
             }
@@ -202,7 +201,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     public void updateJumpVariable() {
         maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
         midJump = (startY - (sizeCharacter*3/2)) + (playerY - startY);
-        System.out.println(maxJump + " " + midJump);
     }
 
     /**
