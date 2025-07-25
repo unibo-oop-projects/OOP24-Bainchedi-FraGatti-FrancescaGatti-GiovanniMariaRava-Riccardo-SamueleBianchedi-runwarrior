@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class GameSaveManager {
     private static final String SAVE_FILE = "game_save.txt";
+    private static final int MAX_LEVEL = 3;
 
     private int levelsCompleted;
     private int coinCollected;
@@ -80,6 +81,10 @@ public class GameSaveManager {
     }
 
     public void setLevelsCompleted(int levelsCompleted) {
+        if (levelsCompleted <= 0 || levelsCompleted > 3) {
+            throw new IllegalArgumentException( 
+                "I livelli sono compresi tra 1 e " + MAX_LEVEL + " Provato a salvare: " + levelsCompleted);
+        }
         this.levelsCompleted = levelsCompleted;
         saveGame();
     }
