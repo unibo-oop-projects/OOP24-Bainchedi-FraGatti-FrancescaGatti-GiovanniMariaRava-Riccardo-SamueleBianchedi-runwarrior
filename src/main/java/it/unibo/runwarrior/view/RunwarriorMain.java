@@ -4,10 +4,11 @@ package it.unibo.runwarrior.view;
 
 public class RunwarriorMain{
 
-    public RunwarriorMain(){
+    public RunwarriorMain() {
         new Menu(); 
     }
-    public static void main(String[] args){
+
+    public static void main(final String[] args) {
         new RunwarriorMain();
     }
 }
