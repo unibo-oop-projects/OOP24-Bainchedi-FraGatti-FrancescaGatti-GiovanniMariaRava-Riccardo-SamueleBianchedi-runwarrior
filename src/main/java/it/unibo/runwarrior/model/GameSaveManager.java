@@ -118,4 +118,11 @@ public class GameSaveManager {
         saveGame();
     }
 
+    public void resetGame(){
+        this.coinCollected = 0;
+        this.levelsCompleted = 0;
+        this.premiumSkinUnlocked = false;
+        saveGame();
+    }
+
 }
