@@ -1,14 +1,16 @@
 package it.unibo.runwarrior.model;
 
 public class Skin {
-    private String nameSkin; 
-    private int price; 
-    private boolean isBought; 
+    private final String nameSkin; 
+    private final int price; 
+    private boolean bought; 
+    private boolean skinUnlocked; 
 
-    public Skin(String nameSkin, int price){
+    public Skin(String nameSkin, int price, boolean unlocked){
         this.nameSkin = nameSkin; 
         this.price = price; 
-        this.isBought = false; 
+        this.bought = false; 
+        this.skinUnlocked = unlocked;
     }
 
     public String getNameSkin(){
@@ -19,11 +21,14 @@ public class Skin {
         return price; 
     }
 
-    public boolean saleState(){
-        return isBought; 
+    public boolean isSkinBought(){
+        return bought; 
     }
 
-    public void setSaleState(boolean bought){
-        this.isBought = bought;
+    public boolean isSkinUnlocked(){
+        return skinUnlocked;
+    }
+    public void unlockSkin(){ //metodo da chiamare per sbloccare la skin
+        this.skinUnlocked = true;
     }
 }

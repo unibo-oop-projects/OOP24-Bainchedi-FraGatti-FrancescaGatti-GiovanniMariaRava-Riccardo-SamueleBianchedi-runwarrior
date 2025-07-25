@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,9 @@ import java.util.Map;
 public class GameSaveManagerTest {
     private GameSaveManager gsm;
 
+    /**
+     * Create a test instance of the game with random variables
+     */
     @BeforeEach
     public void resetSingleton() {
         gsm = GameSaveManager.getInstance();
@@ -23,7 +28,7 @@ public class GameSaveManagerTest {
     }
 
     /**
-     * Check if the pattern singleton is effective and there is only one saving file
+     * Check if the pattern singleton is effective and there is only one saving file.
      */
     @Test
     public void testSingletonInstance() {
@@ -32,27 +37,26 @@ public class GameSaveManagerTest {
     }
 
     /**
-     * Test the correct loading of the variables from the file
+     * Test both the saving in the file and the loading. Every time a setter method is called
+     * is called also saveGame().
      */
     @Test
-    public void testLoadFroamFile(){
+    public void testSaveAndLoadFromFile(){
         assertEquals(2, GameSaveManager.getInstance().getLevelsCompleted());
         gsm.setLevelsCompleted(3);
         assertEquals(3, GameSaveManager.getInstance().getLevelsCompleted());
         assertEquals(100, GameSaveManager.getInstance().getCoinCollected());
         gsm.setCoinCollected(115);
         assertEquals(115, GameSaveManager.getInstance().getCoinCollected());
+        gsm.setSkinPremiumSbloccata(true);
+        assertEquals(true, GameSaveManager.getInstance().isSkinPremiumSbloccata());
     }
-
-    /**
-     * Test if the game is saved in the right way
-     */
-    @Test 
-    public void testSaveGameOnExit(){
     
-    }
+    /**
+     * Checks that the right exception is thrown
+     */
     @Test
-    public void testLoadFromInexistentFile(){
-       //assertNull();
+    public void testWrongLevelsSaving(){
+        assertThrows(IllegalArgumentException.class, () -> gsm.setLevelsCompleted(5));
     }
 }

@@ -13,11 +13,14 @@ import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowersHandler;
+import it.unibo.runwarrior.controller.ScoreController;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.Chronometer;
 import it.unibo.runwarrior.model.GameMap;
+import it.unibo.runwarrior.model.GameSaveManager;
+import it.unibo.runwarrior.model.Score;
 import it.unibo.runwarrior.model.player.NakedWarrior;
 import it.unibo.runwarrior.model.player.NakedWizard;
 import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
@@ -47,6 +50,8 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private CoinController coinController;
     private Chronometer chronometer;
     private boolean gameStarted = false;
+    private Score score;
+    private ScoreController scoreController;
    // private GameMusic music;
 
     public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath) {
@@ -80,6 +85,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
             coinController.addCoins(coord[0], coord[1]);
         }
         this.chronometer = new Chronometer();
+        this.score = new Score(GameSaveManager.getInstance());
+        this.scoreController = new ScoreController(score);
+        this.coinController.setScoreController(scoreController);
     }
 
     public void startGame() {
@@ -115,6 +123,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         player.update();
         enemySpawner.update();
         enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
+        coinController.controlCoinCollision(mapHandler.getTileSize());
     }
 
     @Override
@@ -131,7 +140,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gr2.setColor(Color.BLACK);
         gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
         gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
-        gr2.drawString("COINS:", 20, 70);
+        gr2.drawString("COINS:" + coinController.getCoinsCollected(), 20, 70);
         gr2.dispose();
     }
 

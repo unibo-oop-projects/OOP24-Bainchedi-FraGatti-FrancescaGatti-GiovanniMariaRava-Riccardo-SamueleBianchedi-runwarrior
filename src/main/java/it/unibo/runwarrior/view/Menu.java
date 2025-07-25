@@ -4,6 +4,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import it.unibo.runwarrior.model.GameSaveManager;
+import it.unibo.runwarrior.model.Score;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -22,10 +25,14 @@ public class Menu extends JPanel{
             frameMenu.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e){
-                    int n = JOptionPane.showConfirmDialog(frameMenu, "do you really want to quit?", "Quitting...", JOptionPane.YES_NO_OPTION); 
+                    int n = JOptionPane.showConfirmDialog(frameMenu, "Do you want to save your game data?", "Quitting...", JOptionPane.YES_NO_OPTION); 
                     if(n==JOptionPane.YES_OPTION){
+                        GameSaveManager.getInstance().saveGame();
                         System.exit(0);
-                    }
+                    } else if (n == JOptionPane.NO_OPTION){
+                        GameSaveManager.getInstance().resetGame();
+                        System.exit(0);
+                    } else if (n == JOptionPane.CANCEL_OPTION || n == JOptionPane.CLOSED_OPTION){}
                 }
             });
             frameMenu.setSize(1280, 720); 
@@ -58,8 +65,8 @@ public class Menu extends JPanel{
             final JPanel pannelloTastoPlay = new JPanel(); 
             pannelloTastoPlay.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
             pannelloTastoPlay.setOpaque(false);
-            pannelloTastoPlay.setBounds(430, 300, 400, 250);
-            pannelloTastoPlay.setPreferredSize(new Dimension(200, 400));
+            pannelloTastoPlay.setBounds(430, 300, 400, 500);
+            pannelloTastoPlay.setPreferredSize(new Dimension(250, 500));
 
             final JButton playButton = new JButton("PLAY");
             Dimension buttonPlayDimension = new Dimension(150, 40);
@@ -145,6 +152,27 @@ public class Menu extends JPanel{
                         mainFrame.pack();
                         mainFrame.setVisible(true);
                     });
+                    JButton shopButton = new JButton("SHOP");
+                    shopButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+                    shopButton.setMaximumSize(new Dimension(150, 40));
+                    shopButton.setPreferredSize(new Dimension(150, 40));
+                    shopButton.setFont(new Font("Cooper Black", Font.BOLD, 14));
+                    shopButton.setBackground(new Color(70, 130, 180));
+                    shopButton.setForeground(Color.WHITE);
+                    shopButton.setBorder(new LineBorder(new Color(30, 90, 150), 3));
+
+                    shopButton.addActionListener(shopEvent -> {
+                        JFrame shopFrame = new JFrame("SHOP");
+                        shopFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        shopFrame.setSize(600, 400);
+                        shopFrame.setLocationRelativeTo(null);
+                        shopFrame.setResizable(false);
+
+                        // Inserisci la ShopView collegata a GameSaveManager e Score
+                        ShopView shopView = new ShopView(new Score(GameSaveManager.getInstance()));
+                        shopFrame.add(shopView);
+                        shopFrame.setVisible(true);
+                    });
                     panel.setOpaque(false);
                     panel.add(Box.createVerticalStrut(10));
                     panel.add(level1);
@@ -152,12 +180,16 @@ public class Menu extends JPanel{
                     panel.add(level2);
                     panel.add(Box.createVerticalStrut(10));
                     panel.add(level3);
+                    panel.add(Box.createVerticalStrut(10));
+                    panel.add(shopButton);
+                    
                     pannelloTastoPlay.setPreferredSize(new Dimension(250, 400));
                     pannelloTastoPlay.removeAll();
                     pannelloTastoPlay.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
                     pannelloTastoPlay.add(panel);
                     pannelloTastoPlay.revalidate();
                     pannelloTastoPlay.repaint();
+
                 }
             });
             pannelloTastoPlay.add(playButton, BorderLayout.CENTER); 

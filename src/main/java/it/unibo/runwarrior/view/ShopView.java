@@ -1,64 +1,67 @@
 package it.unibo.runwarrior.view;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-// import java.awt.BorderLayout;
-// import java.awt.Color;
-// import java.awt.GridLayout;
-// import java.util.List;
+import it.unibo.runwarrior.controller.ShopController;
+//import it.unibo.runwarrior.model.GameSaveManager;
+import it.unibo.runwarrior.model.Score;
 
-// import javax.swing.BorderFactory;
-// import javax.swing.BoxLayout;
-// import javax.swing.JButton;
-import javax.swing.JFrame;
-// import javax.swing.JLabel;
-// import javax.swing.JPanel;
-// import javax.swing.SwingConstants;
+public class ShopView extends JPanel{
+    private final ShopController shopController;
+    private final JLabel coinLabel;
+    private final JLabel skinStateLabel; 
+    private final JButton buySkinButton;
 
-// import it.unibo.runwarrior.controller.ShopController;
-// import it.unibo.runwarrior.model.Skin;
+    public ShopView(Score score){
+        this.shopController = new ShopController(score);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        JLabel titleLabel = new JLabel("SHOP");
+        titleLabel.setFont(new Font("Cooper Black", Font.BOLD, 24));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-public class ShopView extends JFrame{
-    // private ShopController shopController; 
-    // private JLabel coinLabel; 
+        coinLabel = new JLabel();
+        coinLabel.setFont(new Font("Cooper Black", Font.BOLD, 14));
+        coinLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    // public ShopView(ShopController shopController){
-    //     this.shopController = shopController;
-    // }
+        skinStateLabel = new JLabel();
+        skinStateLabel.setFont(new Font("Cooper Black", Font.BOLD, 14));
+        skinStateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    // private void shopFrame(){
-    //     setTitle("Shop");
-    //     setSize(600,400);
-    //     setLocationRelativeTo(null);
-    //     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        buySkinButton = new JButton("BUY SKIN");
+        buySkinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buySkinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(shopController.buyPremiumSkin()){
+                    JOptionPane.showMessageDialog(null, "Skin purchased successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Not enough coins or skin already purchased");
+                }
+            }
+        });
+        add(titleLabel);
+        add(Box.createRigidArea(new Dimension(0,20)));
+        add(coinLabel);
+        add(Box.createRigidArea(new Dimension(0,10)));
+        add(skinStateLabel);
+        add(Box.createRigidArea(new Dimension(0, 20)));
+        add(buySkinButton);
+        updateShop();
+    }
+    
+    private void updateShop(){
+        int coins = shopController.getCoinScore();
+        coinLabel.setText("coins:" + coins);
 
-    //     setLayout(new BorderLayout());
-
-    //     //parte con quante monete ho nel portafoglio
-    //     coinLabel = new JLabel("WALLET: "+ shopController.getCoinScore(), SwingConstants.CENTER);
-    //     add(coinLabel, BorderLayout.NORTH);
-
-    //     //pannello con le skin da comprare e non 
-    //     JPanel skinsPanel = new JPanel(new GridLayout(0,2,10,10));
-    //     skinsPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-
-    //     List<Skin> skins = shopController.getAllSkins();
-
-    //     for(Skin skin : skins){
-    //         JPanel oneSkinPanel = new JPanel();
-    //         oneSkinPanel.setLayout(new BoxLayout(oneSkinPanel, BoxLayout.Y_AXIS)); //me li mette in verticale
-    //         oneSkinPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-    //         JLabel nameSkinLabel = new JLabel(skin.getPrice() + "$", SwingConstants.CENTER);
-    //         nameSkinLabel.setAlignmentX(CENTER_ALIGNMENT);
-
-    //         JButton buyButton = new JButton(skin.saleState() ? "USE" : "BUY");
-    //         buyButton.setAlignmentX(CENTER_ALIGNMENT);
-    //         buyButton.setEnabled(!skin.saleState());
-
-    //         buyButton.addActionListener(e -> {
-    //             //bottone del compra o usa 
-    //         });
-
-    //     }
-    // }
-
+        boolean unlocked = shopController.isPremiumSkinUnlocked();
+        if(unlocked){
+            skinStateLabel.setText("Skin 'Wizard' : BOUGHT");
+            buySkinButton.setEnabled(false);
+        } else{
+            skinStateLabel.setText("Skin 'Wizard' : NOT BOUGHT");
+            buySkinButton.setEnabled(false);
+        }
+    }
 }

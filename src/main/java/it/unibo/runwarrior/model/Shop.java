@@ -1,26 +1,18 @@
 package it.unibo.runwarrior.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Shop {
-    private List<Skin> skinList; 
+    private final Skin newPremiumSkin;
 
-    public Shop(List<Skin> skins){
-        this.skinList = new ArrayList<>(skins);
+    public Shop(){
+        this.newPremiumSkin = new Skin("WIZARD", 50, GameSaveManager.getInstance().isSkinPremiumSbloccata()); 
     }
 
-    public void addSkin(Skin skin){
-        skinList.add(skin);
+    public Skin getPremiumSkin(){
+        return newPremiumSkin;
     }
-
-    public List<Skin> getAllSkins(){
-        return skinList;
-    }
-    
-    void resetShop(){
-        for(Skin skin : skinList){
-            skin.setSaleState(false);
-        }
+    public void unlockNewPremiumSkin(){
+        newPremiumSkin.unlockSkin();
+        GameSaveManager.getInstance().setSkinPremiumSbloccata(true);
     }
 }
