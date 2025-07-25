@@ -1,33 +1,27 @@
 package it.unibo.runwarrior.model;
 
-
 public class Score {
-    private final GameSaveManager gameSaveManager;
-    
-    
-    public Score(GameSaveManager gameSaveManager){
-       this.gameSaveManager = gameSaveManager; 
+    private GameSaveManager gameSaveManager;
+
+    public Score(final GameSaveManager gameSaveManager) {
+       this.gameSaveManager = gameSaveManager;
     }
 
-    public void incrementCoinScore(int coinPoints){ 
+    public final void incrementCoinScore(final int coinPoints) { 
         gameSaveManager.addCoin(coinPoints);
     }
 
-    public int getTotalScore(){
+    public final int getTotalScore() {
         return gameSaveManager.getCoinCollected(); 
     }
 
-    public int getCoinScore(){
+    public final int getCoinScore() {
         return gameSaveManager.getCoinCollected();
     }
 
-    public void reset(){ //da chiamare quando il giocatore non vuole salvare i dati della partita
-        gameSaveManager.setCoinCollected(0);
-    }
-
-    public boolean spendCoins(int skinPrice){
-        if(getCoinScore() >= skinPrice){
-           gameSaveManager.setCoinCollected(getCoinScore()-skinPrice);
+    public final boolean spendCoins(final int skinPrice) {
+        if (getCoinScore() >= skinPrice) {
+            gameSaveManager.setCoinCollected(getCoinScore() - skinPrice);
             return true;
         }
         return false;
