@@ -19,23 +19,6 @@ public class ScoreController {
     }
 
     public void levelCompleted(int coinSmallCount, int coinBigCount){
-        long timeUsed = chronometer.getTimeElapsed(); 
-        int seconds = (int)(timeUsed/1000); 
-        if(seconds <= MINIMUM_TIME_IN_SEC){
-            score.incrementTotalScore(100); //se sta entro i 3 minuti prende 100 punti
-        }
-        if(seconds > MINIMUM_TIME_IN_SEC && seconds <= MED_TIME_IN_SEC){
-            score.incrementTotalScore(50);
-        }
-        if(seconds > MED_TIME_IN_SEC && seconds <= MAX_TIME_IN_SEC){
-            score.incrementTotalScore(25);
-        }
-        if(seconds > MAX_TIME_IN_SEC){
-            score.incrementTotalScore(0); //se va oltre i 5 minuti non incrementa il punteggio, ha senso questo if?
-        }
-        coinPoints = coinSmallCount*SMALL_COIN_VALUE + coinBigCount*BIG_COIN_VALUE; 
-        score.incrementTotalScore(coinPoints);
-        score.incrementCoinScore(coinPoints);
     }
 
 }
