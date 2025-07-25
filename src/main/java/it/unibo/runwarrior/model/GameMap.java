@@ -13,7 +13,7 @@ public class GameMap {
     private int cols;
     private Map<Integer, BufferedImage> blockImages;
 
-    private GameMap(int[][] mapData, Map<Integer, BufferedImage> blockImages, int rows, int cols) {
+    public GameMap(int[][] mapData, Map<Integer, BufferedImage> blockImages, int rows, int cols) {
         this.mapData = mapData;
         this.blockImages = blockImages;
         this.rows = rows;
