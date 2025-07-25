@@ -70,6 +70,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         sizeCharacter = hM.getTileSize() * 2;
         this.startY = hM.getFirstY() + CharacterImpl.TO_TOUCH_FLOOR;
         endOfMap = ((hM.getMap()[0].length - 1) * hM.getTileSize()) - hM.getTileSize();
+        //impostare già anche ma e mid jump?
     }
 
     /**
@@ -78,7 +79,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     @Override
     public void setStartY(int y){
         playerY = y + CharacterImpl.TO_TOUCH_FLOOR;
-        maxJump = playerY - (sizeCharacter*5/2); //362
+        maxJump = playerY - (sizeCharacter*5/2);
         midJump = playerY - (sizeCharacter*3/2);
     }
 
@@ -90,9 +91,12 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         this.screenX = x;
         this.playerY = y;
         this.playerX = realx;
+        maxJump = playerY - (sizeCharacter*5/2);
+        midJump = playerY - (sizeCharacter*3/2);
         this.groundX = groundX;
         this.killDetection.setHitWaitTime(lastHit);
         this.collisionDetection.setHitWaitTime(lastHit);
+        System.out.println(playerX + " " + playerY);
     }
 
     /**
@@ -100,6 +104,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     public void movePlayer() {
+        System.out.println("-- " + playerY);
         maxScreenX = glp.getWidth() / 2;
         player.updatePlayerPosition();
         collisionDir = collisionDetection.checkCollision(player);
