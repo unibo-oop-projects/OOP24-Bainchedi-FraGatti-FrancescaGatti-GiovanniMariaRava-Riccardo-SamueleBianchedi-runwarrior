@@ -23,7 +23,7 @@ public class GameSaveManager {
         premiumSkinUnlocked = false;
     }
 
-    private void saveGame() {
+    public void saveGame() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(SAVE_FILE, StandardCharsets.UTF_8))) {
             writer.write(Integer.toString(levelsCompleted));
             writer.newLine();

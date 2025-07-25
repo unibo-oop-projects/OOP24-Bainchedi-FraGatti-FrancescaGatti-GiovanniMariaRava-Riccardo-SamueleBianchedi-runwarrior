@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.controller;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.io.BufferedReader;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -76,6 +78,8 @@ public class CoinController {
 
                 if (screenX + tileSize >= 0 && screenX <= GameLoopPanel.WIDTH) {
                     g.drawImage(coin.coinImage, screenX, coinY, tileSize, tileSize, null);
+                    g.setColor(Color.RED);
+                    g.drawRect(screenX, coinY, tileSize, tileSize);
                 }
             }  
         }
@@ -87,20 +91,24 @@ public class CoinController {
     public void controlCoinCollision(int tileSize){
         Rectangle playerRectangle = player.getArea(); 
         groundX = player.getMovementHandler().getGroundX(); 
-        for (Coin coin : coinList){
+        Iterator<Coin> it = coinList.iterator();
+        while(it.hasNext()){
+            Coin coin = it.next();
             if (!coin.isCollected()){
                 Rectangle coinRectangle = coin.getRectangle(tileSize);
-                coinRectangle.x += groundX;
                 if (playerRectangle.intersects(coinRectangle)){
                     coin.collect();
                     coinsCollected++;
                     if(scoreController != null){
                         scoreController.addCoin();
                     }
+                    it.remove();
                 }
             }
         }
     }
+
+
     public int getCoinsCollected(){
         return coinsCollected;
     }

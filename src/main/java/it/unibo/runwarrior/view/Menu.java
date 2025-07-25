@@ -25,10 +25,14 @@ public class Menu extends JPanel{
             frameMenu.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e){
-                    int n = JOptionPane.showConfirmDialog(frameMenu, "do you really want to quit?", "Quitting...", JOptionPane.YES_NO_OPTION); 
+                    int n = JOptionPane.showConfirmDialog(frameMenu, "Do you want to save your game data?", "Quitting...", JOptionPane.YES_NO_OPTION); 
                     if(n==JOptionPane.YES_OPTION){
+                        GameSaveManager.getInstance().saveGame();
                         System.exit(0);
-                    }
+                    } else if (n == JOptionPane.NO_OPTION){
+                        GameSaveManager.getInstance().resetGame();
+                        System.exit(0);
+                    } else if (n == JOptionPane.CANCEL_OPTION || n == JOptionPane.CLOSED_OPTION){}
                 }
             });
             frameMenu.setSize(1280, 720); 
