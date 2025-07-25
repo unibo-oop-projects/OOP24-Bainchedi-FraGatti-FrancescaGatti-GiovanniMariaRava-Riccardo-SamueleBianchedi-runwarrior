@@ -2,6 +2,7 @@ package it.unibo.runwarrior.controller;
 
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +17,7 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 public class CoinController {
     private Character player;
     public int groundX;
+    private int coinsCollected = 0;
     List<Coin> coinList;
     public CoinController(Character player){
         coinList = new ArrayList<>(); 
@@ -79,5 +81,23 @@ public class CoinController {
     }
     public void updatePlayer(Character player){
         this.player = player;
+    }
+
+    public void controlCoinCollision(int tileSize){
+        Rectangle playerRectangle = player.getArea(); 
+        groundX = player.getMovementHandler().getGroundX(); 
+        for (Coin coin : coinList){
+            if (!coin.isCollected()){
+                Rectangle coinRectangle = coin.getRectangle(tileSize);
+                coinRectangle.x += groundX;
+                if (playerRectangle.intersects(coinRectangle)){
+                    coin.collect();
+                    coinsCollected++;
+                }
+            }
+        }
+    }
+    public int getCoinsCollected(){
+        return coinsCollected;
     }
 }

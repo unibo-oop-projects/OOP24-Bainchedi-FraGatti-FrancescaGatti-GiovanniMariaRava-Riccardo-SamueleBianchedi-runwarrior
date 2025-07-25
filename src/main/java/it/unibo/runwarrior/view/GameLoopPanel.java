@@ -115,6 +115,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         player.update();
         enemySpawner.update();
         enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
+        coinController.controlCoinCollision(mapHandler.getTileSize());
     }
 
     @Override
@@ -131,7 +132,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gr2.setColor(Color.BLACK);
         gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
         gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
-        gr2.drawString("COINS:", 20, 70);
+        gr2.drawString("COINS:" + coinController.getCoinsCollected(), 20, 70);
         gr2.dispose();
     }
 
