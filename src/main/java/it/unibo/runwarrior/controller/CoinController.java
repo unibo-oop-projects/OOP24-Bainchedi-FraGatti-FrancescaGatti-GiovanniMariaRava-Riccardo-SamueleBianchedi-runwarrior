@@ -19,6 +19,7 @@ public class CoinController {
     public int groundX;
     private int coinsCollected = 0;
     List<Coin> coinList;
+    private ScoreController scoreController;
     public CoinController(Character player){
         coinList = new ArrayList<>(); 
         this.player = player;
@@ -93,11 +94,18 @@ public class CoinController {
                 if (playerRectangle.intersects(coinRectangle)){
                     coin.collect();
                     coinsCollected++;
+                    if(scoreController != null){
+                        scoreController.addCoin();
+                    }
                 }
             }
         }
     }
     public int getCoinsCollected(){
         return coinsCollected;
+    }
+
+    public void setScoreController(ScoreController scoreController){
+        this.scoreController = scoreController;
     }
 }
