@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +29,25 @@ public final class ImageLoader {
         this.blockImages = new HashMap<>();
     }
 
+    //modifiche da spotbug
+    /*
+    public BufferedImage getBlockImage(final int blockValue) {
+    final BufferedImage originalImage = this.blockImages.get(blockValue);
+    if (originalImage == null) {
+        System.err.println("Warning: No image loaded for block value: " + blockValue);
+        return null;
+    }
+    
+    // Crea e restituisce una copia per proteggere l'originale
+    final BufferedImage copy = new BufferedImage(
+        originalImage.getWidth(),
+        originalImage.getHeight(),
+        originalImage.getType()
+    );
+    copy.getGraphics().drawImage(originalImage, 0, 0, null);
+    return copy;
+}
+    */
     /**
      * Gets the loaded image for a specific block value.
      *
@@ -121,12 +141,14 @@ public final class ImageLoader {
         return allLoadedSuccessfully;
     }
 
-    /**
-     * Returns an unmodifiable map of the loaded images.
-     *
-     * @return the map of block values to BufferedImages.
-     */
+    /*
+    * Returns an unmodifiable view of the map of loaded images.
+    * This prevents external code from modifying the internal map.
+    *
+    * @return an unmodifiable map of block values to BufferedImages.
+    */
     public Map<Integer, BufferedImage> getLoadedImages() {
-        return this.blockImages;
-    }
+        // Invece di 'return this.blockImages;'
+        return Collections.unmodifiableMap(this.blockImages);
+        }
 }

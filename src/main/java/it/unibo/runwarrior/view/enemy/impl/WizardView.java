@@ -28,7 +28,7 @@ public class WizardView implements EnemyView {
         this.glp = glp;
         try {
             loadResources();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -38,7 +38,7 @@ public class WizardView implements EnemyView {
 
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
-        BufferedImage currentImage;
+        final BufferedImage currentImage;
         if (enemy.getVelocityX() > 0) {
             currentImage = enemy.isStep() ? rightWizardMoving : rightWizard;
         } else {

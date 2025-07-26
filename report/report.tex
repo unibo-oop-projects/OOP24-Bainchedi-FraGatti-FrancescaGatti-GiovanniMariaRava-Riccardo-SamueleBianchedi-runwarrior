@@ -21,41 +21,49 @@
 \chapter{Analisi}
 \section{Descrizione e requisiti}
 Il gruppo si pone come obbiettivo quello di realizzare una reinterpretazione del famoso gioco 
-Super Mario Bross del 1986. Il gioco consiste in un personaggio principale, un cavaliere, che tramite 
+Super Mario Bross del 1986. Il gioco ha come personaggio principale un cavaliere, che tramite 
 l'input dell'utente si muove in una mappa 2D. L'obbiettivo del cavaliere è salvare una princessa tenuta
 prigioniera da uno stregone, completando diversi livelli che lo condurranno al castello nel quale è 
-prigioniera. Nel gioco sarà possibile, tramite un menù, selezionare di giocare con un altro personaggio, 
-un mago, che ha lo stesso obbiettivo del cavaliere. All'interno del gioco, oltre a diversi ostacoli, sono presenti nemici che il 
-cavaliere deve uccidere per ottenere potenziamenti quali un armatura e la spada.
+rinchiusa. Nel gioco sarà possibile, tramite un negozio, comprare un altro personaggio, se si ha raccolto un numero sufficiente di monete.
+All'interno del gioco, oltre a diversi ostacoli, sono presenti nemici che il cavaliere può uccidere per rimanere in vita e 
+completare il livello. 
 \subsection*{Requisiti funzionali}
 \begin{itemize}
-    \item Il personaggio deve avanzare, indietreggiare e saltare all'interno della mappa. Deve gestire le collisioni con nemici e ostacoli.
-    \item Il personaggio può ottenere due potenziamenti, un'armatura e una spada che lo aiuteranno nella sua avventura.
+    \item Il personaggio deve avanzare, indietreggiare e saltare all'interno della mappa.
+    \item Gestione delle collisioni del personaggio con nemici, ostacoli, monete e potenziamenti.
+    \item Il personaggio può ottenere due potenziamenti che lo aiuteranno nella sua avventura.
     \item Gestione di nemici ed ostacoli diversi in base alla mappa.
-    \item Creazione di un sistema di punteggio. Il punteggio verrà mostrato al completamento del livello.
+    \item Creazione di un sistema di punteggio, che verrà mostrato al completamento del livello.
 \end{itemize}
 \newpage
 \subsection*{Requisiti non funzionali}
 \begin{itemize}
     \item Implementazioni di una quarta mappa. 
     \item Gestione di restart e checkpoint.
+    \item Creazione di nemici e ostacoli più complessi.
     \item Musica e suoni. 
 \end{itemize}
 \section{Modello del Dominio}
-RunWarrior è gioco ambientato in un mondo fantastico in cui il personaggio principale deve affrontare 3 livelli diversi. In questi
-livelli il personaggio deve portersi muovere per soppravvivere e uccidere i nemici. Il movimento del personaggio è gestito tramite tastiera.
-All'interno della mappa sono posizionate delle uova che racchiudono al loro interno i 2 possibili powerup (diversi per Warrior e Wizard).
-Quando l'uovo viene aperto il personaggio può prendere il potenziamento successivo, quindi anche una ulteriore vita.
-Per il completamento del gioco è neccessario sbloccare tutti i livelli in maniera sequenziale.
-Il passaggio tra un livello e l'altro avviene tramite l'ingresso in un portale 
-All'interno di ogni livello possono essere presenti degli ostacoli (MapElement) e dei nemici (Enemy) con il quale il personaggio può collidere.
-Gli ostacoli possono essere: letali, non letali. I nemici sono di 5 tipi:
+RunWarrior è gioco ambientato in un mondo fantastico in cui il personaggio principale deve affrontare 3 livelli diversi, selezionabili mediante un menù.
+In questi livelli il personaggio deve portersi muovere per sopravvivere e uccidere i nemici. Il movimento del personaggio è gestito tramite tastiera.
+All'interno della mappa sono posizionate delle uova che racchiudono al loro interno i 2 possibili powerup, diversi per Warrior e Wizard.
+Per il completamento del gioco è neccessario sbloccare tutti i livelli in maniera sequenziale, che si considerano terminati 
+tramite l'ingresso in un portale, ad eccezione del terzo che si conclude con il castello della principessa.
+All'interno di ogni livello possono essere presenti degli ostacoli letali (MapElement) e dei nemici (Enemy) e delle monete (Coin) con il quale il 
+personaggio può collidere. Se ciò accade con un ostacolo o con un nemico perde un potenziamento, nel caso lo avesse, altrimenti la partita finisce.
+I nemici sono di 5 tipi:
 \begin{itemize}
     \item Goblin
     \item Snake
     \item Wizard
     \item Monkey 
     \item Guard
+\end{itemize}
+Gli ostacoli letali sono:
+\begin{itemize}
+    \item Fungo
+    \item Cactus
+    \item Camino con fuoco
 \end{itemize}
 
 \begin{figure}
@@ -64,9 +72,18 @@ Gli ostacoli possono essere: letali, non letali. I nemici sono di 5 tipi:
     \caption{UML del modello del dominio}
     \label{}
 \end{figure}
-
-Se il personaggio collide con un ostacolo letale o con un nemico perde un potenziamento, nel caso lo avesse, altrimenti la partita finisce.
 \chapter{Design}
 \section{Architettura}
-
+L'architettura di RunWarrior segue il pattern architetturale MVC (Model - View - Controller). Il GameLoopController gestisce l'aggiornamento
+del gioco e di tutte le sue entità a seguito dei diversi eventi che possono capitare durante la sessione. All'interno della classe, 
+dal momento in cui viene acquistato il nuovo personaggio, ricevendo le informazione da GameSaveManager e Shop, viene gestito il cambio skin.
+Gli input da tastiera per muovere il personaggio vengono gestiti tramite la comunicazione tra le classi CharacterComand e MovementHandlerImpl.
+Quindi il Character è una entità reattiva che modifica il proprio stato a seguito delle diverse collisioni con le entità, 
+tramite CollisionDetection, KillDetection e PowerUpDetection.
+Il pattern MVC implementato consente di mantenere lo stato del controller nell'eventualità che si modifichi la view.
+inserire UML delle classi principali dell'MVC
+\section{Samuele Bianchedi}
+\section{Riccardo Cornacchia}
+\section{Francesca Gatti}
+\section{Giovanni Maria Rava}
 \end{document}

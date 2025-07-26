@@ -1,4 +1,4 @@
-0
-8
-false
+3
+115
+true
 DEFAULT_SKIN

@@ -51,7 +51,7 @@ public class GoblinView implements EnemyView {
 
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
-        BufferedImage currentImage;
+        final BufferedImage currentImage;
         if (enemy.getVelocityX() == 0) {
             currentImage = image;
         } else if (enemy.getVelocityX() > 0) {

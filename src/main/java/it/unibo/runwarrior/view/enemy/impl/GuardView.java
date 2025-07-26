@@ -56,7 +56,7 @@ public class GuardView implements EnemyView {
     
     @Override
     public final void render(final Graphics g, final EnemyImpl enemy) {
-        BufferedImage currentImage;
+        final BufferedImage currentImage;
         if (enemy.getVelocityX()== 0) {
             currentImage = image;
         } else if (enemy.getVelocityX() > 0) {
