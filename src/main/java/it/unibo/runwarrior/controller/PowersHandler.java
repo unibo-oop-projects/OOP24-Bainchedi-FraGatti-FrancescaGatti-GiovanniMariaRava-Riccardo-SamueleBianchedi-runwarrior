@@ -35,7 +35,7 @@ public class PowersHandler {
      * @param mapH objects that prints map
      * @param pMan object that prints powerups
      */
-    public PowersHandler(GameLoopPanel glp, CharacterComand cmd, HandlerMapElement mapH, PowerUpManager pMan){
+    public PowersHandler(final GameLoopPanel glp, final CharacterComand cmd, final HandlerMapElement mapH, final PowerUpManager pMan) {
         this.glp = glp;
         everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd, mapH, pMan),
         new ArmourWarrior(glp, cmd, mapH, pMan),

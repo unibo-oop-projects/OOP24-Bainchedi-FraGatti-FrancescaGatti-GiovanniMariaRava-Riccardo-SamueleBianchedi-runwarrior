@@ -25,6 +25,7 @@ public class SwordWarrior extends CharacterImpl {
     public SwordWarrior(final GameLoopPanel panel, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         super(panel, commands, mapHandler, pMan);
+        playerImage();
     }
 
     /**
@@ -33,18 +34,18 @@ public class SwordWarrior extends CharacterImpl {
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopRightS.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightS1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightS2.png"));
-            left0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopLeftS.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftS1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftS2.png"));
-            jumpR = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/jumpRightS.png"));
-            jumpL = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/jumpLeftS.png"));
-            attackR = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/attackRight.png"));
-            attackL = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/attackLeft.png"));
-            tipR = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/tipRight.png"));
-            tipL = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/tipLeft.png"));
+            right0 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/stopRightS.png"));
+            right1 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goRightS1.png"));
+            right2 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goRightS2.png"));
+            left0 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/stopLeftS.png"));
+            left1 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goLeftS1.png"));
+            left2 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goLeftS2.png"));
+            jumpR = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/jumpRightS.png"));
+            jumpL = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/jumpLeftS.png"));
+            attackR = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/attackRight.png"));
+            attackL = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/attackLeft.png"));
+            tipR = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/tipRight.png"));
+            tipL = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/tipLeft.png"));
         } catch (final IOException e) {
             e.printStackTrace();
         }

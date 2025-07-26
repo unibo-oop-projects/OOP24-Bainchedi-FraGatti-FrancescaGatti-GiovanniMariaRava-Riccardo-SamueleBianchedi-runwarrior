@@ -14,17 +14,15 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 * Class that detects the collision between the player and the enmies.
 */
 public class KillDetectionImpl implements KillDetection {
-    private GameLoopPanel glp;
-    private HandlerMapElement hM;
+    private final GameLoopPanel glp;
+    private final HandlerMapElement hM;
     //private PowersHandler powerUpHandler; // vedi sotto
     private EnemyImpl enemyToDie; // commentato per ricordare che forse è meglio mantenerlo come variabile
-    private Rectangle playerArea;
-    private Rectangle swordArea;
     private long hitWaitTime;
-    private final int TOLL = CharacterImpl.SPEED;
+    private static final int TOLL = CharacterImpl.SPEED;
 
     /**
-     * Constructor
+     * Constructor of kill detection.
      *
      * @param glp game-loop panel
      * @param hM map handler
@@ -38,18 +36,18 @@ public class KillDetectionImpl implements KillDetection {
      * {@inheritDoc}
      */
     @Override
-    public void checkCollisionWithEnemeies(Character player) {
-        playerArea = player.getArea();
-        swordArea = player.getSwordArea();
+    public void checkCollisionWithEnemeies(final Character player) {
+        final Rectangle playerArea = player.getArea();
+        final Rectangle swordArea = player.getSwordArea();
         //ConcurrentModificationException
-        for (EnemyImpl enemy : glp.getEnemyHandler().getEnemies()) {
+        for (final EnemyImpl enemy : glp.getEnemyHandler().getEnemies()) {
             if (futureArea(playerArea).intersects(enemy.getBounds())) {
                 //System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
                 if (isTouchingUp(playerArea, enemy.getBounds())) {
                     player.getMovementHandler().setJumpKill();
                     enemyToDie = enemy;
                 }
-                else if ((playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x) &&
+                else if (playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x &&
                         System.currentTimeMillis() - hitWaitTime > 3000) {
                     hitWaitTime = System.currentTimeMillis();
                     glp.getPowersHandler().losePower(true);
@@ -72,8 +70,8 @@ public class KillDetectionImpl implements KillDetection {
      * {@inheritDoc}
      */
     @Override
-    public Rectangle futureArea(Rectangle r1) {
-        Rectangle futureArea = new Rectangle(r1);
+    public Rectangle futureArea(final Rectangle r1) {
+        final Rectangle futureArea = new Rectangle(r1);
         futureArea.translate(0, it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
         return futureArea;
     }
@@ -82,7 +80,7 @@ public class KillDetectionImpl implements KillDetection {
      * {@inheritDoc}
      */
     @Override
-    public boolean isTouchingUp(Rectangle playerArea, Rectangle enemyArea){
+    public boolean isTouchingUp(final Rectangle playerArea, final Rectangle enemyArea){
         return playerArea.y + playerArea.height <= enemyArea.y && 
         ((playerArea.x + TOLL >= enemyArea.x && playerArea.x + TOLL <= enemyArea.x + enemyArea.width) ||
         (playerArea.x + playerArea.width - TOLL >= enemyArea.x && playerArea.x + playerArea.width - TOLL <= enemyArea.x + enemyArea.width));
@@ -92,14 +90,11 @@ public class KillDetectionImpl implements KillDetection {
      * {@inheritDoc}
      */
     @Override
-    public boolean isBehindTile(int x, int y) {
-        float indexXtile = x / hM.getTileSize();
-        float indexYtile = y / hM.getTileSize();
-        int blockIndex = hM.getMap()[(int) indexYtile][(int) indexXtile];
-        if (hM.getBlocks().get(blockIndex).getCollision()) {
-            return true;
-        }
-        return false;
+    public boolean isBehindTile(final int x, final int y) {
+        final float indexXtile = x / hM.getTileSize();
+        final float indexYtile = y / hM.getTileSize();
+        final int blockIndex = hM.getMap()[(int) indexYtile][(int) indexXtile];
+        return hM.getBlocks().get(blockIndex).getCollision();
     }
 
     /**
@@ -114,7 +109,7 @@ public class KillDetectionImpl implements KillDetection {
      * {@inheritDoc}
      */
     @Override
-    public void setHitWaitTime(long lastHit) {
+    public void setHitWaitTime(final long lastHit) {
         hitWaitTime = lastHit;
     }
 }

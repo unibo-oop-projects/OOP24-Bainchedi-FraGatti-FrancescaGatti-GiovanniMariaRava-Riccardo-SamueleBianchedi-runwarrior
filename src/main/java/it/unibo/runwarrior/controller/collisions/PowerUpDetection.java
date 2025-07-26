@@ -14,7 +14,7 @@ public interface PowerUpDetection {
      * @param move player movement handler
      * @return the String of the collision direction
      */
-    public String checkCollisionWithPowers(Character player, CharacterMovementHandler move);
+    String checkCollisionWithPowers(Character player, CharacterMovementHandler move);
 
     /**
      * Creates the future area of the falling player
@@ -23,7 +23,7 @@ public interface PowerUpDetection {
      * @param pl player
      * @return the collision area the player will have
      */
-    public Rectangle futureArea(Rectangle r1);
+    Rectangle futureArea(Rectangle r1);
 
     /**
      * Control if the collision is from above the powerup.
@@ -32,5 +32,5 @@ public interface PowerUpDetection {
      * @param pUpArea powerup collision area
      * @return true if the player touches the powerup with his feet
      */
-    public boolean isTouchingUp(Rectangle playerArea, Rectangle pUpArea);
+    boolean isTouchingUp(Rectangle playerArea, Rectangle pUpArea);
 }
