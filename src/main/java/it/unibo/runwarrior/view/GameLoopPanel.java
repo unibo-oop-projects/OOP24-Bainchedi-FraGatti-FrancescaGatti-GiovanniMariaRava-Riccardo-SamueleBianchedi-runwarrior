@@ -149,8 +149,15 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * To be connected with the shop
      */
     public void initializePlayer() {
-        player = new NakedWizard(this, commands, mapHandler, powersManager);
         player.playerImage();
+        final String selectedSkin = GameSaveManager.getInstance().getSelectedSkinName();
+        if ("DEFAULT SKIN".equals(selectedSkin)) {
+            player = new NakedWarrior(this, commands, mapHandler, powersManager);
+        } else if ("WIZARD".equals(selectedSkin)) {
+            player = new NakedWizard(this, commands, mapHandler, powersManager);
+        } else {
+            player = new NakedWarrior(this, commands, mapHandler, powersManager);
+        }
         player.getMovementHandler().setStartY(mapHandler.getFirstY());
         powerUpsHandler.setIndex();
     }

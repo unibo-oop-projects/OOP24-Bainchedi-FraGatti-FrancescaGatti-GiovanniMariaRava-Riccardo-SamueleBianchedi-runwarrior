@@ -15,6 +15,7 @@ public class GameSaveManager {
     private int levelsCompleted;
     private int coinCollected;
     private boolean premiumSkinUnlocked;
+    private String selectedSkinName;
 
     private static GameSaveManager instance;
 
@@ -31,6 +32,8 @@ public class GameSaveManager {
             writer.write(Integer.toString(coinCollected));
             writer.newLine();
             writer.write(Boolean.toString(premiumSkinUnlocked));
+            writer.newLine();
+            writer.write(selectedSkinName != null ? selectedSkinName : "DEFAULT SKIN");
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,6 +59,11 @@ public class GameSaveManager {
             }
             if ((line = reader.readLine()) != null){
                 gsm.premiumSkinUnlocked = Boolean.parseBoolean(line.trim());
+            }
+            if ((line = reader.readLine()) != null) {
+                gsm.selectedSkinName = line.trim();
+            } else {
+                gsm.selectedSkinName = "DEFAULT SKIN";
             }
 
             return gsm;
@@ -127,7 +135,15 @@ public class GameSaveManager {
         this.coinCollected = 0;
         this.levelsCompleted = 0;
         this.premiumSkinUnlocked = false;
+        this.selectedSkinName = "DEFAULT SKIN";
         saveGame();
     }
 
+    public String getSelectedSkinName() {
+        return selectedSkinName;
+    }
+
+    public void setSelectedSkinName(String name) {
+        this.selectedSkinName = name;
+    }
 }

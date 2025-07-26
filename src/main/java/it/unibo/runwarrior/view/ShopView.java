@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import it.unibo.runwarrior.controller.ShopController;
 //import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
+import it.unibo.runwarrior.model.Skin;
 
 public class ShopView extends JPanel {
     private final ShopController shopController;
@@ -49,6 +50,33 @@ public class ShopView extends JPanel {
                 } else {
                     JOptionPane.showMessageDialog(null, "Not enough coins or skin already purchased");
                 }
+                updateShop();
+            }
+        });
+        final JButton selectDefaultSkinButton = new JButton("SELECT DEFAULT SKIN");
+        selectDefaultSkinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selectDefaultSkinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                shopController.selectSkin(shopController.getDefaultSkin());
+                JOptionPane.showMessageDialog(null, "Default skin successfully selected!");
+                updateShop();
+            }
+        });
+        final JButton selectWizardSkinButton = new JButton("SELECT WIZARD SKIN");
+        selectWizardSkinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selectWizardSkinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!shopController.isPremiumSkinUnlocked()) {
+                    JOptionPane.showMessageDialog(null,
+                    "The 'Wizard' skin isn't available in the wardrobe yet. Get it first!");
+                } else {
+                    shopController.selectSkin(shopController.getPremiumSkin());
+                    JOptionPane.showMessageDialog(null,
+                    "'Wizard' skin successfully selected!");
+                }
+                updateShop();
             }
         });
         add(titleLabel);
@@ -58,6 +86,10 @@ public class ShopView extends JPanel {
         add(skinStateLabel);
         add(Box.createRigidArea(new Dimension(0, 20)));
         add(buySkinButton);
+        add(Box.createRigidArea(new Dimension(0, 10)));
+        add(selectDefaultSkinButton);
+        add(Box.createRigidArea(new Dimension(0, 5)));
+        add(selectWizardSkinButton);
         updateShop();
     }
 
@@ -66,12 +98,17 @@ public class ShopView extends JPanel {
         coinLabel.setText("coins:" + coins);
 
         final boolean unlocked = shopController.isPremiumSkinUnlocked();
+        final Skin skinSelected = shopController.getSelectedSkin();
         if (unlocked) {
             skinStateLabel.setText("Skin 'Wizard' : BOUGHT");
             buySkinButton.setEnabled(false);
         } else {
             skinStateLabel.setText("Skin 'Wizard' : NOT BOUGHT");
-            buySkinButton.setEnabled(false);
+            buySkinButton.setEnabled(true);
+        }
+
+        if (skinSelected.getNameSkin().equals("DEFAULT SKIN")) {
+            
         }
     }
 }
