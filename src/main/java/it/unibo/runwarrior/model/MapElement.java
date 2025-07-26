@@ -20,10 +20,14 @@ public final class MapElement {
     public void setImage(final BufferedImage im) {
         this.image = im;
     }
-/* modifica di spot bug
+    //modifica di spot bug
+    /**
+     * Sets the image for this map element by creating a defensive copy.
+     * @param im the new image.
+     */
+    /*
     public void setImage(BufferedImage image) {
     if (image != null) {
-        // Crea una copia difensiva dell'immagine
         this.image = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
         this.image.getGraphics().drawImage(image, 0, 0, null);
     } else {
@@ -67,6 +71,22 @@ public final class MapElement {
     public BufferedImage getImage() {
         return this.image;
     }
+
+    //modifiche da spotbug
+    /**
+     * Gets a defensive copy of the image of the map element.
+     * @return a copy of the element's image.
+     */
+    /*
+    public BufferedImage getImage() {
+        if (this.image == null) {
+            return null;
+        }
+        final BufferedImage copy = new BufferedImage(this.image.getWidth(), this.image.getHeight(), this.image.getType());
+        copy.getGraphics().drawImage(this.image, 0, 0, null);
+        return copy;
+    }
+    */
 
     /**
      * Gets the collision status of the map element.
