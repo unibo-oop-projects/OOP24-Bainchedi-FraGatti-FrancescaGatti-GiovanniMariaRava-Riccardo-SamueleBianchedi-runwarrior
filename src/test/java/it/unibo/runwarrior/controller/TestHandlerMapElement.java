@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Rectangle;
@@ -46,9 +47,23 @@ public class TestHandlerMapElement {
         List<MapElement> blocks = handlerMapElement.getBlocks();
 
         assertEquals(7, blocks.size());
+
+        assertFalse(blocks.get(0).getCollision());
+        assertTrue(blocks.get(1).getCollision()); 
+        assertFalse(blocks.get(3).getCollision());
+        assertFalse(blocks.get(5).getHarmless());
     }
     @Test
-    public void testDamageSet(){
+    public void testGetCollisionRectangles(){
+        List<Rectangle> collisionRects = handlerMapElement.getCollisionRectangles();
+
+        assertEquals(4, collisionRects.size());
+        final int tileSize = handlerMapElement.getTileSize();
+
+        Rectangle rectangleExpected = new Rectangle(1*tileSize, 0*tileSize, tileSize, tileSize);
+
+        assertTrue(collisionRects.contains(rectangleExpected));
+    
 
     }
 }
