@@ -75,11 +75,11 @@ public class PowersHandler {
      *
      * @param enemy true if the hit comes from a enemy
      */
-    public void losePower(boolean enemy){
+    public void losePower(final boolean enemy){
         this.index--;
         if(index >= 0){
             setPosition();
-            long lastHit = enemy ? glp.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime() 
+            final long lastHit = enemy ? glp.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime() 
             : glp.getPlayer().getMovementHandler().getCollisionDetection().getHitWaitTime();
             glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift, lastHit);
         }
@@ -109,9 +109,6 @@ public class PowersHandler {
         if (maxIndex == 2 && index < 0) {
             return true;
         }
-        if (maxIndex == 5 && index < 3) {
-            return true;
-        }
-        return false;
+        return maxIndex == 5 && index < 3;
     }
 }

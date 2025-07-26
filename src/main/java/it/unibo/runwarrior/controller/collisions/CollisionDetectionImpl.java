@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.CharacterImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
@@ -15,12 +16,12 @@ import it.unibo.runwarrior.model.MapElement;
 public class CollisionDetectionImpl implements CollisionDetection {
     public static final int SEC_3 = 3000;
     public static final int FEET_HEAD_TOLL = 5;
-    private int map[][];
-    private List<MapElement> blocks = new ArrayList<>();
+    private final int map[][];
+    private final List<MapElement> blocks;
     private int tileSize;
-    private ArrayList<String> directions = new ArrayList<>();
+    private List<String> directions;
     private Rectangle playerArea;
-    private GameLoopPanel glp;
+    private final GameLoopPanel glp;
     private long hitWaitTime;
     private int gameOverY;
     private boolean end;
@@ -32,18 +33,20 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * @param blocks list of the block types
      * @param tileSize size of the tile
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public CollisionDetectionImpl(final int map[][], final List<MapElement> blocks, final int tileSize, final GameLoopPanel glp) {
         this.map = map;
         this.blocks = blocks;
         this.tileSize = tileSize;
         this.glp = glp;
+        this.directions = new ArrayList<>();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String checkCollision(Character player) {
+    public String checkCollision(final Character player) {
         playerArea = player.getArea();
         String dir = "";
         this.directions.clear();
@@ -53,7 +56,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
             touchSolid(playerArea.x + (FEET_HEAD_TOLL + 1), playerArea.y, player, true) |
             touchSolid(playerArea.x, playerArea.y + playerArea.height / 2, player, true) |
             touchSolid(playerArea.x, playerArea.y + playerArea.height, player, true)) {
-                dir = directions.stream().filter(s -> s.equals("right") | s.equals("left"))
+                dir = directions.stream().filter(s -> "right".equals(s) | "left".equals(s))
                         .distinct().findFirst().orElse("");
         }
         if (dir.isEmpty() && directions.contains("up")) {
@@ -150,7 +153,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    public void setHitWaitTime(long lastHit) {
+    public void setHitWaitTime(final long lastHit) {
         hitWaitTime = lastHit;
     }
 

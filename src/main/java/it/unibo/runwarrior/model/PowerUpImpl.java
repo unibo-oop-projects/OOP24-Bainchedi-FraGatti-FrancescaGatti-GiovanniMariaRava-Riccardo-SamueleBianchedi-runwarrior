@@ -3,6 +3,9 @@ package it.unibo.runwarrior.model;
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
@@ -13,9 +16,11 @@ public class PowerUpImpl implements PowerUp {
     private BufferedImage image;
     private BufferedImage egg;
     private Rectangle touchArea;
-    private GameLoopPanel glp;
+    private final GameLoopPanel glp;
     private boolean powerTaken;
     private boolean eggOpen;
+
+    private static final Logger LOGGER = Logger.getLogger(PowerUpImpl.class.getName());
 
     /**
      * Constructor that creates powerup area and set the egg image.
@@ -28,7 +33,7 @@ public class PowerUpImpl implements PowerUp {
         try {
             egg = ImageIO.read(getClass().getResourceAsStream("/PowerUps/egg.png"));
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Cannot load egg image");
         }
     }
 
@@ -51,7 +56,7 @@ public class PowerUpImpl implements PowerUp {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/stick.png"));
             }
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Cannot load powerup images");
         }
     }
 

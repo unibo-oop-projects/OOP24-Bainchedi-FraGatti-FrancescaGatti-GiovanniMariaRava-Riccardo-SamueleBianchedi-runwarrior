@@ -2,6 +2,7 @@ package it.unibo.runwarrior.controller.collisions;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.List;
 
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.CharacterImpl;
@@ -16,7 +17,7 @@ import it.unibo.runwarrior.view.PowerUpManager;
 public class PowerUpDetectionImpl implements PowerUpDetection {
     private final GameLoopPanel glp;
     private final PowerUpManager powersManager;
-    private ArrayList<PowerUp> powerCollision = new ArrayList<>();
+    private List<PowerUp> powerCollision;
     private long hitWaitTime;
     private static final int TOLL = CharacterImpl.SPEED;
     private static final int WAIT = 200;
@@ -30,6 +31,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     public PowerUpDetectionImpl(final GameLoopPanel glp, final PowerUpManager pMan) {
         this.glp = glp;
         this.powersManager = pMan;
+        this.powerCollision = new ArrayList<>();
     }
 
     /**
