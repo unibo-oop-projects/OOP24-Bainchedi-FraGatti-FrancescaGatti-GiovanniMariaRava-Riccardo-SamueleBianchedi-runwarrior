@@ -7,7 +7,7 @@ public class Shop {
     private Skin selectedSkin;
 
     public Shop() {
-        this.defaultSkin = new Skin("DEFAULT SKIN", 0, true);
+        this.defaultSkin = new Skin("DEFAULT_SKIN", 0, true);
         this.newPremiumSkin = new Skin("WIZARD", SKIN_PREMIUM_PRICE, GameSaveManager.getInstance().isSkinPremiumSbloccata());
         final String selected = GameSaveManager.getInstance().getSelectedSkinName();
         if ("WIZARD".equals(selected)) {

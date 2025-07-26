@@ -33,7 +33,7 @@ public class GameSaveManager {
             writer.newLine();
             writer.write(Boolean.toString(premiumSkinUnlocked));
             writer.newLine();
-            writer.write(selectedSkinName != null ? selectedSkinName : "DEFAULT SKIN");
+            writer.write(selectedSkinName != null ? selectedSkinName : "DEFAULT_SKIN");
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +63,7 @@ public class GameSaveManager {
             if ((line = reader.readLine()) != null) {
                 gsm.selectedSkinName = line.trim();
             } else {
-                gsm.selectedSkinName = "DEFAULT SKIN";
+                gsm.selectedSkinName = "DEFAULT_SKIN";
             }
 
             return gsm;
@@ -135,7 +135,7 @@ public class GameSaveManager {
         this.coinCollected = 0;
         this.levelsCompleted = 0;
         this.premiumSkinUnlocked = false;
-        this.selectedSkinName = "DEFAULT SKIN";
+        this.selectedSkinName = "DEFAULT_SKIN";
         saveGame();
     }
 
@@ -144,6 +144,10 @@ public class GameSaveManager {
     }
 
     public void setSelectedSkinName(String name) {
+        if ("WIZARD".equalsIgnoreCase(name) && !premiumSkinUnlocked) {
+            return; //se la skin non è sbloccata non viene salvata
+        }
         this.selectedSkinName = name;
+        saveGame();
     }
 }
