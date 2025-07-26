@@ -4,12 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Objects;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A utility class to load a map's numerical data from a text file.
- * The class ensures the loaded map conforms to predefined dimensions.
- * This class is final as it is a utility class not designed for extension.
+ * The class ensures the loaded map conforms to predefined dimensions and is fully encapsulated.
  */
 public final class MapLoader {
 
@@ -30,18 +29,22 @@ public final class MapLoader {
 
     /**
      * Private constructor to create an instance with the loaded map data.
-     * 
+     * CORREZIONE: Esegue una copia profonda (deep copy) per proteggere i dati.
+     *
      * @param mapData The 2D integer array representing the map.
      */
     private MapLoader(final int[][] mapData) {
-        this.mapData = mapData.clone();
+        this.mapData = new int[mapData.length][];
+        for (int i = 0; i < mapData.length; i++) {
+            this.mapData[i] = mapData[i].clone();
+        }
         this.rows = MAP_HEIGHT;
         this.cols = MAP_WIDTH;
     }
 
     /**
      * Gets the numeric value of a block at a specific coordinate.
-     * 
+     *
      * @param r the row index.
      * @param c the column index.
      * @return the block's numeric value, or -1 if coordinates are out of bounds.
@@ -55,7 +58,7 @@ public final class MapLoader {
 
     /**
      * Gets the total number of rows in the map.
-     * 
+     *
      * @return the number of rows.
      */
     public int getRows() {
@@ -64,7 +67,7 @@ public final class MapLoader {
 
     /**
      * Gets the total number of columns in the map.
-     * 
+     *
      * @return the number of columns.
      */
     public int getCols() {
@@ -72,29 +75,38 @@ public final class MapLoader {
     }
 
     /**
-     * Gets a defensive copy of the map data.
-     * 
+     * Gets a defensive deep copy of the map data.
+     * CORREZIONE: Esegue una copia profonda per non esporre l'array interno.
+     *
      * @return a 2D integer array representing the map grid.
      */
     public int[][] getMapData() {
-        return this.mapData.clone();
+        final int[][] mapCopy = new int[this.mapData.length][];
+        for (int i = 0; i < this.mapData.length; i++) {
+            mapCopy[i] = this.mapData[i].clone();
+        }
+        return mapCopy;
     }
 
     /**
      * Loads map data from a specified resource file.
      * This static factory method reads a text file line by line, parsing characters
      * into integer values to build the map grid.
-     * 
+     *
      * @param mapFilePath The path to the map data file within the resources.
-     * 
      * @return a new {@link MapLoader} instance, or null if loading fails.
      */
     public static MapLoader load(final String mapFilePath) {
         final int[][] mapData = new int[MAP_HEIGHT][MAP_WIDTH];
         int currentRow = 0;
 
-        try (InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(mapFilePath);
-             BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
+        final InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(mapFilePath);
+        if (inputStream == null) {
+            System.err.println("Error: Map file not found at path '" + mapFilePath + "'");
+            return null;
+        }
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (currentRow >= MAP_HEIGHT) {
@@ -133,7 +145,7 @@ public final class MapLoader {
                     + MAP_HEIGHT + ", Found: " + currentRow + ".");
                 return null;
             }
-        } catch (final IOException | NullPointerException e) {
+        } catch (final IOException e) { 
             System.err.println("Error loading map file '" + mapFilePath + "': " + e.getMessage());
             return null;
         }

@@ -2,6 +2,8 @@ package it.unibo.runwarrior.model;
 
 import java.awt.image.BufferedImage;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.Collections;
 
 /**
  * Represents the game map, holding the grid data and the images for each block type.
@@ -15,39 +17,35 @@ public final class GameMap {
     private final Map<Integer, BufferedImage> blockImages;
 
     //modifiche da spotbug
-    /*
-    // da aggiungere in cima
-    import java.util.HashMap;
-
+    /**
+     * Constructs a new GameMap, performing deep copies of all mutable data.
+     *
+     * @param mapData     the 2D array representing the map grid.
+     * @param blockImages a map linking block integer values to their images.
+     * @param rows        the number of rows in the map.
+     * @param cols        the number of columns in the map.
+     */
     public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
-        // Esegui una copia profonda della mappa
         this.mapData = new int[mapData.length][];
         for (int i = 0; i < mapData.length; i++) {
-        this.mapData[i] = mapData[i].clone();
+            this.mapData[i] = mapData[i].clone();
         }
-    }
-    public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
-    this.mapData = new int[mapData.length][];
-    for (int i = 0; i < mapData.length; i++) {
-        this.mapData[i] = mapData[i].clone();
-    }
 
-    this.blockImages = new HashMap<>();
-    for (final var entry : blockImages.entrySet()) {
-        final BufferedImage originalImage = entry.getValue();
-        final BufferedImage copyImage = new BufferedImage(
+        this.blockImages = new HashMap<>();
+        for (final var entry : blockImages.entrySet()) {
+            final BufferedImage originalImage = entry.getValue();
+            final BufferedImage copyImage = new BufferedImage(
             originalImage.getWidth(),
             originalImage.getHeight(),
             originalImage.getType()
-        );
-        copyImage.getGraphics().drawImage(originalImage, 0, 0, null);
-        this.blockImages.put(entry.getKey(), copyImage);
-    }
+            );
+            copyImage.getGraphics().drawImage(originalImage, 0, 0, null);
+            this.blockImages.put(entry.getKey(), copyImage);
+        }
     
-    this.rows = rows;
-    this.cols = cols;
-}
-     */
+        this.rows = rows;
+        this.cols = cols;
+    }
     /**
      * Constructs a new GameMap.
      *
@@ -56,12 +54,14 @@ public final class GameMap {
      * @param rows        the number of rows in the map.
      * @param cols        the number of columns in the map.
      */
+    /*
     public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
         this.mapData = mapData.clone();
         this.blockImages = blockImages;
         this.rows = rows;
         this.cols = cols;
     }
+    */
 
     /**
      * Loads a map from data files and image configuration files.
@@ -102,24 +102,25 @@ public final class GameMap {
     }
 
     //modifiche da spotbug
-    /*
-     public int[][] getMapData() {
-    // Esegui una copia profonda per non esporre la mappa interna
-    final int[][] mapCopy = new int[this.mapData.length][];
-    for (int i = 0; i < this.mapData.length; i++) {
-        mapCopy[i] = this.mapData[i].clone();
+
+    public int[][] getMapData() {
+        final int[][] mapCopy = new int[this.mapData.length][];
+        for (int i = 0; i < this.mapData.length; i++) {
+            mapCopy[i] = this.mapData[i].clone();
+        }
+        return mapCopy;
     }
-    return mapCopy;
-}
-     */
+
     /**
      * Returns the map data as a 2D integer array.
      *
      * @return the map grid.
      */
+    /*
     public int[][] getMapData() {
         return mapData.clone();
     }
+    */
 
     /**
      * Returns the number of rows in the map.
@@ -140,27 +141,43 @@ public final class GameMap {
     }
 
     //modifiche da spotbug
-    /*
-    public Map<Integer, BufferedImage> getBlockImages() {
-        return Collections.unmodifiableMap(this.blockImages);
-    }
-     */
-    /**
-     * Gets the image for a specific block value.
+     /**
+     * Gets a defensive copy of the image for a specific block value.
      *
      * @param blockValue the integer value of the block.
-     * @return the corresponding BufferedImage.
+     * @return a safe copy of the corresponding BufferedImage, or null if not found.
      */
+    public BufferedImage getBlockImage(final int blockValue) {
+        final BufferedImage originalImage = this.blockImages.get(blockValue);
+        if (originalImage == null) {
+            return null;
+        }
+        // Return a defensive copy to protect the internal image.
+        final BufferedImage copy = new BufferedImage(
+            originalImage.getWidth(),
+            originalImage.getHeight(),
+            originalImage.getType()
+        );
+        copy.getGraphics().drawImage(originalImage, 0, 0, null);
+        return copy;
+    }
+    /*
     public BufferedImage getBlockImage(final int blockValue) {
         return blockImages.get(blockValue);
     }
+    */
 
     /**
-     * Returns the map of all block images.
+     * Returns an unmodifiable view of the map of all block images.
      *
-     * @return the map of block values to BufferedImages.
+     * @return an unmodifiable map of block values to BufferedImages.
      */
+    public Map<Integer, BufferedImage> getBlockImages() {
+        return Collections.unmodifiableMap(this.blockImages);
+    }
+    /*
     public Map<Integer, BufferedImage> getBlockImages() {
         return blockImages;
     }
+    */
 }

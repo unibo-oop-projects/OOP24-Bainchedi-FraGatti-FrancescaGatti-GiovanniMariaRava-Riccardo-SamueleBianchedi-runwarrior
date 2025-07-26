@@ -6,11 +6,13 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
 
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.MapElement;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.view.GameLoopPanel;
+
 /**
  * The class uses the gamemap to render the map and setcollision, and damages
  */
@@ -25,6 +27,7 @@ public class HandlerMapElement {
 
     /**
      * Constructor of the class HandlerMapElement
+     * 
      * @param gamemap
      */
     public HandlerMapElement(final GameMap gamemap) { 
@@ -33,14 +36,6 @@ public class HandlerMapElement {
         this.map = gamemap.getMapData();
         MapImage();
     }
-    /*
-    public HandlerMapElement(final GameMap gamemap) { 
-        this.blocks = new ArrayList<>();
-        this.mapBlock = gamemap.getBlockImages();
-        this.map = gamemap.getMapData();
-        mapImage();
-    }
-    */
 
     /**
      * 0 = sky
@@ -98,17 +93,15 @@ public class HandlerMapElement {
     }
 
     //modifica da spotbug
-    /*
-    import java.util.Collections; // Aggiungi questo import in cima al file
-
     public List<MapElement> getBlocks() {
     // Restituisce una versione "read-only" della lista per proteggerla
         return Collections.unmodifiableList(this.blocks);
     }
-    */
+    /*
     public List<MapElement> getBlocks() {
         return this.blocks;
     }
+    */
 
     public void setShift(int slide) {
         shift = slide;
@@ -162,17 +155,16 @@ public class HandlerMapElement {
     }
 
     //modifiche da spotbug
-    /*
     public int[][] getMap() {
-    // Crea e restituisce una copia della mappa per non esporre l'originale
     final int[][] mapCopy = new int[this.map.length][];
     for (int i = 0; i < this.map.length; i++) {
         mapCopy[i] = this.map[i].clone();
     }
     return mapCopy;
 }
-    */
+    /*
     public int[][] getMap() {
         return map;
     }
+    */
 }

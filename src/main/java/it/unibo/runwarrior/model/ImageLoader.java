@@ -5,17 +5,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.imageio.ImageIO;
 
 /**
  * Utility class to load images based on a configuration file.
- * The class reads key-value pairs where the key is an integer block ID
- * and the value is the path to the image resource.
- * This class is final as it is not designed for extension.
+ * This class is fully encapsulated and protects its internal state from external modification.
  */
 public final class ImageLoader {
 
@@ -29,41 +27,30 @@ public final class ImageLoader {
         this.blockImages = new HashMap<>();
     }
 
-    //modifiche da spotbug
-    /*
-    public BufferedImage getBlockImage(final int blockValue) {
-    final BufferedImage originalImage = this.blockImages.get(blockValue);
-    if (originalImage == null) {
-        System.err.println("Warning: No image loaded for block value: " + blockValue);
-        return null;
-    }
-    
-    // Crea e restituisce una copia per proteggere l'originale
-    final BufferedImage copy = new BufferedImage(
-        originalImage.getWidth(),
-        originalImage.getHeight(),
-        originalImage.getType()
-    );
-    copy.getGraphics().drawImage(originalImage, 0, 0, null);
-    return copy;
-}
-    */
     /**
-     * Gets the loaded image for a specific block value.
+     * Gets a defensive copy of the loaded image for a specific block value.
      *
      * @param blockValue the integer value of the block.
-     * @return the corresponding BufferedImage, or null if not found.
+     * @return a safe copy of the corresponding BufferedImage, or null if not found.
      */
     public BufferedImage getBlockImage(final int blockValue) {
-        final BufferedImage image = this.blockImages.get(blockValue);
-        if (image == null) {
+        final BufferedImage originalImage = this.blockImages.get(blockValue);
+        if (originalImage == null) {
             System.err.println("Warning: No image loaded for block value: " + blockValue);
+            return null;
         }
-        return image;
+        
+        final BufferedImage copy = new BufferedImage(
+            originalImage.getWidth(),
+            originalImage.getHeight(),
+            originalImage.getType() != 0 ? originalImage.getType() : BufferedImage.TYPE_INT_ARGB
+        );
+        copy.getGraphics().drawImage(originalImage, 0, 0, null);
+        return copy;
     }
 
     /**
-     * Loads a single image and associates it with a block value.
+     * Loads a single image, stores a defensive copy, and associates it with a block value.
      *
      * @param blockValue the integer value to associate with the image.
      * @param filePath   the resource path to the image file.
@@ -75,9 +62,16 @@ public final class ImageLoader {
                 System.err.println("Error: Cannot find resource file at path: " + filePath);
                 return false;
             }
-            final BufferedImage image = ImageIO.read(is);
-            if (image != null) {
-                this.blockImages.put(blockValue, image);
+            final BufferedImage loadedImage = ImageIO.read(is);
+            if (loadedImage != null) {
+                final BufferedImage copy = new BufferedImage(
+                    loadedImage.getWidth(),
+                    loadedImage.getHeight(),
+                    loadedImage.getType() != 0 ? loadedImage.getType() : BufferedImage.TYPE_INT_ARGB
+                );
+                copy.getGraphics().drawImage(loadedImage, 0, 0, null);
+                
+                this.blockImages.put(blockValue, copy);
                 System.out.println("Image for block " + blockValue + " loaded from: " + filePath);
                 return true;
             }
@@ -92,20 +86,20 @@ public final class ImageLoader {
     }
 
     /**
-     * Loads all images specified in a given configuration file.
-     * The config file should contain lines in the format 'key=value'.
+     * Loads all images specified in a given configuration file using UTF-8 encoding.
      *
      * @param configFilePath the resource path to the configuration file.
      * @return true if all images were loaded without critical errors, false otherwise.
      */
     public boolean loadImagesFromConfigFile(final String configFilePath) {
         boolean allLoadedSuccessfully = true;
-        try (InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(configFilePath)) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(configFilePath)) {
             if (inputStream == null) {
                 System.err.println("Error: Cannot find configuration file: " + configFilePath);
                 return false;
             }
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            // Specify UTF-8 encoding to prevent platform-dependent issues.
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
                 String line;
                 while ((line = br.readLine()) != null) {
                     final String trimmedLine = line.trim();
@@ -118,8 +112,6 @@ public final class ImageLoader {
                             final int blockValue = Integer.parseInt(parts[0].trim());
                             final String imagePath = parts[1].trim();
                             if (!this.loadImage(blockValue, imagePath)) {
-                                System.err.println("Error: Failed to load image for block " + blockValue
-                                    + FROM_PATH_STRING + imagePath);
                                 allLoadedSuccessfully = false;
                             }
                         } catch (final NumberFormatException e) {
@@ -141,14 +133,12 @@ public final class ImageLoader {
         return allLoadedSuccessfully;
     }
 
-    /*
-    * Returns an unmodifiable view of the map of loaded images.
-    * This prevents external code from modifying the internal map.
-    *
-    * @return an unmodifiable map of block values to BufferedImages.
-    */
+    /**
+     * Returns an unmodifiable view of the map of the loaded images.
+     *
+     * @return a read-only map of block values to BufferedImages.
+     */
     public Map<Integer, BufferedImage> getLoadedImages() {
-        // Invece di 'return this.blockImages;'
         return Collections.unmodifiableMap(this.blockImages);
-        }
+    }
 }
