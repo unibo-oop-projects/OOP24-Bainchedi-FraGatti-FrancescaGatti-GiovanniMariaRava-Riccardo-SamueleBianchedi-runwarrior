@@ -19,7 +19,6 @@ public class SnakeView implements EnemyView {
     private BufferedImage rightSnakeMoving;
     private BufferedImage leftSnake;
     private BufferedImage leftSnakeMoving;
-    private BufferedImage poisonImage;
     private final GameLoopPanel glp;
     /**
      * Constructor of the SnakeView class.
@@ -29,7 +28,7 @@ public class SnakeView implements EnemyView {
         this.glp = glp;
         try {
             loadResources();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -43,7 +42,6 @@ public class SnakeView implements EnemyView {
         rightSnakeMoving = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/rightSnakeMoving.png"));
         leftSnake = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/leftSnake.png"));
         leftSnakeMoving = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/leftSnakeMoving.png"));
-        poisonImage = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/poison.png"));
     }
     /**
      * {@inheritDoc}
@@ -51,7 +49,7 @@ public class SnakeView implements EnemyView {
 
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
-        BufferedImage currentImage;
+        final BufferedImage currentImage;
         if (enemy.getVelocityX() > 0) {
             currentImage = enemy.isStep() ? rightSnakeMoving : rightSnake;
         } else {

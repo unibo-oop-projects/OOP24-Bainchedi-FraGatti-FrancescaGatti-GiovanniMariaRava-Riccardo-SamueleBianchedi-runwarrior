@@ -20,7 +20,6 @@ public class MonkeyView implements EnemyView {
     private BufferedImage leftMonkeyMoving;
     private BufferedImage rightMonkeyRunning;
     private BufferedImage leftMonkeyRunning;
-    private BufferedImage banana;
     private BufferedImage image;
     private final GameLoopPanel glp;
     /**
@@ -32,7 +31,7 @@ public class MonkeyView implements EnemyView {
         this.glp = glp;
         try {
             loadResources();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -41,14 +40,13 @@ public class MonkeyView implements EnemyView {
      */
 
     @Override
-    public void loadResources() throws IOException {
+    public final void loadResources() throws IOException {
         rightMonkey = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/rightMonkey.png"));
         leftMonkey = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/leftMonkey.png"));
         rightMonkeyMoving = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/rightMonkeyMoving.png"));
         leftMonkeyMoving = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/leftMonkeyMoving.png"));
         rightMonkeyRunning = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/rightMonkeyRunning.png"));
         leftMonkeyRunning = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/leftMonkeyRunning.png"));
-        banana = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/banana.png"));
         image = rightMonkey;
     }
     /**
@@ -57,7 +55,7 @@ public class MonkeyView implements EnemyView {
 
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
-        BufferedImage currentImage;
+        final BufferedImage currentImage;
         if (enemy.getVelocityX() == 0) {
             currentImage = image;
         } else if (enemy.getVelocityX() > 0) {
