@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.model.player;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 
@@ -25,7 +26,6 @@ public class NakedWarrior extends CharacterImpl {
     public NakedWarrior(final GameLoopPanel panel, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         super(panel, commands, mapHandler, pMan);
-        playerImage();
     }
 
     /**
@@ -45,7 +45,7 @@ public class NakedWarrior extends CharacterImpl {
             attackR = right0;
             attackL = left0;
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Cannot load player images");
         }
     }
 }

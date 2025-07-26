@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.model.player;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 
@@ -24,7 +25,6 @@ public class StickWizard extends CharacterImpl {
     public StickWizard(final GameLoopPanel panel, final CharacterComand commands,
         final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         super(panel, commands, mapHandler, pMan);
-        playerImage();
     }
 
     /**
@@ -46,7 +46,7 @@ public class StickWizard extends CharacterImpl {
             tipR = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/tipRightW.png"));
             tipL = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/tipLeftW.png"));
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Cannot load player images");
         }
     }
 

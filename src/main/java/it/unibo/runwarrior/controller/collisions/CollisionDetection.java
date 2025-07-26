@@ -12,7 +12,7 @@ public interface CollisionDetection {
      * @param player the player in the game panel
      * @return the decisive direction of the collision 
      */
-    public String checkCollision(Character player);
+    String checkCollision(Character player);
 
     /**
      * Controls if the player touches a solid tile in his position.
@@ -24,7 +24,7 @@ public interface CollisionDetection {
      * @param checkDirections boolean to decide if the check of the direction is useful or not
      * @return true if the player touches a solid tile
      */
-    public boolean touchSolid(int x, int y, Character player, boolean checkDirections);
+    boolean touchSolid(int x, int y, Character player, boolean checkDirections);
 
     /**
      * Controls in which direction the player collides with a tile.
@@ -36,7 +36,7 @@ public interface CollisionDetection {
      * @param player the player in the game panel
      * @return the string that specifies the direction of the collision
      */
-    public String checkCollisionDirection(int x, int y, float indexXtile, float indexYtile, Character player);
+    String checkCollisionDirection(int x, int y, float indexXtile, float indexYtile, Character player);
 
     /**
      * Controls if the given player is in air, so if he doesn't touch the ground.
@@ -44,22 +44,22 @@ public interface CollisionDetection {
      * @param player the player in the game panel
      * @return true if the player doesn't touch the ground
      */
-    public boolean isInAir(Character player);
+    boolean isInAir(Character player);
 
     /**
      * @return last time the player hit an obstacle
      */
-    public long getHitWaitTime();
+    long getHitWaitTime();
 
     /**
      * Set hitWaitTime
      *
      * @param lastHit last time of the player hitting an obstacle
      */
-    public void setHitWaitTime(long lastHit);
+    void setHitWaitTime(long lastHit);
 
     /**
      * @return true if the game has to be stopped
      */
-    public boolean gameOver();
+    boolean gameOver();
 }

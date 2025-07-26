@@ -77,7 +77,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void setStartY(int y){
+    public void setStartY(final int y){
         playerY = y + CharacterImpl.TO_TOUCH_FLOOR;
         maxJump = playerY - (sizeCharacter*5/2);
         midJump = playerY - (sizeCharacter*3/2);
@@ -87,7 +87,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void setLocationAfterPowerup(int x, int y, int realx, int groundX, long lastHit) {
+    public void setLocationAfterPowerup(final int x, final int y, final int realx, final int groundX, final long lastHit) {
         this.screenX = x;
         this.playerY = y;
         this.playerX = realx;
@@ -114,19 +114,20 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         }
         killDetection.checkCollisionWithEnemeies(player);
 
-        hitHead = collisionDir.equals("down") ? true : false;
+        hitHead = "down".equals(collisionDir);
         if (hitHead) {
             cmd.setJump(false);
         }
         jump(cmd.isJumping(), maxJump);
-        handleDoubleCollision = (collisionDir.equals("up") || collisionDir.equals("down")) && descend ? true : false;
+        handleDoubleCollision = ("up".equals(collisionDir) || "down".equals(collisionDir)) && descend;
         if (jumpKill) {
             jumpAfterKill();
         }
 
         if (cmd.getRight() && !cmd.getLeft()) {
             rightDirection = true;
-            if (!collisionDir.equals("right") && !handleDoubleCollision && playerX < endOfMap) {
+            if (!"right".equals(collisionDir) && !handleDoubleCollision && playerX < endOfMap) {
+                System.out.println("si");
                 playerX += CharacterImpl.SPEED;
                 if (screenX < maxScreenX) {
                     screenX += CharacterImpl.SPEED;
@@ -137,7 +138,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         }
         if (cmd.getLeft() && !cmd.getRight()) {
             rightDirection = false;
-            if (!collisionDir.equals("left") && !handleDoubleCollision) {
+            if (!"left".equals(collisionDir) && !handleDoubleCollision) {
                 if (screenX > 0) {
                     playerX -= CharacterImpl.SPEED;
                 }
@@ -146,14 +147,14 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 }
             }
         }
-        canAttack = (collisionDir.equals("right") || collisionDir.equals("left")) ? false : true;
+        canAttack = ("right".equals(collisionDir) || "left".equals(collisionDir));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void jump (boolean isJump, int jumpHeight) {
+    public void jump (final boolean isJump, final int jumpHeight) {
         if (isJump && !descend) {
             if(playerY > jumpHeight){
                 playerY -= SPEED_JUMP_UP;
@@ -204,8 +205,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     public void updateJumpVariable() {
-        maxJump = (startY - (sizeCharacter*5/2)) + (playerY - startY);
-        midJump = (startY - (sizeCharacter*3/2)) + (playerY - startY);
+        maxJump = startY - (sizeCharacter * 5 / 2) + (playerY - startY);
+        midJump = startY - (sizeCharacter * 3 / 2) + (playerY - startY);
     }
 
     /**

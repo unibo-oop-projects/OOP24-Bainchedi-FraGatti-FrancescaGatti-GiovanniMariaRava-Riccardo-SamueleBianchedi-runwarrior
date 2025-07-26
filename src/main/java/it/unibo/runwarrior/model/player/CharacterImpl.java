@@ -3,6 +3,8 @@ package it.unibo.runwarrior.model.player;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.logging.Logger;
+
 import it.unibo.runwarrior.controller.CharacterAnimationHandler;
 import it.unibo.runwarrior.controller.CharacterAnimationHandlerImpl;
 import it.unibo.runwarrior.controller.CharacterComand;
@@ -18,6 +20,7 @@ import it.unibo.runwarrior.view.PowerUpManager;
 public abstract class CharacterImpl implements Character {
     public static final int TO_TOUCH_FLOOR = 2;
     public static final int SPEED = 5;
+    protected static final Logger LOGGER = Logger.getLogger(CharacterImpl.class.getName());
     protected int sizeCharacter;
     protected Rectangle collisionArea;
     protected Rectangle swordArea;
@@ -53,6 +56,7 @@ public abstract class CharacterImpl implements Character {
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         this.cmd = commands;
         sizeCharacter = mapHandler.getTileSize() * 2;
+        playerImage();
         this.movement = new CharacterMovementHandlerImpl(panel, this, commands, mapHandler, pMan);
         this.animation = new CharacterAnimationHandlerImpl(commands, movement, right0, right1, right2, 
         left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL);
@@ -91,21 +95,21 @@ public abstract class CharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
-    public void drawPlayer(Graphics2D gr2) {
-        BufferedImage im = null;
-        BufferedImage tip = null;
+    public void drawPlayer(final Graphics2D gr2) {
+        BufferedImage im;
+        BufferedImage tip;
         im = animation.imagePlayer(rightDirection);
         gr2.drawImage(im, movement.getScX(), movement.getPlY(), sizeCharacter, sizeCharacter, null);
         if (animation.isAttacking()) {
             tip = animation.getTip(rightDirection);
-            int tipPos = rightDirection ? 1 : (-1);
+            final int tipPos = rightDirection ? 1 : (-1);
             gr2.drawImage(tip, movement.getScX() + (tipPos * sizeCharacter), movement.getPlY(), sizeCharacter, sizeCharacter, null);
             //gr2.drawRect(movement.getScX() + (tipPos * sizeCharacter), swordArea.y, swordArea.width, swordArea.height);
         }
     }
 
     @Override
-    public void drawRectangle(Graphics2D gr) {
+    public void drawRectangle(final Graphics2D gr) {
         gr.drawRect(movement.getScX() + (sizeCharacter / 4), collisionArea.y, collisionArea.width, collisionArea.height);
         //si sposta in avanti perchè segue playerX non screenX
     }
