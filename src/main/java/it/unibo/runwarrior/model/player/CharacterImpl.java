@@ -56,6 +56,7 @@ public abstract class CharacterImpl implements Character {
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         this.cmd = commands;
         sizeCharacter = mapHandler.getTileSize() * 2;
+        playerImage();
         this.movement = new CharacterMovementHandlerImpl(panel, this, commands, mapHandler, pMan);
         this.animation = new CharacterAnimationHandlerImpl(commands, movement, right0, right1, right2, 
         left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL);

@@ -149,7 +149,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * To be connected with the shop
      */
     public void initializePlayer() {
-        player.playerImage();
         final String selectedSkin = GameSaveManager.getInstance().getSelectedSkinName();
         if ("DEFAULT SKIN".equals(selectedSkin)) {
             player = new NakedWarrior(this, commands, mapHandler, powersManager);
@@ -168,7 +167,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
         this.player = pl;
-        player.playerImage();
         this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
         this.coinController.updatePlayer(pl);
     }

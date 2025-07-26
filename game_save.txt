@@ -1,3 +1,4 @@
 0
 102
 true
+DEFAULT SKIN

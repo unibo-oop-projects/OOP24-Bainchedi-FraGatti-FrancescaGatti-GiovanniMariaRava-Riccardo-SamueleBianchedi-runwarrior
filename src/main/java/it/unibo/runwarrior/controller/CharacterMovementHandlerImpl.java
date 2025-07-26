@@ -119,7 +119,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             cmd.setJump(false);
         }
         jump(cmd.isJumping(), maxJump);
-        handleDoubleCollision = "up".equals(collisionDir) || "down".equals(collisionDir) && descend;
+        handleDoubleCollision = ("up".equals(collisionDir) || "down".equals(collisionDir)) && descend;
         if (jumpKill) {
             jumpAfterKill();
         }
@@ -127,6 +127,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         if (cmd.getRight() && !cmd.getLeft()) {
             rightDirection = true;
             if (!"right".equals(collisionDir) && !handleDoubleCollision && playerX < endOfMap) {
+                System.out.println("si");
                 playerX += CharacterImpl.SPEED;
                 if (screenX < maxScreenX) {
                     screenX += CharacterImpl.SPEED;
