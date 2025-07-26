@@ -61,6 +61,7 @@ public class HandlerMapElement {
                     newElement.setPortal(true);
                     newElement.setHarmless(true);
                     newElement.setCollision(false);
+                    break;
                 case 5,6:
                     newElement.setHarmless(false);
                     newElement.setCollision(true);
