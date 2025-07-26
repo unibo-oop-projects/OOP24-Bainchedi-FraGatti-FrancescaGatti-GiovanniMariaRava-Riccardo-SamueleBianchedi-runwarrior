@@ -13,7 +13,7 @@ import it.unibo.runwarrior.view.PowerUpManager;
 /**
  * Implementation of the warrior with cape and stick.
  */
-public class NakedWarrior extends CharacterImpl {
+public class NakedWarrior extends AbstractCharacterImpl {
 
     /**
      * Constructor of this skin.

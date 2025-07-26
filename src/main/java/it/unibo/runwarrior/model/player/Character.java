@@ -6,6 +6,9 @@ import java.awt.Rectangle;
 import it.unibo.runwarrior.controller.CharacterAnimationHandler;
 import it.unibo.runwarrior.controller.CharacterMovementHandler;
 
+/**
+ * Character entity.
+ */
 public interface Character {
 
     /**
@@ -35,13 +38,13 @@ public interface Character {
 
     /**
      * @return the object that handles the player movement,
-     * including the collisions with tiles, powerups and enemies.
+     *    including the collisions with tiles, powerups and enemies.
      */
     CharacterMovementHandler getMovementHandler();
 
     /**
      * @return the object that handles the player animation,
-     * so how the player frames change.
+     *    so how the player frames change.
      */
     CharacterAnimationHandler getAnimationHandler();
 

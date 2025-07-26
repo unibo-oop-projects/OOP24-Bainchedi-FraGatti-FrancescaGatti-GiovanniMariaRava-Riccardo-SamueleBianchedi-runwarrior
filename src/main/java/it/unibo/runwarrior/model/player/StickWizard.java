@@ -13,7 +13,7 @@ import it.unibo.runwarrior.view.PowerUpManager;
 /**
  * Implementation of the wizard with cape and stick.
  */
-public class StickWizard extends CharacterImpl {
+public class StickWizard extends AbstractCharacterImpl {
     /**
      * Constructor of this skin.
      *

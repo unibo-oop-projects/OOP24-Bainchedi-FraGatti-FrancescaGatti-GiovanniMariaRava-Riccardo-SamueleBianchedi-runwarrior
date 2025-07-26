@@ -13,7 +13,7 @@ import it.unibo.runwarrior.view.PowerUpManager;
 /**
  * Implementation of the wizard with cape.
  */
-public class ArmourWizard extends CharacterImpl {
+public class ArmourWizard extends AbstractCharacterImpl {
 
     /**
      * Constructor of this skin.

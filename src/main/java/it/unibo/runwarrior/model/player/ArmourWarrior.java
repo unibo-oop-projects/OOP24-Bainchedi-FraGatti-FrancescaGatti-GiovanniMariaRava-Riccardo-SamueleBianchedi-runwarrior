@@ -13,8 +13,8 @@ import it.unibo.runwarrior.view.PowerUpManager;
 /**
  * Implementation of the warrioir with armour.
  */
-public class ArmourWarrior extends CharacterImpl {
-    
+public class ArmourWarrior extends AbstractCharacterImpl {
+
     /**
      * Constructor of this skin.
      *

@@ -16,6 +16,7 @@ public class PowerUpManager {
     public static final int END_OF_POWERUP = 222;
     public static final int NUM_POWERUP = 6;
     public static final int FIRST_DISTANCE_POWERUP = 55;
+    public static final int OBSTACLE  = 5;
     private List<PowerUp> powerUps;
     private final HandlerMapElement mapHandler;
     private final int tileSize;
@@ -38,7 +39,7 @@ public class PowerUpManager {
             int row = 0;
             while (map[row][distance] != 2 && map[row][distance] != 1) {
                 row++;
-                if(row == map.length || map[row][distance] == 5){
+                if (row == map.length || map[row][distance] == OBSTACLE) {
                     row = 0;
                     distance += tileSize;
                 }

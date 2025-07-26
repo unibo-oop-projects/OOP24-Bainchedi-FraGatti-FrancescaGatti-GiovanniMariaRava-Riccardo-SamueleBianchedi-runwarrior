@@ -13,14 +13,13 @@ import it.unibo.runwarrior.view.GameLoopPanel;
  * Implementation of the powerup object.
  */
 public class PowerUpImpl implements PowerUp {
+    private static final Logger LOGGER = Logger.getLogger(PowerUpImpl.class.getName());
     private BufferedImage image;
     private BufferedImage egg;
     private Rectangle touchArea;
     private final GameLoopPanel glp;
     private boolean powerTaken;
     private boolean eggOpen;
-
-    private static final Logger LOGGER = Logger.getLogger(PowerUpImpl.class.getName());
 
     /**
      * Constructor that creates powerup area and set the egg image.

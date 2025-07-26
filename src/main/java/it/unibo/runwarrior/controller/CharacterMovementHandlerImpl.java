@@ -7,7 +7,7 @@ import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.PowerUpDetectionImpl;
 import it.unibo.runwarrior.model.player.Character;
-import it.unibo.runwarrior.model.player.CharacterImpl;
+import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 
 /**
  * Class that handles player movement and his collisions.
@@ -68,7 +68,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         screenX = START_X;
         groundX = 0;
         sizeCharacter = hM.getTileSize() * 2;
-        this.startY = hM.getFirstY() + CharacterImpl.TO_TOUCH_FLOOR;
+        this.startY = hM.getFirstY() + AbstractCharacterImpl.TO_TOUCH_FLOOR;
         endOfMap = ((hM.getMap()[0].length - 1) * hM.getTileSize()) - hM.getTileSize();
         //impostare già anche ma e mid jump?
     }
@@ -78,7 +78,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     public void setStartY(final int y){
-        playerY = y + CharacterImpl.TO_TOUCH_FLOOR;
+        playerY = y + AbstractCharacterImpl.TO_TOUCH_FLOOR;
         maxJump = playerY - (sizeCharacter*5/2);
         midJump = playerY - (sizeCharacter*3/2);
     }
@@ -128,11 +128,11 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             rightDirection = true;
             if (!"right".equals(collisionDir) && !handleDoubleCollision && playerX < endOfMap) {
                 System.out.println("si");
-                playerX += CharacterImpl.SPEED;
+                playerX += AbstractCharacterImpl.SPEED;
                 if (screenX < maxScreenX) {
-                    screenX += CharacterImpl.SPEED;
+                    screenX += AbstractCharacterImpl.SPEED;
                 } else {
-                    groundX -= CharacterImpl.SPEED;
+                    groundX -= AbstractCharacterImpl.SPEED;
                 }
             }
         }
@@ -140,10 +140,10 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             rightDirection = false;
             if (!"left".equals(collisionDir) && !handleDoubleCollision) {
                 if (screenX > 0) {
-                    playerX -= CharacterImpl.SPEED;
+                    playerX -= AbstractCharacterImpl.SPEED;
                 }
                 if (screenX > MIN_SCREEN_X) {
-                    screenX -= CharacterImpl.SPEED;
+                    screenX -= AbstractCharacterImpl.SPEED;
                 }
             }
         }

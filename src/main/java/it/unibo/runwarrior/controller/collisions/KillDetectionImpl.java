@@ -6,7 +6,7 @@ import java.util.List;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.Character;
-import it.unibo.runwarrior.model.player.CharacterImpl;
+import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
@@ -19,7 +19,7 @@ public class KillDetectionImpl implements KillDetection {
     //private PowersHandler powerUpHandler; // vedi sotto
     private EnemyImpl enemyToDie; // commentato per ricordare che forse è meglio mantenerlo come variabile
     private long hitWaitTime;
-    private static final int TOLL = CharacterImpl.SPEED;
+    private static final int TOLL = AbstractCharacterImpl.SPEED;
 
     /**
      * Constructor of kill detection.

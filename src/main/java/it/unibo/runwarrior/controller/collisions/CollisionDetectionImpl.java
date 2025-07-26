@@ -6,7 +6,7 @@ import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.player.Character;
-import it.unibo.runwarrior.model.player.CharacterImpl;
+import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.model.MapElement;
 
@@ -121,10 +121,10 @@ public class CollisionDetectionImpl implements CollisionDetection {
             x >= tileRec.x && x <= tileRec.x + tileRec.width || y <= 0) {
             direction = "down";
         }
-        else if (x - CharacterImpl.SPEED <= tileRec.x) {
+        else if (x - AbstractCharacterImpl.SPEED <= tileRec.x) {
             direction = "right";
         }
-        else if (x + CharacterImpl.SPEED >= tileRec.x + tileRec.width) {
+        else if (x + AbstractCharacterImpl.SPEED >= tileRec.x + tileRec.width) {
             direction = "left";
         }
         //System.out.println("- " + x + " " + y + " - - " + direction + " - " + indexXtile + " " + indexYtile);

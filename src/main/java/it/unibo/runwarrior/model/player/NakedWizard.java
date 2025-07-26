@@ -13,7 +13,7 @@ import it.unibo.runwarrior.view.PowerUpManager;
 /**
  * Implementation of the wizard without powerups.
  */
-public class NakedWizard extends CharacterImpl {
+public class NakedWizard extends AbstractCharacterImpl {
 
     /**
      * Constructor of this skin.
