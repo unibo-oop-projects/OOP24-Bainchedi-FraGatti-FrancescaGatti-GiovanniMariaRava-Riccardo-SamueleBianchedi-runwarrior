@@ -7,8 +7,8 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 
 /**
@@ -22,13 +22,13 @@ public class GuardView implements EnemyView {
     private BufferedImage rightGuardRunning;
     private BufferedImage leftGuardRunning;
     private BufferedImage image;
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
     /**
      * Constructor of the GuardView class.
      * @param glp is the panel in which the guard need to be renderd.
      */
 
-    public GuardView(final GameLoopPanel glp) {
+    public GuardView(final GameLoopController glp) {
         this.glp = glp;
         try {
             loadResources();

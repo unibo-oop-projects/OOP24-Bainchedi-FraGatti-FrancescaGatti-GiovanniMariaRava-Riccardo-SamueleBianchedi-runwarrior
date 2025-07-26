@@ -10,8 +10,8 @@ import it.unibo.runwarrior.controller.CharacterAnimationHandlerImpl;
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.controller.CharacterMovementHandlerImpl;
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpManager;
 
 /**
@@ -26,18 +26,19 @@ public abstract class AbstractCharacterImpl implements Character {
     protected Rectangle collisionArea;
     protected Rectangle swordArea;
     protected boolean rightDirection;
-    protected BufferedImage right0;
-    protected BufferedImage right1;
-    protected BufferedImage right2;
-    protected BufferedImage left0;
-    protected BufferedImage left1;
-    protected BufferedImage left2;
-    protected BufferedImage jumpR;
-    protected BufferedImage jumpL;
-    protected BufferedImage attackR;
-    protected BufferedImage attackL;
-    protected BufferedImage tipR;
-    protected BufferedImage tipL;
+    protected BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
+    // protected BufferedImage right0;
+    // protected BufferedImage right1;
+    // protected BufferedImage right2;
+    // protected BufferedImage left0;
+    // protected BufferedImage left1;
+    // protected BufferedImage left2;
+    // protected BufferedImage jumpR;
+    // protected BufferedImage jumpL;
+    // protected BufferedImage attackR;
+    // protected BufferedImage attackL;
+    // protected BufferedImage tipR;
+    // protected BufferedImage tipL;
 
     protected CharacterComand cmd;
     protected CharacterAnimationHandler animation;
@@ -52,7 +53,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * @param mapHandler object that prints tiles
      * @param pMan object that prints powerups
      */
-    public AbstractCharacterImpl(final GameLoopPanel panel, final CharacterComand commands, 
+    public AbstractCharacterImpl(final GameLoopController panel, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         this.cmd = commands;
         sizeCharacter = mapHandler.getTileSize() * 2;
@@ -87,7 +88,7 @@ public abstract class AbstractCharacterImpl implements Character {
     /**
      * Used by SwordWarrior and StickWizard to update swordArea when attacking.
      */
-    public void updateAttackCollision() {
+    protected void updateAttackCollision() {
         //default void for skin without a weapon
     }
 

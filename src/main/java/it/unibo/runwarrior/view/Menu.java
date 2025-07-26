@@ -12,6 +12,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
 
@@ -109,7 +110,7 @@ public class Menu extends JPanel {
             playButton.setBorder(new LineBorder(new Color(85, 89, 91), 4));
 
             playButton.addActionListener(new ActionListener() {
-                private GameLoopPanel glp;
+                private GameLoopController glc;
                 public void actionPerformed(final ActionEvent e) {
                     playButtonPanel.remove(playButton);
                     playButtonPanel.revalidate();
@@ -144,37 +145,40 @@ public class Menu extends JPanel {
                     level3.setForeground(Color.BLACK);
 
                     level1.addActionListener(level1Event -> {
-                        glp = new GameLoopPanel("Map1/map_1.txt", "Map1/desert_theme.txt",
+                        glc = new GameLoopController("Map1/map_1.txt", "Map1/desert_theme.txt",
                         "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
-                        glp.startGame();
+                        glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glp);
+                        frameMenu.setContentPane(glc.getGlp()); 
                         frameMenu.revalidate();
                         frameMenu.repaint();
-                        glp.setFocusable(true);
-                        glp.requestFocusInWindow();
+                        glc.getGlp().setFocusable(true);
+                        glc.getGlp().requestFocusInWindow();
+                        glc.getGlp().requestFocus();
                     });
                     level2.addActionListener(level2Event -> {
-                        glp = new GameLoopPanel("Map2/map2.txt", "Map2/forest_theme.txt",
+                        glc = new GameLoopController("Map2/map2.txt", "Map2/forest_theme.txt",
                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
-                        glp.startGame();
+                        glc.glp.startGame();
                         frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glp);
+                        frameMenu.setContentPane(glc.glp);
                         frameMenu.revalidate();
                         frameMenu.repaint();
-                        glp.setFocusable(true);
-                        glp.requestFocusInWindow();
+                        glc.getGlp().setFocusable(true);
+                        glc.getGlp().requestFocusInWindow();
+                        glc.getGlp().requestFocus();
                     });
                     level3.addActionListener(level3Event -> {
-                        glp = new GameLoopPanel("Map_3/map_3.txt", "Map_3/map3Theme.txt",
+                        glc = new GameLoopController("Map_3/map_3.txt", "Map_3/map3Theme.txt",
                         "/Map_3/enemiesMap3.txt", "/Coins/CoinCoordinates_map3.txt");
-                        glp.startGame();
+                        glc.glp.startGame();
                         frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glp);
+                        frameMenu.setContentPane(glc.glp);
                         frameMenu.revalidate();
                         frameMenu.repaint();
-                        glp.setFocusable(true);
-                        glp.requestFocusInWindow();
+                        glc.getGlp().setFocusable(true);
+                        glc.getGlp().requestFocusInWindow();
+                        glc.getGlp().requestFocus();
                     });
                     final JButton shopButton = new JButton("SHOP");
                     shopButton.setAlignmentX(JButton.CENTER_ALIGNMENT);

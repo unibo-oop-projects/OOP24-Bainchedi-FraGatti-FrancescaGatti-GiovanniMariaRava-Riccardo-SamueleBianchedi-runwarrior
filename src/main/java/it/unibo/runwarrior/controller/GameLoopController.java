@@ -21,7 +21,7 @@ import it.unibo.runwarrior.view.enemy.impl.WizardView;
 
 public class GameLoopController {
     
-    private GameLoopPanel glp;
+    public GameLoopPanel glp;
     private Character player;
     private CharacterComand commands;
     private PowersHandler powerUpsHandler;
@@ -37,7 +37,6 @@ public class GameLoopController {
     private ScoreController scoreController;
 
     public GameLoopController(String mapPath, String themePath, String enemiesPath, String coinsPath) {
-        this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this);
         this.gameMap = GameMap.load(mapPath, themePath);
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
@@ -58,6 +57,7 @@ public class GameLoopController {
         this.score = new Score(GameSaveManager.getInstance());
         this.scoreController = new ScoreController(score);
         this.coinController.setScoreController(scoreController);
+        this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this);
     }
 
     public void update() {
@@ -115,6 +115,14 @@ public class GameLoopController {
 
     public EnemyHandlerImpl getEnemyHandler() {
         return this.enemyHandler;
+    }
+
+    public CoinController getCoinController(){
+        return this.coinController;
+    }
+
+    public ScoreController getScoreController() {
+        return this.scoreController;
     }
 
     /**

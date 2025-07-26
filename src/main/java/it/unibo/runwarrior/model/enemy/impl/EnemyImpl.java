@@ -3,7 +3,7 @@ package it.unibo.runwarrior.model.enemy.impl;
 import java.awt.Rectangle;
 import java.util.List;
 
-import it.unibo.runwarrior.view.GameLoopPanel;
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.PowerUpImpl;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
@@ -28,7 +28,7 @@ public class EnemyImpl implements Enemy {
 
     private EnemyHandlerImpl enemyHandler;
 
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
     private PowerUpImpl powerUp;
     
     /**
@@ -44,7 +44,7 @@ public class EnemyImpl implements Enemy {
      * @param type of the enemy (Goblin, Guard, Snake, Monkey, Wizard)
      */
     public EnemyImpl(int x, final int y, final int width, final int height, final boolean solid, 
-                    final EnemyHandlerImpl handler, final GameLoopPanel glp, final int type) {
+                    final EnemyHandlerImpl handler, final GameLoopController glp, final int type) {
         this.x = x;
         this.y = y;
         this.width = width;

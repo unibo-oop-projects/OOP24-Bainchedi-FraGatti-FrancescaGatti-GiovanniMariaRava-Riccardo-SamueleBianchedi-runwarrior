@@ -7,7 +7,7 @@ import java.util.List;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
-import it.unibo.runwarrior.view.GameLoopPanel;
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.MapElement;
 
 /**
@@ -21,7 +21,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
     private int tileSize;
     private List<String> directions;
     private Rectangle playerArea;
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
     private long hitWaitTime;
     private int gameOverY;
     private boolean end;
@@ -34,7 +34,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * @param tileSize size of the tile
      */
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    public CollisionDetectionImpl(final int map[][], final List<MapElement> blocks, final int tileSize, final GameLoopPanel glp) {
+    public CollisionDetectionImpl(final int map[][], final List<MapElement> blocks, final int tileSize, final GameLoopController glp) {
         this.map = map;
         this.blocks = blocks;
         this.tileSize = tileSize;
@@ -73,29 +73,26 @@ public class CollisionDetectionImpl implements CollisionDetection {
      */
     @Override
     public boolean touchSolid(final int x, final int y, final Character player, final boolean checkDirections) {
-        System.out.println(end);
         gameOverY = y;
         float indexXtile = x / tileSize;
         float indexYtile = y / tileSize;
         int blockIndex = map[(int) indexYtile][(int) indexXtile];
         end = blocks.get(blockIndex).isPortal();
-        if (blocks.get(blockIndex).getCollision() || y <= 0){
-            System.out.println(blockIndex + " " + blocks.get(blockIndex).getCollision());
+        if (blocks.get(blockIndex).getCollision() || y <= 0) {
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
             }
-            if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3){
+            if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3) {
                 hitWaitTime = System.currentTimeMillis();
                 glp.getPowersHandler().losePower(false);
             }
             return true;
-        } else {
+        } else if (!blocks.get(blockIndex).isPortal()) {
             //altro ciclo per verificare se c'è realmente collisione, per evitare che il player si infili nel terreno durante il salto
             for (int i = playerArea.width; i >= 0; i = i - playerArea.width) {
                 indexXtile = (playerArea.x + i) / tileSize;
                 indexYtile = playerArea.y / tileSize;
                 blockIndex = map[(int) indexYtile][(int) indexXtile];
-                end = blocks.get(blockIndex).isPortal();
                 if (blocks.get(blockIndex).getCollision() && checkDirections) {
                     final String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile, player);
                     if ("right".equals(tempDir) || "left".equals(tempDir)) {
@@ -166,6 +163,6 @@ public class CollisionDetectionImpl implements CollisionDetection {
      */
     @Override
     public boolean gameOver() {
-        return gameOverY >= glp.getHeight() || end;
+        return gameOverY >= glp.getGlp().getHeight() || end;
     }
 }

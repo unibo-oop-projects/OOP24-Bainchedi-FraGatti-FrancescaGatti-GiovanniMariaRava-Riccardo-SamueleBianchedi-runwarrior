@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 
 /**
@@ -20,12 +20,12 @@ public class SnakeView implements EnemyView {
     private BufferedImage leftSnake;
     private BufferedImage leftSnakeMoving;
     private BufferedImage poisonImage;
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
     /**
      * Constructor of the SnakeView class.
      * @param glp is the panel in which the guard need to be rendered
      */
-    public SnakeView(final GameLoopPanel glp) {
+    public SnakeView(final GameLoopController glp) {
         this.glp = glp;
         try {
             loadResources();

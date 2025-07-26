@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpManager;
@@ -23,7 +24,7 @@ public class NakedWarrior extends AbstractCharacterImpl {
      * @param mapHandler object that prints tiles
      * @param pMan object that prints powerups
      */
-    public NakedWarrior(final GameLoopPanel panel, final CharacterComand commands, 
+    public NakedWarrior(final GameLoopController panel, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         super(panel, commands, mapHandler, pMan);
     }

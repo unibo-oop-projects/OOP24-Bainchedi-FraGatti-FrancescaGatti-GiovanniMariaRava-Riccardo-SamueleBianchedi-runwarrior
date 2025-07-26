@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 /**
  * Implementation of the enemy view with Wizard enemy.
@@ -17,14 +17,14 @@ public class WizardView implements EnemyView {
     private BufferedImage rightWizardMoving;
     private BufferedImage leftWizard; 
     private BufferedImage leftWizardMoving; 
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
 
     /**
      * Constructor of the class WizardView.
      * @param glp is the panel in which the guard need to be rendered
      */
 
-    public WizardView(final GameLoopPanel glp) {
+    public WizardView(final GameLoopController glp) {
         this.glp = glp;
         try {
             loadResources();

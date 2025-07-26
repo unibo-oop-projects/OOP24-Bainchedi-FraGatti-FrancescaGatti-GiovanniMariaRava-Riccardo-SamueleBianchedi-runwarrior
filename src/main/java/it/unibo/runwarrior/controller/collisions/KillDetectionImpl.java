@@ -7,14 +7,14 @@ import it.unibo.runwarrior.model.enemy.api.Enemy;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.view.GameLoopPanel;
 
 /**
 * Class that detects the collision between the player and the enmies.
 */
 public class KillDetectionImpl implements KillDetection {
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
     private final HandlerMapElement hM;
     //private PowersHandler powerUpHandler; // vedi sotto
     private EnemyImpl enemyToDie; // commentato per ricordare che forse è meglio mantenerlo come variabile
@@ -27,7 +27,7 @@ public class KillDetectionImpl implements KillDetection {
      * @param glp game-loop panel
      * @param hM map handler
      */
-    public KillDetectionImpl(final GameLoopPanel glp, final HandlerMapElement hM) {
+    public KillDetectionImpl(final GameLoopController glp, final HandlerMapElement hM) {
         this.glp = glp;
         this.hM = hM;
     }

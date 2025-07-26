@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.api.EnemyHandler;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
@@ -17,7 +18,7 @@ import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
 public class EnemyHandlerImpl implements EnemyHandler {
     private LinkedList<EnemyImpl> enemies;
     private EnemyViewFactoryImpl viewFactory;
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
 
     /**
      * Constructor of the class EnemyHandlerImpl.
@@ -25,7 +26,7 @@ public class EnemyHandlerImpl implements EnemyHandler {
      * @param glp is the panel in which the enemy will be rendered
      * @param viewFactory contains the map with enemy type and 
      */
-    public EnemyHandlerImpl(final GameLoopPanel glp, final EnemyViewFactoryImpl viewFactory) {
+    public EnemyHandlerImpl(final GameLoopController glp, final EnemyViewFactoryImpl viewFactory) {
         this.viewFactory = viewFactory;
         this.glp = glp;
         this.enemies = new LinkedList<>();

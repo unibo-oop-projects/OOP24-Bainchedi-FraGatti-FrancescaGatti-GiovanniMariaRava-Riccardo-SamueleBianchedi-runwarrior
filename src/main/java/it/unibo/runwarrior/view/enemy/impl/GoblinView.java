@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 /**
  * Implementation of the enemy view with Goblin enemy.
@@ -19,13 +19,13 @@ public class GoblinView implements EnemyView {
     private BufferedImage rightGoblinMoving;
     private BufferedImage leftGoblinMoving;
     private BufferedImage image;
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
     /**
      * Constructor of the class.
      * @param glp is the panel in which the goblin need to be rendered.
      */
 
-    public GoblinView(final GameLoopPanel glp) {
+    public GoblinView(final GameLoopController glp) {
         this.glp = glp;
         try {
             loadResources();
