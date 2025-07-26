@@ -29,6 +29,22 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Menu extends JPanel {
+        private final static int FRAME_MENU_WIDTH = 1280;
+        private final static int FRAME_MENU_HEIGHT = 720;
+        private final static int PLAY_BUTTON_PANEL_WIDTH = 250;
+        private final static int PLAY_BUTTON_PANEL_HEIGHT = 500;
+        private final static int BUTTON_WIDTH = 150;
+        private final static int BUTTON_HEIGHT = 40;
+        private static final int TITOLO_X = 440;
+        private static final int TITOLO_Y = 100;
+        private static final int TITOLO_WIDTH = 400;
+        private static final int TITOLO_HEIGHT = 300;
+        private static final int PLAY_PANEL_X = 430;
+        private static final int PLAY_PANEL_Y = 300;
+        private static final int PLAY_PANEL_WIDTH = 400;
+        private static final int PLAY_PANEL_HEIGHT = 500;
+        private static final int SHOP_FRAME_WIDHT = 600;
+        private static final int SHOP_FRAME_HEIGHT = 400;
         //creo il frame e imposto il titolo 
         private JFrame frameMenu = new JFrame();
         private BufferedImage immagineSfondo;
@@ -51,7 +67,7 @@ public class Menu extends JPanel {
                     }
                 }
             });
-            frameMenu.setSize(1280, 720);
+            frameMenu.setSize(FRAME_MENU_WIDTH, FRAME_MENU_HEIGHT);
             frameMenu.setLocationRelativeTo(null);
             try {
                 immagineSfondo = ImageIO.read(getClass().getResourceAsStream("/Menu/sfondoMenu.png"));
@@ -73,19 +89,19 @@ public class Menu extends JPanel {
             pannelloSfondoMenu.setOpaque(true);
 
             final JLabel titoloLabel = new JLabel(new ImageIcon(imgTitolo));
-            titoloLabel.setBounds(440, 100, 400, 300);
+            titoloLabel.setBounds(TITOLO_X, TITOLO_Y, TITOLO_WIDTH, TITOLO_HEIGHT);
             pannelloSfondoMenu.add(titoloLabel);
-            final JPanel pannelloTastoPlay = new JPanel();
-            pannelloTastoPlay.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-            pannelloTastoPlay.setOpaque(false);
-            pannelloTastoPlay.setBounds(430, 300, 400, 500);
-            pannelloTastoPlay.setPreferredSize(new Dimension(250, 500));
+            final JPanel playButtonPanel = new JPanel();
+            playButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+            playButtonPanel.setOpaque(false);
+            playButtonPanel.setBounds(PLAY_PANEL_X, PLAY_PANEL_Y, PLAY_PANEL_WIDTH, PLAY_PANEL_HEIGHT);
+            playButtonPanel.setPreferredSize(new Dimension(PLAY_BUTTON_PANEL_WIDTH, PLAY_BUTTON_PANEL_HEIGHT));
 
             final JButton playButton = new JButton("PLAY");
-            final Dimension buttonPlayDimension = new Dimension(150, 40);
-            playButton.setMaximumSize(buttonPlayDimension);
-            playButton.setPreferredSize(buttonPlayDimension);
-            playButton.setMinimumSize(buttonPlayDimension);
+            final Dimension buttonsDimension = new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT);
+            playButton.setMaximumSize(buttonsDimension);
+            playButton.setPreferredSize(buttonsDimension);
+            playButton.setMinimumSize(buttonsDimension);
             playButton.setBackground(new Color(120, 124, 126));
             final Font font = new Font("Cooper Black", Font.BOLD, 16);
             playButton.setFont(font);
@@ -96,34 +112,33 @@ public class Menu extends JPanel {
                 private JFrame mainFrame;
                 private GameLoopPanel glp;
                 public void actionPerformed(final ActionEvent e) {
-                    pannelloTastoPlay.remove(playButton);
-                    pannelloTastoPlay.revalidate();
-                    pannelloTastoPlay.repaint();
+                    playButtonPanel.remove(playButton);
+                    playButtonPanel.revalidate();
+                    playButtonPanel.repaint();
 
                     final JPanel panel = new JPanel();
                     panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-                    final Dimension buttonLevelDimension = new Dimension(150, 40);
 
                     final JButton level1 = new JButton("LEVEL 1");
                     final JButton level2 = new JButton("LEVEL 2");
                     final JButton level3 = new JButton("LEVEL 3");
                     level1.setAlignmentX(JButton.CENTER_ALIGNMENT);
-                    level1.setMaximumSize(buttonLevelDimension);
-                    level1.setPreferredSize(buttonLevelDimension);
+                    level1.setMaximumSize(buttonsDimension);
+                    level1.setPreferredSize(buttonsDimension);
                     level1.setFont(font);
                     level1.setBackground(new Color(218, 165, 32));
                     level1.setBorder(new LineBorder(new Color(180, 130, 25), 4)); 
                     level1.setForeground(Color.BLACK);
                     level2.setAlignmentX(JButton.CENTER_ALIGNMENT);
-                    level2.setMaximumSize(buttonLevelDimension);
-                    level2.setPreferredSize(buttonLevelDimension);
+                    level2.setMaximumSize(buttonsDimension);
+                    level2.setPreferredSize(buttonsDimension);
                     level2.setFont(font);
                     level2.setBackground(new Color(60, 179, 60));
                     level2.setBorder(new LineBorder(new Color(40, 120, 40), 4));
                     level2.setForeground(Color.BLACK);
                     level3.setAlignmentX(JButton.CENTER_ALIGNMENT);
-                    level3.setMaximumSize(buttonLevelDimension);
-                    level3.setPreferredSize(buttonLevelDimension);
+                    level3.setMaximumSize(buttonsDimension);
+                    level3.setPreferredSize(buttonsDimension);
                     level3.setFont(font);
                     level3.setBackground(new Color(120, 124, 126));
                     level3.setBorder(new LineBorder(new Color(85, 89, 91), 4));
@@ -167,17 +182,17 @@ public class Menu extends JPanel {
                     });
                     final JButton shopButton = new JButton("SHOP");
                     shopButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
-                    shopButton.setMaximumSize(new Dimension(150, 40));
-                    shopButton.setPreferredSize(new Dimension(150, 40));
+                    shopButton.setMaximumSize(new Dimension(buttonsDimension));
+                    shopButton.setPreferredSize(buttonsDimension);
                     shopButton.setFont(new Font("Cooper Black", Font.BOLD, 14));
                     shopButton.setBackground(new Color(70, 130, 180));
                     shopButton.setForeground(Color.WHITE);
-                    shopButton.setBorder(new LineBorder(new Color(30, 90, 150), 3));
+                    shopButton.setBorder(new LineBorder(new Color(30, 90, 150), 4));
 
                     shopButton.addActionListener(shopEvent -> {
                         final JFrame shopFrame = new JFrame("SHOP");
                         shopFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        shopFrame.setSize(600, 400);
+                        shopFrame.setSize(SHOP_FRAME_WIDHT, SHOP_FRAME_HEIGHT);
                         shopFrame.setLocationRelativeTo(null);
                         shopFrame.setResizable(false);
 
@@ -195,17 +210,17 @@ public class Menu extends JPanel {
                     panel.add(level3);
                     panel.add(Box.createVerticalStrut(10));
                     panel.add(shopButton);
-                    pannelloTastoPlay.setPreferredSize(new Dimension(250, 400));
-                    pannelloTastoPlay.removeAll();
-                    pannelloTastoPlay.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-                    pannelloTastoPlay.add(panel);
-                    pannelloTastoPlay.revalidate();
-                    pannelloTastoPlay.repaint();
+                    playButtonPanel.setPreferredSize(new Dimension(PLAY_BUTTON_PANEL_WIDTH, PLAY_BUTTON_PANEL_HEIGHT));
+                    playButtonPanel.removeAll();
+                    playButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+                    playButtonPanel.add(panel);
+                    playButtonPanel.revalidate();
+                    playButtonPanel.repaint();
 
                 }
             });
-            pannelloTastoPlay.add(playButton, BorderLayout.CENTER); 
-            pannelloSfondoMenu.add(pannelloTastoPlay);
+            playButtonPanel.add(playButton, BorderLayout.CENTER); 
+            pannelloSfondoMenu.add(playButtonPanel);
             frameMenu.setContentPane(pannelloSfondoMenu);
             frameMenu.setVisible(true);
         }

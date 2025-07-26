@@ -8,26 +8,41 @@ public class ShopController {
     private final Score score;
     private final Shop shop;
     
-    public ShopController(Score score){
+    public ShopController(Score score) {
         this.score = score; 
         this.shop = new Shop();
     }
 
-    public boolean buyPremiumSkin(){
+    public boolean buyPremiumSkin() {
         Skin skin = shop.getPremiumSkin();
-        if(!skin.isSkinUnlocked() && score.spendCoins(skin.getPrice())){
+        if (!skin.isSkinUnlocked() && score.spendCoins(skin.getPrice())) {
            shop.unlockNewPremiumSkin();
            return true;
         }
         return false;
     }
 
-    public boolean isPremiumSkinUnlocked(){
+    public Skin getDefaultSkin() {
+        return shop.getDefaultSkin();
+    }
+
+    public Skin getPremiumSkin() {
+        return shop.getPremiumSkin();
+    }
+
+    public void selectSkin(Skin skin){
+        shop.selectSkin(skin);
+    }
+
+    public Skin getSelectedSkin() {
+        return shop.getSelectedSkin();
+    }
+
+    public boolean isPremiumSkinUnlocked() {
         return shop.getPremiumSkin().isSkinUnlocked();
     }
 
-    public int getCoinScore(){
+    public int getCoinScore() {
         return score.getCoinScore();
     }
-
 }
