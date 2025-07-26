@@ -2,8 +2,6 @@ package it.unibo.runwarrior.model;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,91 +10,123 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
-public class ImageLoader {
-    
-    private Map<Integer, BufferedImage> blockImages;
+/**
+ * Utility class to load images based on a configuration file.
+ * The class reads key-value pairs where the key is an integer block ID
+ * and the value is the path to the image resource.
+ * This class is final as it is not designed for extension.
+ */
+public final class ImageLoader {
 
+    private static final String FROM_PATH_STRING = " from ";
+    private final Map<Integer, BufferedImage> blockImages;
+
+    /**
+     * Constructs a new ImageLoader, initializing the internal image map.
+     */
     public ImageLoader() {
-        blockImages = new HashMap<>();
+        this.blockImages = new HashMap<>();
     }
 
-    public BufferedImage getBlockImage(int blockValue) {
-        BufferedImage image = blockImages.get(blockValue);
+    /**
+     * Gets the loaded image for a specific block value.
+     *
+     * @param blockValue the integer value of the block.
+     * @return the corresponding BufferedImage, or null if not found.
+     */
+    public BufferedImage getBlockImage(final int blockValue) {
+        final BufferedImage image = this.blockImages.get(blockValue);
         if (image == null) {
-            System.err.println("Avviso: Nessuna immagine caricata per il valore di blocco: " + blockValue);
+            System.err.println("Warning: No image loaded for block value: " + blockValue);
         }
         return image;
     }
 
-    public boolean loadImage(int blockValue, String filePath) {
-        
-        try {
-
-            //File imageFile = new File(filePath);
-
-            BufferedImage image = ImageIO.read(getClass().getResourceAsStream(filePath));
-
-            if (image != null) {
-                blockImages.put(blockValue, image);
-                System.out.println("Immagine per blocco " + blockValue + " caricata da: " + filePath);
-                return true;
-            } else {
-                System.err.println("Errore: Impossibile caricare l'immagine per il blocco " + blockValue +
-                                   ". File letto come NULL. Controlla il formato o il contenuto del file: " + filePath);
+    /**
+     * Loads a single image and associates it with a block value.
+     *
+     * @param blockValue the integer value to associate with the image.
+     * @param filePath   the resource path to the image file.
+     * @return true if loading was successful, false otherwise.
+     */
+    public boolean loadImage(final int blockValue, final String filePath) {
+        try (InputStream is = getClass().getResourceAsStream(filePath)) {
+            if (is == null) {
+                System.err.println("Error: Cannot find resource file at path: " + filePath);
                 return false;
             }
-        } catch (IOException e) {
-            System.err.println("Errore I/O durante il caricamento dell'immagine per blocco " + blockValue +
-                               " da " + filePath + ": " + e.getMessage());
+            final BufferedImage image = ImageIO.read(is);
+            if (image != null) {
+                this.blockImages.put(blockValue, image);
+                System.out.println("Image for block " + blockValue + " loaded from: " + filePath);
+                return true;
+            }
+            System.err.println("Error: Failed to load image for block " + blockValue
+                + ". File might be corrupted or in an unsupported format: " + filePath);
             return false;
-        } catch (Exception e) {
-            System.err.println("Si è verificato un errore inatteso durante il caricamento dell'immagine per blocco " + blockValue +
-                               " da " + filePath + ": " + e.getMessage());
+        } catch (final IOException e) {
+            System.err.println("I/O Error loading image for block " + blockValue
+                + FROM_PATH_STRING + filePath + ": " + e.getMessage());
             return false;
         }
     }
 
-    public boolean loadImagesFromConfigFile(String configFilePath) {
+    /**
+     * Loads all images specified in a given configuration file.
+     * The config file should contain lines in the format 'key=value'.
+     *
+     * @param configFilePath the resource path to the configuration file.
+     * @return true if all images were loaded without critical errors, false otherwise.
+     */
+    public boolean loadImagesFromConfigFile(final String configFilePath) {
         boolean allLoadedSuccessfully = true;
-        InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(configFilePath);
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String trimmedLine = line.trim();
-                if (trimmedLine.isEmpty() || trimmedLine.startsWith("#")) {
-                    continue;
-                }
-
-                String[] parts = trimmedLine.split("=", 2);
-
-                if (parts.length == 2) {
-                    try {
-                        int blockValue = Integer.parseInt(parts[0].trim());
-                        String imagePath = parts[1].trim();
-
-                        if (!loadImage(blockValue, imagePath)) {
-                            System.err.println("Errore: Fallito il caricamento dell'immagine specificata nel config per il blocco " + blockValue + " da " + imagePath);
-                            allLoadedSuccessfully = false; 
+        try (InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(configFilePath)) {
+            if (inputStream == null) {
+                System.err.println("Error: Cannot find configuration file: " + configFilePath);
+                return false;
+            }
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    final String trimmedLine = line.trim();
+                    if (trimmedLine.isEmpty() || trimmedLine.startsWith("#")) {
+                        continue;
+                    }
+                    final String[] parts = trimmedLine.split("=", 2);
+                    if (parts.length == 2) {
+                        try {
+                            final int blockValue = Integer.parseInt(parts[0].trim());
+                            final String imagePath = parts[1].trim();
+                            if (!this.loadImage(blockValue, imagePath)) {
+                                System.err.println("Error: Failed to load image for block " + blockValue
+                                    + FROM_PATH_STRING + imagePath);
+                                allLoadedSuccessfully = false;
+                            }
+                        } catch (final NumberFormatException e) {
+                            System.err.println("Error: Invalid block value in config line: '"
+                                + trimmedLine + "' in file: " + configFilePath);
+                            allLoadedSuccessfully = false;
                         }
-                    } catch (NumberFormatException e) {
-                        System.err.println("Errore: Valore di blocco non valido (non numerico) nella riga di configurazione: '" + trimmedLine + "' nel file: " + configFilePath);
+                    } else {
+                        System.err.println("Warning: Invalid image config line format: '"
+                            + trimmedLine + "' in file: " + configFilePath);
                         allLoadedSuccessfully = false;
                     }
-                } else {
-                    System.err.println("Avviso: Riga di configurazione immagine non valida, formato atteso 'numero=percorso': '" + trimmedLine + "' nel file: " + configFilePath);
-                    allLoadedSuccessfully = false;
                 }
             }
-        } catch (IOException e) {
-            System.err.println("Errore I/O durante la lettura del file di configurazione immagini '" + configFilePath + "': " + e.getMessage());
+        } catch (final IOException e) {
+            System.err.println("I/O Error reading image config file '" + configFilePath + "': " + e.getMessage());
             return false;
         }
-
         return allLoadedSuccessfully;
     }
 
+    /**
+     * Returns an unmodifiable map of the loaded images.
+     *
+     * @return the map of block values to BufferedImages.
+     */
     public Map<Integer, BufferedImage> getLoadedImages() {
-        return blockImages;
+        return this.blockImages;
     }
 }
