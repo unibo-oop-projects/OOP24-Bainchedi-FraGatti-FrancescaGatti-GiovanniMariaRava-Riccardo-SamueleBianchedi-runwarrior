@@ -19,6 +19,17 @@ public final class MapElement {
     public void setImage(final BufferedImage im) {
         this.image = im;
     }
+/* modifica di spot bug
+    public void setImage(BufferedImage image) {
+    if (image != null) {
+        // Crea una copia difensiva dell'immagine
+        this.image = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
+        this.image.getGraphics().drawImage(image, 0, 0, null);
+    } else {
+        this.image = null;
+    }
+}
+    */
 
     /**
      * Sets the collision property for this map element.
@@ -46,6 +57,7 @@ public final class MapElement {
 
     /**
      * Gets the image of the map element.
+     *      
      * @return the element's image.
      */
     public BufferedImage getImage() {
@@ -54,6 +66,7 @@ public final class MapElement {
 
     /**
      * Gets the collision status of the map element.
+     * 
      * @return true if the element has collision.
      */
     public boolean getCollision() {
@@ -62,6 +75,7 @@ public final class MapElement {
 
     /**
      * Gets the harmless status of the map element.
+     * 
      * @return true if the element is harmless.
      */
     public boolean getHarmless() {
@@ -70,6 +84,7 @@ public final class MapElement {
 
     /**
      * Checks if the map element is a portal.
+     * 
      * @return true if the element is a portal.
      */
     public boolean isPortal() {
