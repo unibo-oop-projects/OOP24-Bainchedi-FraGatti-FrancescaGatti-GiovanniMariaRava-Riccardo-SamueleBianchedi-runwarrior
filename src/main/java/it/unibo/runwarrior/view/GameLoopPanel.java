@@ -150,9 +150,8 @@ public class GameLoopPanel extends JPanel implements Runnable {
      */
     public void initializePlayer() {
         final String selectedSkin = GameSaveManager.getInstance().getSelectedSkinName();
-        if ("DEFAULT SKIN".equals(selectedSkin)) {
-            player = new NakedWarrior(this, commands, mapHandler, powersManager);
-        } else if ("WIZARD".equals(selectedSkin)) {
+        final boolean wizardUnlocked = GameSaveManager.getInstance().isSkinPremiumSbloccata();
+        if ("WIZARD".equalsIgnoreCase(selectedSkin) && wizardUnlocked) {
             player = new NakedWizard(this, commands, mapHandler, powersManager);
         } else {
             player = new NakedWarrior(this, commands, mapHandler, powersManager);

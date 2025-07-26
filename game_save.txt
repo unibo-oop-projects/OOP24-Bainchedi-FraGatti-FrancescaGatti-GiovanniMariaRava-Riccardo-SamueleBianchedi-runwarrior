@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 3
 115
 true
 DEFAULT SKIN
+=======
+0
+110
+false
+DEFAULT_SKIN
+>>>>>>> fe7bf5a23d50eb59b3e3e95af094ab3b3139e5e7

@@ -109,7 +109,6 @@ public class Menu extends JPanel {
             playButton.setBorder(new LineBorder(new Color(85, 89, 91), 4));
 
             playButton.addActionListener(new ActionListener() {
-                private JFrame mainFrame;
                 private GameLoopPanel glp;
                 public void actionPerformed(final ActionEvent e) {
                     playButtonPanel.remove(playButton);
@@ -145,40 +144,37 @@ public class Menu extends JPanel {
                     level3.setForeground(Color.BLACK);
 
                     level1.addActionListener(level1Event -> {
-                        mainFrame = new JFrame("runwarrior");
-                        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        mainFrame.setLocationByPlatform(false);
-                        mainFrame.setResizable(true);
                         glp = new GameLoopPanel("Map1/map_1.txt", "Map1/desert_theme.txt",
                         "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
                         glp.startGame();
-                        mainFrame.add(glp);
-                        mainFrame.pack();
-                        mainFrame.setVisible(true);
+                        frameMenu.getContentPane().removeAll();
+                        frameMenu.setContentPane(glp);
+                        frameMenu.revalidate();
+                        frameMenu.repaint();
+                        glp.setFocusable(true);
+                        glp.requestFocusInWindow();
                     });
                     level2.addActionListener(level2Event -> {
-                        mainFrame = new JFrame("runwarrior");
-                        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        mainFrame.setLocationByPlatform(false);
-                        mainFrame.setResizable(true);
                         glp = new GameLoopPanel("Map2/map2.txt", "Map2/forest_theme.txt",
                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
                         glp.startGame();
-                        mainFrame.add(glp);
-                        mainFrame.pack();
-                        mainFrame.setVisible(true);
+                        frameMenu.getContentPane().removeAll();
+                        frameMenu.setContentPane(glp);
+                        frameMenu.revalidate();
+                        frameMenu.repaint();
+                        glp.setFocusable(true);
+                        glp.requestFocusInWindow();
                     });
                     level3.addActionListener(level3Event -> {
-                        mainFrame = new JFrame("runwarrior");
-                        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        mainFrame.setLocationByPlatform(false);
-                        mainFrame.setResizable(true);
                         glp = new GameLoopPanel("Map_3/map_3.txt", "Map_3/map3Theme.txt",
                         "/Map_3/enemiesMap3.txt", "/Coins/CoinCoordinates_map3.txt");
                         glp.startGame();
-                        mainFrame.add(glp);
-                        mainFrame.pack();
-                        mainFrame.setVisible(true);
+                        frameMenu.getContentPane().removeAll();
+                        frameMenu.setContentPane(glp);
+                        frameMenu.revalidate();
+                        frameMenu.repaint();
+                        glp.setFocusable(true);
+                        glp.requestFocusInWindow();
                     });
                     final JButton shopButton = new JButton("SHOP");
                     shopButton.setAlignmentX(JButton.CENTER_ALIGNMENT);

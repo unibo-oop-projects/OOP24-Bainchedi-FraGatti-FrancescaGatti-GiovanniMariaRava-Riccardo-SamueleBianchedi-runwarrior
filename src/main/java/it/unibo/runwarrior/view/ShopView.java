@@ -14,9 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import it.unibo.runwarrior.controller.ShopController;
-//import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
-import it.unibo.runwarrior.model.Skin;
 
 public class ShopView extends JPanel {
     private final ShopController shopController;
@@ -26,6 +24,8 @@ public class ShopView extends JPanel {
 
     public ShopView(final Score score) {
         this.shopController = new ShopController(score);
+        setBackground(new java.awt.Color(255, 192, 203));
+        setOpaque(true);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         final JLabel titleLabel = new JLabel("SHOP");
         final Font font = new Font("Cooper Black", Font.BOLD, 24);
@@ -98,17 +98,12 @@ public class ShopView extends JPanel {
         coinLabel.setText("coins:" + coins);
 
         final boolean unlocked = shopController.isPremiumSkinUnlocked();
-        final Skin skinSelected = shopController.getSelectedSkin();
         if (unlocked) {
             skinStateLabel.setText("Skin 'Wizard' : BOUGHT");
             buySkinButton.setEnabled(false);
         } else {
             skinStateLabel.setText("Skin 'Wizard' : NOT BOUGHT");
             buySkinButton.setEnabled(true);
-        }
-
-        if (skinSelected.getNameSkin().equals("DEFAULT SKIN")) {
-            
         }
     }
 }
