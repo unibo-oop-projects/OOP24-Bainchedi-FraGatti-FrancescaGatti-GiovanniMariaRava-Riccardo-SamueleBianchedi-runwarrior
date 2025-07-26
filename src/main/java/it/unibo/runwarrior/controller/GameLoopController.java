@@ -47,9 +47,8 @@ public class GameLoopController {
         this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
-        initializePlayer();
 
-        this.coinController = new CoinController(player);
+        this.coinController = new CoinController();
         List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
@@ -57,6 +56,7 @@ public class GameLoopController {
         this.score = new Score(GameSaveManager.getInstance());
         this.scoreController = new ScoreController(score);
         this.coinController.setScoreController(scoreController);
+        initializePlayer();
         this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this);
     }
 
@@ -64,7 +64,6 @@ public class GameLoopController {
         player.update();
         enemySpawner.update();
         enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
-        coinController.controlCoinCollision(mapHandler.getTileSize());
     }
 
     /**

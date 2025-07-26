@@ -2,7 +2,6 @@ package it.unibo.runwarrior.controller.collisions;
 
 import java.awt.Rectangle;
 import java.util.Iterator;
-import java.util.List;
 
 import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.ScoreController;

@@ -22,9 +22,8 @@ public class CoinController {
     private int coinsCollected = 0;
     List<Coin> coinList;
     private ScoreController scoreController;
-    public CoinController(Character player){
-        coinList = new ArrayList<>(); 
-        this.player = player;
+    public CoinController(){
+        coinList = new ArrayList<>();
     }
 
     public List<int[]> loadCoinFromFile(String pathFile){
@@ -66,7 +65,7 @@ public class CoinController {
         coinList.add(coin);
     }
 
-    public void drawAllCoins(Graphics g, int tileSize){
+    public void drawAllCoins(Graphics g, int tileSize, Character player){
         groundX = player.getMovementHandler().getGroundX(); 
 
         for (Coin coin : coinList) {

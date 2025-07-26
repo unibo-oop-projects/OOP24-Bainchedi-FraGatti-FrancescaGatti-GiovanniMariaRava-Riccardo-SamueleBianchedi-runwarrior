@@ -79,7 +79,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gameController.getPlayer().drawPlayer(gr2);
         gameController.getPlayer().drawRectangle(gr2);
         gameController.getEnemyHandler().render(gr2);
-        gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize());
+        gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize(), gameController.getPlayer());
         gr2.setColor(Color.BLACK);
         gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
         gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
