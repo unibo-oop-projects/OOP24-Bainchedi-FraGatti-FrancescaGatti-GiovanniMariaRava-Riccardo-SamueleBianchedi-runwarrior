@@ -1,183 +1,229 @@
 package it.unibo.runwarrior.model;
 
+
+
 import java.awt.image.BufferedImage;
 import java.util.Map;
-import java.util.HashMap;
-import java.util.Collections;
+
+
 
 /**
- * Represents the game map, holding the grid data and the images for each block type.
- * This class is final as it's not designed for extension.
- */
+
+* Represents the game map, holding the grid data and the images for each block type.
+
+* This class is final as it's not designed for extension.
+
+*/
+
 public final class GameMap {
 
-    private final int[][] mapData;
-    private final int rows;
-    private final int cols;
-    private final Map<Integer, BufferedImage> blockImages;
 
-    //modifiche da spotbug
-    /**
-     * Constructs a new GameMap, performing deep copies of all mutable data.
-     *
-     * @param mapData     the 2D array representing the map grid.
-     * @param blockImages a map linking block integer values to their images.
-     * @param rows        the number of rows in the map.
-     * @param cols        the number of columns in the map.
-     */
-    public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
-        this.mapData = new int[mapData.length][];
-        for (int i = 0; i < mapData.length; i++) {
-            this.mapData[i] = mapData[i].clone();
-        }
 
-        this.blockImages = new HashMap<>();
-        for (final var entry : blockImages.entrySet()) {
-            final BufferedImage originalImage = entry.getValue();
-            final BufferedImage copyImage = new BufferedImage(
-            originalImage.getWidth(),
-            originalImage.getHeight(),
-            originalImage.getType()
-            );
-            copyImage.getGraphics().drawImage(originalImage, 0, 0, null);
-            this.blockImages.put(entry.getKey(), copyImage);
-        }
-    
-        this.rows = rows;
-        this.cols = cols;
-    }
-    /**
-     * Constructs a new GameMap.
-     *
-     * @param mapData     the 2D array representing the map grid.
-     * @param blockImages a map linking block integer values to their images.
-     * @param rows        the number of rows in the map.
-     * @param cols        the number of columns in the map.
-     */
-    /*
-    public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
-        this.mapData = mapData.clone();
-        this.blockImages = blockImages;
-        this.rows = rows;
-        this.cols = cols;
-    }
-    */
+  private final int[][] mapData;
 
-    /**
-     * Loads a map from data files and image configuration files.
-     * This is a factory method to create a GameMap instance.
-     *
-     * @param mapDataFilePath     the path to the file containing the map's numerical data.
-     * @param imageConfigFilePath the path to the file configuring the block images.
-     * @return a new GameMap instance, or null if loading fails.
-     */
-    public static GameMap load(final String mapDataFilePath, final String imageConfigFilePath) {
+  private final int rows;
 
-        System.out.println("Inizio caricamento dati mappa da: " + mapDataFilePath);
-        final MapLoader rawMapData = MapLoader.load(mapDataFilePath);
-        if (rawMapData == null) {
-            System.err.println("GameMap Error: Impossibile caricare i dati numerici della mappa da " + mapDataFilePath);
-            return null;
-        }
-        System.out.println("Dati mappa caricati con successo.");
+  private final int cols;
 
-        System.out.println("Inizio caricamento immagini da config: " + imageConfigFilePath);
-        final ImageLoader mapImageLoader = new ImageLoader();
-        final boolean imagesLoaded = mapImageLoader.loadImagesFromConfigFile(imageConfigFilePath);
-        if (!imagesLoaded) {
-            // Ho spezzato la riga per rispettare il limite di lunghezza
-            System.err.println("GameMap Error: Impossibile caricare le immagini per la mappa"
-                + " utilizzando la configurazione " + imageConfigFilePath);
-            return null;
-        }
-        System.out.println("Immagini caricate con successo.");
+  private final Map<Integer, BufferedImage> blockImages;
 
-        System.out.println("Creazione oggetto GameMap.");
-        return new GameMap(
-            rawMapData.getMapData(),
-            mapImageLoader.getLoadedImages(),
-            rawMapData.getRows(),
-            rawMapData.getCols()
-        );
+
+
+  /**
+
+  * Constructs a new GameMap.
+
+  *
+
+  * @param mapData   the 2D array representing the map grid.
+
+  * @param blockImages a map linking block integer values to their images.
+
+  * @param rows    the number of rows in the map.
+
+  * @param cols    the number of columns in the map.
+
+  */
+
+  public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
+
+    this.mapData = mapData.clone();
+
+    this.blockImages = blockImages;
+
+    this.rows = rows;
+
+    this.cols = cols;
+
+  }
+
+
+
+  /**
+
+  * Loads a map from data files and image configuration files.
+
+  * This is a factory method to create a GameMap instance.
+
+  *
+
+  * @param mapDataFilePath   the path to the file containing the map's numerical data.
+
+  * @param imageConfigFilePath the path to the file configuring the block images.
+
+  * @return a new GameMap instance, or null if loading fails.
+
+  */
+
+  public static GameMap load(final String mapDataFilePath, final String imageConfigFilePath) {
+
+
+
+    System.out.println("Inizio caricamento dati mappa da: " + mapDataFilePath);
+
+    final MapLoader rawMapData = MapLoader.load(mapDataFilePath);
+
+    if (rawMapData == null) {
+
+      System.err.println("GameMap Error: Impossibile caricare i dati numerici della mappa da " + mapDataFilePath);
+
+      return null;
+
     }
 
-    //modifiche da spotbug
+    System.out.println("Dati mappa caricati con successo.");
 
-    public int[][] getMapData() {
-        final int[][] mapCopy = new int[this.mapData.length][];
-        for (int i = 0; i < this.mapData.length; i++) {
-            mapCopy[i] = this.mapData[i].clone();
-        }
-        return mapCopy;
-    }
 
-    /**
-     * Returns the map data as a 2D integer array.
-     *
-     * @return the map grid.
-     */
-    /*
-    public int[][] getMapData() {
-        return mapData.clone();
-    }
-    */
 
-    /**
-     * Returns the number of rows in the map.
-     *
-     * @return the number of rows.
-     */
-    public int getRows() {
-        return rows;
+    System.out.println("Inizio caricamento immagini da config: " + imageConfigFilePath);
+
+    final ImageLoader mapImageLoader = new ImageLoader();
+
+    final boolean imagesLoaded = mapImageLoader.loadImagesFromConfigFile(imageConfigFilePath);
+
+    if (!imagesLoaded) {
+
+      // Ho spezzato la riga per rispettare il limite di lunghezza
+
+      System.err.println("GameMap Error: Impossibile caricare le immagini per la mappa"
+
+        + " utilizzando la configurazione " + imageConfigFilePath);
+
+      return null;
+
     }
 
-    /**
-     * Returns the number of columns in the map.
-     *
-     * @return the number of columns.
-     */
-    public int getCols() {
-        return cols;
-    }
+    System.out.println("Immagini caricate con successo.");
 
-    //modifiche da spotbug
-     /**
-     * Gets a defensive copy of the image for a specific block value.
-     *
-     * @param blockValue the integer value of the block.
-     * @return a safe copy of the corresponding BufferedImage, or null if not found.
-     */
-    public BufferedImage getBlockImage(final int blockValue) {
-        final BufferedImage originalImage = this.blockImages.get(blockValue);
-        if (originalImage == null) {
-            return null;
-        }
-        // Return a defensive copy to protect the internal image.
-        final BufferedImage copy = new BufferedImage(
-            originalImage.getWidth(),
-            originalImage.getHeight(),
-            originalImage.getType()
-        );
-        copy.getGraphics().drawImage(originalImage, 0, 0, null);
-        return copy;
-    }
-    /*
-    public BufferedImage getBlockImage(final int blockValue) {
-        return blockImages.get(blockValue);
-    }
-    */
 
-    /**
-     * Returns an unmodifiable view of the map of all block images.
-     *
-     * @return an unmodifiable map of block values to BufferedImages.
-     */
-    public Map<Integer, BufferedImage> getBlockImages() {
-        return Collections.unmodifiableMap(this.blockImages);
-    }
-    /*
-    public Map<Integer, BufferedImage> getBlockImages() {
-        return blockImages;
-    }
-    */
+
+    System.out.println("Creazione oggetto GameMap.");
+
+    return new GameMap(
+
+      rawMapData.getMapData(),
+
+      mapImageLoader.getLoadedImages(),
+
+      rawMapData.getRows(),
+
+      rawMapData.getCols()
+
+    );
+
+  }
+
+
+
+  /**
+
+  * Returns the map data as a 2D integer array.
+
+  *
+
+  * @return the map grid.
+
+  */
+
+  public int[][] getMapData() {
+
+    return mapData.clone();
+
+  }
+
+
+
+  /**
+
+  * Returns the number of rows in the map.
+
+  *
+
+  * @return the number of rows.
+
+  */
+
+  public int getRows() {
+
+    return rows;
+
+  }
+
+
+
+  /**
+
+  * Returns the number of columns in the map.
+
+  *
+
+  * @return the number of columns.
+
+  */
+
+  public int getCols() {
+
+    return cols;
+
+  }
+
+
+
+  /**
+
+  * Gets the image for a specific block value.
+
+  *
+
+  * @param blockValue the integer value of the block.
+
+  * @return the corresponding BufferedImage.
+
+  */
+
+  public BufferedImage getBlockImage(final int blockValue) {
+
+    return blockImages.get(blockValue);
+
+  }
+
+
+
+  /**
+
+  * Returns the map of all block images.
+
+  *
+
+  * @return the map of block values to BufferedImages.
+
+  */
+
+  public Map<Integer, BufferedImage> getBlockImages() {
+
+    return blockImages;
+
+  }
+
 }
+
