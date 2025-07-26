@@ -88,32 +88,39 @@ public class CoinController {
         this.player = player;
     }
 
-    public void controlCoinCollision(int tileSize){
-        Rectangle playerRectangle = player.getArea(); 
-        groundX = player.getMovementHandler().getGroundX(); 
-        Iterator<Coin> it = coinList.iterator();
-        while(it.hasNext()){
-            Coin coin = it.next();
-            if (!coin.isCollected()){
-                Rectangle coinRectangle = coin.getRectangle(tileSize);
-                if (playerRectangle.intersects(coinRectangle)){
-                    coin.collect();
-                    coinsCollected++;
-                    if(scoreController != null){
-                        scoreController.addCoin();
-                    }
-                    it.remove();
-                }
-            }
-        }
-    }
+    // public void controlCoinCollision(int tileSize){
+    //     Rectangle playerRectangle = player.getArea();
+    //     Iterator<Coin> it = coinList.iterator();
+    //     while(it.hasNext()){
+    //         Coin coin = it.next();
+    //         if (!coin.isCollected()){
+    //             Rectangle coinRectangle = coin.getRectangle(tileSize);
+    //             if (playerRectangle.intersects(coinRectangle)){
+    //                 coin.collect();
+    //                 coinsCollected++;
+    //                 if(scoreController != null){
+    //                     scoreController.addCoin();
+    //                 }
+    //                 it.remove();
+    //             }
+    //         }
+    //     }
+    // }
 
 
     public int getCoinsCollected(){
         return coinsCollected;
     }
 
+    public void increaseCoinsCollected(){
+        coinsCollected++;
+    }
+
     public void setScoreController(ScoreController scoreController){
         this.scoreController = scoreController;
+    }
+
+    public List<Coin> getCoinList() {
+        return coinList;
     }
 }
