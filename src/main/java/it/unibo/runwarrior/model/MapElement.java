@@ -14,6 +14,7 @@ public final class MapElement {
 
     /**
      * Sets the image for this map element.
+     * 
      * @param im the new image.
      */
     public void setImage(final BufferedImage im) {
@@ -33,6 +34,7 @@ public final class MapElement {
 
     /**
      * Sets the collision property for this map element.
+     *      
      * @param col true if the element should have collision, false otherwise.
      */
     public void setCollision(final boolean col) {
@@ -41,6 +43,7 @@ public final class MapElement {
 
     /**
      * Sets the harmless property for this map element.
+     * 
      * @param harm true if the element is harmless, false otherwise.
      */
     public void setHarmless(final boolean harm) {
@@ -49,6 +52,7 @@ public final class MapElement {
 
     /**
      * Sets the portal property for this map element.
+     * 
      * @param portal true if the element is a portal, false otherwise.
      */
     public void setPortal(final boolean portal) {
