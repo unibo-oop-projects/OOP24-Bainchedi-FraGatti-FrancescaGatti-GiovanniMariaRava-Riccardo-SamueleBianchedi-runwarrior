@@ -54,7 +54,16 @@ public class TestHandlerMapElement {
         assertFalse(blocks.get(5).getHarmless());
     }
     @Test
-    public void testDamageSet(){
+    public void testGetCollisionRectangles(){
+        List<Rectangle> collisionRects = handlerMapElement.getCollisionRectangles();
+
+        assertEquals(4, collisionRects.size());
+        final int tileSize = handlerMapElement.getTileSize();
+
+        Rectangle rectangleExpected = new Rectangle(1*tileSize, 0*tileSize, tileSize, tileSize);
+
+        assertTrue(collisionRects.contains(rectangleExpected));
+    
 
     }
 }
