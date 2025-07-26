@@ -11,7 +11,7 @@ public interface KillDetection {
      *
      * @param player current player
      */
-    public void checkCollisionWithEnemeies(Character player);
+    void checkCollisionWithEnemeies(Character player);
 
     /**
      * Creates the future area of the falling player
@@ -20,7 +20,7 @@ public interface KillDetection {
      * @param pl player
      * @return the collision area the player will have
      */
-    public Rectangle futureArea(Rectangle r1);
+    Rectangle futureArea(Rectangle r1);
 
     /**
      * Control if the collision is from above the enemy.
@@ -29,7 +29,7 @@ public interface KillDetection {
      * @param enemyArea enemy collision area
      * @return true if the player touches the enemy in his head
      */
-    public boolean isTouchingUp(Rectangle playerArea, Rectangle enemyArea);
+    boolean isTouchingUp(Rectangle playerArea, Rectangle enemyArea);
 
     /**
      * Controls if the given point (x, y) is touching a solid tile.
@@ -38,17 +38,17 @@ public interface KillDetection {
      * @param y y coordinate
      * @return true if the point touches a solid tile
      */
-    public boolean isBehindTile(int x, int y);
+    boolean isBehindTile(int x, int y);
 
     /**
      * @return the moment when the player was hit.
      */
-    public long getHitWaitTime();
+    long getHitWaitTime();
 
     /**
      * Set the last time the player was hit.
      *
      * @param lastHit time of the last hit
      */
-    public void setHitWaitTime(long lastHit);
+    void setHitWaitTime(long lastHit);
 }

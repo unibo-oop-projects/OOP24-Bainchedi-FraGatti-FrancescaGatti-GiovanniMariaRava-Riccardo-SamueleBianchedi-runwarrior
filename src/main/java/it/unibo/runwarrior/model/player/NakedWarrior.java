@@ -25,6 +25,7 @@ public class NakedWarrior extends CharacterImpl {
     public NakedWarrior(final GameLoopPanel panel, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         super(panel, commands, mapHandler, pMan);
+        playerImage();
     }
 
     /**
@@ -33,14 +34,14 @@ public class NakedWarrior extends CharacterImpl {
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopRightN.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goRightN2.png"));
-            left0 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/stopLeftN.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/goLeftN2.png"));
-            jumpR = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/jumpRightN.png"));
-            jumpL = ImageIO.read(getClass().getResourceAsStream("/WarriorImages/jumpLeftN.png"));
+            right0 = ImageIO.read(NakedWarrior.class.getResourceAsStream("/WarriorImages/stopRightN.png"));
+            right1 = ImageIO.read(NakedWarrior.class.getResourceAsStream("/WarriorImages/goRightN1.png"));
+            right2 = ImageIO.read(NakedWarrior.class.getResourceAsStream("/WarriorImages/goRightN2.png"));
+            left0 = ImageIO.read(NakedWarrior.class.getResourceAsStream("/WarriorImages/stopLeftN.png"));
+            left1 = ImageIO.read(NakedWarrior.class.getResourceAsStream("/WarriorImages/goLeftN1.png"));
+            left2 = ImageIO.read(NakedWarrior.class.getResourceAsStream("/WarriorImages/goLeftN2.png"));
+            jumpR = ImageIO.read(NakedWarrior.class.getResourceAsStream("/WarriorImages/jumpRightN.png"));
+            jumpL = ImageIO.read(NakedWarrior.class.getResourceAsStream("/WarriorImages/jumpLeftN.png"));
             attackR = right0;
             attackL = left0;
         } catch (final IOException e) {

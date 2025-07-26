@@ -12,8 +12,8 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
     private CharacterComand cmd;
     private CharacterMovementHandler movement;
 
-    private final int TIME_TO_CHANGE = 8;
-    private final int LIMIT_ATTACK = 60;
+    private static final int TIME_TO_CHANGE = 8;
+    private static final int LIMIT_ATTACK = 60;
     private int changeFrame = 0;
     private boolean crossWalk = false;
     private int useAttackMoving = 0;

@@ -24,6 +24,7 @@ public class StickWizard extends CharacterImpl {
     public StickWizard(final GameLoopPanel panel, final CharacterComand commands,
         final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         super(panel, commands, mapHandler, pMan);
+        playerImage();
     }
 
     /**
@@ -32,18 +33,18 @@ public class StickWizard extends CharacterImpl {
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/stopRightSW.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goRightSW1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goRightSW2.png"));
-            left0 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/stopLeftSW.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goLeftSW1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/WizardImages/goLeftSW2.png"));
-            jumpR = ImageIO.read(getClass().getResourceAsStream("/WizardImages/jumpRightSW.png"));
-            jumpL = ImageIO.read(getClass().getResourceAsStream("/WizardImages/jumpLeftSW.png"));
-            attackR = ImageIO.read(getClass().getResourceAsStream("/WizardImages/attackRightW.png"));
-            attackL = ImageIO.read(getClass().getResourceAsStream("/WizardImages/attackLeftW.png"));
-            tipR = ImageIO.read(getClass().getResourceAsStream("/WizardImages/tipRightW.png"));
-            tipL = ImageIO.read(getClass().getResourceAsStream("/WizardImages/tipLeftW.png"));
+            right0 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/stopRightSW.png"));
+            right1 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goRightSW1.png"));
+            right2 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goRightSW2.png"));
+            left0 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/stopLeftSW.png"));
+            left1 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goLeftSW1.png"));
+            left2 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goLeftSW2.png"));
+            jumpR = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/jumpRightSW.png"));
+            jumpL = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/jumpLeftSW.png"));
+            attackR = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/attackRightW.png"));
+            attackL = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/attackLeftW.png"));
+            tipR = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/tipRightW.png"));
+            tipL = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/tipLeftW.png"));
         } catch (final IOException e) {
             e.printStackTrace();
         }

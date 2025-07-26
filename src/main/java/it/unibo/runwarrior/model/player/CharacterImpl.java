@@ -52,7 +52,6 @@ public abstract class CharacterImpl implements Character {
     public CharacterImpl(final GameLoopPanel panel, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         this.cmd = commands;
-        playerImage();
         sizeCharacter = mapHandler.getTileSize() * 2;
         this.movement = new CharacterMovementHandlerImpl(panel, this, commands, mapHandler, pMan);
         this.animation = new CharacterAnimationHandlerImpl(commands, movement, right0, right1, right2, 
@@ -62,6 +61,9 @@ public abstract class CharacterImpl implements Character {
         swordArea = new Rectangle();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         this.rightDirection = movement.getRightDirection();
@@ -69,6 +71,9 @@ public abstract class CharacterImpl implements Character {
         animation.frameChanger();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePlayerPosition() {
         collisionArea.setLocation(movement.getPlX() + (sizeCharacter / 4), movement.getPlY() + (sizeCharacter / 4));
@@ -79,9 +84,12 @@ public abstract class CharacterImpl implements Character {
      * Used by SwordWarrior and StickWizard to update swordArea when attacking.
      */
     public void updateAttackCollision(){
-        //void for skin without a weapon
+        //default void for skin without a weapon
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawPlayer(Graphics2D gr2) {
         BufferedImage im = null;
@@ -102,24 +110,39 @@ public abstract class CharacterImpl implements Character {
         //si sposta in avanti perchè segue playerX non screenX
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public abstract void playerImage();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CharacterMovementHandler getMovementHandler() {
         return this.movement;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CharacterAnimationHandler getAnimationHandler() {
         return this.animation;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Rectangle getSwordArea() {
         return this.swordArea;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Rectangle getArea() {
         return this.collisionArea;

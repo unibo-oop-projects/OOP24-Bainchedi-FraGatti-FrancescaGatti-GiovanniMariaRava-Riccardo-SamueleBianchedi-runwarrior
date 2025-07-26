@@ -69,12 +69,12 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    public boolean touchSolid(int x, int y, Character player, boolean checkDirections) {
+    public boolean touchSolid(final int x, final int y, final Character player, final boolean checkDirections) {
         gameOverY = y;
         float indexXtile = x / tileSize;
         float indexYtile = y / tileSize;
         int blockIndex = map[(int) indexYtile][(int) indexXtile];
-        end = blocks.get(blockIndex).isPortal() ? true : false;
+        end = blocks.get(blockIndex).isPortal();
         if (blocks.get(blockIndex).getCollision() || y <= 0){
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
@@ -90,8 +90,8 @@ public class CollisionDetectionImpl implements CollisionDetection {
                 indexYtile = playerArea.y / tileSize;
                 blockIndex = map[(int) indexYtile][(int) indexXtile];
                 if (blocks.get(blockIndex).getCollision() && checkDirections) {
-                    String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile, player);
-                    if (tempDir.equals("right") || tempDir.equals("left")) {
+                    final String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile, player);
+                    if ("right".equals(tempDir) || "left".equals(tempDir)) {
                         this.directions.add(tempDir);
                         return true;
                     }
@@ -105,17 +105,17 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    public String checkCollisionDirection(int x, int y, float indexXtile, float indexYtile, Character player){
+    public String checkCollisionDirection(final int x, final int y, final float indexXtile, final float indexYtile, final Character player) {
         String direction = "";
-        int tileX = ((int) indexXtile) * tileSize;
-        int tileY = ((int) indexYtile) * tileSize;
-        Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
-        if (y == tileRec.y && (x >= tileRec.x && x <= tileRec.x + tileRec.width)) {
+        final int tileX = ((int) indexXtile) * tileSize;
+        final int tileY = ((int) indexYtile) * tileSize;
+        final Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
+        if (y == tileRec.y && x >= tileRec.x && x <= tileRec.x + tileRec.width) {
             direction = "up";
         }
         else if (isInAir(player) && y == playerArea.y && 
             (tileRec.y + tileRec.height - y) < it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_UP &&
-            (x >= tileRec.x && x <= tileRec.x + tileRec.width) || y <= 0) {
+            x >= tileRec.x && x <= tileRec.x + tileRec.width || y <= 0) {
             direction = "down";
         }
         else if (x - CharacterImpl.SPEED <= tileRec.x) {
@@ -132,13 +132,10 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    public boolean isInAir(Character player) {
-        if (!touchSolid(player.getArea().x + FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, player, false) &&
+    public boolean isInAir(final Character player) {
+        return !touchSolid(player.getArea().x + FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, player, false) &&
             !touchSolid(player.getArea().x + player.getArea().width - FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, 
-            player, false)) {
-            return true;
-        }
-        return false;
+            player, false);
     }
 
     /**
@@ -162,6 +159,6 @@ public class CollisionDetectionImpl implements CollisionDetection {
      */
     @Override
     public boolean gameOver() {
-        return (gameOverY >= glp.getHeight() || end) ? true : false;
+        return gameOverY >= glp.getHeight() || end;
     }
 }
