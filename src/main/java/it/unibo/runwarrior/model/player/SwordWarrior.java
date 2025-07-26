@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.model.player;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 
@@ -25,7 +26,6 @@ public class SwordWarrior extends CharacterImpl {
     public SwordWarrior(final GameLoopPanel panel, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         super(panel, commands, mapHandler, pMan);
-        playerImage();
     }
 
     /**
@@ -47,7 +47,7 @@ public class SwordWarrior extends CharacterImpl {
             tipR = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/tipRight.png"));
             tipL = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/tipLeft.png"));
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Cannot load player images");
         }
     }
 

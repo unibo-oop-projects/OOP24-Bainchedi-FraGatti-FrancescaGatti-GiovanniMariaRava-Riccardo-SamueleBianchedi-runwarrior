@@ -14,8 +14,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class GameMusic {
 
-    private Clip clip;
-
     /**
      * Constructor of the music during the game.
      * It takes the music file, creates the audio stream, creates and open the clip and play it once or endlessly.
@@ -27,7 +25,7 @@ public class GameMusic {
         try {
             final URL musicURL = getClass().getResource("/Music/" + musicFile);
             final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicURL);
-            clip = AudioSystem.getClip();
+            final Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             if (loop) {
                 clip.loop(Clip.LOOP_CONTINUOUSLY);

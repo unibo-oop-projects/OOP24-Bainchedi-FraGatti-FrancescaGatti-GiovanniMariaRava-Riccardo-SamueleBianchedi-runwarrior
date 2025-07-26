@@ -150,6 +150,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
      */
     public void initializePlayer() {
         player = new NakedWizard(this, commands, mapHandler, powersManager);
+        player.playerImage();
         player.getMovementHandler().setStartY(mapHandler.getFirstY());
         powerUpsHandler.setIndex();
     }
@@ -160,6 +161,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
         this.player = pl;
+        player.playerImage();
         this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
         this.coinController.updatePlayer(pl);
     }

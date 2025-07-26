@@ -3,7 +3,10 @@ package it.unibo.runwarrior.view;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
+
 import it.unibo.runwarrior.controller.HandlerMapElement;
+import it.unibo.runwarrior.model.PowerUp;
 import it.unibo.runwarrior.model.PowerUpImpl;
 
 /**
@@ -13,11 +16,9 @@ public class PowerUpManager {
     public static final int END_OF_POWERUP = 222;
     public static final int NUM_POWERUP = 6;
     public static final int FIRST_DISTANCE_POWERUP = 55;
-    private ArrayList<PowerUpImpl> powerUps = new ArrayList<>();
-    private HandlerMapElement mapHandler;
-    private int tileSize;
-    private int distance;
-    private int space;
+    private List<PowerUp> powerUps;
+    private final HandlerMapElement mapHandler;
+    private final int tileSize;
 
     /**
      * Constructor that creates the list of powerup by using the game-loop panel, the map handler and the map.
@@ -29,10 +30,11 @@ public class PowerUpManager {
     public PowerUpManager(final GameLoopPanel glp, final HandlerMapElement hM, final int[][] map) {
         this.mapHandler = hM;
         this.tileSize = hM.getTileSize();
-        distance = FIRST_DISTANCE_POWERUP;
-        space = END_OF_POWERUP / NUM_POWERUP;
+        this.powerUps = new ArrayList<>();
+        int distance = FIRST_DISTANCE_POWERUP;
+        int space = END_OF_POWERUP / NUM_POWERUP;
         for (int i = 0; i < NUM_POWERUP; i++) {
-            final PowerUpImpl p = new PowerUpImpl(glp);
+            final PowerUp p = new PowerUpImpl(glp);
             int row = 0;
             while (map[row][distance] != 2 && map[row][distance] != 1) {
                 row++;
@@ -66,7 +68,7 @@ public class PowerUpManager {
      */
     public void printPowerUp(final Graphics2D gr2) {
         BufferedImage im;
-        for (final PowerUpImpl p : powerUps) {
+        for (final PowerUp p : powerUps) {
             p.powerUpImage();
             if (!p.isEggOpen()) {
                 im = p.getEgg();
@@ -85,7 +87,7 @@ public class PowerUpManager {
     /**
      * @return the list of powerups
      */
-    public ArrayList<PowerUpImpl> getPowerUps() {
+    public List<PowerUp> getPowerUps() {
         return this.powerUps;
     }
 }
