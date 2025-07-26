@@ -30,6 +30,7 @@ public final class MapLoader {
 
     /**
      * Private constructor to create an instance with the loaded map data.
+     * 
      * @param mapData The 2D integer array representing the map.
      */
     private MapLoader(final int[][] mapData) {
@@ -40,6 +41,7 @@ public final class MapLoader {
 
     /**
      * Gets the numeric value of a block at a specific coordinate.
+     * 
      * @param r the row index.
      * @param c the column index.
      * @return the block's numeric value, or -1 if coordinates are out of bounds.
@@ -53,6 +55,7 @@ public final class MapLoader {
 
     /**
      * Gets the total number of rows in the map.
+     * 
      * @return the number of rows.
      */
     public int getRows() {
@@ -61,6 +64,7 @@ public final class MapLoader {
 
     /**
      * Gets the total number of columns in the map.
+     * 
      * @return the number of columns.
      */
     public int getCols() {
@@ -69,6 +73,7 @@ public final class MapLoader {
 
     /**
      * Gets a defensive copy of the map data.
+     * 
      * @return a 2D integer array representing the map grid.
      */
     public int[][] getMapData() {
@@ -79,7 +84,9 @@ public final class MapLoader {
      * Loads map data from a specified resource file.
      * This static factory method reads a text file line by line, parsing characters
      * into integer values to build the map grid.
+     * 
      * @param mapFilePath The path to the map data file within the resources.
+     * 
      * @return a new {@link MapLoader} instance, or null if loading fails.
      */
     public static MapLoader load(final String mapFilePath) {
