@@ -104,7 +104,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     public void movePlayer() {
-        System.out.println("-- " + playerY);
+        //System.out.println("-- " + playerY);
         maxScreenX = glp.getWidth() / 2;
         player.updatePlayerPosition();
         collisionDir = collisionDetection.checkCollision(player);
@@ -127,7 +127,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         if (cmd.getRight() && !cmd.getLeft()) {
             rightDirection = true;
             if (!"right".equals(collisionDir) && !handleDoubleCollision && playerX < endOfMap) {
-                System.out.println("si");
                 playerX += AbstractCharacterImpl.SPEED;
                 if (screenX < maxScreenX) {
                     screenX += AbstractCharacterImpl.SPEED;
@@ -147,7 +146,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 }
             }
         }
-        canAttack = ("right".equals(collisionDir) || "left".equals(collisionDir));
+        canAttack = (!"right".equals(collisionDir) || !"left".equals(collisionDir));
     }
 
     /**
@@ -161,6 +160,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             } else {
                 playerY = jumpHeight;
                 cmd.setJump(false);
+                updateJumpVariable();
             }
         } else {
             if (collisionDetection.isInAir(player) && !jumpKill) {

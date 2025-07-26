@@ -73,12 +73,14 @@ public class CollisionDetectionImpl implements CollisionDetection {
      */
     @Override
     public boolean touchSolid(final int x, final int y, final Character player, final boolean checkDirections) {
+        System.out.println(end);
         gameOverY = y;
         float indexXtile = x / tileSize;
         float indexYtile = y / tileSize;
         int blockIndex = map[(int) indexYtile][(int) indexXtile];
         end = blocks.get(blockIndex).isPortal();
         if (blocks.get(blockIndex).getCollision() || y <= 0){
+            System.out.println(blockIndex + " " + blocks.get(blockIndex).getCollision());
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
             }
@@ -88,10 +90,12 @@ public class CollisionDetectionImpl implements CollisionDetection {
             }
             return true;
         } else {
+            //altro ciclo per verificare se c'è realmente collisione, per evitare che il player si infili nel terreno durante il salto
             for (int i = playerArea.width; i >= 0; i = i - playerArea.width) {
                 indexXtile = (playerArea.x + i) / tileSize;
                 indexYtile = playerArea.y / tileSize;
                 blockIndex = map[(int) indexYtile][(int) indexXtile];
+                end = blocks.get(blockIndex).isPortal();
                 if (blocks.get(blockIndex).getCollision() && checkDirections) {
                     final String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile, player);
                     if ("right".equals(tempDir) || "left".equals(tempDir)) {
