@@ -3,27 +3,31 @@ package it.unibo.runwarrior.model.enemy.api;
 import java.awt.Rectangle;
 import java.util.List;
 
+/**
+ * Interfaces that manage the enemy logic part.
+ */
 public interface Enemy {
     /**
      * Handles the logic that should be executed when the entity dies.
      * This include playing an animation or removing the entity from the game. 
      */
-    public void die();
-    
+    void die();
+        
     /**
      * Updates the state of the entity.
-     * This include movement, animation and collision
+     * This include movement, animation and collision.
      */
     void update();
 
     /**
-     * @param obstacles
-     * Check whether the current enemy collides with any of the obstacles in the map
+     * Check whether the current enemy collides with any of the obstacles in the map.
+     * 
+     * @param obstacles is the list of obstacle's position
      */
     void checkMapCollision(List<Rectangle> obstacles);
-    
+
     /**
-     * Return the bounds of the enemy's rectangle
+     * Return the bounds of the enemy's rectangle.
      * 
      * @return the rectangle of the enemy
      */
@@ -41,7 +45,7 @@ public interface Enemy {
      * 
      * @param x the new x position
      */
-    void setX(final int x);
+    void setX(int x);
 
     /**
      * Returns the Y-coordinate of the entity.
@@ -76,7 +80,7 @@ public interface Enemy {
      * 
      * @param solid {@code true} to make the entity solid, {@code false} to make it passable
      */
-    void setSolid(final boolean solid);
+    void setSolid(boolean solid);
 
     /**
      * Returns the current horizontal velocity of the entity.
@@ -90,7 +94,7 @@ public interface Enemy {
      * 
      * @param velocityX the new velocity along the X axis
      */
-    void setVelocityX(final int velocityX);
+    void setVelocityX(int velocityX);
 
     /**
      * Returns the type identifier of the entity.
@@ -111,6 +115,5 @@ public interface Enemy {
      * 
      * @param step {@code true} to enable step state, {@code false} to disable
      */
-    void setStep(final boolean step);
-
+    void setStep(boolean step);
 }

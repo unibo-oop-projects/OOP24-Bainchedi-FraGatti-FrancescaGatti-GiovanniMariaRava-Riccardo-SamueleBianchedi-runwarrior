@@ -21,6 +21,7 @@ public class WizardView implements EnemyView {
 
     /**
      * Constructor of the class WizardView.
+     * 
      * @param glp is the panel in which the guard need to be rendered
      */
 

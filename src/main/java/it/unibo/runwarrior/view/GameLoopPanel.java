@@ -23,6 +23,10 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private CoinController coinController;
     private Chronometer chronometer;
     private boolean gameStarted = false;
+    private boolean gameEnded = false;
+    private boolean showLevelCompletedMessage = false;
+    private boolean levelCompleted = false;
+
 
     public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController) {
         this.gameController = gameController;
@@ -65,6 +69,16 @@ public class GameLoopPanel extends JPanel implements Runnable {
             chronometer.StartTimer();
             gameStarted = true;
         }
+        if (!gameEnded) {
+            // controllo se ha vinto
+            if (gameController.getCollisionDetection().gameOver()) {
+                gameEnded = true;
+                levelCompleted = true; 
+            } else if (gameController.getPowersHandler().gameOver()) {
+                gameEnded = true; 
+                levelCompleted = false; 
+            }
+        }
         gameController.update();
     }
 
@@ -83,6 +97,14 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
         gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
         gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), 20, 70);
+        
+        if (gameEnded) {
+            gr2.setColor(Color.WHITE);
+            gr2.setFont(new Font("Arial", Font.BOLD, 32));
+            String msg = levelCompleted ? "LIVELLO COMPLETATO" : "GAME OVER";
+            gr2.drawString(msg, getWidth() / 2 - 100, getHeight() / 2); // Adatta posizione
+        }
+
         gr2.dispose();
     }
 

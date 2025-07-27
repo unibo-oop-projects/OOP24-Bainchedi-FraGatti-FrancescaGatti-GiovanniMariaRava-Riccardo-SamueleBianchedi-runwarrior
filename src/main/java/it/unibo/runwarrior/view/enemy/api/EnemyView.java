@@ -13,15 +13,16 @@ import java.awt.Graphics;
 public interface EnemyView {
     /**
      * Load all the images of the enemy.
+     * 
      * @throws IOException when the image is not found
-     */
-    
-    public void loadResources() throws IOException;
+     */   
+    void loadResources() throws IOException;
+
     /**
      * Render the image of the enemy.
+     * 
      * @param g is the graphics that method use to render
      * @param enemy is the one rendered
      */
-
-    public void render(Graphics g, EnemyImpl enemy);
+    void render(Graphics g, EnemyImpl enemy);
 } 
