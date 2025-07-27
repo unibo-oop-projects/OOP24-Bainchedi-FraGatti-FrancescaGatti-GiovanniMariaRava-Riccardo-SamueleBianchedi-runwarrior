@@ -2,8 +2,9 @@ package it.unibo.runwarrior.model.enemy.api;
 
 import java.awt.Rectangle;
 import java.util.List;
+
 /**
- * 
+ * Interfaces that manage the enemy logic part
  */
 public interface Enemy {
     /**
@@ -14,14 +15,14 @@ public interface Enemy {
     
     /**
      * Updates the state of the entity.
-     * This include movement, animation and collision
+     * This include movement, animation and collision.
      */
     void update();
 
     /**
-     * Check whether the current enemy collides with any of the obstacles in the map
+     * Check whether the current enemy collides with any of the obstacles in the map.
      * 
-     * @param obstacles
+     * @param obstacles is the list of obstacle's position
      */
     void checkMapCollision(List<Rectangle> obstacles);
     
@@ -44,7 +45,7 @@ public interface Enemy {
      * 
      * @param x the new x position
      */
-    void setX(final int x);
+    void setX(int x);
 
     /**
      * Returns the Y-coordinate of the entity.
@@ -114,6 +115,6 @@ public interface Enemy {
      * 
      * @param step {@code true} to enable step state, {@code false} to disable
      */
-    void setStep(final boolean step);
+    void setStep(boolean step);
 
 }
