@@ -86,10 +86,11 @@ inserire UML delle classi principali dell'MVC
 \section{Samuele Bianchedi}
 \section{Riccardo Cornacchia}
 \section{Francesca Gatti}
-Nel gioco è previsto un sistema di personalizzazione del personaggio tramite l'acquisto e la selezione di una nuova skin.
+\textbf{Problema}: Nel gioco è previsto un sistema di personalizzazione del personaggio tramite l'acquisto e la selezione di una nuova skin.
 Il problema principale affrontato è stato quello di separare la gestione della parte logica del negozio, ovvero il controllo delle monete, 
 delle skin e la selezione, dalla sua interfaccia grafica, mantenendo la possibilità di modificarlo in futuro.
-Ho scelto di adottare il pattern MVC (Model-View-Controller) diviso nel seguente modo:
+\textbf{Soluzione}: Per affrontare questo problema è stato adottato il pattern Model-View-Controller (MVC), suddividendo le responsabilità 
+tra i tre livelli:
 \begin{itemize}
     \item Model: rappresentato dalla classe Shop, gestisce le skin disponibili, quella selezionata e lo stato di sblocco della skin (unlock). 
     Nel model sono inoltre presenti le due classi Skin e Score che permettono la gestione degli oggetti skin e punteggio da parte dello Shop.
@@ -100,6 +101,7 @@ Ho scelto di adottare il pattern MVC (Model-View-Controller) diviso nel seguente
     delle skin e all'acquisizione dei dati e delle informazioni richieste dalla View. Inizialmente avevo implementato un'unica classe 
     all'interno del Model (la classe Shop), ma il codice risultava molto pesante e difficile da gestire.
 \end{itemize}
+L'introduzione del pattern MVC ha permesso di ottenere una struttura più chiara, estendibile e orientata al riuso.
 \section{Giovanni Maria Rava}
 \textbf{Problema:} I nemici del gioco devono muoversi da soli, invertire direzione appena urtano un ostacolo e restare sincronizzati con 
 lo scorrimento della camera. 
@@ -136,6 +138,12 @@ All'avvio successivo, lo stato viene ricostruito e propagato ai vari model che l
 L'intera logica di I/O è dunque isolata in una sola classe, priva di dipendenze dal motore di gioco; il resto del codice
 che dipende da un'interfaccia minimale, 
 Questa architettura rende effettivo il singleton e semplifica i test automatizzati.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/UMLshopMVC.png}
+    \caption{UML dell'MVC per la gestione dello shop}
+    \label{}
+\end{figure}
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{resources/saveManagerUML.png}
