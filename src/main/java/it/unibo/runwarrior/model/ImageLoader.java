@@ -5,8 +5,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -84,7 +87,7 @@ public final class ImageLoader {
                 System.err.println("Error: Cannot find configuration file: " + configFilePath);
                 return false;
             }
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
                 String line;
                 while ((line = br.readLine()) != null) {
                     final String trimmedLine = line.trim();
@@ -126,6 +129,6 @@ public final class ImageLoader {
      * @return the map of block values to BufferedImages.
      */
     public Map<Integer, BufferedImage> getLoadedImages() {
-        return this.blockImages;
+        return Collections.unmodifiableMap(this.blockImages);
     }
 }

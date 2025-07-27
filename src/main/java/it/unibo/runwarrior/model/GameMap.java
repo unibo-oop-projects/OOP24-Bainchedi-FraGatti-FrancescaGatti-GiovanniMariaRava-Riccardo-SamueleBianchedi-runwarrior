@@ -1,6 +1,8 @@
 package it.unibo.runwarrior.model;
 
 import java.awt.image.BufferedImage;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,8 +25,11 @@ public final class GameMap {
      * @param cols        the number of columns in the map.
      */
     public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
-        this.mapData = mapData.clone();
-        this.blockImages = blockImages;
+        this.mapData = new int[mapData.length][];
+        for (int i = 0; i < mapData.length; i++) {
+            this.mapData[i] = mapData[i].clone();
+        }
+        this.blockImages = new HashMap<>(blockImages);
         this.rows = rows;
         this.cols = cols;
     }
@@ -73,7 +78,11 @@ public final class GameMap {
      * @return the map grid.
      */
     public int[][] getMapData() {
-        return mapData.clone();
+        final int[][] deepCopy = new int[this.mapData.length][];
+        for (int i = 0; i < this.mapData.length; i++) {
+            deepCopy[i] = this.mapData[i].clone();
+        }
+        return deepCopy;
     }
 
     /**
@@ -110,6 +119,6 @@ public final class GameMap {
      * @return the map of block values to BufferedImages.
      */
     public Map<Integer, BufferedImage> getBlockImages() {
-        return blockImages;
+        return Collections.unmodifiableMap(this.blockImages);
     }
 }
