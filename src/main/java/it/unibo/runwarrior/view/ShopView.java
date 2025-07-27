@@ -12,18 +12,17 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import it.unibo.runwarrior.controller.ShopController;
+import it.unibo.runwarrior.controller.ShopControllerImpl;
 import it.unibo.runwarrior.model.Score;
 
 public class ShopView extends JPanel {
-    private final ShopController shopController;
+    private final ShopControllerImpl shopController;
     private final JLabel coinLabel;
     private final JLabel skinStateLabel; 
     private final JButton buySkinButton;
 
     public ShopView(final Score score) {
-        this.shopController = new ShopController(score);
+        this.shopController = new ShopControllerImpl(score);
         setBackground(new java.awt.Color(255, 192, 203));
         setOpaque(true);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

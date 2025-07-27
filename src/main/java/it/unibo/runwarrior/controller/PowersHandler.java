@@ -11,7 +11,6 @@ import it.unibo.runwarrior.model.player.NakedWarrior;
 import it.unibo.runwarrior.model.player.NakedWizard;
 import it.unibo.runwarrior.model.player.StickWizard;
 import it.unibo.runwarrior.model.player.SwordWarrior;
-import it.unibo.runwarrior.view.PowerUpManager;
 
 /**
  * Class that handle the change of powerup during the game.
@@ -32,17 +31,17 @@ public class PowersHandler {
      * @param glc game-loop controller
      * @param cmd object that handles keyboard input
      * @param mapH objects that prints map
-     * @param pMan object that prints powerups
+     * @param pCon object that creates powerup list
      */
     public PowersHandler(final GameLoopController glc, final CharacterComand cmd, 
-    final HandlerMapElement mapH, final PowerUpManager pMan) {
+    final HandlerMapElement mapH, final PowerUpController pCon) {
         this.glc = glc;
-        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glc, cmd, mapH, pMan),
-        new ArmourWarrior(glc, cmd, mapH, pMan),
-        new SwordWarrior(glc, cmd, mapH, pMan), 
-        new NakedWizard(glc, cmd, mapH, pMan), 
-        new ArmourWizard(glc, cmd, mapH, pMan), 
-        new StickWizard(glc, cmd, mapH, pMan)));
+        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glc, cmd, mapH, pCon),
+        new ArmourWarrior(glc, cmd, mapH, pCon),
+        new SwordWarrior(glc, cmd, mapH, pCon), 
+        new NakedWizard(glc, cmd, mapH, pCon), 
+        new ArmourWizard(glc, cmd, mapH, pCon), 
+        new StickWizard(glc, cmd, mapH, pCon)));
     }
 
     /**

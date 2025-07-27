@@ -39,11 +39,21 @@ public class Menu extends JPanel {
         private static final int SHOP_FRAME_WIDHT = 600;
         private static final int SHOP_FRAME_HEIGHT = 400;
         //creo il frame e imposto il titolo 
-        private JFrame frameMenu = new JFrame();
+        private JFrame frameMenu;
         private BufferedImage immagineSfondo;
         private BufferedImage imgTitolo;
 
         public Menu() {
+            this.frameMenu = new JFrame();
+            initMenu();
+        }
+
+        public Menu(JFrame frame_esterno){
+            this.frameMenu = frame_esterno;
+            initMenu();  // stessa logica
+        }
+
+        public void initMenu(){
             frameMenu.setTitle("RUN WARRIOR");
             frameMenu.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             frameMenu.addWindowListener(new WindowAdapter() {
@@ -145,7 +155,7 @@ public class Menu extends JPanel {
                     level3.setForeground(Color.BLACK);
 
                     level1.addActionListener(level1Event -> {
-                        glc = new GameLoopController("Map1/map_1.txt", "Map1/desert_theme.txt",
+                        glc = new GameLoopController(frameMenu, "Map1/map_1.txt", "Map1/desert_theme.txt",
                         "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
                         glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
@@ -157,7 +167,7 @@ public class Menu extends JPanel {
                         glc.getGlp().requestFocus();
                     });
                     level2.addActionListener(level2Event -> {
-                        glc = new GameLoopController("Map2/map2.txt", "Map2/forest_theme.txt",
+                        glc = new GameLoopController(frameMenu, "Map2/map2.txt", "Map2/forest_theme.txt",
                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
                         glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
@@ -169,7 +179,7 @@ public class Menu extends JPanel {
                         glc.getGlp().requestFocus();
                     });
                     level3.addActionListener(level3Event -> {
-                        glc = new GameLoopController("Map_3/map_3.txt", "Map_3/map3Theme.txt",
+                        glc = new GameLoopController(frameMenu, "Map_3/map_3.txt", "Map_3/map3Theme.txt",
                         "/Map_3/enemiesMap3.txt", "/Coins/CoinCoordinates_map3.txt");
                         glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
@@ -227,7 +237,7 @@ public class Menu extends JPanel {
         }
 
         public JPanel getPanel() {
-            return this;
+            return new Menu();
         }
 
         public JFrame getFrameMenu() {

@@ -1,6 +1,5 @@
 package it.unibo.runwarrior.controller;
 
-import it.unibo.runwarrior.view.PowerUpManager;
 import it.unibo.runwarrior.controller.collisions.CoinDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
@@ -54,16 +53,16 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * @param cmd keyboard handler
      * @param collDet collision with map tiles
      * @param hM object that prints tiles
-     * @param pMan object that prints powerups
+     * @param pCon object that creates powerup list
      */
     public CharacterMovementHandlerImpl(final GameLoopController glc, final Character player, final CharacterComand cmd,
-    final HandlerMapElement hM, final PowerUpManager pMan) {
+    final HandlerMapElement hM, final PowerUpController pCon) {
         this.glc = glc;
         this.cmd = cmd;
         this.player = player;
         this.collisionDetection = new CollisionDetectionImpl(hM.getMap(), hM.getBlocks(), hM.getTileSize(), glc);
         this.killDetection = new KillDetectionImpl(glc, hM);
-        this.pUpDetection = new PowerUpDetectionImpl(glc, pMan);
+        this.pUpDetection = new PowerUpDetectionImpl(glc, pCon);
         this.coinDetection = new CoinDetectionImpl(hM.getTileSize(), glc.getCoinController(), glc.getScoreController());
         playerX = START_X;
         screenX = START_X;

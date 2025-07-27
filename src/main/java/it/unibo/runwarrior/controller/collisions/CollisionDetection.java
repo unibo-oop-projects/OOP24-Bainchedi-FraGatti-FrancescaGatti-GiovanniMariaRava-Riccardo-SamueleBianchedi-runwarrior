@@ -24,7 +24,7 @@ public interface CollisionDetection {
      * @param checkDirections boolean to decide if the check of the direction is useful or not
      * @return true if the player touches a solid tile
      */
-    public boolean touchSolid(final int x, final int y, final Character player, final boolean checkDirections);
+    boolean touchSolid(final int x, final int y, final Character player, final boolean checkDirections);
 
     /**
      * Controls in which direction the player collides with a tile.

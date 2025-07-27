@@ -2,6 +2,8 @@ package it.unibo.runwarrior.controller;
 
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.player.Character;
@@ -25,6 +27,7 @@ public class GameLoopController {
     private Character player;
     private CharacterComand commands;
     private PowersHandler powerUpsHandler;
+    private PowerUpController powerController;
     private PowerUpManager powersManager;
 
     private HandlerMapElement mapHandler;
@@ -36,9 +39,9 @@ public class GameLoopController {
     private Score score;
     private ScoreController scoreController;
 
-    public GameLoopController(String mapPath, String themePath, String enemiesPath, String coinsPath) {
+    public GameLoopController(JFrame mainFrame, String mapPath, String themePath, String enemiesPath, String coinsPath) {
         this.gameMap = GameMap.load(mapPath, themePath);
-        this.coinController = new CoinController();
+        this.coinController = new CoinControllerImpl();
         List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
@@ -46,8 +49,9 @@ public class GameLoopController {
         
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
-        this.powersManager = new PowerUpManager(this, mapHandler, gameMap.getMapData());
-        this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powersManager);
+        this.powerController = new PowerUpController(this, mapHandler, gameMap.getMapData());
+        this.powersManager = new PowerUpManager(powerController.getPowerUps(), mapHandler);
+        this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powerController);
         this.enemyViewFactory = new EnemyViewFactoryImpl();
         initializeEnemyViewFactory();
         this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
@@ -55,9 +59,9 @@ public class GameLoopController {
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
 
         this.score = new Score(GameSaveManager.getInstance());
-        this.scoreController = new ScoreController(score);
+        this.scoreController = new ScoreControllerImpl(score);
         this.coinController.setScoreController(scoreController);
-        this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this);
+        this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this, mainFrame);
         initializePlayer();
     }
 
@@ -75,9 +79,9 @@ public class GameLoopController {
         final String selectedSkin = GameSaveManager.getInstance().getSelectedSkinName();
         final boolean wizardUnlocked = GameSaveManager.getInstance().isSkinPremiumSbloccata();
         if ("WIZARD".equalsIgnoreCase(selectedSkin) && wizardUnlocked) {
-            player = new NakedWizard(this, commands, mapHandler, powersManager);
+            player = new NakedWizard(this, commands, mapHandler, powerController);
         } else {
-            player = new NakedWarrior(this, commands, mapHandler, powersManager);
+            player = new NakedWarrior(this, commands, mapHandler, powerController);
         }
         player.getMovementHandler().setStartY(mapHandler.getFirstY());
         powerUpsHandler.setIndex();

@@ -5,9 +5,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.Chronometer;
@@ -26,12 +30,12 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private boolean levelCompleted = false;
     private boolean panelShawn = false;
     private JFrame resultFrame;
-    
+    private JFrame mainFrame;
 
 
-    public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController) {
+    public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController, JFrame mainFrame) {
         this.gameController = gameController;
-
+        this.mainFrame = mainFrame;
         //music = new GameMusic("gameMusic.wav", true);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(gameController.getCommands());
@@ -74,10 +78,11 @@ public class GameLoopPanel extends JPanel implements Runnable {
             // controllo se ha vinto
             if (gameController.getPlayer().getMovementHandler().getCollisionDetection().gameOver()) {
                 gameEnded = true;
-                levelCompleted = true; 
+                levelCompleted = true;
             } else if (gameController.getPowersHandler().gameOver()) {
                 gameEnded = true; 
-                levelCompleted = false; 
+                levelCompleted = false;
+
             }
         }
         if (gameEnded && !panelShawn) {
@@ -114,32 +119,54 @@ public class GameLoopPanel extends JPanel implements Runnable {
     }
 
     private void showEndPanel(){
-        resultFrame = new JFrame(levelCompleted ? "Level Completed" : "Game Over");
-        resultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        resultFrame.setSize(400, 300);
-        resultFrame.setLocationRelativeTo(null);
+        // resultFrame = new JFrame(levelCompleted ? "Level Completed" : "Game Over");
+        // resultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // resultFrame.setSize(400, 300);
+        // resultFrame.setLocationRelativeTo(null);
+        mainFrame.revalidate();
+        mainFrame.repaint();
+        final JDialog popup = new JDialog(mainFrame, true); // true = modale
+        popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        popup.setSize(300, 200);
+        popup.setLocationRelativeTo(mainFrame); // centra rispetto al frame principale
+        popup.setResizable(false);
+        popup.setTitle(levelCompleted ? "Level Completed" : "Game Over");
+        JPanel endPanel;
 
         if (levelCompleted) {
-            resultFrame.setContentPane(new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected()));
+            endPanel = new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected());
         } else {
-            resultFrame.setContentPane(new GameOverPanel(gameController.getCoinController().getCoinsCollected()));
+            endPanel = new GameOverPanel(gameController.getCoinController().getCoinsCollected());
         }
-        resultFrame.setVisible(true);
-        resultFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-        @Override
-        public void windowClosed(java.awt.event.WindowEvent e) {
-            // Quando l'utente chiude il pannello, torna al menu
-            javax.swing.SwingUtilities.invokeLater(() -> {
-                Menu menu = new Menu();
-                JFrame frame = menu.getFrameMenu();
-                frame.setVisible(true);
-            });
-        }
-        @Override
-        public void windowClosing(java.awt.event.WindowEvent e) {
-            resultFrame.dispose();
-        }
+        popup.setContentPane(endPanel);
+        
+        popup.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e){
+                mainFrame.getContentPane().removeAll();
+                Menu menu = new Menu(mainFrame);
+                mainFrame.setContentPane(menu.getPanel());
+                mainFrame.revalidate();
+                mainFrame.repaint();
+            }
         });
+        popup.setVisible(true);
+    }
+        // resultFrame.setVisible(true);
+        // resultFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+        // @Override
+        // public void windowClosed(java.awt.event.WindowEvent e) {
+        //     // Quando l'utente chiude il pannello, torna al menu
+        //     javax.swing.SwingUtilities.invokeLater(() -> {
+        //         Menu menu = new Menu();
+        //         JFrame frame = menu.getFrameMenu();
+        //         frame.setVisible(true);
+        //     });
+        // @Override
+        // public void windowClosing(java.awt.event.WindowEvent e) {
+        //     resultFrame.dispose();
+        // }
+        // });
     }
 
     /**
@@ -198,4 +225,4 @@ public class GameLoopPanel extends JPanel implements Runnable {
     //     enemyViewFactory.register(4, new GoblinView(this));
     //     enemyViewFactory.register(5, new MonkeyView(this));
     // }
-}
+
