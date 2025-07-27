@@ -2,6 +2,8 @@ package it.unibo.runwarrior.model;
 
 import java.awt.image.BufferedImage;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * This class represents each tile of the map, with its characteristics.
  */
@@ -64,6 +66,17 @@ public final class MapElement {
      * 
      * @return the element's image.
      */
+    /**
+     * Gets the image of the map element.
+     * A SuppressFBWarnings annotation is used to ignore the EI_EXPOSE_REP error.
+     * Creating a defensive copy of every get() call leads to significant lag.
+     *
+     * @return the element's original image for performance reasons.
+     */
+    @SuppressFBWarnings(
+        value = "EI_EXPOSE_REP",
+        justification = "Performance-critical code: defensive copy in game loop causes lag."
+    )
     public BufferedImage getImage() {
         return this.image;
     }
