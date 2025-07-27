@@ -137,7 +137,6 @@ class TestPlayerCollisions {
         ScoreController scoreController = new ScoreController(score);
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, null);
         final CoinDetectionImpl collisionCoins = new CoinDetectionImpl(tileSize, coinController, scoreController);
-
         assertTrue(coinController.getCoinsCollected() == 0);
         player.getArea().setLocation(1730, 560);
         collisionCoins.controlCoinCollision(player);
