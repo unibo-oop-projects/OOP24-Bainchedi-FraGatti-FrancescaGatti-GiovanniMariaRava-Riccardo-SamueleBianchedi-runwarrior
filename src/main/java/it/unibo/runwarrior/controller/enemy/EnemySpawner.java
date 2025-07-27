@@ -36,7 +36,7 @@ public class EnemySpawner {
         this.handler = handler;
         this.glp = glp;
         this.spawnPoints = new ArrayList<>();
-        this.spawnedEnemies = new HashSet();
+        this.spawnedEnemies = new HashSet<>();
     }
     
     /**
