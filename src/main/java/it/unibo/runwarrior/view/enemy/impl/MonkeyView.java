@@ -3,9 +3,12 @@ package it.unibo.runwarrior.view.enemy.impl;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
@@ -21,25 +24,29 @@ public class MonkeyView implements EnemyView {
     private BufferedImage rightMonkeyRunning;
     private BufferedImage leftMonkeyRunning;
     private BufferedImage image;
-    private final GameLoopController glp;
+    @SuppressFBWarnings(
+    value = "EI_EXPOSE_REP2",
+    justification = "MonkeyView needs to invoke controller actions during rendering")
+    private final GameLoopController glc;
+    private static final Logger LOGGER = Logger.getLogger(MonkeyView.class.getName());
+    
     /**
      * Constructor of the class MonkeyView.
      * 
-     * @param glp is the panel in which the monkey need to be renderd
+     * @param glc is the panel in which the monkey need to be renderd
      */
-
-    public MonkeyView(final GameLoopController glp) {
-        this.glp = glp;
+    public MonkeyView(final GameLoopController glc) {
+        this.glc = glc;
         try {
             loadResources();
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento delle immagini di Monkey");
         }
     }
+
     /**
      * {@inheritDoc}
      */
-
     @Override
     public final void loadResources() throws IOException {
         rightMonkey = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/rightMonkey.png"));
@@ -50,10 +57,10 @@ public class MonkeyView implements EnemyView {
         leftMonkeyRunning = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/leftMonkeyRunning.png"));
         image = rightMonkey;
     }
+
     /**
      * {@inheritDoc}
      */
-
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         final BufferedImage currentImage;
@@ -66,7 +73,7 @@ public class MonkeyView implements EnemyView {
             currentImage = enemy.isStep() ? leftMonkeyMoving : leftMonkeyRunning;
             image = leftMonkey;
         }
-        final int shift = glp.getMapHandler().getShift();
+        final int shift = glc.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
 }

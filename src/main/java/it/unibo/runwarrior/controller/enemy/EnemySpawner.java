@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
@@ -21,10 +23,11 @@ import it.unibo.runwarrior.view.GameLoopPanel;
  */
 public class EnemySpawner {
     private static final int TO_TOUCH_FLOOR = 8;
-    private EnemyHandlerImpl handler;
+    private final EnemyHandlerImpl handler;
     private final GameLoopController glp;
     private final List<EnemySpawnPoints> spawnPoints;
     private final Set<EnemySpawnPoints> spawnedEnemies;
+    private static final Logger LOGGER = Logger.getLogger(EnemySpawner.class.getName());
 
     /**
      * Constructor of the class EnemySpawner.
@@ -46,8 +49,8 @@ public class EnemySpawner {
      */
     public void loadEnemiesFromStream(final InputStream is) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-            String line;
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            while (line != null) {
                 String[] parts = line.trim().split(",");
                 if (parts.length != 3) {
                     continue;
@@ -56,9 +59,23 @@ public class EnemySpawner {
                 final int tilex = Integer.parseInt(parts[1]);
                 final int tiley = Integer.parseInt(parts[2]);
                 spawnPoints.add(new EnemySpawnPoints(type, tilex, tiley));
+                line = br.readLine();
             }
+                /*
+                 * Bozza di una prova senza while ma con stream 
+                 *
+            br.lines().map(String :: trim)
+                .filter(s->!s.isEmpty())
+                .map(s->s.split(",", -1))
+                .filter(part -> part.length == 3)
+                .map(part -> new EnemySpawnPoints(
+                                                    Integer.parseInt(part[0]), 
+                                                    Integer.parseInt(part[1]), 
+                                                    Integer.parseInt(part[2])))
+                .forEach(spawnPoints :: add);
+            */
         } catch (IOException | NumberFormatException e) {
-            System.err.println("Errore durante il caricamento dei nemici: " + e.getMessage());
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento dei nemici: " + e.getMessage());
         }
     }
     
@@ -73,7 +90,7 @@ public class EnemySpawner {
         final Iterator<EnemySpawnPoints> iterator = spawnPoints.iterator();
         while (iterator.hasNext()) {
             final EnemySpawnPoints spawnPoint = iterator.next();
-            int enemyX = spawnPoint.x() * tileSize;
+            final int enemyX = spawnPoint.x() * tileSize;
             if (enemyX >= screenLeft && enemyX <= screenRight && !spawnedEnemies.contains(spawnPoint)) {
                 final EnemyImpl enemy = new EnemyImpl(enemyX, (spawnPoint.y() * tileSize) + TO_TOUCH_FLOOR, 64, 64, 
                                             true, handler, glp, spawnPoint.type());

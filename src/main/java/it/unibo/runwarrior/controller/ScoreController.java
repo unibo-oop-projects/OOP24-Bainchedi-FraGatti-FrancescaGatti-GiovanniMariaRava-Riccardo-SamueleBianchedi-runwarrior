@@ -4,7 +4,7 @@ import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
 
 /**
- * Class that control player score.
+ * Class that control game score.
  */
 public class ScoreController {
     private final Score score; 
