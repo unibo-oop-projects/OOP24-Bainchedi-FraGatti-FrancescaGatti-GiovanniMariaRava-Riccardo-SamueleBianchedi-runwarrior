@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
@@ -22,16 +23,19 @@ public class GoblinView implements EnemyView {
     private BufferedImage rightGoblinMoving;
     private BufferedImage leftGoblinMoving;
     private BufferedImage image;
-    private final GameLoopController glp;
+    @SuppressFBWarnings(
+    value = "EI_EXPOSE_REP2",
+    justification = "GoblinView needs to invoke controller actions during rendering")
+    private final GameLoopController glc;
     private static final Logger LOGGER = Logger.getLogger(GoblinView.class.getName());
 
     /**
      * Constructor of the class.
      * 
-     * @param glp is the panel in which the goblin need to be rendered.
+     * @param glc is the panel in which the goblin need to be rendered.
      */
-    public GoblinView(final GameLoopController glp) {
-        this.glp = glp;
+    public GoblinView(final GameLoopController glc) {
+        this.glc = glc;
         try {
             loadResources();
         } catch (final IOException e) {
@@ -64,7 +68,7 @@ public class GoblinView implements EnemyView {
         } else {
             currentImage = enemy.isStep() ? leftGoblinMoving : leftGoblin;
         }
-        final int shift = glp.getMapHandler().getShift();
+        final int shift = glc.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
 }

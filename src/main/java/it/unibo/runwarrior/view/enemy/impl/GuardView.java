@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -24,16 +26,19 @@ public class GuardView implements EnemyView {
     private BufferedImage rightGuardRunning;
     private BufferedImage leftGuardRunning;
     private BufferedImage image;
-    private final GameLoopController glp;
+    @SuppressFBWarnings(
+    value = "EI_EXPOSE_REP2",
+    justification = "GuardView needs to invoke controller actions during rendering")
+    private final GameLoopController glc;
     private static final Logger LOGGER = Logger.getLogger(GuardView.class.getName());
     
     /**
      * Constructor of the GuardView class.
      * 
-     * @param glp is the panel in which the guard need to be renderd.
+     * @param glc is the panel in which the guard need to be renderd.
      */
-    public GuardView(final GameLoopController glp) {
-        this.glp = glp;
+    public GuardView(final GameLoopController glc) {
+        this.glc = glc;
         try {
             loadResources();
         } catch (final IOException e) {
@@ -45,7 +50,7 @@ public class GuardView implements EnemyView {
      * {@inheritDoc}
      */
     @Override
-    public void loadResources() throws IOException {
+    public final void loadResources() throws IOException {
         rightGuard = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/rightGuard.png"));
         leftGuard = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/leftGuard.png"));
         rightGuardMoving = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/rightGuardMoving.png"));
@@ -70,7 +75,7 @@ public class GuardView implements EnemyView {
             currentImage = enemy.isStep() ? leftGuardMoving : leftGuardRunning;
             image = leftGuard;
         }
-        final int shift = glp.getMapHandler().getShift();
+        final int shift = glc.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
 }

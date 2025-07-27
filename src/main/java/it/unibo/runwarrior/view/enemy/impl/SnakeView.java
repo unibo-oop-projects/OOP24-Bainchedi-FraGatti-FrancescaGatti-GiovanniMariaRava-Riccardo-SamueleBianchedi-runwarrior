@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
@@ -21,7 +22,10 @@ public class SnakeView implements EnemyView {
     private BufferedImage rightSnakeMoving;
     private BufferedImage leftSnake;
     private BufferedImage leftSnakeMoving;
-    private final GameLoopController glp;
+    @SuppressFBWarnings(
+    value = "EI_EXPOSE_REP2",
+    justification = "SnakeView needs to invoke controller actions during rendering")
+    private final GameLoopController glc;
     private static final Logger LOGGER = Logger.getLogger(SnakeView.class.getName());
     
     /**
@@ -29,8 +33,8 @@ public class SnakeView implements EnemyView {
      * 
      * @param glp is the panel in which the guard need to be rendered
      */
-    public SnakeView(final GameLoopController glp) {
-        this.glp = glp;
+    public SnakeView(final GameLoopController glc) {
+        this.glc = glc;
         try {
             loadResources();
         } catch (final IOException e) {
@@ -60,7 +64,7 @@ public class SnakeView implements EnemyView {
         } else {
             currentImage = enemy.isStep() ? leftSnakeMoving : leftSnake;
         }
-        final int shift = glp.getMapHandler().getShift();
+        final int shift = glc.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
 }
