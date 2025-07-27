@@ -19,7 +19,6 @@ public class SnakeView implements EnemyView {
     private BufferedImage rightSnakeMoving;
     private BufferedImage leftSnake;
     private BufferedImage leftSnakeMoving;
-    private BufferedImage poisonImage;
     private final GameLoopController glp;
     /**
      * Constructor of the SnakeView class.
