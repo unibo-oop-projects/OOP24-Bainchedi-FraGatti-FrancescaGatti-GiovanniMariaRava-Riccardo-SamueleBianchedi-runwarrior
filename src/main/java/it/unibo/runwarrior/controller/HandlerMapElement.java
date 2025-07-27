@@ -14,9 +14,8 @@ import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 /**
- * The class uses the gamemap to render the map and setcollision, and damages
+ * The class uses the gamemap to render the map and set collision and damages.
  */
-
 public class HandlerMapElement {
     private List<MapElement> blocks;
     private int[][] map;
@@ -27,7 +26,7 @@ public class HandlerMapElement {
     private int tileSize;
 
     /**
-    * Constructor of the class HandlerMapElement
+    * Constructor of the class HandlerMapElement.
     *
     * @param gamemap
     */
@@ -38,15 +37,8 @@ public class HandlerMapElement {
         mapImage();
     }
 
-    /*
-    * 0 = sky
-    * 1 = grass
-    * 2 = terrain
-    * 3 = portal/castle block
-    * 4 = portal/castel center
-    * 5 = obastcol
-    * 6 = only in first one
-    * This method create a new MapElement using the map created in GameMap
+   /**
+    * This method create a new MapElement using the map created in GameMap.
     */
     private void mapImage() {
         for (var entry : mapBlock.entrySet()) {
@@ -112,7 +104,7 @@ public class HandlerMapElement {
      * 
      * @param slide the shift value
      */
-    public void setShift(int slide) {
+    public void setShift(final int slide) {
         shift = slide;
     }
     
@@ -139,7 +131,7 @@ public class HandlerMapElement {
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 if (x == 0 && map[y][x] == 1 && !setStart) {
-                    firstY = (y*tileSize) - (tileSize*2);
+                    firstY = (y * tileSize) - (tileSize * 2);
                     setStart = true;
                 }
             }
@@ -153,7 +145,7 @@ public class HandlerMapElement {
      * @return the list with all the obstacle's rectangles
      */
     public List<Rectangle> getCollisionRectangles() {
-        List<Rectangle> collisionRects = new ArrayList<>();
+        final List<Rectangle> collisionRects = new ArrayList<>();
         int rows = map.length;
         int cols = map[0].length;
         int tileHeight = GameLoopPanel.HEIGHT / rows;
