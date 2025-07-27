@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
-import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.enemy.api.EnemySpawnPoints;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
@@ -76,7 +75,7 @@ public class EnemySpawner {
                 .forEach(spawnPoints :: add);
             */
         } catch (IOException | NumberFormatException e) {
-             LOGGER.log(Level.SEVERE, "Errore durante il caricamento dei nemici: " + e.getMessage());
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento dei nemici: " + e.getMessage());
         }
     }
     
@@ -91,7 +90,7 @@ public class EnemySpawner {
         final Iterator<EnemySpawnPoints> iterator = spawnPoints.iterator();
         while (iterator.hasNext()) {
             final EnemySpawnPoints spawnPoint = iterator.next();
-            int enemyX = spawnPoint.x() * tileSize;
+            final int enemyX = spawnPoint.x() * tileSize;
             if (enemyX >= screenLeft && enemyX <= screenRight && !spawnedEnemies.contains(spawnPoint)) {
                 final EnemyImpl enemy = new EnemyImpl(enemyX, (spawnPoint.y() * tileSize) + TO_TOUCH_FLOOR, 64, 64, 
                                             true, handler, glp, spawnPoint.type());
