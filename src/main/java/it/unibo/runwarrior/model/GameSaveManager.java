@@ -24,7 +24,7 @@ public final class GameSaveManager {
     private boolean premiumSkinUnlocked;
     private String selectedSkinName;
 
-    private static GameSaveManager instance;
+    private static GameSaveManager instance = loadFromFile(SAVE_FILE);
     private static final Logger LOGGER = Logger.getLogger(GameSaveManager.class.getName());
 
     /**

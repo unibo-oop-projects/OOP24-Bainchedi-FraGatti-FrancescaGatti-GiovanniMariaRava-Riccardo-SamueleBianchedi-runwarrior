@@ -25,7 +25,7 @@ public class EnemyImpl implements Enemy {
 
     private int velocityX;
 
-    private EnemyHandlerImpl enemyHandler;
+    private final EnemyHandlerImpl enemyHandler;
 
     private final GameLoopController glp;
     
@@ -41,7 +41,7 @@ public class EnemyImpl implements Enemy {
      * @param glp panel in which enemies are shown
      * @param type of the enemy (Goblin, Guard, Snake, Monkey, Wizard)
      */
-    public EnemyImpl(int x, final int y, final int width, final int height, final boolean solid, 
+    public EnemyImpl(final int x, final int y, final int width, final int height, final boolean solid, 
                     final EnemyHandlerImpl handler, final GameLoopController glp, final int type) {
         this.x = x;
         this.y = y;
@@ -81,9 +81,9 @@ public class EnemyImpl implements Enemy {
      */
     @Override
     public void checkMapCollision(final List<Rectangle> obstacles) {
-        int newX = x + velocityX;
+        final int newX = x + velocityX;
         final Rectangle futureBounds = new Rectangle(newX, y, width, height);
-        for (Rectangle rectangle : obstacles) {
+        for (final Rectangle rectangle : obstacles) {
             if (futureBounds.intersects(rectangle)) {
                 if (velocityX > 0) {
                     x = rectangle.x - width;
@@ -173,7 +173,7 @@ public class EnemyImpl implements Enemy {
      * {@inheritDoc}
      */
     @Override
-    public void setVelocityX(final int velocityX) {
+    public final void setVelocityX(final int velocityX) {
         this.velocityX = velocityX;
     }
 
