@@ -8,7 +8,6 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.Chronometer;
 
@@ -20,12 +19,11 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private GameLoopController gameController;
-    private CoinController coinController;
     private Chronometer chronometer;
     private boolean gameStarted = false;
     private boolean gameEnded = false;
-    private boolean showLevelCompletedMessage = false;
     private boolean levelCompleted = false;
+    
 
 
     public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController) {
