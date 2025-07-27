@@ -36,6 +36,23 @@ public final class GameSaveManager {
         premiumSkinUnlocked = false;
     }
 
+     /**
+     * Get the current instance of the GameSaveManager. 
+     * If load return null it creates a new one.
+     *
+     * @return the instance created or loaded 
+     */
+    public static GameSaveManager getInstance() {
+        if (instance == null) {
+            instance = loadFromFile(SAVE_FILE);
+            if (instance == null) {
+                instance = new GameSaveManager();
+                instance.saveGame();
+            }
+        }
+        return instance;
+    }
+    
     /**
      * Save the changes of the variables in the file.
      */
@@ -90,23 +107,6 @@ public final class GameSaveManager {
             return null;
         }
     }
-
-    /**
-     * Get the current istance of the GameSaveManager.
-     *
-     * @return the istance of the file
-     */
-    public static GameSaveManager getInstance() {
-        if (instance == null) {
-            instance = loadFromFile(SAVE_FILE);
-            if (instance == null) {
-                instance = new GameSaveManager();
-                instance.saveGame();
-            }
-        }
-        return instance;
-    }
-    
     /**
      * Getters for the completed levels.
      *
