@@ -36,14 +36,6 @@ public class Menu extends JPanel {
         private final static int PLAY_BUTTON_PANEL_HEIGHT = 500;
         private final static int BUTTON_WIDTH = 150;
         private final static int BUTTON_HEIGHT = 40;
-        private static final int TITOLO_X = 440;
-        private static final int TITOLO_Y = 100;
-        private static final int TITOLO_WIDTH = 400;
-        private static final int TITOLO_HEIGHT = 300;
-        private static final int PLAY_PANEL_X = 430;
-        private static final int PLAY_PANEL_Y = 300;
-        private static final int PLAY_PANEL_WIDTH = 400;
-        private static final int PLAY_PANEL_HEIGHT = 500;
         private static final int SHOP_FRAME_WIDHT = 600;
         private static final int SHOP_FRAME_HEIGHT = 400;
         //creo il frame e imposto il titolo 

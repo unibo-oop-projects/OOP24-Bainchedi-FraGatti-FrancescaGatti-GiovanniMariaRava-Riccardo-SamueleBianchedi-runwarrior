@@ -67,7 +67,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     public void update() {
         if(!gameStarted){
-            chronometer.StartTimer();
+            chronometer.startTimer();
             gameStarted = true;
         }
         if (!gameEnded) {
