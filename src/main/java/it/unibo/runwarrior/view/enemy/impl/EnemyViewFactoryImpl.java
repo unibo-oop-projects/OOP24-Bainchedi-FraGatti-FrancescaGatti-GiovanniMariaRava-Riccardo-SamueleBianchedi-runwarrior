@@ -11,6 +11,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyViewFactory;
 
 public class EnemyViewFactoryImpl implements EnemyViewFactory {
     private final Map<Integer, EnemyView> viewsByType = new HashMap<>();
+    
     /**
      * {@inheritDoc} 
      */
@@ -18,6 +19,7 @@ public class EnemyViewFactoryImpl implements EnemyViewFactory {
     public void register(final int type, final EnemyView view) {
         viewsByType.put(type, view);
     }
+
     /**
      * {@inheritDoc} 
      */

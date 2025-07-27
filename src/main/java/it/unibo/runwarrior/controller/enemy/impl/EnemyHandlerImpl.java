@@ -37,7 +37,7 @@ public class EnemyHandlerImpl implements EnemyHandler {
      */
     @Override
     public void render(final Graphics g) {
-        for (EnemyImpl enemy : enemies) {
+        for (final EnemyImpl enemy : enemies) {
             viewFactory.get(enemy.getType()).render(g, enemy);
         }
     }
@@ -47,9 +47,9 @@ public class EnemyHandlerImpl implements EnemyHandler {
      */
     @Override
     public void update() {
-        Iterator<EnemyImpl> iterator = enemies.iterator();
+        final Iterator<EnemyImpl> iterator = enemies.iterator();
         while (iterator.hasNext()) {
-            EnemyImpl enemy = iterator.next();
+            final EnemyImpl enemy = iterator.next();
             enemy.update();
         }
     }
@@ -77,9 +77,9 @@ public class EnemyHandlerImpl implements EnemyHandler {
      */
     @Override
     public void updateWithMap(final List<Rectangle> mapObstacles) {
-        Iterator<EnemyImpl> iterator = enemies.iterator();
+        final Iterator<EnemyImpl> iterator = enemies.iterator();
         while (iterator.hasNext()) {
-            EnemyImpl enemy = iterator.next();
+            final EnemyImpl enemy = iterator.next();
             if (enemy.getX() + enemy.getWidth() < glp.getPlayer().getArea().x - GameLoopPanel.WIDTH) {
                 iterator.remove();
                 continue;

@@ -22,6 +22,7 @@ public class GoblinView implements EnemyView {
     private final GameLoopController glp;
     /**
      * Constructor of the class.
+     * 
      * @param glp is the panel in which the goblin need to be rendered.
      */
 
@@ -29,7 +30,7 @@ public class GoblinView implements EnemyView {
         this.glp = glp;
         try {
             loadResources();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         } 
     }
