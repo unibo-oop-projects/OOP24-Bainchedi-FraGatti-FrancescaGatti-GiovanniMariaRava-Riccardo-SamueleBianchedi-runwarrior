@@ -6,11 +6,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * GameSaveManagerTest checks if the singleton is respected.
+ * Checks if the saving and loading works.
+ */
 public class GameSaveManagerTest {
+    private static final int COIN_NUM = 115;
+    private static final int WRONG_LEVEL_NUM = 5;
     private GameSaveManager gsm;
 
     /**
-     * Create a test instance of the game with random variables
+     * Create a test instance of the game with random variables.
      */
     @BeforeEach
     public void resetSingleton() {
@@ -25,7 +31,7 @@ public class GameSaveManagerTest {
      */
     @Test
     public void testSingletonInstance() {
-        GameSaveManager anotherInstance = GameSaveManager.getInstance();
+        final GameSaveManager anotherInstance = GameSaveManager.getInstance();
         assertSame(gsm, anotherInstance, "Le istanze devono essere le stesse (singleton)");
     }
 
@@ -34,22 +40,22 @@ public class GameSaveManagerTest {
      * is called also saveGame().
      */
     @Test
-    public void testSaveAndLoadFromFile(){
+    public void testSaveAndLoadFromFile() {
         assertEquals(2, GameSaveManager.getInstance().getLevelsCompleted());
         gsm.setLevelsCompleted(3);
         assertEquals(3, GameSaveManager.getInstance().getLevelsCompleted());
         assertEquals(100, GameSaveManager.getInstance().getCoinCollected());
-        gsm.setCoinCollected(115);
-        assertEquals(115, GameSaveManager.getInstance().getCoinCollected());
+        gsm.setCoinCollected(COIN_NUM);
+        assertEquals(COIN_NUM, GameSaveManager.getInstance().getCoinCollected());
         gsm.setSkinPremiumSbloccata(true);
         assertEquals(true, GameSaveManager.getInstance().isSkinPremiumSbloccata());
     }
     
     /**
-     * Checks that the right exception is thrown
+     * Checks that the right exception is thrown.
      */
     @Test
-    public void testWrongLevelsSaving(){
-        assertThrows(IllegalArgumentException.class, () -> gsm.setLevelsCompleted(5));
+    public void testWrongLevelsSaving() {
+        assertThrows(IllegalArgumentException.class, () -> gsm.setLevelsCompleted(WRONG_LEVEL_NUM));
     }
 }
