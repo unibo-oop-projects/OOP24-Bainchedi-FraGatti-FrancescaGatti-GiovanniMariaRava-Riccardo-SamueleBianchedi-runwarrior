@@ -27,6 +27,7 @@ public class EnemyImplTest {
         enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
         enemy = new EnemyImpl(50, 100, 64, 64, true, enemyHandler, glp, 1); 
     }
+    
     /**
      * Verifies that getBounds() returns the correct rectangle based on position and size.
      */
@@ -58,7 +59,7 @@ public class EnemyImplTest {
     }
 
     /**
-     * questo metodo devo ancora capire se è corretto averlo qui o dentro enemyhandlertest (del quale manca ancora implementazione)
+     * This method check if when the enemy is dead is removed from the list
      */
     @Test 
     public void testDie(){
