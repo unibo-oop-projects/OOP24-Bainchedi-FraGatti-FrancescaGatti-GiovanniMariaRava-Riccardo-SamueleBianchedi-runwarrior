@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.util.List;
 
 /**
- * Interfaces that manage the enemy logic part
+ * Interfaces that manage the enemy logic part.
  */
 public interface Enemy {
     /**
@@ -25,9 +25,9 @@ public interface Enemy {
      * @param obstacles is the list of obstacle's position
      */
     void checkMapCollision(List<Rectangle> obstacles);
-    
+
     /**
-     * Return the bounds of the enemy's rectangle
+     * Return the bounds of the enemy's rectangle.
      * 
      * @return the rectangle of the enemy
      */
@@ -116,5 +116,4 @@ public interface Enemy {
      * @param step {@code true} to enable step state, {@code false} to disable
      */
     void setStep(boolean step);
-
 }
