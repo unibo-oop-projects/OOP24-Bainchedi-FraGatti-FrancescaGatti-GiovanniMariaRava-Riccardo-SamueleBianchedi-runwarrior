@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  27 JUL 2025 19:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  27 JUL 2025 19:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -349,7 +349,7 @@ Overfull \hbox (2.69823pt too wide) in paragraph at lines 93--108
 <resources/saveManagerUML.png, id=93, 3317.39375pt x 3854.4pt>
 File: resources/saveManagerUML.png Graphic file (type png)
 <use resources/saveManagerUML.png>
-Package pdftex.def Info: resources/saveManagerUML.png  used on input line 127.
+Package pdftex.def Info: resources/saveManagerUML.png  used on input line 126.
 (pdftex.def)             Requested size: 312.00119pt x 362.46657pt.
  [7] [8 <./resources/saveManagerUML.png>] (./report.aux
 Package cleveref Info: loaded `italian' language definitions on input line 7.
@@ -375,7 +375,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,7n,79p,309b,495s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on report.pdf (9 pages, 614457 bytes).
+Output written on report.pdf (9 pages, 614839 bytes).
 PDF statistics:
  136 PDF objects out of 1000 (max. 8388607)
  107 compressed objects within 2 object streams
