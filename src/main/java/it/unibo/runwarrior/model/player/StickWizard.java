@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.controller.CharacterComand;
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpManager;
@@ -22,7 +23,7 @@ public class StickWizard extends AbstractCharacterImpl {
      * @param mapHandler object that prints tiles
      * @param pMan object that prints powerups
      */
-    public StickWizard(final GameLoopPanel panel, final CharacterComand commands,
+    public StickWizard(final GameLoopController panel, final CharacterComand commands,
         final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         super(panel, commands, mapHandler, pMan);
     }
@@ -54,7 +55,7 @@ public class StickWizard extends AbstractCharacterImpl {
      * {@inheritDoc}
      */
     @Override
-    public void updateAttackCollision() {
+    protected void updateAttackCollision() {
         if (animation.getFrame() == PlayerFrame.ATTACK_FRAME && rightDirection) {
             swordArea.setBounds(movement.getPlX() + sizeCharacter, movement.getPlY() + sizeCharacter / 4,
             sizeCharacter, sizeCharacter - (sizeCharacter / 4) - (TO_TOUCH_FLOOR * 2));

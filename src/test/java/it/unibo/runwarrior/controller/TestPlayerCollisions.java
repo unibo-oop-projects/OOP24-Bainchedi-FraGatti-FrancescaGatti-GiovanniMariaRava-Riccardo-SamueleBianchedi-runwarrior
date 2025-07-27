@@ -23,12 +23,11 @@ import it.unibo.runwarrior.model.player.ArmourWarrior;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.model.player.NakedWarrior;
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpManager;
 
 class TestPlayerCollisions {
     private static final int TRY_TYLE = 36;
-    private GameLoopPanel glp;
+    private GameLoopController glp;
     private CharacterComand cmd;
     private GameMap gameMap1;
     private HandlerMapElement mapHandler1;
@@ -38,7 +37,7 @@ class TestPlayerCollisions {
 
     @BeforeEach
     void initCollisions() {
-        glp = new GameLoopPanel("Map2/map2.txt", "Map2/forest_theme.txt", 
+        glp = new GameLoopController("Map2/map2.txt", "Map2/forest_theme.txt", 
         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         cmd = new CharacterComand();
         gameMap1 = GameMap.load(string1Map2, string2Map2);

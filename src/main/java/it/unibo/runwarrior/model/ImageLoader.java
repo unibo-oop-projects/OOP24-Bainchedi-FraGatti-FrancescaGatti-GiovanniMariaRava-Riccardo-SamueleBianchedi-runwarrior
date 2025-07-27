@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,39 +28,6 @@ public final class ImageLoader {
      */
     public ImageLoader() {
         this.blockImages = new HashMap<>();
-    }
-
-    //modifiche da spotbug
-    /*
-    public BufferedImage getBlockImage(final int blockValue) {
-    final BufferedImage originalImage = this.blockImages.get(blockValue);
-    if (originalImage == null) {
-        System.err.println("Warning: No image loaded for block value: " + blockValue);
-        return null;
-    }
-    
-    // Crea e restituisce una copia per proteggere l'originale
-    final BufferedImage copy = new BufferedImage(
-        originalImage.getWidth(),
-        originalImage.getHeight(),
-        originalImage.getType()
-    );
-    copy.getGraphics().drawImage(originalImage, 0, 0, null);
-    return copy;
-}
-    */
-    /**
-     * Gets the loaded image for a specific block value.
-     *
-     * @param blockValue the integer value of the block.
-     * @return the corresponding BufferedImage, or null if not found.
-     */
-    public BufferedImage getBlockImage(final int blockValue) {
-        final BufferedImage image = this.blockImages.get(blockValue);
-        if (image == null) {
-            System.err.println("Warning: No image loaded for block value: " + blockValue);
-        }
-        return image;
     }
 
     /**
@@ -105,7 +73,7 @@ public final class ImageLoader {
                 System.err.println("Error: Cannot find configuration file: " + configFilePath);
                 return false;
             }
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
                 String line;
                 while ((line = br.readLine()) != null) {
                     final String trimmedLine = line.trim();
@@ -141,14 +109,26 @@ public final class ImageLoader {
         return allLoadedSuccessfully;
     }
 
-    /*
-    * Returns an unmodifiable view of the map of loaded images.
-    * This prevents external code from modifying the internal map.
-    *
-    * @return an unmodifiable map of block values to BufferedImages.
-    */
-    public Map<Integer, BufferedImage> getLoadedImages() {
-        // Invece di 'return this.blockImages;'
-        return Collections.unmodifiableMap(this.blockImages);
+    /**
+     * Gets the loaded image for a specific block value.
+     *
+     * @param blockValue the integer value of the block.
+     * @return the corresponding BufferedImage, or null if not found.
+     */
+    public BufferedImage getBlockImage(final int blockValue) {
+        final BufferedImage image = this.blockImages.get(blockValue);
+        if (image == null) {
+            System.err.println("Warning: No image loaded for block value: " + blockValue);
         }
+        return image;
+    }
+
+    /**
+     * Returns an unmodifiable map of the loaded images.
+     *
+     * @return the map of block values to BufferedImages.
+     */
+    public Map<Integer, BufferedImage> getLoadedImages() {
+        return Collections.unmodifiableMap(this.blockImages);
+    }
 }

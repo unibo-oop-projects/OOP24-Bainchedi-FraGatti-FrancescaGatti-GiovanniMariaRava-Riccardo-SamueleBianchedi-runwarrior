@@ -5,30 +5,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.List;
 
 import javax.swing.JPanel;
 
-import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.CoinController;
-import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.controller.PowersHandler;
-import it.unibo.runwarrior.controller.ScoreController;
-import it.unibo.runwarrior.controller.enemy.EnemySpawner;
-import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
-import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.Chronometer;
-import it.unibo.runwarrior.model.GameMap;
-import it.unibo.runwarrior.model.GameSaveManager;
-import it.unibo.runwarrior.model.Score;
-import it.unibo.runwarrior.model.player.NakedWarrior;
-import it.unibo.runwarrior.model.player.NakedWizard;
-import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
-import it.unibo.runwarrior.view.enemy.impl.GoblinView;
-import it.unibo.runwarrior.view.enemy.impl.GuardView;
-import it.unibo.runwarrior.view.enemy.impl.MonkeyView;
-import it.unibo.runwarrior.view.enemy.impl.SnakeView;
-import it.unibo.runwarrior.view.enemy.impl.WizardView;
 
 public class GameLoopPanel extends JPanel implements Runnable {
     public static final int WIDTH = 1056;
@@ -37,57 +19,21 @@ public class GameLoopPanel extends JPanel implements Runnable {
     public static final int FPS = 60;
 
     private Thread gameThread;
-    private Character player;
-    private CharacterComand commands;
-    private PowersHandler powerUpsHandler;
-    private PowerUpManager powersManager;
-
-    private HandlerMapElement mapHandler;
-    private EnemyHandlerImpl enemyHandler;
-    private EnemyViewFactoryImpl enemyViewFactory;
-    private EnemySpawner enemySpawner;
-    private GameMap gameMap;
+    private GameLoopController gameController;
     private CoinController coinController;
     private Chronometer chronometer;
     private boolean gameStarted = false;
-    private Score score;
-    private ScoreController scoreController;
-   // private GameMusic music;
 
-    public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath) {
-        this.gameMap = GameMap.load(mapPath, themePath);
-        this.commands = new CharacterComand();
-        this.mapHandler = new HandlerMapElement(gameMap);
-        this.powersManager = new PowerUpManager(this, mapHandler, gameMap.getMapData());
-        this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powersManager);
-        // String mapOneFileName = "src/main/resources/Map_1/map_1.txt";
-        // String mapTwoFileName = "src/main/resources/Map_2/map_2.txt";
-        // String imageConfigMapOne = "src/main/resources/Map_1/forest_theme.txt";
-        // String imageConfigMapTwo = "src/main/resources/Map_2/desert_theme.txt";
-
-        //GameMap levelOne = GameMap.load(mapOneFileName, imageConfigMapOne);
-        //GameMap levelTwo = GameMap.load(mapTwoFileName, imageConfigMapTwo);
-        this.enemyViewFactory = new EnemyViewFactoryImpl();
-        initializeEnemyViewFactory();
-        this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
-        this.enemySpawner = new EnemySpawner(enemyHandler, this);
-        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
-        initializePlayer();
+    public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController) {
+        this.gameController = gameController;
 
         //music = new GameMusic("gameMusic.wav", true);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        this.addKeyListener(commands);
+        System.out.println("--" + gameController.getCommands());
+        this.addKeyListener(gameController.getCommands());
         this.setFocusable(true);
-
-        this.coinController = new CoinController(player);
-        List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
-        for(int[] coord : coords){
-            coinController.addCoins(coord[0], coord[1]);
-        }
+        this.requestFocusInWindow();
         this.chronometer = new Chronometer();
-        this.score = new Score(GameSaveManager.getInstance());
-        this.scoreController = new ScoreController(score);
-        this.coinController.setScoreController(scoreController);
     }
 
     public void startGame() {
@@ -120,10 +66,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
             chronometer.StartTimer();
             gameStarted = true;
         }
-        player.update();
-        enemySpawner.update();
-        enemyHandler.updateWithMap(mapHandler.getCollisionRectangles());
-        coinController.controlCoinCollision(mapHandler.getTileSize());
+        gameController.update();
     }
 
     @Override
@@ -131,16 +74,16 @@ public class GameLoopPanel extends JPanel implements Runnable {
         super.paintComponent(gr);
         Graphics2D gr2 = (Graphics2D) gr;
         
-        mapHandler.printBlocks(gr2, player);
-        powersManager.printPowerUp(gr2);
-        player.drawPlayer(gr2);
-        player.drawRectangle(gr2);
-        enemyHandler.render(gr2);
-        coinController.drawAllCoins(gr2, mapHandler.getTileSize());
+        gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
+        gameController.getPowersManager().printPowerUp(gr2);
+        gameController.getPlayer().drawPlayer(gr2);
+        gameController.getPlayer().drawRectangle(gr2);
+        gameController.getEnemyHandler().render(gr2);
+        gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize(), gameController.getPlayer());
         gr2.setColor(Color.BLACK);
         gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
         gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
-        gr2.drawString("COINS:" + coinController.getCoinsCollected(), 20, 70);
+        gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), 20, 70);
         gr2.dispose();
     }
 
@@ -148,56 +91,56 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * Chooses one of the two player with whom the game starts.
      * To be connected with the shop
      */
-    public void initializePlayer() {
-        final String selectedSkin = GameSaveManager.getInstance().getSelectedSkinName();
-        final boolean wizardUnlocked = GameSaveManager.getInstance().isSkinPremiumSbloccata();
-        if ("WIZARD".equalsIgnoreCase(selectedSkin) && wizardUnlocked) {
-            player = new NakedWizard(this, commands, mapHandler, powersManager);
-        } else {
-            player = new NakedWarrior(this, commands, mapHandler, powersManager);
-        }
-        player.getMovementHandler().setStartY(mapHandler.getFirstY());
-        powerUpsHandler.setIndex();
-    }
-
-    public Character getPlayer() {
-        return this.player;
-    }
-
-    public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
-        this.player = pl;
-        this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
-        this.coinController.updatePlayer(pl);
-    }
-
-    public PowersHandler getPowersHandler() {
-        return this.powerUpsHandler;
-    }
-
-    public PowerUpManager getPowersManager() {
-        return this.powersManager;
-    }
-
-    // public int getCameraShift(){
-    //     return player.getPlX();
+    // public void initializePlayer() {
+    //     final String selectedSkin = GameSaveManager.getInstance().getSelectedSkinName();
+    //     final boolean wizardUnlocked = GameSaveManager.getInstance().isSkinPremiumSbloccata();
+    //     if ("WIZARD".equalsIgnoreCase(selectedSkin) && wizardUnlocked) {
+    //         player = new NakedWizard(this, commands, mapHandler, powersManager);
+    //     } else {
+    //         player = new NakedWarrior(this, commands, mapHandler, powersManager);
+    //     }
+    //     player.getMovementHandler().setStartY(mapHandler.getFirstY());
+    //     powerUpsHandler.setIndex();
     // }
+
+    // public Character getPlayer() {
+    //     return this.player;
+    // }
+
+    // public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
+    //     this.player = pl;
+    //     this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
+    //     this.coinController.updatePlayer(pl);
+    // }
+
+    // public PowersHandler getPowersHandler() {
+    //     return this.powerUpsHandler;
+    // }
+
+    // public PowerUpManager getPowersManager() {
+    //     return this.powersManager;
+    // }
+
+    // // public int getCameraShift(){
+    // //     return player.getPlX();
+    // // }
     
-    public HandlerMapElement getMapHandler() {
-        return this.mapHandler;
-    }
+    // public HandlerMapElement getMapHandler() {
+    //     return this.mapHandler;
+    // }
 
-    public EnemyHandlerImpl getEnemyHandler() {
-        return this.enemyHandler;
-    }
+    // public EnemyHandlerImpl getEnemyHandler() {
+    //     return this.enemyHandler;
+    // }
 
-    /**
-     * Map the int type with the correct EnemyView
-     */
-    private final void initializeEnemyViewFactory() {
-        enemyViewFactory.register(1, new GuardView(this));
-        enemyViewFactory.register(2, new SnakeView(this));
-        enemyViewFactory.register(3, new WizardView(this));
-        enemyViewFactory.register(4, new GoblinView(this));
-        enemyViewFactory.register(5, new MonkeyView(this));
-    }
+    // /**
+    //  * Map the int type with the correct EnemyView
+    //  */
+    // private final void initializeEnemyViewFactory() {
+    //     enemyViewFactory.register(1, new GuardView(this));
+    //     enemyViewFactory.register(2, new SnakeView(this));
+    //     enemyViewFactory.register(3, new WizardView(this));
+    //     enemyViewFactory.register(4, new GoblinView(this));
+    //     enemyViewFactory.register(5, new MonkeyView(this));
+    // }
 }

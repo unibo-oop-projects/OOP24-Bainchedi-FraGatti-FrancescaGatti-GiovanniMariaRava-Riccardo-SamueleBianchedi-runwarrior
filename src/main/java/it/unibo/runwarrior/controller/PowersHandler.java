@@ -11,14 +11,13 @@ import it.unibo.runwarrior.model.player.NakedWarrior;
 import it.unibo.runwarrior.model.player.NakedWizard;
 import it.unibo.runwarrior.model.player.StickWizard;
 import it.unibo.runwarrior.model.player.SwordWarrior;
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpManager;
 
 /**
  * Class that handle the change of powerup during the game.
  */
 public class PowersHandler {
-    private GameLoopPanel glp;
+    private GameLoopController glp;
     private int index;
     private int maxIndex;
     private List<Character> everyPowerUp = new ArrayList<>();
@@ -35,7 +34,7 @@ public class PowersHandler {
      * @param mapH objects that prints map
      * @param pMan object that prints powerups
      */
-    public PowersHandler(final GameLoopPanel glp, final CharacterComand cmd, final HandlerMapElement mapH, final PowerUpManager pMan) {
+    public PowersHandler(final GameLoopController glp, final CharacterComand cmd, final HandlerMapElement mapH, final PowerUpManager pMan) {
         this.glp = glp;
         everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd, mapH, pMan),
         new ArmourWarrior(glp, cmd, mapH, pMan),
