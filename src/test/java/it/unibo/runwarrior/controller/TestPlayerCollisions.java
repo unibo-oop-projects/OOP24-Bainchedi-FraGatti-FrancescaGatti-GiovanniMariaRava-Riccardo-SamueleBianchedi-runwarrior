@@ -32,16 +32,16 @@ class TestPlayerCollisions {
     private GameMap gameMap1;
     private HandlerMapElement mapHandler1;
     private int tileSize;
-    private final String string1Map2 = "Map2/map2.txt";
+    private final String string1Map2 = "tryMap.txt";
     private final String string2Map2 = "Map2/forest_theme.txt";
 
     @BeforeEach
     void initCollisions() {
-        glp = new GameLoopController("Map2/map2.txt", "Map2/forest_theme.txt", 
-        "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
-        cmd = new CharacterComand();
         gameMap1 = GameMap.load(string1Map2, string2Map2);
         mapHandler1 = new HandlerMapElement(gameMap1);
+        cmd = new CharacterComand();
+        glp = new GameLoopController("tryMap.txt", "Map2/forest_theme.txt", 
+        "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         tileSize = TRY_TYLE;
     }
 
@@ -90,11 +90,11 @@ class TestPlayerCollisions {
         assertFalse(collisionPowerups.isTouchingUp(new Rectangle(50, 50, 50, 50), 
         new Rectangle(70, 80, 50, 50)));
 
-        player.getArea().setLocation(1960, 524);
+        player.getArea().setLocation(1984, 533);
         assertEquals("up", collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler()));
-        player.getArea().setLocation(4610, 524);
+        player.getArea().setLocation(3290, 560);
         assertEquals("right", collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler()));
-        player.getArea().setLocation(7343, 505);
+        player.getArea().setLocation(7343, 560);
         assertEquals("left", collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler()));
     }
 

@@ -11,23 +11,24 @@ import it.unibo.runwarrior.model.player.Character;
 public class CoinDetectionImpl {
 
     private int tileSize;
-    private CoinController coinC;
-    private ScoreController score;
+    private final CoinController coinC;
+    private final ScoreController score;
 
-    public CoinDetectionImpl(int tileSize, CoinController coinC, ScoreController score){
+    public CoinDetectionImpl(final int tileSize, final CoinController coinC, final ScoreController score) {
         this.tileSize = tileSize;
         this.coinC = coinC;
         this.score = score;
     }
     
-    public void controlCoinCollision(Character player){
+    public void controlCoinCollision(final Character player) {
         Rectangle playerRectangle = player.getArea();
+        System.out.println("-- "+coinC);
         Iterator<Coin> it = coinC.getCoinList().iterator();
-        while(it.hasNext()){
+        while(it.hasNext()) {
             Coin coin = it.next();
-            if (!coin.isCollected()){
+            if (!coin.isCollected()) {
                 Rectangle coinRectangle = coin.getRectangle(tileSize);
-                if (playerRectangle.intersects(coinRectangle)){
+                if (playerRectangle.intersects(coinRectangle)) {
                     coin.collect();
                     coinC.increaseCoinsCollected();
                     if(score != null){

@@ -64,7 +64,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         this.collisionDetection = new CollisionDetectionImpl(hM.getMap(), hM.getBlocks(), hM.getTileSize(), panel);
         this.pUpDetection = new PowerUpDetectionImpl(panel, pMan);
         this.killDetection = new KillDetectionImpl(panel, hM);
-        this.coinDetection = new CoinDetectionImpl(hM.getTileSize(), glp.getCoinController(), glp.getScoreController());
+        this.coinDetection = new CoinDetectionImpl(hM.getTileSize(), panel.getCoinController(), panel.getScoreController());
         playerX = START_X;
         screenX = START_X;
         groundX = 0;
@@ -114,6 +114,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             collisionDir = tempDir;
         }
         killDetection.checkCollisionWithEnemeies(player);
+        System.out.println();
         coinDetection.controlCoinCollision(player);
 
         hitHead = "down".equals(collisionDir);
@@ -203,10 +204,9 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     }
 
     /**
-     * {@inheritDoc}
+     * Updates the values of max and mid jump based on where the player is.
      */
-    @Override
-    public void updateJumpVariable() {
+    private void updateJumpVariable() {
         maxJump = startY - (sizeCharacter * 5 / 2) + (playerY - startY);
         midJump = startY - (sizeCharacter * 3 / 2) + (playerY - startY);
     }
