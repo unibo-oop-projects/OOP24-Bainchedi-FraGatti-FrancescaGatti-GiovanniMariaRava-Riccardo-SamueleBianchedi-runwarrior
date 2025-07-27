@@ -12,7 +12,7 @@ import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.controller.CharacterMovementHandlerImpl;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.view.PowerUpManager;
+import it.unibo.runwarrior.controller.PowerUpController;
 
 /**
  * Class that creates the player.
@@ -51,13 +51,13 @@ public abstract class AbstractCharacterImpl implements Character {
      * @param glc game-loop controller
      * @param commands object that handles the movement with the keyboard
      * @param mapHandler object that prints tiles
-     * @param pMan object that prints powerups
+     * @param pCon object that creates powerup list
      */
     public AbstractCharacterImpl(final GameLoopController glc, final CharacterComand commands, 
-    final HandlerMapElement mapHandler, final PowerUpManager pMan) {
+    final HandlerMapElement mapHandler, final PowerUpController pCon) {
         this.cmd = commands;
         sizeCharacter = mapHandler.getTileSize() * 2;
-        this.movement = new CharacterMovementHandlerImpl(glc, this, commands, mapHandler, pMan);
+        this.movement = new CharacterMovementHandlerImpl(glc, this, commands, mapHandler, pCon);
         this.animation = new CharacterAnimationHandlerImpl(commands, movement);
         collisionArea = new Rectangle(movement.getPlX() + (sizeCharacter / 4), movement.getPlY() + (sizeCharacter / 4),
         sizeCharacter / 2, sizeCharacter - (sizeCharacter / 4) - TO_TOUCH_FLOOR);

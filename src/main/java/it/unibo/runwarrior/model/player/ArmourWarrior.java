@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.view.PowerUpManager;
+import it.unibo.runwarrior.controller.PowerUpController;
 
 /**
  * Implementation of the warrioir with armour.
@@ -21,11 +21,11 @@ public class ArmourWarrior extends AbstractCharacterImpl {
      * @param glc game-loop controller
      * @param commands object that handles keyboard input
      * @param mapHandler object that prints tiles
-     * @param pMan object that prints powerups
+     * @param pCon object that creates powerup list
      */
     public ArmourWarrior(final GameLoopController glc, final CharacterComand commands, 
-    final HandlerMapElement mapHandler, final PowerUpManager pMan) {
-        super(glc, commands, mapHandler, pMan);
+    final HandlerMapElement mapHandler, final PowerUpController pCon) {
+        super(glc, commands, mapHandler, pCon);
     }
 
     /**

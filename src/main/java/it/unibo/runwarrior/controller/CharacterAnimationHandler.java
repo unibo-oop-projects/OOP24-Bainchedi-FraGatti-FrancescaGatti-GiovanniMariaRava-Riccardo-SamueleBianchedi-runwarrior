@@ -6,10 +6,15 @@ import it.unibo.runwarrior.model.player.PlayerFrame;
 
 public interface CharacterAnimationHandler {
     
-    public void setImages(BufferedImage... im);
-    
     /**
-     * Controls and change frame during the player movement
+     * Set the current player images.
+     *
+     * @param im current player images
+     */
+    public void setImages(BufferedImage... im);
+
+    /**
+     * Controls and change frame during the player movement.
      */
     public void frameChanger();
 

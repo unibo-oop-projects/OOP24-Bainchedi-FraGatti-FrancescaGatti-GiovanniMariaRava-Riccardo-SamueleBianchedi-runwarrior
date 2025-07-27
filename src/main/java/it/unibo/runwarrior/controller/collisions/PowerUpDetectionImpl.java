@@ -8,15 +8,15 @@ import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.controller.GameLoopController;
+import it.unibo.runwarrior.controller.PowerUpController;
 import it.unibo.runwarrior.model.PowerUp;
-import it.unibo.runwarrior.view.PowerUpManager;
 
 /**
  * Class that handles the collision between the player and the powerups.
  */
 public class PowerUpDetectionImpl implements PowerUpDetection {
     private final GameLoopController glc;
-    private final PowerUpManager powersManager;
+    private final PowerUpController powersController;
     private List<PowerUp> powerCollision;
     private long hitWaitTime;
     private static final int TOLL = AbstractCharacterImpl.SPEED;
@@ -26,11 +26,11 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
      * Constructor of powerup detection.
      *
      * @param glc game-loop controller
-     * @param pMan obhect that prints powerups
+     * @param pCon object that creates powerup list
      */
-    public PowerUpDetectionImpl(final GameLoopController glc, final PowerUpManager pMan) {
+    public PowerUpDetectionImpl(final GameLoopController glc, final PowerUpController pCon) {
         this.glc = glc;
-        this.powersManager = pMan;
+        this.powersController = pCon;
         this.powerCollision = new ArrayList<>();
     }
 
@@ -39,7 +39,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
      */
     @Override
     public String checkCollisionWithPowers(final Character player, final CharacterMovementHandler move) {
-        powerCollision.addAll(powersManager.getPowerUps());
+        powerCollision.addAll(powersController.getPowerUps());
         final Rectangle playerArea = player.getArea();
         String dir = "";
         for(final PowerUp pUp : powerCollision) {
