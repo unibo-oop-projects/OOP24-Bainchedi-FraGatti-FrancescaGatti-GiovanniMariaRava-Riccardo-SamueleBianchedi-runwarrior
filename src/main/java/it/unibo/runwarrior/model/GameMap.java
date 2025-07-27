@@ -1,6 +1,8 @@
 package it.unibo.runwarrior.model;
 
 import java.awt.image.BufferedImage;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,40 +16,6 @@ public final class GameMap {
     private final int cols;
     private final Map<Integer, BufferedImage> blockImages;
 
-    //modifiche da spotbug
-    /*
-    // da aggiungere in cima
-    import java.util.HashMap;
-
-    public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
-        // Esegui una copia profonda della mappa
-        this.mapData = new int[mapData.length][];
-        for (int i = 0; i < mapData.length; i++) {
-        this.mapData[i] = mapData[i].clone();
-        }
-    }
-    public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
-    this.mapData = new int[mapData.length][];
-    for (int i = 0; i < mapData.length; i++) {
-        this.mapData[i] = mapData[i].clone();
-    }
-
-    this.blockImages = new HashMap<>();
-    for (final var entry : blockImages.entrySet()) {
-        final BufferedImage originalImage = entry.getValue();
-        final BufferedImage copyImage = new BufferedImage(
-            originalImage.getWidth(),
-            originalImage.getHeight(),
-            originalImage.getType()
-        );
-        copyImage.getGraphics().drawImage(originalImage, 0, 0, null);
-        this.blockImages.put(entry.getKey(), copyImage);
-    }
-    
-    this.rows = rows;
-    this.cols = cols;
-}
-     */
     /**
      * Constructs a new GameMap.
      *
@@ -57,8 +25,11 @@ public final class GameMap {
      * @param cols        the number of columns in the map.
      */
     public GameMap(final int[][] mapData, final Map<Integer, BufferedImage> blockImages, final int rows, final int cols) {
-        this.mapData = mapData.clone();
-        this.blockImages = blockImages;
+        this.mapData = new int[mapData.length][];
+        for (int i = 0; i < mapData.length; i++) {
+            this.mapData[i] = mapData[i].clone();
+        }
+        this.blockImages = new HashMap<>(blockImages);
         this.rows = rows;
         this.cols = cols;
     }
@@ -67,7 +38,7 @@ public final class GameMap {
      * Loads a map from data files and image configuration files.
      * This is a factory method to create a GameMap instance.
      *
-     * @param mapDataFilePath     the path to the file containing the map's numerical data.
+     * @param mapDataFilePath   the path to the file containing the map's numerical data.
      * @param imageConfigFilePath the path to the file configuring the block images.
      * @return a new GameMap instance, or null if loading fails.
      */
@@ -101,24 +72,17 @@ public final class GameMap {
         );
     }
 
-    //modifiche da spotbug
-    /*
-     public int[][] getMapData() {
-    // Esegui una copia profonda per non esporre la mappa interna
-    final int[][] mapCopy = new int[this.mapData.length][];
-    for (int i = 0; i < this.mapData.length; i++) {
-        mapCopy[i] = this.mapData[i].clone();
-    }
-    return mapCopy;
-}
-     */
     /**
      * Returns the map data as a 2D integer array.
      *
      * @return the map grid.
      */
     public int[][] getMapData() {
-        return mapData.clone();
+        final int[][] deepCopy = new int[this.mapData.length][];
+        for (int i = 0; i < this.mapData.length; i++) {
+            deepCopy[i] = this.mapData[i].clone();
+        }
+        return deepCopy;
     }
 
     /**
@@ -139,12 +103,6 @@ public final class GameMap {
         return cols;
     }
 
-    //modifiche da spotbug
-    /*
-    public Map<Integer, BufferedImage> getBlockImages() {
-        return Collections.unmodifiableMap(this.blockImages);
-    }
-     */
     /**
      * Gets the image for a specific block value.
      *
@@ -161,6 +119,6 @@ public final class GameMap {
      * @return the map of block values to BufferedImages.
      */
     public Map<Integer, BufferedImage> getBlockImages() {
-        return blockImages;
+        return Collections.unmodifiableMap(this.blockImages);
     }
 }

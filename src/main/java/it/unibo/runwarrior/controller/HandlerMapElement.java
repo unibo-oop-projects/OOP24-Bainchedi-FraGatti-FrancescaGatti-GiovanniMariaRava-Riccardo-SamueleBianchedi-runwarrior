@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +12,11 @@ import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.MapElement;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.view.GameLoopPanel;
+
 /**
- * The class uses the gamemap to render the map and setcollision, and damages
- */
+ * The class uses the gamemap to render the map and setcollision, and damages
+ */
+
 public class HandlerMapElement {
     private List<MapElement> blocks;
     private int[][] map;
@@ -24,63 +27,61 @@ public class HandlerMapElement {
     private int tileSize;
 
     /**
-     * Constructor of the class HandlerMapElement
-     * @param gamemap
-     */
-    public HandlerMapElement(final GameMap gamemap) { 
-        this.blocks = new ArrayList<>();
-        this.mapBlock = gamemap.getBlockImages();
-        this.map = gamemap.getMapData();
-        MapImage();
-    }
-    /*
-    public HandlerMapElement(final GameMap gamemap) { 
+    * Constructor of the class HandlerMapElement
+    *
+    * @param gamemap
+    */
+    public HandlerMapElement(final GameMap gamemap) {
         this.blocks = new ArrayList<>();
         this.mapBlock = gamemap.getBlockImages();
         this.map = gamemap.getMapData();
         mapImage();
     }
-    */
 
-    /**
-     * 0 = sky
-     * 1 = grass
-     * 2 = terrain
-     * 3 = blocchi portale/castello
-     * 4 = centro portale/castello
-     * 5 = ostacolo
-     * 6= presente solo nella prima
-     * This method create a new MapElement using the map created in GameMap
-     */
-    public void MapImage() {
+    /*
+    * 0 = sky
+    * 1 = grass
+    * 2 = terrain
+    * 3 = portal/castle block
+    * 4 = portal/castel center
+    * 5 = obastcol
+    * 6 = only in first one
+    * This method create a new MapElement using the map created in GameMap
+    */
+    private void mapImage() {
         for (var entry : mapBlock.entrySet()) {
             MapElement newElement = new MapElement();
             newElement.setImage(entry.getValue());
             switch (entry.getKey()) {
-                case 0,4:
-                    newElement.setHarmless(true);
-                    newElement.setCollision(false);
-                    break;
+                case 0, 4:
+                newElement.setHarmless(true);
+                newElement.setCollision(false);
+                break;
                 case 1,2:
-                    newElement.setHarmless(true);
-                    newElement.setCollision(true);
-                    break;
+                newElement.setHarmless(true);
+                newElement.setCollision(true);
+                break;
                 case 3:
-                    newElement.setPortal(true);
-                    newElement.setHarmless(true);
-                    newElement.setCollision(false);
-                    break;
+                newElement.setCollision(false);
+                newElement.setHarmless(true);
+                newElement.setPortal(true);
+                break;
                 case 5,6:
-                    newElement.setHarmless(false);
-                    newElement.setCollision(true);
-                    break;
+                newElement.setHarmless(false);
+                newElement.setCollision(true);
+                break;
+                default:
+                break;
             }
             blocks.add(newElement);
         }
     }
-
+    
     /**
-     * @param gr
+     * Renders all the blocks of the map.
+     * 
+     * @param g the graphics context
+     * @param player the player character
      */
     public void printBlocks(Graphics2D gr, Character player) {
         int rows = map.length;
@@ -96,24 +97,28 @@ public class HandlerMapElement {
             }
         }
     }
-
-    //modifica da spotbug
-    /*
-    import java.util.Collections; // Aggiungi questo import in cima al file
-
+    
+    /**
+     * Gets an unmodifiable list of map elements (blocks).
+     * 
+     * @return an unmodifiable list of blocks
+     */
     public List<MapElement> getBlocks() {
-    // Restituisce una versione "read-only" della lista per proteggerla
         return Collections.unmodifiableList(this.blocks);
     }
-    */
-    public List<MapElement> getBlocks() {
-        return this.blocks;
-    }
-
+    
+    /**
+     * Sets the horizontal shift for rendering.
+     * 
+     * @param slide the shift value
+     */
     public void setShift(int slide) {
         shift = slide;
     }
+    
     /**
+     * Gets the size of a single tile.
+     * 
      * @return the dimension of the tile
      */
     public int getTileSize() {
@@ -121,7 +126,12 @@ public class HandlerMapElement {
         tileSize = GameLoopPanel.HEIGHT / rows;
         return tileSize;
     }
-
+    
+    /**
+     * Calculates the starting Y position for the player.
+     * 
+     * @return the starting Y coordinate
+     */
     public int getFirstY() {
         int rows = map.length;
         int cols = map[0].length;
@@ -136,8 +146,10 @@ public class HandlerMapElement {
         }
         return firstY;
     }
-
+    
     /**
+     * Gets a list of all rectangles with collision enabled.
+     * 
      * @return the list with all the obstacle's rectangles
      */
     public List<Rectangle> getCollisionRectangles() {
@@ -156,23 +168,26 @@ public class HandlerMapElement {
         }
         return collisionRects;
     }
-
+    
+    /**
+     * Gets the current horizontal shift value.
+     * 
+     * @return the shift value
+     */
     public int getShift() {
         return this.shift;
     }
-
-    //modifiche da spotbug
-    /*
+    
+    /**
+     * Gets a deep copy of the raw map data array.
+     * 
+     * @return a deep copy of the 2D map array
+     */
     public int[][] getMap() {
-    // Crea e restituisce una copia della mappa per non esporre l'originale
-    final int[][] mapCopy = new int[this.map.length][];
-    for (int i = 0; i < this.map.length; i++) {
-        mapCopy[i] = this.map[i].clone();
-    }
-    return mapCopy;
-}
-    */
-    public int[][] getMap() {
-        return map;
+        final int[][] deepCopy = new int[this.map.length][];
+            for (int i = 0; i < this.map.length; i++) {
+            deepCopy[i] = this.map[i].clone();
+        }
+        return deepCopy;
     }
 }

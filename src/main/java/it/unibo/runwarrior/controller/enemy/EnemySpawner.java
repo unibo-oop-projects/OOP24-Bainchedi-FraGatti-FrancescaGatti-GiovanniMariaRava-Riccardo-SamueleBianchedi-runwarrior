@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.enemy.api.EnemySpawnPoints;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
@@ -20,7 +21,7 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 public class EnemySpawner {
     private final static int TO_TOUCH_FLOOR = 8;
     private EnemyHandlerImpl handler;
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
     private final List<EnemySpawnPoints> spawnPoints;
     private final Set<EnemySpawnPoints> spawnedEnemies;
 
@@ -29,7 +30,7 @@ public class EnemySpawner {
      * @param handler where the enemies list is stored
      * @param glp the panel in which enemies are shown
      */
-    public EnemySpawner(final EnemyHandlerImpl handler, final GameLoopPanel glp) {
+    public EnemySpawner(final EnemyHandlerImpl handler, final GameLoopController glp) {
         this.handler = handler;
         this.glp = glp;
         this.spawnPoints = new ArrayList<>();

@@ -7,7 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
-import it.unibo.runwarrior.view.GameLoopPanel;
+
+import it.unibo.runwarrior.controller.GameLoopController;
 
 /**
  * Implementation of the powerup object.
@@ -17,7 +18,7 @@ public class PowerUpImpl implements PowerUp {
     private BufferedImage image;
     private BufferedImage egg;
     private Rectangle touchArea;
-    private final GameLoopPanel glp;
+    private final GameLoopController glp;
     private boolean powerTaken;
     private boolean eggOpen;
 
@@ -26,7 +27,7 @@ public class PowerUpImpl implements PowerUp {
      *
      * @param glp game-loop panel
      */
-    public PowerUpImpl(final GameLoopPanel glp) {
+    public PowerUpImpl(final GameLoopController glp) {
         this.glp = glp;
         touchArea = new Rectangle();
         try {

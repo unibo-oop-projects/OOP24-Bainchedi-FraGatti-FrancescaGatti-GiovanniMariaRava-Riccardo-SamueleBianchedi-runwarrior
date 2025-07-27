@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.model.PowerUp;
 import it.unibo.runwarrior.model.PowerUpImpl;
@@ -28,7 +29,7 @@ public class PowerUpManager {
      * @param hM map handler
      * @param map map
      */
-    public PowerUpManager(final GameLoopPanel glp, final HandlerMapElement hM, final int[][] map) {
+    public PowerUpManager(final GameLoopController glp, final HandlerMapElement hM, final int[][] map) {
         this.mapHandler = hM;
         this.tileSize = hM.getTileSize();
         this.powerUps = new ArrayList<>();

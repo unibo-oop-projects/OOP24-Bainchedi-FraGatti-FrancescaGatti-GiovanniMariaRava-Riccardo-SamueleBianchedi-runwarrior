@@ -17,28 +17,24 @@ public final class MapElement {
      * 
      * @param im the new image.
      */
+    /*
+     * 
     public void setImage(final BufferedImage im) {
         this.image = im;
     }
-    //modifica di spot bug
-    /**
-     * Sets the image for this map element by creating a defensive copy.
-     * @param im the new image.
      */
-    /*
     public void setImage(BufferedImage image) {
-    if (image != null) {
-        this.image = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
-        this.image.getGraphics().drawImage(image, 0, 0, null);
-    } else {
-        this.image = null;
+        if (image != null) {
+            this.image = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
+            this.image.getGraphics().drawImage(image, 0, 0, null);
+        } else {
+            this.image = null;
+        }
     }
-}
-    */
 
     /**
      * Sets the collision property for this map element.
-     *      
+     * 
      * @param col true if the element should have collision, false otherwise.
      */
     public void setCollision(final boolean col) {
@@ -65,18 +61,13 @@ public final class MapElement {
 
     /**
      * Gets the image of the map element.
-     *      
+     * 
      * @return the element's image.
      */
     public BufferedImage getImage() {
         return this.image;
     }
-
-    //modifiche da spotbug
-    /**
-     * Gets a defensive copy of the image of the map element.
-     * @return a copy of the element's image.
-     */
+    //attenazione crea freezamenti del gioco!
     /*
     public BufferedImage getImage() {
         if (this.image == null) {

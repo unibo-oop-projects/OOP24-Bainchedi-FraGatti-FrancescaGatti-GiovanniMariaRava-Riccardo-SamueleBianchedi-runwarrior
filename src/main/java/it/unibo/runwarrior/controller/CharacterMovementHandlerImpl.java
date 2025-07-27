@@ -1,8 +1,7 @@
 package it.unibo.runwarrior.controller;
 
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpManager;
-
+import it.unibo.runwarrior.controller.collisions.CoinDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.PowerUpDetectionImpl;
@@ -13,12 +12,13 @@ import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
  * Class that handles player movement and his collisions.
  */
 public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
-    private GameLoopPanel glp;
+    private GameLoopController glp;
     private CharacterComand cmd;
     private Character player;
     private CollisionDetectionImpl collisionDetection;
     private PowerUpDetectionImpl pUpDetection;
     private KillDetectionImpl killDetection;
+    private CoinDetectionImpl coinDetection;
 
     public static final int START_X = 96;
     private int startY;
@@ -56,7 +56,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * @param hM object that prints tiles
      * @param pMan object that prints powerups
      */
-    public CharacterMovementHandlerImpl(final GameLoopPanel panel, final Character player, final CharacterComand cmd,
+    public CharacterMovementHandlerImpl(final GameLoopController panel, final Character player, final CharacterComand cmd,
     final HandlerMapElement hM, final PowerUpManager pMan) {
         this.glp = panel;
         this.cmd = cmd;
@@ -64,6 +64,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         this.collisionDetection = new CollisionDetectionImpl(hM.getMap(), hM.getBlocks(), hM.getTileSize(), panel);
         this.pUpDetection = new PowerUpDetectionImpl(panel, pMan);
         this.killDetection = new KillDetectionImpl(panel, hM);
+        this.coinDetection = new CoinDetectionImpl(hM.getTileSize(), glp.getCoinController(), glp.getScoreController());
         playerX = START_X;
         screenX = START_X;
         groundX = 0;
@@ -96,7 +97,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         this.groundX = groundX;
         this.killDetection.setHitWaitTime(lastHit);
         this.collisionDetection.setHitWaitTime(lastHit);
-        System.out.println(playerX + " " + playerY);
+        //System.out.println(playerX + " " + playerY);
     }
 
     /**
@@ -105,7 +106,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     @Override
     public void movePlayer() {
         //System.out.println("-- " + playerY);
-        maxScreenX = glp.getWidth() / 2;
+        maxScreenX = glp.getGlp().getWidth() / 2;
         player.updatePlayerPosition();
         collisionDir = collisionDetection.checkCollision(player);
         tempDir = pUpDetection.checkCollisionWithPowers(player, this);
@@ -113,6 +114,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             collisionDir = tempDir;
         }
         killDetection.checkCollisionWithEnemeies(player);
+        coinDetection.controlCoinCollision(player);
 
         hitHead = "down".equals(collisionDir);
         if (hitHead) {
