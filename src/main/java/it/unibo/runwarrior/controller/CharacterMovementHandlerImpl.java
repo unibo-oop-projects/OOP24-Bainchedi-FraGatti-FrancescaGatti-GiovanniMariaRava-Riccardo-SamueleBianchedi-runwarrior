@@ -114,6 +114,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             collisionDir = tempDir;
         }
         killDetection.checkCollisionWithEnemeies(player);
+        System.out.println();
         coinDetection.controlCoinCollision(player);
 
         hitHead = "down".equals(collisionDir);

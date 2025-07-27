@@ -2,8 +2,6 @@ package it.unibo.runwarrior.controller;
 
 import java.util.List;
 
-import it.unibo.runwarrior.controller.collisions.CollisionDetection;
-import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.player.Character;
@@ -23,7 +21,7 @@ import it.unibo.runwarrior.view.enemy.impl.WizardView;
 
 public class GameLoopController {
     
-    public GameLoopPanel glp;
+    private GameLoopPanel glp;
     private Character player;
     private CharacterComand commands;
     private PowersHandler powerUpsHandler;
@@ -37,13 +35,17 @@ public class GameLoopController {
     private CoinController coinController;
     private Score score;
     private ScoreController scoreController;
-    private CollisionDetection collisionDetection;
 
     public GameLoopController(String mapPath, String themePath, String enemiesPath, String coinsPath) {
         this.gameMap = GameMap.load(mapPath, themePath);
+        this.coinController = new CoinController();
+        List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
+        for(int[] coord : coords){
+            coinController.addCoins(coord[0], coord[1]);
+        }
+        
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
-        this.collisionDetection = new CollisionDetectionImpl(this.mapHandler.getMap(), this.mapHandler.getBlocks(), this.mapHandler.getTileSize(), this);
         this.powersManager = new PowerUpManager(this, mapHandler, gameMap.getMapData());
         this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powersManager);
         this.enemyViewFactory = new EnemyViewFactoryImpl();
@@ -52,11 +54,6 @@ public class GameLoopController {
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
 
-        this.coinController = new CoinController();
-        List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
-        for(int[] coord : coords){
-            coinController.addCoins(coord[0], coord[1]);
-        }
         this.score = new Score(GameSaveManager.getInstance());
         this.scoreController = new ScoreController(score);
         this.coinController.setScoreController(scoreController);
@@ -137,9 +134,5 @@ public class GameLoopController {
         enemyViewFactory.register(3, new WizardView(this));
         enemyViewFactory.register(4, new GoblinView(this));
         enemyViewFactory.register(5, new MonkeyView(this));
-    }
-
-    public CollisionDetection getCollisionDetection(){
-        return this.collisionDetection;
     }
 }

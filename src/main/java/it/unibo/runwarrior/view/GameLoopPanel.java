@@ -71,7 +71,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         }
         if (!gameEnded) {
             // controllo se ha vinto
-            if (gameController.getCollisionDetection().gameOver()) {
+            if (gameController.getPlayer().getMovementHandler().getCollisionDetection().gameOver()) {
                 gameEnded = true;
                 levelCompleted = true; 
             } else if (gameController.getPowersHandler().gameOver()) {
