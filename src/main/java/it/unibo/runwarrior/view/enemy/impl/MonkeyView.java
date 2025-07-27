@@ -17,6 +17,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
  */
 
 public class MonkeyView implements EnemyView {
+    private static final Logger LOGGER = Logger.getLogger(MonkeyView.class.getName());
     private BufferedImage rightMonkey;
     private BufferedImage leftMonkey;
     private BufferedImage rightMonkeyMoving;
@@ -28,11 +29,10 @@ public class MonkeyView implements EnemyView {
     value = "EI_EXPOSE_REP2",
     justification = "MonkeyView needs to invoke controller actions during rendering")
     private final GameLoopController glc;
-    private static final Logger LOGGER = Logger.getLogger(MonkeyView.class.getName());
-    
+
     /**
      * Constructor of the class MonkeyView.
-     * 
+     *
      * @param glc is the panel in which the monkey need to be renderd
      */
     public MonkeyView(final GameLoopController glc) {

@@ -19,6 +19,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
  * Implementation of the enemy view with Guard enemy.
  */
 public class GuardView implements EnemyView {
+    private static final Logger LOGGER = Logger.getLogger(GuardView.class.getName());
     private BufferedImage rightGuard;
     private BufferedImage leftGuard;
     private BufferedImage rightGuardMoving;
@@ -30,11 +31,10 @@ public class GuardView implements EnemyView {
     value = "EI_EXPOSE_REP2",
     justification = "GuardView needs to invoke controller actions during rendering")
     private final GameLoopController glc;
-    private static final Logger LOGGER = Logger.getLogger(GuardView.class.getName());
-    
+
     /**
      * Constructor of the GuardView class.
-     * 
+     *
      * @param glc is the panel in which the guard need to be renderd.
      */
     public GuardView(final GameLoopController glc) {
@@ -66,7 +66,7 @@ public class GuardView implements EnemyView {
     @Override
     public final void render(final Graphics g, final EnemyImpl enemy) {
         final BufferedImage currentImage;
-        if (enemy.getVelocityX()== 0) {
+        if (enemy.getVelocityX() == 0) {
             currentImage = image;
         } else if (enemy.getVelocityX() > 0) {
             currentImage = enemy.isStep() ? rightGuardMoving : rightGuardRunning;

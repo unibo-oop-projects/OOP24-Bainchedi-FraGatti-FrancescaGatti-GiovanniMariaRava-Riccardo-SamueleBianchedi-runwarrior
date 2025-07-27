@@ -18,6 +18,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
  */
 
 public class SnakeView implements EnemyView {
+    private static final Logger LOGGER = Logger.getLogger(SnakeView.class.getName());
     private BufferedImage rightSnake;
     private BufferedImage rightSnakeMoving;
     private BufferedImage leftSnake;
@@ -26,12 +27,11 @@ public class SnakeView implements EnemyView {
     value = "EI_EXPOSE_REP2",
     justification = "SnakeView needs to invoke controller actions during rendering")
     private final GameLoopController glc;
-    private static final Logger LOGGER = Logger.getLogger(SnakeView.class.getName());
-    
+
     /**
      * Constructor of the SnakeView class.
-     * 
-     * @param glp is the panel in which the guard need to be rendered
+     *
+     * @param glc is the panel in which the guard need to be rendered
      */
     public SnakeView(final GameLoopController glc) {
         this.glc = glc;

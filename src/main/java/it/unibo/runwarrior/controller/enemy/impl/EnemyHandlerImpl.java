@@ -26,7 +26,7 @@ public class EnemyHandlerImpl implements EnemyHandler {
 
     /**
      * Constructor of the class EnemyHandlerImpl.
-     * 
+     *
      * @param glp is the panel in which the enemy will be rendered
      * @param viewFactory contains the map with enemy type and 
      */
@@ -60,7 +60,7 @@ public class EnemyHandlerImpl implements EnemyHandler {
 
     /**
      * Adds the enemy to the list.
-     * 
+     *
      * @param en the enemies to be added
      */
     public void addEnemy(final EnemyImpl en) {
@@ -69,7 +69,7 @@ public class EnemyHandlerImpl implements EnemyHandler {
 
     /**
      * Removed the enemy from the list.
-     * 
+     *
      * @param en the enemy to be removed
      */
     public void removeEnemy(final EnemyImpl en) {
@@ -94,10 +94,10 @@ public class EnemyHandlerImpl implements EnemyHandler {
             }
         }
     }
-    
+
     /**
      * Checks if the enemyes in the visible screen part.
-     * 
+     *
      * @param enemy is the enemy that is being checked
      * @return whether the enemy is visible on the screen or too far on the left
      */

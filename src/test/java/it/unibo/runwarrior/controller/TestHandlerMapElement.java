@@ -13,21 +13,27 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.MapElement;
 
+/**
+ * TestHandlerMapElement check is the element are setted with the right caratheristics.
+ * Check if the list return is correct.
+ */
 public class TestHandlerMapElement {
     private static final int ROW_COLS = 3;
+    private static final int SEVEN = 7;
+    private static final int SIX = 6;
+    private static final int FIVE = 5;
     private HandlerMapElement handlerMapElement;
     private GameMap gameMap;
-    private int [] [] map;
-    //per ora testo solo il primo metood. gli altri capisco se ha veramente senso 
+    private int[][] map;
+    
     /**
-     * Creo una mappa più piccola e cono solo 0 e 1 così poi controllo che setti bene collisioni e danni
-    */
+     * Create a smaller map for the test and the initialize the map.
+     */
     @BeforeEach
-    public void initMap(){
+    public void initMap() {
         map = new int[][] {
             {0, 1, 2},
             {1, 5, 0},
@@ -35,32 +41,39 @@ public class TestHandlerMapElement {
         };
 
         Map<Integer, BufferedImage> testBlockImages = new HashMap<>();
-        for (int i = 0; i <= 6; i++) {
+        for (int i = 0; i <= SIX; i++) {
             testBlockImages.put(i, null);
         }
-        gameMap = new GameMap (map, testBlockImages, ROW_COLS, ROW_COLS);
+        gameMap = new GameMap(map, testBlockImages, ROW_COLS, ROW_COLS);
         handlerMapElement = new HandlerMapElement(gameMap);
     }
+    
+    /**
+     * Test if the MapElement are initilized in the correct way.
+     */
     @Test
     void testMapImageInitialization() {
-        List<MapElement> blocks = handlerMapElement.getBlocks();
+        final List<MapElement> blocks = handlerMapElement.getBlocks();
 
-        assertEquals(7, blocks.size());
+        assertEquals(SEVEN, blocks.size());
 
         assertFalse(blocks.get(0).getCollision());
         assertTrue(blocks.get(1).getCollision()); 
         assertFalse(blocks.get(3).getCollision());
-        assertFalse(blocks.get(5).getHarmless());
+        assertFalse(blocks.get(FIVE).getHarmless());
     }
+    
+    /**
+     * Test if the list returned contains the right element.
+     */
     @Test
     public void testGetCollisionRectangles(){
-        List<Rectangle> collisionRects = handlerMapElement.getCollisionRectangles();
+        final List<Rectangle> collisionRects = handlerMapElement.getCollisionRectangles();
 
-        assertEquals(5, collisionRects.size());
+        assertEquals(FIVE, collisionRects.size());
         final int tileSize = handlerMapElement.getTileSize();
 
-        Rectangle rectangleExpected = new Rectangle(1*tileSize, 0*tileSize, tileSize, tileSize);
-
+        final Rectangle rectangleExpected = new Rectangle(1 * tileSize, 0 * tileSize, tileSize, tileSize);
         assertTrue(collisionRects.contains(rectangleExpected));
     }
 }

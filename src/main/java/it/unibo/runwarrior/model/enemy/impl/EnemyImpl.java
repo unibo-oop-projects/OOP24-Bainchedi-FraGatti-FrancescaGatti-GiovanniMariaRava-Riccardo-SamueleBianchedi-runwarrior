@@ -28,14 +28,14 @@ public class EnemyImpl implements Enemy {
     private final EnemyHandlerImpl enemyHandler;
 
     private final GameLoopController glp;
-    
+
     /**
      * Constructor of the class.
-     * 
+     *
      * @param x starting x
      * @param y starting y
-     * @param width 
-     * @param height
+     * @param width of the enemies tile
+     * @param height of the enemies tile
      * @param solid setting for collision
      * @param handler used to render the enemy
      * @param glp panel in which enemies are shown
