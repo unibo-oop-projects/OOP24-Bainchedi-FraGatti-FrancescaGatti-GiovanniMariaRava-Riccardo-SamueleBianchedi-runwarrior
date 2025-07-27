@@ -86,16 +86,24 @@ public class Menu extends JPanel {
                     }
                 }
             };
-            pannelloSfondoMenu.setLayout(null);
+            //pannelloSfondoMenu.setLayout(null);
+            pannelloSfondoMenu.setLayout(new BorderLayout());
+            pannelloSfondoMenu.setLayout(new BoxLayout(pannelloSfondoMenu, BoxLayout.Y_AXIS));
             pannelloSfondoMenu.setOpaque(true);
 
             final JLabel titoloLabel = new JLabel(new ImageIcon(imgTitolo));
-            titoloLabel.setBounds(TITOLO_X, TITOLO_Y, TITOLO_WIDTH, TITOLO_HEIGHT);
+            titoloLabel.setAlignmentX(CENTER_ALIGNMENT);
+            //titoloLabel.setBounds(TITOLO_X, TITOLO_Y, TITOLO_WIDTH, TITOLO_HEIGHT);
+            pannelloSfondoMenu.add(Box.createVerticalGlue());
             pannelloSfondoMenu.add(titoloLabel);
             final JPanel playButtonPanel = new JPanel();
             playButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
             playButtonPanel.setOpaque(false);
-            playButtonPanel.setBounds(PLAY_PANEL_X, PLAY_PANEL_Y, PLAY_PANEL_WIDTH, PLAY_PANEL_HEIGHT);
+            //playButtonPanel.setBounds(PLAY_PANEL_X, PLAY_PANEL_Y, PLAY_PANEL_WIDTH, PLAY_PANEL_HEIGHT);
+            playButtonPanel.setAlignmentX(CENTER_ALIGNMENT);
+            pannelloSfondoMenu.add(Box.createVerticalStrut(20));
+            pannelloSfondoMenu.add(playButtonPanel);
+            pannelloSfondoMenu.add(Box.createHorizontalGlue());
             playButtonPanel.setPreferredSize(new Dimension(PLAY_BUTTON_PANEL_WIDTH, PLAY_BUTTON_PANEL_HEIGHT));
 
             final JButton playButton = new JButton("PLAY");
@@ -149,7 +157,7 @@ public class Menu extends JPanel {
                         "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
                         glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glc.getGlp()); 
+                        frameMenu.setContentPane(glc.getGlp());
                         frameMenu.revalidate();
                         frameMenu.repaint();
                         glc.getGlp().setFocusable(true);
@@ -159,9 +167,9 @@ public class Menu extends JPanel {
                     level2.addActionListener(level2Event -> {
                         glc = new GameLoopController("Map2/map2.txt", "Map2/forest_theme.txt",
                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
-                        glc.glp.startGame();
+                        glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glc.glp);
+                        frameMenu.setContentPane(glc.getGlp());
                         frameMenu.revalidate();
                         frameMenu.repaint();
                         glc.getGlp().setFocusable(true);
@@ -171,14 +179,15 @@ public class Menu extends JPanel {
                     level3.addActionListener(level3Event -> {
                         glc = new GameLoopController("Map_3/map_3.txt", "Map_3/map3Theme.txt",
                         "/Map_3/enemiesMap3.txt", "/Coins/CoinCoordinates_map3.txt");
-                        glc.glp.startGame();
+                        glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glc.glp);
+                        frameMenu.setContentPane(glc.getGlp());
                         frameMenu.revalidate();
                         frameMenu.repaint();
                         glc.getGlp().setFocusable(true);
                         glc.getGlp().requestFocusInWindow();
                         glc.getGlp().requestFocus();
+                        
                     });
                     final JButton shopButton = new JButton("SHOP");
                     shopButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
