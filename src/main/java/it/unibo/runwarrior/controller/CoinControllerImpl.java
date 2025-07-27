@@ -24,9 +24,6 @@ public class CoinControllerImpl implements CoinController {
     private List<Coin> coinList;
     private ScoreController scoreController;
 
-    /**
-     * CoinControllerImpl constructor
-     */
     public CoinControllerImpl(){
         coinList = new ArrayList<>();
     }
@@ -86,7 +83,7 @@ public class CoinControllerImpl implements CoinController {
      * {@inheritDoc}
      */
     @Override
-    public void drawAllCoins(Graphics g, int tileSize, Character player) {
+    public void drawAllCoins(Graphics g, int tileSize, Character player){
         groundX = player.getMovementHandler().getGroundX(); 
 
         for (final Coin coin : coinList) {
@@ -106,6 +103,7 @@ public class CoinControllerImpl implements CoinController {
     /**
      * {@inheritDoc}
      */
+    @Override
     public final void updatePlayer(final Character player) {
         this.player = player;
     }
@@ -132,6 +130,7 @@ public class CoinControllerImpl implements CoinController {
     /**
      * {@inheritDoc}
      */
+    @Override
     public final int getCoinsCollected() {
         return coinsCollected;
     }
@@ -139,6 +138,7 @@ public class CoinControllerImpl implements CoinController {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void increaseCoinsCollected(){
         coinsCollected++;
     }
@@ -146,6 +146,7 @@ public class CoinControllerImpl implements CoinController {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setScoreController(ScoreController scoreController){
         this.scoreController = scoreController;
     }
@@ -153,8 +154,8 @@ public class CoinControllerImpl implements CoinController {
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<Coin> getCoinList() {
         return coinList;
-    }
-    
+    }   
 }

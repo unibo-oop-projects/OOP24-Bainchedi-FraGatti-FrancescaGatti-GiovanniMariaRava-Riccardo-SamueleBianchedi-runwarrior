@@ -18,6 +18,7 @@
 \date{\today}
 \begin{document}
 \maketitle
+\tableofcontents
 \chapter{Analisi}
 \section{Descrizione e requisiti}
 Il gruppo si pone come obbiettivo quello di realizzare una reinterpretazione del famoso gioco 
@@ -85,5 +86,60 @@ inserire UML delle classi principali dell'MVC
 \section{Samuele Bianchedi}
 \section{Riccardo Cornacchia}
 \section{Francesca Gatti}
+Nel gioco è previsto un sistema di personalizzazione del personaggio tramite l'acquisto e la selezione di una nuova skin.
+Il problema principale affrontato è stato quello di separare la gestione della parte logica del negozio, ovvero il controllo delle monete, 
+delle skin e la selezione, dalla sua interfaccia grafica, mantenendo la possibilità di modificarlo in futuro.
+Ho scelto di adottare il pattern MVC (Model-View-Controller) diviso nel seguente modo:
+\begin{itemize}
+    \item Model: rappresentato dalla classe Shop, gestisce le skin disponibili, quella selezionata e lo stato di sblocco della skin (unlock). 
+    Nel model sono inoltre presenti le due classi Skin e Score che permettono la gestione degli oggetti skin e punteggio da parte dello Shop.
+    \item View: la classe ShopView è responsabile della visualizzazione delle informazioni (monete, stato skin) e della gestione dei pulsanti 
+    che consentono l'acquisto e la selezione della nuova skin. L'utente è messo al corrente delle azioni che può fare nello shop grazie a 
+    messaggi di dialogo che appaiono una volta cliccato il pulsante desiderato.
+    \item Controller: ho implementato l'interfaccia ShopController che è responsabile della logica legata all'acquisto e alla selezione 
+    delle skin e all'acquisizione dei dati e delle informazioni richieste dalla View. Inizialmente avevo implementato un'unica classe 
+    all'interno del Model (la classe Shop), ma il codice risultava molto pesante e difficile da gestire.
+\end{itemize}
 \section{Giovanni Maria Rava}
+\textbf{Problema:} I nemici del gioco devono muoversi da soli, invertire direzione appena urtano un ostacolo e restare sincronizzati con 
+lo scorrimento della camera. 
+
+\textbf{Soluzione:} Per gestire il movimento autonomo dei nemici e l'inversione di marcia in presenza di ostacoli ho adottato 
+il pattern \emph{Model‑View‑Controller}. Il controller centrale è l'\emph{EnemyHandler}, che a ogni ciclo di gioco scorre l'intera lista di 
+nemici: per ciascuno aggiorna prima lo stato logico delegando questa responsabilità all'oggetto model, \emph{EnemyImpl}, poi ne richiede 
+la rappresentazione grafica all'oggetto view specifico, (ad esempio \emph{GoblinView}), per farla disegnare sul pannello di gioco. In questo modo 
+la logica di collisione con la mappa e la scelta del momento in cui invertire la direzione restano incapsulate nel model, 
+mentre il caricamento e il rendering rimangono confinati nella view; il controller non conosce i dettagli interni di nessuna delle due parti, 
+ma si limita a coordinarne l'interazione. 
+Questo assetto garantisce un codice più estendibile e manutenibile: introdurre una nuova tipologia di nemico richiede soltanto 
+di aggiungere una nuova View, senza toccare il controller, e ogni modifica grafica o comportamentale resta circoscritta al relativo livello dell'architettura.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/enemyMvcUml.png}
+    \caption{UML dell'MVC per la gestione dei nemici}
+    \label{}
+\end{figure}
+\newpage
+\textbf{Problema:} Gestione il salvataggio del gioco e del caricamento del salvataggio all'apertura del gioco.\\
+\textbf{Soluzione:} Il salvataggio e il ripristino della partita sono gestiti da un'unica classe, GameSaveManager, progettata come singleton 
+per garantire un punto di accesso centralizzato e soprattutto per mantenere una unica istanza del file. Per rendere effettivo ciò,
+all'interno della classe viene quindi eseguito un controllo specifico, in modo da non creare più file di salvataggio.
+Quando il giocatore conclude un livello o chiude l'applicazione, i controller, \emph{ScoreController} e \emph{CoinController} invocano i relativi metodi 
+per modificare le variabili e salvare lo stato di gioco, che si compone di:
+\begin{itemize}
+    \item Un intero che indica i livelli completati.
+    \item Un intero che indica lemonete raccolte.
+    \item Un booleano che indica l'acquisto della skin secondaria.
+    \item Una stringa che indica la skin scelta.
+\end{itemize}
+All'avvio successivo, lo stato viene ricostruito e propagato ai vari model che lo necessitano; in caso contrario viene generata una partita nuova con parametri standard. 
+L'intera logica di I/O è dunque isolata in una sola classe, priva di dipendenze dal motore di gioco; Questa architettura rende effettivo
+il singleton e semplifica i test automatizzati.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/saveManagerUML.png}
+    \caption{UML dell'MVC per la gestione dei nemici}
+    \label{}
+\end{figure}
+
 \end{document}

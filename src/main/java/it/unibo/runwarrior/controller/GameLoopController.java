@@ -59,7 +59,7 @@ public class GameLoopController {
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
 
         this.score = new Score(GameSaveManager.getInstance());
-        this.scoreController = new ScoreController(score);
+        this.scoreController = new ScoreControllerImpl(score);
         this.coinController.setScoreController(scoreController);
         this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this, mainFrame);
         initializePlayer();
