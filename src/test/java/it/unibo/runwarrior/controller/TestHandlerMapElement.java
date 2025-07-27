@@ -57,13 +57,11 @@ public class TestHandlerMapElement {
     public void testGetCollisionRectangles(){
         List<Rectangle> collisionRects = handlerMapElement.getCollisionRectangles();
 
-        assertEquals(4, collisionRects.size());
+        assertEquals(5, collisionRects.size());
         final int tileSize = handlerMapElement.getTileSize();
 
         Rectangle rectangleExpected = new Rectangle(1*tileSize, 0*tileSize, tileSize, tileSize);
 
         assertTrue(collisionRects.contains(rectangleExpected));
-    
-
     }
 }

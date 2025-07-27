@@ -28,7 +28,7 @@ public class EnemyImplTest {
      */
     @BeforeEach
     public void setUp() {
-        glp = new GameLoopController("Map2/map_2.txt", "Map2/foreste_theme.txt", "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
+        glp = new GameLoopController("tryMap.txt", "Map2/forest_theme.txt", "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
         enemy = new EnemyImpl(50, 100, 64, 64, true, enemyHandler, glp, 1); 
     }
@@ -40,8 +40,8 @@ public class EnemyImplTest {
         Rectangle bounds = enemy.getBounds();
         assertEquals(50, bounds.x);
         assertEquals(100, bounds.y);
-        assertEquals(64, bounds.width);
-        assertEquals(64, bounds.height);
+        assertEquals(48, bounds.width);
+        assertEquals(48, bounds.height);
     }
 
     /**
