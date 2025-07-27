@@ -18,14 +18,13 @@ public final class GameSaveManager {
     private static final String DEFAULT_STRING = "DEFAULT_SKIN";
     private static final String WIZARD = "WIZARD";
     private static final int MAX_LEVEL = 3;
+    private static GameSaveManager instance = getInstance();
+    private static final Logger LOGGER = Logger.getLogger(GameSaveManager.class.getName());
 
     private int levelsCompleted;
     private int coinCollected;
     private boolean premiumSkinUnlocked;
     private String selectedSkinName;
-
-    private static GameSaveManager instance = getInstance();
-    private static final Logger LOGGER = Logger.getLogger(GameSaveManager.class.getName());
 
     /**
      * Constructor of the class GameSaveManager.
@@ -36,11 +35,12 @@ public final class GameSaveManager {
         premiumSkinUnlocked = false;
     }
 
-     /**
-     * Get the current instance of the GameSaveManager. 
+    
+    /**
+     * Get the current instance of the GameSaveManager.
      * If load return null it creates a new one.
      *
-     * @return the instance created or loaded 
+     * @return the instance created or loaded
      */
     public static GameSaveManager getInstance() {
         if (instance == null) {
@@ -86,15 +86,15 @@ public final class GameSaveManager {
         final GameSaveManager gsm = new GameSaveManager();
         try (BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
             String line;
-            line=reader.readLine();
+            line = reader.readLine();
             if (line != null) {
                 gsm.levelsCompleted = Integer.parseInt(line.trim());
             }
-            line=reader.readLine();
+            line = reader.readLine();
             if (line != null) {
                 gsm.coinCollected = Integer.parseInt(line.trim());
             }
-            line=reader.readLine();
+            line = reader.readLine();
             if (line != null) {
                 gsm.premiumSkinUnlocked = Boolean.parseBoolean(line.trim());
             }
@@ -107,6 +107,7 @@ public final class GameSaveManager {
             return null;
         }
     }
+
     /**
      * Getters for the completed levels.
      *
@@ -141,7 +142,7 @@ public final class GameSaveManager {
 
     /**
      * Set the number of coin collected.
-     * 
+     *
      * @param coinCollected the new number of coin collected 
      */
     public void setCoinCollected(final int coinCollected) {
