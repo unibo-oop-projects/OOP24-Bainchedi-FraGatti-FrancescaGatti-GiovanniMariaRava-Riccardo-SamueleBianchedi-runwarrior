@@ -25,6 +25,7 @@ public class GameLoopController {
     private Character player;
     private CharacterComand commands;
     private PowersHandler powerUpsHandler;
+    private PowerUpController powerController;
     private PowerUpManager powersManager;
 
     private HandlerMapElement mapHandler;
@@ -46,8 +47,9 @@ public class GameLoopController {
         
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
-        this.powersManager = new PowerUpManager(this, mapHandler, gameMap.getMapData());
-        this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powersManager);
+        this.powerController = new PowerUpController(this, mapHandler, gameMap.getMapData());
+        this.powersManager = new PowerUpManager(powerController.getPowerUps(), mapHandler);
+        this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powerController);
         this.enemyViewFactory = new EnemyViewFactoryImpl();
         initializeEnemyViewFactory();
         this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
@@ -75,9 +77,9 @@ public class GameLoopController {
         final String selectedSkin = GameSaveManager.getInstance().getSelectedSkinName();
         final boolean wizardUnlocked = GameSaveManager.getInstance().isSkinPremiumSbloccata();
         if ("WIZARD".equalsIgnoreCase(selectedSkin) && wizardUnlocked) {
-            player = new NakedWizard(this, commands, mapHandler, powersManager);
+            player = new NakedWizard(this, commands, mapHandler, powerController);
         } else {
-            player = new NakedWarrior(this, commands, mapHandler, powersManager);
+            player = new NakedWarrior(this, commands, mapHandler, powerController);
         }
         player.getMovementHandler().setStartY(mapHandler.getFirstY());
         powerUpsHandler.setIndex();

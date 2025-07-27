@@ -23,7 +23,6 @@ import it.unibo.runwarrior.model.player.ArmourWarrior;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.model.player.NakedWarrior;
-import it.unibo.runwarrior.view.PowerUpManager;
 
 class TestPlayerCollisions {
     private static final int TRY_TYLE = 36;
@@ -88,9 +87,9 @@ class TestPlayerCollisions {
 
     @Test
     void testCollisionPowerup() {
-        final PowerUpManager pMan = new PowerUpManager(glc, mapHandler1, mapHandler1.getMap());
-        final Character player = new ArmourWarrior(glc, cmd, mapHandler1, pMan);
-        final PowerUpDetectionImpl collisionPowerups = new PowerUpDetectionImpl(glc, pMan);
+        final PowerUpController pCon = new PowerUpController(glc, mapHandler1, mapHandler1.getMap());
+        final Character player = new ArmourWarrior(glc, cmd, mapHandler1, pCon);
+        final PowerUpDetectionImpl collisionPowerups = new PowerUpDetectionImpl(glc, pCon);
 
         assertTrue(isTouchingUp(new Rectangle(50, 50, 50, 50), 
         new Rectangle(70, 100, 50, 50)));
@@ -107,8 +106,8 @@ class TestPlayerCollisions {
 
     @Test
     void testCollisionEnemies() {
-        final PowerUpManager pMan = new PowerUpManager(glc, mapHandler1, mapHandler1.getMap());
-        final Character player = new NakedWarrior(glc, cmd, mapHandler1, pMan);
+        final PowerUpController pCon = new PowerUpController(glc, mapHandler1, mapHandler1.getMap());
+        final Character player = new NakedWarrior(glc, cmd, mapHandler1, pCon);
         final List<EnemyImpl> enemies = new ArrayList<>();
         enemies.add(new EnemyImpl(1836, 576, 36, 36, true, glc.getEnemyHandler(), glc, 0));
         enemies.add(new EnemyImpl(2664, 576, 36, 36, true, glc.getEnemyHandler(), glc, 0));
