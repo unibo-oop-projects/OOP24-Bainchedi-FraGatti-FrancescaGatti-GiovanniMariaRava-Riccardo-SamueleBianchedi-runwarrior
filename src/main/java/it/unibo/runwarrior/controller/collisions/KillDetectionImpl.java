@@ -1,7 +1,6 @@
 package it.unibo.runwarrior.controller.collisions;
 
 import java.awt.Rectangle;
-import java.util.List;
 
 import it.unibo.runwarrior.model.enemy.api.Enemy;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
@@ -14,21 +13,20 @@ import it.unibo.runwarrior.controller.HandlerMapElement;
 * Class that detects the collision between the player and the enmies.
 */
 public class KillDetectionImpl implements KillDetection {
-    private final GameLoopController glp;
+    private final GameLoopController glc;
     private final HandlerMapElement hM;
-    //private PowersHandler powerUpHandler; // vedi sotto
-    private EnemyImpl enemyToDie; // commentato per ricordare che forse è meglio mantenerlo come variabile
+    private EnemyImpl enemyToDie;
     private long hitWaitTime;
     private static final int TOLL = AbstractCharacterImpl.SPEED;
 
     /**
      * Constructor of kill detection.
      *
-     * @param glp game-loop panel
+     * @param glc game-loop controller
      * @param hM map handler
      */
-    public KillDetectionImpl(final GameLoopController glp, final HandlerMapElement hM) {
-        this.glp = glp;
+    public KillDetectionImpl(final GameLoopController glc, final HandlerMapElement hM) {
+        this.glc = glc;
         this.hM = hM;
     }
 
@@ -40,7 +38,7 @@ public class KillDetectionImpl implements KillDetection {
         final Rectangle playerArea = player.getArea();
         final Rectangle swordArea = player.getSwordArea();
         //ConcurrentModificationException
-        for (final EnemyImpl enemy : glp.getEnemyHandler().getEnemies()) {
+        for (final EnemyImpl enemy : glc.getEnemyHandler().getEnemies()) {
             if (futureArea(playerArea).intersects(enemy.getBounds())) {
                 //System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
                 if (isTouchingUp(playerArea, enemy.getBounds())) {
@@ -50,11 +48,11 @@ public class KillDetectionImpl implements KillDetection {
                 else if (playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x &&
                         System.currentTimeMillis() - hitWaitTime > 3000) {
                     hitWaitTime = System.currentTimeMillis();
-                    glp.getPowersHandler().losePower(true);
+                    glc.getPowersHandler().losePower(true);
                 }
                 else if (playerArea.x <= enemy.getBounds().x + enemy.getBounds().width && System.currentTimeMillis() - hitWaitTime > 3000) {
                     hitWaitTime = System.currentTimeMillis();
-                    glp.getPowersHandler().losePower(true);
+                    glc.getPowersHandler().losePower(true);
                 }
             }
             else if (swordArea.intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking() &&
@@ -63,34 +61,43 @@ public class KillDetectionImpl implements KillDetection {
                 enemyToDie = enemy;
             }
         }
-        glp.getEnemyHandler().removeEnemy(enemyToDie);
+        glc.getEnemyHandler().removeEnemy(enemyToDie);
     }
 
     /**
-     * {@inheritDoc}
+     * Creates the future area of the falling player
+     *
+     * @param r1 collision area
+     * @param pl player
+     * @return the collision area the player will have
      */
-    @Override
-    public Rectangle futureArea(final Rectangle r1) {
+    private Rectangle futureArea(final Rectangle r1) {
         final Rectangle futureArea = new Rectangle(r1);
         futureArea.translate(0, it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
         return futureArea;
     }
 
     /**
-     * {@inheritDoc}
+     * Control if the collision is from above the enemy.
+     *
+     * @param playerArea player collision area
+     * @param enemyArea enemy collision area
+     * @return true if the player touches the enemy in his head
      */
-    @Override
-    public boolean isTouchingUp(final Rectangle playerArea, final Rectangle enemyArea){
+    private boolean isTouchingUp(final Rectangle playerArea, final Rectangle enemyArea){
         return playerArea.y + playerArea.height <= enemyArea.y && 
         ((playerArea.x + TOLL >= enemyArea.x && playerArea.x + TOLL <= enemyArea.x + enemyArea.width) ||
         (playerArea.x + playerArea.width - TOLL >= enemyArea.x && playerArea.x + playerArea.width - TOLL <= enemyArea.x + enemyArea.width));
     }
 
     /**
-     * {@inheritDoc}
+     * Controls if the given point (x, y) is touching a solid tile.
+     *
+     * @param x x coordinate
+     * @param y y coordinate
+     * @return true if the point touches a solid tile
      */
-    @Override
-    public boolean isBehindTile(final int x, final int y) {
+    private boolean isBehindTile(final int x, final int y) {
         final float indexXtile = x / hM.getTileSize();
         final float indexYtile = y / hM.getTileSize();
         final int blockIndex = hM.getMap()[(int) indexYtile][(int) indexXtile];

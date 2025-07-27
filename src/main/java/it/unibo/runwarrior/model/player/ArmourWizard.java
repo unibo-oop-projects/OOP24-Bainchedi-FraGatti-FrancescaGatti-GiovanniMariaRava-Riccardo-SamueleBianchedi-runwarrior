@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpManager;
 
 /**
@@ -19,14 +18,14 @@ public class ArmourWizard extends AbstractCharacterImpl {
     /**
      * Constructor of this skin.
      *
-     * @param panel game-loop panel
+     * @param glc game-loop controller
      * @param commands object that handles keyboard input
      * @param mapHandler object that prints tiles
      * @param pMan object that prints powerups
      */
-    public ArmourWizard(final GameLoopController panel, final CharacterComand commands,
+    public ArmourWizard(final GameLoopController glc, final CharacterComand commands,
         final HandlerMapElement mapHandler, final PowerUpManager pMan) {
-        super(panel, commands, mapHandler, pMan);
+        super(glc, commands, mapHandler, pMan);
     }
 
     /**

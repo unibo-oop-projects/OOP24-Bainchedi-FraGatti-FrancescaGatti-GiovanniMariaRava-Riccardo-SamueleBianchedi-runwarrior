@@ -18,17 +18,17 @@ public class PowerUpImpl implements PowerUp {
     private BufferedImage image;
     private BufferedImage egg;
     private Rectangle touchArea;
-    private final GameLoopController glp;
+    private final GameLoopController glc;
     private boolean powerTaken;
     private boolean eggOpen;
 
     /**
      * Constructor that creates powerup area and set the egg image.
      *
-     * @param glp game-loop panel
+     * @param glc game-loop controller
      */
-    public PowerUpImpl(final GameLoopController glp) {
-        this.glp = glp;
+    public PowerUpImpl(final GameLoopController glc) {
+        this.glc = glc;
         touchArea = new Rectangle();
         try {
             egg = ImageIO.read(getClass().getResourceAsStream("/PowerUps/egg.png"));
@@ -43,16 +43,16 @@ public class PowerUpImpl implements PowerUp {
     @Override
     public void powerUpImage() {
         try {
-            if (glp.getPowersHandler().getPowers() == 0) {
+            if (glc.getPowersHandler().getPowers() == 0) {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/armour.png"));
             }
-            if (glp.getPowersHandler().getPowers() == 1) {
+            if (glc.getPowersHandler().getPowers() == 1) {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/sword.png"));
             }
-            if (glp.getPowersHandler().getPowers() == 3) {
+            if (glc.getPowersHandler().getPowers() == 3) {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/cape.png"));
             }
-            if (glp.getPowersHandler().getPowers() == 4) {
+            if (glc.getPowersHandler().getPowers() == 4) {
                 image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/stick.png"));
             }
         } catch (final IOException e) {

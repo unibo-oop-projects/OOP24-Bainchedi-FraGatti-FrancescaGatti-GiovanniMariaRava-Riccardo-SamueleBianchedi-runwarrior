@@ -24,7 +24,7 @@ public interface CollisionDetection {
      * @param checkDirections boolean to decide if the check of the direction is useful or not
      * @return true if the player touches a solid tile
      */
-    boolean touchSolid(int x, int y, Character player, boolean checkDirections);
+    public boolean touchSolid(final int x, final int y, final Character player, final boolean checkDirections);
 
     /**
      * Controls in which direction the player collides with a tile.
@@ -35,8 +35,8 @@ public interface CollisionDetection {
      * @param indexYtile column of the tile
      * @param player the player in the game panel
      * @return the string that specifies the direction of the collision
-     */
-    String checkCollisionDirection(int x, int y, float indexXtile, float indexYtile, Character player);
+    */
+    String checkCollisionDirection(final int x, final int y, final float indexXtile, final float indexYtile, final Character player);
 
     /**
      * Controls if the given player is in air, so if he doesn't touch the ground.

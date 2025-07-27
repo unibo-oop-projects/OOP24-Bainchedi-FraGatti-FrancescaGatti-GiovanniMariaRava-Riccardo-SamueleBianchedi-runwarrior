@@ -17,7 +17,7 @@ import it.unibo.runwarrior.view.PowerUpManager;
  * Class that handle the change of powerup during the game.
  */
 public class PowersHandler {
-    private GameLoopController glp;
+    private GameLoopController glc;
     private int index;
     private int maxIndex;
     private List<Character> everyPowerUp = new ArrayList<>();
@@ -29,30 +29,31 @@ public class PowersHandler {
     /**
      * Constructor of the object that handles powerup chenging.
      *
-     * @param glp game-loop panel
+     * @param glc game-loop controller
      * @param cmd object that handles keyboard input
      * @param mapH objects that prints map
      * @param pMan object that prints powerups
      */
-    public PowersHandler(final GameLoopController glp, final CharacterComand cmd, final HandlerMapElement mapH, final PowerUpManager pMan) {
-        this.glp = glp;
-        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glp, cmd, mapH, pMan),
-        new ArmourWarrior(glp, cmd, mapH, pMan),
-        new SwordWarrior(glp, cmd, mapH, pMan), 
-        new NakedWizard(glp, cmd, mapH, pMan), 
-        new ArmourWizard(glp, cmd, mapH, pMan), 
-        new StickWizard(glp, cmd, mapH, pMan)));
+    public PowersHandler(final GameLoopController glc, final CharacterComand cmd, 
+    final HandlerMapElement mapH, final PowerUpManager pMan) {
+        this.glc = glc;
+        everyPowerUp.addAll(Arrays.asList(new NakedWarrior(glc, cmd, mapH, pMan),
+        new ArmourWarrior(glc, cmd, mapH, pMan),
+        new SwordWarrior(glc, cmd, mapH, pMan), 
+        new NakedWizard(glc, cmd, mapH, pMan), 
+        new ArmourWizard(glc, cmd, mapH, pMan), 
+        new StickWizard(glc, cmd, mapH, pMan)));
     }
 
     /**
      * Set the index of the list based on the skin, warrior or wizard.
      */
     public void setIndex(){
-        if(glp.getPlayer().getClass().equals(NakedWarrior.class)){
+        if(glc.getPlayer().getClass().equals(NakedWarrior.class)){
             index = 0;
             maxIndex = 2;
         }
-        if(glp.getPlayer().getClass().equals(NakedWizard.class)){
+        if(glc.getPlayer().getClass().equals(NakedWizard.class)){
             index = 3;
             maxIndex = 5;
         }
@@ -65,7 +66,7 @@ public class PowersHandler {
         if(index < maxIndex && index >= 0){
             this.index++;
             setPosition();
-            glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift, 0);
+            glc.setPlayer(everyPowerUp.get(index), realx, x, y, shift, 0);
         }
     }
 
@@ -78,9 +79,9 @@ public class PowersHandler {
         this.index--;
         if(index >= 0){
             setPosition();
-            final long lastHit = enemy ? glp.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime() 
-            : glp.getPlayer().getMovementHandler().getCollisionDetection().getHitWaitTime();
-            glp.setPlayer(everyPowerUp.get(index), realx, x, y, shift, lastHit);
+            final long lastHit = enemy ? glc.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime() 
+            : glc.getPlayer().getMovementHandler().getCollisionDetection().getHitWaitTime();
+            glc.setPlayer(everyPowerUp.get(index), realx, x, y, shift, lastHit);
         }
     }
 
@@ -88,10 +89,10 @@ public class PowersHandler {
      * Set the player position when he gains or loses a powerup.
      */
     private void setPosition(){
-        realx = glp.getPlayer().getMovementHandler().getPlX();
-        x = glp.getPlayer().getMovementHandler().getScX();
-        y = glp.getPlayer().getMovementHandler().getPlY();
-        shift = glp.getPlayer().getMovementHandler().getGroundX();
+        realx = glc.getPlayer().getMovementHandler().getPlX();
+        x = glc.getPlayer().getMovementHandler().getScX();
+        y = glc.getPlayer().getMovementHandler().getPlY();
+        shift = glc.getPlayer().getMovementHandler().getGroundX();
     }
 
     /**

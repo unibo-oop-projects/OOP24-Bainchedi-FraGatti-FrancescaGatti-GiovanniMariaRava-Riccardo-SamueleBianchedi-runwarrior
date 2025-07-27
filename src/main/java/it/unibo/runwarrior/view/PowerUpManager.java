@@ -23,20 +23,20 @@ public class PowerUpManager {
     private final int tileSize;
 
     /**
-     * Constructor that creates the list of powerup by using the game-loop panel, the map handler and the map.
+     * Constructor that creates the list of powerup by using the game-loop controller, the map handler and the map.
      *
-     * @param glp game-loop panel
+     * @param glc game-loop controller
      * @param hM map handler
      * @param map map
      */
-    public PowerUpManager(final GameLoopController glp, final HandlerMapElement hM, final int[][] map) {
+    public PowerUpManager(final GameLoopController glc, final HandlerMapElement hM, final int[][] map) {
         this.mapHandler = hM;
         this.tileSize = hM.getTileSize();
         this.powerUps = new ArrayList<>();
         int distance = FIRST_DISTANCE_POWERUP;
         int space = END_OF_POWERUP / NUM_POWERUP;
         for (int i = 0; i < NUM_POWERUP; i++) {
-            final PowerUp p = new PowerUpImpl(glp);
+            final PowerUp p = new PowerUpImpl(glc);
             int row = 0;
             while (map[row][distance] != 2 && map[row][distance] != 1) {
                 row++;

@@ -21,7 +21,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
     private int tileSize;
     private List<String> directions;
     private Rectangle playerArea;
-    private final GameLoopController glp;
+    private final GameLoopController glc;
     private long hitWaitTime;
     private int gameOverY;
     private boolean end;
@@ -38,7 +38,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
         this.map = map;
         this.blocks = blocks;
         this.tileSize = tileSize;
-        this.glp = glp;
+        this.glc = glp;
         this.directions = new ArrayList<>();
     }
 
@@ -84,7 +84,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
             }
             if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3) {
                 hitWaitTime = System.currentTimeMillis();
-                glp.getPowersHandler().losePower(false);
+                glc.getPowersHandler().losePower(false);
             }
             return true;
         } else if (!blocks.get(blockIndex).isPortal()) {
@@ -128,7 +128,6 @@ public class CollisionDetectionImpl implements CollisionDetection {
         else if (x + AbstractCharacterImpl.SPEED >= tileRec.x + tileRec.width) {
             direction = "left";
         }
-        //System.out.println("- " + x + " " + y + " - - " + direction + " - " + indexXtile + " " + indexYtile);
         return direction;
     }
 
@@ -163,6 +162,6 @@ public class CollisionDetectionImpl implements CollisionDetection {
      */
     @Override
     public boolean gameOver() {
-        return gameOverY >= glp.getGlp().getHeight() || end;
+        return gameOverY >= glc.getGlp().getHeight() || end;
     }
 }
