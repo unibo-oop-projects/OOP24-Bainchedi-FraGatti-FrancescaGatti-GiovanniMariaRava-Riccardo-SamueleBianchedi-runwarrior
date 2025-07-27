@@ -149,7 +149,7 @@ public class Menu extends JPanel {
                         "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
                         glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glc.getGlp()); 
+                        frameMenu.setContentPane(glc.getGlp());
                         frameMenu.revalidate();
                         frameMenu.repaint();
                         glc.getGlp().setFocusable(true);
@@ -159,9 +159,9 @@ public class Menu extends JPanel {
                     level2.addActionListener(level2Event -> {
                         glc = new GameLoopController("Map2/map2.txt", "Map2/forest_theme.txt",
                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
-                        glc.glp.startGame();
+                        glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glc.glp);
+                        frameMenu.setContentPane(glc.getGlp());
                         frameMenu.revalidate();
                         frameMenu.repaint();
                         glc.getGlp().setFocusable(true);
@@ -171,14 +171,15 @@ public class Menu extends JPanel {
                     level3.addActionListener(level3Event -> {
                         glc = new GameLoopController("Map_3/map_3.txt", "Map_3/map3Theme.txt",
                         "/Map_3/enemiesMap3.txt", "/Coins/CoinCoordinates_map3.txt");
-                        glc.glp.startGame();
+                        glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glc.glp);
+                        frameMenu.setContentPane(glc.getGlp());
                         frameMenu.revalidate();
                         frameMenu.repaint();
                         glc.getGlp().setFocusable(true);
                         glc.getGlp().requestFocusInWindow();
                         glc.getGlp().requestFocus();
+                        
                     });
                     final JButton shopButton = new JButton("SHOP");
                     shopButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
