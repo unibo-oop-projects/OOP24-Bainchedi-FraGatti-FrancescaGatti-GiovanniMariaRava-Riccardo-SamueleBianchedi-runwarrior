@@ -24,6 +24,7 @@ public class MonkeyView implements EnemyView {
     private final GameLoopController glp;
     /**
      * Constructor of the class MonkeyView.
+     * 
      * @param glp is the panel in which the monkey need to be renderd
      */
 

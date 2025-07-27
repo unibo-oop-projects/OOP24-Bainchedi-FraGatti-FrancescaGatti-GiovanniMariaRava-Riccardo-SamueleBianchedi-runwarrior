@@ -25,6 +25,7 @@ public class GuardView implements EnemyView {
     private final GameLoopController glp;
     /**
      * Constructor of the GuardView class.
+     * 
      * @param glp is the panel in which the guard need to be renderd.
      */
 
@@ -32,7 +33,7 @@ public class GuardView implements EnemyView {
         this.glp = glp;
         try {
             loadResources();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }

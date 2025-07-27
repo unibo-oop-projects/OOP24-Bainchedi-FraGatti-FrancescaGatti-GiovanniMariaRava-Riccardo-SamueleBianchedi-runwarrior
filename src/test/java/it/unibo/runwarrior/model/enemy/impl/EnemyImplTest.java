@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import java.util.Collections;
 import java.util.List;
 
+import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
@@ -18,7 +19,7 @@ import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
 
 public class EnemyImplTest {
     private EnemyImpl enemy;
-    private GameLoopPanel glp;
+    private GameLoopController glp;
     private EnemyHandlerImpl enemyHandler;
     private EnemyViewFactoryImpl enemyViewFactory;
     
@@ -27,7 +28,7 @@ public class EnemyImplTest {
      */
     @BeforeEach
     public void setUp() {
-        glp = new GameLoopPanel("Map2/map_2.txt", "Map2/foreste_theme.txt", "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
+        glp = new GameLoopController("Map2/map_2.txt", "Map2/foreste_theme.txt", "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
         enemy = new EnemyImpl(50, 100, 64, 64, true, enemyHandler, glp, 1); 
     }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
-import it.unibo.runwarrior.model.PowerUpImpl;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
 
 /**
@@ -29,7 +28,6 @@ public class EnemyImpl implements Enemy {
     private EnemyHandlerImpl enemyHandler;
 
     private final GameLoopController glp;
-    private PowerUpImpl powerUp;
     
     /**
      * Constructor of the class.
@@ -75,8 +73,6 @@ public class EnemyImpl implements Enemy {
      */
     @Override
     public void die() {
-        // powerUp.setTouchArea(new Rectangle(x, y, width, height));
-        // glp.getPowersFactory().PowerUpAppearance(powerUp);
         enemyHandler.removeEnemy(this);
     }
 
