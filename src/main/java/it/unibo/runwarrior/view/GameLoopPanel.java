@@ -100,7 +100,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
         gameController.getPowersManager().printPowerUp(gr2);
         gameController.getPlayer().drawPlayer(gr2);
-        gameController.getPlayer().drawRectangle(gr2);
         gameController.getEnemyHandler().render(gr2);
         gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize(), gameController.getPlayer());
         gr2.setColor(Color.BLACK);

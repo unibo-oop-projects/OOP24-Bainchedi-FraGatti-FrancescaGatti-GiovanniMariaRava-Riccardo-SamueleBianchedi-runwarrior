@@ -16,8 +16,12 @@ import it.unibo.runwarrior.model.MapElement;
 public class CollisionDetectionImpl implements CollisionDetection {
     public static final int SEC_3 = 3000;
     public static final int FEET_HEAD_TOLL = 5;
+    public static final String RIGHT = "right";
+    public static final String LEFT = "left";
+    public static final String UP = "up";
+    public static final String DOWN = "down";
     private Character player;
-    private final int map[][];
+    private final int[][] map;
     private final List<MapElement> blocks;
     private int tileSize;
     private List<String> directions;
@@ -33,13 +37,15 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * @param map current map
      * @param blocks list of the block types
      * @param tileSize size of the tile
+     * @param glc game-loop controller
      */
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    public CollisionDetectionImpl(final int map[][], final List<MapElement> blocks, final int tileSize, final GameLoopController glp) {
+    public CollisionDetectionImpl(final int[][] map, final List<MapElement> blocks, 
+    final int tileSize, final GameLoopController glc) {
         this.map = map;
         this.blocks = blocks;
         this.tileSize = tileSize;
-        this.glc = glp;
+        this.glc = glc;
         this.directions = new ArrayList<>();
     }
 
@@ -47,25 +53,25 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    public String checkCollision(final Character player) {
-        this.player = player;
-        playerArea = player.getArea();
+    public String checkCollision(final Character pl) {
+        this.player = pl;
+        playerArea = pl.getArea();
         String dir = "";
         this.directions.clear();
-        if (touchSolid(playerArea.x + playerArea.width - (FEET_HEAD_TOLL + 1), playerArea.y, true) |
-            touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height / 2, true) |
-            touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height, true) |
-            touchSolid(playerArea.x + (FEET_HEAD_TOLL + 1), playerArea.y, true) |
-            touchSolid(playerArea.x, playerArea.y + playerArea.height / 2, true) |
-            touchSolid(playerArea.x, playerArea.y + playerArea.height, true)) {
-                dir = directions.stream().filter(s -> "right".equals(s) | "left".equals(s))
+        if (touchSolid(playerArea.x + playerArea.width - (FEET_HEAD_TOLL + 1), playerArea.y, true) 
+            | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height / 2, true) 
+            | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height, true) 
+            | touchSolid(playerArea.x + (FEET_HEAD_TOLL + 1), playerArea.y, true) 
+            | touchSolid(playerArea.x, playerArea.y + playerArea.height / 2, true) 
+            | touchSolid(playerArea.x, playerArea.y + playerArea.height, true)) {
+                dir = directions.stream().filter(s -> RIGHT.equals(s) | LEFT.equals(s))
                         .distinct().findFirst().orElse("");
         }
-        if (dir.isEmpty() && directions.contains("up")) {
-            dir = "up";
+        if (dir.isEmpty() && directions.contains(UP)) {
+            dir = UP;
         }
-        if (directions.contains("down")) {
-            dir = "down";
+        if (directions.contains(DOWN)) {
+            dir = DOWN;
         }
         return dir;
     }
@@ -90,14 +96,14 @@ public class CollisionDetectionImpl implements CollisionDetection {
             }
             return true;
         } else if (!blocks.get(blockIndex).isPortal()) {
-            //altro ciclo per verificare se c'è realmente collisione, per evitare che il player si infili nel terreno durante il salto
+//altro ciclo per verificare se c'è realmente collisione, per evitare che il player si infili nel terreno durante il salto
             for (int i = playerArea.width; i >= 0; i = i - playerArea.width) {
                 indexXtile = (playerArea.x + i) / tileSize;
                 indexYtile = playerArea.y / tileSize;
                 blockIndex = map[(int) indexYtile][(int) indexXtile];
                 if (blocks.get(blockIndex).getCollision() && checkDirections) {
                     final String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile);
-                    if ("right".equals(tempDir) || "left".equals(tempDir)) {
+                    if (RIGHT.equals(tempDir) || LEFT.equals(tempDir)) {
                         this.directions.add(tempDir);
                         return true;
                     }
@@ -117,18 +123,15 @@ public class CollisionDetectionImpl implements CollisionDetection {
         final int tileY = ((int) indexYtile) * tileSize;
         final Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
         if (y == tileRec.y && x >= tileRec.x && x <= tileRec.x + tileRec.width) {
-            direction = "up";
-        }
-        else if (isInAir(player) && y == playerArea.y && 
-            (tileRec.y + tileRec.height - y) < it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_UP &&
-            x >= tileRec.x && x <= tileRec.x + tileRec.width || y <= 0) {
-            direction = "down";
-        }
-        else if (x - AbstractCharacterImpl.SPEED <= tileRec.x) {
-            direction = "right";
-        }
-        else if (x + AbstractCharacterImpl.SPEED >= tileRec.x + tileRec.width) {
-            direction = "left";
+            direction = UP;
+        } else if (isInAir(player) && y == playerArea.y 
+            && (tileRec.y + tileRec.height - y) < it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_UP 
+            && x >= tileRec.x && x <= tileRec.x + tileRec.width || y <= 0) {
+            direction = DOWN;
+        } else if (x - AbstractCharacterImpl.SPEED <= tileRec.x) {
+            direction = RIGHT;
+        } else if (x + AbstractCharacterImpl.SPEED >= tileRec.x + tileRec.width) {
+            direction = LEFT;
         }
         return direction;
     }
@@ -137,9 +140,10 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    public boolean isInAir(final Character player) {
-        return !touchSolid(player.getArea().x + FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, false) &&
-            !touchSolid(player.getArea().x + player.getArea().width - FEET_HEAD_TOLL, player.getArea().y + player.getArea().height, false);
+    public boolean isInAir(final Character pl) {
+        return !touchSolid(pl.getArea().x + FEET_HEAD_TOLL, pl.getArea().y + pl.getArea().height, false) 
+        && !touchSolid(pl.getArea().x + pl.getArea().width - FEET_HEAD_TOLL, pl.getArea().y + pl.getArea().height, 
+        false);
     }
 
     /**

@@ -26,6 +26,10 @@ public class PowerUpController {
     public PowerUpController(final GameLoopController glc, final HandlerMapElement hM, final int[][] map) {
         this.tileSize = hM.getTileSize();
         this.powerUps = new ArrayList<>();
+        createList(glc, map);
+    }
+
+    private void createList(final GameLoopController glc, final int[][] map) {
         int distance = FIRST_DISTANCE_POWERUP;
         final int space = END_OF_POWERUP / NUM_POWERUP;
         for (int i = 0; i < NUM_POWERUP; i++) {

@@ -10,14 +10,14 @@ import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 
 /**
-* Class that detects the collision between the player and the enmies.
-*/
+ * Class that detects the collision between the player and the enmies.
+ */
 public class KillDetectionImpl implements KillDetection {
+    private static final int TOLL = AbstractCharacterImpl.SPEED;
     private final GameLoopController glc;
     private final HandlerMapElement hM;
     private EnemyImpl enemyToDie;
     private long hitWaitTime;
-    private static final int TOLL = AbstractCharacterImpl.SPEED;
 
     /**
      * Constructor of kill detection.
@@ -44,20 +44,19 @@ public class KillDetectionImpl implements KillDetection {
                 if (isTouchingUp(playerArea, enemy.getBounds())) {
                     player.getMovementHandler().setJumpKill();
                     enemyToDie = enemy;
-                }
-                else if (playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x &&
-                        System.currentTimeMillis() - hitWaitTime > 3000) {
+                } else if (playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x 
+                        && System.currentTimeMillis() - hitWaitTime > CollisionDetectionImpl.SEC_3) {
+                    hitWaitTime = System.currentTimeMillis();
+                    glc.getPowersHandler().losePower(true);
+                } else if (playerArea.x <= enemy.getBounds().x + enemy.getBounds().width 
+                        && System.currentTimeMillis() - hitWaitTime > CollisionDetectionImpl.SEC_3) {
                     hitWaitTime = System.currentTimeMillis();
                     glc.getPowersHandler().losePower(true);
                 }
-                else if (playerArea.x <= enemy.getBounds().x + enemy.getBounds().width && System.currentTimeMillis() - hitWaitTime > 3000) {
-                    hitWaitTime = System.currentTimeMillis();
-                    glc.getPowersHandler().losePower(true);
-                }
-            }
-            else if (swordArea.intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking() &&
-                    !isBehindTile(swordArea.x + hM.getTileSize() / 2, swordArea.y + (swordArea.height / 2)) &&
-                    !isBehindTile(swordArea.x + swordArea.width - hM.getTileSize() / 2, swordArea.y + (swordArea.height / 2)) ) {
+            } else if (swordArea.intersects(enemy.getBounds()) && player.getAnimationHandler().isAttacking() 
+                    && !isBehindTile(swordArea.x + hM.getTileSize() / 2, swordArea.y + (swordArea.height / 2)) 
+                    && !isBehindTile(swordArea.x + swordArea.width - hM.getTileSize() / 2, 
+                    swordArea.y + (swordArea.height / 2))) {
                 enemyToDie = enemy;
             }
         }
@@ -65,10 +64,9 @@ public class KillDetectionImpl implements KillDetection {
     }
 
     /**
-     * Creates the future area of the falling player
+     * Creates the future area of the falling player.
      *
      * @param r1 collision area
-     * @param pl player
      * @return the collision area the player will have
      */
     private Rectangle futureArea(final Rectangle r1) {
@@ -85,9 +83,10 @@ public class KillDetectionImpl implements KillDetection {
      * @return true if the player touches the enemy in his head
      */
     private boolean isTouchingUp(final Rectangle playerArea, final Rectangle enemyArea){
-        return playerArea.y + playerArea.height <= enemyArea.y && 
-        ((playerArea.x + TOLL >= enemyArea.x && playerArea.x + TOLL <= enemyArea.x + enemyArea.width) ||
-        (playerArea.x + playerArea.width - TOLL >= enemyArea.x && playerArea.x + playerArea.width - TOLL <= enemyArea.x + enemyArea.width));
+        return playerArea.y + playerArea.height <= enemyArea.y 
+        && (playerArea.x + TOLL >= enemyArea.x && playerArea.x + TOLL <= enemyArea.x + enemyArea.width
+        || (playerArea.x + playerArea.width - TOLL >= enemyArea.x 
+        && playerArea.x + playerArea.width - TOLL <= enemyArea.x + enemyArea.width));
     }
 
     /**

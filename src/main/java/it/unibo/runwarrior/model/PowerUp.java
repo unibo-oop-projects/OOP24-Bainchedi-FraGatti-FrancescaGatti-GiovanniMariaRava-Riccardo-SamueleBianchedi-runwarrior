@@ -24,13 +24,6 @@ public interface PowerUp {
     BufferedImage getEgg();
 
     /**
-     * Set the area of the powerup if it comes from a dead enemy.
-     *
-     * @param deathPosition position of the dead enemy
-     */
-    void setTouchArea(Rectangle deathPosition);
-
-    /**
      * @return the collision area of the powerup/egg
      */
     Rectangle getTouchArea();

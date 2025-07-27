@@ -80,14 +80,6 @@ public class PowerUpImpl implements PowerUp {
      * {@inheritDoc}
      */
     @Override
-    public void setTouchArea(final Rectangle deathPosition) {
-        this.touchArea = deathPosition;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Rectangle getTouchArea() {
         return touchArea;
     }

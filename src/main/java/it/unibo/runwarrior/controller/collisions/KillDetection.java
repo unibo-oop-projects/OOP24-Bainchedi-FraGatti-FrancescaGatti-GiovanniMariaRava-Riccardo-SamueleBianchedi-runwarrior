@@ -2,6 +2,9 @@ package it.unibo.runwarrior.controller.collisions;
 
 import it.unibo.runwarrior.model.player.Character;
 
+/**
+ * Interfaces that handles collision between player and enemies.
+ */
 public interface KillDetection {
     /**
      * Checks the collision with every enemies present in the map.

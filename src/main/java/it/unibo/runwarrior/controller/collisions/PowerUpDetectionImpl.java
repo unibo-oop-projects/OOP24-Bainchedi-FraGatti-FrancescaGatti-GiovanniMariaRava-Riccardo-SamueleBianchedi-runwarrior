@@ -94,7 +94,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     private boolean isTouchingUp(final Rectangle playerArea, final Rectangle pUpArea) {
         return playerArea.y + playerArea.height <= pUpArea.y 
         && (playerArea.x + TOLL >= pUpArea.x && playerArea.x + TOLL <= pUpArea.x + pUpArea.width
-        || (playerArea.x + playerArea.width - TOLL >= pUpArea.x 
-        && playerArea.x + playerArea.width - TOLL <= pUpArea.x + pUpArea.width));
+        || playerArea.x + playerArea.width - TOLL >= pUpArea.x 
+        && playerArea.x + playerArea.width - TOLL <= pUpArea.x + pUpArea.width);
     }
 }
