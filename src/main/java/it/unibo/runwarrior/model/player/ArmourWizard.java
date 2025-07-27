@@ -9,6 +9,7 @@ import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowerUpController;
+
 /**
  * Implementation of the wizard with cape.
  */

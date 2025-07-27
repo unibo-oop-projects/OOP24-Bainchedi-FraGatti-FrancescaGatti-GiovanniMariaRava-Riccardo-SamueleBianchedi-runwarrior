@@ -5,7 +5,9 @@ import java.util.List;
 
 import it.unibo.runwarrior.model.PowerUp;
 import it.unibo.runwarrior.model.PowerUpImpl;
-
+/**
+ * Class that handles powerup list creation
+ */
 public class PowerUpController {
     public static final int END_OF_POWERUP = 222;
     public static final int NUM_POWERUP = 6;
@@ -14,11 +16,18 @@ public class PowerUpController {
     private List<PowerUp> powerUps;
     private final int tileSize;
 
+    /**
+     * Constructor of PowerUp controller, uses the map to set powerup bounds correctly.
+     *
+     * @param glc game-loop controller
+     * @param hM object that prints map tiles
+     * @param map current map
+     */
     public PowerUpController(final GameLoopController glc, final HandlerMapElement hM, final int[][] map) {
         this.tileSize = hM.getTileSize();
         this.powerUps = new ArrayList<>();
         int distance = FIRST_DISTANCE_POWERUP;
-        int space = END_OF_POWERUP / NUM_POWERUP;
+        final int space = END_OF_POWERUP / NUM_POWERUP;
         for (int i = 0; i < NUM_POWERUP; i++) {
             final PowerUp p = new PowerUpImpl(glc);
             int row = 0;

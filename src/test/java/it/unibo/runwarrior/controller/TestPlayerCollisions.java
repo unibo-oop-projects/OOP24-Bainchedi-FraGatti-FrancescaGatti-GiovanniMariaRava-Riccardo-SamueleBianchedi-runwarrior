@@ -64,16 +64,16 @@ class TestPlayerCollisions {
         final CollisionDetectionImpl collisionTiles = new CollisionDetectionImpl(gameMap1.getMapData(), mapHandler1.getBlocks(), tileSize, glc);
 
         collisionTiles.checkCollision(player);
-        assertTrue(collisionTiles.touchSolid(8 * tileSize, 16 * tileSize, player, false));
-        assertFalse(collisionTiles.touchSolid(39 * tileSize, 14 * tileSize, player, false));
+        assertTrue(collisionTiles.touchSolid(8 * tileSize, 16 * tileSize, false));
+        assertFalse(collisionTiles.touchSolid(39 * tileSize, 14 * tileSize, false));
 
         assertEquals("right", collisionTiles.checkCollisionDirection(12 * tileSize, 550, 
-        12, 15, player));
+        12, 15));
         assertEquals("up", collisionTiles.checkCollisionDirection(605, 12 * tileSize, 
-        16, 12, player));
+        16, 12));
         player.getArea().setLocation(9914, 500);
         assertEquals("down", collisionTiles.checkCollisionDirection(9914, 500, 
-        275, 13, player));
+        275, 13));
 
         player.getArea().setLocation(56 * tileSize, 14 * tileSize);
         assertTrue(collisionTiles.isInAir(player));
@@ -131,9 +131,9 @@ class TestPlayerCollisions {
 
     @Test
     void testCoinCollision(){
-        CoinController coinController = new CoinController();
+        CoinController coinController = new CoinControllerImpl();
         Score score = new Score(GameSaveManager.getInstance());
-        ScoreController scoreController = new ScoreController(score);
+        ScoreController scoreController = new ScoreControllerImpl(score);
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, null);
         final CoinDetectionImpl collisionCoins = new CoinDetectionImpl(tileSize, coinController, scoreController);
 

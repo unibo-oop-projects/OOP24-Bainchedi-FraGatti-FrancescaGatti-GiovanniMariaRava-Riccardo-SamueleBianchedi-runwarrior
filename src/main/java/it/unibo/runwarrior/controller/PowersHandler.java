@@ -16,6 +16,7 @@ import it.unibo.runwarrior.model.player.SwordWarrior;
  * Class that handle the change of powerup during the game.
  */
 public class PowersHandler {
+    public static final int MAX_IND = 5;
     private GameLoopController glc;
     private int index;
     private int maxIndex;
@@ -47,22 +48,22 @@ public class PowersHandler {
     /**
      * Set the index of the list based on the skin, warrior or wizard.
      */
-    public void setIndex(){
-        if(glc.getPlayer().getClass().equals(NakedWarrior.class)){
+    public void setIndex() {
+        if (glc.getPlayer().getClass().equals(NakedWarrior.class)) {
             index = 0;
             maxIndex = 2;
         }
-        if(glc.getPlayer().getClass().equals(NakedWizard.class)){
+        if (glc.getPlayer().getClass().equals(NakedWizard.class)) {
             index = 3;
-            maxIndex = 5;
+            maxIndex = MAX_IND;
         }
     }
 
     /**
      * The player gains a powerup, so it's created a new object from everyPowerUp list.
      */
-    public void setPowers(){
-        if(index < maxIndex && index >= 0){
+    public void setPowers() {
+        if (index < maxIndex && index >= 0) {
             this.index++;
             setPosition();
             glc.setPlayer(everyPowerUp.get(index), realx, x, y, shift, 0);
@@ -74,9 +75,9 @@ public class PowersHandler {
      *
      * @param enemy true if the hit comes from a enemy
      */
-    public void losePower(final boolean enemy){
+    public void losePower(final boolean enemy) {
         this.index--;
-        if(index >= 0){
+        if (index >= 0) {
             setPosition();
             final long lastHit = enemy ? glc.getPlayer().getMovementHandler().getKillDetection().getHitWaitTime() 
             : glc.getPlayer().getMovementHandler().getCollisionDetection().getHitWaitTime();
@@ -87,7 +88,7 @@ public class PowersHandler {
     /**
      * Set the player position when he gains or loses a powerup.
      */
-    private void setPosition(){
+    private void setPosition() {
         realx = glc.getPlayer().getMovementHandler().getPlX();
         x = glc.getPlayer().getMovementHandler().getScX();
         y = glc.getPlayer().getMovementHandler().getPlY();
@@ -97,17 +98,17 @@ public class PowersHandler {
     /**
      * @return the current skin/powerup
      */
-    public int getPowers(){
+    public int getPowers() {
         return this.index;
     }
 
     /**
      * @return true if the player is dead
      */
-    public boolean gameOver(){
+    public boolean gameOver() {
         if (maxIndex == 2 && index < 0) {
             return true;
         }
-        return maxIndex == 5 && index < 3;
+        return maxIndex == MAX_IND && index < 3;
     }
 }

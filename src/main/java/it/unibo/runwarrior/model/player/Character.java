@@ -26,12 +26,6 @@ public interface Character {
     void drawPlayer(Graphics2D gr2);
 
     /**
-     * @param gr2
-     * da cancellare
-     */
-    void drawRectangle(Graphics2D gr2);
-
-    /**
      * Loads the images for every skin.
      */
     void playerImage();

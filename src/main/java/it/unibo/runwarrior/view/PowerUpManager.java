@@ -15,18 +15,19 @@ public class PowerUpManager {
     public static final int NUM_POWERUP = 6;
     public static final int FIRST_DISTANCE_POWERUP = 55;
     public static final int OBSTACLE  = 5;
+
     private List<PowerUp> powerUps;
     private final HandlerMapElement mapHandler;
     private final int tileSize;
 
+    
     /**
-     * Constructor that creates the list of powerup by using the game-loop controller, the map handler and the map.
+     * Constructor that takes powerup list and mapHandler.
      *
-     * @param glc game-loop controller
+     * @param powerUps list of powerup
      * @param hM map handler
-     * @param map map
      */
-    public PowerUpManager(List<PowerUp> powerUps, HandlerMapElement hM) {
+    public PowerUpManager(final List<PowerUp> powerUps, final HandlerMapElement hM) {
         this.mapHandler = hM;
         this.tileSize = hM.getTileSize();
         this.powerUps = powerUps;
