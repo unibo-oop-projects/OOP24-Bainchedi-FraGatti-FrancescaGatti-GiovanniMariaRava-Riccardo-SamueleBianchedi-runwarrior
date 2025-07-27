@@ -86,16 +86,24 @@ public class Menu extends JPanel {
                     }
                 }
             };
-            pannelloSfondoMenu.setLayout(null);
+            //pannelloSfondoMenu.setLayout(null);
+            pannelloSfondoMenu.setLayout(new BorderLayout());
+            pannelloSfondoMenu.setLayout(new BoxLayout(pannelloSfondoMenu, BoxLayout.Y_AXIS));
             pannelloSfondoMenu.setOpaque(true);
 
             final JLabel titoloLabel = new JLabel(new ImageIcon(imgTitolo));
-            titoloLabel.setBounds(TITOLO_X, TITOLO_Y, TITOLO_WIDTH, TITOLO_HEIGHT);
+            titoloLabel.setAlignmentX(CENTER_ALIGNMENT);
+            //titoloLabel.setBounds(TITOLO_X, TITOLO_Y, TITOLO_WIDTH, TITOLO_HEIGHT);
+            pannelloSfondoMenu.add(Box.createVerticalGlue());
             pannelloSfondoMenu.add(titoloLabel);
             final JPanel playButtonPanel = new JPanel();
             playButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
             playButtonPanel.setOpaque(false);
-            playButtonPanel.setBounds(PLAY_PANEL_X, PLAY_PANEL_Y, PLAY_PANEL_WIDTH, PLAY_PANEL_HEIGHT);
+            //playButtonPanel.setBounds(PLAY_PANEL_X, PLAY_PANEL_Y, PLAY_PANEL_WIDTH, PLAY_PANEL_HEIGHT);
+            playButtonPanel.setAlignmentX(CENTER_ALIGNMENT);
+            pannelloSfondoMenu.add(Box.createVerticalStrut(20));
+            pannelloSfondoMenu.add(playButtonPanel);
+            pannelloSfondoMenu.add(Box.createHorizontalGlue());
             playButtonPanel.setPreferredSize(new Dimension(PLAY_BUTTON_PANEL_WIDTH, PLAY_BUTTON_PANEL_HEIGHT));
 
             final JButton playButton = new JButton("PLAY");
