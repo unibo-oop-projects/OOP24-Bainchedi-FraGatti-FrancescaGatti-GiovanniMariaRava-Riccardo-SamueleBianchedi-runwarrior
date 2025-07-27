@@ -16,8 +16,8 @@ import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
  * Implementes EnemyHandler interfaces to manage properly the enemies.
  */
 public class EnemyHandlerImpl implements EnemyHandler {
-    private LinkedList<EnemyImpl> enemies;
-    private EnemyViewFactoryImpl viewFactory;
+    private final List<EnemyImpl> enemies;
+    private final EnemyViewFactoryImpl viewFactory;
     private final GameLoopController glp;
 
     /**
@@ -107,7 +107,7 @@ public class EnemyHandlerImpl implements EnemyHandler {
     /**
      * @return the list of the enemies
      */
-    public LinkedList<EnemyImpl> getEnemies() {
+    public List<EnemyImpl> getEnemies() {
         return enemies;
     }
 }
