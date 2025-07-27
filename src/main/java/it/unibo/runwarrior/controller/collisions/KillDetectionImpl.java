@@ -3,7 +3,6 @@ package it.unibo.runwarrior.controller.collisions;
 import java.awt.Rectangle;
 
 import it.unibo.runwarrior.model.enemy.api.Enemy;
-import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.view.GameMusic;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
@@ -17,9 +16,9 @@ public class KillDetectionImpl implements KillDetection {
     private static final int TOLL = AbstractCharacterImpl.SPEED;
     private final GameLoopController glc;
     private final HandlerMapElement hM;
-    private EnemyImpl enemyToDie;
+    private Enemy enemyToDie;
     private long hitWaitTime;
-    private GameMusic sound;
+    public GameMusic sound;
 
     /**
      * Constructor of kill detection.
@@ -40,7 +39,7 @@ public class KillDetectionImpl implements KillDetection {
         final Rectangle playerArea = player.getArea();
         final Rectangle swordArea = player.getSwordArea();
         //ConcurrentModificationException
-        for (final EnemyImpl enemy : glc.getEnemyHandler().getEnemies()) {
+        for (final Enemy enemy : glc.getEnemyHandler().getEnemies()) {
             if (futureArea(playerArea).intersects(enemy.getBounds())) {
                 //System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
                 if (isTouchingUp(playerArea, enemy.getBounds())) {

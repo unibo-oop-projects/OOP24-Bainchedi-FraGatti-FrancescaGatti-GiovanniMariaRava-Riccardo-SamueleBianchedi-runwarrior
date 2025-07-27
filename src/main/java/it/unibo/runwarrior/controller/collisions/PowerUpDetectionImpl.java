@@ -22,7 +22,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     private final PowerUpController powersController;
     private List<PowerUp> powerCollision;
     private long hitWaitTime;
-    private GameMusic sound;
+    public GameMusic sound;
 
     /**
      * Constructor of powerup detection.

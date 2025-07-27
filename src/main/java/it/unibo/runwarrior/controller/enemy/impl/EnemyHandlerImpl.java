@@ -9,6 +9,7 @@ import java.util.List;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.api.EnemyHandler;
+import it.unibo.runwarrior.model.enemy.api.Enemy;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
@@ -72,7 +73,7 @@ public class EnemyHandlerImpl implements EnemyHandler {
      *
      * @param en the enemy to be removed
      */
-    public void removeEnemy(final EnemyImpl en) {
+    public void removeEnemy(final Enemy en) {
         enemies.remove(en);
     }
 

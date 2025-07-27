@@ -31,7 +31,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
     private long hitWaitTime;
     private int gameOverY;
     private boolean end;
-    private GameMusic sound;
+    public GameMusic sound;
 
     /**
      * Constructor of the collision detection.
