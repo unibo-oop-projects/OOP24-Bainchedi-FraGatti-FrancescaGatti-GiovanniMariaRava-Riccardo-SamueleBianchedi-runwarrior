@@ -11,7 +11,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyViewFactory;
 
 public class EnemyViewFactoryImpl implements EnemyViewFactory {
     private final Map<Integer, EnemyView> viewsByType = new HashMap<>();
-    
+
     /**
      * {@inheritDoc} 
      */
