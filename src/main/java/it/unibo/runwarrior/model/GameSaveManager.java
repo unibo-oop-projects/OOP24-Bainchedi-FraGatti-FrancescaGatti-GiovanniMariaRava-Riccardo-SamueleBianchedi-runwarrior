@@ -28,7 +28,7 @@ public final class GameSaveManager {
     private static final Logger LOGGER = Logger.getLogger(GameSaveManager.class.getName());
 
     /**
-     * Constructor of the class GameSaveManager
+     * Constructor of the class GameSaveManager.
      */
     private GameSaveManager() {
         levelsCompleted = 0;
@@ -56,7 +56,7 @@ public final class GameSaveManager {
 
     /**
      * Read the variables from file so can be used.
-     * 
+     *
      * @param filePath of the saving file
      * @return the GameSaveManger instance
      */
@@ -69,22 +69,21 @@ public final class GameSaveManager {
         final GameSaveManager gsm = new GameSaveManager();
         try (BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
             String line;
-            
-            if ((line = reader.readLine()) != null) {
+            line=reader.readLine();
+            if (line != null) {
                 gsm.levelsCompleted = Integer.parseInt(line.trim());
             }
-            if ((line = reader.readLine()) != null) {
+            line=reader.readLine();
+            if (line != null) {
                 gsm.coinCollected = Integer.parseInt(line.trim());
             }
-            if ((line = reader.readLine()) != null) {
+            line=reader.readLine();
+            if (line != null) {
                 gsm.premiumSkinUnlocked = Boolean.parseBoolean(line.trim());
             }
-            if ((line = reader.readLine()) != null) {
-                gsm.selectedSkinName = line.trim();
-            } else {
-                gsm.selectedSkinName = DEFAULT_STRING;
-            }
-
+            line = reader.readLine();
+            gsm.selectedSkinName = (line != null) ? line.trim() : DEFAULT_STRING;
+            
             return gsm;
         } catch (IOException | NumberFormatException e) {
             LOGGER.log(Level.SEVERE, "Cannot load from file");
@@ -94,7 +93,7 @@ public final class GameSaveManager {
 
     /**
      * Get the current istance of the GameSaveManager.
-     * 
+     *
      * @return the istance of the file
      */
     public static GameSaveManager getInstance() {
@@ -110,7 +109,7 @@ public final class GameSaveManager {
     
     /**
      * Getters for the completed levels.
-     * 
+     *
      * @return the numeber of completed levels
      */
     public int getLevelsCompleted() {
@@ -119,7 +118,7 @@ public final class GameSaveManager {
 
     /**
      * Set the new number of levels completed.
-     * 
+     *
      * @param levelsCompleted the new number of completed levels that needs to be >0 && <=3
      */
     public void setLevelsCompleted(final int levelsCompleted) {
@@ -133,7 +132,7 @@ public final class GameSaveManager {
 
     /**
      * Getters forr the coin.
-     * 
+     *
      * @return the numbers of coin collected
      */
     public int getCoinCollected() {
@@ -152,7 +151,7 @@ public final class GameSaveManager {
 
     /**
      * Tells whether or not the player has unlocked the skin premium.
-     * 
+     *
      * @return a boolean 
      */
     public boolean isSkinPremiumSbloccata() {
@@ -161,17 +160,17 @@ public final class GameSaveManager {
 
     /**
      * Set the new skin as unlocked when it's purchased.
-     * 
+     *
      * @param unlocked a boolean that indicates that the new skin has been purchased
      */
-    public void setSkinPremiumSbloccata(boolean unlocked) {
+    public void setSkinPremiumSbloccata(final boolean unlocked) {
         this.premiumSkinUnlocked = unlocked;
         saveGame();
     }
 
     /**
      * Called every conclusion of the level to add the coin to the final amount.
-     * 
+     *
      * @param quantity the number of coin to be added
      */
     public void addCoin(final int quantity) {
@@ -187,7 +186,7 @@ public final class GameSaveManager {
     }
 
     /**
-     * Reset the game to starting value
+     * Reset the game to starting value.
      */
     public void resetGame() {
         this.coinCollected = 0;
@@ -199,7 +198,7 @@ public final class GameSaveManager {
 
     /**
      * Tells if the user has selected the premium skin or the basic one.
-     * 
+     *
      * @return a string that indicates the skin type
      */
     public String getSelectedSkinName() {
@@ -207,8 +206,8 @@ public final class GameSaveManager {
     }
 
     /**
-     * Set the skin in which the user want to play the game
-     * 
+     * Set the skin in which the user want to play the game.
+     *
      * @param name is the name of the skin used
      */
     public void setSelectedSkinName(final String name) {
