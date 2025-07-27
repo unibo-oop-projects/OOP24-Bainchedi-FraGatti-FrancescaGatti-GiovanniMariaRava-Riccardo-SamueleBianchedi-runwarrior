@@ -2,6 +2,8 @@ package it.unibo.runwarrior.controller;
 
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.player.Character;
@@ -36,9 +38,9 @@ public class GameLoopController {
     private Score score;
     private ScoreController scoreController;
 
-    public GameLoopController(String mapPath, String themePath, String enemiesPath, String coinsPath) {
+    public GameLoopController(JFrame mainFrame, String mapPath, String themePath, String enemiesPath, String coinsPath) {
         this.gameMap = GameMap.load(mapPath, themePath);
-        this.coinController = new CoinController();
+        this.coinController = new CoinControllerImpl();
         List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
         for(int[] coord : coords){
             coinController.addCoins(coord[0], coord[1]);
@@ -57,7 +59,7 @@ public class GameLoopController {
         this.score = new Score(GameSaveManager.getInstance());
         this.scoreController = new ScoreController(score);
         this.coinController.setScoreController(scoreController);
-        this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this);
+        this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this, mainFrame);
         initializePlayer();
     }
 
