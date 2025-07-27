@@ -126,7 +126,7 @@ di aggiungere una nuova View, senza toccare il controller, e ogni modifica grafi
 \textbf{Soluzione:} Il salvataggio e il ripristino della partita sono gestiti da un'unica classe, GameSaveManager, progettata come singleton 
 per garantire un punto di accesso centralizzato e soprattutto per mantenere una unica istanza del file. Per rendere effettivo ciò,
 all'interno della classe viene quindi eseguito un controllo specifico, in modo da non creare più file di salvataggio.
-Quando il giocatore conclude un livello o chiude l'applicazione, i controlle, ScoreController e CoinController invocano i relativi metodi 
+Quando il giocatore conclude un livello o chiude l'applicazione, i controller, \emph{ScoreController} e \emph{CoinController} invocano i relativi metodi 
 per modificare le variabili e salvare lo stato di gioco, che si compone di:
 \begin{itemize}
     \item Un intero che indica i livelli completati.
@@ -135,9 +135,8 @@ per modificare le variabili e salvare lo stato di gioco, che si compone di:
     \item Una stringa che indica la skin scelta.
 \end{itemize}
 All'avvio successivo, lo stato viene ricostruito e propagato ai vari model che lo necessitano; in caso contrario viene generata una partita nuova con parametri standard. 
-L'intera logica di I/O è dunque isolata in una sola classe, priva di dipendenze dal motore di gioco; il resto del codice
-che dipende da un'interfaccia minimale, 
-Questa architettura rende effettivo il singleton e semplifica i test automatizzati.
+L'intera logica di I/O è dunque isolata in una sola classe, priva di dipendenze dal motore di gioco; Questa architettura rende effettivo
+il singleton e semplifica i test automatizzati.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{resources/UMLshopMVC.png}
@@ -150,4 +149,5 @@ Questa architettura rende effettivo il singleton e semplifica i test automatizza
     \caption{UML dell'MVC per la gestione dei nemici}
     \label{}
 \end{figure}
+
 \end{document}
