@@ -16,13 +16,13 @@ public class Score {
        this.gameSaveManager = gameSaveManager;
     }
 
-    // /**
-    //  * Increments the coin score by the specific 
-    //  * @param coinPoints
-    //  */
-    // public final void incrementCoinScore(final int coinPoints) { 
-    //     gameSaveManager.addCoin(coinPoints);
-    // }
+    /**
+     * Increments the coin score by the specific 
+     * @param coinPoints
+     */
+    public final void incrementCoinScore(final int coinPoints) { 
+        gameSaveManager.addCoin(coinPoints);
+    }
 
     /**
      * @return the total score

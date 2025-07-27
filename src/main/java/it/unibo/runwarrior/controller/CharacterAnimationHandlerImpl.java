@@ -27,9 +27,24 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
      * @param move player movement handler
      * @param im current player images
      */
-    public CharacterAnimationHandlerImpl(CharacterComand cmd, CharacterMovementHandler move, BufferedImage... im) {
+    public CharacterAnimationHandlerImpl(CharacterComand cmd, CharacterMovementHandler move) {
         this.cmd = cmd;
         this.movement = move;
+        // right0 = im[0];
+        // right1 = im[1];
+        // right2 = im[2];
+        // left0 = im[3];
+        // left1 = im[4];
+        // left2 = im[5];
+        // jumpR = im[6];
+        // jumpL = im[7];
+        // attackR = im[8];
+        // attackL = im[9];
+        // tipR = im[10];
+        // tipL = im[11];
+    }
+
+    public void setImages(BufferedImage... im){
         right0 = im[0];
         right1 = im[1];
         right2 = im[2];

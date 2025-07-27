@@ -105,7 +105,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     @Override
     public void movePlayer() {
         maxScreenX = glc.getGlp().getWidth() / 2;
-        player.updatePlayerPosition();
         collisionDir = collisionDetection.checkCollision(player);
         tempDir = pUpDetection.checkCollisionWithPowers(player, this);
         if (!tempDir.isEmpty()) {
