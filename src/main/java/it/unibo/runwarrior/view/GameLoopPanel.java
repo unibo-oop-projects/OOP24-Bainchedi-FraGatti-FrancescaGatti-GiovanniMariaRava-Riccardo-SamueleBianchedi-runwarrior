@@ -33,9 +33,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private JFrame mainFrame;
 
 
-    public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController, JFrame mainFrame) {
+    public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController) {
         this.gameController = gameController;
-        this.mainFrame = mainFrame;
+        //this.mainFrame = mainFrame;
         //music = new GameMusic("gameMusic.wav", true);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(gameController.getCommands());
@@ -86,7 +86,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
             }
         }
         if (gameEnded && !panelShawn) {
-            showEndPanel();
+            //showEndPanel();
             panelShawn = true;
         }
         gameController.update();
@@ -117,40 +117,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gr2.dispose();
     }
 
-    private void showEndPanel(){
-        // resultFrame = new JFrame(levelCompleted ? "Level Completed" : "Game Over");
-        // resultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        // resultFrame.setSize(400, 300);
-        // resultFrame.setLocationRelativeTo(null);
-        mainFrame.revalidate();
-        mainFrame.repaint();
-        final JDialog popup = new JDialog(mainFrame, true); // true = modale
-        popup.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        popup.setSize(300, 200);
-        popup.setLocationRelativeTo(mainFrame); // centra rispetto al frame principale
-        popup.setResizable(false);
-        popup.setTitle(levelCompleted ? "Level Completed" : "Game Over");
-        JPanel endPanel;
-
-        if (levelCompleted) {
-            endPanel = new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected());
-        } else {
-            endPanel = new GameOverPanel(gameController.getCoinController().getCoinsCollected());
-        }
-        popup.setContentPane(endPanel);
-        
-        popup.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e){
-                mainFrame.getContentPane().removeAll();
-                Menu menu = new Menu(mainFrame);
-                mainFrame.setContentPane(menu.getPanel());
-                mainFrame.revalidate();
-                mainFrame.repaint();
-            }
-        });
-        popup.setVisible(true);
-    }
         // resultFrame.setVisible(true);
         // resultFrame.addWindowListener(new java.awt.event.WindowAdapter() {
         // @Override
