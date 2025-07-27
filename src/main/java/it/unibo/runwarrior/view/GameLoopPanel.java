@@ -6,9 +6,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.Chronometer;
 
@@ -20,12 +20,13 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private GameLoopController gameController;
-    private CoinController coinController;
     private Chronometer chronometer;
     private boolean gameStarted = false;
     private boolean gameEnded = false;
-    private boolean showLevelCompletedMessage = false;
     private boolean levelCompleted = false;
+    private boolean panelShawn = false;
+    private JFrame resultFrame;
+    
 
 
     public GameLoopPanel(String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController) {
@@ -79,6 +80,10 @@ public class GameLoopPanel extends JPanel implements Runnable {
                 levelCompleted = false; 
             }
         }
+        if (gameEnded && !panelShawn) {
+            showEndPanel();
+            panelShawn = true;
+        }
         gameController.update();
     }
 
@@ -106,6 +111,35 @@ public class GameLoopPanel extends JPanel implements Runnable {
         }
 
         gr2.dispose();
+    }
+
+    private void showEndPanel(){
+        resultFrame = new JFrame(levelCompleted ? "Level Completed" : "Game Over");
+        resultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        resultFrame.setSize(400, 300);
+        resultFrame.setLocationRelativeTo(null);
+
+        if (levelCompleted) {
+            resultFrame.setContentPane(new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected()));
+        } else {
+            resultFrame.setContentPane(new GameOverPanel(gameController.getCoinController().getCoinsCollected()));
+        }
+        resultFrame.setVisible(true);
+        resultFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosed(java.awt.event.WindowEvent e) {
+            // Quando l'utente chiude il pannello, torna al menu
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                Menu menu = new Menu();
+                JFrame frame = menu.getFrameMenu();
+                frame.setVisible(true);
+            });
+        }
+        @Override
+        public void windowClosing(java.awt.event.WindowEvent e) {
+            resultFrame.dispose();
+        }
+        });
     }
 
     /**

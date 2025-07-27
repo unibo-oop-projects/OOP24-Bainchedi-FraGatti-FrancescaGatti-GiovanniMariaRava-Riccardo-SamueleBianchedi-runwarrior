@@ -225,4 +225,12 @@ public class Menu extends JPanel {
             frameMenu.setContentPane(pannelloSfondoMenu);
             frameMenu.setVisible(true);
         }
+
+        public JPanel getPanel() {
+            return this;
+        }
+
+        public JFrame getFrameMenu() {
+            return frameMenu;
+        }
 }

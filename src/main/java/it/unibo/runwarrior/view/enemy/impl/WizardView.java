@@ -45,7 +45,7 @@ public class WizardView implements EnemyView {
         } else {
             currentImage = enemy.isStep() ? leftWizardMoving : leftWizard;
         }
-        final int shift = glp.getMapHandler().getShift(); 
+        final int shift = glp.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
     /**
