@@ -31,20 +31,6 @@ public final class ImageLoader {
     }
 
     /**
-     * Gets the loaded image for a specific block value.
-     *
-     * @param blockValue the integer value of the block.
-     * @return the corresponding BufferedImage, or null if not found.
-     */
-    public BufferedImage getBlockImage(final int blockValue) {
-        final BufferedImage image = this.blockImages.get(blockValue);
-        if (image == null) {
-            System.err.println("Warning: No image loaded for block value: " + blockValue);
-        }
-        return image;
-    }
-
-    /**
      * Loads a single image and associates it with a block value.
      *
      * @param blockValue the integer value to associate with the image.
@@ -121,6 +107,20 @@ public final class ImageLoader {
             return false;
         }
         return allLoadedSuccessfully;
+    }
+
+    /**
+     * Gets the loaded image for a specific block value.
+     *
+     * @param blockValue the integer value of the block.
+     * @return the corresponding BufferedImage, or null if not found.
+     */
+    public BufferedImage getBlockImage(final int blockValue) {
+        final BufferedImage image = this.blockImages.get(blockValue);
+        if (image == null) {
+            System.err.println("Warning: No image loaded for block value: " + blockValue);
+        }
+        return image;
     }
 
     /**

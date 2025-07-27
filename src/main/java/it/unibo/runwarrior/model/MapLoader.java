@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
@@ -17,6 +18,7 @@ public final class MapLoader {
      * The expected number of rows for the map.
      */
     public static final int MAP_HEIGHT = 22;
+
     /**
      * The expected number of columns for the map.
      */
@@ -30,6 +32,7 @@ public final class MapLoader {
 
     /**
      * Private constructor to create an instance with the loaded map data.
+     * 
      * @param mapData The 2D integer array representing the map.
      */
     private MapLoader(final int[][] mapData) {
@@ -39,46 +42,10 @@ public final class MapLoader {
     }
 
     /**
-     * Gets the numeric value of a block at a specific coordinate.
-     * @param r the row index.
-     * @param c the column index.
-     * @return the block's numeric value, or -1 if coordinates are out of bounds.
-     */
-    public int getBlock(final int r, final int c) {
-        if (r >= 0 && r < this.rows && c >= 0 && c < this.cols) {
-            return this.mapData[r][c];
-        }
-        return -1;
-    }
-
-    /**
-     * Gets the total number of rows in the map.
-     * @return the number of rows.
-     */
-    public int getRows() {
-        return this.rows;
-    }
-
-    /**
-     * Gets the total number of columns in the map.
-     * @return the number of columns.
-     */
-    public int getCols() {
-        return this.cols;
-    }
-
-    /**
-     * Gets a defensive copy of the map data.
-     * @return a 2D integer array representing the map grid.
-     */
-    public int[][] getMapData() {
-        return this.mapData.clone();
-    }
-
-    /**
      * Loads map data from a specified resource file.
      * This static factory method reads a text file line by line, parsing characters
      * into integer values to build the map grid.
+     * 
      * @param mapFilePath The path to the map data file within the resources.
      * @return a new {@link MapLoader} instance, or null if loading fails.
      */
@@ -86,8 +53,12 @@ public final class MapLoader {
         final int[][] mapData = new int[MAP_HEIGHT][MAP_WIDTH];
         int currentRow = 0;
 
-        try (InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(mapFilePath);
-            BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
+        final InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(mapFilePath);
+        if (inputStream == null) {
+            System.err.println("Error: Cannot find map file at path: " + mapFilePath);
+            return null;
+        }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) { // Usa UTF-8
             String line;
             while ((line = br.readLine()) != null) {
                 if (currentRow >= MAP_HEIGHT) {
@@ -133,5 +104,50 @@ public final class MapLoader {
 
         System.out.println("Map loaded from '" + mapFilePath + "': " + MAP_HEIGHT + "x" + MAP_WIDTH + " blocks.");
         return new MapLoader(mapData);
+    }
+
+    /**
+     * Gets the numeric value of a block at a specific coordinate.
+     * 
+     * @param r the row index.
+     * @param c the column index.
+     * @return the block's numeric value, or -1 if coordinates are out of bounds.
+     */
+    public int getBlock(final int r, final int c) {
+        if (r >= 0 && r < this.rows && c >= 0 && c < this.cols) {
+            return this.mapData[r][c];
+        }
+        return -1;
+    }
+
+    /**
+     * Gets the total number of rows in the map.
+     * 
+     * @return the number of rows.
+     */
+    public int getRows() {
+        return this.rows;
+    }
+
+    /**
+     * Gets the total number of columns in the map.
+     * 
+     * @return the number of columns.
+     */
+    public int getCols() {
+        return this.cols;
+    }
+
+    /**
+     * Gets a defensive copy of the map data.
+     * 
+     * @return a 2D integer array representing the map grid.
+     */
+    public int[][] getMapData() {
+        final int[][] deepCopy = new int[this.mapData.length][];
+        for (int i =  0; i < this.mapData.length; i++) {
+            deepCopy[i] = this.mapData[i].clone();
+        }
+        return deepCopy;
     }
 }
