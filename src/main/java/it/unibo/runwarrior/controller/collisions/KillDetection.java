@@ -1,6 +1,5 @@
 package it.unibo.runwarrior.controller.collisions;
 
-import java.awt.Rectangle;
 import it.unibo.runwarrior.model.player.Character;
 
 public interface KillDetection {
@@ -12,33 +11,6 @@ public interface KillDetection {
      * @param player current player
      */
     void checkCollisionWithEnemeies(Character player);
-
-    /**
-     * Creates the future area of the falling player
-     *
-     * @param r1 collision area
-     * @param pl player
-     * @return the collision area the player will have
-     */
-    Rectangle futureArea(Rectangle r1);
-
-    /**
-     * Control if the collision is from above the enemy.
-     *
-     * @param playerArea player collision area
-     * @param enemyArea enemy collision area
-     * @return true if the player touches the enemy in his head
-     */
-    boolean isTouchingUp(Rectangle playerArea, Rectangle enemyArea);
-
-    /**
-     * Controls if the given point (x, y) is touching a solid tile.
-     *
-     * @param x x coordinate
-     * @param y y coordinate
-     * @return true if the point touches a solid tile
-     */
-    boolean isBehindTile(int x, int y);
 
     /**
      * @return the moment when the player was hit.

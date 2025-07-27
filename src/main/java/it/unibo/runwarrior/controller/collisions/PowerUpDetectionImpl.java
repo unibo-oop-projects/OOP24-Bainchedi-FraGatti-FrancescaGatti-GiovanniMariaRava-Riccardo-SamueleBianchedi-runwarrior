@@ -15,7 +15,7 @@ import it.unibo.runwarrior.view.PowerUpManager;
  * Class that handles the collision between the player and the powerups.
  */
 public class PowerUpDetectionImpl implements PowerUpDetection {
-    private final GameLoopController glp;
+    private final GameLoopController glc;
     private final PowerUpManager powersManager;
     private List<PowerUp> powerCollision;
     private long hitWaitTime;
@@ -25,11 +25,11 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     /**
      * Constructor of powerup detection.
      *
-     * @param glp game-loop panel
+     * @param glc game-loop controller
      * @param pMan obhect that prints powerups
      */
-    public PowerUpDetectionImpl(final GameLoopController glp, final PowerUpManager pMan) {
-        this.glp = glp;
+    public PowerUpDetectionImpl(final GameLoopController glc, final PowerUpManager pMan) {
+        this.glc = glc;
         this.powersManager = pMan;
         this.powerCollision = new ArrayList<>();
     }
@@ -47,7 +47,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
                 if(isTouchingUp(playerArea, pUp.getTouchArea())){
                     dir = "up";
                     if(pUp.isEggOpen() && !pUp.isPowerTaken() && System.currentTimeMillis() - hitWaitTime > WAIT) {
-                        glp.getPowersHandler().setPowers();
+                        glc.getPowersHandler().setPowers();
                         pUp.takePower();
                     }
                     else if(!pUp.isEggOpen()) {
@@ -59,14 +59,14 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
                 else if(playerArea.x + playerArea.width >= pUp.getTouchArea().x && playerArea.x < pUp.getTouchArea().x) {
                     dir = "right";
                     if(pUp.isEggOpen() && !pUp.isPowerTaken()) {
-                        glp.getPowersHandler().setPowers();
+                        glc.getPowersHandler().setPowers();
                         pUp.takePower();
                     }
                 }
                 else if(playerArea.x <= pUp.getTouchArea().x + pUp.getTouchArea().width) {
                     dir = "left";
                     if(pUp.isEggOpen() && !pUp.isPowerTaken()) {
-                        glp.getPowersHandler().setPowers();
+                        glc.getPowersHandler().setPowers();
                         pUp.takePower();
                     }
                 }
@@ -76,20 +76,26 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     }
 
     /**
-     * {@inheritDoc}
+     * Creates the future area of the falling player
+     *
+     * @param r1 collision area
+     * @param pl player
+     * @return the collision area the player will have
      */
-    @Override
-    public Rectangle futureArea(final Rectangle r1) {
+    private Rectangle futureArea(final Rectangle r1) {
         final Rectangle futureArea = new Rectangle(r1);
         futureArea.translate(0, it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
         return futureArea;
     }
 
     /**
-     * {@inheritDoc}
+     * Control if the collision is from above the powerup.
+     *
+     * @param playerArea player collision area
+     * @param pUpArea powerup collision area
+     * @return true if the player touches the powerup with his feet
      */
-    @Override
-    public boolean isTouchingUp(final Rectangle playerArea, final Rectangle pUpArea){
+    private boolean isTouchingUp(final Rectangle playerArea, final Rectangle pUpArea){
         return playerArea.y + playerArea.height <= pUpArea.y && 
         ((playerArea.x + TOLL >= pUpArea.x && playerArea.x + TOLL <= pUpArea.x + pUpArea.width) ||
         (playerArea.x + playerArea.width - TOLL >= pUpArea.x && playerArea.x + playerArea.width - TOLL <= pUpArea.x + pUpArea.width));

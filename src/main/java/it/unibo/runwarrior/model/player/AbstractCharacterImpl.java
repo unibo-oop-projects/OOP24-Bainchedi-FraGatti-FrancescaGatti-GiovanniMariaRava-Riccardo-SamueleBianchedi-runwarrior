@@ -48,17 +48,17 @@ public abstract class AbstractCharacterImpl implements Character {
      * Constructor of the player; set player images, first position, 
      * movement and animation handler and his area.
      *
-     * @param panel game-loop panel
+     * @param glc game-loop controller
      * @param commands object that handles the movement with the keyboard
      * @param mapHandler object that prints tiles
      * @param pMan object that prints powerups
      */
-    public AbstractCharacterImpl(final GameLoopController panel, final CharacterComand commands, 
+    public AbstractCharacterImpl(final GameLoopController glc, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         this.cmd = commands;
         sizeCharacter = mapHandler.getTileSize() * 2;
         playerImage();
-        this.movement = new CharacterMovementHandlerImpl(panel, this, commands, mapHandler, pMan);
+        this.movement = new CharacterMovementHandlerImpl(glc, this, commands, mapHandler, pMan);
         this.animation = new CharacterAnimationHandlerImpl(commands, movement, right0, right1, right2, 
         left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL);
         collisionArea = new Rectangle(movement.getPlX() + (sizeCharacter / 4), movement.getPlY() + (sizeCharacter / 4),

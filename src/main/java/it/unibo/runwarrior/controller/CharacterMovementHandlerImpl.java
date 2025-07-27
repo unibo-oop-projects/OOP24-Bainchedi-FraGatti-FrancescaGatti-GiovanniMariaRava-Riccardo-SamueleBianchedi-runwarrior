@@ -12,7 +12,7 @@ import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
  * Class that handles player movement and his collisions.
  */
 public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
-    private GameLoopController glp;
+    private GameLoopController glc;
     private CharacterComand cmd;
     private Character player;
     private CollisionDetectionImpl collisionDetection;
@@ -49,22 +49,22 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * Constructor of player movemnt that sets the following parametres, the collision with tiles, powerup and enemies
      * and the starting position.
      *
-     * @param panel game-loop panel
+     * @param glc game-loop controller
      * @param player current player
      * @param cmd keyboard handler
      * @param collDet collision with map tiles
      * @param hM object that prints tiles
      * @param pMan object that prints powerups
      */
-    public CharacterMovementHandlerImpl(final GameLoopController panel, final Character player, final CharacterComand cmd,
+    public CharacterMovementHandlerImpl(final GameLoopController glc, final Character player, final CharacterComand cmd,
     final HandlerMapElement hM, final PowerUpManager pMan) {
-        this.glp = panel;
+        this.glc = glc;
         this.cmd = cmd;
         this.player = player;
-        this.collisionDetection = new CollisionDetectionImpl(hM.getMap(), hM.getBlocks(), hM.getTileSize(), panel);
-        this.pUpDetection = new PowerUpDetectionImpl(panel, pMan);
-        this.killDetection = new KillDetectionImpl(panel, hM);
-        this.coinDetection = new CoinDetectionImpl(hM.getTileSize(), panel.getCoinController(), panel.getScoreController());
+        this.collisionDetection = new CollisionDetectionImpl(hM.getMap(), hM.getBlocks(), hM.getTileSize(), glc);
+        this.killDetection = new KillDetectionImpl(glc, hM);
+        this.pUpDetection = new PowerUpDetectionImpl(glc, pMan);
+        this.coinDetection = new CoinDetectionImpl(hM.getTileSize(), glc.getCoinController(), glc.getScoreController());
         playerX = START_X;
         screenX = START_X;
         groundX = 0;
@@ -97,7 +97,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         this.groundX = groundX;
         this.killDetection.setHitWaitTime(lastHit);
         this.collisionDetection.setHitWaitTime(lastHit);
-        //System.out.println(playerX + " " + playerY);
     }
 
     /**
@@ -105,8 +104,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     public void movePlayer() {
-        //System.out.println("-- " + playerY);
-        maxScreenX = glp.getGlp().getWidth() / 2;
+        maxScreenX = glc.getGlp().getWidth() / 2;
         player.updatePlayerPosition();
         collisionDir = collisionDetection.checkCollision(player);
         tempDir = pUpDetection.checkCollisionWithPowers(player, this);
@@ -114,7 +112,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             collisionDir = tempDir;
         }
         killDetection.checkCollisionWithEnemeies(player);
-        System.out.println();
         coinDetection.controlCoinCollision(player);
 
         hitHead = "down".equals(collisionDir);
