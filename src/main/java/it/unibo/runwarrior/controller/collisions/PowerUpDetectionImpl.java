@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.view.GameMusic;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.CharacterMovementHandler;
 import it.unibo.runwarrior.controller.GameLoopController;
@@ -21,6 +22,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     private final PowerUpController powersController;
     private List<PowerUp> powerCollision;
     private long hitWaitTime;
+    private GameMusic sound;
 
     /**
      * Constructor of powerup detection.
@@ -47,9 +49,11 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
                 if (isTouchingUp(playerArea, pUp.getTouchArea())) {
                     dir = "up";
                     if (pUp.isEggOpen() && !pUp.isPowerTaken() && System.currentTimeMillis() - hitWaitTime > WAIT) {
+                        sound = new GameMusic("power.wav", false);
                         glc.getPowersHandler().setPowers();
                         pUp.takePower();
                     } else if (!pUp.isEggOpen()) {
+                        sound = new GameMusic("jumpKill.wav", false);
                         move.setJumpKill();
                         pUp.openTheEgg();
                         hitWaitTime = System.currentTimeMillis();
@@ -57,12 +61,14 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
                 } else if (playerArea.x + playerArea.width >= pUp.getTouchArea().x && playerArea.x < pUp.getTouchArea().x) {
                     dir = "right";
                     if (pUp.isEggOpen() && !pUp.isPowerTaken()) {
+                        sound = new GameMusic("power.wav", false);
                         glc.getPowersHandler().setPowers();
                         pUp.takePower();
                     }
                 } else if (playerArea.x <= pUp.getTouchArea().x + pUp.getTouchArea().width) {
                     dir = "left";
                     if (pUp.isEggOpen() && !pUp.isPowerTaken()) {
+                        sound = new GameMusic("power.wav", false);
                         glc.getPowersHandler().setPowers();
                         pUp.takePower();
                     }

@@ -24,6 +24,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private GameLoopController gameController;
+    private GameMusic music;
     private Chronometer chronometer;
     private boolean gameStarted = false;
     private boolean gameEnded = false;

@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.view.GameMusic;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
@@ -18,6 +19,7 @@ public class KillDetectionImpl implements KillDetection {
     private final HandlerMapElement hM;
     private EnemyImpl enemyToDie;
     private long hitWaitTime;
+    private GameMusic sound;
 
     /**
      * Constructor of kill detection.
@@ -42,14 +44,17 @@ public class KillDetectionImpl implements KillDetection {
             if (futureArea(playerArea).intersects(enemy.getBounds())) {
                 //System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
                 if (isTouchingUp(playerArea, enemy.getBounds())) {
+                    sound = new GameMusic("jumpKill.wav", false);
                     player.getMovementHandler().setJumpKill();
                     enemyToDie = enemy;
                 } else if (playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x 
                         && System.currentTimeMillis() - hitWaitTime > CollisionDetectionImpl.SEC_3) {
+                    sound = new GameMusic("hit.wav", false);
                     hitWaitTime = System.currentTimeMillis();
                     glc.getPowersHandler().losePower(true);
                 } else if (playerArea.x <= enemy.getBounds().x + enemy.getBounds().width 
                         && System.currentTimeMillis() - hitWaitTime > CollisionDetectionImpl.SEC_3) {
+                    sound = new GameMusic("hit.wav", false);
                     hitWaitTime = System.currentTimeMillis();
                     glc.getPowersHandler().losePower(true);
                 }

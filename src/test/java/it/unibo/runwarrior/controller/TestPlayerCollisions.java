@@ -8,8 +8,6 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +23,7 @@ import it.unibo.runwarrior.model.player.ArmourWarrior;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.model.player.NakedWarrior;
+import it.unibo.runwarrior.model.player.SwordWarrior;
 
 class TestPlayerCollisions {
     private static final int TRY_TYLE = 36;
@@ -42,15 +41,16 @@ class TestPlayerCollisions {
         gameMap1 = GameMap.load(string1Map2, string2Map2);
         mapHandler1 = new HandlerMapElement(gameMap1);
         cmd = new CharacterComand();
-        glc = new GameLoopController(new JFrame(), "tryMap.txt", "Map2/forest_theme.txt", 
+        glc = new GameLoopController("tryMap.txt", "Map2/forest_theme.txt", 
         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         tileSize = TRY_TYLE;
     }
 
-    private boolean isTouchingUp(final Rectangle playerArea, final Rectangle enemyArea){
-        return playerArea.y + playerArea.height <= enemyArea.y && 
-        ((playerArea.x + TOLL >= enemyArea.x && playerArea.x + TOLL <= enemyArea.x + enemyArea.width) ||
-        (playerArea.x + playerArea.width - TOLL >= enemyArea.x && playerArea.x + playerArea.width - TOLL <= enemyArea.x + enemyArea.width));
+    private boolean isTouchingUp(final Rectangle playerArea, final Rectangle enemyArea) {
+        return playerArea.y + playerArea.height <= enemyArea.y 
+        && (playerArea.x + TOLL >= enemyArea.x && playerArea.x + TOLL <= enemyArea.x + enemyArea.width  
+        || playerArea.x + playerArea.width - TOLL >= enemyArea.x 
+        && playerArea.x + playerArea.width - TOLL <= enemyArea.x + enemyArea.width);
     }
 
     private boolean isBehindTile(final int x, final int y, final HandlerMapElement hM) {
@@ -63,7 +63,8 @@ class TestPlayerCollisions {
     @Test
     void testCollisionTile() {
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, null);
-        final CollisionDetectionImpl collisionTiles = new CollisionDetectionImpl(gameMap1.getMapData(), mapHandler1.getBlocks(), tileSize, glc);
+        final CollisionDetectionImpl collisionTiles = new CollisionDetectionImpl(gameMap1.getMapData(),
+        mapHandler1.getBlocks(), tileSize, glc);
 
         collisionTiles.checkCollision(player);
         assertTrue(collisionTiles.touchSolid(8 * tileSize, 16 * tileSize, false));
@@ -104,6 +105,12 @@ class TestPlayerCollisions {
         assertEquals("right", collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler()));
         player.getArea().setLocation(7343, 560);
         assertEquals("left", collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler()));
+
+        player.getArea().setLocation(1949, 560);
+        final int i = glc.getPowersHandler().getPowers();
+        collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler());
+        assertEquals(i + 1, glc.getPowersHandler().getPowers());
+        assertEquals(SwordWarrior.class, player.getClass());
     }
 
     @Test
@@ -140,10 +147,8 @@ class TestPlayerCollisions {
         final CoinDetectionImpl collisionCoins = new CoinDetectionImpl(tileSize, coinController, scoreController);
 
         coinController.addCoins(16, 74);
-        //coinController.initCoinsFromFile("/Coins/CoinCoordinates_map2.txt");
         assertTrue(coinController.getCoinsCollected() == 0);
         player.getArea().setLocation(2633, 560);
-        //player.getArea().setLocation(1661, 560);
         collisionCoins.controlCoinCollision(player);
         assertTrue(coinController.getCoinsCollected() == 1);
     }
