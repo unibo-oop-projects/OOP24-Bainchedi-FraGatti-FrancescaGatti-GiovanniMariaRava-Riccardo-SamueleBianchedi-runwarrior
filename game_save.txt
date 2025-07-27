@@ -1,4 +1,4 @@
 0
-12
+60
 false
 DEFAULT_SKIN
