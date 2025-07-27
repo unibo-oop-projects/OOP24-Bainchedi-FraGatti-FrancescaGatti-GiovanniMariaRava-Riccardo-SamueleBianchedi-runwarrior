@@ -15,7 +15,7 @@ import it.unibo.runwarrior.view.GameLoopPanel;
 
 /**
  * implementation of CoinController that manages the loading, the drawing
- * and the
+ * and the collection of coins.
  */
 public class CoinControllerImpl implements CoinController {
     private Character player;
@@ -28,6 +28,9 @@ public class CoinControllerImpl implements CoinController {
         coinList = new ArrayList<>();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final List<int[]> loadCoinFromFile(final String pathFile) {
         final List<int[]> coinCoordinates = new ArrayList<>();
@@ -53,6 +56,9 @@ public class CoinControllerImpl implements CoinController {
         return coinCoordinates;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final void initCoinsFromFile(final String pathFile) {
         final List<int[]> coords = loadCoinFromFile("CoinCoordinates_map1.txt");
@@ -63,6 +69,9 @@ public class CoinControllerImpl implements CoinController {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final void addCoins(final int row, final int col) {
         final Coin coin = new Coin(row, col);
@@ -70,6 +79,9 @@ public class CoinControllerImpl implements CoinController {
         coinList.add(coin);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawAllCoins(Graphics g, int tileSize, Character player){
         groundX = player.getMovementHandler().getGroundX(); 
@@ -88,6 +100,9 @@ public class CoinControllerImpl implements CoinController {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final void updatePlayer(final Character player) {
         this.player = player;
@@ -112,24 +127,35 @@ public class CoinControllerImpl implements CoinController {
     //     }
     // }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final int getCoinsCollected() {
         return coinsCollected;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void increaseCoinsCollected(){
         coinsCollected++;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setScoreController(ScoreController scoreController){
         this.scoreController = scoreController;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Coin> getCoinList() {
         return coinList;
-    }
-    
+    }   
 }
