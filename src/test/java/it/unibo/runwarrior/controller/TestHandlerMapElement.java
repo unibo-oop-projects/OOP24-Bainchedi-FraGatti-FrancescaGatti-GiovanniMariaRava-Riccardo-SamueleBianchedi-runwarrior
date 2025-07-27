@@ -20,7 +20,6 @@ import it.unibo.runwarrior.model.MapElement;
 public class TestHandlerMapElement {
     private static final int ROW_COLS = 3;
     private HandlerMapElement handlerMapElement;
-    private Map<Integer, BufferedImage> mapImage;
     private GameMap gameMap;
     private int [] [] map;
     //per ora testo solo il primo metood. gli altri capisco se ha veramente senso 

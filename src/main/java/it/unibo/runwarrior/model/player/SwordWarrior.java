@@ -64,8 +64,5 @@ public class SwordWarrior extends AbstractCharacterImpl {
             swordArea.setBounds(movement.getPlX() - sizeCharacter, movement.getPlY() + sizeCharacter / 4,
             sizeCharacter, sizeCharacter - (sizeCharacter / 4) - (TO_TOUCH_FLOOR * 2));
         }
-        if (!cmd.getAttack()) {
-            collisionArea.setSize(sizeCharacter / 2, sizeCharacter - (sizeCharacter / 4) - TO_TOUCH_FLOOR);
-        }
     }
 }

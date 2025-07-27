@@ -23,7 +23,7 @@ public abstract class AbstractCharacterImpl implements Character {
     public static final int SPEED = 5;
     protected static final Logger LOGGER = Logger.getLogger(AbstractCharacterImpl.class.getName());
     protected int sizeCharacter;
-    protected Rectangle collisionArea;
+    private Rectangle collisionArea;
     protected Rectangle swordArea;
     protected boolean rightDirection;
     protected BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
@@ -57,10 +57,8 @@ public abstract class AbstractCharacterImpl implements Character {
     final HandlerMapElement mapHandler, final PowerUpManager pMan) {
         this.cmd = commands;
         sizeCharacter = mapHandler.getTileSize() * 2;
-        playerImage();
         this.movement = new CharacterMovementHandlerImpl(glc, this, commands, mapHandler, pMan);
-        this.animation = new CharacterAnimationHandlerImpl(commands, movement, right0, right1, right2, 
-        left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL);
+        this.animation = new CharacterAnimationHandlerImpl(commands, movement);
         collisionArea = new Rectangle(movement.getPlX() + (sizeCharacter / 4), movement.getPlY() + (sizeCharacter / 4),
         sizeCharacter / 2, sizeCharacter - (sizeCharacter / 4) - TO_TOUCH_FLOOR);
         swordArea = new Rectangle();
@@ -70,17 +68,19 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
-    public void update() {
+    public final void update() {
+        playerImage();
+        updatePlayerPosition();
         this.rightDirection = movement.getRightDirection();
         movement.movePlayer();
         animation.frameChanger();
     }
 
     /**
-     * {@inheritDoc}
+     * Updates the collision area of the player,
+     * including the tip/stick.
      */
-    @Override
-    public void updatePlayerPosition() {
+    private void updatePlayerPosition() {
         collisionArea.setLocation(movement.getPlX() + (sizeCharacter / 4), movement.getPlY() + (sizeCharacter / 4));
         updateAttackCollision();
     }
@@ -97,6 +97,7 @@ public abstract class AbstractCharacterImpl implements Character {
      */
     @Override
     public void drawPlayer(final Graphics2D gr2) {
+        animation.setImages(right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL);
         final BufferedImage im;
         final BufferedImage tip;
         im = animation.imagePlayer(rightDirection);

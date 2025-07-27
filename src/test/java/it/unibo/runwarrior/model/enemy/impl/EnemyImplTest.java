@@ -1,20 +1,15 @@
 package it.unibo.runwarrior.model.enemy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.Collections;
 import java.util.List;
 
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
-import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
-import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
 
 public class EnemyImplTest {

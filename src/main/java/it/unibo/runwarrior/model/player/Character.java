@@ -49,12 +49,6 @@ public interface Character {
     CharacterAnimationHandler getAnimationHandler();
 
     /**
-     * Updates the collision area of the player,
-     * including the tip/stick.
-     */
-    void updatePlayerPosition();
-
-    /**
      * @return the collision area of the weapon
      */
     Rectangle getSwordArea();

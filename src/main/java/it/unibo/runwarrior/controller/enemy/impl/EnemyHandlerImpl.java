@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.api.EnemyHandler;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
@@ -16,8 +17,11 @@ import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
  * Implementes EnemyHandler interfaces to manage properly the enemies.
  */
 public class EnemyHandlerImpl implements EnemyHandler {
-    private LinkedList<EnemyImpl> enemies;
-    private EnemyViewFactoryImpl viewFactory;
+    private final List<EnemyImpl> enemies;
+    private final EnemyViewFactoryImpl viewFactory;
+    @SuppressFBWarnings(
+    value = "EI_EXPOSE_REP2",
+    justification = "EnemyHandlerImpl interacts directly with the gameloopController")
     private final GameLoopController glp;
 
     /**
@@ -107,7 +111,7 @@ public class EnemyHandlerImpl implements EnemyHandler {
     /**
      * @return the list of the enemies
      */
-    public LinkedList<EnemyImpl> getEnemies() {
-        return enemies;
+    public List<EnemyImpl> getEnemies() {
+        return List.copyOf(enemies);
     }
 }
