@@ -29,7 +29,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
         //music = new GameMusic("gameMusic.wav", true);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        System.out.println("--" + gameController.getCommands());
         this.addKeyListener(gameController.getCommands());
         this.setFocusable(true);
         this.requestFocusInWindow();

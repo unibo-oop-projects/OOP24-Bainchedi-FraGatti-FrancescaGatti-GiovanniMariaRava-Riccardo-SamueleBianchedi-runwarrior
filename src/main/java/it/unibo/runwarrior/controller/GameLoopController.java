@@ -56,8 +56,8 @@ public class GameLoopController {
         this.score = new Score(GameSaveManager.getInstance());
         this.scoreController = new ScoreController(score);
         this.coinController.setScoreController(scoreController);
-        initializePlayer();
         this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this);
+        initializePlayer();
     }
 
     public void update() {
@@ -116,7 +116,7 @@ public class GameLoopController {
         return this.enemyHandler;
     }
 
-    public CoinController getCoinController(){
+    public CoinController getCoinController() {
         return this.coinController;
     }
 

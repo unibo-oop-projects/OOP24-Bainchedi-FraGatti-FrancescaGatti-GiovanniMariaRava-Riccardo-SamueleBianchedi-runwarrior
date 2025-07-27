@@ -78,6 +78,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
         float indexYtile = y / tileSize;
         int blockIndex = map[(int) indexYtile][(int) indexXtile];
         end = blocks.get(blockIndex).isPortal();
+        //System.out.println("portal " + end);
         if (blocks.get(blockIndex).getCollision() || y <= 0) {
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
