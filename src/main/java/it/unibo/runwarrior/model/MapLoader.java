@@ -97,7 +97,7 @@ public final class MapLoader {
                     + MAP_HEIGHT + ", Found: " + currentRow + ".");
                 return null;
             }
-        } catch (final IOException | NullPointerException e) {
+        } catch (final IOException e) {
             System.err.println("Error loading map file '" + mapFilePath + "': " + e.getMessage());
             return null;
         }
