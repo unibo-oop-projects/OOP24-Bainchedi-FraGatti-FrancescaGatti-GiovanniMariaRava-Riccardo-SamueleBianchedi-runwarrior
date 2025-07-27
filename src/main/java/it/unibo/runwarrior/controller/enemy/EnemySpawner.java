@@ -23,15 +23,15 @@ import it.unibo.runwarrior.view.GameLoopPanel;
  */
 public class EnemySpawner {
     private static final int TO_TOUCH_FLOOR = 8;
+    private static final Logger LOGGER = Logger.getLogger(EnemySpawner.class.getName());
     private final EnemyHandlerImpl handler;
     private final GameLoopController glp;
     private final List<EnemySpawnPoints> spawnPoints;
     private final Set<EnemySpawnPoints> spawnedEnemies;
-    private static final Logger LOGGER = Logger.getLogger(EnemySpawner.class.getName());
 
     /**
      * Constructor of the class EnemySpawner.
-     * 
+     *
      * @param handler where the enemies list is stored
      * @param glp the panel in which enemies are shown
      */
@@ -41,17 +41,17 @@ public class EnemySpawner {
         this.spawnPoints = new ArrayList<>();
         this.spawnedEnemies = new HashSet<>();
     }
-    
+
     /**
      * This method read the file enemies*.txt in order to fill the List enemies so EnemyHandler can render them.
-     * 
+     *
      * @param is lo stream di input da cui leggere le righe nel formato type , tileX, tileY.
      */
     public void loadEnemiesFromStream(final InputStream is) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line = br.readLine();
             while (line != null) {
-                String[] parts = line.trim().split(",");
+                final String[] parts = line.trim().split(",");
                 if (parts.length != 3) {
                     continue;
                 }
@@ -61,9 +61,9 @@ public class EnemySpawner {
                 spawnPoints.add(new EnemySpawnPoints(type, tilex, tiley));
                 line = br.readLine();
             }
-                /*
-                 * Bozza di una prova senza while ma con stream 
-                 *
+            /*
+            * Bozza di una prova senza while ma con stream 
+            *
             br.lines().map(String :: trim)
                 .filter(s->!s.isEmpty())
                 .map(s->s.split(",", -1))
@@ -78,7 +78,7 @@ public class EnemySpawner {
             LOGGER.log(Level.SEVERE, "Errore durante il caricamento dei nemici: " + e.getMessage());
         }
     }
-    
+
     /**
      * This methods updates the enemy spawner by checking which enemies should be spawned based on current camera position.
      */

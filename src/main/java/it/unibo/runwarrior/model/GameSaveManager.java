@@ -35,7 +35,6 @@ public final class GameSaveManager {
         premiumSkinUnlocked = false;
     }
 
-    
     /**
      * Get the current instance of the GameSaveManager.
      * If load return null it creates a new one.
@@ -52,7 +51,7 @@ public final class GameSaveManager {
         }
         return instance;
     }
-    
+
     /**
      * Save the changes of the variables in the file.
      */
@@ -100,7 +99,6 @@ public final class GameSaveManager {
             }
             line = reader.readLine();
             gsm.selectedSkinName = (line != null) ? line.trim() : DEFAULT_STRING;
-            
             return gsm;
         } catch (IOException | NumberFormatException e) {
             LOGGER.log(Level.SEVERE, "Cannot load from file");
