@@ -3,6 +3,8 @@ package it.unibo.runwarrior.view.enemy.impl;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -20,6 +22,8 @@ public class SnakeView implements EnemyView {
     private BufferedImage leftSnake;
     private BufferedImage leftSnakeMoving;
     private final GameLoopController glp;
+    private static final Logger LOGGER = Logger.getLogger(SnakeView.class.getName());
+    
     /**
      * Constructor of the SnakeView class.
      * 
@@ -30,24 +34,24 @@ public class SnakeView implements EnemyView {
         try {
             loadResources();
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento delle immagini di Guard");
         }
     }
+
     /**
      * {@inheritDoc}
      */
-
     @Override
-    public void loadResources() throws IOException {
+    public final void loadResources() throws IOException {
         rightSnake = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/rightSnake.png"));
         rightSnakeMoving = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/rightSnakeMoving.png"));
         leftSnake = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/leftSnake.png"));
         leftSnakeMoving = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/leftSnakeMoving.png"));
     }
+
     /**
      * {@inheritDoc}
      */
-
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         final BufferedImage currentImage;

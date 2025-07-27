@@ -3,6 +3,8 @@ package it.unibo.runwarrior.view.enemy.impl;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -22,24 +24,25 @@ public class MonkeyView implements EnemyView {
     private BufferedImage leftMonkeyRunning;
     private BufferedImage image;
     private final GameLoopController glp;
+    private static final Logger LOGGER = Logger.getLogger(MonkeyView.class.getName());
+    
     /**
      * Constructor of the class MonkeyView.
      * 
      * @param glp is the panel in which the monkey need to be renderd
      */
-
     public MonkeyView(final GameLoopController glp) {
         this.glp = glp;
         try {
             loadResources();
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento delle immagini di Monkey");
         }
     }
+
     /**
      * {@inheritDoc}
      */
-
     @Override
     public final void loadResources() throws IOException {
         rightMonkey = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/rightMonkey.png"));
@@ -50,10 +53,10 @@ public class MonkeyView implements EnemyView {
         leftMonkeyRunning = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/leftMonkeyRunning.png"));
         image = rightMonkey;
     }
+
     /**
      * {@inheritDoc}
      */
-
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         final BufferedImage currentImage;

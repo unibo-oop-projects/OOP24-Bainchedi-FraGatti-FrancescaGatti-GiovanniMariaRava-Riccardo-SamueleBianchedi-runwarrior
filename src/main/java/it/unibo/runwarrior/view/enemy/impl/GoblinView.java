@@ -3,10 +3,13 @@ package it.unibo.runwarrior.view.enemy.impl;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
 import it.unibo.runwarrior.controller.GameLoopController;
+import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
 /**
@@ -20,36 +23,37 @@ public class GoblinView implements EnemyView {
     private BufferedImage leftGoblinMoving;
     private BufferedImage image;
     private final GameLoopController glp;
+    private static final Logger LOGGER = Logger.getLogger(GoblinView.class.getName());
+
     /**
      * Constructor of the class.
      * 
      * @param glp is the panel in which the goblin need to be rendered.
      */
-
     public GoblinView(final GameLoopController glp) {
         this.glp = glp;
         try {
             loadResources();
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento delle immagini Goblin");
         } 
     }
+
     /**
      * {@inheritDoc}
      */
-
     @Override
-    public void loadResources() throws IOException {
+    public final void loadResources() throws IOException {
         rightGoblin = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/rightGoblin.png"));
         leftGoblin = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/leftGoblin.png"));
         rightGoblinMoving = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/rightGoblinMoving.png"));
         leftGoblinMoving = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/leftGoblinMoving.png"));
         image = rightGoblin;
     }
+
     /**
      * {@inheritDoc}
      */
-
     @Override
     public void render(final Graphics g, final EnemyImpl enemy) {
         final BufferedImage currentImage;

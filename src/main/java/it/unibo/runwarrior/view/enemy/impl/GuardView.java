@@ -1,6 +1,8 @@
 package it.unibo.runwarrior.view.enemy.impl;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -23,24 +25,25 @@ public class GuardView implements EnemyView {
     private BufferedImage leftGuardRunning;
     private BufferedImage image;
     private final GameLoopController glp;
+    private static final Logger LOGGER = Logger.getLogger(GuardView.class.getName());
+    
     /**
      * Constructor of the GuardView class.
      * 
      * @param glp is the panel in which the guard need to be renderd.
      */
-
     public GuardView(final GameLoopController glp) {
         this.glp = glp;
         try {
             loadResources();
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento delle immagini di Guard");
         }
     }
+
     /**
      * {@inheritDoc}
      */
-
     @Override
     public void loadResources() throws IOException {
         rightGuard = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/rightGuard.png"));
@@ -51,10 +54,10 @@ public class GuardView implements EnemyView {
         leftGuardRunning = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/leftRunningGuard.png"));
         image = rightGuard;
     }
+
     /**
      * {@inheritDoc}
      */
-    
     @Override
     public final void render(final Graphics g, final EnemyImpl enemy) {
         final BufferedImage currentImage;
