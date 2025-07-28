@@ -1,6 +1,10 @@
 package it.unibo.runwarrior.model;
 
 import org.junit.jupiter.api.Test;
+
+import it.unibo.runwarrior.model.chronometer.api.Chronometer;
+import it.unibo.runwarrior.model.chronometer.impl.ChronometerImpl;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChronometerTest {
