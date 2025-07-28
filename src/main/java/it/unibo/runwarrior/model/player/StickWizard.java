@@ -39,7 +39,7 @@ public class StickWizard extends AbstractCharacterImpl {
             setLeft0(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/stopLeftSW.png")));
             setLeft1(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goLeftSW1.png")));
             setLeft2(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goLeftSW2.png")));
-            setjumpR(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/jumpRightSW.png")));
+            setJumpR(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/jumpRightSW.png")));
             setJumpL(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/jumpLeftSW.png")));
             setAttackR(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/attackRightW.png")));
             setAttackL(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/attackLeftW.png")));

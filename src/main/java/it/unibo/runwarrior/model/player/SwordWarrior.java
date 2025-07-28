@@ -40,7 +40,7 @@ public class SwordWarrior extends AbstractCharacterImpl {
             setLeft0(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/stopLeftS.png")));
             setLeft1(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goLeftS1.png")));
             setLeft2(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goLeftS2.png")));
-            setjumpR(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/jumpRightS.png")));
+            setJumpR(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/jumpRightS.png")));
             setJumpL(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/jumpLeftS.png")));
             setAttackR(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/attackRight.png")));
             setAttackL(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/attackLeft.png")));
