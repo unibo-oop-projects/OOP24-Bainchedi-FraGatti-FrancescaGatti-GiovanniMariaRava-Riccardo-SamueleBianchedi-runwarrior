@@ -3,6 +3,7 @@ package it.unibo.runwarrior.model.enemy.impl;
 import java.awt.Rectangle;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
@@ -13,6 +14,7 @@ import it.unibo.runwarrior.model.enemy.api.Enemy;
 public class EnemyImpl implements Enemy {
     private static final int NUM_UPDATE_FRAME = 20;
     private static final int COLLISION_HEIGHT_WIDTH = 48;
+    private static final int COLLISION_DIF= 15;
     private int x;
     private final int y;
     private final int width;
@@ -24,9 +26,9 @@ public class EnemyImpl implements Enemy {
     private boolean solid;
 
     private int velocityX;
-
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     private final EnemyHandlerImpl enemyHandler;
-
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     private final GameLoopController glp;
 
     /**
@@ -102,7 +104,7 @@ public class EnemyImpl implements Enemy {
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x+15, y, COLLISION_HEIGHT_WIDTH, COLLISION_HEIGHT_WIDTH-15);
+        return new Rectangle(x + COLLISION_DIF, y, COLLISION_HEIGHT_WIDTH, COLLISION_HEIGHT_WIDTH - COLLISION_DIF);
     }
 
     /**

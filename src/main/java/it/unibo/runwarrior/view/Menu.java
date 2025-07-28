@@ -228,7 +228,7 @@ public class Menu extends JPanel {
                         shopFrame.setResizable(false);
 
                         // Inserisci la ShopView collegata a GameSaveManager e Score
-                        final ShopView shopView = new ShopView(new Score(GameSaveManager.getInstance()));
+                        final ShopView shopView = new ShopView(new Score());
                         shopFrame.add(shopView);
                         shopFrame.setVisible(true);
                     });

@@ -16,7 +16,6 @@ import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.PowerUpDetectionImpl;
 import it.unibo.runwarrior.model.GameMap;
-import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.ArmourWarrior;
@@ -143,7 +142,7 @@ class TestPlayerCollisions {
     @Test
     void testCoinCollision(){
         CoinController coinController = new CoinControllerImpl();
-        Score score = new Score(GameSaveManager.getInstance());
+        Score score = new Score();
         ScoreController scoreController = new ScoreControllerImpl(score);
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, null);
         final CoinDetectionImpl collisionCoins = new CoinDetectionImpl(tileSize, coinController, scoreController);

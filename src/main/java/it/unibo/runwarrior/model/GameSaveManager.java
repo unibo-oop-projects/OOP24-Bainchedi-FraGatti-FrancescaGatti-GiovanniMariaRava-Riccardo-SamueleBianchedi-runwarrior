@@ -10,15 +10,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 /**
  * GameSaveManager handles the saving part of the game in the file game_save.txt.
  */
-@SuppressFBWarnings(
-    value = "MS_EXPOSE_REP",
-    justification = "Classe singleton: esporre l'unica istanza serve"
-)
 public final class GameSaveManager {
     private static final String SAVE_FILE = "game_save.txt";
     private static final String DEFAULT_STRING = "DEFAULT_SKIN";
@@ -30,7 +24,6 @@ public final class GameSaveManager {
     private int coinCollected;
     private boolean premiumSkinUnlocked;
     private String selectedSkinName;
-    private GameSaveManager gsm;
 
     /**
      * Private constructor of the class GameSaveManager.
@@ -42,16 +35,8 @@ public final class GameSaveManager {
     }
 
     /**
-     * Holder class that contains the singleton instance.
-     * Loaded only when getInstance() is called for the first time.
-     */
-    private static class Holder {
-        private static final GameSaveManager INSTANCE = createInstance();
-    }
-
-    /**
      * Create and initialize the instance.
-     * 
+     *
      * @return the instance created
      */
     private static GameSaveManager createInstance() {
@@ -61,17 +46,15 @@ public final class GameSaveManager {
         }
         return gsm;
     }
-    
 
     /**
      * Returns the singleton instance of the GameSaveManager.
-     * 
+     *
      * @return the only instance of GameSaveManager
      */
     public static GameSaveManager getInstance() {
         return Holder.INSTANCE;
     }
-
 
     /**
      * Save the changes of the variables in the file.
@@ -236,5 +219,13 @@ public final class GameSaveManager {
         }
         this.selectedSkinName = name;
         saveGame();
+    }
+
+    /**
+     * Holder class that contains the singleton instance.
+     * Loaded only when getInstance() is called for the first time.
+     */
+    private static final class Holder {
+        private static final GameSaveManager INSTANCE = createInstance();
     }
 }

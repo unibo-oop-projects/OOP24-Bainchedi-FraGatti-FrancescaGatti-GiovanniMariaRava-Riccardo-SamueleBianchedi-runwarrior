@@ -169,84 +169,84 @@ public abstract class AbstractCharacterImpl implements Character {
     /**
      * @param i image to set
      */
-    protected void setRight0(BufferedImage i) {
+    protected void setRight0(final BufferedImage i) {
         this.right0 = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setRight1(BufferedImage i) {
+    protected void setRight1(final BufferedImage i) {
         this.right1 = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setRight2(BufferedImage i) {
+    protected void setRight2(final BufferedImage i) {
         this.right2 = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setLeft0(BufferedImage i) {
+    protected void setLeft0(final BufferedImage i) {
         this.left0 = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setLeft1(BufferedImage i) {
+    protected void setLeft1(final BufferedImage i) {
         this.left1 = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setLeft2(BufferedImage i) {
+    protected void setLeft2(final BufferedImage i) {
         this.left2 = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setJumpR(BufferedImage i) {
+    protected void setJumpR(final BufferedImage i) {
         this.jumpR = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setJumpL(BufferedImage i) {
+    protected void setJumpL(final BufferedImage i) {
         this.jumpL = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setAttackR(BufferedImage i) {
+    protected void setAttackR(final BufferedImage i) {
         this.attackR = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setAttackL(BufferedImage i) {
+    protected void setAttackL(final BufferedImage i) {
         this.attackL = i;
     }
 
     /**
      * @param i image to set
      */
-    protected void setTipR(BufferedImage i) {
+    protected void setTipR(final BufferedImage i) {
         this.tipR = i;
     }
-    
+
     /**
      * @param i image to set
      */
-    protected void setTipL(BufferedImage i) {
+    protected void setTipL(final BufferedImage i) {
         this.tipL = i;
     }
 }
