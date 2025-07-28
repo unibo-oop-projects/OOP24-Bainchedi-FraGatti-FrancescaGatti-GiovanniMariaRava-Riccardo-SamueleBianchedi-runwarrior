@@ -1,5 +1,7 @@
 package it.unibo.runwarrior.model;
 
+import it.unibo.runwarrior.model.save.GameSaveManager;
+
 /**
  * Class that manages the player's score related to coin collection.
  * It uses Game Save Manager to persist coin data.

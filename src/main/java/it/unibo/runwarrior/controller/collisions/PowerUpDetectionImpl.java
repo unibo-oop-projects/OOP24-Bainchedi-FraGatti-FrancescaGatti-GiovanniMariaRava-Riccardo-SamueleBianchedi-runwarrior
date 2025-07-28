@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.view.GameMusic;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
@@ -31,7 +32,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
      * @param glc game-loop controller
      * @param pCon object that creates powerup list
      */
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public PowerUpDetectionImpl(final GameLoopController glc, final PowerUpController pCon) {
         this.glc = glc;
         this.powersController = pCon;

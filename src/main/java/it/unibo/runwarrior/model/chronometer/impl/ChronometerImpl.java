@@ -1,6 +1,9 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.chronometer.impl;
 
 import javax.swing.Timer;
+
+import it.unibo.runwarrior.model.chronometer.api.Chronometer;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

@@ -5,14 +5,19 @@ import java.util.Locale;
 
 import javax.swing.JFrame;
 
+import it.unibo.runwarrior.controller.coinController.api.CoinController;
+import it.unibo.runwarrior.controller.coinController.impl.CoinControllerImpl;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
+import it.unibo.runwarrior.controller.score.api.ScoreController;
+import it.unibo.runwarrior.controller.score.impl.ScoreControllerImpl;
+import it.unibo.runwarrior.controller.shop.api.ShopController;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.GameMap;
-import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
 import it.unibo.runwarrior.model.player.NakedWarrior;
 import it.unibo.runwarrior.model.player.NakedWizard;
+import it.unibo.runwarrior.model.save.GameSaveManager;
 import it.unibo.runwarrior.view.GameLoopPanel;
 import it.unibo.runwarrior.view.PowerUpManager;
 import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;

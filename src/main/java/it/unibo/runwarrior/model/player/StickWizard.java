@@ -1,5 +1,6 @@
 package it.unibo.runwarrior.model.player;
 
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.logging.Level;
 
@@ -56,16 +57,16 @@ public class StickWizard extends AbstractCharacterImpl {
     @Override
     protected void updateAttackCollision() {
         if (getAnimationHandler().getFrame() == PlayerFrame.ATTACK_FRAME && isRightDirection()) {
-            getSwordArea().setBounds(getMovementHandler().getPlX() + getSizeCharacter(), 
+            setSwordArea(new Rectangle(getMovementHandler().getPlX() + getSizeCharacter(), 
             getMovementHandler().getPlY() + getSizeCharacter() / 4,
             getSizeCharacter(), 
-            getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
+            getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2)));
         }
         if (getAnimationHandler().getFrame() == PlayerFrame.ATTACK_FRAME && !isRightDirection()) {
-            getSwordArea().setBounds(getMovementHandler().getPlX() - getSizeCharacter(), 
+            setSwordArea(new Rectangle(getMovementHandler().getPlX() - getSizeCharacter(), 
             getMovementHandler().getPlY() + getSizeCharacter() / 4,
             getSizeCharacter(), 
-            getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
+            getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2)));
         }
     }
 }

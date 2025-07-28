@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 
 /**
@@ -18,7 +19,7 @@ public class PowerUpImpl implements PowerUp {
     private static final Logger LOGGER = Logger.getLogger(PowerUpImpl.class.getName());
     private BufferedImage image;
     private BufferedImage egg;
-    private final Rectangle touchArea;
+    private Rectangle touchArea;
     private final GameLoopController glc;
     private boolean powerTaken;
     private boolean eggOpen;
@@ -28,7 +29,7 @@ public class PowerUpImpl implements PowerUp {
      *
      * @param glc game-loop controller
      */
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public PowerUpImpl(final GameLoopController glc) {
         this.glc = glc;
         touchArea = new Rectangle();
@@ -46,16 +47,16 @@ public class PowerUpImpl implements PowerUp {
     public void powerUpImage() {
         try {
             if (glc.getPowersHandler().getPowers() == 0) {
-                image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/armour.png"));
+                image = ImageIO.read(PowerUpImpl.class.getResourceAsStream("/PowerUps/armour.png"));
             }
             if (glc.getPowersHandler().getPowers() == 1) {
-                image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/sword.png"));
+                image = ImageIO.read(PowerUpImpl.class.getResourceAsStream("/PowerUps/sword.png"));
             }
             if (glc.getPowersHandler().getPowers() == 3) {
-                image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/cape.png"));
+                image = ImageIO.read(PowerUpImpl.class.getResourceAsStream("/PowerUps/cape.png"));
             }
             if (glc.getPowersHandler().getPowers() == 4) {
-                image = ImageIO.read(getClass().getResourceAsStream("/PowerUps/stick.png"));
+                image = ImageIO.read(PowerUpImpl.class.getResourceAsStream("/PowerUps/stick.png"));
             }
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load powerup images");
@@ -95,9 +96,12 @@ public class PowerUpImpl implements PowerUp {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("EI_EXPOSE_REP")
     public Rectangle getTouchArea() {
-        return touchArea;
+        return new Rectangle(touchArea);
+    }
+
+    public void setTouchArea(Rectangle touchArea) {
+        this.touchArea = touchArea;
     }
 
     /**

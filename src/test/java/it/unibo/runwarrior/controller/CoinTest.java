@@ -2,6 +2,7 @@ package it.unibo.runwarrior.controller;
 
 import org.junit.jupiter.api.Test;
 
+import it.unibo.runwarrior.controller.coinController.impl.CoinControllerImpl;
 import it.unibo.runwarrior.model.Coin;
 
 import static org.junit.jupiter.api.Assertions.*;

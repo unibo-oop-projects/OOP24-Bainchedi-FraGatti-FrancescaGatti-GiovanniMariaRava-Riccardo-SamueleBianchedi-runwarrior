@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.CharacterAnimationHandler;
 import it.unibo.runwarrior.controller.CharacterAnimationHandlerImpl;
 import it.unibo.runwarrior.controller.CharacterComand;
@@ -39,9 +40,9 @@ public abstract class AbstractCharacterImpl implements Character {
     private BufferedImage attackL;
     private BufferedImage tipR;
     private BufferedImage tipL;
-    private CharacterAnimationHandler animation;
-    private CharacterMovementHandler movement;
-    private int sizeCharacter;
+    private final CharacterAnimationHandler animation;
+    private final CharacterMovementHandler movement;
+    private final int sizeCharacter;
 
     /**
      * Constructor of the player; set player images, first position, 
@@ -120,7 +121,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public CharacterMovementHandler getMovementHandler() {
         return this.movement;
     }
@@ -129,7 +130,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public CharacterAnimationHandler getAnimationHandler() {
         return this.animation;
     }
@@ -145,18 +146,24 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("EI_EXPOSE_REP")
-    public Rectangle getSwordArea() {
-        return this.swordArea;
+    public void setSwordArea(Rectangle swordArea) {
+        this.swordArea = swordArea;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("EI_EXPOSE_REP")
+    public Rectangle getSwordArea() {
+        return new Rectangle(swordArea);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Rectangle getArea() {
-        return this.collisionArea;
+        return new Rectangle(collisionArea);
     }
 
     /**

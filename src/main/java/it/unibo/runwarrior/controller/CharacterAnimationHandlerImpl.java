@@ -3,6 +3,7 @@ package it.unibo.runwarrior.controller;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.player.PlayerFrame;
 
 /**
@@ -48,6 +49,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
      * @param cmd keyboard handler
      * @param move player movement handler
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public CharacterAnimationHandlerImpl(final CharacterComand cmd, final CharacterMovementHandler move) {
         this.cmd = cmd;
         this.movement = move;

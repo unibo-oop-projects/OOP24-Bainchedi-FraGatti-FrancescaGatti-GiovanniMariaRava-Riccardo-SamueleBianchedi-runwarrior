@@ -1,5 +1,6 @@
 package it.unibo.runwarrior.controller;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +44,8 @@ public class PowerUpController {
                     distance += tileSize;
                 }
             }
-            p.getTouchArea().setBounds(distance * tileSize, (row - 1) * tileSize + (tileSize / 4), 
-            tileSize, tileSize - (tileSize / 4));
+            p.setTouchArea(new Rectangle(distance * tileSize, (row - 1) * tileSize + (tileSize / 4), 
+            tileSize, tileSize - (tileSize / 4)));
             powerUps.add(p);
             distance += space;
         }
@@ -54,6 +55,6 @@ public class PowerUpController {
      * @return the list of powerups
      */
     public List<PowerUp> getPowerUps() {
-        return this.powerUps;
+        return new ArrayList<>(powerUps);
     }
 }

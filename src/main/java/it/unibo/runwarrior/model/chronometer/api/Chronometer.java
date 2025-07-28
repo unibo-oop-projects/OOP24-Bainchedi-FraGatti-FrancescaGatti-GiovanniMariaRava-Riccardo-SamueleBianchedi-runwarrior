@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.chronometer.api;
 
 /**
  * Chronometer interface.
