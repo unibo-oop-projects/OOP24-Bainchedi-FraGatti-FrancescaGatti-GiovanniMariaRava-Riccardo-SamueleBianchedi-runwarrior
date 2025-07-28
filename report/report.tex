@@ -84,6 +84,27 @@ tramite CollisionDetection, KillDetection e PowerUpDetection.
 Il pattern MVC implementato consente di mantenere lo stato del controller nell'eventualità che si modifichi la view.
 inserire UML delle classi principali dell'MVC
 \section{Samuele Bianchedi}
+\textbf{Problema}: L’implementazioni delle classi del modello soffriva di una criticità legata all’incapsulamento. SptoBugs ha rilevato molti warning che indicavano oggetti mutabili passati e restituiti tramite riferimento diretto.
+Questo poteva creare un’architettura fragile, incline ad errori e/o modifiche involontarie.
+\textbf{Soluzione}: Per risolvere questo problema e rendere sicuro i dati ho scelto di implementare copie difensive.
+\begin{itemize}
+    \item Per oggetti come BufferedImage e int[][]: nei costruttori e nei metodi setter invece di memorizzare il riferimento all’oggetto, 
+    ne viene creata una copia completa.
+    \item Nei metodi getter: invece di restituire una riferimento all'oggetti ne viene creato uno nuovo da passare al chiamante
+    \item Per le collezioni: i metodi getter sono stati modificato per restituire una vista immodificabile della collezione.
+\end{itemize}
+I pro sono ovviamente la sicurezza dei dati che sono protetti da modifiche esterne. Di contro abbiamo una riduzione della performance, 
+in quanto copiare oggetti innumerevoli volte costa abbastanza e in alcuni casi ha portato a “freeze” dell’applicazione.
+Nel seguente schema UML si mostra come i campi siano privati e l’accesso avvenga tramite metodi pubblici che lavorano restituendo copie.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/UMLMapElement.png}
+    \caption{UML della classe MapElement nel model}
+    \label{}
+\end{figure}
+Il pattern utilizzato è stato Immutable Object, un idioma fondamentale di OOP. Quest'ultimo spiega gli oggetti immutabili, oggetti che non
+si possono veder modificato lo stato dopo la loro creazione. Sebbene gli oggetti nel progetto non siano perfettamente immutabili a causa
+dei setter, quello a cui si aspirava era un oggetto non modificabile lontano da errori imprevedibili.
 \section{Riccardo Cornacchia}
 \section{Francesca Gatti}
 \textbf{Problema}: Nel gioco è previsto un sistema di personalizzazione del personaggio tramite l'acquisto e la selezione di una nuova skin.
