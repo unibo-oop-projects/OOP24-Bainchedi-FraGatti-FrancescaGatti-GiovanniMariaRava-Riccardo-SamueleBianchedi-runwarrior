@@ -45,9 +45,8 @@ public final class GoblinView implements EnemyView {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("checkstyle:RedundantModifier")
     @Override
-    public final void loadResources() throws IOException {
+    public void loadResources() throws IOException {
         rightGoblin = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/rightGoblin.png"));
         leftGoblin = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/leftGoblin.png"));
         rightGoblinMoving = ImageIO.read(GoblinView.class.getResourceAsStream("/Goblin/rightGoblinMoving.png"));

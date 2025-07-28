@@ -50,8 +50,8 @@ public class EnemySpawner {
     public void loadEnemiesFromStream(final InputStream is) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             br.lines().map(String :: trim)
-                .filter(s->!s.isEmpty())
-                .map(s->s.split(",", -1))
+                .filter(s -> !s.isEmpty())
+                .map(s -> s.split(",", -1))
                 .filter(part -> part.length == 3)
                 .map(part -> new EnemySpawnPoints(
                                                     Integer.parseInt(part[0]), 

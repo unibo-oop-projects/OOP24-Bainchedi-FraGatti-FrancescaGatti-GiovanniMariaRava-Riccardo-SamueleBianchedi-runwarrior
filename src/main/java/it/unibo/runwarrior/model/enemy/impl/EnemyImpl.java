@@ -13,6 +13,7 @@ import it.unibo.runwarrior.model.enemy.api.Enemy;
 public class EnemyImpl implements Enemy {
     private static final int NUM_UPDATE_FRAME = 20;
     private static final int COLLISION_HEIGHT_WIDTH = 48;
+    private static final int COLLISION_DIF= 15;
     private int x;
     private final int y;
     private final int width;
@@ -102,7 +103,7 @@ public class EnemyImpl implements Enemy {
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x+15, y, COLLISION_HEIGHT_WIDTH, COLLISION_HEIGHT_WIDTH-15);
+        return new Rectangle(x + COLLISION_DIF, y, COLLISION_HEIGHT_WIDTH, COLLISION_HEIGHT_WIDTH - COLLISION_DIF);
     }
 
     /**

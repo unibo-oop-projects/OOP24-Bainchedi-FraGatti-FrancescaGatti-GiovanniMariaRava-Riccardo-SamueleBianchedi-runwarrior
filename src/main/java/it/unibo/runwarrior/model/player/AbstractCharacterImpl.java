@@ -242,7 +242,7 @@ public abstract class AbstractCharacterImpl implements Character {
     protected void setTipR(final BufferedImage i) {
         this.tipR = i;
     }
-    
+
     /**
      * @param i image to set
      */

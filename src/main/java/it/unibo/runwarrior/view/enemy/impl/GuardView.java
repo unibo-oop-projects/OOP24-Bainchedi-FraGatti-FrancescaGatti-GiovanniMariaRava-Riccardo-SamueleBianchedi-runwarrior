@@ -49,9 +49,8 @@ public final class GuardView implements EnemyView {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("checkstyle:RedundantModifier")
     @Override
-    public final void loadResources() throws IOException {
+    public void loadResources() throws IOException {
         rightGuard = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/rightGuard.png"));
         leftGuard = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/leftGuard.png"));
         rightGuardMoving = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/rightGuardMoving.png"));
@@ -64,9 +63,8 @@ public final class GuardView implements EnemyView {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("checkstyle:RedundantModifier")
     @Override
-    public final void render(final Graphics g, final EnemyImpl enemy) {
+    public void render(final Graphics g, final EnemyImpl enemy) {
         final BufferedImage currentImage;
         if (enemy.getVelocityX() == 0) {
             currentImage = image;

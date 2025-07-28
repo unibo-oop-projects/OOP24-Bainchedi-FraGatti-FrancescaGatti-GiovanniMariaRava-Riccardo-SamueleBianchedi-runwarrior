@@ -52,7 +52,7 @@ public final class GameSaveManager {
         }
         return gsm;
     }
-    
+
     /**
      * Returns the singleton instance of the GameSaveManager.
      *
@@ -231,7 +231,7 @@ public final class GameSaveManager {
      * Holder class that contains the singleton instance.
      * Loaded only when getInstance() is called for the first time.
      */
-    private final static class Holder {
+    private static final class Holder {
         private static final GameSaveManager INSTANCE = createInstance();
     }
 }
