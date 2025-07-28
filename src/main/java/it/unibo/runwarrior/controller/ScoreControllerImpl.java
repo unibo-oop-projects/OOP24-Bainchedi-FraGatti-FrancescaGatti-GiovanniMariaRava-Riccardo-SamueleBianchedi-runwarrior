@@ -26,6 +26,13 @@ public class ScoreControllerImpl implements ScoreController {
     @Override
     public final void addCoin() {
         score.incrementCoinScore(1);
-        gameSaveManager.addCoin(1);
+        gameSaveManager.setCoinCollected(score.getCoinScore());
+        gameSaveManager.saveGame();
+        // gameSaveManager.addCoin(1);
+    }
+
+    @Override
+    public final Score getScore() {
+        return this.score;
     }
 }

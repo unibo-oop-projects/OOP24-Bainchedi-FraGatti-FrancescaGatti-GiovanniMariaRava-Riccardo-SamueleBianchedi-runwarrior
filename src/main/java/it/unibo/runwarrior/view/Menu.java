@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -31,8 +30,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Menu extends JPanel {
-        private final static int FRAME_MENU_WIDTH = 1280;
-        private final static int FRAME_MENU_HEIGHT = 720;
+        // private final static int FRAME_MENU_WIDTH = 1280;
+        // private final static int FRAME_MENU_HEIGHT = 720;
         private final static int PLAY_BUTTON_PANEL_WIDTH = 250;
         private final static int PLAY_BUTTON_PANEL_HEIGHT = 500;
         private final static int BUTTON_WIDTH = 150;
@@ -73,8 +72,8 @@ public class Menu extends JPanel {
                     }
                 }
             });
-            frameMenu.setSize(FRAME_MENU_WIDTH, FRAME_MENU_HEIGHT);
-            frameMenu.setLocationRelativeTo(null);
+            // frameMenu.setSize(FRAME_MENU_WIDTH, FRAME_MENU_HEIGHT);
+            // frameMenu.setLocationRelativeTo(null);
             try {
                 immagineSfondo = ImageIO.read(getClass().getResourceAsStream("/Menu/sfondoMenu.png"));
                 imgTitolo = ImageIO.read(getClass().getResourceAsStream("/Menu/titolo4.png"));

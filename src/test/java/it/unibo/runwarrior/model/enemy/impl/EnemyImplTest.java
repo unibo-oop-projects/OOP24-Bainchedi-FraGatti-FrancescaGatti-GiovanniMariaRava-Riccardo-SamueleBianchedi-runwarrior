@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.awt.Rectangle;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
@@ -26,13 +28,14 @@ public class EnemyImplTest {
     private GameLoopController glp;
     private EnemyHandlerImpl enemyHandler;
     private EnemyViewFactoryImpl enemyViewFactory;
+    private JFrame testFrame = new JFrame();
 
     /**
      * Sets up a new EnemyImpl instance.
      */
     @BeforeEach
     public void setUp() {
-        glp = new GameLoopController("tryMap.txt", "Map2/forest_theme.txt", 
+        glp = new GameLoopController(testFrame,"tryMap.txt", "Map2/forest_theme.txt", 
                                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
         enemy = new EnemyImpl(STANDARD_X, STANDARD_Y, TILE_SIZE, TILE_SIZE, true, enemyHandler, glp, 1); 

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.ScoreController;
 import it.unibo.runwarrior.model.Coin;
+import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.player.Character;
 
 /**
