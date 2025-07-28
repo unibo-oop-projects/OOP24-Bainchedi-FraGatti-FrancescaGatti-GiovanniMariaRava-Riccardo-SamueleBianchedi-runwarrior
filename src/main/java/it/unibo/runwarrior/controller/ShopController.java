@@ -2,7 +2,6 @@ package it.unibo.runwarrior.controller;
 
 import it.unibo.runwarrior.model.Skin;
 
-
 public interface ShopController {
     /**
      * tries the buying of premium skin.
