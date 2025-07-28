@@ -211,7 +211,7 @@ public abstract class AbstractCharacterImpl implements Character {
     /**
      * @param i image to set
      */
-    protected void setjumpR(BufferedImage i) {
+    protected void setJumpR(BufferedImage i) {
         this.jumpR = i;
     }
 
