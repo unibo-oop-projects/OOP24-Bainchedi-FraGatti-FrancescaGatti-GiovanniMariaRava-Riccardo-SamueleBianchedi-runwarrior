@@ -140,7 +140,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
                 save.setLevelsCompleted(currentLevel);
             }
         }
-        
+
         GameSaveManager.getInstance().addCoin(gameController.getCoinController().getCoinsCollected());
 
         //quale pannello mostrare?
@@ -181,7 +181,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     protected void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         Graphics2D gr2 = (Graphics2D) gr;
-        
+
         gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
         gameController.getPowersManager().printPowerUp(gr2);
         gameController.getPlayer().drawPlayer(gr2);

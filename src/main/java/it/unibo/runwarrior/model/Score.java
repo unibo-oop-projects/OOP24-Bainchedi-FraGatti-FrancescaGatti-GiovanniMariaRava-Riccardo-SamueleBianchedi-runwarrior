@@ -9,11 +9,8 @@ public class Score {
 
     /**
      * Score Constructor.
-     *
-     * @param gameSaveManager to take saved data
      */
     public Score() {
-       //this.gameSaveManager = gameSaveManager;
     }
 
     // /**
