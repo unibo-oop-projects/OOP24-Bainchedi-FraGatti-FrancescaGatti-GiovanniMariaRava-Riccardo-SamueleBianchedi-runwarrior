@@ -13,10 +13,10 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.view.enemy.api.EnemyView;
+
 /**
  * Implementation of the enemy view with Goblin enemy.
  */
-
 public final class GoblinView implements EnemyView {
     private static final Logger LOGGER = Logger.getLogger(GoblinView.class.getName());
     private BufferedImage rightGoblin;

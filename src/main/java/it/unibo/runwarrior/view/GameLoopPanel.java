@@ -65,7 +65,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * Initialize a new thread and call start method.
      */
     public void startGame() {
-        //System.out.println("Start Game chiamato");
         gameThread = new Thread(this);
         gameThread.start();
         //music.play(true);
@@ -76,7 +75,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        double timeFor1Frame = MLD/FPS;
+        final double timeFor1Frame = MLD / FPS;
         long lastTime = System.nanoTime();
         long currentTime;
         double waitingTime = 0;
@@ -118,7 +117,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
             } else if (gameController.getPowersHandler().gameOver()) {
                 gameEnded = true;
                 levelCompleted = false;
-            } else if (gameController.getPlayer().getMovementHandler().getCollisionDetection().gameOver()){
+            } else if (gameController.getPlayer().getMovementHandler().getCollisionDetection().gameOver()) {
                 gameEnded = true;
                 levelCompleted = false;
             }
@@ -136,21 +135,21 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private void showEndPanel() {
         //aggiorno livelli:
         if (levelCompleted) {
-            int currentLevel = gameController.getCurrentLevel();
-            GameSaveManager save = GameSaveManager.getInstance();
+            final int currentLevel = gameController.getCurrentLevel();
+            final GameSaveManager save = GameSaveManager.getInstance();
 
             if (currentLevel >= save.getLevelsCompleted() + 1) {
                 save.setLevelsCompleted(currentLevel);
             }
         }
-        
+
         GameSaveManager.getInstance().addCoin(gameController.getCoinController().getCoinsCollected());
 
-        JPanel content = levelCompleted
+        final JPanel content = levelCompleted
         ? new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected())
         : new GameOverPanel(gameController.getCoinController().getCoinsCollected());
 
-        JDialog dialog = new JDialog(frameMenu, "Game Result", true);
+        final JDialog dialog = new JDialog(frameMenu, "Game Result", true);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setContentPane(content);
         dialog.pack();
@@ -158,12 +157,12 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
         dialog.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosed(WindowEvent e) {
+            public void windowClosed(final WindowEvent e) {
                 System.out.println("Dialog closed, resetting frame");
                 endGame();
                 SwingUtilities.invokeLater(() -> {
                     frameMenu.getContentPane().removeAll();
-                    Menu menuPanel = new Menu(frameMenu);
+                    final Menu menuPanel = new Menu(frameMenu);
                     frameMenu.setContentPane(menuPanel);
                     frameMenu.revalidate();
                     frameMenu.repaint();
@@ -180,10 +179,10 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * Render all the part of the game.
      */
     @Override
-    protected void paintComponent(Graphics gr) {
+    protected void paintComponent(final Graphics gr) {
         super.paintComponent(gr);
-        Graphics2D gr2 = (Graphics2D) gr;
-        
+        final Graphics2D gr2 = (Graphics2D) gr;
+
         gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
         gameController.getPowersManager().printPowerUp(gr2);
         gameController.getPlayer().drawPlayer(gr2);

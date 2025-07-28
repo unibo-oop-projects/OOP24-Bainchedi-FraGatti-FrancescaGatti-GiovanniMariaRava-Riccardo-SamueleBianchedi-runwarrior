@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  28 JUL 2025 20:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  28 JUL 2025 21:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -227,6 +227,24 @@ LaTeX Warning: Label `' multiply defined.
 
 LaTeX Warning: Label `@cref' multiply defined.
 
+
+LaTeX Warning: Label `fig:2.3' multiply defined.
+
+
+LaTeX Warning: Label `fig:2.3@cref' multiply defined.
+
+
+LaTeX Warning: Label `fig:2.4' multiply defined.
+
+
+LaTeX Warning: Label `fig:2.4@cref' multiply defined.
+
+
+LaTeX Warning: Label `fig:2.5' multiply defined.
+
+
+LaTeX Warning: Label `fig:2.5@cref' multiply defined.
+
 )
 \openout1 = `report.aux'.
 
@@ -336,60 +354,89 @@ File: resources/UMLMapElement.png Graphic file (type png)
 Package pdftex.def Info: resources/UMLMapElement.png  used on input line 101.
 (pdftex.def)             Requested size: 312.00119pt x 247.66583pt.
  [6 <./resources/UMLMapElement.png>]
-<resources/UMLshopMVC.png, id=146, 2083.785pt x 1255.69125pt>
+<resources/TemplateCharacter.png, id=146, 3603.4625pt x 3854.4pt>
+File: resources/TemplateCharacter.png Graphic file (type png)
+<use resources/TemplateCharacter.png>
+Package pdftex.def Info: resources/TemplateCharacter.png  used on input line 127.
+(pdftex.def)             Requested size: 312.00119pt x 333.70685pt.
+ [7] [8 <./resources/TemplateCharacter.png>]
+<resources/playerAction.png, id=158, 3854.4pt x 2296.58pt>
+File: resources/playerAction.png Graphic file (type png)
+<use resources/playerAction.png>
+Package pdftex.def Info: resources/playerAction.png  used on input line 151.
+(pdftex.def)             Requested size: 312.00119pt x 185.86777pt.
+ [9 <./resources/playerAction.png>]
+<resources/Collisions.png, id=165, 3854.4pt x 1617.04124pt>
+File: resources/Collisions.png Graphic file (type png)
+<use resources/Collisions.png>
+Package pdftex.def Info: resources/Collisions.png  used on input line 186.
+(pdftex.def)             Requested size: 312.00119pt x 130.87105pt.
+<resources/Powerup.png, id=166, 3854.4pt x 2736.2225pt>
+File: resources/Powerup.png Graphic file (type png)
+<use resources/Powerup.png>
+Package pdftex.def Info: resources/Powerup.png  used on input line 201.
+(pdftex.def)             Requested size: 312.00119pt x 221.4491pt.
+ [10 <./resources/Collisions.png>]
+<resources/PowersHandler.png, id=173, 3854.4pt x 3650.63875pt>
+File: resources/PowersHandler.png Graphic file (type png)
+<use resources/PowersHandler.png>
+Package pdftex.def Info: resources/PowersHandler.png  used on input line 218.
+(pdftex.def)             Requested size: 312.00119pt x 295.45502pt.
+ [11 <./resources/Powerup.png>] [12 <./resources/PowersHandler.png>]
+<resources/UMLshopMVC.png, id=187, 2083.785pt x 1255.69125pt>
 File: resources/UMLshopMVC.png Graphic file (type png)
 <use resources/UMLshopMVC.png>
-Package pdftex.def Info: resources/UMLshopMVC.png  used on input line 128.
+Package pdftex.def Info: resources/UMLshopMVC.png  used on input line 242.
 (pdftex.def)             Requested size: 312.00119pt x 188.00067pt.
- [7] [8 <./resources/UMLshopMVC.png>]
-<resources/enemyMvcUml.png, id=159, 3854.4pt x 1964.33875pt>
+ [13 <./resources/UMLshopMVC.png>]
+<resources/enemyMvcUml.png, id=195, 3854.4pt x 1964.33875pt>
 File: resources/enemyMvcUml.png Graphic file (type png)
 <use resources/enemyMvcUml.png>
-Package pdftex.def Info: resources/enemyMvcUml.png  used on input line 168.
+Package pdftex.def Info: resources/enemyMvcUml.png  used on input line 283.
 (pdftex.def)             Requested size: 312.00119pt x 158.97868pt.
- [9]
-<resources/saveManagerUML.png, id=167, 3317.39375pt x 3854.4pt>
+ [14] [15 <./resources/enemyMvcUml.png>]
+<resources/saveManagerUML.png, id=208, 3317.39375pt x 3854.4pt>
 File: resources/saveManagerUML.png Graphic file (type png)
 <use resources/saveManagerUML.png>
-Package pdftex.def Info: resources/saveManagerUML.png  used on input line 190.
+Package pdftex.def Info: resources/saveManagerUML.png  used on input line 305.
 (pdftex.def)             Requested size: 234.00238pt x 271.83522pt.
- [10 <./resources/enemyMvcUml.png>] [11 <./resources/saveManagerUML.png>]
-<resources/spawingEnemyUML.png, id=180, 3854.4pt x 1799.72375pt>
+ [16] [17 <./resources/saveManagerUML.png>]
+<resources/spawingEnemyUML.png, id=220, 3854.4pt x 1799.72375pt>
 File: resources/spawingEnemyUML.png Graphic file (type png)
 <use resources/spawingEnemyUML.png>
-Package pdftex.def Info: resources/spawingEnemyUML.png  used on input line 209.
+Package pdftex.def Info: resources/spawingEnemyUML.png  used on input line 324.
 (pdftex.def)             Requested size: 312.00119pt x 145.65599pt.
- [12 <./resources/spawingEnemyUML.png>]
+ [18 <./resources/spawingEnemyUML.png>]
 Capitolo 3.
-[13
+[19
 
 ]
-Overfull \hbox (118.46422pt too wide) in paragraph at lines 250--252
+Overfull \hbox (118.46422pt too wide) in paragraph at lines 365--367
 \OT1/cmr/m/n/12 Map<Integer, Buf-fe-re-dI-ma-ge> e Li-st<MapElement> https://github.com/GiovanniRava/OOP24-
  []
 
 
-Overfull \hbox (260.95436pt too wide) in paragraph at lines 250--252
+Overfull \hbox (260.95436pt too wide) in paragraph at lines 365--367
 \OT1/cmr/m/n/12 runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/GameMap.java 
  []
 
 
-Overfull \hbox (4.57233pt too wide) in paragraph at lines 252--254
+Overfull \hbox (4.57233pt too wide) in paragraph at lines 367--369
 \OT1/cmr/m/n/12 l'en-co-ding UTF-8 in let-tu-ra https://github.com/GiovanniRava/OOP24-
  []
 
 
-Overfull \hbox (266.25708pt too wide) in paragraph at lines 252--254
+Overfull \hbox (266.25708pt too wide) in paragraph at lines 367--369
 \OT1/cmr/m/n/12 runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/MapLoader.java 
  []
 
-[14]
+[20]
 Capitolo 4.
-[15
+[21
 
 ]
 Appendice A.
-[16
+[22
 
 ] (./report.aux
 Package cleveref Info: loaded `italian' language definitions on input line 7.
@@ -407,18 +454,18 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D3C629ADDB7A2EB6CB4FF2CE2B2E3DE3;2773.
  ) 
 Here is how much of TeX's memory you used:
- 12310 strings out of 474116
- 207325 string characters out of 5743683
- 1933187 words of memory out of 5000000
- 34505 multiletter control sequences out of 15000+600000
+ 12360 strings out of 474116
+ 208607 string characters out of 5743683
+ 1935187 words of memory out of 5000000
+ 34544 multiletter control sequences out of 15000+600000
  564527 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,7n,79p,350b,517s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,7n,79p,350b,519s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on report.pdf (17 pages, 1189179 bytes).
+Output written on report.pdf (23 pages, 2517521 bytes).
 PDF statistics:
- 249 PDF objects out of 1000 (max. 8388607)
- 203 compressed objects within 3 object streams
- 46 named destinations out of 1000 (max. 500000)
- 197 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 291 PDF objects out of 1000 (max. 8388607)
+ 229 compressed objects within 3 object streams
+ 57 named destinations out of 1000 (max. 500000)
+ 222 words of extra memory for PDF output out of 10000 (max. 10000000)
 

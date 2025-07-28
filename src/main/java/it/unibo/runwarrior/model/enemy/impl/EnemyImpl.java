@@ -14,7 +14,7 @@ import it.unibo.runwarrior.model.enemy.api.Enemy;
 public class EnemyImpl implements Enemy {
     private static final int NUM_UPDATE_FRAME = 20;
     private static final int COLLISION_HEIGHT_WIDTH = 48;
-    private static final int COLLISION_DIF= 15;
+    private static final int COLLISION_DIF = 15;
     private int x;
     private final int y;
     private final int width;

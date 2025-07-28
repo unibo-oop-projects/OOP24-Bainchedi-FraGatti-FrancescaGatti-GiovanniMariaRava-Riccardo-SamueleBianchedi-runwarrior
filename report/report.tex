@@ -149,7 +149,7 @@ entità.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{resources/playerAction.png}
-    \caption{UML del pattern Template per il personaggio principale}
+    \caption{UML architettura implementazione animazione e movimento player}
     \label{fig:2.2}
 \end{figure}
 
@@ -184,7 +184,7 @@ diverse entità.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{resources/Collisions.png}
-    \caption{UML del pattern Template per il personaggio principale}
+    \caption{UML architettura per gestire le collisioni}
     \label{fig:2.3}
 \end{figure}
 
@@ -199,13 +199,13 @@ che acquisisce la lista di tutti i powerups e si occupa di stamparli a video nel
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{resources/Powerup.png}
-    \caption{UML del pattern Template per il personaggio principale}
+    \caption{UML architettura MVC dei powerup}
     \label{fig:2.4}
 \end{figure}
 
 \textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni
 
-\textbf{Soluzione}: creazione della classe PowersHandler nel controller del progetto, classe che gestisce l'inizializzazione del 
+\textbf{Soluzione}: creazione della classe PowersHandler nella sezione controller dell'MVC. La classe che gestisce l'inizializzazione del 
 personaggio con cui si inzia il livello e la creazione di nuove istanze Character mantenendole in una lista. Quando il player ottiene 
 1 vita (raccolta powerup) o la perde (collisione ostacolo o nemico, se non schiacciato) vengono utilizzati i metodi setPowers() e 
 losePowers() dalle classi “Detection”; questi metodi si collegano al GameLoopController permettondo di cambiare la skin del player 
@@ -216,7 +216,7 @@ Infine fornisce il metodo gameOver() che restituisce true se l'entità Character
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{resources/PowersHandler.png}
-    \caption{UML del pattern Template per il personaggio principale}
+    \caption{UML architettura per gestire cambio skin in base alle collisioni}
     \label{fig:2.5}
 \end{figure}
 
