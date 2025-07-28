@@ -3,6 +3,7 @@ package it.unibo.runwarrior.controller.collisions;
 import java.awt.Rectangle;
 import java.util.Iterator;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.CoinController;
 import it.unibo.runwarrior.controller.ScoreController;
 import it.unibo.runwarrior.model.Coin;
@@ -24,7 +25,7 @@ public class CoinDetectionImpl implements CoinDetection {
      * @param coinC CoinController instance
      * @param score ScoreController instance
      */
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public CoinDetectionImpl(final int tileSize, final CoinController coinC, final ScoreController score) {
         this.tileSize = tileSize;
         this.coinC = coinC;
