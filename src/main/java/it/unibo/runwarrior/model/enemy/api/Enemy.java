@@ -12,7 +12,7 @@ public interface Enemy {
      * This include playing an animation or removing the entity from the game. 
      */
     void die();
-        
+ 
     /**
      * Updates the state of the entity.
      * This include movement, animation and collision.

@@ -18,7 +18,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
 /**
  * Implementation of the enemy view with Guard enemy.
  */
-public class GuardView implements EnemyView {
+public final class GuardView implements EnemyView {
     private static final Logger LOGGER = Logger.getLogger(GuardView.class.getName());
     private BufferedImage rightGuard;
     private BufferedImage leftGuard;

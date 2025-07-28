@@ -15,7 +15,7 @@ public interface EnemyHandler {
 
     /**
      * Call the view part to render the enemies.
-     * 
+     *
      * @param g is graphics used in the rendering part
      */
     void render(Graphics g);
@@ -23,7 +23,7 @@ public interface EnemyHandler {
     /**
      * Updates the state of all enemies and handles their collision with the map.
      * Removes enemies that are not on the screen 
-     * 
+     *
      * @param mapObstacles a list of rectangular objects representing obstacles on the map
      */
     void updateWithMap(List<Rectangle> mapObstacles);

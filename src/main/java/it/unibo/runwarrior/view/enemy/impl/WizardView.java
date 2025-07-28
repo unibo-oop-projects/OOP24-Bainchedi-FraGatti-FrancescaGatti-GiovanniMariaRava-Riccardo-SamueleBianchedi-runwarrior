@@ -16,7 +16,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
 /**
  * Implementation of the enemy view with Wizard enemy.
  */
-public class WizardView implements EnemyView {
+public final class WizardView implements EnemyView {
     private static final Logger LOGGER = Logger.getLogger(MonkeyView.class.getName());
     private BufferedImage rightWizard;
     private BufferedImage rightWizardMoving;

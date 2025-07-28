@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  * This class is final as it is not designed for extension.
  */
 public final class ImageLoader {
-
+    private static final String FROM_PATH_STRING = "from";
     private final Map<Integer, BufferedImage> blockImages;
 
     /**

@@ -16,7 +16,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
  * Implementation of the enemy view with Goblin enemy.
  */
 
-public class GoblinView implements EnemyView {
+public final class GoblinView implements EnemyView {
     private static final Logger LOGGER = Logger.getLogger(GoblinView.class.getName());
     private BufferedImage rightGoblin;
     private BufferedImage leftGoblin;
