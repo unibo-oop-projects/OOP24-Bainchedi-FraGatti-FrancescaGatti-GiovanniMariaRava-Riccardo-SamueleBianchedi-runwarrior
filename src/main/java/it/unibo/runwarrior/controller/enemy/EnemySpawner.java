@@ -83,7 +83,6 @@ public class EnemySpawner {
                                             true, handler, glp, spawnPoint.type());
                 handler.addEnemy(enemy);
                 spawnedEnemies.add(spawnPoint);
-                
                 iterator.remove();
             }
         }
