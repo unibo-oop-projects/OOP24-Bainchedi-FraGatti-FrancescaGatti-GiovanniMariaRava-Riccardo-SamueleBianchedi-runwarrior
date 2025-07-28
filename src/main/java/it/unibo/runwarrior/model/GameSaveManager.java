@@ -41,16 +41,8 @@ public final class GameSaveManager {
     }
 
     /**
-     * Holder class that contains the singleton instance.
-     * Loaded only when getInstance() is called for the first time.
-     */
-    private static class Holder {
-        private static final GameSaveManager INSTANCE = createInstance();
-    }
-
-    /**
      * Create and initialize the instance.
-     * 
+     *
      * @return the instance created
      */
     private static GameSaveManager createInstance() {
@@ -61,16 +53,14 @@ public final class GameSaveManager {
         return gsm;
     }
     
-
     /**
      * Returns the singleton instance of the GameSaveManager.
-     * 
+     *
      * @return the only instance of GameSaveManager
      */
     public static GameSaveManager getInstance() {
         return Holder.INSTANCE;
     }
-
 
     /**
      * Save the changes of the variables in the file.
@@ -235,5 +225,13 @@ public final class GameSaveManager {
         }
         this.selectedSkinName = name;
         saveGame();
+    }
+
+    /**
+     * Holder class that contains the singleton instance.
+     * Loaded only when getInstance() is called for the first time.
+     */
+    private final static class Holder {
+        private static final GameSaveManager INSTANCE = createInstance();
     }
 }
