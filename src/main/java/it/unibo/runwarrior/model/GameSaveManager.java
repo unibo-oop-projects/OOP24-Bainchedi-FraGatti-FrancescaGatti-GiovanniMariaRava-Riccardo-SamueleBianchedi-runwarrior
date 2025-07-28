@@ -30,7 +30,6 @@ public final class GameSaveManager {
     private int coinCollected;
     private boolean premiumSkinUnlocked;
     private String selectedSkinName;
-    private GameSaveManager gsm;
 
     /**
      * Private constructor of the class GameSaveManager.
