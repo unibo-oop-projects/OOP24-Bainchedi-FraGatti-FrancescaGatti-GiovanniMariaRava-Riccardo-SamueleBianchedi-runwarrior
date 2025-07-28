@@ -154,6 +154,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         dialog.setContentPane(content);
         dialog.pack();
         dialog.setLocationRelativeTo(frameMenu);
+        dialog.setResizable(false);
 
         dialog.addWindowListener(new WindowAdapter() {
             @Override

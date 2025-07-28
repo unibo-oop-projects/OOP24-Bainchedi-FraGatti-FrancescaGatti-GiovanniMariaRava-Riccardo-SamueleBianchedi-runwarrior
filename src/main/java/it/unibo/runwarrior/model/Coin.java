@@ -39,7 +39,7 @@ public class Coin {
      */
     public void loadCoinImage() {
         try {
-            coinImage = ImageIO.read(getClass().getResourceAsStream("/Coins/CoinSmall.png"));
+            coinImage = ImageIO.read(Coin.class.getResourceAsStream("/Coins/CoinSmall.png"));
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load coin images");
         }
@@ -89,6 +89,15 @@ public class Coin {
      * @return the image of coin
      */
     public final BufferedImage getCoinImage() {
-        return coinImage;
+        if (coinImage == null) {
+        return null;
+    }
+    final BufferedImage copy = new BufferedImage(
+        coinImage.getWidth(),
+        coinImage.getHeight(),
+        coinImage.getType()
+        );
+        copy.getGraphics().drawImage(coinImage, 0, 0, null);
+        return copy;
     }
 }

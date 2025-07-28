@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,8 +43,8 @@ public class CoinControllerImpl implements CoinController {
     @Override
     public final List<int[]> loadCoinFromFile(final String pathFile) {
         final List<int[]> coinCoordinates = new ArrayList<>();
-        try (InputStream is = getClass().getResourceAsStream(pathFile);
-         BufferedReader fileReader = new BufferedReader(new InputStreamReader(is))) {
+        try (InputStream is = CoinControllerImpl.class.getResourceAsStream(pathFile);
+         BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             if (is == null) {
             return coinCoordinates;
             }
@@ -136,16 +137,8 @@ public class CoinControllerImpl implements CoinController {
      * {@inheritDoc}
      */
     @Override
-    public void setScoreController(final ScoreController scoreController) {
-        this.scoreController = scoreController;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public List<Coin> getCoinList() {
-        return coinList;
+        return new ArrayList<>(coinList);
     }
 
     /**

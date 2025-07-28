@@ -61,13 +61,6 @@ public interface CoinController {
     void increaseCoinsCollected();
 
     /**
-     * sets the controller to manages the score.
-     *
-     * @param scoreController controller of the score
-     */
-    void setScoreController(ScoreController scoreController);
-
-    /**
      * @return list of coins that are actually in the level
      */
     List<Coin> getCoinList();

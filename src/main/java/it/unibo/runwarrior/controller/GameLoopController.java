@@ -77,7 +77,7 @@ public class GameLoopController {
 
         this.score = new Score();
         this.scoreController = new ScoreControllerImpl(score);
-        this.coinController.setScoreController(scoreController);
+        //this.coinController.setScoreController(scoreController);
         this.glp = new GameLoopPanel(mainFrame, mapPath, themePath, enemiesPath, coinsPath, this);
         initializePlayer();
     }
