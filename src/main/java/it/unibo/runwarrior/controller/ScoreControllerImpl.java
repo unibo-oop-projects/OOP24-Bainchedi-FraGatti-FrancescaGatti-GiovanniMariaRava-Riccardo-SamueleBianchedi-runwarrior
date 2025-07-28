@@ -13,7 +13,7 @@ public class ScoreControllerImpl implements ScoreController {
     /**
      * Constructor of ScoreControllerImpl.
      *
-     *@param score object score
+     * @param score object score
      */
     public ScoreControllerImpl(final Score score) { 
         this.score = score; 

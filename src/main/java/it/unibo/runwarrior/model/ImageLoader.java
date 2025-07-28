@@ -86,7 +86,7 @@ public final class ImageLoader {
                             final String imagePath = parts[1].trim();
                             if (!this.loadImage(blockValue, imagePath)) {
                                 System.err.println("Error: Failed to load image for block " + blockValue
-                                    +"from path" + imagePath);
+                                    + "from path" + imagePath);
                                 allLoadedSuccessfully = false;
                             }
                         } catch (final NumberFormatException e) {
