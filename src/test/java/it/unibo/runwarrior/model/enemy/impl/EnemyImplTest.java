@@ -17,7 +17,7 @@ import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
 /**
  * Test class for EnemyImpl, in which is tested the right positioning and collision.
  */
-public class EnemyImplTest {
+class EnemyImplTest {
     private static final int STANDARD_X = 50;
     private static final int STANDARD_Y = 100;
     private static final int TILE_SIZE = 64;
@@ -27,7 +27,6 @@ public class EnemyImplTest {
     private static final int STANDARD_VEL = 2;
     private static final int OBSTACLE_X = 60;
     private EnemyImpl enemy;
-    private GameLoopController glc;
     private EnemyHandlerImpl enemyHandler;
     private EnemyViewFactoryImpl enemyViewFactory;
     private JFrame mainFrame;
@@ -36,8 +35,8 @@ public class EnemyImplTest {
      * Sets up a new EnemyImpl instance.
      */
     @BeforeEach
-    public void setUp() {
-        glc = new GameLoopController(mainFrame, "tryMap.txt", "Map2/forest_theme.txt", 
+    void setUp() {
+        final GameLoopController glc = new GameLoopController(mainFrame, "tryMap.txt", "Map2/forest_theme.txt", 
                                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         glc.getGlp().startGame();
         glc.getGlp().endGame();
@@ -49,7 +48,7 @@ public class EnemyImplTest {
      * Verifies that getBounds() returns the correct rectangle based on position and size.
      */
     @Test
-    public void testGetBounds() {
+    void testGetBounds() {
         final Rectangle bounds = enemy.getBounds();
         assertEquals(COLLISION_X, bounds.x);
         assertEquals(STANDARD_Y, bounds.y);
@@ -61,7 +60,7 @@ public class EnemyImplTest {
      * Ensures that checkMapCollision inverts velocity.
      */
     @Test
-    public void testCheckMapCollisionBlocksMovement() {
+    void testCheckMapCollisionBlocksMovement() {
         final Rectangle obstacle = new Rectangle(OBSTACLE_X, STANDARD_Y, TILE_SIZE, TILE_SIZE);
         enemy.setVelocityX(STANDARD_VEL);
         enemy.checkMapCollision(List.of(obstacle));
@@ -72,7 +71,7 @@ public class EnemyImplTest {
      * This method check if when the enemy is dead is removed from the list.
      */
     @Test 
-    public void testDie() {
+    void testDie() {
         enemyHandler.addEnemy(enemy);
         assertEquals(1, enemyHandler.getEnemies().size());
         enemy.die();
