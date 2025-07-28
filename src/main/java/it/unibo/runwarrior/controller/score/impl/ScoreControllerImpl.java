@@ -1,5 +1,6 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.score.impl;
 
+import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.model.Score;
 import it.unibo.runwarrior.model.save.GameSaveManager;
 

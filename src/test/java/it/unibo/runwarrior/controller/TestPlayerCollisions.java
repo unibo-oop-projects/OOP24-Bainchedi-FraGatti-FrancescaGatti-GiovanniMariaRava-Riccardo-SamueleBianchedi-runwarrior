@@ -15,6 +15,8 @@ import it.unibo.runwarrior.controller.collisions.CoinDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.PowerUpDetectionImpl;
+import it.unibo.runwarrior.controller.score.api.ScoreController;
+import it.unibo.runwarrior.controller.score.impl.ScoreControllerImpl;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.Score;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;

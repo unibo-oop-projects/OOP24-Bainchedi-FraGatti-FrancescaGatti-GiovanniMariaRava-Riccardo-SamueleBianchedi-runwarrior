@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.score.api;
 
 import it.unibo.runwarrior.model.Score;
 

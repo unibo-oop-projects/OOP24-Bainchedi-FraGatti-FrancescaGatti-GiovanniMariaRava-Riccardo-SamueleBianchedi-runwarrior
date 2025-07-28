@@ -3,6 +3,7 @@ package it.unibo.runwarrior.controller;
 import java.awt.Graphics;
 import java.util.List;
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.model.Coin;
 
 /**
