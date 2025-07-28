@@ -34,16 +34,16 @@ public class NakedWizard extends AbstractCharacterImpl {
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/stopRightNW.png"));
-            right1 = ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/goRightNW1.png"));
-            right2 = ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/goRightNW2.png"));
-            left0 = ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/stopLeftNW.png"));
-            left1 = ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/goLeftNW1.png"));
-            left2 = ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/goLeftNW2.png"));
-            jumpR = ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/jumpRightNW.png"));
-            jumpL = ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/jumpLeftNW.png"));
-            attackR = right0;
-            attackL = left0;
+            setRight0(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/stopRightNW.png")));
+            setRight1(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/goRightNW1.png")));
+            setRight2(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/goRightNW2.png")));
+            setLeft0(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/stopLeftNW.png")));
+            setLeft1(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/goLeftNW1.png")));
+            setLeft2(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/goLeftNW2.png")));
+            setJumpR(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/jumpRightNW.png")));
+            setJumpL(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/jumpLeftNW.png")));
+            setAttackR(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/stopRightNW.png")));
+            setAttackL(ImageIO.read(NakedWizard.class.getResourceAsStream("/WizardImages/stopLeftNW.png")));
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load player images");
         }
