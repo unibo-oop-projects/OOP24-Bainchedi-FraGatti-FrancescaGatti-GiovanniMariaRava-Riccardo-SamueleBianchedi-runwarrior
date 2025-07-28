@@ -201,8 +201,15 @@ Per quanto riguarda i nemici, i test verificano la corretta restituzione del pro
 altri elementi della mappa siano gestite a dovere, e controllano l'inversione della velocità in caso di impatto con un ostacolo.
 Con la medesima logica, la classe TestGoblinView verifica il caricamento corretto delle immagini.
 
-Infine, GameSaveManagerTest accerta che il pattern singleton sia rispettato, impedendo la creazione di più istanze del gestore dei 
+GameSaveManagerTest accerta che il pattern singleton sia rispettato, impedendo la creazione di più istanze del gestore dei 
 salvataggi. Controlla il corretto funzionamento della scrittura e lettura tramite file.
+
+Il test rigurdante il player è TestPlayerCollision, che ha lo scopo di verificare con 4 test le possibili interazioni del player con
+le altre entità. Si è settata uan dimensione di default dei blocchi della mappa.
+Quindi vengono verificati i metodi principali delle classi "Detection". Nel caso dei blocchi di mappa e delle uova,
+vengono verificate le direzioni delle collisioni. Si verifica poi se il player raccoglie in modo corretto il powerup e se cambia skin.
+Il cambio di skin viene verificato anche quando il player collide con un nemico; se la collisione avviene dall'alto il nemico 
+invece muore. Infine si verifica se le monete vengono raccolte.
 
 \section{Note di sviluppo}
 \chapter{Commenti finali}

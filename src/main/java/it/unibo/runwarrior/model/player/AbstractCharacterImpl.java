@@ -28,18 +28,6 @@ public abstract class AbstractCharacterImpl implements Character {
     protected Rectangle swordArea;
     protected boolean rightDirection;
     protected BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
-    // protected BufferedImage right0;
-    // protected BufferedImage right1;
-    // protected BufferedImage right2;
-    // protected BufferedImage left0;
-    // protected BufferedImage left1;
-    // protected BufferedImage left2;
-    // protected BufferedImage jumpR;
-    // protected BufferedImage jumpL;
-    // protected BufferedImage attackR;
-    // protected BufferedImage attackL;
-    // protected BufferedImage tipR;
-    // protected BufferedImage tipL;
     protected CharacterAnimationHandler animation;
     protected CharacterMovementHandler movement;
 

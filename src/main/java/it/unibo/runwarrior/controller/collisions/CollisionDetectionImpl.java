@@ -125,8 +125,8 @@ public class CollisionDetectionImpl implements CollisionDetection {
     @Override
     public String checkCollisionDirection(final int x, final int y, final int indexXtile, final int indexYtile) {
         String direction = "";
-        final int tileX = (indexXtile) * tileSize;
-        final int tileY = (indexYtile) * tileSize;
+        final int tileX = indexXtile * tileSize;
+        final int tileY = indexYtile * tileSize;
         final Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
         if (y == tileRec.y && x >= tileRec.x && x <= tileRec.x + tileRec.width) {
             direction = UP;

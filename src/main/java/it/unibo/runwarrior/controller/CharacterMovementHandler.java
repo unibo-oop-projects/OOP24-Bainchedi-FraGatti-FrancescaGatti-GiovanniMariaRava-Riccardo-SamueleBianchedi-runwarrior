@@ -14,7 +14,7 @@ public interface CharacterMovementHandler {
      * @param y y coordinate
      */
     void setStartY(int y);
-    
+
     /**
      * Sets the position of the new player when he takes powerups or loses them when he's hit by a enemy.
      * This include the change of the skin and life.

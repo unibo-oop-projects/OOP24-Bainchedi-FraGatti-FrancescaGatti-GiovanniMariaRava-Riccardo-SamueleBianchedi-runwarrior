@@ -9,24 +9,44 @@ import it.unibo.runwarrior.model.player.PlayerFrame;
  * Class that handle player frames changing.
  */
 public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler {
-
-    private final CharacterComand cmd;
-    private final CharacterMovementHandler movement;
-
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+    private static final int TWO = 2;
+    private static final int THREE = 3;
+    private static final int FOUR = 4;
+    private static final int FIVE = 5;
+    private static final int SIX = 6;
+    private static final int SEVEN = 7;
+    private static final int EIGHT = 8;
+    private static final int NINE = 9;
+    private static final int TEN = 10;
+    private static final int ELEVEN = 11;
     private static final int TIME_TO_CHANGE = 8;
     private static final int LIMIT_ATTACK = 60;
+    private final CharacterComand cmd;
+    private final CharacterMovementHandler movement;
     private int changeFrame;
     private boolean crossWalk;
     private int useAttackMoving;
     private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
-    private BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
+    private BufferedImage right0;
+    private BufferedImage right1;
+    private BufferedImage right2;
+    private BufferedImage left0;
+    private BufferedImage left1;
+    private BufferedImage left2;
+    private BufferedImage jumpR;
+    private BufferedImage jumpL;
+    private BufferedImage attackR;
+    private BufferedImage attackL;
+    private BufferedImage tipR;
+    private BufferedImage tipL;
 
     /**
      * Constructor of the player animation handler that sets current player images.
      *
      * @param cmd keyboard handler
      * @param move player movement handler
-     * @param im current player images
      */
     public CharacterAnimationHandlerImpl(final CharacterComand cmd, final CharacterMovementHandler move) {
         this.cmd = cmd;
@@ -37,19 +57,19 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
      * {@inheritDoc}
      */
     @Override
-    public void setImages(final BufferedImage... im){
-        right0 = im[0];
-        right1 = im[1];
-        right2 = im[2];
-        left0 = im[3];
-        left1 = im[4];
-        left2 = im[5];
-        jumpR = im[6];
-        jumpL = im[7];
-        attackR = im[8];
-        attackL = im[9];
-        tipR = im[10];
-        tipL = im[11];
+    public void setImages(final BufferedImage... im) {
+        right0 = im[ZERO];
+        right1 = im[ONE];
+        right2 = im[TWO];
+        left0 = im[THREE];
+        left1 = im[FOUR];
+        left2 = im[FIVE];
+        jumpR = im[SIX];
+        jumpL = im[SEVEN];
+        attackR = im[EIGHT];
+        attackL = im[NINE];
+        tipR = im[TEN];
+        tipL = im[ELEVEN];
     }
 
     /**
@@ -74,17 +94,14 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
                 playerFrame = PlayerFrame.ATTACK_FRAME;
                 useAttackMoving = 0;
             }
-        }
-        else if (cmd.isJumping()) {
+        } else if (cmd.isJumping()) {
             playerFrame = PlayerFrame.JUMP_FRAME;
             if (cmd.isAttacking() && movement.canAttack()) {
                 playerFrame = PlayerFrame.ATTACK_FRAME;
             }
-        }
-        else if (cmd.isAttacking() && movement.canAttack()) {
+        } else if (cmd.isAttacking() && movement.canAttack()) {
             playerFrame = PlayerFrame.ATTACK_FRAME;
-        }
-        else {
+        } else {
             playerFrame = PlayerFrame.STOP_FRAME;
         }
     }
@@ -123,7 +140,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
      * {@inheritDoc}
      */
     @Override
-    public PlayerFrame getFrame(){
+    public PlayerFrame getFrame() {
         return this.playerFrame;
     }
 
@@ -154,9 +171,9 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
      * @return copy of the original
      */
     private BufferedImage copy(final BufferedImage im) {
-        if (im != null){
-            BufferedImage copy = new BufferedImage(im.getWidth(), im.getHeight(), im.getType());
-            Graphics2D g = copy.createGraphics();
+        if (im != null) {
+            final BufferedImage copy = new BufferedImage(im.getWidth(), im.getHeight(), im.getType());
+            final Graphics2D g = copy.createGraphics();
             g.drawImage(im, 0, 0, null);
             return copy;
         }

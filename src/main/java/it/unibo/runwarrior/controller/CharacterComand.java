@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 /**
  * Class thath handles keyboard input.
  */
-public class CharacterComand implements KeyListener{
+public class CharacterComand implements KeyListener {
 
     private boolean right;
     private boolean left;
@@ -18,7 +18,7 @@ public class CharacterComand implements KeyListener{
      * {@inheritDoc}
      */
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyTyped(final KeyEvent e) {
         //throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
     }
 
@@ -73,7 +73,7 @@ public class CharacterComand implements KeyListener{
     }
 
     /**
-     * Set this variable to deny double jump while in air
+     * Set this variable to deny double jump while in air.
      *
      * @param i false if the player can jump, true if the player touched ground and can jump
      */
@@ -99,7 +99,7 @@ public class CharacterComand implements KeyListener{
      * @return true if the player is stopped
      */
     public boolean isStop() {
-        boolean standing;
+        final boolean standing;
         if (isRight() && isLeft() || !isRight() && !isLeft()) {
             standing = true;
         } else {

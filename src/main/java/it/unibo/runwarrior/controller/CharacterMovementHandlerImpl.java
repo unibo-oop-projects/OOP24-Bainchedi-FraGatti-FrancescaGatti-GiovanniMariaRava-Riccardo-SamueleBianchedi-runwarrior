@@ -11,6 +11,12 @@ import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
  * Class that handles player movement and his collisions.
  */
 public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
+    public static final int SPEED_JUMP_UP = 12; 
+    public static final int SPEED_JUMP_DOWN = 6;
+    private static final int START_X = 96;
+    private static final int JUMP_MAX = 5 / 2;
+    private static final int JUMP_MID = 3 / 2;
+    private static final int MIN_SCREEN_X = 0; //y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private final GameLoopController glc;
     private final CharacterComand cmd;
     private final Character player;
@@ -18,29 +24,20 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private final PowerUpDetectionImpl pUpDetection;
     private final KillDetectionImpl killDetection;
     private final CoinDetectionImpl coinDetection;
-
-    public static final int START_X = 96;
-    private static final int JUMP_MAX = 5 / 2;
-    private static final int JUMP_MID = 3 / 2;
     private final int startY;
+    private final int endOfMap;
     private int maxJump;
     private int midJump;
-    protected int sizeCharacter;
-    
-    private static final int MIN_SCREEN_X = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
-    protected int playerX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
-    protected int playerY;// * VERTICALE
-    private int screenX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
-    private final int endOfMap;
+    private int sizeCharacter;
+    private int playerX; //POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
+    private int playerY; // * VERTICALE
+    private int screenX; //POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
     private boolean hitHead;
     private boolean jumpKill;
     private boolean descend;
     private boolean canAttack;
-
-    public static final int SPEED_JUMP_UP = 12; 
-    public static final int SPEED_JUMP_DOWN = 6;
     private boolean rightDirection = true;
-    private int groundX;//variabile che permette lo scorrimento della mappa
+    private int groundX; //variabile che permette lo scorrimento della mappa
 
     /**
      * Constructor of player movemnt that sets the following parametres, the collision with tiles, powerup and enemies
@@ -49,7 +46,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * @param glc game-loop controller
      * @param player current player
      * @param cmd keyboard handler
-     * @param collDet collision with map tiles
      * @param hM object that prints tiles
      * @param pCon object that creates powerup list
      */
@@ -150,7 +146,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void jump (final boolean isJump, final int jumpHeight) {
+    public void jump(final boolean isJump, final int jumpHeight) {
         if (isJump && !descend) {
             if (playerY > jumpHeight) {
                 playerY -= SPEED_JUMP_UP;
