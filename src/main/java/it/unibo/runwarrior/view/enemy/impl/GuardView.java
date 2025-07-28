@@ -49,6 +49,7 @@ public final class GuardView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("checkstyle:RedundantModifier")
     @Override
     public final void loadResources() throws IOException {
         rightGuard = ImageIO.read(GuardView.class.getResourceAsStream("/Guardia/rightGuard.png"));
@@ -63,6 +64,7 @@ public final class GuardView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("checkstyle:RedundantModifier")
     @Override
     public final void render(final Graphics g, final EnemyImpl enemy) {
         final BufferedImage currentImage;
