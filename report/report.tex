@@ -85,7 +85,7 @@ Il pattern MVC implementato consente di mantenere lo stato del controller nell'e
 inserire UML delle classi principali dell'MVC
 \section{Samuele Bianchedi}
 \textbf{Problema}: L'implementazioni delle classi del modello soffriva di una criticità legata all'incapsulamento. SptoBugs ha rilevato molti warning che indicavano oggetti mutabili passati e restituiti tramite riferimento diretto.
-Questo poteva creare un’architettura fragile, incline ad errori e/o modifiche involontarie.
+Questo poteva creare un'architettura fragile, incline ad errori e/o modifiche involontarie.
 \textbf{Soluzione}: Per risolvere questo problema e rendere sicuro i dati ho scelto di implementare copie difensive.
 \begin{itemize}
     \item Per oggetti come BufferedImage e int[][]: nei costruttori e nei metodi setter invece di memorizzare il riferimento all'oggetto, 
@@ -133,7 +133,7 @@ L'introduzione del pattern MVC ha permesso di ottenere una struttura più chiara
 \textbf{Problema:} I nemici del gioco devono muoversi da soli, invertire direzione appena urtano un ostacolo e restare sincronizzati con 
 lo scorrimento della camera. 
 
-\textbf{Soluzione:} Per gestire il movimento autonomo dei nemici e l'inversione di marcia in presenza di ostacoli ho adottato 
+\textbf{Soluzione:} Per gestire il movimento autonomo e l'inversione di marcia in presenza di ostacoli ho adottato 
 il pattern \emph{Model‑View‑Controller}. Il controller centrale è l'\emph{EnemyHandler}, che a ogni ciclo di gioco scorre l'intera lista di 
 nemici: per ciascuno aggiorna prima lo stato logico delegando questa responsabilità all'oggetto model, \emph{EnemyImpl}, poi ne richiede 
 la rappresentazione grafica all'oggetto view specifico, (ad esempio \emph{GoblinView}), per farla disegnare sul pannello di gioco. In questo modo 
@@ -141,12 +141,12 @@ la logica di collisione con la mappa e la scelta del momento in cui invertire la
 mentre il caricamento e il rendering rimangono confinati nella view; il controller non conosce i dettagli interni di nessuna delle due parti, 
 ma si limita a coordinarne l'interazione. 
 Questo assetto garantisce un codice più estendibile e manutenibile: introdurre una nuova tipologia di nemico richiede soltanto 
-di aggiungere una nuova View, senza toccare il controller, e ogni modifica grafica o comportamentale resta circoscritta al relativo livello dell'architettura.
+di aggiungere una nuova View, senza toccare il controller, e ogni modifica grafica o comportamentale resta circoscritta al relativo livello dell'architettura.~\ref{fig:2.3}
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{resources/enemyMvcUml.png}
     \caption{UML dell'MVC per la gestione dei nemici}
-    \label{}
+    \label{fig:2.3}
 \end{figure}
 \newpage
 \textbf{Problema:} Gestione il salvataggio del gioco e del caricamento del salvataggio all'apertura del gioco.\\
@@ -163,13 +163,14 @@ per modificare le variabili e salvare lo stato di gioco, che si compone di:
 \end{itemize}
 All'avvio successivo, lo stato viene ricostruito e propagato ai vari model che lo necessitano; in caso contrario viene generata una partita nuova con parametri standard. 
 L'intera logica di I/O è dunque isolata in una sola classe, priva di dipendenze dal motore di gioco; Questa architettura rende effettivo
-il singleton e semplifica i test automatizzati.
+il singleton e semplifica i test automatizzati.~\ref{fig:2.4}
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{resources/saveManagerUML.png}
+    \includegraphics[width=0.6\textwidth]{resources/saveManagerUML.png}
     \caption{UML dell'MVC per la gestione dei nemici}
-    \label{}
+    \label{fig:2.4}
 \end{figure}
+\newpage
 \textbf{Problema} Nel livello di gioco occorre generare molti nemici in posizioni predefinite: ognuno deve comparire al momento giusto,
 nella coordinata corretta e con la propria grafica, ma senza mescolare la logica di lettura dei dati con la scelta delle view. 
 
@@ -181,13 +182,22 @@ Quest'ultima contiene un metodo che riceve l'identificativo numerico del nemico 
 la sua implementazione concreta, EnemyViewFactoryImpl, contiene la mappatura fra tipologia e view corrispondente (as esempio 1 $\rightarrow$ GuardView).
 In questo modo la lettura del file, la gestione della memoria e il caricamento delle immagini restano ben separati: per aggiungere un 
 nuovo tipo di nemico è sufficiente aggiungere una riga al file di mappa e una voce nella factory, senza toccare né il game‑loop né lo 
-spawner, mantenendo il sistema estendibile e pulito.
+spawner, mantenendo il sistema estendibile e pulito.~\ref{fig:2.5}
 \begin{figure}
     \centering
     \includegraphics*[width=0.8\textwidth]{resources/spawingEnemyUML.png}
     \caption{UML gestione spawing nemici}
-    \label{}
+    \label{fig:2.5}
 \end{figure}
 \chapter{Sviluppo}
 \section{Testing automatizzato}
+\section{Note di sviluppo}
+\chapter{Commenti finali}
+\section{Autovalutazione e lavori futuri}
+\subsection{Samuele Bianchedi}
+\subsection{Riccardo Cornacchia}
+\subsection{Francesca Gatti}
+\subsection{Giovanni Maria Rava}
+\appendix
+\chapter{Guida utente}
 \end{document}
