@@ -28,7 +28,7 @@ public interface PowerUp {
      *
      * @param touchArea powerup area
      */
-    public void setTouchArea(Rectangle touchArea);
+    void setTouchArea(Rectangle touchArea);
 
     /**
      * @return the collision area of the powerup/egg

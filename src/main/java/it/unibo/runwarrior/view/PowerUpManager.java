@@ -54,7 +54,7 @@ public class PowerUpManager {
                 gr2.drawImage(im, p.getTouchArea().x + mapHandler.getShift(), 
                 p.getTouchArea().y - (tileSize / 4), tileSize, tileSize, null);
             } else {
-                p.setTouchArea(new Rectangle(0,0,0,0));
+                p.setTouchArea(new Rectangle(0, 0, 0, 0));
             }
         }
     }

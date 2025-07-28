@@ -66,7 +66,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         sizeCharacter = hM.getTileSize() * 2;
         this.startY = hM.getFirstY() + AbstractCharacterImpl.TO_TOUCH_FLOOR;
         endOfMap = ((hM.getMap()[0].length - 1) * hM.getTileSize()) - hM.getTileSize();
-        //impostare già anche ma e mid jump?
     }
 
     /**

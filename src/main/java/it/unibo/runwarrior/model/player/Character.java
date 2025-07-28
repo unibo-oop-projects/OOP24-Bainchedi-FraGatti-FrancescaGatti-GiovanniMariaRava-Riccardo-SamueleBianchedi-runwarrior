@@ -45,7 +45,7 @@ public interface Character {
      *
      * @param swordArea Rectangle of the sword
      */
-    public void setSwordArea(Rectangle swordArea);
+    void setSwordArea(Rectangle swordArea);
 
     /**
      * @return the collision area of the weapon

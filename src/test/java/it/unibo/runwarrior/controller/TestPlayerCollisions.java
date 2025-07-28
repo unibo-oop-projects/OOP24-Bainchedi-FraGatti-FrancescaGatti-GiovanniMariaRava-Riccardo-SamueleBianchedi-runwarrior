@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Rectangle;
-import java.util.List;
-
 import javax.swing.JFrame;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,20 +31,25 @@ import it.unibo.runwarrior.model.player.NakedWarrior;
  */
 class TestPlayerCollisions {
     private static final int FIFTY = 50;
-    // private static final int
-    // private static final int
-    // private static final int
-    // private static final int
-    // private static final int
-    // private static final int
-    // private static final int
-    // private static final int
-    // private static final int
-    // private static final int
+    private static final int TWELVE = 12;
+    private static final int FIVE_SIX_Z = 560;
+    private static final int FIVE_SEV_SIX = 576;
+    private static final int FIFTEEN = 15;
+    private static final int FIVE_TWO_Z = 520;
+    private static final int COLL_DOWN_TILE = 280;
+    private static final int COLL_DOWN = 10_085;
+    private static final int HUNDRED = 100;
+    private static final int SIX_Z_FIVE = 605;
+    private static final int SEVENTY = 70;
+    private static final int POWERUP_X1 = 1984;
+    private static final int POWERUP_X2 = 3290;
+    private static final int POWERUP_X3 = 7343;
+    private static final int POWERUP_X4 = 1949;
+    private static final int SWORD_POINT = 585;
     private static final int TRY_TYLE = 36;
     private static final int TOLL = 5;
-    private static final String firstString = "tryMap.txt";
-    private static final String secondString = "Map2/forest_theme.txt";
+    private static final String FIRST_STRING = "tryMap.txt";
+    private static final String SECOND_STRING = "Map2/forest_theme.txt";
     private final JFrame testFrame = new JFrame();
     private GameLoopController glc;
     private CharacterComand cmd;
@@ -56,10 +59,10 @@ class TestPlayerCollisions {
 
     @BeforeEach
     void initCollisions() {
-        gameMap1 = GameMap.load(firstString, secondString);
+        gameMap1 = GameMap.load(FIRST_STRING, SECOND_STRING);
         mapHandler1 = new HandlerMapElement(gameMap1);
         cmd = new CharacterComand();
-        glc = new GameLoopController(testFrame, firstString, secondString, 
+        glc = new GameLoopController(testFrame, FIRST_STRING, SECOND_STRING, 
         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         tileSize = TRY_TYLE;
     }
@@ -78,6 +81,7 @@ class TestPlayerCollisions {
         return hM.getBlocks().get(blockIndex).getCollision();
     }
 
+    //CAMBIA MAPPA PER RIUSARE PIù NUMERI
     @Test
     void testCollisionTile() {
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, null);
@@ -85,23 +89,23 @@ class TestPlayerCollisions {
         mapHandler1.getBlocks(), tileSize, glc);
 
         collisionTiles.checkCollision(player);
-        assertTrue(collisionTiles.touchSolid(8 * tileSize, 16 * tileSize, false));
-        assertFalse(collisionTiles.touchSolid(39 * tileSize, 14 * tileSize, false));
+        assertTrue(collisionTiles.touchSolid(TWELVE * tileSize, FIFTEEN * tileSize, false));
+        assertFalse(collisionTiles.touchSolid(FIFTY * tileSize, FIFTEEN * tileSize, false));
 
-        assertEquals("right", collisionTiles.checkCollisionDirection(12 * tileSize, 550, 
-        12, 15));
-        assertEquals("up", collisionTiles.checkCollisionDirection(605, 12 * tileSize, 
-        16, 12));
-        player.getArea().setLocation(9914, 500);
-        assertEquals("down", collisionTiles.checkCollisionDirection(9914, 500, 
-        275, 13));
+        assertEquals("right", collisionTiles.checkCollisionDirection(HUNDRED * tileSize, FIVE_SIX_Z, 
+        HUNDRED + 1, FIFTEEN));
+        assertEquals("up", collisionTiles.checkCollisionDirection(SIX_Z_FIVE, TWELVE * tileSize, 
+        FIFTEEN + 1, TWELVE));
+        player.getArea().setLocation(COLL_DOWN, FIVE_TWO_Z + FIFTEEN);
+        assertEquals("down", collisionTiles.checkCollisionDirection(COLL_DOWN, FIVE_TWO_Z + FIFTEEN, 
+        COLL_DOWN_TILE, FIFTEEN - 1));
 
-        player.getArea().setLocation(56 * tileSize, 14 * tileSize);
+        player.getArea().setLocation(FIFTY * tileSize, (FIFTEEN - 1) * tileSize);
         assertTrue(collisionTiles.isInAir(player));
-        player.getArea().setLocation(75 * tileSize, (15 * tileSize) + (tileSize / 2)  
+        player.getArea().setLocation(FIFTY * tileSize, (FIFTEEN * tileSize) + (tileSize / 2)  
         + AbstractCharacterImpl.TO_TOUCH_FLOOR);
         assertFalse(collisionTiles.isInAir(player));
-        player.getArea().setLocation(1222, (15 * tileSize) + (tileSize / 2)  
+        player.getArea().setLocation((HUNDRED + FIFTY) * tileSize - TOLL, FIVE_SIX_Z  
         + AbstractCharacterImpl.TO_TOUCH_FLOOR);
         assertEquals("left", collisionTiles.checkCollision(player));
     }
@@ -112,19 +116,19 @@ class TestPlayerCollisions {
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, pCon);
         final PowerUpDetectionImpl collisionPowerups = new PowerUpDetectionImpl(glc, pCon);
 
-        assertTrue(isTouchingUp(new Rectangle(50, 50, 50, 50), 
-        new Rectangle(70, 100, 50, 50)));
-        assertFalse(isTouchingUp(new Rectangle(50, 50, 50, 50), 
-        new Rectangle(70, 80, 50, 50)));
+        assertTrue(isTouchingUp(new Rectangle(FIFTY, FIFTY, FIFTY, FIFTY), 
+        new Rectangle(SEVENTY, FIFTY * 2, FIFTY, FIFTY)));
+        assertFalse(isTouchingUp(new Rectangle(FIFTY, FIFTY, FIFTY, FIFTY), 
+        new Rectangle(SEVENTY, SEVENTY + TOLL * 2, FIFTY, FIFTY)));
 
-        player.getArea().setLocation(1984, 533);
+        player.getArea().setLocation(POWERUP_X1, FIVE_TWO_Z + TWELVE);
         assertEquals("up", collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler()));
-        player.getArea().setLocation(3290, 560);
+        player.getArea().setLocation(POWERUP_X2, FIVE_SIX_Z);
         assertEquals("right", collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler()));
-        player.getArea().setLocation(7343, 560);
+        player.getArea().setLocation(POWERUP_X3, FIVE_SIX_Z);
         assertEquals("left", collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler()));
 
-        player.getArea().setLocation(1949, 560);
+        player.getArea().setLocation(POWERUP_X4, FIVE_SIX_Z);
         final int i = glc.getPowersHandler().getPowers();
         collisionPowerups.checkCollisionWithPowers(player, player.getMovementHandler());
         assertEquals(i + 1, glc.getPowersHandler().getPowers());
@@ -135,21 +139,21 @@ class TestPlayerCollisions {
     void testCollisionEnemies() {
         final PowerUpController pCon = new PowerUpController(glc, mapHandler1, mapHandler1.getMap());
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, pCon);
-        final EnemyImpl first = new EnemyImpl(1836, 576, 36, 36, true, glc.getEnemyHandler(), glc, 0);
-        final EnemyImpl second = new EnemyImpl(2664, 576, 36, 36, true, glc.getEnemyHandler(), glc, 0);
+        final EnemyImpl first = new EnemyImpl(1836, FIVE_SEV_SIX, tileSize, tileSize, true, glc.getEnemyHandler(), glc, 0);
+        final EnemyImpl second = new EnemyImpl(2664, FIVE_SEV_SIX, tileSize, tileSize, true, glc.getEnemyHandler(), glc, 0);
         glc.getEnemyHandler().addEnemy(first);
         glc.getEnemyHandler().addEnemy(second);
         final KillDetectionImpl collisionEnemies = new KillDetectionImpl(glc, mapHandler1);
 
-        assertTrue(isBehindTile(3564, 585, mapHandler1));
-        assertFalse(isBehindTile(9360, 585, mapHandler1));
+        assertTrue(isBehindTile(3564, SWORD_POINT, mapHandler1));
+        assertFalse(isBehindTile(9360, SWORD_POINT, mapHandler1));
         assertEquals(2, glc.getEnemyHandler().getEnemies().size());
-        player.getArea().setLocation(1838, 520);
+        player.getArea().setLocation(1838, FIVE_TWO_Z);
         collisionEnemies.checkCollisionWithEnemeies(player);
         assertTrue(isTouchingUp(player.getArea(), first.getBounds()));
         assertEquals(1, glc.getEnemyHandler().getEnemies().size());
 
-        player.getArea().setLocation(2650, 560);
+        player.getArea().setLocation(2650, FIVE_SIX_Z);
         assertTrue(player.getArea().intersects(glc.getEnemyHandler().getEnemies().getFirst().getBounds()));
         final int i = glc.getPowersHandler().getPowers();
         collisionEnemies.checkCollisionWithEnemeies(player);
@@ -164,12 +168,10 @@ class TestPlayerCollisions {
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, null);
         final CoinDetectionImpl collisionCoins = new CoinDetectionImpl(tileSize, coinController, scoreController);
 
-        coinController.addCoins(16, 74);
-        //assertEquals(coinController.getCoinList().get(0).getRectangle(tileSize), 2);
+        coinController.addCoins(FIFTEEN + 1, FIFTY);
         assertEquals(coinController.getCoinsCollected(), 0);
-        player.getArea().setLocation(2633, 560);
+        player.getArea().setLocation(1769, FIVE_SIX_Z);
         collisionCoins.controlCoinCollision(player);
-        assertEquals(coinController.getCoinList().get(0).getRectangle(tileSize), 2);
         assertEquals(coinController.getCoinsCollected(), 1);
     }
 }

@@ -53,7 +53,8 @@ public class PowerUpController {
     }
 
     /**
-     * Get these list and not the copy, cause i have to change powerup bounds in this list
+     * Get these list and not the copy, cause i have to change powerup bounds in this list in a reactive way.
+     *
      * @return the list of powerups
      */
     @SuppressFBWarnings("EI_EXPOSE_REP2")

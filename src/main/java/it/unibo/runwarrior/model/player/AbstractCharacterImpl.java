@@ -19,6 +19,7 @@ import it.unibo.runwarrior.controller.PowerUpController;
  * Class that creates the player.
  */
 public abstract class AbstractCharacterImpl implements Character {
+    public static final String WARNING = "EI_EXPOSE_REP2";
     public static final int TO_TOUCH_FLOOR = 2;
     public static final int SPEED = 5;
     /**
@@ -53,7 +54,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * @param mapHandler object that prints tiles
      * @param pCon object that creates powerup list
      */
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressWarnings(WARNING)
     public AbstractCharacterImpl(final GameLoopController glc, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpController pCon) {
         sizeCharacter = mapHandler.getTileSize() * 2;
@@ -121,7 +122,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings(WARNING)
     public CharacterMovementHandler getMovementHandler() {
         return this.movement;
     }
@@ -130,7 +131,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
-    @SuppressFBWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings(WARNING)
     public CharacterAnimationHandler getAnimationHandler() {
         return this.animation;
     }
@@ -146,7 +147,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
-    public void setSwordArea(Rectangle swordArea) {
+    public void setSwordArea(final Rectangle swordArea) {
         this.swordArea = swordArea;
     }
 
@@ -159,11 +160,14 @@ public abstract class AbstractCharacterImpl implements Character {
     }
 
     /**
+     * Suppress because the update of the area are not visible in Test.
+     * And collisionArea is not changed in other classes.
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings(WARNING)
     public Rectangle getArea() {
-        return new Rectangle(collisionArea);
+        return collisionArea;
     }
 
     /**
