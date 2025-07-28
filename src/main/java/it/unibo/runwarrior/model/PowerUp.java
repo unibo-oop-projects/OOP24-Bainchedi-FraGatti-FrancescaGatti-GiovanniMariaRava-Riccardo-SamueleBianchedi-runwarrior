@@ -24,6 +24,13 @@ public interface PowerUp {
     BufferedImage getEgg();
 
     /**
+     * Set powerup area.
+     *
+     * @param touchArea powerup area
+     */
+    public void setTouchArea(Rectangle touchArea);
+
+    /**
      * @return the collision area of the powerup/egg
      */
     Rectangle getTouchArea();

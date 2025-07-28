@@ -41,6 +41,13 @@ public interface Character {
     CharacterAnimationHandler getAnimationHandler();
 
     /**
+     * Set sword area.
+     *
+     * @param swordArea Rectangle of the sword
+     */
+    public void setSwordArea(Rectangle swordArea);
+
+    /**
      * @return the collision area of the weapon
      */
     Rectangle getSwordArea();

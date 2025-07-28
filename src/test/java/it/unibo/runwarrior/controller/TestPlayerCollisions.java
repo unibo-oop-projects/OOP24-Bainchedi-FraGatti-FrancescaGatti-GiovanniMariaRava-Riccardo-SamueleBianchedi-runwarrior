@@ -31,7 +31,7 @@ class TestPlayerCollisions {
     private static final int POSITION1 = 9914;
     private static final int FIFTEEN = 15;
     private static final int FIVE_SIXTY = 560;
-    // private static final int
+    private static final int TWELVE = 12;
     // private static final int
     // private static final int
     // private static final int
@@ -40,8 +40,8 @@ class TestPlayerCollisions {
     // private static final int
     private static final int TRY_TYLE = 36;
     private static final int TOLL = 5;
-    private static final String firstString = "tryMap.txt";
-    private static final String secondString = "Map2/forest_theme.txt";
+    private static final String FIRST_STRING = "tryMap.txt";
+    private static final String SECOND_STRING = "Map2/forest_theme.txt";
     private final JFrame testFrame = new JFrame();
     private GameLoopController glc;
     private CharacterComand cmd;
@@ -51,10 +51,10 @@ class TestPlayerCollisions {
 
     @BeforeEach
     void initCollisions() {
-        gameMap1 = GameMap.load(firstString, secondString);
+        gameMap1 = GameMap.load(FIRST_STRING, SECOND_STRING);
         mapHandler1 = new HandlerMapElement(gameMap1);
         cmd = new CharacterComand();
-        glc = new GameLoopController(testFrame, firstString, secondString, 
+        glc = new GameLoopController(testFrame, FIRST_STRING, SECOND_STRING, 
         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         tileSize = TRY_TYLE;
     }
@@ -83,10 +83,10 @@ class TestPlayerCollisions {
         assertTrue(collisionTiles.touchSolid(12 * tileSize, FIFTEEN * tileSize, false));
         assertFalse(collisionTiles.touchSolid(FIFTY * tileSize, FIFTEEN * tileSize, false));
 
-        assertEquals("right", collisionTiles.checkCollisionDirection(12 * tileSize, FIVE_SIXTY, 
-        12, FIFTEEN));
-        assertEquals("up", collisionTiles.checkCollisionDirection(16 * tileSize, 12 * tileSize, 
-        16, 12));
+        assertEquals("right", collisionTiles.checkCollisionDirection(TWELVE * tileSize, FIVE_SIXTY, 
+        TWELVE, FIFTEEN));
+        assertEquals("up", collisionTiles.checkCollisionDirection(16 * tileSize, TWELVE * tileSize, 
+        16, TWELVE));
         player.getArea().setLocation(POSITION1, FIFTY * 10);
         assertEquals("down", collisionTiles.checkCollisionDirection(POSITION1, FIFTY * 10, 
         275, 13));
@@ -161,7 +161,7 @@ class TestPlayerCollisions {
 
         coinController.addCoins(16, 74);
         assertEquals(coinController.getCoinsCollected(), 0);
-        player.getArea().setLocation(2633, 560);
+        player.getArea().setLocation(2633, FIVE_SIXTY);
         collisionCoins.controlCoinCollision(player);
         assertEquals(coinController.getCoinsCollected(), 1);
     }

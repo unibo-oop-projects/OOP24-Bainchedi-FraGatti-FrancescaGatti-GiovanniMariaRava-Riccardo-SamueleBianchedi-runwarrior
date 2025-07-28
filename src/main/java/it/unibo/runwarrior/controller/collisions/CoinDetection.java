@@ -5,6 +5,7 @@ import it.unibo.runwarrior.model.player.Character;
 /**
  * Interface that handles collision between player and coins.
  */
+@SuppressWarnings("PMD.ImplicitFunctionalInterface")
 public interface CoinDetection {
 
     /**

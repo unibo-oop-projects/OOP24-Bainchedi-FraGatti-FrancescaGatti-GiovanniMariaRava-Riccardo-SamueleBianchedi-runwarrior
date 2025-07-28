@@ -1,6 +1,9 @@
 package it.unibo.runwarrior.controller;
 
 import java.util.List;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -34,7 +37,7 @@ public class PowersHandler {
      * @param mapH objects that prints map
      * @param pCon object that creates powerup list
      */
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings(value = "EI2", justification = "glc gets recalled to change the current player")
     public PowersHandler(final GameLoopController glc, final CharacterComand cmd, 
     final HandlerMapElement mapH, final PowerUpController pCon) {
         this.glc = glc;

@@ -1,5 +1,6 @@
 package it.unibo.runwarrior.controller;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.collisions.CoinDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
@@ -26,9 +27,9 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private final CoinDetectionImpl coinDetection;
     private final int startY;
     private final int endOfMap;
+    private final int sizeCharacter;
     private int maxJump;
     private int midJump;
-    private int sizeCharacter;
     private int playerX; //POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
     private int playerY; // * VERTICALE
     private int screenX; //POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
@@ -49,7 +50,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * @param hM object that prints tiles
      * @param pCon object that creates powerup list
      */
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public CharacterMovementHandlerImpl(final GameLoopController glc, final Character player, final CharacterComand cmd,
     final HandlerMapElement hM, final PowerUpController pCon) {
         this.glc = glc;
@@ -214,7 +215,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public CollisionDetectionImpl getCollisionDetection() {
         return this.collisionDetection;
     }
@@ -223,7 +224,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public KillDetectionImpl getKillDetection() {
         return this.killDetection;
     }

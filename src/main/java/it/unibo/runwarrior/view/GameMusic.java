@@ -15,7 +15,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * Class used to create and play the music of the game.
  */
 public class GameMusic {
-
     public static final Logger LOGGER = Logger.getLogger(GameMusic.class.getName());
     private Clip clip;
 
@@ -27,7 +26,7 @@ public class GameMusic {
      */
     public GameMusic(final String musicFile) {
         try {
-            final URL musicURL = getClass().getResource("/Music/" + musicFile);
+            final URL musicURL = GameMusic.class.getResource("/Music/" + musicFile);
             final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicURL);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);

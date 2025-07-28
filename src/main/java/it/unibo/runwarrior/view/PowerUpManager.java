@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.model.PowerUp;
 
@@ -27,7 +28,7 @@ public class PowerUpManager {
      * @param powerUps list of powerup
      * @param hM map handler
      */
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public PowerUpManager(final List<PowerUp> powerUps, final HandlerMapElement hM) {
         this.mapHandler = hM;
         this.tileSize = hM.getTileSize();

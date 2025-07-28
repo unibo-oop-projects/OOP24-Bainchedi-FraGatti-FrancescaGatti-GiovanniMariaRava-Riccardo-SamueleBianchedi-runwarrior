@@ -2,6 +2,7 @@ package it.unibo.runwarrior.controller.collisions;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -42,10 +43,9 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * @param glc game-loop controller
      */
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    @SuppressWarnings("EI_EXPOSE_REP")
     public CollisionDetectionImpl(final int[][] map, final List<MapElement> blocks, 
     final int tileSize, final GameLoopController glc) {
-        this.map = map;
+        this.map = Arrays.copyOf(map, map.length);
         this.blocks = blocks;
         this.tileSize = tileSize;
         this.glc = glc;
@@ -58,7 +58,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("Non-Short-Circuit")
+    @SuppressFBWarnings("Non dangerous on-Short-Circuit")
     public String checkCollision(final Character pl) {
         this.player = pl;
         playerArea = pl.getArea();
