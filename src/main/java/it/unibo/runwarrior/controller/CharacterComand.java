@@ -10,7 +10,6 @@ public class CharacterComand implements KeyListener{
 
     private boolean right;
     private boolean left;
-    private boolean standing;
     private boolean isJump;
     private boolean attack;
     private boolean handleDoubleJump;
@@ -27,8 +26,8 @@ public class CharacterComand implements KeyListener{
      * {@inheritDoc}
      */
     @Override
-    public void keyPressed(KeyEvent e) {
-        int value = e.getKeyCode();
+    public void keyPressed(final KeyEvent e) {
+        final int value = e.getKeyCode();
         if(value == KeyEvent.VK_RIGHT){
             right = true;
         }
@@ -48,9 +47,8 @@ public class CharacterComand implements KeyListener{
      * {@inheritDoc}
      */
     @Override
-    public void keyReleased(KeyEvent e) {
-        int value = e.getKeyCode();
-        
+    public void keyReleased(final KeyEvent e) {
+        final int value = e.getKeyCode();
         if(value == KeyEvent.VK_RIGHT){
             right = false;
         }
@@ -70,7 +68,7 @@ public class CharacterComand implements KeyListener{
      *
      * @param i false when the player is descending
      */
-    public void setJump(boolean i){
+    public void setJump(final boolean i){
         this.isJump = i;
     }
 
@@ -78,29 +76,30 @@ public class CharacterComand implements KeyListener{
      * Set this variable to deny double jump while in air
      * @param i false if the player can jump, true if the player touched ground and can jump
      */
-    public void setDoubleJump(boolean i){
+    public void setDoubleJump(final boolean i){
         this.handleDoubleJump = i;
     }
 
     /**
      * @return true if the player goes to the right
      */
-    public boolean getRight(){
+    public boolean isRight(){
         return right;
     }
 
     /**
      * @return true if the player goes to the left
      */
-    public boolean getLeft(){
+    public boolean isLeft(){
         return left;
     }
 
     /**
      * @return true if the player is stopped
      */
-    public boolean getStop(){
-        if((getRight() && getLeft()) || (!getRight() && !getLeft())){
+    public boolean isStop(){
+        boolean standing;
+        if((isRight() && isLeft()) || (!isRight() && !isLeft())){
             standing = true;
         }
         else{
@@ -119,7 +118,7 @@ public class CharacterComand implements KeyListener{
     /**
      * @return true if the player is attacking
      */
-    public boolean getAttack(){
+    public boolean isAttacking(){
         return attack;
     }
 }

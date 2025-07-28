@@ -1,5 +1,6 @@
 package it.unibo.runwarrior.controller;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import it.unibo.runwarrior.model.player.PlayerFrame;
@@ -9,14 +10,14 @@ import it.unibo.runwarrior.model.player.PlayerFrame;
  */
 public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler {
 
-    private CharacterComand cmd;
-    private CharacterMovementHandler movement;
+    private final CharacterComand cmd;
+    private final CharacterMovementHandler movement;
 
     private static final int TIME_TO_CHANGE = 8;
     private static final int LIMIT_ATTACK = 60;
-    private int changeFrame = 0;
-    private boolean crossWalk = false;
-    private int useAttackMoving = 0;
+    private int changeFrame;
+    private boolean crossWalk;
+    private int useAttackMoving;
     private PlayerFrame playerFrame = PlayerFrame.STOP_FRAME;
     private BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
 
@@ -27,12 +28,16 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
      * @param move player movement handler
      * @param im current player images
      */
-    public CharacterAnimationHandlerImpl(CharacterComand cmd, CharacterMovementHandler move) {
+    public CharacterAnimationHandlerImpl(final CharacterComand cmd, final CharacterMovementHandler move) {
         this.cmd = cmd;
         this.movement = move;
     }
 
-    public void setImages(BufferedImage... im){
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setImages(final BufferedImage... im){
         right0 = im[0];
         right1 = im[1];
         right2 = im[2];
@@ -52,7 +57,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
      */
     @Override
     public void frameChanger() {
-        if (!cmd.getStop() && !cmd.isJumping()) {
+        if (!cmd.isStop() && !cmd.isJumping()) {
             changeFrame++;
             if (changeFrame > TIME_TO_CHANGE) {
                 switch (playerFrame) {
@@ -65,18 +70,18 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
                 changeFrame = 0;
             }
             useAttackMoving++;
-            if (cmd.getAttack() && movement.canAttack() && useAttackMoving > LIMIT_ATTACK) {
+            if (cmd.isAttacking() && movement.canAttack() && useAttackMoving > LIMIT_ATTACK) {
                 playerFrame = PlayerFrame.ATTACK_FRAME;
                 useAttackMoving = 0;
             }
         }
         else if (cmd.isJumping()) {
             playerFrame = PlayerFrame.JUMP_FRAME;
-            if (cmd.getAttack() && movement.canAttack()) {
+            if (cmd.isAttacking() && movement.canAttack()) {
                 playerFrame = PlayerFrame.ATTACK_FRAME;
             }
         }
-        else if (cmd.getAttack() && movement.canAttack()) {
+        else if (cmd.isAttacking() && movement.canAttack()) {
             playerFrame = PlayerFrame.ATTACK_FRAME;
         }
         else {
@@ -88,7 +93,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
      * {@inheritDoc}
      */
     @Override
-    public BufferedImage imagePlayer(boolean rightDirection) {
+    public BufferedImage imagePlayer(final boolean rightDirection) {
         BufferedImage im = null;
         if (rightDirection) {
             switch (playerFrame) {
@@ -127,18 +132,34 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
      */
     @Override
     public boolean isAttacking() {
-        return playerFrame == PlayerFrame.ATTACK_FRAME ? true : false;
+        return playerFrame == PlayerFrame.ATTACK_FRAME;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public BufferedImage getTip(boolean rightDirection) {
+    public BufferedImage getTip(final boolean rightDirection) {
         if (playerFrame == PlayerFrame.ATTACK_FRAME && rightDirection) {
-            return tipR;
+            return copy(tipR);
         } else {
-            return tipL;
+            return copy(tipL);
         }
+    }
+
+    /**
+     * Create a copy of the image in order to not modify it.
+     *
+     * @param im original image
+     * @return copy of the original
+     */
+    private BufferedImage copy(final BufferedImage im) {
+        if (im != null){
+            BufferedImage copy = new BufferedImage(im.getWidth(), im.getHeight(), im.getType());
+            Graphics2D g = copy.createGraphics();
+            g.drawImage(im, 0, 0, null);
+            return copy;
+        }
+        return null;
     }
 }

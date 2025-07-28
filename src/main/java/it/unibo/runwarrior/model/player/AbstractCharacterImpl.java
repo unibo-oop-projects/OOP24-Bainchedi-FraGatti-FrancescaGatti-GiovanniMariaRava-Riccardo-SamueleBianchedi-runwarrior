@@ -23,7 +23,7 @@ public abstract class AbstractCharacterImpl implements Character {
     public static final int SPEED = 5;
     protected static final Logger LOGGER = Logger.getLogger(AbstractCharacterImpl.class.getName());
     protected int sizeCharacter;
-    private Rectangle collisionArea;
+    private final Rectangle collisionArea;
     protected Rectangle swordArea;
     protected boolean rightDirection;
     protected BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
@@ -40,7 +40,6 @@ public abstract class AbstractCharacterImpl implements Character {
     // protected BufferedImage tipR;
     // protected BufferedImage tipL;
 
-    protected CharacterComand cmd;
     protected CharacterAnimationHandler animation;
     protected CharacterMovementHandler movement;
 
@@ -53,9 +52,9 @@ public abstract class AbstractCharacterImpl implements Character {
      * @param mapHandler object that prints tiles
      * @param pCon object that creates powerup list
      */
+    @SuppressWarnings("EI_EXPOSE_REP2")
     public AbstractCharacterImpl(final GameLoopController glc, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpController pCon) {
-        this.cmd = commands;
         sizeCharacter = mapHandler.getTileSize() * 2;
         this.movement = new CharacterMovementHandlerImpl(glc, this, commands, mapHandler, pCon);
         this.animation = new CharacterAnimationHandlerImpl(commands, movement);
@@ -71,7 +70,7 @@ public abstract class AbstractCharacterImpl implements Character {
     public final void update() {
         playerImage();
         updatePlayerPosition();
-        this.rightDirection = movement.getRightDirection();
+        this.rightDirection = movement.isRightDirection();
         movement.movePlayer();
         animation.frameChanger();
     }
@@ -121,6 +120,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("EI_EXPOSE_REP")
     public CharacterMovementHandler getMovementHandler() {
         return this.movement;
     }
@@ -129,6 +129,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("EI_EXPOSE_REP")
     public CharacterAnimationHandler getAnimationHandler() {
         return this.animation;
     }
@@ -137,6 +138,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("EI_EXPOSE_REP")
     public Rectangle getSwordArea() {
         return this.swordArea;
     }
@@ -145,6 +147,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("EI_EXPOSE_REP")
     public Rectangle getArea() {
         return this.collisionArea;
     }

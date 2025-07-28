@@ -2,6 +2,8 @@ package it.unibo.runwarrior.view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -14,26 +16,36 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class GameMusic {
 
+    public static final Logger LOGGER = Logger.getLogger(GameMusic.class.getName());
+    private Clip clip;
+
     /**
      * Constructor of the music during the game.
      * It takes the music file, creates the audio stream, creates and open the clip and play it once or endlessly.
      *
      * @param musicFile music file wav
-     * @param loop boolean to play music costantly if it's true
      */
-    public GameMusic(final String musicFile, final boolean loop) {
+    public GameMusic(final String musicFile) {
         try {
             final URL musicURL = getClass().getResource("/Music/" + musicFile);
             final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicURL);
-            final Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audioInputStream);
-            if (loop) {
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-            } else {
-                clip.start();
-            }
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Cannot load or open audio files");
+        }
+    }
+
+    /**
+     * Playe the sound chosen.
+     *
+     * @param loop boolean to play music costantly if it's true
+     */
+    public void play(final boolean loop) {  
+        if (loop) {
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } else {
+            clip.start();
         }
     }
 }

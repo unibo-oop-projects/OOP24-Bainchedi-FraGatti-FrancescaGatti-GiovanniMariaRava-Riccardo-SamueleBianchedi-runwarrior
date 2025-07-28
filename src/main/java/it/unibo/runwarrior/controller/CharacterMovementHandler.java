@@ -66,7 +66,7 @@ public interface CharacterMovementHandler {
     /**
      * @return true if the player is going to the right
      */
-    boolean getRightDirection();
+    boolean isRightDirection();
 
     /**
      * @return the variable used to make the map slide
