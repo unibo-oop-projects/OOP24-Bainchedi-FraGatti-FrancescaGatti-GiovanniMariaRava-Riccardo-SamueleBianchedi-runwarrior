@@ -102,7 +102,7 @@ public class EnemyImpl implements Enemy {
      */
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, COLLISION_HEIGHT_WIDTH, COLLISION_HEIGHT_WIDTH);
+        return new Rectangle(x+15, y, COLLISION_HEIGHT_WIDTH, COLLISION_HEIGHT_WIDTH-15);
     }
 
     /**
