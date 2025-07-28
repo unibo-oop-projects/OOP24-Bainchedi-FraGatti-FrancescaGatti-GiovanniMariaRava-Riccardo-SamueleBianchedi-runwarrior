@@ -3,6 +3,9 @@ package it.unibo.runwarrior.controller;
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
 
+/**
+ * Interface that handles player movement.
+ */
 public interface CharacterMovementHandler {
     
     /**
