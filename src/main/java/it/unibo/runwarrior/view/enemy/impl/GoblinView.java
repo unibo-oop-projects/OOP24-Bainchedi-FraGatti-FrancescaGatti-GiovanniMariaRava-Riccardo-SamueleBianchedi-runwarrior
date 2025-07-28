@@ -71,6 +71,7 @@ public final class GoblinView implements EnemyView {
         final int shift = glc.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
+
     /**
      * Creates and returns a copy of the given BufferedImage.
      *
