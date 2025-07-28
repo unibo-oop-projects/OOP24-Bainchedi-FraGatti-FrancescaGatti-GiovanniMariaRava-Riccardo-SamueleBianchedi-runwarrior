@@ -44,15 +44,7 @@ public class GameLoopController {
     private Score score;
     private ScoreController scoreController;
 
-    /**
-     * Constructor of the GameLoopController
-     * 
-     * @param mapPath
-     * @param themePath
-     * @param enemiesPath
-     * @param coinsPath
-     */
-    public GameLoopController(String mapPath, String themePath, String enemiesPath, String coinsPath) {
+    public GameLoopController(JFrame mainFrame, String mapPath, String themePath, String enemiesPath, String coinsPath) {
         this.gameMap = GameMap.load(mapPath, themePath);
         this.coinController = new CoinControllerImpl();
         List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
@@ -74,7 +66,7 @@ public class GameLoopController {
         this.score = new Score(GameSaveManager.getInstance());
         this.scoreController = new ScoreControllerImpl(score);
         this.coinController.setScoreController(scoreController);
-        this.glp = new GameLoopPanel(mapPath, themePath, enemiesPath, coinsPath, this);
+        this.glp = new GameLoopPanel(mainFrame, mapPath, themePath, enemiesPath, coinsPath, this);
         initializePlayer();
     }
 
