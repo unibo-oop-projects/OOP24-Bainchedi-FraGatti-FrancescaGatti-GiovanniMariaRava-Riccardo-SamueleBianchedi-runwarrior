@@ -20,21 +20,19 @@ import it.unibo.runwarrior.model.MapElement;
  * TestHandlerMapElement check is the element are setted with the right caratheristics.
  * Check if the list return is correct.
  */
-public class TestHandlerMapElement {
+class TestHandlerMapElement {
     private static final int ROW_COLS = 3;
     private static final int SEVEN = 7;
     private static final int SIX = 6;
     private static final int FIVE = 5;
     private HandlerMapElement handlerMapElement;
-    private GameMap gameMap;
-    private int[][] map;
 
     /**
      * Create a smaller map for the test and the initialize the map.
      */
     @BeforeEach
-    public void initMap() {
-        map = new int[][] {
+    void initMap() {
+        final int[][] map = new int[][] {
             {0, 1, 2},
             {1, FIVE, 0},
             {3, 4, SIX},
@@ -44,7 +42,7 @@ public class TestHandlerMapElement {
         for (int i = 0; i <= SIX; i++) {
             testBlockImages.put(i, null);
         }
-        gameMap = new GameMap(map, testBlockImages, ROW_COLS, ROW_COLS);
+        final GameMap gameMap = new GameMap(map, testBlockImages, ROW_COLS, ROW_COLS);
         handlerMapElement = new HandlerMapElement(gameMap);
     }
 
@@ -67,7 +65,7 @@ public class TestHandlerMapElement {
      * Test if the list returned contains the right element.
      */
     @Test
-    public void testGetCollisionRectangles() {
+    void testGetCollisionRectangles() {
         final List<Rectangle> collisionRects = handlerMapElement.getCollisionRectangles();
 
         assertEquals(FIVE, collisionRects.size());

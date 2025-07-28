@@ -23,6 +23,9 @@ import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.model.player.NakedWarrior;
 
+/**
+ * Test collision between entities and player, and consequences.
+ */
 class TestPlayerCollisions {
     private static final int TRY_TYLE = 36;
     private static final int TOLL = 5;
@@ -31,8 +34,8 @@ class TestPlayerCollisions {
     private GameMap gameMap1;
     private HandlerMapElement mapHandler1;
     private int tileSize;
-    private final String string1Map2 = "tryMap.txt";
-    private final String string2Map2 = "Map2/forest_theme.txt";
+    private static final String string1Map2 = "tryMap.txt";
+    private static final String string2Map2 = "Map2/forest_theme.txt";
     private final JFrame testFrame = new JFrame();
 
     @BeforeEach
@@ -40,7 +43,7 @@ class TestPlayerCollisions {
         gameMap1 = GameMap.load(string1Map2, string2Map2);
         mapHandler1 = new HandlerMapElement(gameMap1);
         cmd = new CharacterComand();
-        glc = new GameLoopController(testFrame, "tryMap.txt", "Map2/forest_theme.txt", 
+        glc = new GameLoopController(testFrame, string1Map2, string2Map2, 
         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         tileSize = TRY_TYLE;
     }
@@ -141,16 +144,16 @@ class TestPlayerCollisions {
 
     @Test
     void testCoinCollision(){
-        CoinController coinController = new CoinControllerImpl();
-        Score score = new Score();
-        ScoreController scoreController = new ScoreControllerImpl(score);
+        final CoinController coinController = new CoinControllerImpl();
+        final Score score = new Score();
+        final ScoreController scoreController = new ScoreControllerImpl(score);
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, null);
         final CoinDetectionImpl collisionCoins = new CoinDetectionImpl(tileSize, coinController, scoreController);
 
         coinController.addCoins(16, 74);
-        assertTrue(coinController.getCoinsCollected() == 0);
+        assertEquals(coinController.getCoinsCollected(), 0);
         player.getArea().setLocation(2633, 560);
         collisionCoins.controlCoinCollision(player);
-        assertTrue(coinController.getCoinsCollected() == 1);
+        assertEquals(coinController.getCoinsCollected(), 1);
     }
 }

@@ -13,18 +13,17 @@ import it.unibo.runwarrior.controller.GameLoopController;
 /**
  * Test if the images are loaded correctly and view is ok.
  */
-public class TestGoblinView {
+class TestGoblinView {
     private static final int DIM_IMAGES = 36;
     private GoblinView goblinView;
-    private GameLoopController glc;
     private JFrame mainFrame;
 
     /**
      * Create a new GameLoopController for the view.
      */
     @BeforeEach
-    public void setUp() {
-        glc = new GameLoopController(mainFrame, "tryMap.txt", "Map2/forest_theme.txt", 
+    void setUp() {
+        final GameLoopController glc = new GameLoopController(mainFrame, "tryMap.txt", "Map2/forest_theme.txt", 
                             "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         goblinView = new GoblinView(glc);
     }
@@ -33,7 +32,7 @@ public class TestGoblinView {
      * Test the right uploading of the images.
      */
     @Test
-    public void testLoadResources() {
+    void testLoadResources() {
         assertNotNull(goblinView.getRightGoblin());
         assertNotNull(goblinView.getLeftGoblin());
         assertNotNull(goblinView.getRightGoblinMoving());
