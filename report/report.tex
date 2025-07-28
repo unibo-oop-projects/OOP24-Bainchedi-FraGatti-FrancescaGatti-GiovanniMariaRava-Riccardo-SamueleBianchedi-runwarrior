@@ -192,12 +192,12 @@ spawner, mantenendo il sistema estendibile e pulito.~\ref{fig:2.5}
 \chapter{Sviluppo}
 \section{Testing automatizzato}
 I test sono stati scritti con JUnit 5, quindi Gradle li esegue automaticamente e l'intera suite gira senza alcun intervento manuale.
-Ogni caso di prova carica risorse dedicate, in particolare mappe di test, copie ridotte e semplificate di quelle di produzione,così
+Ogni caso di prova carica risorse dedicate, in particolare mappe di test, copie ridotte e semplificate di quelle di produzione, così
 l'esito non risente di eventuali modifiche ai livelli reali. La combinazione fra esecuzione automatizzata e risorse isolate garantisce 
 che l'intero motore grafico, la gestione dei nemici e la correttezza del sistema di salvataggio vengano controllati con rapidità, 
 senza interferenze con il materiale definitivo del gioco.
 
-Per quanto riguarda i nemici, i test verificano la corretta restituzione del proprio Rectangle, assicurando che le collisioni con gli a
+Per quanto riguarda i nemici, i test verificano la corretta restituzione del proprio Rectangle, assicurano che le collisioni con gli
 altri elementi della mappa siano gestite a dovere, e controllano l'inversione della velocità in caso di impatto con un ostacolo.
 Con la medesima logica, la classe TestGoblinView verifica il caricamento corretto delle immagini.
 
