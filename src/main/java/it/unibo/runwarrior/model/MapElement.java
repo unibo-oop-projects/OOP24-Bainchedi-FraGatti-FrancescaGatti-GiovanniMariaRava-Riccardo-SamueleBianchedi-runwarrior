@@ -17,7 +17,7 @@ public final class MapElement {
     /**
      * Sets the image for this map element.
      *
-     * @param im the new image.
+     * @param image the new image.
      */
     public void setImage(final BufferedImage image) {
         if (image != null) {

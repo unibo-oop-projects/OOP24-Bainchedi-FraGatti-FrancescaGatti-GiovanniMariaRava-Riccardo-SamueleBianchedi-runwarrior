@@ -35,9 +35,13 @@ public final class MapLoader {
      * @param mapData The 2D integer array representing the map.
      */
     private MapLoader(final int[][] mapData) {
-        this.mapData = mapData.clone();
+        this.mapData = new int[mapData.length][];
+        for (int i = 0; i < mapData.length; i++) {
+            this.mapData[i] = mapData[i].clone();
+        }
         this.rows = MAP_HEIGHT;
         this.cols = MAP_WIDTH;
+
     }
 
     /**
@@ -61,19 +65,20 @@ public final class MapLoader {
             String line;
             while ((line = br.readLine()) != null) {
                 if (currentRow >= MAP_HEIGHT) {
-                    System.err.println("Warning: Map file '" + mapFilePath + 
-                                        "' has more rows than expected Extra rows ignored.");
+                    System.err.println("Warning: Map file '" + mapFilePath 
+                        + "' has more rows than expected Extra rows ignored.");
                     break;
                 }
 
                 final String trimmedLine = line.trim();
                 if (trimmedLine.isEmpty()) {
-                    System.err.println("Warning: Empty row at line " + currentRow + "in file" + mapFilePath + "'. Ignoring.");
+                    System.err.println("Warning: Empty row at line " + currentRow 
+                        + IN_FILE_STRING + mapFilePath + "'. Ignoring.");
                     continue;
                 }
 
                 if (trimmedLine.length() != MAP_WIDTH) {
-                    System.err.println("Error: Row " + currentRow + "in file" + mapFilePath
+                    System.err.println("Error: Row " + currentRow + IN_FILE_STRING + mapFilePath
                         + "' has inconsistent length. Expected: " + MAP_WIDTH
                         + ", Found: " + trimmedLine.length() + ".");
                     return null;
@@ -84,7 +89,7 @@ public final class MapLoader {
                     final int blockValue = Character.getNumericValue(blockChar);
                     if (blockValue == -1) {
                         System.err.println("Error: Non-numeric value ('" + blockChar + "') at row " + currentRow
-                            + ", col " + c + "in file" + mapFilePath + "'.");
+                            + ", col " + c + IN_FILE_STRING + mapFilePath + "'.");
                         return null;
                     }
                     mapData[currentRow][c] = blockValue;

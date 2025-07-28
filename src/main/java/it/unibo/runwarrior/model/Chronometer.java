@@ -10,15 +10,15 @@ public interface Chronometer {
     /**
      * It stops the chronometer and update the elapsed time.
      */
-    public void stopTimer();
+    void stopTimer();
 
     /**
      * @return time elapsed
      */
-    public long getTimeElapsed();
+    long getTimeElapsed();
 
     /**
      * @return elapsed time formatted in string format
      */
-    public String getTimeString();
+    String getTimeString();
 }
