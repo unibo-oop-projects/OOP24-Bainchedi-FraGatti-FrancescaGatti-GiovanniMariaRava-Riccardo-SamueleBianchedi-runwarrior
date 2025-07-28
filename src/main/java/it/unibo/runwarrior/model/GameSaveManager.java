@@ -24,13 +24,13 @@ public final class GameSaveManager {
     private static final String DEFAULT_STRING = "DEFAULT_SKIN";
     private static final String WIZARD = "WIZARD";
     private static final int MAX_LEVEL = 3;
-    private static GameSaveManager instance = getInstance();
     private static final Logger LOGGER = Logger.getLogger(GameSaveManager.class.getName());
 
     private int levelsCompleted;
     private int coinCollected;
     private boolean premiumSkinUnlocked;
     private String selectedSkinName;
+    private GameSaveManager gsm;
 
     /**
      * Private constructor of the class GameSaveManager.
@@ -46,8 +46,22 @@ public final class GameSaveManager {
      * Loaded only when getInstance() is called for the first time.
      */
     private static class Holder {
-        private static final GameSaveManager INSTANCE = new GameSaveManager();
+        private static final GameSaveManager INSTANCE = createInstance();
     }
+
+    /**
+     * Create and initialize the instance.
+     * 
+     * @return the instance created
+     */
+    private static GameSaveManager createInstance() {
+        GameSaveManager gsm = loadFromFile(SAVE_FILE);
+        if (gsm == null) {
+            gsm = new GameSaveManager();
+        }
+        return gsm;
+    }
+    
 
     /**
      * Returns the singleton instance of the GameSaveManager.
@@ -57,6 +71,7 @@ public final class GameSaveManager {
     public static GameSaveManager getInstance() {
         return Holder.INSTANCE;
     }
+
 
     /**
      * Save the changes of the variables in the file.
