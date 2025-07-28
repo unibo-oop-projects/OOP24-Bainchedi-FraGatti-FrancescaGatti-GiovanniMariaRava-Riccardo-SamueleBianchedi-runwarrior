@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import it.unibo.runwarrior.controller.GameLoopController;
-import it.unibo.runwarrior.model.Chronometer;
-import it.unibo.runwarrior.model.ChronometerImpl;
-import it.unibo.runwarrior.model.GameSaveManager;
+import it.unibo.runwarrior.model.chronometer.api.Chronometer;
+import it.unibo.runwarrior.model.chronometer.impl.ChronometerImpl;
+import it.unibo.runwarrior.model.save.GameSaveManager;
 
 /**
  * Class that render the main panel of the game and the end frame.
@@ -154,6 +154,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
         dialog.setContentPane(content);
         dialog.pack();
         dialog.setLocationRelativeTo(frameMenu);
+        dialog.setResizable(false);
 
         dialog.addWindowListener(new WindowAdapter() {
             @Override

@@ -13,8 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 import it.unibo.runwarrior.controller.GameLoopController;
-import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
+import it.unibo.runwarrior.model.save.GameSaveManager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -98,8 +98,8 @@ public class Menu extends JPanel {
         });
 
         try {
-            backGroundImage = ImageIO.read(getClass().getResourceAsStream("/Menu/sfondoMenu.png"));
-            titleImage = ImageIO.read(getClass().getResourceAsStream("/Menu/titolo4.png"));
+            backGroundImage = ImageIO.read(Menu.class.getResourceAsStream("/Menu/sfondoMenu.png"));
+            titleImage = ImageIO.read(Menu.class.getResourceAsStream("/Menu/titolo4.png"));
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load images");
         }
@@ -260,16 +260,11 @@ public class Menu extends JPanel {
     }
 
     /**
+     * WARNING: The returned reference is mutable and can be modified externally.
+     *
      * @return the panel of background
      */
     public final JPanel getPanel() {
         return pannelloSfondoMenu;
-    }
-
-    /**
-     * @return the main frame
-     */
-    public final JFrame getFrameMenu() {
-        return frameMenu;
     }
 }

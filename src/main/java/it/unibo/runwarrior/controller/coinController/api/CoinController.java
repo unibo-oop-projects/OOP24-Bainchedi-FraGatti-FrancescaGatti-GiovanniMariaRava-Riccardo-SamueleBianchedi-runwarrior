@@ -1,8 +1,9 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.coinController.api;
 
 import java.awt.Graphics;
 import java.util.List;
 import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.model.Coin;
 
 /**
@@ -59,13 +60,6 @@ public interface CoinController {
      * Increments the count of collected coin.
      */
     void increaseCoinsCollected();
-
-    /**
-     * sets the controller to manages the score.
-     *
-     * @param scoreController controller of the score
-     */
-    void setScoreController(ScoreController scoreController);
 
     /**
      * @return list of coins that are actually in the level

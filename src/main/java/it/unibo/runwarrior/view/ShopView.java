@@ -13,8 +13,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import it.unibo.runwarrior.controller.ShopController;
-import it.unibo.runwarrior.controller.ShopControllerImpl;
+import it.unibo.runwarrior.controller.shop.api.ShopController;
+import it.unibo.runwarrior.controller.shop.impl.ShopControllerImpl;
 import it.unibo.runwarrior.model.Score;
 
 /**

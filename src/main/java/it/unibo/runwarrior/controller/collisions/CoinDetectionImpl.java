@@ -4,8 +4,8 @@ import java.awt.Rectangle;
 import java.util.Iterator;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.runwarrior.controller.CoinController;
-import it.unibo.runwarrior.controller.ScoreController;
+import it.unibo.runwarrior.controller.coinController.api.CoinController;
+import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.model.Coin;
 import it.unibo.runwarrior.model.player.Character;
 

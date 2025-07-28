@@ -23,7 +23,7 @@ class EnemyImplTest {
     private static final int TILE_SIZE = 64;
     private static final int COLLISION_X = 15;
     private static final int COLLISION_TILE = 48;
-    private static final int COLLISION_TILE_WIDHT = 33;
+    private static final int COLLISION_TILE_HEIGHT = 33;
     private static final int STANDARD_VEL = 2;
     private static final int OBSTACLE_X = 60;
     private EnemyImpl enemy;
@@ -50,10 +50,10 @@ class EnemyImplTest {
     @Test
     void testGetBounds() {
         final Rectangle bounds = enemy.getBounds();
-        assertEquals(COLLISION_X, bounds.x);
+        assertEquals(STANDARD_X + COLLISION_X, bounds.x);
         assertEquals(STANDARD_Y, bounds.y);
-        assertEquals(COLLISION_TILE_WIDHT, bounds.width);
-        assertEquals(COLLISION_TILE, bounds.height);
+        assertEquals(COLLISION_TILE, bounds.width);
+        assertEquals(COLLISION_TILE_HEIGHT, bounds.height);
     }
 
     /**
