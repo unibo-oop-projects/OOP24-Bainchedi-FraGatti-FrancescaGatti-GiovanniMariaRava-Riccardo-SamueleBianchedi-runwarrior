@@ -77,8 +77,8 @@ public class PowerUpImpl implements PowerUp {
      * @return copy of the original
      */
     private BufferedImage copy(final BufferedImage im) {
-        BufferedImage copy = new BufferedImage(im.getWidth(), im.getHeight(), im.getType());
-        Graphics2D g = copy.createGraphics();
+        final BufferedImage copy = new BufferedImage(im.getWidth(), im.getHeight(), im.getType());
+        final Graphics2D g = copy.createGraphics();
         g.drawImage(im, 0, 0, null);
         return copy;
     }

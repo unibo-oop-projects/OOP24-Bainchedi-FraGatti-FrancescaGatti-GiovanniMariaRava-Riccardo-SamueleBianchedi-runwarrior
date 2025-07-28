@@ -29,7 +29,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private GameLoopController gameController;
-    private GameMusic music;
+    private final GameMusic music;
     private Chronometer chronometer;
     private boolean gameStarted = false;
     private boolean gameEnded = false;
@@ -42,7 +42,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     public GameLoopPanel(JFrame frameMenu, String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController) {
         this.gameController = gameController;
         this.frameMenu = frameMenu;
-        //music = new GameMusic("gameMusic.wav", true);
+        music = new GameMusic("gameMusic.wav");
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(gameController.getCommands());
         this.setFocusable(true);
@@ -53,6 +53,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     public void startGame() {
         gameThread = new Thread(this);
         gameThread.start();
+        //music.play(true);
     }
 
     @Override

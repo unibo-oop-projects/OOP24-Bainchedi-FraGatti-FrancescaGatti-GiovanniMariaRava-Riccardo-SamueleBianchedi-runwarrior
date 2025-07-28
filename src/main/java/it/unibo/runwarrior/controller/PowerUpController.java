@@ -5,14 +5,15 @@ import java.util.List;
 
 import it.unibo.runwarrior.model.PowerUp;
 import it.unibo.runwarrior.model.PowerUpImpl;
+
 /**
- * Class that handles powerup list creation
+ * Class that handles powerup list creation.
  */
 public class PowerUpController {
     public static final int END_OF_POWERUP = 222;
     public static final int NUM_POWERUP = 6;
     public static final int FIRST_DISTANCE_POWERUP = 55;
-    public static final int OBSTACLE  = 5;
+    public static final int OBSTACLE = 5;
     private final List<PowerUp> powerUps;
     private final int tileSize;
 

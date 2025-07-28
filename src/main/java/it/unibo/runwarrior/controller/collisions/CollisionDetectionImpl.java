@@ -103,7 +103,6 @@ public class CollisionDetectionImpl implements CollisionDetection {
             }
             return true;
         } else if (!blocks.get(blockIndex).isPortal()) {
-//altro ciclo per verificare se c'è realmente collisione, per evitare che il player si infili nel terreno durante il salto
             for (int i = playerArea.width; i >= 0; i = i - playerArea.width) {
                 indexXtile = (playerArea.x + i) / tileSize;
                 indexYtile = playerArea.y / tileSize;

@@ -20,6 +20,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private final CoinDetectionImpl coinDetection;
 
     public static final int START_X = 96;
+    private static final int JUMP_MAX = 5 / 2;
+    private static final int JUMP_MID = 3 / 2;
     private final int startY;
     private int maxJump;
     private int midJump;
@@ -74,23 +76,23 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void setStartY(final int y){
+    public void setStartY(final int y) {
         playerY = y + AbstractCharacterImpl.TO_TOUCH_FLOOR;
-        maxJump = playerY - (sizeCharacter*5/2);
-        midJump = playerY - (sizeCharacter*3/2);
+        maxJump = playerY - (sizeCharacter * JUMP_MAX);
+        midJump = playerY - (sizeCharacter * JUMP_MID);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setLocationAfterPowerup(final int x, final int y, final int realx, final int groundX, final long lastHit) {
+    public void setLocationAfterPowerup(final int x, final int y, final int realx, final int slide, final long lastHit) {
         this.screenX = x;
         this.playerY = y;
         this.playerX = realx;
-        maxJump = playerY - (sizeCharacter*5/2);
-        midJump = playerY - (sizeCharacter*3/2);
-        this.groundX = groundX;
+        maxJump = playerY - (sizeCharacter * JUMP_MAX);
+        midJump = playerY - (sizeCharacter * JUMP_MID);
+        this.groundX = slide;
         this.killDetection.setHitWaitTime(lastHit);
         this.collisionDetection.setHitWaitTime(lastHit);
     }
@@ -102,7 +104,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     public void movePlayer() {
         final int maxScreenX = glc.getGlp().getWidth() / 2;
         String collisionDir = collisionDetection.checkCollision(player);
-        String tempDir = pUpDetection.checkCollisionWithPowers(player, this);
+        final String tempDir = pUpDetection.checkCollisionWithPowers(player, this);
         if (!tempDir.isEmpty()) {
             collisionDir = tempDir;
         }
@@ -114,7 +116,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             cmd.setJump(false);
         }
         jump(cmd.isJumping(), maxJump);
-        boolean handleDoubleCollision = ("up".equals(collisionDir) || "down".equals(collisionDir)) && descend;
+        final boolean handleDoubleCollision = ("up".equals(collisionDir) || "down".equals(collisionDir)) && descend;
         if (jumpKill) {
             jumpAfterKill();
         }
@@ -141,7 +143,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 }
             }
         }
-        canAttack = (!"right".equals(collisionDir) || !"left".equals(collisionDir));
+        canAttack = !"right".equals(collisionDir) || !"left".equals(collisionDir);
     }
 
     /**
@@ -150,7 +152,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     @Override
     public void jump (final boolean isJump, final int jumpHeight) {
         if (isJump && !descend) {
-            if(playerY > jumpHeight){
+            if (playerY > jumpHeight) {
                 playerY -= SPEED_JUMP_UP;
             } else {
                 playerY = jumpHeight;
@@ -162,8 +164,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 descend = true;
                 playerY += SPEED_JUMP_DOWN;
                 updateJumpVariable();
-            }
-            else if (!jumpKill) {
+            } else if (!jumpKill) {
                 descend = false;
                 cmd.setDoubleJump(false);
             }
@@ -182,12 +183,12 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void jumpAfterKill(){
+    public void jumpAfterKill() {
         if (playerY >= midJump && !hitHead) {
             cmd.setDoubleJump(true);
             playerY -= SPEED_JUMP_UP;
         } else {
-            if(!hitHead){
+            if (!hitHead) {
                 playerY = midJump;
             }
             jumpKill = false;
@@ -199,8 +200,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * Updates the values of max and mid jump based on where the player is.
      */
     private void updateJumpVariable() {
-        maxJump = startY - (sizeCharacter * 5 / 2) + playerY - startY;
-        midJump = startY - (sizeCharacter * 3 / 2) + playerY - startY;
+        maxJump = startY - (sizeCharacter * JUMP_MAX) + playerY - startY;
+        midJump = startY - (sizeCharacter * JUMP_MID) + playerY - startY;
     }
 
     /**

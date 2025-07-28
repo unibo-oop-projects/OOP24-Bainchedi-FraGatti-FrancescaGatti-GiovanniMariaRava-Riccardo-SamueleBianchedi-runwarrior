@@ -36,7 +36,7 @@ public interface CollisionDetection {
      * @param indexXtile row of the tile
      * @param indexYtile column of the tile
      * @return the string that specifies the direction of the collision
-    */
+     */
     String checkCollisionDirection(int x, int y, float indexXtile, float indexYtile);
 
     /**
