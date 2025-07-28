@@ -25,7 +25,7 @@ public class EnemyImplTest {
     private static final int STANDARD_VEL = 2;
     private static final int OBSTACLE_X = 60;
     private EnemyImpl enemy;
-    private GameLoopController glp;
+    private GameLoopController glc;
     private EnemyHandlerImpl enemyHandler;
     private EnemyViewFactoryImpl enemyViewFactory;
     private JFrame mainFrame;
@@ -35,10 +35,12 @@ public class EnemyImplTest {
      */
     @BeforeEach
     public void setUp() {
-        glp = new GameLoopController(mainFrame, "tryMap.txt", "Map2/forest_theme.txt", 
+        glc = new GameLoopController(mainFrame, "tryMap.txt", "Map2/forest_theme.txt", 
                                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
-        enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
-        enemy = new EnemyImpl(STANDARD_X, STANDARD_Y, TILE_SIZE, TILE_SIZE, true, enemyHandler, glp, 1); 
+        glc.getGlp().startGame();
+        glc.getGlp().endGame();
+        enemyHandler = new EnemyHandlerImpl(glc, enemyViewFactory);
+        enemy = new EnemyImpl(STANDARD_X, STANDARD_Y, TILE_SIZE, TILE_SIZE, true, enemyHandler, glc, 1); 
     }
 
     /**
