@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JFrame;
 
@@ -205,16 +206,17 @@ public class GameLoopController {
      * @return the number of the current level
      */
     private int calculateLevelIndex(final String mapPath) {
-        if (mapPath.toLowerCase().contains("map_1") || mapPath.toLowerCase().contains("map1")) {
+        final String lowerCasePath = mapPath.toLowerCase(Locale.ROOT);
+        if (lowerCasePath.contains("map_1") || lowerCasePath.contains("map1")) {
             return 1;
-        } else if (mapPath.toLowerCase().contains("map_2") || mapPath.toLowerCase().contains("map2")) {
+        } else if (lowerCasePath.contains("map_2") || lowerCasePath.contains("map2")) {
             return 2;
-        } else if (mapPath.toLowerCase().contains("map_3") || mapPath.toLowerCase().contains("map3")) {
+        } else if (lowerCasePath.contains("map_3") || lowerCasePath.contains("map3")) {
             return 3;
         } else {
             return 1;
         }
-    }
+}
 
     /**
      * @return the current level 
