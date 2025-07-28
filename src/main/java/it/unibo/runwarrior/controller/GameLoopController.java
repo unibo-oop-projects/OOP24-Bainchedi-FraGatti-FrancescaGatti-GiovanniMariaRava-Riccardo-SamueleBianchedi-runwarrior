@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JFrame;
 
@@ -26,7 +27,7 @@ import it.unibo.runwarrior.view.enemy.impl.WizardView;
  * Gestisce l'inizializzazione dei campi necessari e gestisce l'aggiornamento.
  */
 public class GameLoopController {
-
+    private static final int TYPE_FIVE = 5;
     private GameLoopPanel glp;
     private Character player;
     private CharacterComand commands;
@@ -48,19 +49,19 @@ public class GameLoopController {
     /**
      * Constructor of the class. 
      *
-     * @param frameMenu is the frame in which menu is shown
+     * @param mainFrame is the frame in which menu is shown
      * @param mapPath the path for loading of the map
      * @param themePath the path for loading the images of tile
      * @param enemiesPath the path for loadin the enemies position
      * @param coinsPath the path for loading the coin position
-     * @param gameController the controller of the whole game
      */
-    public GameLoopController(JFrame mainFrame, String mapPath, String themePath, String enemiesPath, String coinsPath) {
+    public GameLoopController(final JFrame mainFrame, final String mapPath, final String themePath,
+                                final String enemiesPath, final String coinsPath) {
         this.gameMap = GameMap.load(mapPath, themePath);
         this.coinController = new CoinControllerImpl();
         this.levelIndex = calculateLevelIndex(mapPath);
-        List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
-        for (int[] coord : coords) {
+        final List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
+        for (final int[] coord : coords) {
             coinController.addCoins(coord[0], coord[1]);
         }
         this.commands = new CharacterComand();
@@ -117,7 +118,7 @@ public class GameLoopController {
 
     /**
      * Sets the current player in the panel.
-     * 
+     *
      * @param pl current player
      * @param realX x position in the map
      * @param x x position in the screen
@@ -132,7 +133,7 @@ public class GameLoopController {
     }
 
     /**
-     * Return the main gameLoopPanel in which everything is shown
+     * Return the main gameLoopPanel in which everything is shown.
      *
      * @return GameLoopPanel
      */
@@ -160,7 +161,7 @@ public class GameLoopController {
     public PowerUpManager getPowersManager() {
         return this.powersManager;
     }
-    
+
     /**
      * @return the map handler that provides tiles and collision list
      */
@@ -192,30 +193,41 @@ public class GameLoopController {
     /**
      * Map the int type with the correct EnemyView.
      */
-    private final void initializeEnemyViewFactory() {
+    private void initializeEnemyViewFactory() {
         enemyViewFactory.register(1, new GuardView(this));
         enemyViewFactory.register(2, new SnakeView(this));
         enemyViewFactory.register(3, new WizardView(this));
         enemyViewFactory.register(4, new GoblinView(this));
-        enemyViewFactory.register(5, new MonkeyView(this));
+        enemyViewFactory.register(TYPE_FIVE, new MonkeyView(this));
     }
 
-    private final int calculateLevelIndex(String mapPath) {
-        if (mapPath.toLowerCase().contains("map_1") || mapPath.toLowerCase().contains("map1")) {
+    /**
+     * @param mapPath the path for loading of the map
+     * @return the number of the current level
+     */
+    private int calculateLevelIndex(final String mapPath) {
+        final String lowerCasePath = mapPath.toLowerCase(Locale.ROOT);
+        if (lowerCasePath.contains("map_1") || lowerCasePath.contains("map1")) {
             return 1;
-        } else if (mapPath.toLowerCase().contains("map_2") || mapPath.toLowerCase().contains("map2")) {
+        } else if (lowerCasePath.contains("map_2") || lowerCasePath.contains("map2")) {
             return 2;
-        } else if (mapPath.toLowerCase().contains("map_3") || mapPath.toLowerCase().contains("map3")) {
+        } else if (lowerCasePath.contains("map_3") || lowerCasePath.contains("map3")) {
             return 3;
         } else {
             return 1;
         }
-    }
+}
 
+    /**
+     * @return the current level 
+     */
     public final int getCurrentLevel() {
         return this.levelIndex;
     }
 
+    /**
+     * @return the controller for the shop 
+     */
     public final ShopController getShopController() {
         return this.shopController;
     }
