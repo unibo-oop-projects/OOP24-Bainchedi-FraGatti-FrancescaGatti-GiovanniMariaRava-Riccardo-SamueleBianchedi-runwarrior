@@ -8,20 +8,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-public class CoinTest {
+class CoinTest {
 
     @Test
-    public void testCoinLoading() {
-        CoinControllerImpl coinController = new CoinControllerImpl();
-        List<int[]> coords = coinController.loadCoinFromFile("/Coins/CoinCoordinates_map1.txt");
+    void testCoinLoading() {
+        final CoinControllerImpl coinController = new CoinControllerImpl();
+        final List<int[]> coords = coinController.loadCoinFromFile("/Coins/CoinCoordinates_map1.txt");
         assertFalse(coords.isEmpty(), "Le coordinate caricate non devono essere vuote");
 
         coinController.initCoinsFromFile("/Coins/CoinCoordinates_map1.txt");
-        List<Coin> coins = coinController.getCoinList();
+        final List<Coin> coins = coinController.getCoinList();
         assertEquals(coords.size(), coins.size(), "il numero delle monete caricate deve corrispondere");
         for (int i = 0; i < coins.size(); i++) {
-            Coin c = coins.get(i);
-            int[] coord = coords.get(i);
+            final Coin c = coins.get(i);
+            final int[] coord = coords.get(i);
             assertEquals(coord[0], c.getRow(), "Row della coin deve corrispondere");
             assertEquals(coord[1], c.getCol(), "Col della coin deve corrispondere");
             assertFalse(c.isCollected(), "la moneta non deve già essere raccolta");
@@ -30,13 +30,13 @@ public class CoinTest {
     }
     @Test
     void testCoinInitiallyNotCollected() {
-        Coin coin = new Coin(2,3);
+        final Coin coin = new Coin(2,3);
         assertFalse(coin.isCollected(), "La moneta non dovrebbe essere raccolta inizialmente");
     }
     
     @Test
     void testCoinCollectChangesState(){
-        Coin coin = new Coin(1,1);
+        final Coin coin = new Coin(1,1);
         coin.collect();
         assertTrue(coin.isCollected(), "La moneta dovrebbe risultare raccolta dopo il collect()");
     }

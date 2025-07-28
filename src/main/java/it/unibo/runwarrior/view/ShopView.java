@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,22 +15,35 @@ import java.awt.event.ActionListener;
 
 import it.unibo.runwarrior.controller.ShopController;
 import it.unibo.runwarrior.controller.ShopControllerImpl;
-//import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
 
+/**
+ * Class that creates the Panel of the shop to be showed after the click on the 
+ * shop button in the menu.
+ */
 public final class ShopView extends JPanel {
+    private static final int TITLE_FONT_SIZE = 24;
+    private static final int RIGID_AREA_HEIGHT_LARGE = 20;
+    private static final int RIGID_AREA_HEIGHT_MEDIUM = 10;
+    private static final int RIGID_AREA_HEIGHT_SMALL = 5;
+    private static final Color COLOR_SHOP_BACKGROUND = new Color(255, 192, 203);
     private final ShopController shopController;
     private final JLabel coinLabel;
     private final JLabel skinStateLabel; 
     private final JButton buySkinButton;
 
+    /**
+     * ShopView constructor.
+     *
+     * @param score to take the coins collected
+     */
     public ShopView(final Score score) {
         this.shopController = new ShopControllerImpl(score);
-        setBackground(new java.awt.Color(255, 192, 203));
+        setBackground(COLOR_SHOP_BACKGROUND);
         setOpaque(true);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         final JLabel titleLabel = new JLabel("SHOP");
-        final Font font = new Font("Cooper Black", Font.BOLD, 24);
+        final Font font = new Font("Cooper Black", Font.BOLD, TITLE_FONT_SIZE);
         titleLabel.setFont(font);
         titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 
@@ -81,19 +95,22 @@ public final class ShopView extends JPanel {
             }
         });
         add(titleLabel);
-        add(Box.createRigidArea(new Dimension(0, 20)));
+        add(Box.createRigidArea(new Dimension(0, RIGID_AREA_HEIGHT_LARGE)));
         add(coinLabel);
-        add(Box.createRigidArea(new Dimension(0, 10)));
+        add(Box.createRigidArea(new Dimension(0, RIGID_AREA_HEIGHT_MEDIUM)));
         add(skinStateLabel);
-        add(Box.createRigidArea(new Dimension(0, 20)));
+        add(Box.createRigidArea(new Dimension(0, RIGID_AREA_HEIGHT_LARGE)));
         add(buySkinButton);
-        add(Box.createRigidArea(new Dimension(0, 10)));
+        add(Box.createRigidArea(new Dimension(0, RIGID_AREA_HEIGHT_MEDIUM)));
         add(selectDefaultSkinButton);
-        add(Box.createRigidArea(new Dimension(0, 5)));
+        add(Box.createRigidArea(new Dimension(0, RIGID_AREA_HEIGHT_SMALL)));
         add(selectWizardSkinButton);
         updateShop();
     }
 
+    /**
+     * methot that update the shop based on the coins and the state of the skins.
+     */
     private void updateShop() {
         final int coins = shopController.getCoinScore();
         coinLabel.setText("coins:" + coins);
