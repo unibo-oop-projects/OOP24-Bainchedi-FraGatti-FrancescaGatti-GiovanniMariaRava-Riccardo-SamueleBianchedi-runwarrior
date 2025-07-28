@@ -5,9 +5,9 @@ package it.unibo.runwarrior.model;
  * A skin has a name, price and flag indicating if it is unlocked or bought.
  */
 public class Skin {
-    private String nameSkin;
-    private int price;
-    private boolean bought;
+    private final String nameSkin;
+    private final int price;
+    private final boolean bought;
     private boolean skinUnlocked;
 
     /**

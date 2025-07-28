@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ChronometerTest {
     @Test
     void testChronometerElapsedTimeAndFormat() throws InterruptedException{
-        Chronometer cr = new Chronometer();
+        Chronometer cr = new ChronometerImpl();
         cr.startTimer();
         Thread.sleep(1500);
         cr.stopTimer();

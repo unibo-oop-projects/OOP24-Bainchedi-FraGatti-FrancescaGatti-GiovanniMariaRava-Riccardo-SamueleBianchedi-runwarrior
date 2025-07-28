@@ -34,16 +34,16 @@ public class ArmourWarrior extends AbstractCharacterImpl {
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/stopRightA.png"));
-            right1 = ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/goRightA1.png"));
-            right2 = ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/goRightA2.png"));
-            left0 = ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/stopLeftA.png"));
-            left1 = ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/goLeftA1.png"));
-            left2 = ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/goLeftA2.png"));
-            jumpR = ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/jumpRightA.png"));
-            jumpL = ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/jumpLeftA.png"));
-            attackR = right0;
-            attackL = left0;
+            setRight0(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/stopRightA.png")));
+            setRight1(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/goRightA1.png")));
+            setRight2(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/goRightA2.png")));
+            setLeft0(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/stopLeftA.png")));
+            setLeft1(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/goLeftA1.png")));
+            setLeft2(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/goLeftA2.png")));
+            setJumpR(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/jumpRightA.png")));
+            setJumpL(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/jumpLeftA.png")));
+            setAttackR(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/stopRightA.png")));
+            setAttackL(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WarriorImages/stopLeftA.png")));
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load player images");
         }

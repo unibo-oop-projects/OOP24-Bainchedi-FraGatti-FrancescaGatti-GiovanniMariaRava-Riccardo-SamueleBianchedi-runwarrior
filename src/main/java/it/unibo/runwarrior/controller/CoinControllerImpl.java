@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.Coin;
@@ -19,10 +21,10 @@ import it.unibo.runwarrior.view.GameLoopPanel;
  */
 public class CoinControllerImpl implements CoinController {
     private Character player;
-    private int groundX;
     private int coinsCollected;
-    private List<Coin> coinList;
+    private final List<Coin> coinList;
     private ScoreController scoreController;
+    protected static final Logger LOGGER = Logger.getLogger(CoinControllerImpl.class.getName());
 
     public CoinControllerImpl(){
         coinList = new ArrayList<>();
@@ -37,11 +39,10 @@ public class CoinControllerImpl implements CoinController {
         try (InputStream is = getClass().getResourceAsStream(pathFile);
          BufferedReader fileReader = new BufferedReader(new InputStreamReader(is))) {
             if (is == null) {
-            System.err.println("File non trovato nel classpath: " + pathFile);
             return coinCoordinates;
             }
-            String line;
-            while ((line = fileReader.readLine()) != null) {
+            String line = fileReader.readLine();
+            while (line != null) {
                 line = line.trim();
                 if (!line.isEmpty() && line.contains(",")) {
                     final String[] parts = line.split(",");
@@ -49,9 +50,10 @@ public class CoinControllerImpl implements CoinController {
                     final int col = Integer.parseInt(parts[1].trim());
                     coinCoordinates.add(new int[]{row, col});
                 }
+                line = fileReader.readLine();
             }
         } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Cannot load coin from file");
         }
         return coinCoordinates;
     }
@@ -83,8 +85,8 @@ public class CoinControllerImpl implements CoinController {
      * {@inheritDoc}
      */
     @Override
-    public void drawAllCoins(Graphics g, int tileSize, Character player){
-        groundX = player.getMovementHandler().getGroundX(); 
+    public void drawAllCoins(final Graphics g, final int tileSize, final Character player){
+        int groundX = player.getMovementHandler().getGroundX(); 
 
         for (final Coin coin : coinList) {
             if (!coin.isCollected()) {

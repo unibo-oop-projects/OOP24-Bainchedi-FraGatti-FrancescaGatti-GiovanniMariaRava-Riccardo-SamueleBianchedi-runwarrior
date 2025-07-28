@@ -3,13 +3,19 @@ package it.unibo.runwarrior.model;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
+
+
 
 /**
  * Implementation of a coin.
  * It represents a coin placed in the game world, which the player can collect.
  */
 public class Coin {
+    protected static final Logger LOGGER = Logger.getLogger(Coin.class.getName());
     public BufferedImage coinImage;
     private int row; 
     private int col; 
@@ -34,12 +40,12 @@ public class Coin {
         try {
             coinImage = ImageIO.read(getClass().getResourceAsStream("/Coins/CoinSmall.png"));
             if (coinImage == null) {
-                System.out.println("Immagine moneta non trovata (coinImage è null)");
+                LOGGER.log(Level.SEVERE, "Cannot load coin image");
             } else {
-                System.out.println("Immagine moneta caricata correttamente");
+                LOGGER.log(Level.SEVERE, "Coin Image loaded");
             }
         } catch(final IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Cannot load coin images");
         }
     }
 
@@ -58,7 +64,7 @@ public class Coin {
      */
     public int getRow() {
         return row; 
-    };
+    }
 
     /**
      * @return the coin's column

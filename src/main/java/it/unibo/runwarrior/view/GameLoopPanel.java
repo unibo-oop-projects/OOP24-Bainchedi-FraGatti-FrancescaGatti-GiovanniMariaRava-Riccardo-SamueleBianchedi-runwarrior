@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.Chronometer;
+import it.unibo.runwarrior.model.ChronometerImpl;
 import it.unibo.runwarrior.model.GameSaveManager;
 
 /**
@@ -22,7 +23,7 @@ import it.unibo.runwarrior.model.GameSaveManager;
 public class GameLoopPanel extends JPanel implements Runnable {
     public static final int WIDTH = 1056;
     public static final int HEIGHT = 792;
-    public static final int MLD = 1000000000;
+    public static final int MLD = 1_000_000_000;
     public static final int FPS = 60;
     private static final int FONT_X = 20;
     private static final int FONT_TIME_Y = 40;
@@ -57,13 +58,14 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.addKeyListener(gameController.getCommands());
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.chronometer = new Chronometer();
+        this.chronometer = new ChronometerImpl();
     }
 
     /**
      * Initialize a new thread and call start method.
      */
     public void startGame() {
+        //System.out.println("Start Game chiamato");
         gameThread = new Thread(this);
         gameThread.start();
         //music.play(true);
@@ -138,6 +140,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
                 save.setLevelsCompleted(currentLevel);
             }
         }
+        
+        GameSaveManager.getInstance().addCoin(gameController.getCoinController().getCoinsCollected());
+
         //quale pannello mostrare?
         JPanel content = levelCompleted
         ? new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected())
@@ -188,9 +193,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gr2.drawString("TIME:" + chronometer.getTimeString(), FONT_X, FONT_TIME_Y);
         gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), FONT_X, FONT_COIN_Y);
 
-        gr2.dispose();
+            gr2.dispose();
     }
-
+}
         // resultFrame.setVisible(true);
         // resultFrame.addWindowListener(new java.awt.event.WindowAdapter() {
         // @Override
@@ -206,4 +211,4 @@ public class GameLoopPanel extends JPanel implements Runnable {
         //     resultFrame.dispose();
         // }
         // });
-}
+
