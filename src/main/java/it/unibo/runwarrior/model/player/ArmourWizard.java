@@ -34,16 +34,16 @@ public class ArmourWizard extends AbstractCharacterImpl {
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/stopRightAW.png"));
-            right1 = ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/goRightAW1.png"));
-            right2 = ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/goRightAW2.png"));
-            left0 = ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/stopLeftAW.png"));
-            left1 = ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/goLeftAW1.png"));
-            left2 = ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/goLeftAW2.png"));
-            jumpR = ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/jumpRightAW.png"));
-            jumpL = ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/jumpLeftAW.png"));
-            attackR = right0;
-            attackL = left0;
+            setRight0(ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/stopRightAW.png")));
+            setRight1(ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/goRightAW1.png")));
+            setRight2(ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/goRightAW2.png")));
+            setLeft0(ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/stopLeftAW.png")));
+            setLeft1(ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/goLeftAW1.png")));
+            setLeft2(ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/goLeftAW2.png")));
+            setJumpR(ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/jumpRightAW.png")));
+            setJumpL(ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/jumpLeftAW.png")));
+            setAttackR(ImageIO.read(ArmourWizard.class.getResourceAsStream("/WizardImages/stopRightAW.png")));
+            setAttackL(ImageIO.read(ArmourWarrior.class.getResourceAsStream("/WizardImages/stopLeftAW.png")));
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load player images");
         }
