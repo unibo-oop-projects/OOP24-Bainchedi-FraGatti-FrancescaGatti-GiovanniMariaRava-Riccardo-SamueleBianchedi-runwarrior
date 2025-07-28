@@ -26,7 +26,7 @@ import it.unibo.runwarrior.view.enemy.impl.WizardView;
  * Gestisce l'inizializzazione dei campi necessari e gestisce l'aggiornamento.
  */
 public class GameLoopController {
-
+    private static final int TYPE_FIVE = 5;
     private GameLoopPanel glp;
     private Character player;
     private CharacterComand commands;
@@ -48,14 +48,14 @@ public class GameLoopController {
     /**
      * Constructor of the class. 
      *
-     * @param frameMenu is the frame in which menu is shown
+     * @param mainFrame is the frame in which menu is shown
      * @param mapPath the path for loading of the map
      * @param themePath the path for loading the images of tile
      * @param enemiesPath the path for loadin the enemies position
      * @param coinsPath the path for loading the coin position
-     * @param gameController the controller of the whole game
      */
-    public GameLoopController(JFrame mainFrame, String mapPath, String themePath, String enemiesPath, String coinsPath) {
+    public GameLoopController(final JFrame mainFrame, final String mapPath, final String themePath,
+                                final String enemiesPath, final String coinsPath) {
         this.gameMap = GameMap.load(mapPath, themePath);
         this.coinController = new CoinControllerImpl();
         this.levelIndex = calculateLevelIndex(mapPath);
@@ -117,7 +117,7 @@ public class GameLoopController {
 
     /**
      * Sets the current player in the panel.
-     * 
+     *
      * @param pl current player
      * @param realX x position in the map
      * @param x x position in the screen
@@ -132,7 +132,7 @@ public class GameLoopController {
     }
 
     /**
-     * Return the main gameLoopPanel in which everything is shown
+     * Return the main gameLoopPanel in which everything is shown.
      *
      * @return GameLoopPanel
      */
@@ -197,10 +197,14 @@ public class GameLoopController {
         enemyViewFactory.register(2, new SnakeView(this));
         enemyViewFactory.register(3, new WizardView(this));
         enemyViewFactory.register(4, new GoblinView(this));
-        enemyViewFactory.register(5, new MonkeyView(this));
+        enemyViewFactory.register(TYPE_FIVE, new MonkeyView(this));
     }
 
-    private final int calculateLevelIndex(String mapPath) {
+    /**
+     * @param mapPath the path for loading of the map
+     * @return the number of the current level
+     */
+    private final int calculateLevelIndex(final String mapPath) {
         if (mapPath.toLowerCase().contains("map_1") || mapPath.toLowerCase().contains("map1")) {
             return 1;
         } else if (mapPath.toLowerCase().contains("map_2") || mapPath.toLowerCase().contains("map2")) {
@@ -212,10 +216,16 @@ public class GameLoopController {
         }
     }
 
+    /**
+     * @return the current level 
+     */
     public final int getCurrentLevel() {
         return this.levelIndex;
     }
 
+    /**
+     * @return the controller for the shop 
+     */
     public final ShopController getShopController() {
         return this.shopController;
     }
