@@ -17,27 +17,43 @@ import it.unibo.runwarrior.model.Chronometer;
 import it.unibo.runwarrior.model.ChronometerImpl;
 import it.unibo.runwarrior.model.GameSaveManager;
 
+/**
+ * Class that render the main panel of the game and the end frame.
+ */
 public class GameLoopPanel extends JPanel implements Runnable {
     public static final int WIDTH = 1056;
     public static final int HEIGHT = 792;
     public static final int MLD = 1000000000;
     public static final int FPS = 60;
+    private static final int FONT_X = 20;
+    private static final int FONT_TIME_Y = 40;
+    private static final int FONT_COIN_Y = 70;
 
     private Thread gameThread;
     private GameLoopController gameController;
-    private GameMusic music;
+    private final GameMusic music;
     private Chronometer chronometer;
-    private boolean gameStarted = false;
-    private boolean gameEnded = false;
-    private boolean levelCompleted = false;
-    private boolean panelShawn = false;
+    private boolean gameStarted;
+    private boolean gameEnded;
+    private boolean levelCompleted;
+    private boolean panelShawn;
     private JFrame frameMenu;
-    // private volatile boolean running = true;
 
-    public GameLoopPanel(JFrame frameMenu, String mapPath, String themePath, String enemiesPath, String coinsPath, GameLoopController gameController) {
+    /**
+     * Constructor of the class. 
+     *
+     * @param frameMenu is the frame in which menu is shown
+     * @param mapPath the path for loading of the map
+     * @param themePath the path for loading the images of tile
+     * @param enemiesPath the path for loadin the enemies position
+     * @param coinsPath the path for loading the coin position
+     * @param gameController the controller of the whole game
+     */
+    public GameLoopPanel(final JFrame frameMenu, final String mapPath, final String themePath, final String enemiesPath, 
+                            final String coinsPath, final GameLoopController gameController) {
         this.gameController = gameController;
         this.frameMenu = frameMenu;
-        //music = new GameMusic("gameMusic.wav", true);
+        music = new GameMusic("gameMusic.wav");
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.addKeyListener(gameController.getCommands());
         this.setFocusable(true);
@@ -45,38 +61,52 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.chronometer = new ChronometerImpl();
     }
 
+    /**
+     * Initialize a new thread and call start method.
+     */
     public void startGame() {
         //System.out.println("Start Game chiamato");
         gameThread = new Thread(this);
         gameThread.start();
+        //music.play(true);
     }
 
+    /**
+     * Contains the loop for updating and repainting the game.
+     */
     @Override
     public void run() {
-        double timeFor1Frame = MLD/FPS; //16.666.666,67 in ns
+        double timeFor1Frame = MLD/FPS;
         long lastTime = System.nanoTime();
         long currentTime;
         double waitingTime = 0;
 
         while (!Thread.currentThread().isInterrupted()) {
             currentTime = System.nanoTime();
-            waitingTime += (currentTime-lastTime);
+            waitingTime += currentTime - lastTime;
             lastTime = currentTime;
-            
+
             if (waitingTime >= timeFor1Frame) {
                 update();
                 repaint();
-                waitingTime  -= timeFor1Frame;
+                waitingTime -= timeFor1Frame;
             }
         }
     }
 
-    public void endGame(){
+    /**
+     * Called when the game is ended to interrupt the thread.
+     */
+    public void endGame() {
         gameThread.interrupt();
     }
 
+    /**
+     * Check if the gamestarted is false starts the chronometer.
+     * Handles the end of the level and the game.
+     */
     public void update() {
-        if(!gameStarted){
+        if (!gameStarted) {
             chronometer.startTimer();
             gameStarted = true;
         }
@@ -86,7 +116,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
                 gameEnded = true;
                 levelCompleted = true;
             } else if (gameController.getPowersHandler().gameOver()) {
-                gameEnded = true; 
+                gameEnded = true;
                 levelCompleted = false;
             }
         }
@@ -97,6 +127,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gameController.update();
     }
 
+    /**
+     * Decides which panel show based on if the level is finished or the player is dead.
+     */
     private void showEndPanel() {
         //aggiorno livelli:
         if (levelCompleted) {
@@ -141,9 +174,13 @@ public class GameLoopPanel extends JPanel implements Runnable {
         dialog.setVisible(true);
     }
 
+    /**
+     * Render all the part of the game.
+     */
     @Override
     protected void paintComponent(Graphics gr) {
         super.paintComponent(gr);
+<<<<<<< HEAD
         try{
             Graphics2D gr2 = (Graphics2D) gr;
             
@@ -156,6 +193,20 @@ public class GameLoopPanel extends JPanel implements Runnable {
             gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
             gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
             gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), 20, 70);
+=======
+        Graphics2D gr2 = (Graphics2D) gr;
+        
+        gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
+        gameController.getPowersManager().printPowerUp(gr2);
+        gameController.getPlayer().drawPlayer(gr2);
+        gameController.getEnemyHandler().render(gr2);
+        gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize(), 
+                                                        gameController.getPlayer());
+        gr2.setColor(Color.BLACK);
+        gr2.setFont(new Font("Cooper Black", Font.BOLD, FONT_X));
+        gr2.drawString("TIME:" + chronometer.getTimeString(), FONT_X, FONT_TIME_Y);
+        gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), FONT_X, FONT_COIN_Y);
+>>>>>>> ba8bc7554f70b24890ee2ca3cb1e538de6baf32e
 
             gr2.dispose();
         } catch (Exception e) {
@@ -178,62 +229,4 @@ public class GameLoopPanel extends JPanel implements Runnable {
         //     resultFrame.dispose();
         // }
         // });
-    }
-
-    /**
-     * Chooses one of the two player with whom the game starts.
-     * To be connected with the shop
-     */
-    // public void initializePlayer() {
-    //     final String selectedSkin = GameSaveManager.getInstance().getSelectedSkinName();
-    //     final boolean wizardUnlocked = GameSaveManager.getInstance().isSkinPremiumSbloccata();
-    //     if ("WIZARD".equalsIgnoreCase(selectedSkin) && wizardUnlocked) {
-    //         player = new NakedWizard(this, commands, mapHandler, powersManager);
-    //     } else {
-    //         player = new NakedWarrior(this, commands, mapHandler, powersManager);
-    //     }
-    //     player.getMovementHandler().setStartY(mapHandler.getFirstY());
-    //     powerUpsHandler.setIndex();
-    // }
-
-    // public Character getPlayer() {
-    //     return this.player;
-    // }
-
-    // public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
-    //     this.player = pl;
-    //     this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
-    //     this.coinController.updatePlayer(pl);
-    // }
-
-    // public PowersHandler getPowersHandler() {
-    //     return this.powerUpsHandler;
-    // }
-
-    // public PowerUpManager getPowersManager() {
-    //     return this.powersManager;
-    // }
-
-    // // public int getCameraShift(){
-    // //     return player.getPlX();
-    // // }
-    
-    // public HandlerMapElement getMapHandler() {
-    //     return this.mapHandler;
-    // }
-
-    // public EnemyHandlerImpl getEnemyHandler() {
-    //     return this.enemyHandler;
-    // }
-
-    // /**
-    //  * Map the int type with the correct EnemyView
-    //  */
-    // private final void initializeEnemyViewFactory() {
-    //     enemyViewFactory.register(1, new GuardView(this));
-    //     enemyViewFactory.register(2, new SnakeView(this));
-    //     enemyViewFactory.register(3, new WizardView(this));
-    //     enemyViewFactory.register(4, new GoblinView(this));
-    //     enemyViewFactory.register(5, new MonkeyView(this));
-    // }
-
+}

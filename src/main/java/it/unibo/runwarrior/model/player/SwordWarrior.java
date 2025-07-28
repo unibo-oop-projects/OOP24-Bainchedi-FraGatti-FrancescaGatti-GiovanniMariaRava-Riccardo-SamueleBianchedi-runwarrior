@@ -57,12 +57,12 @@ public class SwordWarrior extends AbstractCharacterImpl {
     @Override
     protected void updateAttackCollision() {
         if (animation.getFrame() == PlayerFrame.ATTACK_FRAME && rightDirection) {
-            swordArea.setBounds(movement.getPlX() + sizeCharacter, movement.getPlY() + sizeCharacter / 4,
-            sizeCharacter, sizeCharacter - (sizeCharacter / 4) - (TO_TOUCH_FLOOR * 2));
+            swordArea.setBounds(movement.getPlX() + getSizeCharacter(), movement.getPlY() + getSizeCharacter() / 4,
+            getSizeCharacter(), getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
         }
         if (animation.getFrame() == PlayerFrame.ATTACK_FRAME && !rightDirection) {
-            swordArea.setBounds(movement.getPlX() - sizeCharacter, movement.getPlY() + sizeCharacter / 4,
-            sizeCharacter, sizeCharacter - (sizeCharacter / 4) - (TO_TOUCH_FLOOR * 2));
+            swordArea.setBounds(movement.getPlX() - getSizeCharacter(), movement.getPlY() + getSizeCharacter() / 4,
+            getSizeCharacter(), getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
         }
     }
 }

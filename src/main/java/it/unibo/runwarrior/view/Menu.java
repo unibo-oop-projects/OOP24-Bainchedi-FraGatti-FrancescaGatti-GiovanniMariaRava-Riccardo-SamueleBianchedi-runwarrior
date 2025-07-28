@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 import it.unibo.runwarrior.controller.GameLoopController;
-import it.unibo.runwarrior.model.Coin;
 import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
 
@@ -70,8 +69,7 @@ public class Menu extends JPanel {
                     }
                 }
             });
-            // frameMenu.setSize(FRAME_MENU_WIDTH, FRAME_MENU_HEIGHT);
-            // frameMenu.setLocationRelativeTo(null);
+
             try {
                 backGroundImage = ImageIO.read(getClass().getResourceAsStream("/Menu/sfondoMenu.png"));
                 titleImage = ImageIO.read(getClass().getResourceAsStream("/Menu/titolo4.png"));

@@ -21,27 +21,18 @@ import it.unibo.runwarrior.controller.PowerUpController;
 public abstract class AbstractCharacterImpl implements Character {
     public static final int TO_TOUCH_FLOOR = 2;
     public static final int SPEED = 5;
+    /**
+     * Logger used for exceptions and error messages.
+     */
     protected static final Logger LOGGER = Logger.getLogger(AbstractCharacterImpl.class.getName());
-    protected int sizeCharacter;
-    private final Rectangle collisionArea;
     protected Rectangle swordArea;
     protected boolean rightDirection;
     protected BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
-    // protected BufferedImage right0;
-    // protected BufferedImage right1;
-    // protected BufferedImage right2;
-    // protected BufferedImage left0;
-    // protected BufferedImage left1;
-    // protected BufferedImage left2;
-    // protected BufferedImage jumpR;
-    // protected BufferedImage jumpL;
-    // protected BufferedImage attackR;
-    // protected BufferedImage attackL;
-    // protected BufferedImage tipR;
-    // protected BufferedImage tipL;
-
     protected CharacterAnimationHandler animation;
     protected CharacterMovementHandler movement;
+
+    private int sizeCharacter;
+    private final Rectangle collisionArea;
 
     /**
      * Constructor of the player; set player images, first position, 
@@ -150,5 +141,12 @@ public abstract class AbstractCharacterImpl implements Character {
     @SuppressWarnings("EI_EXPOSE_REP")
     public Rectangle getArea() {
         return this.collisionArea;
+    }
+
+    /**
+     * @return size of the plyer
+     */
+    protected int getSizeCharacter() {
+        return sizeCharacter;
     }
 }

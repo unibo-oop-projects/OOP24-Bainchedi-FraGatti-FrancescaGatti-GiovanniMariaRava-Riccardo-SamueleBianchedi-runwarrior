@@ -11,6 +11,12 @@ import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
  * Class that handles player movement and his collisions.
  */
 public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
+    public static final int SPEED_JUMP_UP = 12; 
+    public static final int SPEED_JUMP_DOWN = 6;
+    private static final int START_X = 96;
+    private static final int JUMP_MAX = 5 / 2;
+    private static final int JUMP_MID = 3 / 2;
+    private static final int MIN_SCREEN_X = 0; //y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private final GameLoopController glc;
     private final CharacterComand cmd;
     private final Character player;
@@ -18,27 +24,20 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private final PowerUpDetectionImpl pUpDetection;
     private final KillDetectionImpl killDetection;
     private final CoinDetectionImpl coinDetection;
-
-    public static final int START_X = 96;
     private final int startY;
+    private final int endOfMap;
     private int maxJump;
     private int midJump;
-    protected int sizeCharacter;
-    
-    private static final int MIN_SCREEN_X = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
-    protected int playerX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
-    protected int playerY;// * VERTICALE
-    private int screenX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
-    private final int endOfMap;
+    private int sizeCharacter;
+    private int playerX; //POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
+    private int playerY; // * VERTICALE
+    private int screenX; //POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
     private boolean hitHead;
     private boolean jumpKill;
     private boolean descend;
     private boolean canAttack;
-
-    public static final int SPEED_JUMP_UP = 12; 
-    public static final int SPEED_JUMP_DOWN = 6;
     private boolean rightDirection = true;
-    private int groundX;//variabile che permette lo scorrimento della mappa
+    private int groundX; //variabile che permette lo scorrimento della mappa
 
     /**
      * Constructor of player movemnt that sets the following parametres, the collision with tiles, powerup and enemies
@@ -47,7 +46,6 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * @param glc game-loop controller
      * @param player current player
      * @param cmd keyboard handler
-     * @param collDet collision with map tiles
      * @param hM object that prints tiles
      * @param pCon object that creates powerup list
      */
@@ -74,23 +72,23 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void setStartY(final int y){
+    public void setStartY(final int y) {
         playerY = y + AbstractCharacterImpl.TO_TOUCH_FLOOR;
-        maxJump = playerY - (sizeCharacter*5/2);
-        midJump = playerY - (sizeCharacter*3/2);
+        maxJump = playerY - (sizeCharacter * JUMP_MAX);
+        midJump = playerY - (sizeCharacter * JUMP_MID);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setLocationAfterPowerup(final int x, final int y, final int realx, final int groundX, final long lastHit) {
+    public void setLocationAfterPowerup(final int x, final int y, final int realx, final int slide, final long lastHit) {
         this.screenX = x;
         this.playerY = y;
         this.playerX = realx;
-        maxJump = playerY - (sizeCharacter*5/2);
-        midJump = playerY - (sizeCharacter*3/2);
-        this.groundX = groundX;
+        maxJump = playerY - (sizeCharacter * JUMP_MAX);
+        midJump = playerY - (sizeCharacter * JUMP_MID);
+        this.groundX = slide;
         this.killDetection.setHitWaitTime(lastHit);
         this.collisionDetection.setHitWaitTime(lastHit);
     }
@@ -102,7 +100,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     public void movePlayer() {
         final int maxScreenX = glc.getGlp().getWidth() / 2;
         String collisionDir = collisionDetection.checkCollision(player);
-        String tempDir = pUpDetection.checkCollisionWithPowers(player, this);
+        final String tempDir = pUpDetection.checkCollisionWithPowers(player, this);
         if (!tempDir.isEmpty()) {
             collisionDir = tempDir;
         }
@@ -114,7 +112,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             cmd.setJump(false);
         }
         jump(cmd.isJumping(), maxJump);
-        boolean handleDoubleCollision = ("up".equals(collisionDir) || "down".equals(collisionDir)) && descend;
+        final boolean handleDoubleCollision = ("up".equals(collisionDir) || "down".equals(collisionDir)) && descend;
         if (jumpKill) {
             jumpAfterKill();
         }
@@ -141,16 +139,16 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 }
             }
         }
-        canAttack = (!"right".equals(collisionDir) || !"left".equals(collisionDir));
+        canAttack = !"right".equals(collisionDir) || !"left".equals(collisionDir);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void jump (final boolean isJump, final int jumpHeight) {
+    public void jump(final boolean isJump, final int jumpHeight) {
         if (isJump && !descend) {
-            if(playerY > jumpHeight){
+            if (playerY > jumpHeight) {
                 playerY -= SPEED_JUMP_UP;
             } else {
                 playerY = jumpHeight;
@@ -162,8 +160,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 descend = true;
                 playerY += SPEED_JUMP_DOWN;
                 updateJumpVariable();
-            }
-            else if (!jumpKill) {
+            } else if (!jumpKill) {
                 descend = false;
                 cmd.setDoubleJump(false);
             }
@@ -182,12 +179,12 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    public void jumpAfterKill(){
+    public void jumpAfterKill() {
         if (playerY >= midJump && !hitHead) {
             cmd.setDoubleJump(true);
             playerY -= SPEED_JUMP_UP;
         } else {
-            if(!hitHead){
+            if (!hitHead) {
                 playerY = midJump;
             }
             jumpKill = false;
@@ -199,8 +196,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * Updates the values of max and mid jump based on where the player is.
      */
     private void updateJumpVariable() {
-        maxJump = startY - (sizeCharacter * 5 / 2) + playerY - startY;
-        midJump = startY - (sizeCharacter * 3 / 2) + playerY - startY;
+        maxJump = startY - (sizeCharacter * JUMP_MAX) + playerY - startY;
+        midJump = startY - (sizeCharacter * JUMP_MID) + playerY - startY;
     }
 
     /**

@@ -9,7 +9,7 @@ import it.unibo.runwarrior.model.Coin;
 import it.unibo.runwarrior.model.player.Character;
 
 /**
- * Class that detects coins collection
+ * Class that detects coins collection.
  */
 public class CoinDetectionImpl implements CoinDetection {
 
@@ -30,7 +30,7 @@ public class CoinDetectionImpl implements CoinDetection {
         this.coinC = coinC;
         this.score = score;
     }
-    
+
     /**
      * {@inheritDoc}
      */

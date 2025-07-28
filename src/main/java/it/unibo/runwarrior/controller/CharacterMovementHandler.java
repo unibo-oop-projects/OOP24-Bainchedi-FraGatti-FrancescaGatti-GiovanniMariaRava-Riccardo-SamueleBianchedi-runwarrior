@@ -3,15 +3,18 @@ package it.unibo.runwarrior.controller;
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
 
+/**
+ * Interface that handles player movement.
+ */
 public interface CharacterMovementHandler {
-    
+
     /**
      * Set the initial position of the player.
      *
      * @param y y coordinate
      */
     void setStartY(int y);
-    
+
     /**
      * Sets the position of the new player when he takes powerups or loses them when he's hit by a enemy.
      * This include the change of the skin and life.
@@ -53,7 +56,7 @@ public interface CharacterMovementHandler {
      */
     boolean canAttack();
 
-     /**
+    /**
      * @return map tiles collision object
      */
     CollisionDetectionImpl getCollisionDetection();

@@ -42,7 +42,6 @@ public class KillDetectionImpl implements KillDetection {
     public void checkCollisionWithEnemeies(final Character player) {
         final Rectangle playerArea = player.getArea();
         final Rectangle swordArea = player.getSwordArea();
-        //ConcurrentModificationException
         for (final Enemy enemy : glc.getEnemyHandler().getEnemies()) {
             if (futureArea(playerArea).intersects(enemy.getBounds())) {
                 //System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
@@ -90,11 +89,11 @@ public class KillDetectionImpl implements KillDetection {
      * @param enemyArea enemy collision area
      * @return true if the player touches the enemy in his head
      */
-    private boolean isTouchingUp(final Rectangle playerArea, final Rectangle enemyArea){
+    private boolean isTouchingUp(final Rectangle playerArea, final Rectangle enemyArea) {
         return playerArea.y + playerArea.height <= enemyArea.y 
         && (playerArea.x + TOLL >= enemyArea.x && playerArea.x + TOLL <= enemyArea.x + enemyArea.width
-        || (playerArea.x + playerArea.width - TOLL >= enemyArea.x 
-        && playerArea.x + playerArea.width - TOLL <= enemyArea.x + enemyArea.width));
+        || playerArea.x + playerArea.width - TOLL >= enemyArea.x 
+        && playerArea.x + playerArea.width - TOLL <= enemyArea.x + enemyArea.width);
     }
 
     /**

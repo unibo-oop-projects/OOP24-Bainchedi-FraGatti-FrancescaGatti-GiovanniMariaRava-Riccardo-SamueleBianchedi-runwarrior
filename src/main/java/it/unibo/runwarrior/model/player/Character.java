@@ -31,14 +31,12 @@ public interface Character {
     void playerImage();
 
     /**
-     * @return the object that handles the player movement,
-     *    including the collisions with tiles, powerups and enemies.
+     * @return the object that handles the player movement, including the collisions with tiles, powerups and enemies.
      */
     CharacterMovementHandler getMovementHandler();
 
     /**
-     * @return the object that handles the player animation,
-     *    so how the player frames change.
+     * @return the object that handles the player animation, so how the player frames change.
      */
     CharacterAnimationHandler getAnimationHandler();
 

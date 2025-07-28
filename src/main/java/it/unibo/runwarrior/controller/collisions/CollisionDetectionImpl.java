@@ -64,10 +64,10 @@ public class CollisionDetectionImpl implements CollisionDetection {
         playerArea = pl.getArea();
         String dir = "";
         this.directions.clear();
-        if (touchSolid(playerArea.x + playerArea.width - FEET_HEAD_TOLL + 1, playerArea.y, true) 
+        if (touchSolid(playerArea.x + playerArea.width - FEET_HEAD_TOLL, playerArea.y, true) 
             | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height / 2, true) 
             | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height, true) 
-            | touchSolid(playerArea.x + FEET_HEAD_TOLL + 1, playerArea.y, true) 
+            | touchSolid(playerArea.x + FEET_HEAD_TOLL, playerArea.y, true) 
             | touchSolid(playerArea.x, playerArea.y + playerArea.height / 2, true) 
             | touchSolid(playerArea.x, playerArea.y + playerArea.height, true)) {
                 dir = directions.stream().filter(s -> RIGHT.equals(s) | LEFT.equals(s))
@@ -103,7 +103,6 @@ public class CollisionDetectionImpl implements CollisionDetection {
             }
             return true;
         } else if (!blocks.get(blockIndex).isPortal()) {
-//altro ciclo per verificare se c'è realmente collisione, per evitare che il player si infili nel terreno durante il salto
             for (int i = playerArea.width; i >= 0; i = i - playerArea.width) {
                 indexXtile = (playerArea.x + i) / tileSize;
                 indexYtile = playerArea.y / tileSize;
@@ -124,10 +123,10 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    public String checkCollisionDirection(final int x, final int y, final float indexXtile, final float indexYtile) {
+    public String checkCollisionDirection(final int x, final int y, final int indexXtile, final int indexYtile) {
         String direction = "";
-        final int tileX = ((int) indexXtile) * tileSize;
-        final int tileY = ((int) indexYtile) * tileSize;
+        final int tileX = indexXtile * tileSize;
+        final int tileY = indexYtile * tileSize;
         final Rectangle tileRec = new Rectangle(tileX, tileY, tileSize, tileSize);
         if (y == tileRec.y && x >= tileRec.x && x <= tileRec.x + tileRec.width) {
             direction = UP;
