@@ -49,21 +49,6 @@ public class EnemySpawner {
      */
     public void loadEnemiesFromStream(final InputStream is) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-            String line = br.readLine();
-            while (line != null) {
-                final String[] parts = line.trim().split(",");
-                if (parts.length != 3) {
-                    continue;
-                }
-                final int type = Integer.parseInt(parts[0]);
-                final int tilex = Integer.parseInt(parts[1]);
-                final int tiley = Integer.parseInt(parts[2]);
-                spawnPoints.add(new EnemySpawnPoints(type, tilex, tiley));
-                line = br.readLine();
-            }
-            /*
-            * Bozza di una prova senza while ma con stream 
-            *
             br.lines().map(String :: trim)
                 .filter(s->!s.isEmpty())
                 .map(s->s.split(",", -1))
@@ -73,7 +58,6 @@ public class EnemySpawner {
                                                     Integer.parseInt(part[1]), 
                                                     Integer.parseInt(part[2])))
                 .forEach(spawnPoints :: add);
-            */
         } catch (IOException | NumberFormatException e) {
             LOGGER.log(Level.SEVERE, "Errore durante il caricamento dei nemici: " + e.getMessage());
         }
