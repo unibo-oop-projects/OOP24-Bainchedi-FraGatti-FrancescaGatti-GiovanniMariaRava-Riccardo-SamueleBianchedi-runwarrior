@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.unibo.runwarrior.controller.coinController.api.CoinController;
+import it.unibo.runwarrior.controller.coinController.impl.CoinControllerImpl;
 import it.unibo.runwarrior.controller.collisions.CoinDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
