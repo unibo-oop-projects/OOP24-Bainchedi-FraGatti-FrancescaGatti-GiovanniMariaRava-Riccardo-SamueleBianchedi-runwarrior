@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.model;
 
 import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -17,7 +18,7 @@ public class PowerUpImpl implements PowerUp {
     private static final Logger LOGGER = Logger.getLogger(PowerUpImpl.class.getName());
     private BufferedImage image;
     private BufferedImage egg;
-    private Rectangle touchArea;
+    private final Rectangle touchArea;
     private final GameLoopController glc;
     private boolean powerTaken;
     private boolean eggOpen;
@@ -27,11 +28,12 @@ public class PowerUpImpl implements PowerUp {
      *
      * @param glc game-loop controller
      */
+    @SuppressWarnings("EI_EXPOSE_REP2")
     public PowerUpImpl(final GameLoopController glc) {
         this.glc = glc;
         touchArea = new Rectangle();
         try {
-            egg = ImageIO.read(getClass().getResourceAsStream("/PowerUps/egg.png"));
+            egg = ImageIO.read(PowerUpImpl.class.getResourceAsStream("/PowerUps/egg.png"));
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load egg image");
         }
@@ -65,7 +67,20 @@ public class PowerUpImpl implements PowerUp {
      */
     @Override
     public BufferedImage getImage() {
-        return this.image;
+        return copy(image);
+    }
+
+    /**
+     * Create a copy of the image in order to not modify it.
+     *
+     * @param im original image
+     * @return copy of the original
+     */
+    private BufferedImage copy(final BufferedImage im) {
+        BufferedImage copy = new BufferedImage(im.getWidth(), im.getHeight(), im.getType());
+        Graphics2D g = copy.createGraphics();
+        g.drawImage(im, 0, 0, null);
+        return copy;
     }
 
     /**
@@ -73,13 +88,14 @@ public class PowerUpImpl implements PowerUp {
      */
     @Override
     public BufferedImage getEgg() {
-        return this.egg;
+        return copy(egg);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("EI_EXPOSE_REP")
     public Rectangle getTouchArea() {
         return touchArea;
     }

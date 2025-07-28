@@ -2,6 +2,9 @@ package it.unibo.runwarrior.controller.collisions;
 
 import it.unibo.runwarrior.model.player.Character;
 
+/**
+ * Interface that handles collision between player and coins
+ */
 public interface CoinDetection {
     
     /**
@@ -9,5 +12,5 @@ public interface CoinDetection {
      *
      * @param player current player
      */
-    void controlCoinCollision(final Character player);
+    void controlCoinCollision(Character player);
 }

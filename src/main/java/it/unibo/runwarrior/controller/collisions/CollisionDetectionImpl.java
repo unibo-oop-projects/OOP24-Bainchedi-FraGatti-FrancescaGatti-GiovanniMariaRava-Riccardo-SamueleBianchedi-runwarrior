@@ -24,14 +24,14 @@ public class CollisionDetectionImpl implements CollisionDetection {
     private Character player;
     private final int[][] map;
     private final List<MapElement> blocks;
-    private int tileSize;
-    private List<String> directions;
+    private final int tileSize;
+    private final List<String> directions;
     private Rectangle playerArea;
     private final GameLoopController glc;
     private long hitWaitTime;
     private int gameOverY;
     private boolean end;
-    public GameMusic sound;
+    private final GameMusic sound;
 
     /**
      * Constructor of the collision detection.
@@ -42,28 +42,32 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * @param glc game-loop controller
      */
     @SuppressFBWarnings("EI_EXPOSE_REP2")
+    @SuppressWarnings("EI_EXPOSE_REP")
     public CollisionDetectionImpl(final int[][] map, final List<MapElement> blocks, 
     final int tileSize, final GameLoopController glc) {
         this.map = map;
         this.blocks = blocks;
         this.tileSize = tileSize;
         this.glc = glc;
+        this.playerArea = new Rectangle();
         this.directions = new ArrayList<>();
+        sound = new GameMusic("hit.wav");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("Non-Short-Circuit")
     public String checkCollision(final Character pl) {
         this.player = pl;
         playerArea = pl.getArea();
         String dir = "";
         this.directions.clear();
-        if (touchSolid(playerArea.x + playerArea.width - (FEET_HEAD_TOLL + 1), playerArea.y, true) 
+        if (touchSolid(playerArea.x + playerArea.width - FEET_HEAD_TOLL + 1, playerArea.y, true) 
             | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height / 2, true) 
             | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height, true) 
-            | touchSolid(playerArea.x + (FEET_HEAD_TOLL + 1), playerArea.y, true) 
+            | touchSolid(playerArea.x + FEET_HEAD_TOLL + 1, playerArea.y, true) 
             | touchSolid(playerArea.x, playerArea.y + playerArea.height / 2, true) 
             | touchSolid(playerArea.x, playerArea.y + playerArea.height, true)) {
                 dir = directions.stream().filter(s -> RIGHT.equals(s) | LEFT.equals(s))
@@ -84,16 +88,16 @@ public class CollisionDetectionImpl implements CollisionDetection {
     @Override
     public boolean touchSolid(final int x, final int y, final boolean checkDirections) {
         gameOverY = y;
-        float indexXtile = x / tileSize;
-        float indexYtile = y / tileSize;
-        int blockIndex = map[(int) indexYtile][(int) indexXtile];
+        int indexXtile = x / tileSize;
+        int indexYtile = y / tileSize;
+        int blockIndex = map[indexYtile][indexXtile];
         end = blocks.get(blockIndex).isPortal();
         if (blocks.get(blockIndex).getCollision() || y <= 0) {
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile));
             }
             if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3) {
-                sound = new GameMusic("hit.wav", false);
+                sound.play(false);
                 hitWaitTime = System.currentTimeMillis();
                 glc.getPowersHandler().losePower(false);
             }
@@ -103,7 +107,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
             for (int i = playerArea.width; i >= 0; i = i - playerArea.width) {
                 indexXtile = (playerArea.x + i) / tileSize;
                 indexYtile = playerArea.y / tileSize;
-                blockIndex = map[(int) indexYtile][(int) indexXtile];
+                blockIndex = map[indexYtile][indexXtile];
                 if (blocks.get(blockIndex).getCollision() && checkDirections) {
                     final String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile);
                     if (RIGHT.equals(tempDir) || LEFT.equals(tempDir)) {

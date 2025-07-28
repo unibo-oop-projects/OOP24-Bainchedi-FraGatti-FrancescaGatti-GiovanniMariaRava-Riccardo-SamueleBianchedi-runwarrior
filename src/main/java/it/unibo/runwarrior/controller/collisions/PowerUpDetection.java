@@ -6,6 +6,7 @@ import it.unibo.runwarrior.controller.CharacterMovementHandler;
 /**
  * Interface that handles collision between player and powerups.
  */
+@SuppressWarnings("PMD.ImplicitFunctionalInterface")
 public interface PowerUpDetection {
 
     /**

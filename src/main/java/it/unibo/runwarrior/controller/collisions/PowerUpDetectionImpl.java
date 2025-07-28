@@ -20,9 +20,10 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     private static final int WAIT = 200;
     private final GameLoopController glc;
     private final PowerUpController powersController;
-    private List<PowerUp> powerCollision;
+    private final List<PowerUp> powerCollision;
     private long hitWaitTime;
-    public GameMusic sound;
+    private final GameMusic sound1;
+    private final GameMusic sound2;
 
     /**
      * Constructor of powerup detection.
@@ -30,10 +31,13 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
      * @param glc game-loop controller
      * @param pCon object that creates powerup list
      */
+    @SuppressWarnings("EI_EXPOSE_REP2")
     public PowerUpDetectionImpl(final GameLoopController glc, final PowerUpController pCon) {
         this.glc = glc;
         this.powersController = pCon;
         this.powerCollision = new ArrayList<>();
+        sound1 = new GameMusic("power.wav");
+        sound2 = new GameMusic("jumpKill.wav");
     }
 
     /**
@@ -49,11 +53,11 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
                 if (isTouchingUp(playerArea, pUp.getTouchArea())) {
                     dir = "up";
                     if (pUp.isEggOpen() && !pUp.isPowerTaken() && System.currentTimeMillis() - hitWaitTime > WAIT) {
-                        sound = new GameMusic("power.wav", false);
+                        sound1.play(false);
                         glc.getPowersHandler().setPowers();
                         pUp.takePower();
                     } else if (!pUp.isEggOpen()) {
-                        sound = new GameMusic("jumpKill.wav", false);
+                        sound2.play(false);
                         move.setJumpKill();
                         pUp.openTheEgg();
                         hitWaitTime = System.currentTimeMillis();
@@ -61,14 +65,14 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
                 } else if (playerArea.x + playerArea.width >= pUp.getTouchArea().x && playerArea.x < pUp.getTouchArea().x) {
                     dir = "right";
                     if (pUp.isEggOpen() && !pUp.isPowerTaken()) {
-                        sound = new GameMusic("power.wav", false);
+                        sound1.play(false);
                         glc.getPowersHandler().setPowers();
                         pUp.takePower();
                     }
                 } else if (playerArea.x <= pUp.getTouchArea().x + pUp.getTouchArea().width) {
                     dir = "left";
                     if (pUp.isEggOpen() && !pUp.isPowerTaken()) {
-                        sound = new GameMusic("power.wav", false);
+                        sound1.play(false);
                         glc.getPowersHandler().setPowers();
                         pUp.takePower();
                     }

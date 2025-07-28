@@ -11,32 +11,28 @@ import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
  * Class that handles player movement and his collisions.
  */
 public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
-    private GameLoopController glc;
-    private CharacterComand cmd;
-    private Character player;
-    private CollisionDetectionImpl collisionDetection;
-    private PowerUpDetectionImpl pUpDetection;
-    private KillDetectionImpl killDetection;
-    private CoinDetectionImpl coinDetection;
+    private final GameLoopController glc;
+    private final CharacterComand cmd;
+    private final Character player;
+    private final CollisionDetectionImpl collisionDetection;
+    private final PowerUpDetectionImpl pUpDetection;
+    private final KillDetectionImpl killDetection;
+    private final CoinDetectionImpl coinDetection;
 
     public static final int START_X = 96;
-    private int startY;
+    private final int startY;
     private int maxJump;
     private int midJump;
     protected int sizeCharacter;
     
     private static final int MIN_SCREEN_X = 0;//y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
-    private int maxScreenX;//x IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     protected int playerX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLA MAPPA
     protected int playerY;// * VERTICALE
     private int screenX;//POSIZIONE ORIZZONTALE DEL PLAYER NELLO SCHERMO
-    private int endOfMap;
-    private String collisionDir;
-    private String tempDir;
+    private final int endOfMap;
     private boolean hitHead;
     private boolean jumpKill;
     private boolean descend;
-    private boolean handleDoubleCollision;
     private boolean canAttack;
 
     public static final int SPEED_JUMP_UP = 12; 
@@ -55,6 +51,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * @param hM object that prints tiles
      * @param pCon object that creates powerup list
      */
+    @SuppressWarnings("EI_EXPOSE_REP2")
     public CharacterMovementHandlerImpl(final GameLoopController glc, final Character player, final CharacterComand cmd,
     final HandlerMapElement hM, final PowerUpController pCon) {
         this.glc = glc;
@@ -103,9 +100,9 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     public void movePlayer() {
-        maxScreenX = glc.getGlp().getWidth() / 2;
-        collisionDir = collisionDetection.checkCollision(player);
-        tempDir = pUpDetection.checkCollisionWithPowers(player, this);
+        final int maxScreenX = glc.getGlp().getWidth() / 2;
+        String collisionDir = collisionDetection.checkCollision(player);
+        String tempDir = pUpDetection.checkCollisionWithPowers(player, this);
         if (!tempDir.isEmpty()) {
             collisionDir = tempDir;
         }
@@ -117,12 +114,12 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
             cmd.setJump(false);
         }
         jump(cmd.isJumping(), maxJump);
-        handleDoubleCollision = ("up".equals(collisionDir) || "down".equals(collisionDir)) && descend;
+        boolean handleDoubleCollision = ("up".equals(collisionDir) || "down".equals(collisionDir)) && descend;
         if (jumpKill) {
             jumpAfterKill();
         }
 
-        if (cmd.getRight() && !cmd.getLeft()) {
+        if (cmd.isRight() && !cmd.isLeft()) {
             rightDirection = true;
             if (!"right".equals(collisionDir) && !handleDoubleCollision && playerX < endOfMap) {
                 playerX += AbstractCharacterImpl.SPEED;
@@ -133,7 +130,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
                 }
             }
         }
-        if (cmd.getLeft() && !cmd.getRight()) {
+        if (cmd.isLeft() && !cmd.isRight()) {
             rightDirection = false;
             if (!"left".equals(collisionDir) && !handleDoubleCollision) {
                 if (screenX > 0) {
@@ -202,8 +199,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * Updates the values of max and mid jump based on where the player is.
      */
     private void updateJumpVariable() {
-        maxJump = startY - (sizeCharacter * 5 / 2) + (playerY - startY);
-        midJump = startY - (sizeCharacter * 3 / 2) + (playerY - startY);
+        maxJump = startY - (sizeCharacter * 5 / 2) + playerY - startY;
+        midJump = startY - (sizeCharacter * 3 / 2) + playerY - startY;
     }
 
     /**
@@ -218,6 +215,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("EI_EXPOSE_REP2")
     public CollisionDetectionImpl getCollisionDetection() {
         return this.collisionDetection;
     }
@@ -226,6 +224,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("EI_EXPOSE_REP2")
     public KillDetectionImpl getKillDetection() {
         return this.killDetection;
     }
@@ -234,7 +233,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * {@inheritDoc}
      */
     @Override
-    public boolean getRightDirection() {
+    public boolean isRightDirection() {
         return this.rightDirection;
     }
 

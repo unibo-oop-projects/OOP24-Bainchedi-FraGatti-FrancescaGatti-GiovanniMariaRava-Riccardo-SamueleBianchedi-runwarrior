@@ -18,7 +18,8 @@ public class KillDetectionImpl implements KillDetection {
     private final HandlerMapElement hM;
     private Enemy enemyToDie;
     private long hitWaitTime;
-    public GameMusic sound;
+    private final GameMusic sound1;
+    private final GameMusic sound2;
 
     /**
      * Constructor of kill detection.
@@ -26,9 +27,12 @@ public class KillDetectionImpl implements KillDetection {
      * @param glc game-loop controller
      * @param hM map handler
      */
+    @SuppressWarnings("EI_EXPOSE_REP2")
     public KillDetectionImpl(final GameLoopController glc, final HandlerMapElement hM) {
         this.glc = glc;
         this.hM = hM;
+        sound1 = new GameMusic("jumpKill.wav");
+        sound2 = new GameMusic("hit.wav");
     }
 
     /**
@@ -43,17 +47,17 @@ public class KillDetectionImpl implements KillDetection {
             if (futureArea(playerArea).intersects(enemy.getBounds())) {
                 //System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
                 if (isTouchingUp(playerArea, enemy.getBounds())) {
-                    sound = new GameMusic("jumpKill.wav", false);
+                    sound1.play(false);
                     player.getMovementHandler().setJumpKill();
                     enemyToDie = enemy;
                 } else if (playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x 
                         && System.currentTimeMillis() - hitWaitTime > CollisionDetectionImpl.SEC_3) {
-                    sound = new GameMusic("hit.wav", false);
+                    sound2.play(false);
                     hitWaitTime = System.currentTimeMillis();
                     glc.getPowersHandler().losePower(true);
                 } else if (playerArea.x <= enemy.getBounds().x + enemy.getBounds().width 
                         && System.currentTimeMillis() - hitWaitTime > CollisionDetectionImpl.SEC_3) {
-                    sound = new GameMusic("hit.wav", false);
+                    sound2.play(false);
                     hitWaitTime = System.currentTimeMillis();
                     glc.getPowersHandler().losePower(true);
                 }
@@ -101,9 +105,9 @@ public class KillDetectionImpl implements KillDetection {
      * @return true if the point touches a solid tile
      */
     private boolean isBehindTile(final int x, final int y) {
-        final float indexXtile = x / hM.getTileSize();
-        final float indexYtile = y / hM.getTileSize();
-        final int blockIndex = hM.getMap()[(int) indexYtile][(int) indexXtile];
+        final int indexXtile = x / hM.getTileSize();
+        final int indexYtile = y / hM.getTileSize();
+        final int blockIndex = hM.getMap()[indexYtile][indexXtile];
         return hM.getBlocks().get(blockIndex).getCollision();
     }
 
