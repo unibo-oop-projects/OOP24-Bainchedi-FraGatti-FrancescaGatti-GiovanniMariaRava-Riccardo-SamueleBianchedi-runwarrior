@@ -180,20 +180,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
     @Override
     protected void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-<<<<<<< HEAD
-        try{
-            Graphics2D gr2 = (Graphics2D) gr;
-            
-            gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
-            gameController.getPowersManager().printPowerUp(gr2);
-            gameController.getPlayer().drawPlayer(gr2);
-            gameController.getEnemyHandler().render(gr2);
-            gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize(), gameController.getPlayer());
-            gr2.setColor(Color.BLACK);
-            gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
-            gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
-            gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), 20, 70);
-=======
         Graphics2D gr2 = (Graphics2D) gr;
         
         gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
@@ -206,14 +192,10 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gr2.setFont(new Font("Cooper Black", Font.BOLD, FONT_X));
         gr2.drawString("TIME:" + chronometer.getTimeString(), FONT_X, FONT_TIME_Y);
         gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), FONT_X, FONT_COIN_Y);
->>>>>>> ba8bc7554f70b24890ee2ca3cb1e538de6baf32e
 
             gr2.dispose();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
-
+}
         // resultFrame.setVisible(true);
         // resultFrame.addWindowListener(new java.awt.event.WindowAdapter() {
         // @Override
@@ -229,4 +211,4 @@ public class GameLoopPanel extends JPanel implements Runnable {
         //     resultFrame.dispose();
         // }
         // });
-}
+
