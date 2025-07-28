@@ -33,7 +33,7 @@ public final class GameSaveManager {
     private String selectedSkinName;
 
     /**
-     * Constructor of the class GameSaveManager.
+     * Private constructor of the class GameSaveManager.
      */
     private GameSaveManager() {
         levelsCompleted = 0;
@@ -42,20 +42,20 @@ public final class GameSaveManager {
     }
 
     /**
-     * Get the current instance of the GameSaveManager.
-     * If load return null it creates a new one.
-     *
-     * @return the instance created or loaded
+     * Holder class that contains the singleton instance.
+     * Loaded only when getInstance() is called for the first time.
+     */
+    private static class Holder {
+        private static final GameSaveManager INSTANCE = new GameSaveManager();
+    }
+
+    /**
+     * Returns the singleton instance of the GameSaveManager.
+     * 
+     * @return the only instance of GameSaveManager
      */
     public static GameSaveManager getInstance() {
-        if (instance == null) {
-            instance = loadFromFile(SAVE_FILE);
-            if (instance == null) {
-                instance = new GameSaveManager();
-                instance.saveGame();
-            }
-        }
-        return instance;
+        return Holder.INSTANCE;
     }
 
     /**
