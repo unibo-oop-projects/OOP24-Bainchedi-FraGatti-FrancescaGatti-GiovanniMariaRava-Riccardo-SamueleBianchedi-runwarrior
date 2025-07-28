@@ -14,12 +14,15 @@ import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 /**
- * The class uses the gamemap to render the map and set collision and damages.
- */
+ * The class uses the gamemap to render the map and set collision and damages.
+ */
 public class HandlerMapElement {
-    private List<MapElement> blocks;
-    private int[][] map;
-    private Map<Integer, BufferedImage> mapBlock;
+    private static final int OBSTACLE_BLOCK = 5;
+    private static final int ANOTHER_OBSTACLE_BLOCK = 6;
+
+    private final List<MapElement> blocks;
+    private final int[][] map;
+    private final Map<Integer, BufferedImage> mapBlock;
     private int shift;
     private boolean setStart;
     private int firstY;
@@ -27,8 +30,8 @@ public class HandlerMapElement {
 
     /**
      * Constructor of the class HandlerMapElement.
-     * 
-     * @param gamemap 
+     *
+     * @param gamemap the game map object containing map data and images.
      */
     public HandlerMapElement(final GameMap gamemap) {
         this.blocks = new ArrayList<>();
@@ -46,24 +49,24 @@ public class HandlerMapElement {
             newElement.setImage(entry.getValue());
             switch (entry.getKey()) {
                 case 0, 4:
-                newElement.setHarmless(true);
-                newElement.setCollision(false);
-                break;
+                    newElement.setHarmless(true);
+                    newElement.setCollision(false);
+                    break;
                 case 1, 2:
-                newElement.setHarmless(true);
-                newElement.setCollision(true);
-                break;
+                    newElement.setHarmless(true);
+                    newElement.setCollision(true);
+                    break;
                 case 3:
-                newElement.setCollision(false);
-                newElement.setHarmless(true);
-                newElement.setPortal(true);
-                break;
-                case 5, 6:
-                newElement.setHarmless(false);
-                newElement.setCollision(true);
-                break;
+                    newElement.setCollision(false);
+                    newElement.setHarmless(true);
+                    newElement.setPortal(true);
+                    break;
+                case OBSTACLE_BLOCK, ANOTHER_OBSTACLE_BLOCK:
+                    newElement.setHarmless(false);
+                    newElement.setCollision(true);
+                    break;
                 default:
-                break;
+                    break;
             }
             blocks.add(newElement);
         }
@@ -72,28 +75,27 @@ public class HandlerMapElement {
     /**
      * Renders all the blocks of the map.
      *
-     * @param gr the graphics context
-     * @param player the player character
+     * @param gr     the graphics context.
+     * @param player the player character.
      */
     public void printBlocks(final Graphics2D gr, final Character player) {
-        int rows = map.length;
-        int cols = map[0].length;
+        final int rows = map.length;
+        final int cols = map[0].length;
         shift = player.getMovementHandler().getGroundX();
-        int tileHeight = GameLoopPanel.HEIGHT / rows;
+        final int tileHeight = GameLoopPanel.HEIGHT / rows;
         tileSize = tileHeight;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
-                BufferedImage img;
-                img = this.blocks.get(map[y][x]).getImage();
+                final BufferedImage img = this.blocks.get(map[y][x]).getImage();
                 gr.drawImage(img, x * tileSize + shift, y * tileSize, tileSize, tileSize, null);
             }
         }
     }
-    
+
     /**
      * Gets an unmodifiable list of map elements (blocks).
      *
-     * @return an unmodifiable list of blocks
+     * @return an unmodifiable list of blocks.
      */
     public List<MapElement> getBlocks() {
         return Collections.unmodifiableList(this.blocks);
@@ -102,7 +104,7 @@ public class HandlerMapElement {
     /**
      * Sets the horizontal shift for rendering.
      *
-     * @param slide the shift value
+     * @param slide the shift value.
      */
     public void setShift(final int slide) {
         shift = slide;
@@ -111,10 +113,10 @@ public class HandlerMapElement {
     /**
      * Gets the size of a single tile.
      *
-     * @return the dimension of the tile
+     * @return the dimension of the tile.
      */
     public int getTileSize() {
-        int rows = map.length;
+        final int rows = map.length;
         tileSize = GameLoopPanel.HEIGHT / rows;
         return tileSize;
     }
@@ -122,11 +124,11 @@ public class HandlerMapElement {
     /**
      * Calculates the starting Y position for the player.
      *
-     * @return the starting Y coordinate
+     * @return the starting Y coordinate.
      */
     public int getFirstY() {
-        int rows = map.length;
-        int cols = map[0].length;
+        final int rows = map.length;
+        final int cols = map[0].length;
         tileSize = GameLoopPanel.HEIGHT / rows;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
@@ -142,18 +144,19 @@ public class HandlerMapElement {
     /**
      * Gets a list of all rectangles with collision enabled.
      *
-     * @return the list with all the obstacle's rectangles
+     * @return the list with all the obstacle's rectangles.
      */
     public List<Rectangle> getCollisionRectangles() {
         final List<Rectangle> collisionRects = new ArrayList<>();
-        int rows = map.length;
-        int cols = map[0].length;
-        int tileHeight = GameLoopPanel.HEIGHT / rows;
-        int tileSize = tileHeight;
+        final int rows = map.length;
+        final int cols = map[0].length;
+        final int tileHeight = GameLoopPanel.HEIGHT / rows;
+        final int currentTileSize = tileHeight;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 if (blocks.get(map[y][x]).getCollision()) {
-                    Rectangle r = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
+                    final Rectangle r = new Rectangle(x * currentTileSize, y * currentTileSize,
+                                                      currentTileSize, currentTileSize);
                     collisionRects.add(r);
                 }
             }
@@ -164,7 +167,7 @@ public class HandlerMapElement {
     /**
      * Gets the current horizontal shift value.
      *
-     * @return the shift value
+     * @return the shift value.
      */
     public int getShift() {
         return this.shift;
@@ -173,11 +176,11 @@ public class HandlerMapElement {
     /**
      * Gets a deep copy of the raw map data array.
      *
-     * @return a deep copy of the 2D map array
+     * @return a deep copy of the 2D map array.
      */
     public int[][] getMap() {
         final int[][] deepCopy = new int[this.map.length][];
-            for (int i = 0; i < this.map.length; i++) {
+        for (int i = 0; i < this.map.length; i++) {
             deepCopy[i] = this.map[i].clone();
         }
         return deepCopy;
