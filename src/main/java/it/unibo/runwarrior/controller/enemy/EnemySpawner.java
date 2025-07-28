@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.enemy.api.EnemySpawnPoints;
@@ -35,6 +37,7 @@ public class EnemySpawner {
      * @param handler where the enemies list is stored
      * @param glp the panel in which enemies are shown
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public EnemySpawner(final EnemyHandlerImpl handler, final GameLoopController glp) {
         this.handler = handler;
         this.glp = glp;
@@ -48,7 +51,7 @@ public class EnemySpawner {
      * @param is lo stream di input da cui leggere le righe nel formato type , tileX, tileY.
      */
     public void loadEnemiesFromStream(final InputStream is) {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             br.lines().map(String :: trim)
                 .filter(s -> !s.isEmpty())
                 .map(s -> s.split(",", -1))
@@ -78,10 +81,9 @@ public class EnemySpawner {
             if (enemyX >= screenLeft && enemyX <= screenRight && !spawnedEnemies.contains(spawnPoint)) {
                 final EnemyImpl enemy = new EnemyImpl(enemyX, (spawnPoint.y() * tileSize) + TO_TOUCH_FLOOR, 64, 64, 
                                             true, handler, glp, spawnPoint.type());
-                if (enemy != null) {
-                    handler.addEnemy(enemy);
-                    spawnedEnemies.add(spawnPoint);
-                }
+                handler.addEnemy(enemy);
+                spawnedEnemies.add(spawnPoint);
+                
                 iterator.remove();
             }
         }

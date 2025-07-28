@@ -3,6 +3,7 @@ package it.unibo.runwarrior.model.enemy.impl;
 import java.awt.Rectangle;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
@@ -25,9 +26,9 @@ public class EnemyImpl implements Enemy {
     private boolean solid;
 
     private int velocityX;
-
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     private final EnemyHandlerImpl enemyHandler;
-
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     private final GameLoopController glp;
 
     /**
