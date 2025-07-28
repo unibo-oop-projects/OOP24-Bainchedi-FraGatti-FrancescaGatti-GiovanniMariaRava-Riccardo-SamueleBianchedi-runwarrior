@@ -8,7 +8,7 @@ import it.unibo.runwarrior.model.player.PlayerFrame;
  * Interface that handles player animation by changing frames.
  */
 public interface CharacterAnimationHandler {
-    
+
     /**
      * Set the current player images.
      *
