@@ -204,7 +204,7 @@ Con la medesima logica, la classe TestGoblinView verifica il caricamento corrett
 GameSaveManagerTest accerta che il pattern singleton sia rispettato, impedendo la creazione di più istanze del gestore dei 
 salvataggi. Controlla il corretto funzionamento della scrittura e lettura tramite file.
 
-Il test rigurdante il player è TestPlayerCollision, che ha lo scopo di verificare con 4 test le possibili interazioni del player con
+Il test riguardante il player è TestPlayerCollision, che ha lo scopo di verificare con 4 test le possibili interazioni del player con
 le altre entità. Si è settata uan dimensione di default dei blocchi della mappa.
 Quindi vengono verificati i metodi principali delle classi "Detection". Nel caso dei blocchi di mappa e delle uova,
 vengono verificate le direzioni delle collisioni. Si verifica poi se il player raccoglie in modo corretto il powerup e se cambia skin.
@@ -220,4 +220,15 @@ invece muore. Infine si verifica se le monete vengono raccolte.
 \subsection{Giovanni Maria Rava}
 \appendix
 \chapter{Guida utente}
+Per il movimento del player si usano 4 frecce della tastiera:
+\begin{itemize}
+    \item \textbf{Freccia destra}: per muoversi verso destra
+    \item \textbf{Freccia sinistra}: per muoversi verso sinistra
+    \item \textbf{Freccia in alto}: per saltare, più la si preme più il salto sarà alto.
+    Mentre si è in volo il player si può muovere a destra e sinistra.
+    \item \textbf{Shift}: per attaccare con spada o bastone nel caso in cui si è giunti al secondo potenziamento.
+    Attenzione, mentre si è in movimento il player può attaccare una volta ogni secondo.
+\end{itemize}
+
+
 \end{document}
