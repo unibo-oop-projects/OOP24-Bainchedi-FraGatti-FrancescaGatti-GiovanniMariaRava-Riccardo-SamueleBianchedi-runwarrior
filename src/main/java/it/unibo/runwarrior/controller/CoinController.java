@@ -5,9 +5,12 @@ import java.util.List;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.Coin;
 
+/**
+ * Coin Controller interface.
+ */
 public interface CoinController {
     /**
-     * it loads the coins from a file 
+     * it loads the coins from a file.
      *
      * @param pathFile is the path of the file
      *
@@ -15,10 +18,11 @@ public interface CoinController {
      */
     List<int[]> loadCoinFromFile(String pathFile); 
 
+
     /**
-     *it initializes coins from the file.
-     * 
-     * @param pathFile is the path of the file
+     * It initializes the coin from the file.
+     *
+     * @param pathFile the path of the file where the coin coordinates are saved
      */
     void initCoinsFromFile(String pathFile);
 
@@ -31,7 +35,7 @@ public interface CoinController {
     void addCoins(int row, int col);
 
     /**
-     *It draws all coins
+     * It draws all coins.
      *
      * @param g graphic
      * @param tileSize tile dimension

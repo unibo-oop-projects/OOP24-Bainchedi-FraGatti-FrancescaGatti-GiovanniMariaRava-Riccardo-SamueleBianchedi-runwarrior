@@ -13,6 +13,9 @@ import javax.imageio.ImageIO;
  * It represents a coin placed in the game world, which the player can collect.
  */
 public class Coin {
+    /**
+     * Logger used for exceptions and error messages.
+     */
     protected static final Logger LOGGER = Logger.getLogger(Coin.class.getName());
     private BufferedImage coinImage;
     private final int row; 
@@ -82,7 +85,10 @@ public class Coin {
         collected = true; 
     }
 
-    public BufferedImage getCoinImage(){
+    /**
+     * @return the image of coin
+     */
+    public final BufferedImage getCoinImage() {
         return coinImage;
     }
 }

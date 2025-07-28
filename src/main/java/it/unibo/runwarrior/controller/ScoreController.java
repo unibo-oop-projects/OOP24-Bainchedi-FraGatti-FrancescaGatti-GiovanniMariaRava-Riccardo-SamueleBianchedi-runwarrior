@@ -3,7 +3,7 @@ package it.unibo.runwarrior.controller;
 import it.unibo.runwarrior.model.Score;
 
 /**
- * ScoreController interface
+ * ScoreController interface.
  */
 public interface ScoreController {
     /**
