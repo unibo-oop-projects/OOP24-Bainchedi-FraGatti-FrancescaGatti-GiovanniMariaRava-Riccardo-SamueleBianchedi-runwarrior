@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 /**
  * A utility class to load a map's numerical data from a text file.
@@ -58,7 +57,7 @@ public final class MapLoader {
             System.err.println("Error: Cannot find map file at path: " + mapFilePath);
             return null;
         }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) { // Usa UTF-8
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (currentRow >= MAP_HEIGHT) {

@@ -19,12 +19,6 @@ public final class MapElement {
      * 
      * @param im the new image.
      */
-    /*
-     * 
-    public void setImage(final BufferedImage im) {
-        this.image = im;
-    }
-     */
     public void setImage(BufferedImage image) {
         if (image != null) {
             this.image = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
@@ -80,17 +74,6 @@ public final class MapElement {
     public BufferedImage getImage() {
         return this.image;
     }
-    //attenazione crea freezamenti del gioco!
-    /*
-    public BufferedImage getImage() {
-        if (this.image == null) {
-            return null;
-        }
-        final BufferedImage copy = new BufferedImage(this.image.getWidth(), this.image.getHeight(), this.image.getType());
-        copy.getGraphics().drawImage(this.image, 0, 0, null);
-        return copy;
-    }
-    */
 
     /**
      * Gets the collision status of the map element.
