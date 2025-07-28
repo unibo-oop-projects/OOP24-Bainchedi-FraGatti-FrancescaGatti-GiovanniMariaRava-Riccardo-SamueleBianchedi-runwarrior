@@ -94,7 +94,7 @@ public class CoinControllerImpl implements CoinController {
                 final int coinY = coin.getRow() * tileSize;
                 final int screenX = coinX + groundX;
                 if (screenX + tileSize >= 0 && screenX <= GameLoopPanel.WIDTH) {
-                    g.drawImage(coin.coinImage, screenX, coinY, tileSize, tileSize, null);
+                    g.drawImage(coin.getCoinImage(), screenX, coinY, tileSize, tileSize, null);
                     g.setColor(Color.RED);
                     g.drawRect(screenX, coinY, tileSize, tileSize);
                 }
@@ -140,5 +140,21 @@ public class CoinControllerImpl implements CoinController {
     @Override
     public List<Coin> getCoinList() {
         return coinList;
-    }   
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Character getPlayer() {
+        return player;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ScoreController getScoreController() {
+        return scoreController;
+    }
 }

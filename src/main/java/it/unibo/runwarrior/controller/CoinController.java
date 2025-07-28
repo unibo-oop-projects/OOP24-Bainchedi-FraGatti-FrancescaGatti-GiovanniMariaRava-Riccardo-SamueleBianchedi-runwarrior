@@ -67,4 +67,14 @@ public interface CoinController {
      * @return list of coins that are actually in the level
      */
     List<Coin> getCoinList();
+
+    /**
+     * @return the current player
+     */
+    Character getPlayer();
+
+    /**
+     * @return the object score controller
+     */
+    ScoreController getScoreController();
 }

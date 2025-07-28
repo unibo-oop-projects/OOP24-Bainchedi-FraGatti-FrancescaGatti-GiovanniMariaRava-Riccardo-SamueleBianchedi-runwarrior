@@ -15,6 +15,12 @@ public class LevelCompletedPanel extends JPanel {
     private static final int RIGID_AREA_HEIGHT_LARGE = 20;
     private static final int RIGID_AREA_HEIGHT_MEDIUM = 10;
 
+    /**
+     * Constructor of the level completed panel.
+     *
+     * @param time time elapsed to complete the level
+     * @param coins coins collected during the game
+     */
     public LevelCompletedPanel(final String time, final int coins) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         final JLabel titleLabel = new JLabel("LEVEL COMPLETED!");
