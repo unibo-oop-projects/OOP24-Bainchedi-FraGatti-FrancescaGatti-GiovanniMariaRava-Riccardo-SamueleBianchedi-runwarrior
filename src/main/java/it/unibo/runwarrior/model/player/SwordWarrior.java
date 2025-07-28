@@ -34,18 +34,18 @@ public class SwordWarrior extends AbstractCharacterImpl {
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/stopRightS.png"));
-            right1 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goRightS1.png"));
-            right2 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goRightS2.png"));
-            left0 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/stopLeftS.png"));
-            left1 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goLeftS1.png"));
-            left2 = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goLeftS2.png"));
-            jumpR = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/jumpRightS.png"));
-            jumpL = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/jumpLeftS.png"));
-            attackR = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/attackRight.png"));
-            attackL = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/attackLeft.png"));
-            tipR = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/tipRight.png"));
-            tipL = ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/tipLeft.png"));
+            setRight0(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/stopRightS.png")));
+            setRight1(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goRightS1.png")));
+            setRight2(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goRightS2.png")));
+            setLeft0(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/stopLeftS.png")));
+            setLeft1(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goLeftS1.png")));
+            setLeft2(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/goLeftS2.png")));
+            setjumpR(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/jumpRightS.png")));
+            setJumpL(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/jumpLeftS.png")));
+            setAttackR(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/attackRight.png")));
+            setAttackL(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/attackLeft.png")));
+            setTipR(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/tipRight.png")));
+            setTipL(ImageIO.read(SwordWarrior.class.getResourceAsStream("/WarriorImages/tipLeft.png")));
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load player images");
         }
@@ -56,13 +56,17 @@ public class SwordWarrior extends AbstractCharacterImpl {
      */
     @Override
     protected void updateAttackCollision() {
-        if (animation.getFrame() == PlayerFrame.ATTACK_FRAME && rightDirection) {
-            swordArea.setBounds(movement.getPlX() + getSizeCharacter(), movement.getPlY() + getSizeCharacter() / 4,
-            getSizeCharacter(), getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
+        if (getAnimationHandler().getFrame() == PlayerFrame.ATTACK_FRAME && isRightDirection()) {
+            getSwordArea().setBounds(getMovementHandler().getPlX() + getSizeCharacter(), 
+            getMovementHandler().getPlY() + getSizeCharacter() / 4,
+            getSizeCharacter(), 
+            getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
         }
-        if (animation.getFrame() == PlayerFrame.ATTACK_FRAME && !rightDirection) {
-            swordArea.setBounds(movement.getPlX() - getSizeCharacter(), movement.getPlY() + getSizeCharacter() / 4,
-            getSizeCharacter(), getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
+        if (getAnimationHandler().getFrame() == PlayerFrame.ATTACK_FRAME && !isRightDirection()) {
+            getSwordArea().setBounds(getMovementHandler().getPlX() - getSizeCharacter(), 
+            getMovementHandler().getPlY() + getSizeCharacter() / 4,
+            getSizeCharacter(), 
+            getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
         }
     }
 }

@@ -22,7 +22,7 @@ import it.unibo.runwarrior.model.GameSaveManager;
 public class GameLoopPanel extends JPanel implements Runnable {
     public static final int WIDTH = 1056;
     public static final int HEIGHT = 792;
-    public static final int MLD = 1000000000;
+    public static final int MLD = 1_000_000_000;
     public static final int FPS = 60;
     private static final int FONT_X = 20;
     private static final int FONT_TIME_Y = 40;
