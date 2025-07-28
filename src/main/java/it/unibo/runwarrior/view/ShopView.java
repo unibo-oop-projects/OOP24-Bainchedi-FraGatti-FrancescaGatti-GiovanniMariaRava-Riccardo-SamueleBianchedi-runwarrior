@@ -12,11 +12,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import it.unibo.runwarrior.controller.ShopController;
 import it.unibo.runwarrior.controller.ShopControllerImpl;
+//import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
 
-public class ShopView extends JPanel {
-    private final ShopControllerImpl shopController;
+public final class ShopView extends JPanel {
+    private final ShopController shopController;
     private final JLabel coinLabel;
     private final JLabel skinStateLabel; 
     private final JButton buySkinButton;
@@ -29,18 +32,18 @@ public class ShopView extends JPanel {
         final JLabel titleLabel = new JLabel("SHOP");
         final Font font = new Font("Cooper Black", Font.BOLD, 24);
         titleLabel.setFont(font);
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         coinLabel = new JLabel();
         coinLabel.setFont(font);
-        coinLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        coinLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         skinStateLabel = new JLabel();
         skinStateLabel.setFont(font);
-        skinStateLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        skinStateLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         buySkinButton = new JButton("BUY SKIN");
-        buySkinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buySkinButton.setAlignmentX(CENTER_ALIGNMENT);
         buySkinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {

@@ -24,7 +24,7 @@ public final class GameSaveManager {
     private static final String DEFAULT_STRING = "DEFAULT_SKIN";
     private static final String WIZARD = "WIZARD";
     private static final int MAX_LEVEL = 3;
-    private static GameSaveManager instance = getInstance();
+    private static GameSaveManager instance;
     private static final Logger LOGGER = Logger.getLogger(GameSaveManager.class.getName());
 
     private int levelsCompleted;

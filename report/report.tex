@@ -127,8 +127,29 @@ L'introduzione del pattern MVC ha permesso di ottenere una struttura più chiara
     \centering
     \includegraphics[width=0.8\textwidth]{resources/UMLshopMVC.png}
     \caption{UML dell'MVC per la gestione dello shop}
-    \label{}
+    \label{fig: 2.2}
 \end{figure}
+\newpage
+\textbf{Problema:} per lo sviluppo del gioco è stato necessario creare un sistema che gestisse la visualizzazione e la raccolta delle monete.
+Le diverse funzionalità implementate sono il caricamento da file, il disegno delle monete sulla mappa, il rilevamento delle collisioni e 
+l'aggiornamento di un punteggio.
+\textbf{Soluzione:} ho creato questo sistema facendo una separazione logica delle responsabilità, suddividendo il sistema in più componenti
+specializzate:
+\begin{itemize}
+    \item La classe Coin rappresenta l'oggetto moneta, con le informazioni sulla posizione, il suo stato di raccolta e l'immagine.
+    \item L'interfaccia CoinController (impelementata da CoinControllerImpl) gestisce il caricamento delle monete, la logica di visualizzazione
+    e il conteggio.
+    \item L'interfaccia CoinDetection (implementata da CoinDetectionImpl) che si occupa del rilevamento delle collisioni tra player e moneta.
+\end{itemize}
+Le classi sono collegate a Score, ScoreController e GameSaveManager per il salvataggio del punteggio totale.
+All'interno del CoinController è stato necessario aggungere il metodo updatePlayer che si occupa dell'aggiornamento delle monete in base ai 
+cambiamenti subiti dal player durante il gioco, quali i potenziamenti.
+\textbf{Problema:} nel gioco era necessario monitorare il tempo di gioco trascorso, per poterlo visualizzare durante la partita e avere un 
+resoconto finale del tempo impiegato per completare il livello. 
+\textbf{Soluzione:} Per affrontare il problema è stata creata l'interfaccia Chronometer che si occupa della gestione del tempo tramite un 
+oggetto di tipo javax.swing.Timer. Il timer aggiorna periodicamente il tempo trascorso in millisecondi rispetto al momento di avvio. La
+classe fornisce metodi per avviare, fermare e ottenere il tempo in formato numerico e in formato stringa (HH::mm::ss::d). Infine, il tempo 
+viene disegnato a schermo tramite la classe GameLoopPanel che recupera il valore dal Chronometer e lo mostra in tempo reale durante il gioco.
 \section{Giovanni Maria Rava}
 \textbf{Problema:} I nemici del gioco devono muoversi da soli, invertire direzione appena urtano un ostacolo e restare sincronizzati con 
 lo scorrimento della camera. 

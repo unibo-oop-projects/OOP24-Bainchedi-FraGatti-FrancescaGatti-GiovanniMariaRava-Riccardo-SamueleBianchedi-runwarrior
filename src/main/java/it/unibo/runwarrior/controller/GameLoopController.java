@@ -44,32 +44,40 @@ public class GameLoopController {
     private Score score;
     private ScoreController scoreController;
     private int levelIndex;
+    private ShopController shopController;
 
     public GameLoopController(JFrame mainFrame, String mapPath, String themePath, String enemiesPath, String coinsPath) {
-        this.gameMap = GameMap.load(mapPath, themePath);
-        this.coinController = new CoinControllerImpl();
-        this.levelIndex = calculateLevelIndex(mapPath);
-        List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
-        for (int[] coord : coords) {
-            coinController.addCoins(coord[0], coord[1]);
+        try{
+            this.gameMap = GameMap.load(mapPath, themePath);
+            this.coinController = new CoinControllerImpl();
+            this.levelIndex = calculateLevelIndex(mapPath);
+            List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
+            for (int[] coord : coords) {
+                coinController.addCoins(coord[0], coord[1]);
+            }
+
+            this.commands = new CharacterComand();
+            this.mapHandler = new HandlerMapElement(gameMap);
+            this.powerController = new PowerUpController(this, mapHandler, gameMap.getMapData());
+            this.powersManager = new PowerUpManager(powerController.getPowerUps(), mapHandler);
+            this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powerController);
+            this.enemyViewFactory = new EnemyViewFactoryImpl();
+            initializeEnemyViewFactory();
+            this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
+            this.enemySpawner = new EnemySpawner(enemyHandler, this);
+            enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
+
+            this.score = new Score(GameSaveManager.getInstance());
+            this.scoreController = new ScoreControllerImpl(score);
+            this.coinController.setScoreController(scoreController);
+            this.shopController = new ShopControllerImpl(score);
+            this.glp = new GameLoopPanel(mainFrame, mapPath, themePath, enemiesPath, coinsPath, this);
+            initializePlayer();
+            System.out.println("costruttore game loop controller creato correttamente");
+        } catch (Exception e) {
+            System.out.println("Errore nel costruttore gameloopcontroller:");
+            e.printStackTrace();
         }
-
-        this.commands = new CharacterComand();
-        this.mapHandler = new HandlerMapElement(gameMap);
-        this.powerController = new PowerUpController(this, mapHandler, gameMap.getMapData());
-        this.powersManager = new PowerUpManager(powerController.getPowerUps(), mapHandler);
-        this.powerUpsHandler = new PowersHandler(this, commands, mapHandler, powerController);
-        this.enemyViewFactory = new EnemyViewFactoryImpl();
-        initializeEnemyViewFactory();
-        this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
-        this.enemySpawner = new EnemySpawner(enemyHandler, this);
-        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
-
-        this.score = new Score(GameSaveManager.getInstance());
-        this.scoreController = new ScoreControllerImpl(score);
-        this.coinController.setScoreController(scoreController);
-        this.glp = new GameLoopPanel(mainFrame, mapPath, themePath, enemiesPath, coinsPath, this);
-        initializePlayer();
     }
 
     /**
@@ -195,5 +203,9 @@ public class GameLoopController {
 
     public final int getCurrentLevel() {
         return this.levelIndex;
+    }
+
+    public final ShopController getShopController() {
+        return this.shopController;
     }
 }

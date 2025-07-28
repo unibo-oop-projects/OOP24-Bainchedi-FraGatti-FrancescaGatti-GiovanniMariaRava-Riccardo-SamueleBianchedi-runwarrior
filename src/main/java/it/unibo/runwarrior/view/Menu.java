@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 import it.unibo.runwarrior.controller.GameLoopController;
+import it.unibo.runwarrior.model.Coin;
 import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
 
@@ -28,6 +29,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Menu extends JPanel {
         // private final static int FRAME_MENU_WIDTH = 1280;
@@ -37,22 +40,17 @@ public class Menu extends JPanel {
         private final static int BUTTON_WIDTH = 150;
         private final static int BUTTON_HEIGHT = 40;
         private static final int SHOP_FRAME_WIDHT = 600;
-        private static final int SHOP_FRAME_HEIGHT = 400;
-        //creo il frame e imposto il titolo 
-        private JFrame frameMenu;
-        private BufferedImage immagineSfondo;
-        private BufferedImage imgTitolo;
-        private JPanel pannelloSfondoMenu;
+        private static final int SHOP_FRAME_HEIGHT = 400; 
+        protected static final Logger LOGGER = Logger.getLogger(Menu.class.getName());
 
-        // public Menu() {
-        //     //this.frameMenu = new JFrame();
-        //     this(new JFrame("RunWarrior"));
-        //     //initMenu();
-        // }
+        private final JFrame frameMenu;
+        private BufferedImage backGroundImage;
+        private BufferedImage titleImage;
+        private JPanel pannelloSfondoMenu;
 
         public Menu(JFrame frame_esterno){
             this.frameMenu = frame_esterno;
-            initMenu();  // stessa logica
+            initMenu();
         }
 
         public void initMenu(){
@@ -75,18 +73,18 @@ public class Menu extends JPanel {
             // frameMenu.setSize(FRAME_MENU_WIDTH, FRAME_MENU_HEIGHT);
             // frameMenu.setLocationRelativeTo(null);
             try {
-                immagineSfondo = ImageIO.read(getClass().getResourceAsStream("/Menu/sfondoMenu.png"));
-                imgTitolo = ImageIO.read(getClass().getResourceAsStream("/Menu/titolo4.png"));
+                backGroundImage = ImageIO.read(getClass().getResourceAsStream("/Menu/sfondoMenu.png"));
+                titleImage = ImageIO.read(getClass().getResourceAsStream("/Menu/titolo4.png"));
             } catch (final IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Cannot load images");
             }
 
             pannelloSfondoMenu = new JPanel() {
                 @Override
                 protected void paintComponent(final Graphics g) {
                     super.paintComponent(g);
-                    if (immagineSfondo != null) {
-                        g.drawImage(immagineSfondo, 0, 0, getWidth(), getHeight(), this); 
+                    if (backGroundImage != null) {
+                        g.drawImage(backGroundImage, 0, 0, getWidth(), getHeight(), this); 
                     }
                 }
             };
@@ -95,7 +93,7 @@ public class Menu extends JPanel {
             pannelloSfondoMenu.setLayout(new BoxLayout(pannelloSfondoMenu, BoxLayout.Y_AXIS));
             pannelloSfondoMenu.setOpaque(true);
 
-            final JLabel titoloLabel = new JLabel(new ImageIcon(imgTitolo));
+            final JLabel titoloLabel = new JLabel(new ImageIcon(titleImage));
             titoloLabel.setAlignmentX(CENTER_ALIGNMENT);
             //titoloLabel.setBounds(TITOLO_X, TITOLO_Y, TITOLO_WIDTH, TITOLO_HEIGHT);
             pannelloSfondoMenu.add(Box.createVerticalGlue());
@@ -123,6 +121,7 @@ public class Menu extends JPanel {
 
             playButton.addActionListener(new ActionListener() {
                 private GameLoopController glc;
+                @Override
                 public void actionPerformed(final ActionEvent e) {
                     final GameSaveManager save = GameSaveManager.getInstance();
                     playButtonPanel.remove(playButton);
@@ -136,28 +135,22 @@ public class Menu extends JPanel {
                     final JButton level2 = new JButton("LEVEL 2");
                     final JButton level3 = new JButton("LEVEL 3");
                     level2.setEnabled(save.getLevelsCompleted() >= 1);
-                    // if (!level2.isEnabled()) {
-                    //     level2.setToolTipText("Completa il livello 1 per sbloccare");
-                    // }
                     level3.setEnabled(save.getLevelsCompleted() >= 2);
-                    // if (!level3.isEnabled()) {
-                    //     level2.setToolTipText("Completa il livello 2 per sbloccare");
-                    // }
-                    level1.setAlignmentX(JButton.CENTER_ALIGNMENT);
+                    level1.setAlignmentX(CENTER_ALIGNMENT);
                     level1.setMaximumSize(buttonsDimension);
                     level1.setPreferredSize(buttonsDimension);
                     level1.setFont(font);
                     level1.setBackground(new Color(218, 165, 32));
                     level1.setBorder(new LineBorder(new Color(180, 130, 25), 4)); 
                     level1.setForeground(Color.BLACK);
-                    level2.setAlignmentX(JButton.CENTER_ALIGNMENT);
+                    level2.setAlignmentX(CENTER_ALIGNMENT);
                     level2.setMaximumSize(buttonsDimension);
                     level2.setPreferredSize(buttonsDimension);
                     level2.setFont(font);
                     level2.setBackground(new Color(60, 179, 60));
                     level2.setBorder(new LineBorder(new Color(40, 120, 40), 4));
                     level2.setForeground(Color.BLACK);
-                    level3.setAlignmentX(JButton.CENTER_ALIGNMENT);
+                    level3.setAlignmentX(CENTER_ALIGNMENT);
                     level3.setMaximumSize(buttonsDimension);
                     level3.setPreferredSize(buttonsDimension);
                     level3.setFont(font);
@@ -178,16 +171,23 @@ public class Menu extends JPanel {
                         glc.getGlp().requestFocus();
                     });
                     level2.addActionListener(level2Event -> {
-                        glc = new GameLoopController(frameMenu, "Map2/map2.txt", "Map2/forest_theme.txt",
-                        "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
-                        glc.getGlp().startGame();
-                        frameMenu.getContentPane().removeAll();
-                        frameMenu.setContentPane(glc.getGlp());
-                        frameMenu.revalidate();
-                        frameMenu.repaint();
-                        glc.getGlp().setFocusable(true);
-                        glc.getGlp().requestFocusInWindow();
-                        glc.getGlp().requestFocus();
+                        System.out.println("LIVELLO 2 CLICCATO");
+                        try{
+                            glc = new GameLoopController(frameMenu, "Map2/map2.txt", "Map2/forest_theme.txt",
+                            "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
+                            System.out.println("GLP" + glc.getGlp());
+                            glc.getGlp().startGame();
+                            System.out.println("start game chiamato");
+                            frameMenu.getContentPane().removeAll();
+                            frameMenu.setContentPane(glc.getGlp());
+                            frameMenu.revalidate();
+                            frameMenu.repaint();
+                            glc.getGlp().setFocusable(true);
+                            glc.getGlp().requestFocusInWindow();
+                            glc.getGlp().requestFocus();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                     });
                     level3.addActionListener(level3Event -> {
                         glc = new GameLoopController(frameMenu, "Map_3/map_3.txt", "Map_3/map3Theme.txt",
@@ -203,7 +203,7 @@ public class Menu extends JPanel {
                         
                     });
                     final JButton shopButton = new JButton("SHOP");
-                    shopButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
+                    shopButton.setAlignmentX(CENTER_ALIGNMENT);
                     shopButton.setMaximumSize(new Dimension(buttonsDimension));
                     shopButton.setPreferredSize(buttonsDimension);
                     shopButton.setFont(new Font("Cooper Black", Font.BOLD, 14));

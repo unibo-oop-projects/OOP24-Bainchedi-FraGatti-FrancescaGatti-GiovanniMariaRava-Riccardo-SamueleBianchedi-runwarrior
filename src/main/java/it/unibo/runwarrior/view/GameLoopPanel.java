@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.Chronometer;
+import it.unibo.runwarrior.model.ChronometerImpl;
 import it.unibo.runwarrior.model.GameSaveManager;
 
 public class GameLoopPanel extends JPanel implements Runnable {
@@ -41,10 +42,11 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.addKeyListener(gameController.getCommands());
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.chronometer = new Chronometer();
+        this.chronometer = new ChronometerImpl();
     }
 
     public void startGame() {
+        //System.out.println("Start Game chiamato");
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -105,6 +107,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
                 save.setLevelsCompleted(currentLevel);
             }
         }
+        
+        GameSaveManager.getInstance().addCoin(gameController.getCoinController().getCoinsCollected());
+
         //quale pannello mostrare?
         JPanel content = levelCompleted
         ? new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected())
@@ -139,19 +144,23 @@ public class GameLoopPanel extends JPanel implements Runnable {
     @Override
     protected void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        Graphics2D gr2 = (Graphics2D) gr;
-        
-        gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
-        gameController.getPowersManager().printPowerUp(gr2);
-        gameController.getPlayer().drawPlayer(gr2);
-        gameController.getEnemyHandler().render(gr2);
-        gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize(), gameController.getPlayer());
-        gr2.setColor(Color.BLACK);
-        gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
-        gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
-        gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), 20, 70);
+        try{
+            Graphics2D gr2 = (Graphics2D) gr;
+            
+            gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
+            gameController.getPowersManager().printPowerUp(gr2);
+            gameController.getPlayer().drawPlayer(gr2);
+            gameController.getEnemyHandler().render(gr2);
+            gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize(), gameController.getPlayer());
+            gr2.setColor(Color.BLACK);
+            gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
+            gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
+            gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), 20, 70);
 
-        gr2.dispose();
+            gr2.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
         // resultFrame.setVisible(true);
