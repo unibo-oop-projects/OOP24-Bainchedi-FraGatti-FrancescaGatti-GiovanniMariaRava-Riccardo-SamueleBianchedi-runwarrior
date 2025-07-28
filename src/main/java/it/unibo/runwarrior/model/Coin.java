@@ -8,15 +8,13 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-
-
 /**
  * Implementation of a coin.
  * It represents a coin placed in the game world, which the player can collect.
  */
 public class Coin {
     protected static final Logger LOGGER = Logger.getLogger(Coin.class.getName());
-    public BufferedImage coinImage;
+    private BufferedImage coinImage;
     private final int row; 
     private final int col; 
     private boolean collected; 
@@ -39,7 +37,7 @@ public class Coin {
     public void loadCoinImage() {
         try {
             coinImage = ImageIO.read(getClass().getResourceAsStream("/Coins/CoinSmall.png"));
-        } catch(final IOException e) {
+        } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load coin images");
         }
     }
@@ -48,7 +46,8 @@ public class Coin {
      * Returns a rectangle representing the coin's bounding box on the screen.
      * Used for collision detection with the player.
      *
-     * @return
+     * @param tileSize dimension of the block of the map
+     * @return the rectangle of the coin for the collisions
      */
     public Rectangle getRectangle(final int tileSize) {
         return new Rectangle(col * tileSize, row * tileSize, tileSize, tileSize);
@@ -81,5 +80,9 @@ public class Coin {
      */
     public void collect() {
         collected = true; 
+    }
+
+    public BufferedImage getCoinImage(){
+        return coinImage;
     }
 }
