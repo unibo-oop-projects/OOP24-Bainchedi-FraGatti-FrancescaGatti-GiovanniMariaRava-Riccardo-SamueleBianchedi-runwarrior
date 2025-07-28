@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -42,11 +43,13 @@ public class Menu extends JPanel {
         private JFrame frameMenu;
         private BufferedImage immagineSfondo;
         private BufferedImage imgTitolo;
+        private JPanel pannelloSfondoMenu;
 
-        public Menu() {
-            this.frameMenu = new JFrame();
-            initMenu();
-        }
+        // public Menu() {
+        //     //this.frameMenu = new JFrame();
+        //     this(new JFrame("RunWarrior"));
+        //     //initMenu();
+        // }
 
         public Menu(JFrame frame_esterno){
             this.frameMenu = frame_esterno;
@@ -79,7 +82,7 @@ public class Menu extends JPanel {
                 e.printStackTrace();
             }
 
-            final JPanel pannelloSfondoMenu = new JPanel() {
+            pannelloSfondoMenu = new JPanel() {
                 @Override
                 protected void paintComponent(final Graphics g) {
                     super.paintComponent(g);
@@ -89,7 +92,7 @@ public class Menu extends JPanel {
                 }
             };
             //pannelloSfondoMenu.setLayout(null);
-            pannelloSfondoMenu.setLayout(new BorderLayout());
+            //pannelloSfondoMenu.setLayout(new BorderLayout());
             pannelloSfondoMenu.setLayout(new BoxLayout(pannelloSfondoMenu, BoxLayout.Y_AXIS));
             pannelloSfondoMenu.setOpaque(true);
 
@@ -122,6 +125,7 @@ public class Menu extends JPanel {
             playButton.addActionListener(new ActionListener() {
                 private GameLoopController glc;
                 public void actionPerformed(final ActionEvent e) {
+                    final GameSaveManager save = GameSaveManager.getInstance();
                     playButtonPanel.remove(playButton);
                     playButtonPanel.revalidate();
                     playButtonPanel.repaint();
@@ -132,6 +136,14 @@ public class Menu extends JPanel {
                     final JButton level1 = new JButton("LEVEL 1");
                     final JButton level2 = new JButton("LEVEL 2");
                     final JButton level3 = new JButton("LEVEL 3");
+                    level2.setEnabled(save.getLevelsCompleted() >= 1);
+                    // if (!level2.isEnabled()) {
+                    //     level2.setToolTipText("Completa il livello 1 per sbloccare");
+                    // }
+                    level3.setEnabled(save.getLevelsCompleted() >= 2);
+                    // if (!level3.isEnabled()) {
+                    //     level2.setToolTipText("Completa il livello 2 per sbloccare");
+                    // }
                     level1.setAlignmentX(JButton.CENTER_ALIGNMENT);
                     level1.setMaximumSize(buttonsDimension);
                     level1.setPreferredSize(buttonsDimension);
@@ -155,7 +167,7 @@ public class Menu extends JPanel {
                     level3.setForeground(Color.BLACK);
 
                     level1.addActionListener(level1Event -> {
-                        glc = new GameLoopController("Map1/map_1.txt", "Map1/desert_theme.txt",
+                        glc = new GameLoopController(frameMenu, "Map1/map_1.txt", "Map1/desert_theme.txt",
                         "/Map1/enemiesMap1.txt", "/Coins/CoinCoordinates_map1.txt");
                         glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
@@ -167,7 +179,7 @@ public class Menu extends JPanel {
                         glc.getGlp().requestFocus();
                     });
                     level2.addActionListener(level2Event -> {
-                        glc = new GameLoopController("Map2/map2.txt", "Map2/forest_theme.txt",
+                        glc = new GameLoopController(frameMenu, "Map2/map2.txt", "Map2/forest_theme.txt",
                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
                         glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
@@ -179,7 +191,7 @@ public class Menu extends JPanel {
                         glc.getGlp().requestFocus();
                     });
                     level3.addActionListener(level3Event -> {
-                        glc = new GameLoopController("Map_3/map_3.txt", "Map_3/map3Theme.txt",
+                        glc = new GameLoopController(frameMenu, "Map_3/map_3.txt", "Map_3/map3Theme.txt",
                         "/Map_3/enemiesMap3.txt", "/Coins/CoinCoordinates_map3.txt");
                         glc.getGlp().startGame();
                         frameMenu.getContentPane().removeAll();
@@ -232,12 +244,14 @@ public class Menu extends JPanel {
             });
             playButtonPanel.add(playButton, BorderLayout.CENTER); 
             pannelloSfondoMenu.add(playButtonPanel);
-            frameMenu.setContentPane(pannelloSfondoMenu);
-            frameMenu.setVisible(true);
+            this.setLayout(new BorderLayout());
+            this.add(pannelloSfondoMenu, BorderLayout.CENTER);
+            //frameMenu.setContentPane(pannelloSfondoMenu);
+            //frameMenu.setVisible(true);
         }
 
         public JPanel getPanel() {
-            return new Menu();
+            return pannelloSfondoMenu;
         }
 
         public JFrame getFrameMenu() {
