@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-0
-=======
-2
->>>>>>> ba8bc7554f70b24890ee2ca3cb1e538de6baf32e
-0
-false
+3
+115
+true
 DEFAULT_SKIN

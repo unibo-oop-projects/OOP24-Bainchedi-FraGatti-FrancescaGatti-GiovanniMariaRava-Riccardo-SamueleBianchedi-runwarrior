@@ -47,12 +47,12 @@ public class Menu extends JPanel {
         private BufferedImage titleImage;
         private JPanel pannelloSfondoMenu;
 
-        public Menu(JFrame frame_esterno){
-            this.frameMenu = frame_esterno;
+        public Menu(final JFrame externalFrame){
+            this.frameMenu = externalFrame;
             initMenu();
         }
 
-        public void initMenu(){
+        public final void initMenu(){
             frameMenu.setTitle("RUN WARRIOR");
             frameMenu.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             frameMenu.addWindowListener(new WindowAdapter() {
@@ -169,13 +169,9 @@ public class Menu extends JPanel {
                         glc.getGlp().requestFocus();
                     });
                     level2.addActionListener(level2Event -> {
-                        System.out.println("LIVELLO 2 CLICCATO");
-                        try{
                             glc = new GameLoopController(frameMenu, "Map2/map2.txt", "Map2/forest_theme.txt",
                             "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
-                            System.out.println("GLP" + glc.getGlp());
                             glc.getGlp().startGame();
-                            System.out.println("start game chiamato");
                             frameMenu.getContentPane().removeAll();
                             frameMenu.setContentPane(glc.getGlp());
                             frameMenu.revalidate();
@@ -183,9 +179,6 @@ public class Menu extends JPanel {
                             glc.getGlp().setFocusable(true);
                             glc.getGlp().requestFocusInWindow();
                             glc.getGlp().requestFocus();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
                     });
                     level3.addActionListener(level3Event -> {
                         glc = new GameLoopController(frameMenu, "Map_3/map_3.txt", "Map_3/map3Theme.txt",

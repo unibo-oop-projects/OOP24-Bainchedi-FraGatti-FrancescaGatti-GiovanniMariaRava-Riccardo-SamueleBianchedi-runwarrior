@@ -86,7 +86,7 @@ public class CoinControllerImpl implements CoinController {
      */
     @Override
     public void drawAllCoins(final Graphics g, final int tileSize, final Character player){
-        int groundX = player.getMovementHandler().getGroundX(); 
+        final int groundX = player.getMovementHandler().getGroundX(); 
 
         for (final Coin coin : coinList) {
             if (!coin.isCollected()) {
@@ -130,7 +130,7 @@ public class CoinControllerImpl implements CoinController {
      * {@inheritDoc}
      */
     @Override
-    public void setScoreController(ScoreController scoreController){
+    public void setScoreController(final ScoreController scoreController){
         this.scoreController = scoreController;
     }
 

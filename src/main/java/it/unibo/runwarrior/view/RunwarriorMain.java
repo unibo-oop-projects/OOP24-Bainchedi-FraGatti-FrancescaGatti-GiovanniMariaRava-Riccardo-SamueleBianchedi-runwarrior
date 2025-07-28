@@ -7,10 +7,10 @@ public class RunwarriorMain{
     private final static int FRAME_MENU_HEIGHT = 720;
 
     public RunwarriorMain() {
-        JFrame gameFrame = new JFrame();
+        final JFrame gameFrame = new JFrame();
         gameFrame.setSize(FRAME_MENU_WIDTH, FRAME_MENU_HEIGHT);
         gameFrame.setLocationRelativeTo(null);
-        Menu menu = new Menu(gameFrame); 
+        final Menu menu = new Menu(gameFrame); 
         gameFrame.setContentPane(menu.getPanel());
         gameFrame.setVisible(true);
     }

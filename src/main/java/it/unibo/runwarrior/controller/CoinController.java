@@ -13,14 +13,14 @@ public interface CoinController {
      *
      * @return a list of coins
      */
-    List<int[]> loadCoinFromFile(final String pathFile); 
+    List<int[]> loadCoinFromFile(String pathFile); 
 
     /**
      *it initializes coins from the file.
      * 
      * @param pathFile is the path of the file
      */
-    void initCoinsFromFile(final String pathFile);
+    void initCoinsFromFile(String pathFile);
 
     /**
      * it adds one coin to the list.
@@ -28,7 +28,7 @@ public interface CoinController {
      * @param row row of the map matrix to positionate the coin
      * @param col col of the map matrix to positionate the coin
      */
-    void addCoins(final int row, final int col);
+    void addCoins(int row, int col);
 
     /**
      *It draws all coins
@@ -44,26 +44,7 @@ public interface CoinController {
      *
      * @param player the actual player to be update
      */
-    void updatePlayer(final Character player);
-
-    // public void controlCoinCollision(int tileSize){
-    //     Rectangle playerRectangle = player.getArea();
-    //     Iterator<Coin> it = coinList.iterator();
-    //     while(it.hasNext()){
-    //         Coin coin = it.next();
-    //         if (!coin.isCollected()){
-    //             Rectangle coinRectangle = coin.getRectangle(tileSize);
-    //             if (playerRectangle.intersects(coinRectangle)){
-    //                 coin.collect();
-    //                 coinsCollected++;
-    //                 if(scoreController != null){
-    //                     scoreController.addCoin();
-    //                 }
-    //                 it.remove();
-    //             }
-    //         }
-    //     }
-    // }
+    void updatePlayer(Character player);
 
     /**
      * @return total collected coins

@@ -25,7 +25,7 @@ public interface ShopController {
      *
      * @param skin skin that has been selected 
      */
-    void selectSkin(final Skin skin);
+    void selectSkin(Skin skin);
 
     /**
      * @return the skin actually selected 
