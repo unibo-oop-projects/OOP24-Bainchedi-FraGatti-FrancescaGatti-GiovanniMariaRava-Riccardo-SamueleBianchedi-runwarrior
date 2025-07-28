@@ -43,10 +43,12 @@ public class GameLoopController {
     private CoinController coinController;
     private Score score;
     private ScoreController scoreController;
+    private int levelIndex;
 
     public GameLoopController(JFrame mainFrame, String mapPath, String themePath, String enemiesPath, String coinsPath) {
         this.gameMap = GameMap.load(mapPath, themePath);
         this.coinController = new CoinControllerImpl();
+        this.levelIndex = calculateLevelIndex(mapPath);
         List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
         for (int[] coord : coords) {
             coinController.addCoins(coord[0], coord[1]);
@@ -177,5 +179,21 @@ public class GameLoopController {
         enemyViewFactory.register(3, new WizardView(this));
         enemyViewFactory.register(4, new GoblinView(this));
         enemyViewFactory.register(5, new MonkeyView(this));
+    }
+
+    private final int calculateLevelIndex(String mapPath) {
+        if (mapPath.toLowerCase().contains("map_1") || mapPath.toLowerCase().contains("map1")) {
+            return 1;
+        } else if (mapPath.toLowerCase().contains("map_2") || mapPath.toLowerCase().contains("map2")) {
+            return 2;
+        } else if (mapPath.toLowerCase().contains("map_3") || mapPath.toLowerCase().contains("map3")) {
+            return 3;
+        } else {
+            return 1;
+        }
+    }
+
+    public final int getCurrentLevel() {
+        return this.levelIndex;
     }
 }

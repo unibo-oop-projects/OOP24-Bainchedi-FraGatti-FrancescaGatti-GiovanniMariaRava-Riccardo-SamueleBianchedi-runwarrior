@@ -7,19 +7,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.Chronometer;
+import it.unibo.runwarrior.model.GameSaveManager;
 
 public class GameLoopPanel extends JPanel implements Runnable {
     public static final int WIDTH = 1056;
@@ -35,7 +30,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private boolean gameEnded = false;
     private boolean levelCompleted = false;
     private boolean panelShawn = false;
-    private JFrame resultFrame;
     private JFrame frameMenu;
     // private volatile boolean running = true;
 
@@ -103,6 +97,15 @@ public class GameLoopPanel extends JPanel implements Runnable {
     }
 
     private void showEndPanel() {
+        //aggiorno livelli:
+        if (levelCompleted) {
+            int currentLevel = gameController.getCurrentLevel();
+            GameSaveManager save = GameSaveManager.getInstance();
+
+            if (currentLevel >= save.getLevelsCompleted() + 1) {
+                save.setLevelsCompleted(currentLevel);
+            }
+        }
         //quale pannello mostrare?
         JPanel content = levelCompleted
         ? new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected())
@@ -133,27 +136,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
         });
         dialog.setVisible(true);
     }
-    // private void showEndDialog() {
-    //     String message = levelCompleted ? "LEVEL COMPLETED" : "GAME OVER";
-
-    //     int option = JOptionPane.showOptionDialog(
-    //         frameMenu,
-    //         message,
-    //         "Game Result",
-    //         JOptionPane.DEFAULT_OPTION,
-    //         JOptionPane.INFORMATION_MESSAGE,
-    //         null,
-    //         new String[] { "BACK TO MENU" },
-    //         "BACK TO MENU"
-    //     );
-
-    //     if (option == 0) {
-    //         // Torna al menu
-    //         frameMenu.setContentPane(new Menu(frameMenu));
-    //         frameMenu.revalidate();
-    //         frameMenu.repaint();
-    //     }
-    // }
 
     @Override
     protected void paintComponent(Graphics gr) {
@@ -169,13 +151,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gr2.setFont(new Font("Cooper Black", Font.BOLD, 20));
         gr2.drawString("TIME:" + chronometer.getTimeString(), 20, 40);
         gr2.drawString("COINS:" + gameController.getCoinController().getCoinsCollected(), 20, 70);
-        
-        // if (gameEnded) {
-        //     gr2.setColor(Color.WHITE);
-        //     gr2.setFont(new Font("Arial", Font.BOLD, 32));
-        //     String msg = levelCompleted ? "LIVELLO COMPLETATO" : "GAME OVER";
-        //     gr2.drawString(msg, getWidth() / 2 - 100, getHeight() / 2); // Adatta posizione
-        // }
 
         gr2.dispose();
     }

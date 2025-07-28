@@ -37,13 +37,14 @@ class TestPlayerCollisions {
     private int tileSize;
     private final String string1Map2 = "tryMap.txt";
     private final String string2Map2 = "Map2/forest_theme.txt";
+    private final JFrame testFrame = new JFrame();
 
     @BeforeEach
     void initCollisions() {
         gameMap1 = GameMap.load(string1Map2, string2Map2);
         mapHandler1 = new HandlerMapElement(gameMap1);
         cmd = new CharacterComand();
-        glc = new GameLoopController(new JFrame(), "tryMap.txt", "Map2/forest_theme.txt", 
+        glc = new GameLoopController(testFrame, "tryMap.txt", "Map2/forest_theme.txt", 
         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         tileSize = TRY_TYLE;
     }

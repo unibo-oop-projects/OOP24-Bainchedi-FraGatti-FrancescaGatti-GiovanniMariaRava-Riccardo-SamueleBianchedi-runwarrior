@@ -61,7 +61,7 @@ public class CoinControllerImpl implements CoinController {
      */
     @Override
     public final void initCoinsFromFile(final String pathFile) {
-        final List<int[]> coords = loadCoinFromFile("CoinCoordinates_map1.txt");
+        final List<int[]> coords = loadCoinFromFile(pathFile);
         for (final int[] coord : coords) {
             final int row = coord[0];
             final int col = coord[1];
@@ -107,25 +107,6 @@ public class CoinControllerImpl implements CoinController {
     public final void updatePlayer(final Character player) {
         this.player = player;
     }
-
-    // public void controlCoinCollision(int tileSize){
-    //     Rectangle playerRectangle = player.getArea();
-    //     Iterator<Coin> it = coinList.iterator();
-    //     while(it.hasNext()){
-    //         Coin coin = it.next();
-    //         if (!coin.isCollected()){
-    //             Rectangle coinRectangle = coin.getRectangle(tileSize);
-    //             if (playerRectangle.intersects(coinRectangle)){
-    //                 coin.collect();
-    //                 coinsCollected++;
-    //                 if(scoreController != null){
-    //                     scoreController.addCoin();
-    //                 }
-    //                 it.remove();
-    //             }
-    //         }
-    //     }
-    // }
 
     /**
      * {@inheritDoc}
