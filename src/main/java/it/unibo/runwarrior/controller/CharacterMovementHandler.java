@@ -34,14 +34,6 @@ public interface CharacterMovementHandler {
     void movePlayer();
 
     /**
-     * When it's called make the player jump or descend if the jump input from keyboard has ended.
-     *
-     * @param isJump true if the player is jumping
-     * @param jumpHeight max height of the jump
-     */
-    void jump(boolean isJump, int jumpHeight);
-
-    /**
      * Sets the jumpKill to true, used by powerup and kill detection when the player hit a egg or a enemy.
      */
     void setJumpKill();

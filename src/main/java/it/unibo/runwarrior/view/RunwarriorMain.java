@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 /**
  * Main class of the game.
  */
-public class RunwarriorMain{
+public final class RunwarriorMain {
     private static final int FRAME_MENU_WIDTH = 1280;
     private static final int FRAME_MENU_HEIGHT = 720;
 

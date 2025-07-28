@@ -143,10 +143,12 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     }
 
     /**
-     * {@inheritDoc}
+     * When it's called make the player jump or descend if the jump input from keyboard has ended.
+     *
+     * @param isJump true if the player is jumping
+     * @param jumpHeight max height of the jump
      */
-    @Override
-    public void jump(final boolean isJump, final int jumpHeight) {
+    private void jump(final boolean isJump, final int jumpHeight) {
         if (isJump && !descend) {
             if (playerY > jumpHeight) {
                 playerY -= SPEED_JUMP_UP;
