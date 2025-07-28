@@ -1,8 +1,8 @@
 package it.unibo.runwarrior.view;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -32,7 +32,7 @@ public class PowerUpManager {
     public PowerUpManager(final List<PowerUp> powerUps, final HandlerMapElement hM) {
         this.mapHandler = hM;
         this.tileSize = hM.getTileSize();
-        this.powerUps = new ArrayList<>(powerUps);
+        this.powerUps = powerUps;
     }
 
     /**
@@ -54,7 +54,7 @@ public class PowerUpManager {
                 gr2.drawImage(im, p.getTouchArea().x + mapHandler.getShift(), 
                 p.getTouchArea().y - (tileSize / 4), tileSize, tileSize, null);
             } else {
-                p.getTouchArea().setSize(0, 0);
+                p.setTouchArea(new Rectangle(0,0,0,0));
             }
         }
     }

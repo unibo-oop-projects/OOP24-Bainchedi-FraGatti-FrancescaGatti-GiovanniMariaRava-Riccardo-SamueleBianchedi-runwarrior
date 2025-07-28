@@ -100,6 +100,10 @@ public class PowerUpImpl implements PowerUp {
         return new Rectangle(touchArea);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setTouchArea(Rectangle touchArea) {
         this.touchArea = touchArea;
     }

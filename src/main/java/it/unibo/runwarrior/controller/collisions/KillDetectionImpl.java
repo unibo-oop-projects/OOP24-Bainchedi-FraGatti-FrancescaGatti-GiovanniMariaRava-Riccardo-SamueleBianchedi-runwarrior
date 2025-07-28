@@ -2,6 +2,7 @@ package it.unibo.runwarrior.controller.collisions;
 
 import java.awt.Rectangle;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.view.GameMusic;
@@ -27,7 +28,7 @@ public class KillDetectionImpl implements KillDetection {
      * @param glc game-loop controller
      * @param hM map handler
      */
-    @SuppressWarnings("EI_EXPOSE_REP2")
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public KillDetectionImpl(final GameLoopController glc, final HandlerMapElement hM) {
         this.glc = glc;
         this.hM = hM;

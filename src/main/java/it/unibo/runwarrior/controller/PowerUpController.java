@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.PowerUp;
 import it.unibo.runwarrior.model.PowerUpImpl;
 
@@ -52,9 +53,11 @@ public class PowerUpController {
     }
 
     /**
+     * Get these list and not the copy, cause i have to change powerup bounds in this list
      * @return the list of powerups
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public List<PowerUp> getPowerUps() {
-        return new ArrayList<>(powerUps);
+        return this.powerUps;
     }
 }
