@@ -53,7 +53,6 @@ public class GameLoopController {
         for (int[] coord : coords) {
             coinController.addCoins(coord[0], coord[1]);
         }
-
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
         this.powerController = new PowerUpController(this, mapHandler, gameMap.getMapData());
