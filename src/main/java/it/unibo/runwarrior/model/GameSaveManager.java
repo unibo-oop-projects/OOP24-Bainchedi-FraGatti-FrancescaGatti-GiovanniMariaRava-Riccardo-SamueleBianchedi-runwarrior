@@ -24,16 +24,16 @@ public final class GameSaveManager {
     private static final String DEFAULT_STRING = "DEFAULT_SKIN";
     private static final String WIZARD = "WIZARD";
     private static final int MAX_LEVEL = 3;
-    private static GameSaveManager instance;
     private static final Logger LOGGER = Logger.getLogger(GameSaveManager.class.getName());
 
     private int levelsCompleted;
     private int coinCollected;
     private boolean premiumSkinUnlocked;
     private String selectedSkinName;
+    private GameSaveManager gsm;
 
     /**
-     * Constructor of the class GameSaveManager.
+     * Private constructor of the class GameSaveManager.
      */
     private GameSaveManager() {
         levelsCompleted = 0;
@@ -42,21 +42,36 @@ public final class GameSaveManager {
     }
 
     /**
-     * Get the current instance of the GameSaveManager.
-     * If load return null it creates a new one.
-     *
-     * @return the instance created or loaded
+     * Holder class that contains the singleton instance.
+     * Loaded only when getInstance() is called for the first time.
+     */
+    private static class Holder {
+        private static final GameSaveManager INSTANCE = createInstance();
+    }
+
+    /**
+     * Create and initialize the instance.
+     * 
+     * @return the instance created
+     */
+    private static GameSaveManager createInstance() {
+        GameSaveManager gsm = loadFromFile(SAVE_FILE);
+        if (gsm == null) {
+            gsm = new GameSaveManager();
+        }
+        return gsm;
+    }
+    
+
+    /**
+     * Returns the singleton instance of the GameSaveManager.
+     * 
+     * @return the only instance of GameSaveManager
      */
     public static GameSaveManager getInstance() {
-        if (instance == null) {
-            instance = loadFromFile(SAVE_FILE);
-            if (instance == null) {
-                instance = new GameSaveManager();
-                instance.saveGame();
-            }
-        }
-        return instance;
+        return Holder.INSTANCE;
     }
+
 
     /**
      * Save the changes of the variables in the file.
