@@ -32,24 +32,24 @@ public class ChronometerImpl implements Chronometer {
     }
 
     @Override
-    public void startTimer() {
+    public final void startTimer() {
         beginningTime = System.currentTimeMillis(); 
         t.start(); 
     }
 
     @Override
-    public void stopTimer() {
+    public final void stopTimer() {
             timeElapsed = System.currentTimeMillis() - beginningTime;
             t.stop();
     }
 
     @Override
-    public long getTimeElapsed() {
+    public final long getTimeElapsed() {
         return timeElapsed;
     }
 
     @Override
-    public String getTimeString() {
+    public final String getTimeString() {
         final long time = getTimeElapsed();
         final int tenthsSec = (int) (time % MILLIS_IN_ONE_SECOND / TENTHS_DIVISOR); //decimi di secondo
         final int seconds = (int) (time / MILLIS_IN_ONE_SECOND % SECONDS_IN_ONE_MINUTE); 

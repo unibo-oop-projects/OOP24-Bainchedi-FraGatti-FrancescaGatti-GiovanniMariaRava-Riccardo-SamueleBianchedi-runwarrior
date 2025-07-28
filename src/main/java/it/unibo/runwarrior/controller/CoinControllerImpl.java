@@ -20,11 +20,11 @@ import it.unibo.runwarrior.view.GameLoopPanel;
  * and the collection of coins.
  */
 public class CoinControllerImpl implements CoinController {
+    protected static final Logger LOGGER = Logger.getLogger(CoinControllerImpl.class.getName());
     private Character player;
     private int coinsCollected;
     private final List<Coin> coinList;
     private ScoreController scoreController;
-    protected static final Logger LOGGER = Logger.getLogger(CoinControllerImpl.class.getName());
 
     public CoinControllerImpl(){
         coinList = new ArrayList<>();
@@ -85,7 +85,7 @@ public class CoinControllerImpl implements CoinController {
      * {@inheritDoc}
      */
     @Override
-    public void drawAllCoins(final Graphics g, final int tileSize, final Character player){
+    public void drawAllCoins(final Graphics g, final int tileSize, final Character player) {
         final int groundX = player.getMovementHandler().getGroundX(); 
 
         for (final Coin coin : coinList) {
@@ -122,7 +122,7 @@ public class CoinControllerImpl implements CoinController {
      * {@inheritDoc}
      */
     @Override
-    public void increaseCoinsCollected(){
+    public void increaseCoinsCollected() {
         coinsCollected++;
     }
 
@@ -130,7 +130,7 @@ public class CoinControllerImpl implements CoinController {
      * {@inheritDoc}
      */
     @Override
-    public void setScoreController(final ScoreController scoreController){
+    public void setScoreController(final ScoreController scoreController) {
         this.scoreController = scoreController;
     }
 

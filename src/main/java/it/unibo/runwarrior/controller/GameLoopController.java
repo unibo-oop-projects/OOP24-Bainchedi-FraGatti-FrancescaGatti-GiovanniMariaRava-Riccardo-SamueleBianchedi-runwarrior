@@ -59,7 +59,7 @@ public class GameLoopController {
         this.gameMap = GameMap.load(mapPath, themePath);
         this.coinController = new CoinControllerImpl();
         this.levelIndex = calculateLevelIndex(mapPath);
-        List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
+        final List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
         for (int[] coord : coords) {
             coinController.addCoins(coord[0], coord[1]);
         }
@@ -160,7 +160,7 @@ public class GameLoopController {
     public PowerUpManager getPowersManager() {
         return this.powersManager;
     }
-    
+
     /**
      * @return the map handler that provides tiles and collision list
      */
@@ -192,7 +192,7 @@ public class GameLoopController {
     /**
      * Map the int type with the correct EnemyView.
      */
-    private final void initializeEnemyViewFactory() {
+    private void initializeEnemyViewFactory() {
         enemyViewFactory.register(1, new GuardView(this));
         enemyViewFactory.register(2, new SnakeView(this));
         enemyViewFactory.register(3, new WizardView(this));
@@ -204,7 +204,7 @@ public class GameLoopController {
      * @param mapPath the path for loading of the map
      * @return the number of the current level
      */
-    private final int calculateLevelIndex(final String mapPath) {
+    private int calculateLevelIndex(final String mapPath) {
         if (mapPath.toLowerCase().contains("map_1") || mapPath.toLowerCase().contains("map1")) {
             return 1;
         } else if (mapPath.toLowerCase().contains("map_2") || mapPath.toLowerCase().contains("map2")) {

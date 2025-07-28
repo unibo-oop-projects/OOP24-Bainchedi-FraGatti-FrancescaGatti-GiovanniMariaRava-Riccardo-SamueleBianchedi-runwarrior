@@ -1,5 +1,8 @@
 package it.unibo.runwarrior.model;
 
+/**
+ * Chronometer interface.
+ */
 public interface Chronometer {
 
     /**

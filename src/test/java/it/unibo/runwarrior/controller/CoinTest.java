@@ -25,7 +25,7 @@ class CoinTest {
             assertEquals(coord[0], c.getRow(), "Row della coin deve corrispondere");
             assertEquals(coord[1], c.getCol(), "Col della coin deve corrispondere");
             assertFalse(c.isCollected(), "la moneta non deve già essere raccolta");
-            assertNotNull(c.coinImage, "L'immagine della moneta deve essere caricata");
+            assertNotNull(c.getCoinImage(), "L'immagine della moneta deve essere caricata");
         }
     }
     @Test
