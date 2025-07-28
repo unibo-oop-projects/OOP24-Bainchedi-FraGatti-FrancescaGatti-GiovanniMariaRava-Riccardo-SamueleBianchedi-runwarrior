@@ -14,8 +14,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     public static final int SPEED_JUMP_UP = 12; 
     public static final int SPEED_JUMP_DOWN = 6;
     private static final int START_X = 96;
-    private static final int JUMP_MAX = 5 / 2;
-    private static final int JUMP_MID = 3 / 2;
+    private static final int JUMP_MAX = 5;
+    private static final int JUMP_MID = 3;
     private static final int MIN_SCREEN_X = 0; //y IN CUI SI FERMA IL PLAYER NELLO SCHERMO
     private final GameLoopController glc;
     private final CharacterComand cmd;
@@ -74,8 +74,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     @Override
     public void setStartY(final int y) {
         playerY = y + AbstractCharacterImpl.TO_TOUCH_FLOOR;
-        maxJump = playerY - (sizeCharacter * JUMP_MAX);
-        midJump = playerY - (sizeCharacter * JUMP_MID);
+        maxJump = playerY - (sizeCharacter * JUMP_MAX / 2);
+        midJump = playerY - (sizeCharacter * JUMP_MID / 2);
     }
 
     /**
@@ -196,8 +196,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      * Updates the values of max and mid jump based on where the player is.
      */
     private void updateJumpVariable() {
-        maxJump = startY - (sizeCharacter * JUMP_MAX) + playerY - startY;
-        midJump = startY - (sizeCharacter * JUMP_MID) + playerY - startY;
+        maxJump = startY - (sizeCharacter * JUMP_MAX / 2) + playerY - startY;
+        midJump = startY - (sizeCharacter * JUMP_MID / 2) + playerY - startY;
     }
 
     /**

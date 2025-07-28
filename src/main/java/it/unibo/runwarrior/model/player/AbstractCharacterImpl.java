@@ -17,22 +17,31 @@ import it.unibo.runwarrior.controller.PowerUpController;
 /**
  * Class that creates the player.
  */
-@SuppressWarnings("checkstyle:VisibilityModifier")
 public abstract class AbstractCharacterImpl implements Character {
     public static final int TO_TOUCH_FLOOR = 2;
     public static final int SPEED = 5;
     /**
      * Logger used for exceptions and error messages.
      */
-    protected static final Logger LOGGER = Logger.getLogger(AbstractCharacterImpl.class.getName());
-    protected Rectangle swordArea;
-    protected boolean rightDirection;
-    protected BufferedImage right0, right1, right2, left0, left1, left2, jumpR, jumpL, attackR, attackL, tipR, tipL;
-    protected CharacterAnimationHandler animation;
-    protected CharacterMovementHandler movement;
-
-    private int sizeCharacter;
+    public static final Logger LOGGER = Logger.getLogger(AbstractCharacterImpl.class.getName());
     private final Rectangle collisionArea;
+    private Rectangle swordArea;
+    private boolean rightDirection;
+    private BufferedImage right0;
+    private BufferedImage right1;
+    private BufferedImage right2;
+    private BufferedImage left0;
+    private BufferedImage left1;
+    private BufferedImage left2;
+    private BufferedImage jumpR;
+    private BufferedImage jumpL;
+    private BufferedImage attackR;
+    private BufferedImage attackL;
+    private BufferedImage tipR;
+    private BufferedImage tipL;
+    private CharacterAnimationHandler animation;
+    private CharacterMovementHandler movement;
+    private int sizeCharacter;
 
     /**
      * Constructor of the player; set player images, first position, 
@@ -126,6 +135,13 @@ public abstract class AbstractCharacterImpl implements Character {
     }
 
     /**
+     * @return true if the player has been going to the right
+     */
+    protected boolean isRightDirection() {
+        return rightDirection;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -148,5 +164,89 @@ public abstract class AbstractCharacterImpl implements Character {
      */
     protected int getSizeCharacter() {
         return sizeCharacter;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setRight0(BufferedImage i) {
+        this.right0 = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setRight1(BufferedImage i) {
+        this.right1 = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setRight2(BufferedImage i) {
+        this.right2 = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setLeft0(BufferedImage i) {
+        this.left0 = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setLeft1(BufferedImage i) {
+        this.left1 = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setLeft2(BufferedImage i) {
+        this.left2 = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setJumpR(BufferedImage i) {
+        this.jumpR = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setJumpL(BufferedImage i) {
+        this.jumpL = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setAttackR(BufferedImage i) {
+        this.attackR = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setAttackL(BufferedImage i) {
+        this.attackL = i;
+    }
+
+    /**
+     * @param i image to set
+     */
+    protected void setTipR(BufferedImage i) {
+        this.tipR = i;
+    }
+    
+    /**
+     * @param i image to set
+     */
+    protected void setTipL(BufferedImage i) {
+        this.tipL = i;
     }
 }

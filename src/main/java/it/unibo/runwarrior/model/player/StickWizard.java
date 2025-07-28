@@ -33,18 +33,18 @@ public class StickWizard extends AbstractCharacterImpl {
     @Override
     public void playerImage() {
         try {
-            right0 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/stopRightSW.png"));
-            right1 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goRightSW1.png"));
-            right2 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goRightSW2.png"));
-            left0 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/stopLeftSW.png"));
-            left1 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goLeftSW1.png"));
-            left2 = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goLeftSW2.png"));
-            jumpR = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/jumpRightSW.png"));
-            jumpL = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/jumpLeftSW.png"));
-            attackR = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/attackRightW.png"));
-            attackL = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/attackLeftW.png"));
-            tipR = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/tipRightW.png"));
-            tipL = ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/tipLeftW.png"));
+            setRight0(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/stopRightSW.png")));
+            setRight1(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goRightSW1.png")));
+            setRight2(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goRightSW2.png")));
+            setLeft0(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/stopLeftSW.png")));
+            setLeft1(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goLeftSW1.png")));
+            setLeft2(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/goLeftSW2.png")));
+            setJumpR(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/jumpRightSW.png")));
+            setJumpL(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/jumpLeftSW.png")));
+            setAttackR(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/attackRightW.png")));
+            setAttackL(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/attackLeftW.png")));
+            setTipR(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/tipRightW.png")));
+            setTipL(ImageIO.read(StickWizard.class.getResourceAsStream("/WizardImages/tipLeftW.png")));
         } catch (final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load player images");
         }
@@ -55,13 +55,17 @@ public class StickWizard extends AbstractCharacterImpl {
      */
     @Override
     protected void updateAttackCollision() {
-        if (animation.getFrame() == PlayerFrame.ATTACK_FRAME && rightDirection) {
-            swordArea.setBounds(movement.getPlX() + getSizeCharacter(), movement.getPlY() + getSizeCharacter() / 4,
-            getSizeCharacter(), getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
+        if (getAnimationHandler().getFrame() == PlayerFrame.ATTACK_FRAME && isRightDirection()) {
+            getSwordArea().setBounds(getMovementHandler().getPlX() + getSizeCharacter(), 
+            getMovementHandler().getPlY() + getSizeCharacter() / 4,
+            getSizeCharacter(), 
+            getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
         }
-        if (animation.getFrame() == PlayerFrame.ATTACK_FRAME && !rightDirection) {
-            swordArea.setBounds(movement.getPlX() - getSizeCharacter(), movement.getPlY() + getSizeCharacter() / 4,
-            getSizeCharacter(), getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
+        if (getAnimationHandler().getFrame() == PlayerFrame.ATTACK_FRAME && !isRightDirection()) {
+            getSwordArea().setBounds(getMovementHandler().getPlX() - getSizeCharacter(), 
+            getMovementHandler().getPlY() + getSizeCharacter() / 4,
+            getSizeCharacter(), 
+            getSizeCharacter() - (getSizeCharacter() / 4) - (TO_TOUCH_FLOOR * 2));
         }
     }
 }
