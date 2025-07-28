@@ -1,6 +1,7 @@
 package it.unibo.runwarrior.view.enemy.impl;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -70,32 +71,46 @@ public final class GoblinView implements EnemyView {
         final int shift = glc.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
     }
+    /**
+     * Creates and returns a copy of the given BufferedImage.
+     *
+     * @param img the image to copy
+     * @return a new BufferedImage identical to the input
+     */
+    private BufferedImage copyImage(final BufferedImage img) {
+        final BufferedImage copy = new BufferedImage(
+            img.getWidth(), img.getHeight(), img.getType());
+        final Graphics2D g = copy.createGraphics();
+        g.drawImage(img, 0, 0, null);
+        g.dispose();
+        return copy;
+    }
 
     /**
      * @return the image of the rightGoblin
      */
     public BufferedImage getRightGoblin() {
-        return rightGoblin;
+        return copyImage(this.rightGoblin);
     }
 
     /**
      * @return the image of the leftGoblin
      */
     public BufferedImage getLeftGoblin() {
-        return leftGoblin;
+        return copyImage(this.leftGoblin);
     }
 
     /**
      * @return the image of the right Goblin moving
      */
     public BufferedImage getRightGoblinMoving() {
-        return rightGoblinMoving;
+        return copyImage(this.rightGoblinMoving);
     }
 
     /**
      * @return the image of the left Goblin moving
      */
     public BufferedImage getLeftGoblinMoving() {
-        return leftGoblinMoving;
+        return copyImage(this.leftGoblinMoving);
     }
 }
