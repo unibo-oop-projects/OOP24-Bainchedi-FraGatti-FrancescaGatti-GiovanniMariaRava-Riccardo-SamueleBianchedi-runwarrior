@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.shop.api;
 
 import it.unibo.runwarrior.model.Skin;
 

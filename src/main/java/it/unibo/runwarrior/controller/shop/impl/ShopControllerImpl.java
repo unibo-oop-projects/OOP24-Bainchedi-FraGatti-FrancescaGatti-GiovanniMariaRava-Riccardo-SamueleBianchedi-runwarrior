@@ -1,5 +1,6 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.shop.impl;
 
+import it.unibo.runwarrior.controller.shop.api.ShopController;
 import it.unibo.runwarrior.model.Score;
 import it.unibo.runwarrior.model.Shop;
 import it.unibo.runwarrior.model.Skin;

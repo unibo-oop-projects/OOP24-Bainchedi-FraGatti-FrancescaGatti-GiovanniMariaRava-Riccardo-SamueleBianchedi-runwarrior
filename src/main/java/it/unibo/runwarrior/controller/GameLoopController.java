@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
+import it.unibo.runwarrior.controller.shop.api.ShopController;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.Score;
