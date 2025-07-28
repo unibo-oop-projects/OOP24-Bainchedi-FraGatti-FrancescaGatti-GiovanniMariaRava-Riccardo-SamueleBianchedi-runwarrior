@@ -196,19 +196,4 @@ public class GameLoopPanel extends JPanel implements Runnable {
             gr2.dispose();
     }
 }
-        // resultFrame.setVisible(true);
-        // resultFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-        // @Override
-        // public void windowClosed(java.awt.event.WindowEvent e) {
-        //     // Quando l'utente chiude il pannello, torna al menu
-        //     javax.swing.SwingUtilities.invokeLater(() -> {
-        //         Menu menu = new Menu();
-        //         JFrame frame = menu.getFrameMenu();
-        //         frame.setVisible(true);
-        //     });
-        // @Override
-        // public void windowClosing(java.awt.event.WindowEvent e) {
-        //     resultFrame.dispose();
-        // }
-        // });
 
