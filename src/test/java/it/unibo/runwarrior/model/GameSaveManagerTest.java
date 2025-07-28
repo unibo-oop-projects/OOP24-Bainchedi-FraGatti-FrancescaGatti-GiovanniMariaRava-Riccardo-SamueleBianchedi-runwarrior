@@ -50,7 +50,7 @@ public class GameSaveManagerTest {
         gsm.setSkinPremiumSbloccata(true);
         assertEquals(true, GameSaveManager.getInstance().isSkinPremiumSbloccata());
     }
-    
+
     /**
      * Checks that the right exception is thrown.
      */

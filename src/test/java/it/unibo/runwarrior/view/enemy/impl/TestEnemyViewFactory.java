@@ -61,7 +61,7 @@ public class TestEnemyViewFactory {
         enemyViewFactoryImpl.register(1, guardView);
         enemyViewFactoryImpl.register(2, snakeView);
         enemyViewFactoryImpl.register(3, wizardView);
-        
+
         assertEquals(guardView, enemyViewFactoryImpl.get(1));
         assertEquals(snakeView, enemyViewFactoryImpl.get(2));
         assertEquals(wizardView, enemyViewFactoryImpl.get(3));

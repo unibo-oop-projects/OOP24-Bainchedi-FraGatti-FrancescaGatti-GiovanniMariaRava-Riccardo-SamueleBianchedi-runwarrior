@@ -37,13 +37,13 @@ public class EnemyImplTest {
         enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
         enemy = new EnemyImpl(STANDARD_X, STANDARD_Y, TILE_SIZE, TILE_SIZE, true, enemyHandler, glp, 1); 
     }
-    
+
     /**
      * Verifies that getBounds() returns the correct rectangle based on position and size.
      */
     @Test
     public void testGetBounds() {
-        Rectangle bounds = enemy.getBounds();
+        final Rectangle bounds = enemy.getBounds();
         assertEquals(STANDARD_X, bounds.x);
         assertEquals(STANDARD_Y, bounds.y);
         assertEquals(COLLISION_TILE, bounds.width);

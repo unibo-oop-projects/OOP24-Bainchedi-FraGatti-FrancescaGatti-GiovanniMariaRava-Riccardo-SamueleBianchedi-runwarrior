@@ -10,9 +10,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * GameSaveManager handles the saving part of the game in the file game_save.txt.
  */
+@SuppressFBWarnings(
+    value = "MS_EXPOSE_REP",
+    justification = "Classe singleton: esporre l'unica istanza serve"
+)
 public final class GameSaveManager {
     private static final String SAVE_FILE = "game_save.txt";
     private static final String DEFAULT_STRING = "DEFAULT_SKIN";
