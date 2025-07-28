@@ -44,6 +44,7 @@ public class GameLoopController {
     private Score score;
     private ScoreController scoreController;
     private int levelIndex;
+    private ShopController shopController;
 
     public GameLoopController(JFrame mainFrame, String mapPath, String themePath, String enemiesPath, String coinsPath) {
         this.gameMap = GameMap.load(mapPath, themePath);
@@ -194,5 +195,9 @@ public class GameLoopController {
 
     public final int getCurrentLevel() {
         return this.levelIndex;
+    }
+
+    public final ShopController getShopController() {
+        return this.shopController;
     }
 }
