@@ -112,10 +112,13 @@ public class GameLoopPanel extends JPanel implements Runnable {
         }
         if (!gameEnded) {
             // controllo se ha vinto
-            if (gameController.getPlayer().getMovementHandler().getCollisionDetection().gameOver()) {
+            if (gameController.getPlayer().getMovementHandler().getCollisionDetection().win()) {
                 gameEnded = true;
                 levelCompleted = true;
             } else if (gameController.getPowersHandler().gameOver()) {
+                gameEnded = true;
+                levelCompleted = false;
+            } else if (gameController.getPlayer().getMovementHandler().getCollisionDetection().gameOver()){
                 gameEnded = true;
                 levelCompleted = false;
             }
@@ -140,10 +143,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
                 save.setLevelsCompleted(currentLevel);
             }
         }
-        
+
         GameSaveManager.getInstance().addCoin(gameController.getCoinController().getCoinsCollected());
 
-        //quale pannello mostrare?
         JPanel content = levelCompleted
         ? new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected())
         : new GameOverPanel(gameController.getCoinController().getCoinsCollected());
@@ -181,7 +183,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     protected void paintComponent(Graphics gr) {
         super.paintComponent(gr);
         Graphics2D gr2 = (Graphics2D) gr;
-        
+
         gameController.getMapHandler().printBlocks(gr2, gameController.getPlayer());
         gameController.getPowersManager().printPowerUp(gr2);
         gameController.getPlayer().drawPlayer(gr2);

@@ -23,7 +23,6 @@ import it.unibo.runwarrior.view.enemy.impl.WizardView;
 
 /**
  * Controller del ciclo principale di gioco.
- * 
  * Gestisce l'inizializzazione dei campi necessari e gestisce l'aggiornamento.
  */
 public class GameLoopController {
@@ -46,6 +45,16 @@ public class GameLoopController {
     private int levelIndex;
     private ShopController shopController;
 
+    /**
+     * Constructor of the class. 
+     *
+     * @param frameMenu is the frame in which menu is shown
+     * @param mapPath the path for loading of the map
+     * @param themePath the path for loading the images of tile
+     * @param enemiesPath the path for loadin the enemies position
+     * @param coinsPath the path for loading the coin position
+     * @param gameController the controller of the whole game
+     */
     public GameLoopController(JFrame mainFrame, String mapPath, String themePath, String enemiesPath, String coinsPath) {
         this.gameMap = GameMap.load(mapPath, themePath);
         this.coinController = new CoinControllerImpl();
@@ -73,7 +82,7 @@ public class GameLoopController {
     }
 
     /**
-     * Update the state of the game in the order: player, enemySpawner, enemyHandler
+     * Update the state of the game in the order: player, enemySpawner, enemyHandler.
      */
     public void update() {
         player.update();
@@ -98,15 +107,25 @@ public class GameLoopController {
     }
 
     /**
-     * Getters for the main player
-     * 
+     * Getters for the main player.
+     *
      * @return the player
      */
     public Character getPlayer() {
         return this.player;
     }
 
-    public void setPlayer(Character pl, int realX, int x, int y, int shift, long lastHit) {
+    /**
+     * Sets the current player in the panel.
+     * 
+     * @param pl current player
+     * @param realX x position in the map
+     * @param x x position in the screen
+     * @param y y position in the screen
+     * @param shift variable to slide map
+     * @param lastHit handles immortality time
+     */
+    public void setPlayer(final Character pl, final int realX, final int x, final int y, final int shift, final long lastHit) {
         this.player = pl;
         this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
         this.coinController.updatePlayer(pl);

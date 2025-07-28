@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.runwarrior.controller.GameLoopController;
+
 /**
  * Test if the images are loaded correctly and view is ok.
  */
@@ -17,6 +18,7 @@ public class TestGoblinView {
     private GoblinView goblinView;
     private GameLoopController glc;
     private JFrame mainFrame;
+
     /**
      * Create a new GameLoopController for the view.
      */
@@ -36,6 +38,6 @@ public class TestGoblinView {
         assertNotNull(goblinView.getLeftGoblin());
         assertNotNull(goblinView.getRightGoblinMoving());
         assertNotNull(goblinView.getLeftGoblinMoving());
-        assertEquals(DIM_IMAGES, goblinView.getRightGoblin().getWidth());;
+        assertEquals(DIM_IMAGES, goblinView.getRightGoblin().getWidth());
     }
 }
