@@ -16,7 +16,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
  * Implementation of the enemy view with Monkey enemy.
  */
 
-public class MonkeyView implements EnemyView {
+public final class MonkeyView implements EnemyView {
     private static final Logger LOGGER = Logger.getLogger(MonkeyView.class.getName());
     private BufferedImage rightMonkey;
     private BufferedImage leftMonkey;

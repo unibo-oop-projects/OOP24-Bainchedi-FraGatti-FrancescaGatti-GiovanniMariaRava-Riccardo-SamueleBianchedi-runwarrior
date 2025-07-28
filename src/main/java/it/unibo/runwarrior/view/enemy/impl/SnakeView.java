@@ -17,7 +17,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
  * Implementation of the enemy view with Snake enemy.
  */
 
-public class SnakeView implements EnemyView {
+public final class SnakeView implements EnemyView {
     private static final Logger LOGGER = Logger.getLogger(SnakeView.class.getName());
     private BufferedImage rightSnake;
     private BufferedImage rightSnakeMoving;

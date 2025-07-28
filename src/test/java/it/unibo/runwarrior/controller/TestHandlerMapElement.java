@@ -28,7 +28,7 @@ public class TestHandlerMapElement {
     private HandlerMapElement handlerMapElement;
     private GameMap gameMap;
     private int[][] map;
-    
+
     /**
      * Create a smaller map for the test and the initialize the map.
      */
@@ -36,18 +36,18 @@ public class TestHandlerMapElement {
     public void initMap() {
         map = new int[][] {
             {0, 1, 2},
-            {1, 5, 0},
-            {3, 4, 6}
+            {1, FIVE, 0},
+            {3, 4, SIX},
         };
 
-        Map<Integer, BufferedImage> testBlockImages = new HashMap<>();
+        final Map<Integer, BufferedImage> testBlockImages = new HashMap<>();
         for (int i = 0; i <= SIX; i++) {
             testBlockImages.put(i, null);
         }
         gameMap = new GameMap(map, testBlockImages, ROW_COLS, ROW_COLS);
         handlerMapElement = new HandlerMapElement(gameMap);
     }
-    
+
     /**
      * Test if the MapElement are initilized in the correct way.
      */
@@ -62,12 +62,12 @@ public class TestHandlerMapElement {
         assertFalse(blocks.get(3).getCollision());
         assertFalse(blocks.get(FIVE).getHarmless());
     }
-    
+
     /**
      * Test if the list returned contains the right element.
      */
     @Test
-    public void testGetCollisionRectangles(){
+    public void testGetCollisionRectangles() {
         final List<Rectangle> collisionRects = handlerMapElement.getCollisionRectangles();
 
         assertEquals(FIVE, collisionRects.size());

@@ -84,18 +84,18 @@ tramite CollisionDetection, KillDetection e PowerUpDetection.
 Il pattern MVC implementato consente di mantenere lo stato del controller nell'eventualità che si modifichi la view.
 inserire UML delle classi principali dell'MVC
 \section{Samuele Bianchedi}
-\textbf{Problema}: L’implementazioni delle classi del modello soffriva di una criticità legata all’incapsulamento. SptoBugs ha rilevato molti warning che indicavano oggetti mutabili passati e restituiti tramite riferimento diretto.
+\textbf{Problema}: L'implementazioni delle classi del modello soffriva di una criticità legata all'incapsulamento. SptoBugs ha rilevato molti warning che indicavano oggetti mutabili passati e restituiti tramite riferimento diretto.
 Questo poteva creare un’architettura fragile, incline ad errori e/o modifiche involontarie.
 \textbf{Soluzione}: Per risolvere questo problema e rendere sicuro i dati ho scelto di implementare copie difensive.
 \begin{itemize}
-    \item Per oggetti come BufferedImage e int[][]: nei costruttori e nei metodi setter invece di memorizzare il riferimento all’oggetto, 
+    \item Per oggetti come BufferedImage e int[][]: nei costruttori e nei metodi setter invece di memorizzare il riferimento all'oggetto, 
     ne viene creata una copia completa.
     \item Nei metodi getter: invece di restituire una riferimento all'oggetti ne viene creato uno nuovo da passare al chiamante
     \item Per le collezioni: i metodi getter sono stati modificato per restituire una vista immodificabile della collezione.
 \end{itemize}
 I pro sono ovviamente la sicurezza dei dati che sono protetti da modifiche esterne. Di contro abbiamo una riduzione della performance, 
-in quanto copiare oggetti innumerevoli volte costa abbastanza e in alcuni casi ha portato a “freeze” dell’applicazione.
-Nel seguente schema UML si mostra come i campi siano privati e l’accesso avvenga tramite metodi pubblici che lavorano restituendo copie.
+in quanto copiare oggetti innumerevoli volte costa abbastanza e in alcuni casi ha portato a “freeze” dell'applicazione.
+Nel seguente schema UML si mostra come i campi siano privati e l'accesso avvenga tramite metodi pubblici che lavorano restituendo copie.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{resources/UMLMapElement.png}
@@ -123,6 +123,12 @@ tra i tre livelli:
     all'interno del Model (la classe Shop), ma il codice risultava molto pesante e difficile da gestire.
 \end{itemize}
 L'introduzione del pattern MVC ha permesso di ottenere una struttura più chiara, estendibile e orientata al riuso.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/UMLshopMVC.png}
+    \caption{UML dell'MVC per la gestione dello shop}
+    \label{}
+\end{figure}
 \section{Giovanni Maria Rava}
 \textbf{Problema:} I nemici del gioco devono muoversi da soli, invertire direzione appena urtano un ostacolo e restare sincronizzati con 
 lo scorrimento della camera. 
@@ -160,15 +166,28 @@ L'intera logica di I/O è dunque isolata in una sola classe, priva di dipendenze
 il singleton e semplifica i test automatizzati.
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{resources/UMLshopMVC.png}
-    \caption{UML dell'MVC per la gestione dello shop}
-    \label{}
-\end{figure}
-\begin{figure}
-    \centering
     \includegraphics[width=0.8\textwidth]{resources/saveManagerUML.png}
     \caption{UML dell'MVC per la gestione dei nemici}
     \label{}
 \end{figure}
+\textbf{Problema} Nel livello di gioco occorre generare molti nemici in posizioni predefinite: ognuno deve comparire al momento giusto,
+nella coordinata corretta e con la propria grafica, ma senza mescolare la logica di lettura dei dati con la scelta delle view. 
 
+\textbf{Soluzione:} Il file \emph{enemies*.txt}, letto da EnemySpawner, elenca riga per riga tipo di nemico e coordinate. 
+Ogni riga viene trasformata in un oggetto immutabile EnemySpawnPoints, che serve come contenitore dei dati di spawn. Durante 
+l'esecuzione EnemySpawner rimane in ascolto dello scorrimento della mappa di gioco: quando un punto di spawn entra nell'area visibile, 
+istanzia il relativo modello di nemico e, anziché occuparsi direttamente della grafica, delega la creazione della vista a EnemyViewFactory. 
+Quest'ultima contiene un metodo che riceve l'identificativo numerico del nemico e restituisce la classe di rendering adeguata; 
+la sua implementazione concreta, EnemyViewFactoryImpl, contiene la mappatura fra tipologia e view corrispondente (as esempio 1 $\rightarrow$ GuardView).
+In questo modo la lettura del file, la gestione della memoria e il caricamento delle immagini restano ben separati: per aggiungere un 
+nuovo tipo di nemico è sufficiente aggiungere una riga al file di mappa e una voce nella factory, senza toccare né il game‑loop né lo 
+spawner, mantenendo il sistema estendibile e pulito.
+\begin{figure}
+    \centering
+    \includegraphics*[width=0.8\textwidth]{resources/spawingEnemyUML.png}
+    \caption{UML gestione spawing nemici}
+    \label{}
+\end{figure}
+\chapter{Sviluppo}
+\section{Testing automatizzato}
 \end{document}

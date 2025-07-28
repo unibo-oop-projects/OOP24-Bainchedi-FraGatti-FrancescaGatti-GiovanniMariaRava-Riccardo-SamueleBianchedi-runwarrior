@@ -21,8 +21,13 @@ import it.unibo.runwarrior.view.enemy.impl.MonkeyView;
 import it.unibo.runwarrior.view.enemy.impl.SnakeView;
 import it.unibo.runwarrior.view.enemy.impl.WizardView;
 
+/**
+ * Controller del ciclo principale di gioco.
+ * 
+ * Gestisce l'inizializzazione dei campi necessari e gestisce l'aggiornamento.
+ */
 public class GameLoopController {
-    
+
     private GameLoopPanel glp;
     private Character player;
     private CharacterComand commands;
@@ -43,10 +48,10 @@ public class GameLoopController {
         this.gameMap = GameMap.load(mapPath, themePath);
         this.coinController = new CoinControllerImpl();
         List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
-        for(int[] coord : coords){
+        for (int[] coord : coords) {
             coinController.addCoins(coord[0], coord[1]);
         }
-        
+
         this.commands = new CharacterComand();
         this.mapHandler = new HandlerMapElement(gameMap);
         this.powerController = new PowerUpController(this, mapHandler, gameMap.getMapData());
@@ -65,6 +70,9 @@ public class GameLoopController {
         initializePlayer();
     }
 
+    /**
+     * Update the state of the game in the order: player, enemySpawner, enemyHandler
+     */
     public void update() {
         player.update();
         enemySpawner.update();
@@ -87,6 +95,11 @@ public class GameLoopController {
         powerUpsHandler.setIndex();
     }
 
+    /**
+     * Getters for the main player
+     * 
+     * @return the player
+     */
     public Character getPlayer() {
         return this.player;
     }
@@ -97,40 +110,66 @@ public class GameLoopController {
         this.coinController.updatePlayer(pl);
     }
 
+    /**
+     * Return the main gameLoopPanel in which everything is shown
+     *
+     * @return GameLoopPanel
+     */
     public GameLoopPanel getGlp() {
         return this.glp;
     }
 
+    /**
+     * @return the current set of character commands
+     */
     public CharacterComand getCommands() {
         return this.commands;
     }
 
+    /**
+     * @return the handler that controls power‑ups
+     */
     public PowersHandler getPowersHandler() {
         return this.powerUpsHandler;
     }
 
+    /**
+     * @return the manager responsible for rendering power‑ups
+     */
     public PowerUpManager getPowersManager() {
         return this.powersManager;
     }
     
+    /**
+     * @return the map handler that provides tiles and collision list
+     */
     public HandlerMapElement getMapHandler() {
         return this.mapHandler;
     }
 
+    /**
+     * @return the component that controls enemies
+     */
     public EnemyHandlerImpl getEnemyHandler() {
         return this.enemyHandler;
     }
 
+    /**
+     * @return the controller that manages coins on the map
+     */
     public CoinController getCoinController() {
         return this.coinController;
     }
 
+    /**
+     * @return the controller that updates the score
+     */
     public ScoreController getScoreController() {
         return this.scoreController;
     }
 
     /**
-     * Map the int type with the correct EnemyView
+     * Map the int type with the correct EnemyView.
      */
     private final void initializeEnemyViewFactory() {
         enemyViewFactory.register(1, new GuardView(this));
