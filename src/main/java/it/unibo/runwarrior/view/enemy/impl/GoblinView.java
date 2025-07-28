@@ -16,7 +16,7 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
  * Implementation of the enemy view with Goblin enemy.
  */
 
-public class GoblinView implements EnemyView {
+public final class GoblinView implements EnemyView {
     private static final Logger LOGGER = Logger.getLogger(GoblinView.class.getName());
     private BufferedImage rightGoblin;
     private BufferedImage leftGoblin;
@@ -69,5 +69,33 @@ public class GoblinView implements EnemyView {
         }
         final int shift = glc.getMapHandler().getShift();
         g.drawImage(currentImage, enemy.getX() + shift, enemy.getY(), enemy.getWidth(), enemy.getHeight(), null);
+    }
+
+    /**
+     * @return the image of the rightGoblin
+     */
+    public BufferedImage getRightGoblin() {
+        return rightGoblin;
+    }
+
+    /**
+     * @return the image of the leftGoblin
+     */
+    public BufferedImage getLeftGoblin() {
+        return leftGoblin;
+    }
+
+    /**
+     * @return the image of the right Goblin moving
+     */
+    public BufferedImage getRightGoblinMoving() {
+        return rightGoblinMoving;
+    }
+
+    /**
+     * @return the image of the left Goblin moving
+     */
+    public BufferedImage getLeftGoblinMoving() {
+        return leftGoblinMoving;
     }
 }

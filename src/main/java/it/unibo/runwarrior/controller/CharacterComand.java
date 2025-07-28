@@ -19,7 +19,7 @@ public class CharacterComand implements KeyListener{
      */
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
+        //throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
     }
 
     /**

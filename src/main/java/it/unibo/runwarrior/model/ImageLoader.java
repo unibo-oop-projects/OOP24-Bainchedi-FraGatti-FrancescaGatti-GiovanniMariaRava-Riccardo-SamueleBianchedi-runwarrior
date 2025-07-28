@@ -19,8 +19,7 @@ import javax.imageio.ImageIO;
  * This class is final as it is not designed for extension.
  */
 public final class ImageLoader {
-
-    private static final String FROM_PATH_STRING = " from ";
+    private static final String FROM_PATH_STRING = "from";
     private final Map<Integer, BufferedImage> blockImages;
 
     /**
@@ -54,7 +53,7 @@ public final class ImageLoader {
             return false;
         } catch (final IOException e) {
             System.err.println("I/O Error loading image for block " + blockValue
-                + FROM_PATH_STRING + filePath + ": " + e.getMessage());
+                + "from" + filePath + ": " + e.getMessage());
             return false;
         }
     }
@@ -87,7 +86,7 @@ public final class ImageLoader {
                             final String imagePath = parts[1].trim();
                             if (!this.loadImage(blockValue, imagePath)) {
                                 System.err.println("Error: Failed to load image for block " + blockValue
-                                    + FROM_PATH_STRING + imagePath);
+                                    +"from path" + imagePath);
                                 allLoadedSuccessfully = false;
                             }
                         } catch (final NumberFormatException e) {

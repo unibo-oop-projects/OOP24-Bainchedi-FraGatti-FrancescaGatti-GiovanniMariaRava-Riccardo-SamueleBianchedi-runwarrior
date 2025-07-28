@@ -56,7 +56,6 @@ public final class GameMap {
         final ImageLoader mapImageLoader = new ImageLoader();
         final boolean imagesLoaded = mapImageLoader.loadImagesFromConfigFile(imageConfigFilePath);
         if (!imagesLoaded) {
-            // Ho spezzato la riga per rispettare il limite di lunghezza
             System.err.println("GameMap Error: Impossibile caricare le immagini per la mappa"
                 + " utilizzando la configurazione " + imageConfigFilePath);
             return null;

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 /**
  * A utility class to load a map's numerical data from a text file.
@@ -58,7 +57,7 @@ public final class MapLoader {
             System.err.println("Error: Cannot find map file at path: " + mapFilePath);
             return null;
         }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) { // Usa UTF-8
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if (currentRow >= MAP_HEIGHT) {
@@ -68,12 +67,12 @@ public final class MapLoader {
 
                 final String trimmedLine = line.trim();
                 if (trimmedLine.isEmpty()) {
-                    System.err.println("Warning: Empty row at line " + currentRow + IN_FILE_STRING + mapFilePath + "'. Ignoring.");
+                    System.err.println("Warning: Empty row at line " + currentRow + "in file" + mapFilePath + "'. Ignoring.");
                     continue;
                 }
 
                 if (trimmedLine.length() != MAP_WIDTH) {
-                    System.err.println("Error: Row " + currentRow + IN_FILE_STRING + mapFilePath
+                    System.err.println("Error: Row " + currentRow + "in file" + mapFilePath
                         + "' has inconsistent length. Expected: " + MAP_WIDTH
                         + ", Found: " + trimmedLine.length() + ".");
                     return null;
@@ -84,7 +83,7 @@ public final class MapLoader {
                     final int blockValue = Character.getNumericValue(blockChar);
                     if (blockValue == -1) {
                         System.err.println("Error: Non-numeric value ('" + blockChar + "') at row " + currentRow
-                            + ", col " + c + IN_FILE_STRING + mapFilePath + "'.");
+                            + ", col " + c + "in file" + mapFilePath + "'.");
                         return null;
                     }
                     mapData[currentRow][c] = blockValue;

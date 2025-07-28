@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.awt.Rectangle;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.view.enemy.impl.EnemyViewFactoryImpl;
@@ -26,24 +28,25 @@ public class EnemyImplTest {
     private GameLoopController glp;
     private EnemyHandlerImpl enemyHandler;
     private EnemyViewFactoryImpl enemyViewFactory;
+    private JFrame mainFrame;
 
     /**
      * Sets up a new EnemyImpl instance.
      */
     @BeforeEach
     public void setUp() {
-        glp = new GameLoopController("tryMap.txt", "Map2/forest_theme.txt", 
+        glp = new GameLoopController(mainFrame, "tryMap.txt", "Map2/forest_theme.txt", 
                                         "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
         enemyHandler = new EnemyHandlerImpl(glp, enemyViewFactory);
         enemy = new EnemyImpl(STANDARD_X, STANDARD_Y, TILE_SIZE, TILE_SIZE, true, enemyHandler, glp, 1); 
     }
-    
+
     /**
      * Verifies that getBounds() returns the correct rectangle based on position and size.
      */
     @Test
     public void testGetBounds() {
-        Rectangle bounds = enemy.getBounds();
+        final Rectangle bounds = enemy.getBounds();
         assertEquals(STANDARD_X, bounds.x);
         assertEquals(STANDARD_Y, bounds.y);
         assertEquals(COLLISION_TILE, bounds.width);
