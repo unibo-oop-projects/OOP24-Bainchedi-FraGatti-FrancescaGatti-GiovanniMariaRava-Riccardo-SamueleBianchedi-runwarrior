@@ -106,6 +106,120 @@ Il pattern utilizzato è stato Immutable Object, un idioma fondamentale di OOP. 
 si possono veder modificato lo stato dopo la loro creazione. Sebbene gli oggetti nel progetto non siano perfettamente immutabili a causa
 dei setter, quello a cui si aspirava era un oggetto non modificabile lontano da errori imprevedibili.
 \section{Riccardo Cornacchia}
+
+\textbf{Problema}: si deve gestire la creazione del player considerando che le 2 entità warrior e wizard possono cambiare in modo attivo 3 skin
+(senza armatura, con armatura, con armatura e spada/bastone) durante la sessione di gioco.
+
+\textbf{Soluzione}: all'interno dell'architettura MVC, ho realizzato una classe astratta AbstractCharacterImpl che implementa l'interfaccia 
+Character per creare l'entità player, nel model del progetto. In questa classe vengono definiti metodi standard che il player esegue sempre 
+e i campi che ogni entità player deve avere.
+Tale classe astratta viene estesa da 6 classi concrete (NakedWarrior, NakedWizard, ArmourWarrior, ArmourWizard, SwordWarrior, 
+StickWizard). Ogni sottoclasse fa Override del metodo astratto playerImage(), mentre SwordWarrior e StickWizard fanno Override 
+del metodo updateAttackCollision() che setta l'eventuale area dell'arma.
+AbstractCharacterImpl implementa il metodo update(), che richiama i metodi playerImage() e updatePlayerPosition(), modificati ad hoc 
+da ciascuna sottoclasse. Tramite questa architettura viene sfruttato il Template pattern che stabilisce lo scheletro dell'operazione 
+principale (update) nella classe astratta e delega alle sottoclassi la definizione di uno o più aspetti specifici dell'algoritmo 
+(playerImage e updateAttackCollision). Il Template method è l'update() che definisce l'algoritmo principale; esso infatti richiama i due 
+metodi definiti dalle sottoclassi.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/TemplateCharacter.png}
+    \caption{UML del pattern Template per il personaggio principale}
+    \label{fig:2.1}
+\end{figure}
+
+\textbf{Problema}: gestione dell'animazione, ovvero il cambio continuo dei frame per ogni specifica azione del personaggio; 
+gestione del movimento del player, collegato ad input da tastiera.
+
+\textbf{Soluzione}: all'interno dell'architettura MVC , ho realizzato due interfacce CharacterAnimationHandler e 
+CharacterMovementHandler, rispettivamente implementate da CharacterAnimationHandlerImpl e CharacterMovementHandlerImpl, nel controller 
+del progetto. L'obbiettivo è quello di delegare i 2 comportamenti fondamentali di ogni entità player a due classi distinte nella sezione 
+controller. Entrambe le interfacce vengono usate da AbstractCharacterImpl e i loro metodi vengono richiamati all'interno di update() 
+e drawPlayer(Graphics2D).
+Per questa architettura mi sono basato sul pattern Strategy, ma applicandone una variazione, cioè incapsulare in 2 interfacce diverse 
+animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire tali comportamenti entrambe le classi 
+usano CharacterComand, la classe che gestisce l'input da tastiera.
+CharacterAnimationHandler definisce metodi fondamentali come: frameChanger(), per gestire il cambiamento dei frame in base agli input 
+e imagePlayer(boolean rightDirection), che fornisce l'immagine corretta in base al frame corrente.
+CharacterMovementHandler definisce metodi fondamentali come: setLocationAfterPowerUp(), per reimpostare la posizione del player
+dopo aver guadagnato o perso una vita, movePlayer(), per gestire spostamento a destra e sinistra, salto e collisione con le diverse 
+entità.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/playerAction.png}
+    \caption{UML del pattern Template per il personaggio principale}
+    \label{fig:2.2}
+\end{figure}
+
+\textbf{Problema}: gestione delle collisioni con le diverse entità: blocchi della mappa, powerups, nemici e monete. 
+Mantenere la relazione con le classi che gestiscono eventuali conseguenze di una specifica collisione.
+
+\textbf{Soluzione}: in questo caso all'interno dell'architettura MVC , ho realizzato 4 interfacce nel controller del progetto, 
+ognuna delle quali gestisce le collisioni con 1 delle 4 entità: CollisionDetection, per i blocchi delle mappe, PowerUpDetection, 
+per la collisione con l'uovo e i powerups, KillDetection, per i nemici, e CoinDetection, per le monete, 
+rispettivamente implementate da CollisionDetectionImpl, PowerUpDetectionImpl, KillDetectionImpl e CoinDetectionImpl.
+
+Le 4 interfacce vengono usate da CharacterMovementHandlerImpl e i loro metodi vengono richiamati all'interno di movePlayer().
+Le 4 interfacce descritte rappresentano la strategia per il pattern Strategy, che anche in questo caso non si tratta di Strategy puro, 
+ma di una definizione di 4 strategie separate, infatti ognuna di esse incapsula i metodi utili a verificare le collisioni con le 
+diverse entità.
+
+\begin{itemize}
+    \item CollisionDetection usa checkCollision(), che verifica la collisione del player con i blocchi della mappa tenendo conto di 6 punti 
+    della sua area di collisione che lo "circonda". Per verificare che tipologia di blocco viene toccata e in quale direzione avviene
+    la collisione richiama touchSolid() e checkCollisionDirection().
+    Inoltre CollisionDetection fornisce un metodo gameOver() che restituisce true se il player cade in una fossa, e win() quando 
+    tocca un blocco di tipo “Portale”.
+    \item PowerUpDetection usa checkCollisionWithPowers(), che permette al player di bloccarsi se collide con l'uovo, o di raccogliere un 
+    powerup quando l'uovo è stato aperto; tutto ciò avviene consultando la lista di powerups creata dal PowerUpController.
+    \item KillDetection usa checkCollisionWithEnemies(), che permette di identificare 2 tipi di collisione: se il player schiaccia il nemico, 
+    lo uccide, se viene toccato da destra o sinistra perde una vita. La posizione dei nemici viene controllata in loop mediante 
+    la lista creata da EnemyHandlerImpl.
+    \item CoinDetection usa controlCoinCollision(), che scorre la lista di monete creata da CoinController e quando l'area del player collide 
+    con l'area di una moneta viene aggiornato il conteggio delle monete sia in CoinController che in ScoreController.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/Collisions.png}
+    \caption{UML del pattern Template per il personaggio principale}
+    \label{fig:2.3}
+\end{figure}
+
+\textbf{Problema}: creazione dell'entità powerup con meccanica complessa (raccolta powerup solo dopo apertura uovo) e gestione 
+delle collisioni col player.
+
+\textbf{Soluzione}: in questo caso ho sfruttato il pattern architetturale MVC creando l'interfaccia PowerUp che realizza l'entità powerup 
+e la sua implementazione PowerUpImpl nel model del progetto. Nel controller del progetto ho creato la classe PowerUpController 
+con lo scopo di creare la lista dei powerups presenti nelle varie mappe. Infine nella view ho inserito la classe PowerUpManager, 
+che acquisisce la lista di tutti i powerups e si occupa di stamparli a video nel pannello di gioco.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/Powerup.png}
+    \caption{UML del pattern Template per il personaggio principale}
+    \label{fig:2.4}
+\end{figure}
+
+\textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni
+
+\textbf{Soluzione}: creazione della classe PowersHandler nel controller del progetto, classe che gestisce l'inizializzazione del 
+personaggio con cui si inzia il livello e la creazione di nuove istanze Character mantenendole in una lista. Quando il player ottiene 
+1 vita (raccolta powerup) o la perde (collisione ostacolo o nemico, se non schiacciato) vengono utilizzati i metodi setPowers() e 
+losePowers() dalle classi “Detection”; questi metodi si collegano al GameLoopController permettondo di cambiare la skin del player 
+attualmente in gioco e di settare la posizione della nuova istanza all'interno della mappa. Inoltre permette di 
+gestire il tempo in cui il player è immortale non appena perde una vita, tramite la variabile lastHit.
+Infine fornisce il metodo gameOver() che restituisce true se l'entità Character è di tipo “Naked” e perde una vita.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/PowersHandler.png}
+    \caption{UML del pattern Template per il personaggio principale}
+    \label{fig:2.5}
+\end{figure}
+
 \section{Francesca Gatti}
 \textbf{Problema}: Nel gioco è previsto un sistema di personalizzazione del personaggio tramite l'acquisto e la selezione di una nuova skin.
 Il problema principale affrontato è stato quello di separare la gestione della parte logica del negozio, ovvero il controllo delle monete, 
@@ -150,6 +264,7 @@ resoconto finale del tempo impiegato per completare il livello.
 oggetto di tipo javax.swing.Timer. Il timer aggiorna periodicamente il tempo trascorso in millisecondi rispetto al momento di avvio. La
 classe fornisce metodi per avviare, fermare e ottenere il tempo in formato numerico e in formato stringa (HH::mm::ss::d). Infine, il tempo 
 viene disegnato a schermo tramite la classe GameLoopPanel che recupera il valore dal Chronometer e lo mostra in tempo reale durante il gioco.
+
 \section{Giovanni Maria Rava}
 \textbf{Problema:} I nemici del gioco devono muoversi da soli, invertire direzione appena urtano un ostacolo e restare sincronizzati con 
 lo scorrimento della camera. 

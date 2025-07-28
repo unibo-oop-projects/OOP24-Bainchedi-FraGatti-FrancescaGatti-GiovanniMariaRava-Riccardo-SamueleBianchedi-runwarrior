@@ -173,6 +173,14 @@ public class CollisionDetectionImpl implements CollisionDetection {
      */
     @Override
     public boolean gameOver() {
-        return gameOverY >= glc.getGlp().getHeight() || end;
+        return gameOverY >= glc.getGlp().getHeight();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean win() {
+        return this.end;
     }
 }

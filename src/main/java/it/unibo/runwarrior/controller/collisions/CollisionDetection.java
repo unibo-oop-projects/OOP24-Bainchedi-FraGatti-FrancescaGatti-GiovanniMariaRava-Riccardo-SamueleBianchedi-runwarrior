@@ -63,4 +63,9 @@ public interface CollisionDetection {
      * @return true if the game has to be stopped
      */
     boolean gameOver();
+
+    /**
+     * @return true if the player reaches the portal
+     */
+    boolean win();
 }

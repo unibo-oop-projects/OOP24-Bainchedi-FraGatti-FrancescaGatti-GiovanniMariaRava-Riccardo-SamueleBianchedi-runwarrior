@@ -31,28 +31,52 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class represents the main men of the game, with title, play and level buttons and a shop.
+ * It initialize the graphical user interface and handles button actions to
+ * navigate to different parts of the game.
+ */
 public class Menu extends JPanel {
-        // private final static int FRAME_MENU_WIDTH = 1280;
-        // private final static int FRAME_MENU_HEIGHT = 720;
-        private final static int PLAY_BUTTON_PANEL_WIDTH = 250;
-        private final static int PLAY_BUTTON_PANEL_HEIGHT = 500;
-        private final static int BUTTON_WIDTH = 150;
-        private final static int BUTTON_HEIGHT = 40;
+        protected static final Logger LOGGER = Logger.getLogger(Menu.class.getName());
+        private static final int PLAY_BUTTON_PANEL_WIDTH = 250;
+        private static final int PLAY_BUTTON_PANEL_HEIGHT = 500;
+        private static final int BUTTON_WIDTH = 150;
+        private static final int BUTTON_HEIGHT = 40;
         private static final int SHOP_FRAME_WIDHT = 600;
         private static final int SHOP_FRAME_HEIGHT = 400; 
-        protected static final Logger LOGGER = Logger.getLogger(Menu.class.getName());
+        private static final Color PLAY_BUTTON_BG_COLOR = new Color(120, 124, 126);
+        private static final Color PLAY_BUTTON_BORDER_COLOR = new Color(85, 89, 91);
+        private static final Color LEVEL1_BG_COLOR = new Color(218, 165, 32);
+        private static final Color LEVEL1_BORDER_COLOR = new Color(180, 130, 25);
+        private static final Color LEVEL2_BG_COLOR = new Color(60, 179, 60);
+        private static final Color LEVEL2_BORDER_COLOR = new Color(40, 120, 40);
+        private static final Color LEVEL3_BG_COLOR = new Color(120, 124, 126);
+        private static final Color LEVEL3_BORDER_COLOR = new Color(85, 89, 91);
+        private static final Color SHOP_BUTTON_BG_COLOR = new Color(70, 130, 180);
+        private static final Color SHOP_BUTTON_BORDER_COLOR = new Color(30, 90, 150);
+        private static final int LINEBORDER_THICKNESS = 4;
+        private static final int VERTICAL_STRUT_MEDIUM = 20;
+        private static final int FONT_DIMENSION = 16;
 
         private final JFrame frameMenu;
         private BufferedImage backGroundImage;
         private BufferedImage titleImage;
         private JPanel pannelloSfondoMenu;
 
-        public Menu(final JFrame externalFrame){
+        /**
+         * Menu Constructor.
+         *
+         * @param externalFrame frame external on wich the game is based
+         */
+        public Menu(final JFrame externalFrame) {
             this.frameMenu = externalFrame;
             initMenu();
         }
 
-        public final void initMenu(){
+        /**
+         * Method that implement the graphic of the menu and manages the buttons.
+         */
+        public final void initMenu() {
             frameMenu.setTitle("RUN WARRIOR");
             frameMenu.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             frameMenu.addWindowListener(new WindowAdapter() {
@@ -86,22 +110,17 @@ public class Menu extends JPanel {
                     }
                 }
             };
-            //pannelloSfondoMenu.setLayout(null);
-            //pannelloSfondoMenu.setLayout(new BorderLayout());
             pannelloSfondoMenu.setLayout(new BoxLayout(pannelloSfondoMenu, BoxLayout.Y_AXIS));
             pannelloSfondoMenu.setOpaque(true);
-
             final JLabel titoloLabel = new JLabel(new ImageIcon(titleImage));
             titoloLabel.setAlignmentX(CENTER_ALIGNMENT);
-            //titoloLabel.setBounds(TITOLO_X, TITOLO_Y, TITOLO_WIDTH, TITOLO_HEIGHT);
             pannelloSfondoMenu.add(Box.createVerticalGlue());
             pannelloSfondoMenu.add(titoloLabel);
             final JPanel playButtonPanel = new JPanel();
             playButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
             playButtonPanel.setOpaque(false);
-            //playButtonPanel.setBounds(PLAY_PANEL_X, PLAY_PANEL_Y, PLAY_PANEL_WIDTH, PLAY_PANEL_HEIGHT);
             playButtonPanel.setAlignmentX(CENTER_ALIGNMENT);
-            pannelloSfondoMenu.add(Box.createVerticalStrut(20));
+            pannelloSfondoMenu.add(Box.createVerticalStrut(VERTICAL_STRUT_MEDIUM));
             pannelloSfondoMenu.add(playButtonPanel);
             pannelloSfondoMenu.add(Box.createHorizontalGlue());
             playButtonPanel.setPreferredSize(new Dimension(PLAY_BUTTON_PANEL_WIDTH, PLAY_BUTTON_PANEL_HEIGHT));
@@ -111,11 +130,11 @@ public class Menu extends JPanel {
             playButton.setMaximumSize(buttonsDimension);
             playButton.setPreferredSize(buttonsDimension);
             playButton.setMinimumSize(buttonsDimension);
-            playButton.setBackground(new Color(120, 124, 126));
-            final Font font = new Font("Cooper Black", Font.BOLD, 16);
+            playButton.setBackground(PLAY_BUTTON_BG_COLOR);
+            final Font font = new Font("Cooper Black", Font.BOLD, FONT_DIMENSION);
             playButton.setFont(font);
             playButton.setForeground(Color.BLACK);
-            playButton.setBorder(new LineBorder(new Color(85, 89, 91), 4));
+            playButton.setBorder(new LineBorder(PLAY_BUTTON_BORDER_COLOR, LINEBORDER_THICKNESS));
 
             playButton.addActionListener(new ActionListener() {
                 private GameLoopController glc;
@@ -138,22 +157,22 @@ public class Menu extends JPanel {
                     level1.setMaximumSize(buttonsDimension);
                     level1.setPreferredSize(buttonsDimension);
                     level1.setFont(font);
-                    level1.setBackground(new Color(218, 165, 32));
-                    level1.setBorder(new LineBorder(new Color(180, 130, 25), 4)); 
+                    level1.setBackground(LEVEL1_BG_COLOR);
+                    level1.setBorder(new LineBorder(LEVEL1_BORDER_COLOR, LINEBORDER_THICKNESS)); 
                     level1.setForeground(Color.BLACK);
                     level2.setAlignmentX(CENTER_ALIGNMENT);
                     level2.setMaximumSize(buttonsDimension);
                     level2.setPreferredSize(buttonsDimension);
                     level2.setFont(font);
-                    level2.setBackground(new Color(60, 179, 60));
-                    level2.setBorder(new LineBorder(new Color(40, 120, 40), 4));
+                    level2.setBackground(LEVEL2_BG_COLOR);
+                    level2.setBorder(new LineBorder(LEVEL2_BORDER_COLOR, LINEBORDER_THICKNESS));
                     level2.setForeground(Color.BLACK);
                     level3.setAlignmentX(CENTER_ALIGNMENT);
                     level3.setMaximumSize(buttonsDimension);
                     level3.setPreferredSize(buttonsDimension);
                     level3.setFont(font);
-                    level3.setBackground(new Color(120, 124, 126));
-                    level3.setBorder(new LineBorder(new Color(85, 89, 91), 4));
+                    level3.setBackground(LEVEL3_BG_COLOR);
+                    level3.setBorder(new LineBorder(LEVEL3_BORDER_COLOR, LINEBORDER_THICKNESS));
                     level3.setForeground(Color.BLACK);
 
                     level1.addActionListener(level1Event -> {
@@ -191,16 +210,15 @@ public class Menu extends JPanel {
                         glc.getGlp().setFocusable(true);
                         glc.getGlp().requestFocusInWindow();
                         glc.getGlp().requestFocus();
-                        
                     });
                     final JButton shopButton = new JButton("SHOP");
                     shopButton.setAlignmentX(CENTER_ALIGNMENT);
                     shopButton.setMaximumSize(new Dimension(buttonsDimension));
                     shopButton.setPreferredSize(buttonsDimension);
-                    shopButton.setFont(new Font("Cooper Black", Font.BOLD, 14));
-                    shopButton.setBackground(new Color(70, 130, 180));
+                    shopButton.setFont(new Font("Cooper Black", Font.BOLD, FONT_DIMENSION));
+                    shopButton.setBackground(SHOP_BUTTON_BG_COLOR);
                     shopButton.setForeground(Color.WHITE);
-                    shopButton.setBorder(new LineBorder(new Color(30, 90, 150), 4));
+                    shopButton.setBorder(new LineBorder(SHOP_BUTTON_BORDER_COLOR, LINEBORDER_THICKNESS));
 
                     shopButton.addActionListener(shopEvent -> {
                         final JFrame shopFrame = new JFrame("SHOP");
@@ -236,15 +254,19 @@ public class Menu extends JPanel {
             pannelloSfondoMenu.add(playButtonPanel);
             this.setLayout(new BorderLayout());
             this.add(pannelloSfondoMenu, BorderLayout.CENTER);
-            //frameMenu.setContentPane(pannelloSfondoMenu);
-            //frameMenu.setVisible(true);
         }
 
-        public JPanel getPanel() {
+        /**
+         * @return the panel of background
+         */
+        public final JPanel getPanel() {
             return pannelloSfondoMenu;
         }
 
-        public JFrame getFrameMenu() {
+        /**
+         * @return the main frame
+         */
+        public final JFrame getFrameMenu() {
             return frameMenu;
         }
 }
