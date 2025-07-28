@@ -47,6 +47,7 @@ public final class MonkeyView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("checkstyle:RedundantModifier")
     @Override
     public final void loadResources() throws IOException {
         rightMonkey = ImageIO.read(MonkeyView.class.getResourceAsStream("/Monkey/rightMonkey.png"));

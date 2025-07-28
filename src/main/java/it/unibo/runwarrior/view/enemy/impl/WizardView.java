@@ -59,6 +59,7 @@ public final class WizardView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("checkstyle:RedundantModifier")
     @Override
     public final void loadResources() throws IOException {
         rightWizard = ImageIO.read(WizardView.class.getResourceAsStream("/Wizard/rightWizard.png"));

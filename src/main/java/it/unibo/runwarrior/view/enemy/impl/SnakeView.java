@@ -45,6 +45,7 @@ public final class SnakeView implements EnemyView {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("checkstyle:RedundantModifier")
     @Override
     public final void loadResources() throws IOException {
         rightSnake = ImageIO.read(SnakeView.class.getResourceAsStream("/Snake/rightSnake.png"));

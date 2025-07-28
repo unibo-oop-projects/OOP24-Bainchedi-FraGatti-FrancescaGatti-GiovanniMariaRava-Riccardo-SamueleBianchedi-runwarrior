@@ -17,10 +17,10 @@ import it.unibo.runwarrior.model.player.SwordWarrior;
  */
 public class PowersHandler {
     public static final int MAX_IND = 5;
-    private GameLoopController glc;
+    private final GameLoopController glc;
     private int index;
     private int maxIndex;
-    private List<Character> everyPowerUp = new ArrayList<>();
+    private final List<Character> everyPowerUp = new ArrayList<>();
     private int realx;
     private int x;
     private int y;
@@ -34,6 +34,7 @@ public class PowersHandler {
      * @param mapH objects that prints map
      * @param pCon object that creates powerup list
      */
+    @SuppressWarnings("EI_EXPOSE_REP2")
     public PowersHandler(final GameLoopController glc, final CharacterComand cmd, 
     final HandlerMapElement mapH, final PowerUpController pCon) {
         this.glc = glc;
@@ -106,9 +107,6 @@ public class PowersHandler {
      * @return true if the player is dead
      */
     public boolean gameOver() {
-        if (maxIndex == 2 && index < 0) {
-            return true;
-        }
-        return maxIndex == MAX_IND && index < 3;
+        return maxIndex == 2 && index < 0 || maxIndex == MAX_IND && index < 3;
     }
 }

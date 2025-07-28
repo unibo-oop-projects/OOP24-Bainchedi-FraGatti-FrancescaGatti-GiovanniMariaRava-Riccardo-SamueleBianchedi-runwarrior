@@ -85,7 +85,7 @@ public class GameLoopController {
      * Chooses one of the two player with whom the game starts.
      * To be connected with the shop
      */
-    public void initializePlayer() {
+    private void initializePlayer() {
         final String selectedSkin = GameSaveManager.getInstance().getSelectedSkinName();
         final boolean wizardUnlocked = GameSaveManager.getInstance().isSkinPremiumSbloccata();
         if ("WIZARD".equalsIgnoreCase(selectedSkin) && wizardUnlocked) {

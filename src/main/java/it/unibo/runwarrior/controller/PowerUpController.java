@@ -13,7 +13,7 @@ public class PowerUpController {
     public static final int NUM_POWERUP = 6;
     public static final int FIRST_DISTANCE_POWERUP = 55;
     public static final int OBSTACLE  = 5;
-    private List<PowerUp> powerUps;
+    private final List<PowerUp> powerUps;
     private final int tileSize;
 
     /**
