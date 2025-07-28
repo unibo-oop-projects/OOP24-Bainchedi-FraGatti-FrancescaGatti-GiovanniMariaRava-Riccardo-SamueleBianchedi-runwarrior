@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.save;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

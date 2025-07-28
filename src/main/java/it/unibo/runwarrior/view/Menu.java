@@ -13,8 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 import it.unibo.runwarrior.controller.GameLoopController;
-import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
+import it.unibo.runwarrior.model.save.GameSaveManager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

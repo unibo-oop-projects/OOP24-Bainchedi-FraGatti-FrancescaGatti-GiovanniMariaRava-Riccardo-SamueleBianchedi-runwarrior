@@ -1,5 +1,7 @@
 package it.unibo.runwarrior.model;
 
+import it.unibo.runwarrior.model.save.GameSaveManager;
+
 /**
  * Represents the shop containing skins available for the player.
  * Manages default and premium skins, as well as the currently selected skin.

@@ -1,7 +1,7 @@
 package it.unibo.runwarrior.controller;
 
-import it.unibo.runwarrior.model.GameSaveManager;
 import it.unibo.runwarrior.model.Score;
+import it.unibo.runwarrior.model.save.GameSaveManager;
 
 /**
  * Class that control game score.
