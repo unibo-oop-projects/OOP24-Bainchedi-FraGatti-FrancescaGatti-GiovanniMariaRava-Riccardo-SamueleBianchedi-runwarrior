@@ -20,7 +20,6 @@ import javax.imageio.ImageIO;
  */
 public final class ImageLoader {
 
-    private static final String FROM_PATH_STRING = " from ";
     private final Map<Integer, BufferedImage> blockImages;
 
     /**
@@ -54,7 +53,7 @@ public final class ImageLoader {
             return false;
         } catch (final IOException e) {
             System.err.println("I/O Error loading image for block " + blockValue
-                + FROM_PATH_STRING + filePath + ": " + e.getMessage());
+                + "from" + filePath + ": " + e.getMessage());
             return false;
         }
     }
