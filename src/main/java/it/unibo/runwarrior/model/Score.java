@@ -5,15 +5,15 @@ package it.unibo.runwarrior.model;
  * It uses Game Save Manager to persist coin data.
  */
 public class Score {
-    private final GameSaveManager gameSaveManager;
+    private final GameSaveManager gameSaveManager = GameSaveManager.getInstance();
 
     /**
      * Score Constructor.
      *
      * @param gameSaveManager to take saved data
      */
-    public Score(final GameSaveManager gameSaveManager) {
-       this.gameSaveManager = gameSaveManager;
+    public Score() {
+       //this.gameSaveManager = gameSaveManager;
     }
 
     // /**

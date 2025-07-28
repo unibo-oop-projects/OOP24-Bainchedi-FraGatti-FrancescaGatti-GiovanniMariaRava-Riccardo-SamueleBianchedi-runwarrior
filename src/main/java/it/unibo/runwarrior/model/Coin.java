@@ -17,8 +17,8 @@ import javax.imageio.ImageIO;
 public class Coin {
     protected static final Logger LOGGER = Logger.getLogger(Coin.class.getName());
     public BufferedImage coinImage;
-    private int row; 
-    private int col; 
+    private final int row; 
+    private final int col; 
     private boolean collected; 
 
     /**
@@ -27,7 +27,7 @@ public class Coin {
      * @param row row position of the coin in the map grid
      * @param col column position of the coin in the map grid
      */
-    public Coin(int row, int col) {
+    public Coin(final int row, final int col) {
         this.row = row; 
         this.col = col; 
         this.collected = false; 
@@ -39,11 +39,6 @@ public class Coin {
     public void loadCoinImage() {
         try {
             coinImage = ImageIO.read(getClass().getResourceAsStream("/Coins/CoinSmall.png"));
-            if (coinImage == null) {
-                LOGGER.log(Level.SEVERE, "Cannot load coin image");
-            } else {
-                LOGGER.log(Level.SEVERE, "Coin Image loaded");
-            }
         } catch(final IOException e) {
             LOGGER.log(Level.SEVERE, "Cannot load coin images");
         }
@@ -55,7 +50,7 @@ public class Coin {
      *
      * @return
      */
-    public Rectangle getRectangle(int tileSize) {
+    public Rectangle getRectangle(final int tileSize) {
         return new Rectangle(col * tileSize, row * tileSize, tileSize, tileSize);
     }
 

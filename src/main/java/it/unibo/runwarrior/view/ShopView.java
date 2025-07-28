@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -56,7 +55,7 @@ public final class ShopView extends JPanel {
             }
         });
         final JButton selectDefaultSkinButton = new JButton("SELECT DEFAULT SKIN");
-        selectDefaultSkinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selectDefaultSkinButton.setAlignmentX(CENTER_ALIGNMENT);
         selectDefaultSkinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -66,7 +65,7 @@ public final class ShopView extends JPanel {
             }
         });
         final JButton selectWizardSkinButton = new JButton("SELECT WIZARD SKIN");
-        selectWizardSkinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selectWizardSkinButton.setAlignmentX(CENTER_ALIGNMENT);
         selectWizardSkinButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
