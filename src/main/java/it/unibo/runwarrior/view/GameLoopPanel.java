@@ -143,7 +143,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
         
         GameSaveManager.getInstance().addCoin(gameController.getCoinController().getCoinsCollected());
 
-        //quale pannello mostrare?
         JPanel content = levelCompleted
         ? new LevelCompletedPanel(chronometer.getTimeString(), gameController.getCoinController().getCoinsCollected())
         : new GameOverPanel(gameController.getCoinController().getCoinsCollected());
