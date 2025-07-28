@@ -26,10 +26,10 @@ public class HandlerMapElement {
     private int tileSize;
 
     /**
-    * Constructor of the class HandlerMapElement.
-    *
-    * @param gamemap
-    */
+     * Constructor of the class HandlerMapElement.
+     * 
+     * @param gamemap 
+     */
     public HandlerMapElement(final GameMap gamemap) {
         this.blocks = new ArrayList<>();
         this.mapBlock = gamemap.getBlockImages();
@@ -37,19 +37,19 @@ public class HandlerMapElement {
         mapImage();
     }
 
-   /**
-    * This method create a new MapElement using the map created in GameMap.
-    */
+    /**
+     * This method create a new MapElement using the map created in GameMap.
+     */
     private void mapImage() {
-        for (var entry : mapBlock.entrySet()) {
-            MapElement newElement = new MapElement();
+        for (final var entry : mapBlock.entrySet()) {
+            final MapElement newElement = new MapElement();
             newElement.setImage(entry.getValue());
             switch (entry.getKey()) {
                 case 0, 4:
                 newElement.setHarmless(true);
                 newElement.setCollision(false);
                 break;
-                case 1,2:
+                case 1, 2:
                 newElement.setHarmless(true);
                 newElement.setCollision(true);
                 break;
@@ -58,7 +58,7 @@ public class HandlerMapElement {
                 newElement.setHarmless(true);
                 newElement.setPortal(true);
                 break;
-                case 5,6:
+                case 5, 6:
                 newElement.setHarmless(false);
                 newElement.setCollision(true);
                 break;
@@ -68,14 +68,14 @@ public class HandlerMapElement {
             blocks.add(newElement);
         }
     }
-    
+
     /**
      * Renders all the blocks of the map.
-     * 
-     * @param g the graphics context
+     *
+     * @param gr the graphics context
      * @param player the player character
      */
-    public void printBlocks(Graphics2D gr, Character player) {
+    public void printBlocks(final Graphics2D gr, final Character player) {
         int rows = map.length;
         int cols = map[0].length;
         shift = player.getMovementHandler().getGroundX();
@@ -92,25 +92,25 @@ public class HandlerMapElement {
     
     /**
      * Gets an unmodifiable list of map elements (blocks).
-     * 
+     *
      * @return an unmodifiable list of blocks
      */
     public List<MapElement> getBlocks() {
         return Collections.unmodifiableList(this.blocks);
     }
-    
+
     /**
      * Sets the horizontal shift for rendering.
-     * 
+     *
      * @param slide the shift value
      */
     public void setShift(final int slide) {
         shift = slide;
     }
-    
+
     /**
      * Gets the size of a single tile.
-     * 
+     *
      * @return the dimension of the tile
      */
     public int getTileSize() {
@@ -118,10 +118,10 @@ public class HandlerMapElement {
         tileSize = GameLoopPanel.HEIGHT / rows;
         return tileSize;
     }
-    
+
     /**
      * Calculates the starting Y position for the player.
-     * 
+     *
      * @return the starting Y coordinate
      */
     public int getFirstY() {
@@ -138,10 +138,10 @@ public class HandlerMapElement {
         }
         return firstY;
     }
-    
+
     /**
      * Gets a list of all rectangles with collision enabled.
-     * 
+     *
      * @return the list with all the obstacle's rectangles
      */
     public List<Rectangle> getCollisionRectangles() {
@@ -160,19 +160,19 @@ public class HandlerMapElement {
         }
         return collisionRects;
     }
-    
+
     /**
      * Gets the current horizontal shift value.
-     * 
+     *
      * @return the shift value
      */
     public int getShift() {
         return this.shift;
     }
-    
+
     /**
      * Gets a deep copy of the raw map data array.
-     * 
+     *
      * @return a deep copy of the 2D map array
      */
     public int[][] getMap() {

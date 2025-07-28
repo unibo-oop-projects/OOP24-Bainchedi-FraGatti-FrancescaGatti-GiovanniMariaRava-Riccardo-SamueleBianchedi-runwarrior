@@ -4,7 +4,7 @@ import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
 
 public interface CharacterMovementHandler {
-    
+
     /**
      * Set the initial position of the player.
      *
@@ -53,7 +53,7 @@ public interface CharacterMovementHandler {
      */
     boolean canAttack();
 
-     /**
+    /**
      * @return map tiles collision object
      */
     CollisionDetectionImpl getCollisionDetection();

@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import it.unibo.runwarrior.model.player.PlayerFrame;
 
 public interface CharacterAnimationHandler {
-    
+
     /**
      * Set the current player images.
      *
