@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.Chronometer;
 import it.unibo.runwarrior.model.GameSaveManager;
+
 /**
  * Class that render the main panel of the game and the end frame.
  */
@@ -31,21 +32,21 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private GameLoopController gameController;
     private final GameMusic music;
     private Chronometer chronometer;
-    private boolean gameStarted = false;
-    private boolean gameEnded = false;
-    private boolean levelCompleted = false;
-    private boolean panelShawn = false;
+    private boolean gameStarted;
+    private boolean gameEnded;
+    private boolean levelCompleted;
+    private boolean panelShawn;
     private JFrame frameMenu;
 
     /**
      * Constructor of the class. 
      *
-     * @param frameMenu
-     * @param mapPath
-     * @param themePath
-     * @param enemiesPath
-     * @param coinsPath
-     * @param gameController
+     * @param frameMenu is the frame in which menu is shown
+     * @param mapPath the path for loading of the map
+     * @param themePath the path for loading the images of tile
+     * @param enemiesPath the path for loadin the enemies position
+     * @param coinsPath the path for loading the coin position
+     * @param gameController the controller of the whole game
      */
     public GameLoopPanel(final JFrame frameMenu, final String mapPath, final String themePath, final String enemiesPath, 
                             final String coinsPath, final GameLoopController gameController) {
@@ -73,20 +74,20 @@ public class GameLoopPanel extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        double timeFor1Frame = MLD/FPS; // 16.666.666,67 in ns
+        double timeFor1Frame = MLD/FPS;
         long lastTime = System.nanoTime();
         long currentTime;
         double waitingTime = 0;
 
         while (!Thread.currentThread().isInterrupted()) {
             currentTime = System.nanoTime();
-            waitingTime += (currentTime - lastTime);
+            waitingTime += currentTime - lastTime;
             lastTime = currentTime;
 
             if (waitingTime >= timeFor1Frame) {
                 update();
                 repaint();
-                waitingTime  -= timeFor1Frame;
+                waitingTime -= timeFor1Frame;
             }
         }
     }
@@ -94,7 +95,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     /**
      * Called when the game is ended to interrupt the thread.
      */
-    public void endGame(){
+    public void endGame() {
         gameThread.interrupt();
     }
 
@@ -180,7 +181,8 @@ public class GameLoopPanel extends JPanel implements Runnable {
         gameController.getPowersManager().printPowerUp(gr2);
         gameController.getPlayer().drawPlayer(gr2);
         gameController.getEnemyHandler().render(gr2);
-        gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize(), gameController.getPlayer());
+        gameController.getCoinController().drawAllCoins(gr2, gameController.getMapHandler().getTileSize(), 
+                                                        gameController.getPlayer());
         gr2.setColor(Color.BLACK);
         gr2.setFont(new Font("Cooper Black", Font.BOLD, FONT_X));
         gr2.drawString("TIME:" + chronometer.getTimeString(), FONT_X, FONT_TIME_Y);
