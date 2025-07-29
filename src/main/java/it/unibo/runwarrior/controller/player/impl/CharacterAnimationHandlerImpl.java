@@ -8,6 +8,7 @@ import it.unibo.runwarrior.controller.player.CharacterComand;
 import it.unibo.runwarrior.controller.player.api.CharacterAnimationHandler;
 import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
 import it.unibo.runwarrior.model.player.PlayerFrame;
+import it.unibo.runwarrior.view.GameMusic;
 
 /**
  * Class that handle player frames changing.
@@ -29,6 +30,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
     private static final int LIMIT_ATTACK = 60;
     private final CharacterComand cmd;
     private final CharacterMovementHandler movement;
+    private final GameMusic sound;
     private int changeFrame;
     private boolean crossWalk;
     private int useAttackMoving;
@@ -56,6 +58,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
     public CharacterAnimationHandlerImpl(final CharacterComand cmd, final CharacterMovementHandler move) {
         this.cmd = cmd;
         this.movement = move;
+        this.sound = new GameMusic("sword.wav");
     }
 
     /**
@@ -98,14 +101,17 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
             if (cmd.isAttacking() && movement.canAttack() && useAttackMoving > LIMIT_ATTACK) {
                 playerFrame = PlayerFrame.ATTACK_FRAME;
                 useAttackMoving = 0;
+                sound.play(false);
             }
         } else if (cmd.isJumping()) {
             playerFrame = PlayerFrame.JUMP_FRAME;
             if (cmd.isAttacking() && movement.canAttack()) {
                 playerFrame = PlayerFrame.ATTACK_FRAME;
+                sound.play(false);
             }
         } else if (cmd.isAttacking() && movement.canAttack()) {
             playerFrame = PlayerFrame.ATTACK_FRAME;
+            sound.play(false);
         } else {
             playerFrame = PlayerFrame.STOP_FRAME;
         }
