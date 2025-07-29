@@ -104,6 +104,7 @@ public class PowerUpImpl implements PowerUp {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI2_EXPOSE_REP2")
     public void setTouchArea(final Rectangle touchArea) {
         this.touchArea = touchArea;
     }

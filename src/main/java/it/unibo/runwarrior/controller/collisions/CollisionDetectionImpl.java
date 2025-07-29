@@ -57,7 +57,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @SuppressFBWarnings(
-    value = "NO_DANGEROUS_NON_SHORT_CIRCUIT",
+    value = "NS_DANGEROUS_NON_SHORT_CIRCUIT",
     justification = "evey touchSolid has to be checked to verify every point collision")
     @Override
     public String checkCollision(final Character player) {
