@@ -95,8 +95,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
         this.screenX = x;
         this.playerY = y;
         this.playerX = realx;
-        maxJump = playerY - (sizeCharacter * JUMP_MAX);
-        midJump = playerY - (sizeCharacter * JUMP_MID);
+        maxJump = playerY - (sizeCharacter * JUMP_MAX / 2);
+        midJump = playerY - (sizeCharacter * JUMP_MID / 2);
         this.groundX = slide;
         this.killDetection.setHitWaitTime(lastHit);
         this.collisionDetection.setHitWaitTime(lastHit);
