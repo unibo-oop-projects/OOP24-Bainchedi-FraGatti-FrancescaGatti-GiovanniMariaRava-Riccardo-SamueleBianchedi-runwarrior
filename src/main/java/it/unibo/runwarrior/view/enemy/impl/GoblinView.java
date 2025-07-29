@@ -24,6 +24,16 @@ public final class GoblinView implements EnemyView {
     private BufferedImage rightGoblinMoving;
     private BufferedImage leftGoblinMoving;
     private BufferedImage image;
+    /*
+    * SuppressFBWarnings: EI_EXPOSE_REP2
+    *
+    * Il warning EI_EXPOSE_REP2 segnala che un oggetto mutabile fornito come parametro
+    * al costruttore viene salvato direttamente in un campo interno senza difensive copy.
+    * In questo caso, la scelta è intenzionale: GoblinView ha bisogno di mantenere un 
+    * riferimento diretto al controller per invocare azioni durante il rendering, 
+    * come previsto dall'architettura MVC. Non ha senso creare una copia, perché il controller 
+    * rappresenta un punto di coordinamento globale e condiviso.
+    */
     @SuppressFBWarnings(
     value = "EI_EXPOSE_REP2",
     justification = "GoblinView needs to invoke controller actions during rendering")

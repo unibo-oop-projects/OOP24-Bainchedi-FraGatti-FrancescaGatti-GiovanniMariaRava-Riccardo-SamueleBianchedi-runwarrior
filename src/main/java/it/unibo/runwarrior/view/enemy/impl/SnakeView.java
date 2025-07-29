@@ -23,6 +23,16 @@ public final class SnakeView implements EnemyView {
     private BufferedImage rightSnakeMoving;
     private BufferedImage leftSnake;
     private BufferedImage leftSnakeMoving;
+    /*
+    * SuppressFBWarnings: EI_EXPOSE_REP2
+    *
+    * Il warning EI_EXPOSE_REP2 segnala che un oggetto mutabile fornito come parametro
+    * al costruttore viene salvato direttamente in un campo interno senza difensive copy.
+    * In questo caso, la scelta è intenzionale: SnakeView ha bisogno di mantenere un 
+    * riferimento diretto al controller per invocare azioni durante il rendering, 
+    * come previsto dall'architettura MVC. Non ha senso creare una copia, perché il controller 
+    * rappresenta un punto di coordinamento globale e condiviso.
+    */
     @SuppressFBWarnings(
     value = "EI_EXPOSE_REP2",
     justification = "SnakeView needs to invoke controller actions during rendering")
