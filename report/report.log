@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  29 JUL 2025 16:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  29 JUL 2025 16:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -320,7 +320,7 @@ Capitolo 1.
 [2
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<resources/modelloDominioUML.png, id=137, 3854.4pt x 2515.3975pt>
+<resources/modelloDominioUML.png, id=132, 3854.4pt x 2515.3975pt>
 File: resources/modelloDominioUML.png Graphic file (type png)
 <use resources/modelloDominioUML.png>
 Package pdftex.def Info: resources/modelloDominioUML.png  used on input line 72.
@@ -330,49 +330,49 @@ Capitolo 2.
 [5
 
 ]
-<resources/UMLMapElement.png, id=154, 3852.3925pt x 3058.42625pt>
+<resources/UMLMapElement.png, id=149, 3852.3925pt x 3058.42625pt>
 File: resources/UMLMapElement.png Graphic file (type png)
 <use resources/UMLMapElement.png>
 Package pdftex.def Info: resources/UMLMapElement.png  used on input line 100.
 (pdftex.def)             Requested size: 312.00119pt x 247.66583pt.
  [6 <./resources/UMLMapElement.png>]
-<resources/TemplateCharacter.png, id=162, 3603.4625pt x 3854.4pt>
+<resources/TemplateCharacter.png, id=156, 3603.4625pt x 3854.4pt>
 File: resources/TemplateCharacter.png Graphic file (type png)
 <use resources/TemplateCharacter.png>
 Package pdftex.def Info: resources/TemplateCharacter.png  used on input line 128.
 (pdftex.def)             Requested size: 312.00119pt x 333.70685pt.
  [7] [8 <./resources/TemplateCharacter.png>]
-<resources/playerAction.png, id=173, 3854.4pt x 2296.58pt>
+<resources/playerAction.png, id=168, 3854.4pt x 2296.58pt>
 File: resources/playerAction.png Graphic file (type png)
 <use resources/playerAction.png>
 Package pdftex.def Info: resources/playerAction.png  used on input line 156.
 (pdftex.def)             Requested size: 312.00119pt x 185.86777pt.
  [9 <./resources/playerAction.png>]
-<resources/Collisions.png, id=180, 3854.4pt x 1617.04124pt>
+<resources/Collisions.png, id=175, 3854.4pt x 1617.04124pt>
 File: resources/Collisions.png Graphic file (type png)
 <use resources/Collisions.png>
 Package pdftex.def Info: resources/Collisions.png  used on input line 191.
 (pdftex.def)             Requested size: 312.00119pt x 130.87105pt.
  [10 <./resources/Collisions.png>]
-<resources/Powerup.png, id=187, 3854.4pt x 2736.2225pt>
+<resources/Powerup.png, id=182, 3854.4pt x 2736.2225pt>
 File: resources/Powerup.png Graphic file (type png)
 <use resources/Powerup.png>
 Package pdftex.def Info: resources/Powerup.png  used on input line 207.
 (pdftex.def)             Requested size: 312.00119pt x 221.4491pt.
  [11 <./resources/Powerup.png>]
-<resources/PowersHandler.png, id=194, 3854.4pt x 3650.63875pt>
+<resources/PowersHandler.png, id=189, 3854.4pt x 3650.63875pt>
 File: resources/PowersHandler.png Graphic file (type png)
 <use resources/PowersHandler.png>
 Package pdftex.def Info: resources/PowersHandler.png  used on input line 224.
 (pdftex.def)             Requested size: 312.00119pt x 295.45502pt.
  [12 <./resources/PowersHandler.png>]
-<resources/UMLshop.png, id=203, 2083.785pt x 1255.69125pt>
+<resources/UMLshop.png, id=198, 2083.785pt x 1255.69125pt>
 File: resources/UMLshop.png Graphic file (type png)
 <use resources/UMLshop.png>
 Package pdftex.def Info: resources/UMLshop.png  used on input line 251.
 (pdftex.def)             Requested size: 312.00119pt x 188.00067pt.
  [13 <./resources/UMLshop.png>] [14]
-<resources/enemyMvcUml.png, id=215, 3854.4pt x 1964.33875pt>
+<resources/enemyMvcUml.png, id=210, 3854.4pt x 1964.33875pt>
 File: resources/enemyMvcUml.png Graphic file (type png)
 <use resources/enemyMvcUml.png>
 Package pdftex.def Info: resources/enemyMvcUml.png  used on input line 312.
@@ -380,13 +380,13 @@ Package pdftex.def Info: resources/enemyMvcUml.png  used on input line 312.
  [15]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 321.
-<resources/saveManagerUML.png, id=225, 3317.39375pt x 3854.4pt>
+<resources/saveManagerUML.png, id=220, 3317.39375pt x 3854.4pt>
 File: resources/saveManagerUML.png Graphic file (type png)
 <use resources/saveManagerUML.png>
 Package pdftex.def Info: resources/saveManagerUML.png  used on input line 340.
 (pdftex.def)             Requested size: 234.00238pt x 271.83522pt.
  [16 <./resources/enemyMvcUml.png>] [17 <./resources/saveManagerUML.png>]
-<resources/spawingEnemyUML.png, id=244, 3854.4pt x 1799.72375pt>
+<resources/spawingEnemyUML.png, id=239, 3854.4pt x 1799.72375pt>
 File: resources/spawingEnemyUML.png Graphic file (type png)
 <use resources/spawingEnemyUML.png>
 Package pdftex.def Info: resources/spawingEnemyUML.png  used on input line 359.
@@ -534,42 +534,38 @@ Appendice A.
 [25
 
 ]
-Appendice B.
-[26
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 515--519
+Underfull \hbox (badness 10000) in paragraph at lines 514--518
 []$\OT1/cmtt/m/n/12 https : / / docs . pmd-[]code . org / pmd-[]doc-[]7 . 12 . 0 / pmd _ rules _ java _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 521--525
+Underfull \hbox (badness 10000) in paragraph at lines 520--524
 []$\OT1/cmtt/m/n/12 https : / / en . wikipedia . org / wiki / Initialization-[]on-[]demand _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 528--532
+Underfull \hbox (badness 10000) in paragraph at lines 527--531
 []$\OT1/cmtt/m/n/12 https : / / docs . oracle . com / javase / 8 / docs / api / java / util / Timer .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 534--538
+Underfull \hbox (badness 10000) in paragraph at lines 533--537
 []$\OT1/cmtt/m/n/12 https : / / docs . oracle . com / javase / 8 / docs / api / java / awt / event /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 540--544
+Underfull \hbox (badness 10000) in paragraph at lines 539--543
 []$\OT1/cmtt/m/n/12 https : / / www3 . ntu . edu . sg / home / ehchua / programming / java / J8c _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 546--550
+Underfull \hbox (badness 10000) in paragraph at lines 545--549
 []$\OT1/cmtt/m/n/12 https : / / docs . oracle . com / javase / 8 / docs / api / java / awt / Graphics .
  []
 
-[27
+[26
 
-] [28] (./report.aux
+] [27] (./report.aux
 Package cleveref Info: loaded `italian' language definitions on input line 7.
 Package cleveref Info: loaded `italian' language definitions on input line 8.
 )
@@ -582,21 +578,21 @@ L3 programming layer <2024-02-20>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: D16F02E3A99F3C4A5D98336A1E3B8B7F;3184.
+(rerunfilecheck)             Checksum: 94D3FDD791D95A00E98F39B369221338;3075.
  ) 
 Here is how much of TeX's memory you used:
- 12400 strings out of 474116
- 209138 string characters out of 5743683
+ 12397 strings out of 474116
+ 209101 string characters out of 5743683
  1937187 words of memory out of 5000000
- 34566 multiletter control sequences out of 15000+600000
+ 34565 multiletter control sequences out of 15000+600000
  564696 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,350b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,79p,350b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on report.pdf (29 pages, 2680060 bytes).
+Output written on report.pdf (28 pages, 2679638 bytes).
 PDF statistics:
- 414 PDF objects out of 1000 (max. 8388607)
- 337 compressed objects within 4 object streams
- 74 named destinations out of 1000 (max. 500000)
- 246 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 403 PDF objects out of 1000 (max. 8388607)
+ 327 compressed objects within 4 object streams
+ 72 named destinations out of 1000 (max. 500000)
+ 238 words of extra memory for PDF output out of 10000 (max. 10000000)
 
