@@ -79,8 +79,7 @@ L'architettura di RunWarrior segue il pattern architetturale MVC (Model - View -
 del gioco e di tutte le sue entità a seguito dei diversi eventi che possono capitare durante la sessione. All'interno della classe, 
 dal momento in cui viene acquistato il nuovo personaggio, ricevendo le informazione da GameSaveManager e Shop, viene gestito il cambio skin.
 Gli input da tastiera per muovere il personaggio vengono gestiti tramite la comunicazione tra le classi CharacterComand e MovementHandlerImpl.
-Quindi il Character è una entità reattiva che modifica il proprio stato a seguito delle diverse collisioni con le entità, 
-tramite CollisionDetection, KillDetection e PowerUpDetection.
+Quindi il Character è una entità reattiva che modifica il proprio stato a seguito delle diverse collisioni con le diverse entità.
 Il pattern MVC implementato consente di mantenere lo stato del controller nell'eventualità che si modifichi la view.
 inserire UML delle classi principali dell'MVC
 \section{Samuele Bianchedi}
@@ -108,16 +107,18 @@ dei setter, quello a cui si aspirava era un oggetto non modificabile lontano da 
 \section{Riccardo Cornacchia}
 
 \textbf{Problema}: si deve gestire la creazione del player considerando che le 2 entità warrior e wizard possono cambiare in modo attivo 3 skin
-(senza armatura, con armatura, con armatura e spada/bastone) durante la sessione di gioco.
+(senza armatura, con armatura, con armatura e spada/bastone) durante la sessione di gioco.\vspace{1cm}
 
 \textbf{Soluzione}: all'interno dell'architettura MVC, ho realizzato una classe astratta AbstractCharacterImpl che implementa l'interfaccia 
 Character per creare l'entità player, nel model del progetto. In questa classe vengono definiti metodi standard che il player esegue sempre 
 e i campi che ogni entità player deve avere.
+
 Tale classe astratta viene estesa da 6 classi concrete (NakedWarrior, NakedWizard, ArmourWarrior, ArmourWizard, SwordWarrior, 
-StickWizard). Ogni sottoclasse fa Override del metodo astratto playerImage(), mentre SwordWarrior e StickWizard fanno Override 
-del metodo updateAttackCollision() che setta l'eventuale area dell'arma.
-AbstractCharacterImpl implementa il metodo update(), che richiama i metodi playerImage() e updatePlayerPosition(), modificati ad hoc 
-da ciascuna sottoclasse. Tramite questa architettura viene sfruttato il Template pattern che stabilisce lo scheletro dell'operazione 
+StickWizard). Ogni sottoclasse fa Override del metodo astratto playerImage(), per settare le immagini corrispondenti alla skin 
+attualmente in gioco, mentre SwordWarrior e StickWizard fanno Override del metodo updateAttackCollision() che setta l'eventuale area dell'arma.
+AbstractCharacterImpl implementa il metodo update(), che richiama i 2 metodi modificati ad hoc da ciascuna sottoclasse.
+
+Tramite questa architettura viene sfruttato il Template pattern che stabilisce lo scheletro dell'operazione 
 principale (update) nella classe astratta e delega alle sottoclassi la definizione di uno o più aspetti specifici dell'algoritmo 
 (playerImage e updateAttackCollision). Il Template method è l'update() che definisce l'algoritmo principale; esso infatti richiama i due 
 metodi definiti dalle sottoclassi.
@@ -129,32 +130,42 @@ metodi definiti dalle sottoclassi.
     \label{fig:2.1}
 \end{figure}
 
+
 \textbf{Problema}: gestione dell'animazione, ovvero il cambio continuo dei frame per ogni specifica azione del personaggio; 
-gestione del movimento del player, collegato ad input da tastiera.
+gestione del movimento del player, collegato ad input da tastiera.\vspace{1cm}
 
 \textbf{Soluzione}: all'interno dell'architettura MVC , ho realizzato due interfacce CharacterAnimationHandler e 
 CharacterMovementHandler, rispettivamente implementate da CharacterAnimationHandlerImpl e CharacterMovementHandlerImpl, nel controller 
 del progetto. L'obbiettivo è quello di delegare i 2 comportamenti fondamentali di ogni entità player a due classi distinte nella sezione 
-controller. Entrambe le interfacce vengono usate da AbstractCharacterImpl e i loro metodi vengono richiamati all'interno di update() 
+controller.
+
+Entrambe le interfacce vengono usate da AbstractCharacterImpl e i loro metodi vengono richiamati all'interno di update() 
 e drawPlayer(Graphics2D).
 Per questa architettura mi sono basato sul pattern Strategy, ma applicandone una variazione, cioè incapsulare in 2 interfacce diverse 
+<<<<<<< HEAD
+le operazioni che gestiscono animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire 
+tali comportamenti, entrambe le classi usano CharacterComand, la classe che gestisce l'input da tastiera.
+
+=======
 animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire tali comportamenti entrambe le classi 
 usano CharacterComand, la classe che gestisce l'input da tastiera.
+>>>>>>> 1177dc7188d3a96ba1165ba19e439a1417d417bf
 CharacterAnimationHandler definisce metodi fondamentali come: frameChanger(), per gestire il cambiamento dei frame in base agli input 
 e imagePlayer(boolean rightDirection), che fornisce l'immagine corretta in base al frame corrente.
 CharacterMovementHandler definisce metodi fondamentali come: setLocationAfterPowerUp(), per reimpostare la posizione del player
-dopo aver guadagnato o perso una vita, movePlayer(), per gestire spostamento a destra e sinistra, salto e collisione con le diverse 
+dopo aver guadagnato o perso una vita e movePlayer(), per gestire spostamento a destra e sinistra, salto e collisione con le diverse 
 entità.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{resources/playerAction.png}
     \caption{UML architettura implementazione animazione e movimento player}
     \label{fig:2.2}
 \end{figure}
 
+
 \textbf{Problema}: gestione delle collisioni con le diverse entità: blocchi della mappa, powerups, nemici e monete. 
-Mantenere la relazione con le classi che gestiscono eventuali conseguenze di una specifica collisione.
+Mantenere la relazione con le classi che gestiscono eventuali conseguenze di una specifica collisione.\vspace{1cm}
 
 \textbf{Soluzione}: in questo caso all'interno dell'architettura MVC , ho realizzato 4 interfacce nel controller del progetto, 
 ognuna delle quali gestisce le collisioni con 1 delle 4 entità: CollisionDetection, per i blocchi delle mappe, PowerUpDetection, 
@@ -170,18 +181,17 @@ diverse entità.
     \item CollisionDetection usa checkCollision(), che verifica la collisione del player con i blocchi della mappa tenendo conto di 6 punti 
     della sua area di collisione che lo "circonda". Per verificare che tipologia di blocco viene toccata e in quale direzione avviene
     la collisione richiama touchSolid() e checkCollisionDirection().
-    Inoltre CollisionDetection fornisce un metodo gameOver() che restituisce true se il player cade in una fossa, e win() quando 
-    tocca un blocco di tipo “Portale”.
+    Inoltre fornisce i metodi gameOver() e win() che restituiscono true se il player muore o arriva al portale.
     \item PowerUpDetection usa checkCollisionWithPowers(), che permette al player di bloccarsi se collide con l'uovo, o di raccogliere un 
     powerup quando l'uovo è stato aperto; tutto ciò avviene consultando la lista di powerups creata dal PowerUpController.
     \item KillDetection usa checkCollisionWithEnemies(), che permette di identificare 2 tipi di collisione: se il player schiaccia il nemico, 
     lo uccide, se viene toccato da destra o sinistra perde una vita. La posizione dei nemici viene controllata in loop mediante 
     la lista creata da EnemyHandlerImpl.
     \item CoinDetection usa controlCoinCollision(), che scorre la lista di monete creata da CoinController e quando l'area del player collide 
-    con l'area di una moneta viene aggiornato il conteggio delle monete sia in CoinController che in ScoreController.
+    con l'area di una moneta viene aggiornato il conteggio delle monete.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{resources/Collisions.png}
     \caption{UML architettura per gestire le collisioni}
@@ -189,21 +199,26 @@ diverse entità.
 \end{figure}
 
 \textbf{Problema}: creazione dell'entità powerup con meccanica complessa (raccolta powerup solo dopo apertura uovo) e gestione 
-delle collisioni col player.
+delle collisioni col player.\vspace{1cm}
 
 \textbf{Soluzione}: in questo caso ho sfruttato il pattern architetturale MVC creando l'interfaccia PowerUp che realizza l'entità powerup 
 e la sua implementazione PowerUpImpl nel model del progetto. Nel controller del progetto ho creato la classe PowerUpController 
 con lo scopo di creare la lista dei powerups presenti nelle varie mappe. Infine nella view ho inserito la classe PowerUpManager, 
-che acquisisce la lista di tutti i powerups e si occupa di stamparli a video nel pannello di gioco.
+che acquisisce la lista di tutti i powerups e si occupa di stamparli a video nel pannello di gioco. La collsione tra player e lista 
+di powerup è gestita da PowerUpDetection.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{resources/Powerup.png}
     \caption{UML architettura MVC dei powerup}
     \label{fig:2.4}
 \end{figure}
 
+<<<<<<< HEAD
+\textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni.\vspace{1cm}
+=======
 \textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni
+>>>>>>> 1177dc7188d3a96ba1165ba19e439a1417d417bf
 
 \textbf{Soluzione}: creazione della classe PowersHandler nella sezione controller dell'MVC. La classe che gestisce l'inizializzazione del 
 personaggio con cui si inzia il livello e la creazione di nuove istanze Character mantenendole in una lista. Quando il player ottiene 
@@ -213,7 +228,7 @@ attualmente in gioco e di settare la posizione della nuova istanza all'interno d
 gestire il tempo in cui il player è immortale non appena perde una vita, tramite la variabile lastHit.
 Infine fornisce il metodo gameOver() che restituisce true se l'entità Character è di tipo “Naked” e perde una vita.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{resources/PowersHandler.png}
     \caption{UML architettura per gestire cambio skin in base alle collisioni}
@@ -418,7 +433,35 @@ senza aggiungere funzioni complicate, creando classi che si occupano di un solo 
 Ho cercato di fare del mio meglio, tra impegni, lavoro e tutto il resto. Ogni tanto ho rotto il programma e i miei compagni mi hanno aiutato
 a riparare i miei errori. Avrei potuto essere più attivo nel gruppo e apportare qualche contributo in più.
 Sicuramente mi è piaciuto e mi ha divertito e mi ha spronato a impegnarmi di più in vista di futuri esami.
+
 \subsection{Riccardo Cornacchia}
+<<<<<<< HEAD
+\textbf{Sviluppi futuri}: implementazione di nuove skin da inserire nel Template pattern, sia per i personaggi esistenti, sia per 
+nuovi personaggi, creando nuove classi ed estendendo AbstractCharacterImpl.
+In relazione a ciò appena detto si può aggiungere l'implementazione di nuovi powerups: aggiungerne dei nuovi ai personaggi esistenti o 
+modificare quelli esistenti.
+Implementazione di nuovi metodi da parte delle sottoclassi di AbstractCharacterImpl che possano definire nuove meccaniche di gioco, 
+ad esempio: salto doppio, gestione di nuove azioni determinate da evntuali nuovi powerup, accovacciamento.
+
+\textbf{Autovalutazione}: sin dall'inizio dello sviluppo del progetto, penso che mi sia focalizzato con serietà e dedizione su come 
+realizzare la nostra idea e in particolar modo su come definire la mia parte, che ad oggi posso dire essere il frutto di una continua 
+ricerca avvenuta mediante tante idee giuste e sbagliate.
+Uno degli aspetti che mi ha tenuto maggiormente occupato e su cui ho speso un'importante parte del mio lavoro, è la realizzazione 
+delle collisioni, in particolar modo le collisioni tra player e blocchi della mappa, da cui ho 
+poi sviluppato anche le altre classi di gestione delle collisioni; per questo credo che questo aspetto sia un punto di forza della 
+mia parte di codice.
+
+Altro aspetto su cui ho lavorato tanto è stata la meccanica di movimento del player, che step by step è arrivata ad essere ciò che è 
+ora, ma credo che in quel caso, una volta impostati gli input da tastiera, si potessero prendere diverse strade per svilupparla, 
+giungendo alla stessa conclusione ma con un codice eventualmente migliore, o anche peggiore chissà, in confronto a quello da me sviluppato.
+Cito anche la parte relativa ai potenziamenti e la classe PowersHandler che penso essere ben adeguate all'architettura MVC.
+
+Complessivamente penso di essere riuscito ad avere un approccio attivo e stimolante con il gruppo di lavoro, con cui mi sono confrontato 
+con continuità e grazie al quale siamo riusciti a risolvere diversi problemi in maniera più efficiente.
+
+
+=======
+>>>>>>> 1177dc7188d3a96ba1165ba19e439a1417d417bf
 \subsection{Francesca Gatti}
 \begin{itemize}
     \item \textbf{Utilizzo lambda expression} $\rightarrow$ Permalink:
