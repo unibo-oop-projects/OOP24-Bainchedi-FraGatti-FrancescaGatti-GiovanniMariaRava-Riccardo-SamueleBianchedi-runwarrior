@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 
@@ -36,6 +38,8 @@ import it.unibo.runwarrior.view.enemy.impl.WizardView;
  * Gestisce l'inizializzazione dei campi necessari e gestisce l'aggiornamento.
  */
 public class GameLoopController {
+    public static final Logger LOGGER = Logger.getLogger(GameLoopController.class.getName());
+    private static final String WARNING = "EI_EXPOSE_REP";
     private static final int TYPE_FIVE = 5;
     private final GameLoopPanel glp;
     private Character player;
@@ -82,10 +86,9 @@ public class GameLoopController {
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
         try (InputStream is = GameLoopController.class.getResourceAsStream(enemiesPath)) {
             enemySpawner.loadEnemiesFromStream(is);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (final IOException e) {
+            LOGGER.log(Level.SEVERE, "Cannot load enemies");
         }
-       
 
         final Score score = new Score();
         this.scoreController = new ScoreControllerImpl(score);
@@ -124,7 +127,7 @@ public class GameLoopController {
      *
      * @return the player
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(WARNING)
     public Character getPlayer() {
         return this.player;
     }
@@ -151,7 +154,7 @@ public class GameLoopController {
      *
      * @return GameLoopPanel
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(WARNING)
     public GameLoopPanel getGlp() {
         return this.glp;
     }
@@ -159,7 +162,7 @@ public class GameLoopController {
     /**
      * @return the current set of character commands
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(WARNING)
     public CharacterComand getCommands() {
         return this.commands;
     }
@@ -167,7 +170,7 @@ public class GameLoopController {
     /**
      * @return the handler that controls power‑ups
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(WARNING)
     public PowersHandler getPowersHandler() {
         return this.powerUpsHandler;
     }
@@ -182,7 +185,7 @@ public class GameLoopController {
     /**
      * @return the map handler that provides tiles and collision list
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(WARNING)
     public HandlerMapElement getMapHandler() {
         return this.mapHandler;
     }
@@ -190,7 +193,7 @@ public class GameLoopController {
     /**
      * @return the component that controls enemies
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(WARNING)
     public EnemyHandlerImpl getEnemyHandler() {
         return this.enemyHandler;
     }
@@ -198,7 +201,7 @@ public class GameLoopController {
     /**
      * @return the controller that manages coins on the map
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(WARNING)
     public CoinController getCoinController() {
         return this.coinController;
     }
@@ -206,7 +209,7 @@ public class GameLoopController {
     /**
      * @return the controller that updates the score
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(WARNING)
     public ScoreController getScoreController() {
         return this.scoreController;
     }

@@ -63,8 +63,8 @@ public class Menu extends JPanel {
     private static final int FONT_DIMENSION = 16;
 
     private final JFrame frameMenu;
-    private BufferedImage backGroundImage;
-    private BufferedImage titleImage;
+    private transient BufferedImage backGroundImage;
+    private transient BufferedImage titleImage;
     private JPanel pannelloSfondoMenu;
 
     /**

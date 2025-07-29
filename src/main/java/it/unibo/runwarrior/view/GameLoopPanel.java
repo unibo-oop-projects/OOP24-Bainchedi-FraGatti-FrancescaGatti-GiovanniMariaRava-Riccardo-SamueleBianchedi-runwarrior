@@ -32,9 +32,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private static final int FONT_COIN_Y = 70;
 
     private transient Thread gameThread;
-    private final GameLoopController gameController;
-    private final GameMusic music;
-    private final Chronometer chronometer;
+    private final transient GameLoopController gameController;
+    private final transient GameMusic music;
+    private final transient Chronometer chronometer;
     private boolean gameStarted;
     private boolean gameEnded;
     private boolean levelCompleted;
