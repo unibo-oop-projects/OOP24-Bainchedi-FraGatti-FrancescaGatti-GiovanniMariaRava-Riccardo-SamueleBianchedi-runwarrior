@@ -54,7 +54,7 @@ public abstract class AbstractCharacterImpl implements Character {
      * @param mapHandler object that prints tiles
      * @param pCon object that creates powerup list
      */
-    @SuppressWarnings(WARNING)
+    //@SuppressWarnings(WARNING)
     public AbstractCharacterImpl(final GameLoopController glc, final CharacterComand commands, 
     final HandlerMapElement mapHandler, final PowerUpController pCon) {
         sizeCharacter = mapHandler.getTileSize() * 2;

@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.model.chronometer.api.Chronometer;
 import it.unibo.runwarrior.model.chronometer.impl.ChronometerImpl;
@@ -30,7 +31,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private static final int FONT_TIME_Y = 40;
     private static final int FONT_COIN_Y = 70;
 
-    private Thread gameThread;
+    private transient Thread gameThread;
     private final GameLoopController gameController;
     private final GameMusic music;
     private final Chronometer chronometer;
@@ -46,6 +47,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * @param frameMenu is the frame in which menu is shown
      * @param gameController the controller of the whole game
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public GameLoopPanel(final JFrame frameMenu, final GameLoopController gameController) {
         this.gameController = gameController;
         this.frameMenu = frameMenu;
