@@ -54,11 +54,18 @@ public class GameLoopPanel extends JPanel implements Runnable {
         this.gameController = gameController;
         this.frameMenu = frameMenu;
         music = new GameMusic("gameMusic.wav");
-        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        this.addKeyListener(gameController.getCommands());
-        this.setFocusable(true);
-        this.requestFocusInWindow();
+        initialize();
         this.chronometer = new ChronometerImpl();
+    }
+
+    /**
+     * Initialize panel
+     */
+    private void initialize(){
+        super.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        super.addKeyListener(gameController.getCommands());
+        super.setFocusable(true);
+        super.requestFocusInWindow();
     }
 
     /**
@@ -67,7 +74,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     public void startGame() {
         gameThread = new Thread(this);
         gameThread.start();
-        music.play(true);
+        music.play(false);
     }
 
     /**
@@ -159,7 +166,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(final WindowEvent e) {
-                System.out.println("Dialog closed, resetting frame");
                 endGame();
                 SwingUtilities.invokeLater(() -> {
                     frameMenu.getContentPane().removeAll();

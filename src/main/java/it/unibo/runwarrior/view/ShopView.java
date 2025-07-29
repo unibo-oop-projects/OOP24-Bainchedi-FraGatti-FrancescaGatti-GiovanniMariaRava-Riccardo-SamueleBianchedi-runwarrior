@@ -22,6 +22,7 @@ import it.unibo.runwarrior.model.Score;
  * shop button in the menu.
  */
 public final class ShopView extends JPanel {
+    private static final long serialVersionUID = 1L;
     private static final int TITLE_FONT_SIZE = 24;
     private static final int RIGID_AREA_HEIGHT_LARGE = 20;
     private static final int RIGID_AREA_HEIGHT_MEDIUM = 10;

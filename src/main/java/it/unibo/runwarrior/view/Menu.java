@@ -40,7 +40,8 @@ public class Menu extends JPanel {
     /**
      * Logger used for exceptions and error messages.
      */
-    protected static final Logger LOGGER = Logger.getLogger(Menu.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Menu.class.getName());
+    private static final long serialVersionUID = 1L;
     private static final int PLAY_BUTTON_PANEL_WIDTH = 250;
     private static final int PLAY_BUTTON_PANEL_HEIGHT = 500;
     private static final int BUTTON_WIDTH = 150;
@@ -253,8 +254,8 @@ public class Menu extends JPanel {
         });
         playButtonPanel.add(playButton, BorderLayout.CENTER); 
         pannelloSfondoMenu.add(playButtonPanel);
-        this.setLayout(new BorderLayout());
-        this.add(pannelloSfondoMenu, BorderLayout.CENTER);
+        super.setLayout(new BorderLayout());
+        super.add(pannelloSfondoMenu, BorderLayout.CENTER);
     }
 
     /**
