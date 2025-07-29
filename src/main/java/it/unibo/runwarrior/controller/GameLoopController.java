@@ -9,6 +9,7 @@ import it.unibo.runwarrior.controller.coinController.api.CoinController;
 import it.unibo.runwarrior.controller.coinController.impl.CoinControllerImpl;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
+import it.unibo.runwarrior.controller.player.CharacterComand;
 import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.controller.score.impl.ScoreControllerImpl;
 import it.unibo.runwarrior.controller.shop.api.ShopController;

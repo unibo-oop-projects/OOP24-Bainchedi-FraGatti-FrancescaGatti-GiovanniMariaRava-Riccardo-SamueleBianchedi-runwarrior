@@ -12,10 +12,11 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.runwarrior.controller.coinController.api.CoinController;
 import it.unibo.runwarrior.controller.coinController.impl.CoinControllerImpl;
-import it.unibo.runwarrior.controller.collisions.CoinDetectionImpl;
-import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
-import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
-import it.unibo.runwarrior.controller.collisions.PowerUpDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.impl.CoinDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.impl.CollisionDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.impl.KillDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.impl.PowerUpDetectionImpl;
+import it.unibo.runwarrior.controller.player.CharacterComand;
 import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.controller.score.impl.ScoreControllerImpl;
 import it.unibo.runwarrior.model.GameMap;

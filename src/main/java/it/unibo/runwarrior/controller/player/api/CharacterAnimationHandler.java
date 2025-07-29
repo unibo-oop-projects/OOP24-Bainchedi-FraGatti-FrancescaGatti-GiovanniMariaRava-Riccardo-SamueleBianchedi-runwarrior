@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.player.api;
 
 import java.awt.image.BufferedImage;
 

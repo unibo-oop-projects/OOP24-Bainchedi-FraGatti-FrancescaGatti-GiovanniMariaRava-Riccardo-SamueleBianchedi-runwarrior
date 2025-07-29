@@ -1,7 +1,7 @@
-package it.unibo.runwarrior.controller.collisions;
+package it.unibo.runwarrior.controller.collisions.api;
 
 import it.unibo.runwarrior.model.player.Character;
-import it.unibo.runwarrior.controller.CharacterMovementHandler;
+import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
 
 /**
  * Interface that handles collision between player and powerups.
