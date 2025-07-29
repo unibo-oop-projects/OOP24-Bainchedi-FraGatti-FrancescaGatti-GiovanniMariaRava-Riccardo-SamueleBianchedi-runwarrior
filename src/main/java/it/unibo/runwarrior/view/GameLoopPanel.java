@@ -25,19 +25,20 @@ public class GameLoopPanel extends JPanel implements Runnable {
     public static final int HEIGHT = 792;
     public static final int MLD = 1_000_000_000;
     public static final int FPS = 60;
+    private static final long serialVersionUID = 1L;
     private static final int FONT_X = 20;
     private static final int FONT_TIME_Y = 40;
     private static final int FONT_COIN_Y = 70;
 
     private Thread gameThread;
-    private GameLoopController gameController;
+    private final GameLoopController gameController;
     private final GameMusic music;
-    private Chronometer chronometer;
+    private final Chronometer chronometer;
     private boolean gameStarted;
     private boolean gameEnded;
     private boolean levelCompleted;
     private boolean panelShawn;
-    private JFrame frameMenu;
+    private final JFrame frameMenu;
 
     /**
      * Constructor of the class. 
@@ -49,8 +50,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * @param coinsPath the path for loading the coin position
      * @param gameController the controller of the whole game
      */
-    public GameLoopPanel(final JFrame frameMenu, final String mapPath, final String themePath, final String enemiesPath, 
-                            final String coinsPath, final GameLoopController gameController) {
+    public GameLoopPanel(final JFrame frameMenu, final GameLoopController gameController) {
         this.gameController = gameController;
         this.frameMenu = frameMenu;
         music = new GameMusic("gameMusic.wav");
@@ -67,7 +67,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     public void startGame() {
         gameThread = new Thread(this);
         gameThread.start();
-        //music.play(true);
+        music.play(true);
     }
 
     /**

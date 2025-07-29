@@ -434,6 +434,7 @@ https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef
     \item Implementazione della classe \textbf{GameMusic} mediante nuovi tipi AudioInputStream, AudioSystem e Clip. 
     Utilizzata per musica in background ed effetti sonori. $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/GameMusic.java#L17}
+    
     Per questa implementazione ho fatto riferimento al seguente sito $\rightarrow$
     \url{https://www3.ntu.edu.sg/home/ehchua/programming/java/J8c_PlayingSound.html}
     \item Uso di \textbf{stream e lambda expression} nella classe CollisionDetectionImpl. Mi permette di organizzare gerarchicamente 
@@ -443,18 +444,12 @@ https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef
 
 \section{Francesca Gatti}
 \begin{itemize}
-    \item \textbf{Utilizzo lambda expression} 
-    $\rightarrow$ Permalink:
+    \item \textbf{Utilizzo lambda expression} $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L181C17-L192C20}
-   
-    $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L193C17-L204C20}
-    
-    $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L205C16-L216C20}
-    
-    $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/1177dc7188d3a96ba1165ba19e439a1417d417bf/src/main/java/it/unibo/runwarrior/view/Menu.java#L226C17-L235C20}
+    \item
 \end{itemize}
 \section{Giovanni Maria Rava}
 \begin{itemize}
@@ -462,6 +457,13 @@ https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/main/java/it/unibo/runwarrior/controller/enemy/EnemySpawner.java#L55-L63}
     \item \textbf{Utilizzo di lambda expressione} $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/test/java/it/unibo/runwarrior/model/GameSaveManagerTest.java#L63}
+    \item \textbf{Implementazione metodo copyImage} $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/ea221779e7801710824877e7599505de2931ca1d/src/main/java/it/unibo/runwarrior/view/enemy/impl/GoblinView.java#L91-L98}
+    Per risolvere un warning PMD di tipo EI EXPOSE REP, che segnala l'esposizione diretta di oggetti mutabili, in questo caso un BufferedImage, è stato introdotto un metodo privato 
+    che crea una copia sicura dell'immagine da restituire. In questo modo si evita che il chiamante possa modificare direttamente lo stato interno della classe, preservando l'incapsulamento.
+    La copia viene realizzata tramite un nuovo BufferedImage su cui si disegna l'immagine originale usando un oggetto Graphics2D, 
+    ottenuto con createGraphics(). Questo approccio è documentato nella pagina ufficiale Oracle della classe Graphics, sezione 
+    create(...), vedi \cite{oracle-graphics-create}.
 \end{itemize}
 
 \chapter{Commenti finali}
@@ -497,14 +499,18 @@ Cito anche la parte relativa ai potenziamenti e la classe PowersHandler che pens
 Complessivamente penso di essere riuscito ad avere un approccio attivo e stimolante con il gruppo di lavoro, con cui mi sono confrontato 
 con continuità e grazie al quale siamo riusciti a risolvere diversi problemi in maniera più efficiente.
 
-
-\subsection{Francesca Gatti}
-\textbf{Sviluppi futuri}: aggiunta di nuovi bottoni alla schermata del menù (per esempio un LEVEL4). Creazione di un negozio più 
-rifornito con più skin acquistabili. Implementazione di un sistema di punteggio basato, oltre che sulle monete, sulla quantità di tempo impiegato
-per completare il livello. Aggiungere monete di grandezze diverse con valore maggiore rispetto a quelle già presenti, in modo da avvicinarsi di 
-più al vero gioco Super Mario Bros.
-\textbf{Autovalutazione}: 
 \subsection{Giovanni Maria Rava}
+All'interno del progetto mi sono occupato principalmente di una parte che penso sia importante ma comunque non essenziale per il 
+gioco ovvero i nemici. Ho avuto la difficoltà principale nella gestione della loro nascita, in quanto ho cercato di importare una 
+modalità che potesse essere modificabile in un futuro senza però dover intaccare la parte di codice. Ho poi utilizzato il restante
+tempo per lo sviluppo di un sistema di salvataggio del gioco, nel migliorare l'architettura delle mie parti e nel controllo degli 
+spotbugs. La parte al quale ho sicuramente dato meno attenzione è quella di sviluppo della grafica. Gli sviluppi futuri di questa 
+parte sono molti, tra i principali  ci sono: nuovi nemici e/o ostacoli, l'implementazione di un movimento più complesso dei nemici,
+ad esempio quello verticale. In futuro potrebbe essere implementato uno spawning dinamico e una meccanica in cui, alla morte di un
+nemico, venga generato un oggetto bonus o malus.
+Il progetto è stato stimolante a livello personale ma sopratutto è stato un ottimo modo per migliorare la capacità di lavorare in 
+gruppo. Il gruppo mi è stato molto di aiuto per superare le criticità incontrate e darci una mano quando le cose non andavano come 
+volevamo.
 \appendix
 \chapter{Guida utente}
 Appena verrà avviato il gioco apparirà la schermata iniziale con il tasto "PLAY" da cliccare per accedere al menù di gioco.
@@ -567,6 +573,12 @@ verranno cancellati.
     \emph{Java: Playing Sound (Audio Clip, MP3, Java Sound API)} --- NTU Tutorials,\\
     \url{https://www3.ntu.edu.sg/home/ehchua/programming/java/J8c_PlayingSound.html},\\
     accessed May 2025
+
+    \bibitem{oracle-graphics-create}
+    Oracle,\\
+    \emph{Graphics.create(int x, int y, int width, int height) Method Documentation},\\
+    \url{https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html#create-int-int-int-int-},\\
+    accessed July 2025.
 
     \end{thebibliography}
 
