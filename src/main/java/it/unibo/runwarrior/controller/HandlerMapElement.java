@@ -116,8 +116,7 @@ public class HandlerMapElement {
      */
     public int getTileSize() {
         final int rows = map.length;
-        final int tileSize = GameLoopPanel.HEIGHT / rows;
-        return tileSize;
+        return GameLoopPanel.HEIGHT / rows;
     }
 
     /**
