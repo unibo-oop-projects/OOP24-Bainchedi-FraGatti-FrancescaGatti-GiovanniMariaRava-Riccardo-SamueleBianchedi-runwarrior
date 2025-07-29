@@ -27,6 +27,16 @@ public final class GuardView implements EnemyView {
     private BufferedImage rightGuardRunning;
     private BufferedImage leftGuardRunning;
     private BufferedImage image;
+    /*
+    * SuppressFBWarnings: EI_EXPOSE_REP2
+    *
+    * Il warning EI_EXPOSE_REP2 segnala che un oggetto mutabile fornito come parametro
+    * al costruttore viene salvato direttamente in un campo interno senza difensive copy.
+    * In questo caso, la scelta è intenzionale: GuardView ha bisogno di mantenere un 
+    * riferimento diretto al controller per invocare azioni durante il rendering, 
+    * come previsto dall'architettura MVC. Non ha senso creare una copia, perché il controller 
+    * rappresenta un punto di coordinamento globale e condiviso.
+    */
     @SuppressFBWarnings(
     value = "EI_EXPOSE_REP2",
     justification = "GuardView needs to invoke controller actions during rendering")
