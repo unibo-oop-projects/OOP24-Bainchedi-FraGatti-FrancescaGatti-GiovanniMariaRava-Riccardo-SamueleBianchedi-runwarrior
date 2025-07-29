@@ -6,17 +6,16 @@ import org.junit.jupiter.api.Test;
 import it.unibo.runwarrior.controller.coincontroller.impl.CoinControllerImpl;
 import it.unibo.runwarrior.model.Coin;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
 class CoinTest {
-
-    private CoinControllerImpl coinController;
     private static final String COIN_FILE_PATH = "/Coins/CoinCoordinates_map1.txt";
+    private CoinControllerImpl coinController;
 
     @BeforeEach
     void setUp() {
@@ -31,7 +30,6 @@ class CoinTest {
         coinController.initCoinsFromFile(COIN_FILE_PATH);
         final List<Coin> coins = coinController.getCoinList();
         assertEquals(coords.size(), coins.size(), "il numero delle monete caricate deve corrispondere");
-
         for (int i = 0; i < coins.size(); i++) {
             final Coin c = coins.get(i);
             final int[] coord = coords.get(i);
