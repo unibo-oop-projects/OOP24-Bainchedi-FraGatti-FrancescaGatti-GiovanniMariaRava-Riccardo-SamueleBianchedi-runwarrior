@@ -10,7 +10,7 @@ import java.util.Map;
 
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.MapElement;
-import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
 /**

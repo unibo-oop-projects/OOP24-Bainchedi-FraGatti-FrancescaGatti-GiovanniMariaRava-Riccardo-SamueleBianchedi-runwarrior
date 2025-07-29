@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.runwarrior.model.PowerUp;
-import it.unibo.runwarrior.model.PowerUpImpl;
+import it.unibo.runwarrior.model.powerup.api.PowerUp;
+import it.unibo.runwarrior.model.powerup.impl.PowerUpImpl;
 
 /**
  * Class that handles powerup list creation.

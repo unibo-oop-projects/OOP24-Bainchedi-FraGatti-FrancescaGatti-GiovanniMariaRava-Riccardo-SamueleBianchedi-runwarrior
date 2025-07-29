@@ -2,7 +2,7 @@ package it.unibo.runwarrior.controller.coincontroller.api;
 
 import java.awt.Graphics;
 import java.util.List;
-import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.model.Coin;
 
 /**

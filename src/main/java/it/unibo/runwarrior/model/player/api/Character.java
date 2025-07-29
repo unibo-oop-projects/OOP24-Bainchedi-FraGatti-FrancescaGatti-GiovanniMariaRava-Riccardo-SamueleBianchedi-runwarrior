@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model.player;
+package it.unibo.runwarrior.model.player.api;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;

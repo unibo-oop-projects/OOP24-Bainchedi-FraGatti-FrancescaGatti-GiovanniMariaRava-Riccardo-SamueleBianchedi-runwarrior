@@ -17,7 +17,7 @@ import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.controller.player.CharacterComand;
 import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.controller.score.impl.ScoreControllerImpl;
-import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.Score;
 import it.unibo.runwarrior.model.player.NakedWarrior;

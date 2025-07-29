@@ -1,6 +1,6 @@
 package it.unibo.runwarrior.controller.collisions.api;
 
-import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
 
 /**

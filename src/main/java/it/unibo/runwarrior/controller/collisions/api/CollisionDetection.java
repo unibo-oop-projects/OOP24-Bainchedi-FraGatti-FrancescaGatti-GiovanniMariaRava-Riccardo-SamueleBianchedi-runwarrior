@@ -1,6 +1,6 @@
 package it.unibo.runwarrior.controller.collisions.api;
 
-import it.unibo.runwarrior.model.player.Character; 
+import it.unibo.runwarrior.model.player.api.Character; 
 
 /**
  * Interface that handles collision with map tiles.

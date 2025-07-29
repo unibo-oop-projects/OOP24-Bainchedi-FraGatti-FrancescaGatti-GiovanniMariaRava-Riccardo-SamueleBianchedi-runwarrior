@@ -7,7 +7,7 @@ import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.HandlerMapElement;
-import it.unibo.runwarrior.model.PowerUp;
+import it.unibo.runwarrior.model.powerup.api.PowerUp;
 
 /**
  * Class that creates powerup objects and print them on the panel.
