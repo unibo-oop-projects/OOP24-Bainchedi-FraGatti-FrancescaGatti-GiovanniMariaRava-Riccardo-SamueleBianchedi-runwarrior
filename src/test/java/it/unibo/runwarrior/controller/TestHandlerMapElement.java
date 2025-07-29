@@ -36,10 +36,10 @@ class TestHandlerMapElement {
     @SuppressWarnings("PMD.UseArrayTrailingComma")
     @BeforeEach
     void initMap() {
-        final int[][] map = new int[][] {
+        final int[][] map = {
             {0, 1, 2},
             {1, FIVE, 0},
-            {3, 4, SIX}
+            {3, 4, SIX},
         };
 
         final Map<Integer, BufferedImage> testBlockImages = new HashMap<>();
