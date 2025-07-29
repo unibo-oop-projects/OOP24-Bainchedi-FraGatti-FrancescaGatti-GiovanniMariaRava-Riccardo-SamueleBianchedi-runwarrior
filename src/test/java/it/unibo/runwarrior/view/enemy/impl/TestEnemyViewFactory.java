@@ -3,6 +3,8 @@ package it.unibo.runwarrior.view.enemy.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import javax.swing.JFrame;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +17,8 @@ import it.unibo.runwarrior.view.enemy.api.EnemyView;
 class TestEnemyViewFactory {
     private static final int WRONG_TYPE = 99;
     private EnemyViewFactoryImpl enemyViewFactoryImpl;
-    private GameLoopController glc;
+    private final GameLoopController glc = new GameLoopController(new JFrame(), "tryMap.txt", "Map2/forest_theme.txt", 
+        "/Map2/enemiesMap2.txt", "/Coins/CoinCoordinates_map2.txt");
     private EnemyView guardView;
     private EnemyView snakeView;
     private EnemyView wizardView;

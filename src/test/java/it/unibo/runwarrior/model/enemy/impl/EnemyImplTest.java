@@ -28,8 +28,8 @@ class EnemyImplTest {
     private static final int OBSTACLE_X = 60;
     private EnemyImpl enemy;
     private EnemyHandlerImpl enemyHandler;
-    private EnemyViewFactoryImpl enemyViewFactory;
-    private JFrame mainFrame;
+    private final EnemyViewFactoryImpl enemyViewFactory = new EnemyViewFactoryImpl();
+    private final JFrame mainFrame = new JFrame();
 
     /**
      * Sets up a new EnemyImpl instance.

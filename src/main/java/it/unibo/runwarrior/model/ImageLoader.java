@@ -65,10 +65,11 @@ public final class ImageLoader {
                 return false;
             }
             try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-                String line;
-                while ((line = br.readLine()) != null) {
+                String line = br.readLine();
+                while (line != null) {
                     final String trimmedLine = line.trim();
                     if (trimmedLine.isEmpty() || trimmedLine.startsWith("#")) {
+                        line = br.readLine();
                         continue;
                     }
                     final String[] parts = trimmedLine.split("=", 2);
@@ -85,6 +86,7 @@ public final class ImageLoader {
                     } else {
                         allLoadedSuccessfully = false;
                     }
+                    line = br.readLine();
                 }
             }
         } catch (final IOException e) {
@@ -102,7 +104,7 @@ public final class ImageLoader {
     public BufferedImage getBlockImage(final int blockValue) {
         final BufferedImage image = this.blockImages.get(blockValue);
         if (image == null) {
-            System.err.println("Warning: No image loaded for block value: " + blockValue);
+            return null;
         }
         return image;
     }

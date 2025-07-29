@@ -23,7 +23,6 @@ class ChronometerTest {
     void testChronometerElapsedTimeAndFormat() throws InterruptedException {
         chronometer.startTimer();
         Thread.sleep(MILLE5);
-        Thread.sleep(MILLE5);
         chronometer.stopTimer();
         final long timeElapsed = chronometer.getTimeElapsed();
         assertTrue(timeElapsed >= MILLE4 && timeElapsed <= DUE_MILA,
