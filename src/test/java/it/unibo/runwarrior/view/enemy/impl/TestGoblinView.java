@@ -16,7 +16,7 @@ import it.unibo.runwarrior.controller.GameLoopController;
 class TestGoblinView {
     private static final int DIM_IMAGES = 36;
     private GoblinView goblinView;
-    private JFrame mainFrame;
+    private final JFrame mainFrame = new JFrame();
 
     /**
      * Create a new GameLoopController for the view.

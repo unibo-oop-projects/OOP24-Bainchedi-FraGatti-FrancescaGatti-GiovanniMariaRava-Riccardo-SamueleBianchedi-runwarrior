@@ -93,11 +93,11 @@ public class CollisionDetectionImpl implements CollisionDetection {
         int indexYtile = y / tileSize;
         int blockIndex = map[indexYtile][indexXtile];
         end = blocks.get(blockIndex).isPortal();
-        if (blocks.get(blockIndex).getCollision() || y <= 0) {
+        if (blocks.get(blockIndex).isCollision() || y <= 0) {
             if (checkDirections) {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
             }
-            if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3) {
+            if (!blocks.get(blockIndex).isHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3) {
                 sound.play(false);
                 hitWaitTime = System.currentTimeMillis();
                 glc.getPowersHandler().losePower(false);
@@ -108,7 +108,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
                 indexXtile = (playerArea.x + i) / tileSize;
                 indexYtile = playerArea.y / tileSize;
                 blockIndex = map[indexYtile][indexXtile];
-                if (blocks.get(blockIndex).getCollision() && checkDirections) {
+                if (blocks.get(blockIndex).isCollision() && checkDirections) {
                     final String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile, player);
                     if (RIGHT.equals(tempDir) || LEFT.equals(tempDir)) {
                         this.directions.add(tempDir);

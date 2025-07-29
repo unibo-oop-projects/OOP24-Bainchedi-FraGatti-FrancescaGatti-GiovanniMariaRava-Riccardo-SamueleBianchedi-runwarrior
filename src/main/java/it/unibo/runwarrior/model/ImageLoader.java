@@ -19,7 +19,6 @@ import javax.imageio.ImageIO;
  * This class is final as it is not designed for extension.
  */
 public final class ImageLoader {
-    private static final String FROM_PATH_STRING = "from";
     private final Map<Integer, BufferedImage> blockImages;
 
     /**
@@ -39,21 +38,15 @@ public final class ImageLoader {
     public boolean loadImage(final int blockValue, final String filePath) {
         try (InputStream is = getClass().getResourceAsStream(filePath)) {
             if (is == null) {
-                System.err.println("Error: Cannot find resource file at path: " + filePath);
                 return false;
             }
             final BufferedImage image = ImageIO.read(is);
             if (image != null) {
                 this.blockImages.put(blockValue, image);
-                System.out.println("Image for block " + blockValue + " loaded from: " + filePath);
                 return true;
             }
-            System.err.println("Error: Failed to load image for block " + blockValue
-                + ". File might be corrupted or in an unsupported format: " + filePath);
             return false;
         } catch (final IOException e) {
-            System.err.println("I/O Error loading image for block " + blockValue
-                + "from" + filePath + ": " + e.getMessage());
             return false;
         }
     }
@@ -69,14 +62,14 @@ public final class ImageLoader {
         boolean allLoadedSuccessfully = true;
         try (InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(configFilePath)) {
             if (inputStream == null) {
-                System.err.println("Error: Cannot find configuration file: " + configFilePath);
                 return false;
             }
             try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-                String line;
-                while ((line = br.readLine()) != null) {
+                String line = br.readLine();
+                while (line != null) {
                     final String trimmedLine = line.trim();
                     if (trimmedLine.isEmpty() || trimmedLine.startsWith("#")) {
+                        line = br.readLine();
                         continue;
                     }
                     final String[] parts = trimmedLine.split("=", 2);
@@ -85,24 +78,18 @@ public final class ImageLoader {
                             final int blockValue = Integer.parseInt(parts[0].trim());
                             final String imagePath = parts[1].trim();
                             if (!this.loadImage(blockValue, imagePath)) {
-                                System.err.println("Error: Failed to load image for block " + blockValue
-                                    + "from path" + imagePath);
                                 allLoadedSuccessfully = false;
                             }
                         } catch (final NumberFormatException e) {
-                            System.err.println("Error: Invalid block value in config line: '"
-                                + trimmedLine + "' in file: " + configFilePath);
                             allLoadedSuccessfully = false;
                         }
                     } else {
-                        System.err.println("Warning: Invalid image config line format: '"
-                            + trimmedLine + "' in file: " + configFilePath);
                         allLoadedSuccessfully = false;
                     }
+                    line = br.readLine();
                 }
             }
         } catch (final IOException e) {
-            System.err.println("I/O Error reading image config file '" + configFilePath + "': " + e.getMessage());
             return false;
         }
         return allLoadedSuccessfully;
@@ -117,7 +104,7 @@ public final class ImageLoader {
     public BufferedImage getBlockImage(final int blockValue) {
         final BufferedImage image = this.blockImages.get(blockValue);
         if (image == null) {
-            System.err.println("Warning: No image loaded for block value: " + blockValue);
+            return null;
         }
         return image;
     }

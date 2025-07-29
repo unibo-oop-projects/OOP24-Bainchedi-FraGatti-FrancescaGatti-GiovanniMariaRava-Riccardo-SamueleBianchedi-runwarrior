@@ -44,25 +44,16 @@ public final class GameMap {
      */
     public static GameMap load(final String mapDataFilePath, final String imageConfigFilePath) {
 
-        System.out.println("Inizio caricamento dati mappa da: " + mapDataFilePath);
         final MapLoader rawMapData = MapLoader.load(mapDataFilePath);
         if (rawMapData == null) {
-            System.err.println("GameMap Error: Impossibile caricare i dati numerici della mappa da " + mapDataFilePath);
             return null;
         }
-        System.out.println("Dati mappa caricati con successo.");
-
-        System.out.println("Inizio caricamento immagini da config: " + imageConfigFilePath);
         final ImageLoader mapImageLoader = new ImageLoader();
         final boolean imagesLoaded = mapImageLoader.loadImagesFromConfigFile(imageConfigFilePath);
         if (!imagesLoaded) {
-            System.err.println("GameMap Error: Impossibile caricare le immagini per la mappa"
-                + " utilizzando la configurazione " + imageConfigFilePath);
             return null;
         }
-        System.out.println("Immagini caricate con successo.");
 
-        System.out.println("Creazione oggetto GameMap.");
         return new GameMap(
             rawMapData.getMapData(),
             mapImageLoader.getLoadedImages(),

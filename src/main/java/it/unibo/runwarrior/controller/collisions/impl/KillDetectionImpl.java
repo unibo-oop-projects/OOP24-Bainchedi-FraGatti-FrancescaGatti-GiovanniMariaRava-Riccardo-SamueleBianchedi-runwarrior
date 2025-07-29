@@ -109,7 +109,7 @@ public class KillDetectionImpl implements KillDetection {
         final int indexXtile = x / hM.getTileSize();
         final int indexYtile = y / hM.getTileSize();
         final int blockIndex = hM.getMap()[indexYtile][indexXtile];
-        return hM.getBlocks().get(blockIndex).getCollision();
+        return hM.getBlocks().get(blockIndex).isCollision();
     }
 
     /**

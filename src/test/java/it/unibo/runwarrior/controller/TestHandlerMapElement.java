@@ -59,10 +59,10 @@ class TestHandlerMapElement {
 
         assertEquals(SEVEN, blocks.size());
 
-        assertFalse(blocks.get(0).getCollision());
-        assertTrue(blocks.get(1).getCollision()); 
-        assertFalse(blocks.get(3).getCollision());
-        assertFalse(blocks.get(FIVE).getHarmless());
+        assertFalse(blocks.get(0).isCollision());
+        assertTrue(blocks.get(1).isCollision()); 
+        assertFalse(blocks.get(3).isCollision());
+        assertFalse(blocks.get(FIVE).isHarmless());
     }
 
     /**

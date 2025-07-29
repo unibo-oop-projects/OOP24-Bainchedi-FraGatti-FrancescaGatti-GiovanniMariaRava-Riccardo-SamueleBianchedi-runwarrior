@@ -76,10 +76,10 @@ class TestPlayerCollisions {
     }
 
     private boolean isBehindTile(final int x, final int y, final HandlerMapElement hM) {
-        final float indexXtile = x / hM.getTileSize();
-        final float indexYtile = y / hM.getTileSize();
-        final int blockIndex = hM.getMap()[(int) indexYtile][(int) indexXtile];
-        return hM.getBlocks().get(blockIndex).getCollision();
+        final int indexXtile = x / hM.getTileSize();
+        final int indexYtile = y / hM.getTileSize();
+        final int blockIndex = hM.getMap()[indexYtile][indexXtile];
+        return hM.getBlocks().get(blockIndex).isCollision();
     }
 
     //CAMBIA MAPPA PER RIUSARE PIù NUMERI
