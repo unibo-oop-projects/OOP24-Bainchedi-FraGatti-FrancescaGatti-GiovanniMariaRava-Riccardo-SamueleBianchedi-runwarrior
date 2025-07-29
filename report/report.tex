@@ -250,7 +250,6 @@ L'introduzione del pattern MVC ha permesso di ottenere una struttura più chiara
     \centering
     \includegraphics[width=0.8\textwidth]{resources/UMLshop.png}
     \caption{UML dell'MVC per la gestione dello shop}
-    \label{fig: 2.2}
 \end{figure}
 \newpage
 \textbf{Problema:} per lo sviluppo del gioco è stato necessario creare un sistema che gestisse la visualizzazione e la raccolta delle monete.
@@ -266,11 +265,16 @@ specializzate:
     \item L'interfaccia \emph{CoinDetection} (implementata da \emph{CoinDetectionImpl}) che si occupa del rilevamento delle collisioni tra player 
     e moneta.
 \end{itemize}
-Le classi sono collegate a \emph{Score}, \emph{ScoreController} e \emph{GameSaveManager} per il salvataggio del punteggio totale.
+Le classi sono collegate a \emph{Character} e \emph{ScoreController} per il salvataggio del punteggio totale.
 All'interno del \emph{CoinController} è stato necessario aggungere il metodo \emph{updatePlayer()} che permette l'aggiornamento delle monete 
 in base ai cambiamenti subiti dal player durante il gioco, quali i potenziamenti. Senza la chiamata a questo metodo nel \emph{GameLoopController}, 
 una volta acquisito il potenziamento da parte del player le monete non si caricavano più correttamente rimanendo fisse sullo schermo e non era più
 possibile raccoglierle.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/UMLcoin.png}
+    \caption{UML per la gestione delle monete.}
+\end{figure}
 
 \textbf{Problema:} nel gioco era necessario monitorare il tempo di gioco trascorso, per poterlo visualizzare durante la partita e avere un 
 resoconto finale del tempo impiegato per completare il livello.
@@ -280,6 +284,11 @@ oggetto di tipo \emph{javax.swing.Timer}. Il timer aggiorna periodicamente il te
 classe fornisce metodi per avviare, fermare e ottenere il tempo in formato numerico e in formato stringa \emph{(HH::mm::ss::d)}. Infine, il tempo 
 viene disegnato a schermo tramite la classe \emph{GameLoopPanel}, nel metodo \emph{paintComponent()}, che recupera il valore dal Chronometer e lo 
 mostra in tempo reale durante il gioco.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/UMLtimer.png}
+    \caption{UML per la gestione del timer di gioco.}
+\end{figure}
 
 \textbf{Problema:} è stato necessario implementare un sistema che permettesse di gestire il punteggio in base alle monete raccolte dal giocatore, con 
 la possibilità di salvare questi dati in modo persistente o meno su scelta del giocatore. Questo sistema doveva inoltre integrarsi con altre parti del 
@@ -293,6 +302,11 @@ salvataggio su file esterno. Le due componenti sono:
     \item L'interfaccia \emph{ScoreController} (implementata da \emph{ScoreControllerImpl}) ha il compito di aggiornare lo stato del punteggio nel file facendo 
     uso della classe \emph{GameSaveManager} come già detto sopra.
 \end{itemize}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/UMLscore.png}
+    \caption{UML dell'MVC per la gestione del punteggio}
+\end{figure}
 
 \section{Giovanni Maria Rava}
 \textbf{Problema:} I nemici del gioco devono muoversi da soli, invertire direzione appena urtano un ostacolo e restare sincronizzati con 
