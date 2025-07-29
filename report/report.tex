@@ -142,14 +142,9 @@ controller.
 Entrambe le interfacce vengono usate da AbstractCharacterImpl e i loro metodi vengono richiamati all'interno di update() 
 e drawPlayer(Graphics2D).
 Per questa architettura mi sono basato sul pattern Strategy, ma applicandone una variazione, cioè incapsulare in 2 interfacce diverse 
-<<<<<<< HEAD
 le operazioni che gestiscono animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire 
 tali comportamenti, entrambe le classi usano CharacterComand, la classe che gestisce l'input da tastiera.
 
-=======
-animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire tali comportamenti entrambe le classi 
-usano CharacterComand, la classe che gestisce l'input da tastiera.
->>>>>>> 1177dc7188d3a96ba1165ba19e439a1417d417bf
 CharacterAnimationHandler definisce metodi fondamentali come: frameChanger(), per gestire il cambiamento dei frame in base agli input 
 e imagePlayer(boolean rightDirection), che fornisce l'immagine corretta in base al frame corrente.
 CharacterMovementHandler definisce metodi fondamentali come: setLocationAfterPowerUp(), per reimpostare la posizione del player
@@ -214,11 +209,7 @@ di powerup è gestita da PowerUpDetection.
     \label{fig:2.4}
 \end{figure}
 
-<<<<<<< HEAD
 \textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni.\vspace{1cm}
-=======
-\textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni
->>>>>>> 1177dc7188d3a96ba1165ba19e439a1417d417bf
 
 \textbf{Soluzione}: creazione della classe PowersHandler nella sezione controller dell'MVC. La classe che gestisce l'inizializzazione del 
 personaggio con cui si inzia il livello e la creazione di nuove istanze Character mantenendole in una lista. Quando il player ottiene 
@@ -421,7 +412,19 @@ Tra le feature avanzate troviamo:
     \item API di I/O: utilizzo di java.nio.charset.StandardCharset per spcificare l’encoding UTF-8 in lettura
 https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/MapLoader.java
 \end {itemize}
+
 \section{Riccardo Cornacchia}
+\begin{itemize}
+    \item Implementazione della classe \textbf{KeyListener} mediante CharacterComand per ricevere input da tastiera. $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/controller/player/CharacterComand.java#L9}
+    \item Implementazione della classe \textbf{GameMusic} mediante nuovi tipi AudioInputStream, AudioSystem e Clip. 
+    Utilizzata per musica in background ed effetti sonori. $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/GameMusic.java#L17}
+    \item Uso di \textbf{stream e lambda expression} nella classe CollisionDetectionImpl. Mi permette di organizzare gerarchicamente 
+    le diverse direzioni di collisione in cui è coinvolto il player. $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/controller/collisions/impl/CollisionDetectionImpl.java#L74}
+\end{itemize}
+
 \section{Francesca Gatti}
 \section{Giovanni Maria Rava}
 
@@ -435,7 +438,6 @@ a riparare i miei errori. Avrei potuto essere più attivo nel gruppo e apportare
 Sicuramente mi è piaciuto e mi ha divertito e mi ha spronato a impegnarmi di più in vista di futuri esami.
 
 \subsection{Riccardo Cornacchia}
-<<<<<<< HEAD
 \textbf{Sviluppi futuri}: implementazione di nuove skin da inserire nel Template pattern, sia per i personaggi esistenti, sia per 
 nuovi personaggi, creando nuove classi ed estendendo AbstractCharacterImpl.
 In relazione a ciò appena detto si può aggiungere l'implementazione di nuovi powerups: aggiungerne dei nuovi ai personaggi esistenti o 
@@ -460,8 +462,6 @@ Complessivamente penso di essere riuscito ad avere un approccio attivo e stimola
 con continuità e grazie al quale siamo riusciti a risolvere diversi problemi in maniera più efficiente.
 
 
-=======
->>>>>>> 1177dc7188d3a96ba1165ba19e439a1417d417bf
 \subsection{Francesca Gatti}
 \begin{itemize}
     \item \textbf{Utilizzo lambda expression} $\rightarrow$ Permalink:
