@@ -1,5 +1,6 @@
 package it.unibo.runwarrior.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.runwarrior.controller.coinController.impl.CoinControllerImpl;
@@ -11,15 +12,23 @@ import java.util.List;
 
 class CoinTest {
 
+    private CoinControllerImpl coinController;
+    private static final String COIN_FILE_PATH = "/Coins/CoinCoordinates_map1.txt";
+
+    @BeforeEach
+    void setUp() {
+        coinController = new CoinControllerImpl();
+    }
+
     @Test
     void testCoinLoading() {
-        final CoinControllerImpl coinController = new CoinControllerImpl();
-        final List<int[]> coords = coinController.loadCoinFromFile("/Coins/CoinCoordinates_map1.txt");
+        final List<int[]> coords = coinController.loadCoinFromFile(COIN_FILE_PATH);
         assertFalse(coords.isEmpty(), "Le coordinate caricate non devono essere vuote");
 
-        coinController.initCoinsFromFile("/Coins/CoinCoordinates_map1.txt");
+        coinController.initCoinsFromFile(COIN_FILE_PATH);
         final List<Coin> coins = coinController.getCoinList();
         assertEquals(coords.size(), coins.size(), "il numero delle monete caricate deve corrispondere");
+        
         for (int i = 0; i < coins.size(); i++) {
             final Coin c = coins.get(i);
             final int[] coord = coords.get(i);
@@ -29,15 +38,16 @@ class CoinTest {
             assertNotNull(c.getCoinImage(), "L'immagine della moneta deve essere caricata");
         }
     }
+
     @Test
     void testCoinInitiallyNotCollected() {
-        final Coin coin = new Coin(2,3);
+        final Coin coin = new Coin(2, 3);
         assertFalse(coin.isCollected(), "La moneta non dovrebbe essere raccolta inizialmente");
     }
-    
+
     @Test
-    void testCoinCollectChangesState(){
-        final Coin coin = new Coin(1,1);
+    void testCoinCollectChangesState() {
+        final Coin coin = new Coin(1, 1);
         coin.collect();
         assertTrue(coin.isCollected(), "La moneta dovrebbe risultare raccolta dopo il collect()");
     }
