@@ -89,7 +89,6 @@ public class GameLoopController {
 
         final Score score = new Score();
         this.scoreController = new ScoreControllerImpl(score);
-        //this.coinController.setScoreController(scoreController);
         this.glp = new GameLoopPanel(mainFrame, this);
         initializePlayer();
     }
