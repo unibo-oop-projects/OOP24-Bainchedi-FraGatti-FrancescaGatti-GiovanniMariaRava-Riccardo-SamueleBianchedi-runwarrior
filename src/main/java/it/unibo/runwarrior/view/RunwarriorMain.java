@@ -31,7 +31,7 @@ public final class RunwarriorMain {
     /**
      * start the game.
      */
-    public static void start(){
+    public static void start() {
         initializeGame();
     }
 

@@ -23,7 +23,7 @@ public final class MapLoader {
      */
     public static final int MAP_WIDTH = 374;
 
-    private static final String IN_FILE_STRING = "' in file '";
+    // private static final String IN_FILE_STRING = "' in file '";
 
     private final int[][] mapData;
     private final int rows;
@@ -54,33 +54,25 @@ public final class MapLoader {
      */
     public static MapLoader load(final String mapFilePath) {
         final int[][] mapData = new int[MAP_HEIGHT][MAP_WIDTH];
-        int currentRow = 0;
 
         final InputStream inputStream = MapLoader.class.getClassLoader().getResourceAsStream(mapFilePath);
         if (inputStream == null) {
-            System.err.println("Error: Cannot find map file at path: " + mapFilePath);
             return null;
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-            String line;
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            int currentRow = 0;
+            while (line != null) {
                 if (currentRow >= MAP_HEIGHT) {
-                    System.err.println("Warning: Map file '" + mapFilePath 
-                        + "' has more rows than expected Extra rows ignored.");
                     break;
                 }
 
                 final String trimmedLine = line.trim();
                 if (trimmedLine.isEmpty()) {
-                    System.err.println("Warning: Empty row at line " + currentRow 
-                        + IN_FILE_STRING + mapFilePath + "'. Ignoring.");
                     continue;
                 }
 
                 if (trimmedLine.length() != MAP_WIDTH) {
-                    System.err.println("Error: Row " + currentRow + IN_FILE_STRING + mapFilePath
-                        + "' has inconsistent length. Expected: " + MAP_WIDTH
-                        + ", Found: " + trimmedLine.length() + ".");
                     return null;
                 }
 
@@ -88,26 +80,21 @@ public final class MapLoader {
                     final char blockChar = trimmedLine.charAt(c);
                     final int blockValue = Character.getNumericValue(blockChar);
                     if (blockValue == -1) {
-                        System.err.println("Error: Non-numeric value ('" + blockChar + "') at row " + currentRow
-                            + ", col " + c + IN_FILE_STRING + mapFilePath + "'.");
                         return null;
                     }
                     mapData[currentRow][c] = blockValue;
                 }
                 currentRow++;
+                line = br.readLine();
             }
 
             if (currentRow < MAP_HEIGHT) {
-                System.err.println("Error: Map file '" + mapFilePath + "' has fewer rows than expected. Expected: "
-                    + MAP_HEIGHT + ", Found: " + currentRow + ".");
                 return null;
             }
         } catch (final IOException e) {
-            System.err.println("Error loading map file '" + mapFilePath + "': " + e.getMessage());
             return null;
         }
 
-        System.out.println("Map loaded from '" + mapFilePath + "': " + MAP_HEIGHT + "x" + MAP_WIDTH + " blocks.");
         return new MapLoader(mapData);
     }
 

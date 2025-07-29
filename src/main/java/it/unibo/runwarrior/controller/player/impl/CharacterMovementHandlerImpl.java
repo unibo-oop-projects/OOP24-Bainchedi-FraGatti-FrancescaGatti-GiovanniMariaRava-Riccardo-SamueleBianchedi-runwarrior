@@ -222,8 +222,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     /**
      * {@inheritDoc}
      */
-    @Override
     @SuppressFBWarnings("EI_EXPOSE_REP")
+    @Override
     public CollisionDetection getCollisionDetection() {
         return this.collisionDetection;
     }
@@ -231,8 +231,8 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     /**
      * {@inheritDoc}
      */
-    @Override
     @SuppressFBWarnings("EI_EXPOSE_REP")
+    @Override
     public KillDetection getKillDetection() {
         return this.killDetection;
     }
