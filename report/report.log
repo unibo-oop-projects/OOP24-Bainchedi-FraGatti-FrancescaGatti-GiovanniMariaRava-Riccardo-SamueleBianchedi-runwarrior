@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.7.29)  29 JUL 2025 14:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.7.29)  29 JUL 2025 16:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -340,127 +340,126 @@ Capitolo 2.
 <resources/UMLMapElement.png, id=158, 3852.3925pt x 3058.42625pt>
 File: resources/UMLMapElement.png Graphic file (type png)
 <use resources/UMLMapElement.png>
-Package pdftex.def Info: resources/UMLMapElement.png  used on input line 101.
+Package pdftex.def Info: resources/UMLMapElement.png  used on input line 100.
 (pdftex.def)             Requested size: 312.00119pt x 247.66583pt.
  [6 <./resources/UMLMapElement.png>]
 <resources/TemplateCharacter.png, id=165, 3603.4625pt x 3854.4pt>
 File: resources/TemplateCharacter.png Graphic file (type png)
 <use resources/TemplateCharacter.png>
-Package pdftex.def Info: resources/TemplateCharacter.png  used on input line 127.
+Package pdftex.def Info: resources/TemplateCharacter.png  used on input line 128.
 (pdftex.def)             Requested size: 312.00119pt x 333.70685pt.
  [7] [8 <./resources/TemplateCharacter.png>]
 <resources/playerAction.png, id=176, 3854.4pt x 2296.58pt>
 File: resources/playerAction.png Graphic file (type png)
 <use resources/playerAction.png>
-Package pdftex.def Info: resources/playerAction.png  used on input line 151.
+Package pdftex.def Info: resources/playerAction.png  used on input line 156.
 (pdftex.def)             Requested size: 312.00119pt x 185.86777pt.
  [9 <./resources/playerAction.png>]
 <resources/Collisions.png, id=183, 3854.4pt x 1617.04124pt>
 File: resources/Collisions.png Graphic file (type png)
 <use resources/Collisions.png>
-Package pdftex.def Info: resources/Collisions.png  used on input line 186.
+Package pdftex.def Info: resources/Collisions.png  used on input line 191.
 (pdftex.def)             Requested size: 312.00119pt x 130.87105pt.
-<resources/Powerup.png, id=184, 3854.4pt x 2736.2225pt>
+ [10 <./resources/Collisions.png>]
+<resources/Powerup.png, id=190, 3854.4pt x 2736.2225pt>
 File: resources/Powerup.png Graphic file (type png)
 <use resources/Powerup.png>
-Package pdftex.def Info: resources/Powerup.png  used on input line 201.
+Package pdftex.def Info: resources/Powerup.png  used on input line 207.
 (pdftex.def)             Requested size: 312.00119pt x 221.4491pt.
- [10 <./resources/Collisions.png>]
-<resources/PowersHandler.png, id=191, 3854.4pt x 3650.63875pt>
+ [11 <./resources/Powerup.png>]
+<resources/PowersHandler.png, id=197, 3854.4pt x 3650.63875pt>
 File: resources/PowersHandler.png Graphic file (type png)
 <use resources/PowersHandler.png>
-Package pdftex.def Info: resources/PowersHandler.png  used on input line 218.
+Package pdftex.def Info: resources/PowersHandler.png  used on input line 224.
 (pdftex.def)             Requested size: 312.00119pt x 295.45502pt.
- [11 <./resources/Powerup.png>] [12 <./resources/PowersHandler.png>]
-<resources/UMLshop.png, id=205, 2083.785pt x 1255.69125pt>
+ [12 <./resources/PowersHandler.png>]
+<resources/UMLshop.png, id=206, 2083.785pt x 1255.69125pt>
 File: resources/UMLshop.png Graphic file (type png)
 <use resources/UMLshop.png>
-Package pdftex.def Info: resources/UMLshop.png  used on input line 245.
+Package pdftex.def Info: resources/UMLshop.png  used on input line 251.
 (pdftex.def)             Requested size: 312.00119pt x 188.00067pt.
- [13] [14 <./resources/UMLshop.png>]
+ [13 <./resources/UMLshop.png>] [14]
 <resources/enemyMvcUml.png, id=218, 3854.4pt x 1964.33875pt>
 File: resources/enemyMvcUml.png Graphic file (type png)
 <use resources/enemyMvcUml.png>
-Package pdftex.def Info: resources/enemyMvcUml.png  used on input line 306.
+Package pdftex.def Info: resources/enemyMvcUml.png  used on input line 312.
 (pdftex.def)             Requested size: 312.00119pt x 158.97868pt.
- [15] [16 <./resources/enemyMvcUml.png>]
+ [15]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 315.
-<resources/saveManagerUML.png, id=233, 3317.39375pt x 3854.4pt>
+(Font)              <5> on input line 321.
+<resources/saveManagerUML.png, id=228, 3317.39375pt x 3854.4pt>
 File: resources/saveManagerUML.png Graphic file (type png)
 <use resources/saveManagerUML.png>
-Package pdftex.def Info: resources/saveManagerUML.png  used on input line 334.
+Package pdftex.def Info: resources/saveManagerUML.png  used on input line 340.
 (pdftex.def)             Requested size: 234.00238pt x 271.83522pt.
- [17] [18 <./resources/saveManagerUML.png>]
-<resources/spawingEnemyUML.png, id=252, 3854.4pt x 1799.72375pt>
+ [16 <./resources/enemyMvcUml.png>] [17 <./resources/saveManagerUML.png>]
+<resources/spawingEnemyUML.png, id=247, 3854.4pt x 1799.72375pt>
 File: resources/spawingEnemyUML.png Graphic file (type png)
 <use resources/spawingEnemyUML.png>
-Package pdftex.def Info: resources/spawingEnemyUML.png  used on input line 353.
+Package pdftex.def Info: resources/spawingEnemyUML.png  used on input line 359.
 (pdftex.def)             Requested size: 312.00119pt x 145.65599pt.
- [19 <./resources/spawingEnemyUML.png>]
+ [18 <./resources/spawingEnemyUML.png>]
 Capitolo 3.
-[20
+[19
 
 ]
-Overfull \hbox (118.46422pt too wide) in paragraph at lines 404--406
+Overfull \hbox (118.46422pt too wide) in paragraph at lines 410--412
 \OT1/cmr/m/n/12 Map<Integer, Buf-fe-re-dI-ma-ge> e Li-st<MapElement> https://github.com/GiovanniRava/OOP24-
  []
 
 
-Overfull \hbox (260.95436pt too wide) in paragraph at lines 404--406
+Overfull \hbox (260.95436pt too wide) in paragraph at lines 410--412
 \OT1/cmr/m/n/12 runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/GameMap.java 
  []
 
 
-Overfull \hbox (4.57233pt too wide) in paragraph at lines 406--408
+Overfull \hbox (4.57233pt too wide) in paragraph at lines 412--414
 \OT1/cmr/m/n/12 l'en-co-ding UTF-8 in let-tu-ra https://github.com/GiovanniRava/OOP24-
  []
 
 
-Overfull \hbox (266.25708pt too wide) in paragraph at lines 406--408
+Overfull \hbox (266.25708pt too wide) in paragraph at lines 412--414
 \OT1/cmr/m/n/12 runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/MapLoader.java 
  []
 
-[21] [22]
-Capitolo 4.
 
-Overfull \hbox (109.17493pt too wide) in paragraph at lines 424--430
+Overfull \hbox (109.17493pt too wide) in paragraph at lines 418--421
 \OT1/cmtt/m/n/12 GiovanniRava / OOP24-[]runwarrior / blob / 786d60909eb4856d26449dafa053fcec146400df /
  []
 
 
-Overfull \hbox (35.07489pt too wide) in paragraph at lines 424--430
-\OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / Menu . java # L181C17-[]L192C20$[]
+Overfull \hbox (35.07489pt too wide) in paragraph at lines 418--421
+\OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / Menu . java # L181C17-[]L192C20$[] 
+ []
+
+[20]
+Overfull \hbox (17.27701pt too wide) in paragraph at lines 422--424
+[]$\OMS/cmsy/m/n/12 !$ \OT1/cmr/m/n/12 Per-ma-link: []$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava / OOP24-[]runwarrior /
  []
 
 
-Overfull \hbox (226.49998pt too wide) in paragraph at lines 424--430
-[]$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava / OOP24-[]runwarrior / blob / 786d60909eb4856d26449dafa053fcec146400df /
+Overfull \hbox (9.87488pt too wide) in paragraph at lines 422--424
+\OT1/cmtt/m/n/12 blob / 786d60909eb4856d26449dafa053fcec146400df / src / main / java /
  []
 
 
-Overfull \hbox (35.07489pt too wide) in paragraph at lines 424--430
-\OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / Menu . java # L193C17-[]L204C20$[]
+Overfull \hbox (17.27701pt too wide) in paragraph at lines 425--427
+[]$\OMS/cmsy/m/n/12 !$ \OT1/cmr/m/n/12 Per-ma-link: []$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava / OOP24-[]runwarrior /
  []
 
 
-Overfull \hbox (226.49998pt too wide) in paragraph at lines 424--430
-[]$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava / OOP24-[]runwarrior / blob / 786d60909eb4856d26449dafa053fcec146400df /
+Overfull \hbox (9.87488pt too wide) in paragraph at lines 425--427
+\OT1/cmtt/m/n/12 blob / 786d60909eb4856d26449dafa053fcec146400df / src / main / java /
  []
 
 
-Overfull \hbox (35.07489pt too wide) in paragraph at lines 424--430
-\OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / Menu . java # L205C16-[]L216C20$[]
+Overfull \hbox (17.27701pt too wide) in paragraph at lines 428--430
+[]$\OMS/cmsy/m/n/12 !$ \OT1/cmr/m/n/12 Per-ma-link: []$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava / OOP24-[]runwarrior /
  []
 
 
-Overfull \hbox (226.49998pt too wide) in paragraph at lines 424--430
-[]$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava / OOP24-[]runwarrior / blob / 1177dc7188d3a96ba1165ba19e439a1417d417bf /
- []
-
-
-Overfull \hbox (35.07489pt too wide) in paragraph at lines 424--430
-\OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / Menu . java # L226C17-[]L235C20$[] 
+Overfull \hbox (9.87488pt too wide) in paragraph at lines 428--430
+\OT1/cmtt/m/n/12 blob / 1177dc7188d3a96ba1165ba19e439a1417d417bf / src / main / java /
  []
 
 
@@ -473,9 +472,7 @@ Overfull \hbox (34.57489pt too wide) in paragraph at lines 433--435
 \OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / controller / enemy / EnemySpawner .
  []
 
-[23
 
-]
 Overfull \hbox (133.87494pt too wide) in paragraph at lines 435--437
 \OT1/cmtt/m/n/12 com / GiovanniRava / OOP24-[]runwarrior / blob / 487ae1a3598382a5eb6584d892bbe61fabc8d758 /
  []
@@ -485,27 +482,31 @@ Overfull \hbox (9.87488pt too wide) in paragraph at lines 435--437
 \OT1/cmtt/m/n/12 src / test / java / it / unibo / runwarrior / model / GameSaveManagerTest .
  []
 
-[24]
-Appendice A.
-[25
+[21]
+Capitolo 4.
+[22
 
-]
+] [23]
+Appendice A.
+[24
+
+] [25]
 Appendice B.
 [26
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 453--457
+Underfull \hbox (badness 10000) in paragraph at lines 513--517
 []$\OT1/cmtt/m/n/12 https : / / docs . pmd-[]code . org / pmd-[]doc-[]7 . 12 . 0 / pmd _ rules _ java _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--463
+Underfull \hbox (badness 10000) in paragraph at lines 519--523
 []$\OT1/cmtt/m/n/12 https : / / en . wikipedia . org / wiki / Initialization-[]on-[]demand _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 466--470
-[]$\OT1/cmtt/m/n/12 https : / / docs . oracle . com / javase / 8 / docs / api / java / util / Timer .
+Underfull \hbox (badness 10000) in paragraph at lines 526--530
+[]$\OT1/cmtt/m/n/12 https : / / docs . oracle . com / javase / 7 / docs / api / javax / swing / Timer .
  []
 
 [27
@@ -526,17 +527,17 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 3F784ACFA3D8FC6174996A5A299565D8;3324.
  ) 
 Here is how much of TeX's memory you used:
- 12450 strings out of 474486
- 212185 string characters out of 5743283
+ 12451 strings out of 474486
+ 212195 string characters out of 5743283
  1934542 words of memory out of 5000000
- 34537 multiletter control sequences out of 15000+600000
+ 34538 multiletter control sequences out of 15000+600000
  564696 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,321b,523s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Utente\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on report.pdf (28 pages, 2702358 bytes).
+Output written on report.pdf (28 pages, 2708389 bytes).
 PDF statistics:
- 380 PDF objects out of 1000 (max. 8388607)
+ 383 PDF objects out of 1000 (max. 8388607)
  71 named destinations out of 1000 (max. 500000)
  254 words of extra memory for PDF output out of 10000 (max. 10000000)
 

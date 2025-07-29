@@ -142,14 +142,9 @@ controller.
 Entrambe le interfacce vengono usate da AbstractCharacterImpl e i loro metodi vengono richiamati all'interno di update() 
 e drawPlayer(Graphics2D).
 Per questa architettura mi sono basato sul pattern Strategy, ma applicandone una variazione, cioè incapsulare in 2 interfacce diverse 
-<<<<<<< HEAD
 le operazioni che gestiscono animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire 
 tali comportamenti, entrambe le classi usano CharacterComand, la classe che gestisce l'input da tastiera.
 
-=======
-animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire tali comportamenti entrambe le classi 
-usano CharacterComand, la classe che gestisce l'input da tastiera.
->>>>>>> 1177dc7188d3a96ba1165ba19e439a1417d417bf
 CharacterAnimationHandler definisce metodi fondamentali come: frameChanger(), per gestire il cambiamento dei frame in base agli input 
 e imagePlayer(boolean rightDirection), che fornisce l'immagine corretta in base al frame corrente.
 CharacterMovementHandler definisce metodi fondamentali come: setLocationAfterPowerUp(), per reimpostare la posizione del player
@@ -214,11 +209,7 @@ di powerup è gestita da PowerUpDetection.
     \label{fig:2.4}
 \end{figure}
 
-<<<<<<< HEAD
 \textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni.\vspace{1cm}
-=======
-\textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni
->>>>>>> 1177dc7188d3a96ba1165ba19e439a1417d417bf
 
 \textbf{Soluzione}: creazione della classe PowersHandler nella sezione controller dell'MVC. La classe che gestisce l'inizializzazione del 
 personaggio con cui si inzia il livello e la creazione di nuove istanze Character mantenendole in una lista. Quando il player ottiene 
@@ -423,7 +414,27 @@ https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef
 \end {itemize}
 \section{Riccardo Cornacchia}
 \section{Francesca Gatti}
+\begin{itemize}
+    \item \textbf{Utilizzo lambda expression} 
+    $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L181C17-L192C20}
+   
+    $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L193C17-L204C20}
+    
+    $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L205C16-L216C20}
+    
+    $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/1177dc7188d3a96ba1165ba19e439a1417d417bf/src/main/java/it/unibo/runwarrior/view/Menu.java#L226C17-L235C20}
+\end{itemize}
 \section{Giovanni Maria Rava}
+\begin{itemize}
+    \item \textbf{Utilizzo di stream e lambda expression} $\rightarrow$ Permalink: 
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/main/java/it/unibo/runwarrior/controller/enemy/EnemySpawner.java#L55-L63}
+    \item \textbf{Utilizzo di lambda expressione} $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/test/java/it/unibo/runwarrior/model/GameSaveManagerTest.java#L63}
+\end{itemize}
 
 \chapter{Commenti finali}
 \section{Autovalutazione e lavori futuri}
@@ -435,7 +446,6 @@ a riparare i miei errori. Avrei potuto essere più attivo nel gruppo e apportare
 Sicuramente mi è piaciuto e mi ha divertito e mi ha spronato a impegnarmi di più in vista di futuri esami.
 
 \subsection{Riccardo Cornacchia}
-<<<<<<< HEAD
 \textbf{Sviluppi futuri}: implementazione di nuove skin da inserire nel Template pattern, sia per i personaggi esistenti, sia per 
 nuovi personaggi, creando nuove classi ed estendendo AbstractCharacterImpl.
 In relazione a ciò appena detto si può aggiungere l'implementazione di nuovi powerups: aggiungerne dei nuovi ai personaggi esistenti o 
@@ -460,27 +470,27 @@ Complessivamente penso di essere riuscito ad avere un approccio attivo e stimola
 con continuità e grazie al quale siamo riusciti a risolvere diversi problemi in maniera più efficiente.
 
 
-=======
->>>>>>> 1177dc7188d3a96ba1165ba19e439a1417d417bf
 \subsection{Francesca Gatti}
-\begin{itemize}
-    \item \textbf{Utilizzo lambda expression} $\rightarrow$ Permalink:
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L181C17-L192C20}
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L193C17-L204C20}
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L205C16-L216C20}
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/1177dc7188d3a96ba1165ba19e439a1417d417bf/src/main/java/it/unibo/runwarrior/view/Menu.java#L226C17-L235C20}
-    \item
-\end{itemize}
+\textbf{Sviluppi futuri}: aggiunta di nuovi bottoni alla schermata del menù (per esempio un LEVEL4). Creazione di un negozio più 
+rifornito con più skin acquistabili. Implementazione di un sistema di punteggio basato, oltre che sulle monete, sulla quantità di tempo impiegato
+per completare il livello. Aggiungere monete di grandezze diverse con valore maggiore rispetto a quelle già presenti, in modo da avvicinarsi di 
+più al vero gioco Super Mario Bros.
+\textbf{Autovalutazione}: 
 \subsection{Giovanni Maria Rava}
-\begin{itemize}
-    \item \textbf{Utilizzo di stream e lambda expression} $\rightarrow$ Permalink: 
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/main/java/it/unibo/runwarrior/controller/enemy/EnemySpawner.java#L55-L63}
-    \item \textbf{Utilizzo di lambda expressione} $\rightarrow$ Permalink:
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/test/java/it/unibo/runwarrior/model/GameSaveManagerTest.java#L63}
-\end{itemize}
 \appendix
 \chapter{Guida utente}
-Per il movimento del player si usano 4 frecce della tastiera:
+Appena verrà avviato il gioco apparirà la schermata iniziale con il tasto "PLAY" da cliccare per accedere al menù di gioco.
+Successivamente la schermata cambierà e saranno visibili quattro nuovi tasti: "LEVEL1", "LEVEL2", "LEVEL3", "SHOP". A gioco appena avviato e senza
+salvataggi precedenti sarà possibile accedere solo al LEVEL1 o allo SHOP. Per poter accedere a LEVEL2 e LEVEL3 è necessario completare i livelli
+precedenti. Per iniziare il gioco selezionare LEVEL1. Per visualizzare il negozio di gioco cliccare sul tasto SHOP, si aprirà una finestra con tre pulsanti:
+\begin{itemize}
+    \item BUY SKIN: pulsante per acquistare la skin, in base alla quantità di monete possedute dall'utente l'azione andrà a buon fine o meno.
+    \item SELECT DEFAULT SKIN: pulsante per selezionare la skin base del gioco (WARRIOR), l'utente è già a disposizione di tale skin e potrà già selezionarla 
+    (nel caso in cui non lo faccia verrà impostata in automatico come skin di gioco).
+    \item SELECT WIZARD SKIN: pulsante per selezionare la skin nuova acquistata (WIZARD), l'utente dovrà prima raccogliere un totale di 50 monete per poterla 
+    comprare, nel caso in cui la skin non sia ancora selezionabile perché non ancora acquistata verrà mostrato un messaggio di tentativo fallito.s
+\end{itemize}
+Per il movimento del player si usano quattro frecce della tastiera:
 \begin{itemize}
     \item \textbf{Freccia destra}: per muoversi verso destra
     \item \textbf{Freccia sinistra}: per muoversi verso sinistra
@@ -489,6 +499,13 @@ Per il movimento del player si usano 4 frecce della tastiera:
     \item \textbf{Shift}: per attaccare con spada o bastone nel caso in cui si è giunti al secondo potenziamento.
     Attenzione, mentre si è in movimento il player può attaccare una volta ogni secondo.
 \end{itemize}
+Se il giocatore dovesse morire mentre gioca apparirà una finestra con la scritta GAMEOVER con un resoconto delle monete raccolte che segnala la fine del gioco.
+Se invece il giocatore dovesse finire il livello raggiungendo il portale si aprirà una finestra con la scritta LEVELCOMPLETED con un resoconto delle monete 
+raccolte e il tempo impiegato per raggiungere la fine. 
+In entrambi i casi cliccare la X in alto per tornare alla schermata iniziale con il tasto PLAY.
+Se si desidera terminare la sessione di gioco cliccare la X in alto del frame del videogioco, apparirà una finestra dove verrà chiesto all'utente se vuole 
+salvare o meno i dati e i progressi fatti: selezionare SI per continuare a giocare con i progressi fatti in quella sessione, altrimenti selezionare NO e i dati 
+verranno cancellati.
 \chapter{Bibliografia}
 \begin{thebibliography}{9}
 
@@ -508,7 +525,7 @@ Per il movimento del player si usano 4 frecce della tastiera:
     \bibitem{oracle-timer}
     Oracle Corporation,\\
     \emph{Timer (Java Platform SE 8)} --- Oracle Docs,\\
-    \url{https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html},\\
+    \url{https://docs.oracle.com/javase/7/docs/api/javax/swing/Timer.html},\\
     accessed May 2025
 
     \end{thebibliography}
