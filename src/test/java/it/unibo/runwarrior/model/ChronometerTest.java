@@ -9,10 +9,9 @@ import it.unibo.runwarrior.model.chronometer.api.Chronometer;
 import it.unibo.runwarrior.model.chronometer.impl.ChronometerImpl;
 
 class ChronometerTest {
-
+    private static final int MILLE5 = 1500;
     private static final int MILLE4 = 1400;
     private static final int DUE_MILA = 2000;
-    private static final int MILLE5 = 1500;
     private Chronometer chronometer;
 
     @BeforeEach
@@ -23,6 +22,7 @@ class ChronometerTest {
     @Test
     void testChronometerElapsedTimeAndFormat() throws InterruptedException {
         chronometer.startTimer();
+        Thread.sleep(MILLE5);
         Thread.sleep(MILLE5);
         chronometer.stopTimer();
         final long timeElapsed = chronometer.getTimeElapsed();

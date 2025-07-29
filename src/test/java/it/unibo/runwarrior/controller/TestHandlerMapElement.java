@@ -29,7 +29,11 @@ class TestHandlerMapElement {
 
     /**
      * Create a smaller map for the test and the initialize the map.
+     * Suppresses the PMD warning that suggests adding a trailing comma
+     * after the last element of an array initializer.
+     * In this context, the trailing comma is intentionally omitted for clarity.
      */
+    @SuppressWarnings("PMD.UseArrayTrailingComma")
     @BeforeEach
     void initMap() {
         final int[][] map = new int[][] {
