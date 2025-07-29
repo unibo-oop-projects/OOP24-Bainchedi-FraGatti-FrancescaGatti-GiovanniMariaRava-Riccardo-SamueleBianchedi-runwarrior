@@ -429,7 +429,28 @@ https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef
 \end{itemize}
 
 \section{Francesca Gatti}
+\begin{itemize}
+    \item \textbf{Utilizzo lambda expression} $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L181C17-L192C20}
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L193C17-L204C20}
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L205C16-L216C20}
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/1177dc7188d3a96ba1165ba19e439a1417d417bf/src/main/java/it/unibo/runwarrior/view/Menu.java#L226C17-L235C20}
+    \item
+\end{itemize}
 \section{Giovanni Maria Rava}
+\begin{itemize}
+    \item \textbf{Utilizzo di stream e lambda expression} $\rightarrow$ Permalink: 
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/main/java/it/unibo/runwarrior/controller/enemy/EnemySpawner.java#L55-L63}
+    \item \textbf{Utilizzo di lambda expressione} $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/test/java/it/unibo/runwarrior/model/GameSaveManagerTest.java#L63}
+    \item \textbf{Implementazione metodo copyImage} $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/ea221779e7801710824877e7599505de2931ca1d/src/main/java/it/unibo/runwarrior/view/enemy/impl/GoblinView.java#L91-L98}
+    Per risolvere un warning PMD di tipo EI EXPOSE REP, che segnala l'esposizione diretta di oggetti mutabili, in questo caso un BufferedImage, è stato introdotto un metodo privato 
+    che crea una copia sicura dell'immagine da restituire. In questo modo si evita che il chiamante possa modificare direttamente lo stato interno della classe, preservando l'incapsulamento.
+    La copia viene realizzata tramite un nuovo BufferedImage su cui si disegna l'immagine originale usando un oggetto Graphics2D, 
+    ottenuto con createGraphics(). Questo approccio è documentato nella pagina ufficiale Oracle della classe Graphics, sezione 
+    create(...), vedi \cite{oracle-graphics-create}.
+\end{itemize}
 
 \chapter{Commenti finali}
 \section{Autovalutazione e lavori futuri}
@@ -464,23 +485,18 @@ Cito anche la parte relativa ai potenziamenti e la classe PowersHandler che pens
 Complessivamente penso di essere riuscito ad avere un approccio attivo e stimolante con il gruppo di lavoro, con cui mi sono confrontato 
 con continuità e grazie al quale siamo riusciti a risolvere diversi problemi in maniera più efficiente.
 
-
-\subsection{Francesca Gatti}
-\begin{itemize}
-    \item \textbf{Utilizzo lambda expression} $\rightarrow$ Permalink:
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L181C17-L192C20}
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L193C17-L204C20}
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L205C16-L216C20}
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/1177dc7188d3a96ba1165ba19e439a1417d417bf/src/main/java/it/unibo/runwarrior/view/Menu.java#L226C17-L235C20}
-    \item
-\end{itemize}
 \subsection{Giovanni Maria Rava}
-\begin{itemize}
-    \item \textbf{Utilizzo di stream e lambda expression} $\rightarrow$ Permalink: 
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/main/java/it/unibo/runwarrior/controller/enemy/EnemySpawner.java#L55-L63}
-    \item \textbf{Utilizzo di lambda expressione} $\rightarrow$ Permalink:
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/test/java/it/unibo/runwarrior/model/GameSaveManagerTest.java#L63}
-\end{itemize}
+All'interno del progetto mi sono occupato principalmente di una parte che penso sia importante ma comunque non essenziale per il 
+gioco ovvero i nemici. Ho avuto la difficoltà principale nella gestione della loro nascita, in quanto ho cercato di importare una 
+modalità che potesse essere modificabile in un futuro senza però dover intaccare la parte di codice. Ho poi utilizzato il restante
+tempo per lo sviluppo di un sistema di salvataggio del gioco, nel migliorare l'architettura delle mie parti e nel controllo degli 
+spotbugs. La parte al quale ho sicuramente dato meno attenzione è quella di sviluppo della grafica. Gli sviluppi futuri di questa 
+parte sono molti, tra i principali  ci sono: nuovi nemici e/o ostacoli, l'implementazione di un movimento più complesso dei nemici,
+ad esempio quello verticale. In futuro potrebbe essere implementato uno spawning dinamico e una meccanica in cui, alla morte di un
+nemico, venga generato un oggetto bonus o malus.
+Il progetto è stato stimolante a livello personale ma sopratutto è stato un ottimo modo per migliorare la capacità di lavorare in 
+gruppo. Il gruppo mi è stato molto di aiuto per superare le criticità incontrate e darci una mano quando le cose non andavano come 
+volevamo.
 \appendix
 \chapter{Guida utente}
 Per il movimento del player si usano 4 frecce della tastiera:
@@ -492,7 +508,6 @@ Per il movimento del player si usano 4 frecce della tastiera:
     \item \textbf{Shift}: per attaccare con spada o bastone nel caso in cui si è giunti al secondo potenziamento.
     Attenzione, mentre si è in movimento il player può attaccare una volta ogni secondo.
 \end{itemize}
-\chapter{Bibliografia}
 \begin{thebibliography}{9}
 
     \bibitem{pmd-singleton}
@@ -525,6 +540,12 @@ Per il movimento del player si usano 4 frecce della tastiera:
     \emph{Java: Playing Sound (Audio Clip, MP3, Java Sound API)} --- NTU Tutorials,\\
     \url{https://www3.ntu.edu.sg/home/ehchua/programming/java/J8c_PlayingSound.html},\\
     accessed May 2025
+
+    \bibitem{oracle-graphics-create}
+    Oracle,\\
+    \emph{Graphics.create(int x, int y, int width, int height) Method Documentation},\\
+    \url{https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html#create-int-int-int-int-},\\
+    accessed July 2025.
 
     \end{thebibliography}
 
