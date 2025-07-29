@@ -36,7 +36,7 @@ public class LevelCompletedPanel extends JPanel {
         initialize();
     }
 
-    private void initialize(){
+    private void initialize() {
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.add(titleLabel);
         super.add(Box.createRigidArea(new Dimension(0, RIGID_AREA_HEIGHT_LARGE)));
