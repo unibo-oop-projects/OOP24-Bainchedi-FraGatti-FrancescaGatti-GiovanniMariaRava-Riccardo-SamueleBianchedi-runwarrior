@@ -13,6 +13,13 @@ public final class RunwarriorMain {
      * Constructor of the main, that initialize the gameFrame and the menu.
      */
     private RunwarriorMain() {
+        // void
+    }
+
+    /**
+     * game initializer.
+     */
+    private static void initializeGame() {
         final JFrame gameFrame = new JFrame();
         gameFrame.setSize(FRAME_MENU_WIDTH, FRAME_MENU_HEIGHT);
         gameFrame.setLocationRelativeTo(null);
@@ -22,11 +29,18 @@ public final class RunwarriorMain {
     }
 
     /**
+     * start the game.
+     */
+    public static void start(){
+        initializeGame();
+    }
+
+    /**
      * Entry point of the application. Launches the game.
      *
      * @param args command-line arguments
      */
     public static void main(final String[] args) {
-        new RunwarriorMain();
+        start();
     }
 }

@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.controller.coincontroller.api.CoinController;
-import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.model.Coin;
 import it.unibo.runwarrior.view.GameLoopPanel;
 
@@ -30,7 +30,6 @@ public class CoinControllerImpl implements CoinController {
     private Character player;
     private int coinsCollected;
     private final List<Coin> coinList;
-    private ScoreController scoreController;
 
     /**
      * Coin Controller constructor.
@@ -114,6 +113,7 @@ public class CoinControllerImpl implements CoinController {
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     @Override
     public final void updatePlayer(final Character currentPlayer) {
         this.player = currentPlayer;
@@ -146,16 +146,9 @@ public class CoinControllerImpl implements CoinController {
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     @Override
     public Character getPlayer() {
         return player;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ScoreController getScoreController() {
-        return scoreController;
     }
 }

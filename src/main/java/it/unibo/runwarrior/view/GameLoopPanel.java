@@ -37,7 +37,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     private final transient Chronometer chronometer;
     private boolean gameStarted;
     private boolean gameEnded;
-    private boolean levelCompleted;
+    private volatile boolean levelCompleted;
     private boolean panelShawn;
     private final JFrame frameMenu;
 

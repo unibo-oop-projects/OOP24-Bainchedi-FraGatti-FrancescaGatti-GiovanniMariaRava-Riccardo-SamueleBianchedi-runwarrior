@@ -9,6 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -72,6 +75,7 @@ public class Menu extends JPanel {
      *
      * @param externalFrame frame external on wich the game is based
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public Menu(final JFrame externalFrame) {
         this.frameMenu = externalFrame;
         initMenu();
@@ -259,10 +263,9 @@ public class Menu extends JPanel {
     }
 
     /**
-     * WARNING: The returned reference is mutable and can be modified externally.
-     *
      * @return the panel of background
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public final JPanel getPanel() {
         return pannelloSfondoMenu;
     }

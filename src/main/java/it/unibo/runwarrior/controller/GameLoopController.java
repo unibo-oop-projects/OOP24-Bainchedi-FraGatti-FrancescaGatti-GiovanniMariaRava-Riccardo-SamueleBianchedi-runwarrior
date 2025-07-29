@@ -17,7 +17,6 @@ import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.controller.player.CharacterComand;
 import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.controller.score.impl.ScoreControllerImpl;
-import it.unibo.runwarrior.controller.shop.api.ShopController;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.Score;
@@ -55,7 +54,6 @@ public class GameLoopController {
     private final CoinController coinController;
     private final ScoreController scoreController;
     private final int levelIndex;
-    private ShopController shopController;
 
     /**
      * Constructor of the class. 
@@ -246,12 +244,5 @@ public class GameLoopController {
      */
     public final int getCurrentLevel() {
         return this.levelIndex;
-    }
-
-    /**
-     * @return the controller for the shop 
-     */
-    public final ShopController getShopController() {
-        return this.shopController;
     }
 }
