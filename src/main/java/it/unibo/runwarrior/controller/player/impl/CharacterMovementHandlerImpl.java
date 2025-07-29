@@ -276,4 +276,13 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     public int getScX() {
         return this.screenX;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @Override
+    public Character getPlayer() {
+        return this.player;
+    }
 }

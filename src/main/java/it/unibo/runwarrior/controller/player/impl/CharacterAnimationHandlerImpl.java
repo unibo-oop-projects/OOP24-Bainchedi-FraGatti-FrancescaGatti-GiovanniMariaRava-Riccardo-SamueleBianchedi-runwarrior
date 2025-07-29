@@ -8,6 +8,9 @@ import it.unibo.runwarrior.controller.player.CharacterComand;
 import it.unibo.runwarrior.controller.player.api.CharacterAnimationHandler;
 import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
 import it.unibo.runwarrior.model.player.PlayerFrame;
+import it.unibo.runwarrior.model.player.StickWizard;
+import it.unibo.runwarrior.model.player.SwordWarrior;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.view.GameMusic;
 
 /**
@@ -101,17 +104,23 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
             if (cmd.isAttacking() && movement.canAttack() && useAttackMoving > LIMIT_ATTACK) {
                 playerFrame = PlayerFrame.ATTACK_FRAME;
                 useAttackMoving = 0;
-                sound.play(false);
+                if (hasSword(movement.getPlayer())) {
+                    sound.play(false);
+                }
             }
         } else if (cmd.isJumping()) {
             playerFrame = PlayerFrame.JUMP_FRAME;
             if (cmd.isAttacking() && movement.canAttack()) {
                 playerFrame = PlayerFrame.ATTACK_FRAME;
-                sound.play(false);
+                if (hasSword(movement.getPlayer())) {
+                    sound.play(false);
+                }
             }
         } else if (cmd.isAttacking() && movement.canAttack()) {
             playerFrame = PlayerFrame.ATTACK_FRAME;
-            sound.play(false);
+            if (hasSword(movement.getPlayer())) {
+                sound.play(false);
+            }
         } else {
             playerFrame = PlayerFrame.STOP_FRAME;
         }
@@ -189,5 +198,15 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
             return copy;
         }
         return null;
+    }
+
+    /**
+     * Controls if the player has a weapon.
+     *
+     * @param pl current player
+     * @return true if the player has a weapon
+     */
+    private boolean hasSword(final Character pl) {
+        return pl.getClass().equals(SwordWarrior.class) || pl.getClass().equals(StickWizard.class);
     }
 }
