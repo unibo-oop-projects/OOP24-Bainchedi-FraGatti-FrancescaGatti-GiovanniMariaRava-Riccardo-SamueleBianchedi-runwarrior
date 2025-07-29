@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller.collisions;
+package it.unibo.runwarrior.controller.collisions.api;
 
 import it.unibo.runwarrior.model.player.Character;
 

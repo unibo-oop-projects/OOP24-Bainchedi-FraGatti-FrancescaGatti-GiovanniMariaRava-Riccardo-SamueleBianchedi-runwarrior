@@ -6,14 +6,14 @@ import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.runwarrior.controller.CharacterAnimationHandler;
-import it.unibo.runwarrior.controller.CharacterAnimationHandlerImpl;
-import it.unibo.runwarrior.controller.CharacterComand;
-import it.unibo.runwarrior.controller.CharacterMovementHandler;
-import it.unibo.runwarrior.controller.CharacterMovementHandlerImpl;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowerUpController;
+import it.unibo.runwarrior.controller.player.CharacterComand;
+import it.unibo.runwarrior.controller.player.api.CharacterAnimationHandler;
+import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
+import it.unibo.runwarrior.controller.player.impl.CharacterAnimationHandlerImpl;
+import it.unibo.runwarrior.controller.player.impl.CharacterMovementHandlerImpl;
 
 /**
  * Class that creates the player.
@@ -119,19 +119,21 @@ public abstract class AbstractCharacterImpl implements Character {
     public abstract void playerImage();
 
     /**
+     * Suppressed warnings cause it's a safe operation.
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     @Override
-    @SuppressFBWarnings(WARNING)
     public CharacterMovementHandler getMovementHandler() {
         return this.movement;
     }
 
     /**
+     * Suppressed warnings cause it's a safe operation.
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     @Override
-    @SuppressFBWarnings(WARNING)
     public CharacterAnimationHandler getAnimationHandler() {
         return this.animation;
     }
@@ -144,8 +146,10 @@ public abstract class AbstractCharacterImpl implements Character {
     }
 
     /**
+     * Sword area has to be set by subclasses.
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     @Override
     public void setSwordArea(final Rectangle swordArea) {
         this.swordArea = swordArea;
@@ -164,8 +168,8 @@ public abstract class AbstractCharacterImpl implements Character {
      * And collisionArea is not changed in other classes.
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     @Override
-    @SuppressFBWarnings(WARNING)
     public Rectangle getArea() {
         return collisionArea;
     }

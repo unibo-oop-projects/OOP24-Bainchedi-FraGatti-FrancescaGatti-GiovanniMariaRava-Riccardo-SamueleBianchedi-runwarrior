@@ -5,10 +5,10 @@ import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 
-import it.unibo.runwarrior.controller.CharacterComand;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowerUpController;
+import it.unibo.runwarrior.controller.player.CharacterComand;
 
 /**
  * Implementation of the warrioir with armour.

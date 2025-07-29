@@ -105,6 +105,7 @@ Nel seguente schema UML si mostra come i campi siano privati e l'accesso avvenga
 Il pattern utilizzato è stato Immutable Object, un idioma fondamentale di OOP. Quest'ultimo spiega gli oggetti immutabili, oggetti che non
 si possono veder modificato lo stato dopo la loro creazione. Sebbene gli oggetti nel progetto non siano perfettamente immutabili a causa
 dei setter, quello a cui si aspirava era un oggetto non modificabile lontano da errori imprevedibili.
+
 \section{Riccardo Cornacchia}
 
 \textbf{Problema}: si deve gestire la creazione del player considerando che le 2 entità warrior e wizard possono cambiare in modo attivo 3 skin
@@ -122,9 +123,9 @@ principale (update) nella classe astratta e delega alle sottoclassi la definizio
 (playerImage e updateAttackCollision). Il Template method è l'update() che definisce l'algoritmo principale; esso infatti richiama i due 
 metodi definiti dalle sottoclassi.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{resources/TemplateCharacter.png}
+    \includegraphics[width=\textwidth, height=10cm]{resources/TemplateCharacter.png}
     \caption{UML del pattern Template per il personaggio principale}
     \label{fig:2.1}
 \end{figure}
@@ -138,8 +139,8 @@ del progetto. L'obbiettivo è quello di delegare i 2 comportamenti fondamentali 
 controller. Entrambe le interfacce vengono usate da AbstractCharacterImpl e i loro metodi vengono richiamati all'interno di update() 
 e drawPlayer(Graphics2D).
 Per questa architettura mi sono basato sul pattern Strategy, ma applicandone una variazione, cioè incapsulare in 2 interfacce diverse 
-animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire tali comportamenti entrambe le classi 
-usano CharacterComand, la classe che gestisce l'input da tastiera.
+le operazioni che gestiscono animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire 
+tali comportamenti, entrambe le classi usano CharacterComand, la classe che gestisce l'input da tastiera.
 CharacterAnimationHandler definisce metodi fondamentali come: frameChanger(), per gestire il cambiamento dei frame in base agli input 
 e imagePlayer(boolean rightDirection), che fornisce l'immagine corretta in base al frame corrente.
 CharacterMovementHandler definisce metodi fondamentali come: setLocationAfterPowerUp(), per reimpostare la posizione del player
@@ -183,8 +184,8 @@ diverse entità.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{resources/Collisions.png}
-    \caption{UML architettura per gestire le collisioni}
+    \includegraphics[width=\textwidth, height=10cm]{resources/Collisions.png}
+    \caption{UML architettura per gestire le collisioni del player cone le altre entità}
     \label{fig:2.3}
 \end{figure}
 
@@ -203,10 +204,10 @@ che acquisisce la lista di tutti i powerups e si occupa di stamparli a video nel
     \label{fig:2.4}
 \end{figure}
 
-\textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni
+\textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni.
 
-\textbf{Soluzione}: creazione della classe PowersHandler nella sezione controller dell'MVC. La classe che gestisce l'inizializzazione del 
-personaggio con cui si inzia il livello e la creazione di nuove istanze Character mantenendole in una lista. Quando il player ottiene 
+\textbf{Soluzione}: creazione della classe PowersHandler nella sezione controller dell'MVC. La classe gestisce l'inizializzazione del 
+personaggio con cui si sceglie di inziare il livello e la creazione di nuove istanze Character mantenendole in una lista. Quando il player ottiene 
 1 vita (raccolta powerup) o la perde (collisione ostacolo o nemico, se non schiacciato) vengono utilizzati i metodi setPowers() e 
 losePowers() dalle classi “Detection”; questi metodi si collegano al GameLoopController permettondo di cambiare la skin del player 
 attualmente in gioco e di settare la posizione della nuova istanza all'interno della mappa. Inoltre permette di 
@@ -407,9 +408,24 @@ Tra le feature avanzate troviamo:
 https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/MapLoader.java
 \end {itemize}
 \section{Riccardo Cornacchia}
+\begin{itemize}
+    \item Implementazione della classe \textbf{KeyListener} mediante CharacterComand per ricevere input da tastiera. $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/controller/player/CharacterComand.java#L9}
+    \item Implementazione della classe \textbf{GameMusic} mediante nuovi tipi AudioInputStream, AudioSystem e Clip. 
+    Utilizzata per musica in background ed effetti sonori. $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/GameMusic.java#L17}
+    \item Uso di \textbf{stream e lambda expression} nella classe CollisionDetectionImpl. Mi permette di organizzare gerarchicamente 
+    le diverse direzioni di collisione in cui è coinvolto il player. $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/controller/collisions/impl/CollisionDetectionImpl.java#L74}
+\end{itemize}
 \section{Francesca Gatti}
 \section{Giovanni Maria Rava}
-
+\begin{itemize}
+    \item \textbf{Uso di stream e lambda expression:} $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/f9851fc3c4aa7f8be1d98113f4c133a7ec516e03/src/main/java/it/unibo/runwarrior/controller/enemy/EnemySpawner.java#L55-L63}
+    \item \textbf{Uso lambda expression:} $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/test/java/it/unibo/runwarrior/model/GameSaveManagerTest.java#L63}
+\end{itemize}
 \chapter{Commenti finali}
 \section{Autovalutazione e lavori futuri}
 \subsection{Samuele Bianchedi}
@@ -419,6 +435,31 @@ Ho cercato di fare del mio meglio, tra impegni, lavoro e tutto il resto. Ogni ta
 a riparare i miei errori. Avrei potuto essere più attivo nel gruppo e apportare qualche contributo in più.
 Sicuramente mi è piaciuto e mi ha divertito e mi ha spronato a impegnarmi di più in vista di futuri esami.
 \subsection{Riccardo Cornacchia}
+\textbf{Sviluppi futuri}: implementazione di nuove skin da inserire nel Template pattern, sia per i personaggi esistenti, sia per 
+nuovi personaggi, creando nuove classi ed estendendo AbstractCharacterImpl.
+In relazione a ciò appena detto si può aggiungere l'implementazione di nuovi powerups: aggiungerne dei nuovi ai personaggi esistenti o 
+modificare quelli esistenti.
+Implementazione di nuovi metodi da parte delle sottoclassi di AbstractCharacterImpl che possano definire nuove meccaniche di gioco, 
+ad esempio: salto doppio, gestione di nuove azioni determinate da evntuali nuovi powerup, accovacciamento.
+
+\textbf{Autovalutazione}: sin dall'inizio dello sviluppo del progetto, penso che mi sia focalizzato con serietà e dedizione su come 
+realizzare la nostra idea e in particolar modo su come definire la mia parte, che ad oggi posso dire essere il frutto di una continua 
+ricerca avvenuta mediante tante idee giuste e sbagliate.
+Uno degli aspetti che mi ha tenuto maggiormente occupato e su cui ho speso un'importante parte del mio lavoro, ragionando da zero 
+su come organizzarlo, è la realizzazione delle collisioni, in particolar modo le collisioni tra player e blocchi della mappa, da cui ho 
+poi sviluppato anche le altre classi di gestione delle collisioni; per questo credo che questo aspetto sia un punto di forza della 
+mia parte di codice.
+
+Altro aspetto su cui ho lavorato tanto è stata la meccanica di movimento del player, che step by step è arrivata ad essere ciò che è 
+ora, ma credo che in quel caso, una volta impostati gli input da tastiera, si potessero prendere diverse strade per svilupparla, 
+e quindi giungere alla stessa conclusione con un codice eventualmente migliore, ma anche peggiore, in confronto a quello sviluppato da me.
+Cito anche la parte relativa ai potenziamenti e la classe PowersHandler che permette di rendere reattiva l'entità del player, 
+in base alle diverse interazioni che ha nel gioco, che penso essere ben adeguate all'architettura MVC.
+
+Complessivamente penso di essere riuscito ad avere un approccio attivo e stimolante con il gruppo di lavoro, con cui mi sono confrontato 
+con continuità e grazie al quale siamo riusciti a risolvere diversi problemi in maniera più efficiente.
+
+
 \subsection{Francesca Gatti}
 \begin{itemize}
     \item \textbf{Utilizzo di stream e lambda expression} $\rightarrow$ Permalink:
@@ -426,12 +467,17 @@ Sicuramente mi è piaciuto e mi ha divertito e mi ha spronato a impegnarmi di pi
     \item 
 \end{itemize}
 \subsection{Giovanni Maria Rava}
-\begin{itemize}
-    \item \textbf{Utilizzo di stream e lambda expression} $\rightarrow$ Permalink: 
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/main/java/it/unibo/runwarrior/controller/enemy/EnemySpawner.java#L55-L63}
-    \item \textbf{Utilizzo di lambda expressione} $\rightarrow$ Permalink:
-    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/test/java/it/unibo/runwarrior/model/GameSaveManagerTest.java#L63}
-\end{itemize}
+All'interno del progetto mi sono occupato principalmente di una parte che penso sia importante ma comunque non essenziale per il 
+gioco ovvero i nemici. Ho avuto la difficoltà principale nella gestione della loro nascita, in quanto ho cercato di importare una
+modalità che potesse essere modificabile in un futuro senza però dover intaccare la parte di codice. Ho poi utilizzato il restante 
+tempo per lo sviluppo di un sistema di salvataggio del gioco, nel migliorare l’architettura delle mie parti e nel controllo degli 
+spotbugs. La parte al quale ho sicuramente dato meno attenzione è quella di sviluppo della grafica. Gli sviluppi futuri di questa 
+parte sono molti, tra i principali  ci sono: nuovi nemici e/o ostacoli, l’implementazione di un movimento più complesso dei nemici,
+ad esempio quello verticale. In futuro potrebbe essere implementato uno spawning dinamico e una meccanica in cui, alla morte di un 
+nemico, venga generato un oggetto bonus o malus.
+Il progetto è stato stimolante a livello personale ma sopratutto è stato un ottimo modo per migliorare la capacità di lavorare in 
+gruppo. Il gruppo mi è stato molto di aiuto per superare le criticità incontrate e darci una mano quando le cose non andavano come 
+volevamo.
 \appendix
 \chapter{Guida utente}
 Per il movimento del player si usano 4 frecce della tastiera:

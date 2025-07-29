@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller.collisions;
+package it.unibo.runwarrior.controller.collisions.impl;
 
 import java.awt.Rectangle;
 
@@ -9,6 +9,7 @@ import it.unibo.runwarrior.view.GameMusic;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
+import it.unibo.runwarrior.controller.collisions.api.KillDetection;
 
 /**
  * Class that detects the collision between the player and the enmies.
@@ -79,7 +80,7 @@ public class KillDetectionImpl implements KillDetection {
      */
     private Rectangle futureArea(final Rectangle r1) {
         final Rectangle futureArea = new Rectangle(r1);
-        futureArea.translate(0, it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
+        futureArea.translate(0, it.unibo.runwarrior.controller.player.impl.CharacterMovementHandlerImpl.SPEED_JUMP_DOWN);
         return futureArea;
     }
 

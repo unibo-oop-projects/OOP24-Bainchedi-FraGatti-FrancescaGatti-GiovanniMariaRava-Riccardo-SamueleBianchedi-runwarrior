@@ -1,7 +1,7 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.player.api;
 
-import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
-import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.api.CollisionDetection;
+import it.unibo.runwarrior.controller.collisions.api.KillDetection;
 
 /**
  * Interface that handles player movement.
@@ -51,12 +51,12 @@ public interface CharacterMovementHandler {
     /**
      * @return map tiles collision object
      */
-    CollisionDetectionImpl getCollisionDetection();
+    CollisionDetection getCollisionDetection();
 
     /**
      * @return kill detection object
      */
-    KillDetectionImpl getKillDetection();
+    KillDetection getKillDetection();
 
     /**
      * @return true if the player is going to the right

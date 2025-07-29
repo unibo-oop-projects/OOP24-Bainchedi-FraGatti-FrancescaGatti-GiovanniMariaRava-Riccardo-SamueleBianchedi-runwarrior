@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller.collisions;
+package it.unibo.runwarrior.controller.collisions.api;
 
 import it.unibo.runwarrior.model.player.Character; 
 
@@ -24,9 +24,10 @@ public interface CollisionDetection {
      * @param x x coordinate in pixel of the player
      * @param y y coordinate in pixel of the player
      * @param checkDirections boolean to decide if the check of the direction is useful or not
+     * @param player the player in the game panel
      * @return true if the player touches a solid tile
      */
-    boolean touchSolid(int x, int y, boolean checkDirections);
+    boolean touchSolid(int x, int y, boolean checkDirections, Character player);
 
     /**
      * Controls in which direction the player collides with a tile.
@@ -35,9 +36,10 @@ public interface CollisionDetection {
      * @param y y coordinate in pixel of the player
      * @param indexXtile row of the tile
      * @param indexYtile column of the tile
+     * @param player the player in the game panel
      * @return the string that specifies the direction of the collision
      */
-    String checkCollisionDirection(int x, int y, int indexXtile, int indexYtile);
+    String checkCollisionDirection(int x, int y, int indexXtile, int indexYtile, Character player);
 
     /**
      * Controls if the given player is in air, so if he doesn't touch the ground.
