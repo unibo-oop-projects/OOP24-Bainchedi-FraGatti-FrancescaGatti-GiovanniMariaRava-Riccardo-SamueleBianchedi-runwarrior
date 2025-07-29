@@ -152,7 +152,7 @@ public class HandlerMapElement {
         final int currentTileSize = tileHeight;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
-                if (blocks.get(map[y][x]).getCollision()) {
+                if (blocks.get(map[y][x]).isCollision()) {
                     final Rectangle r = new Rectangle(x * currentTileSize, y * currentTileSize,
                                                       currentTileSize, currentTileSize);
                     collisionRects.add(r);

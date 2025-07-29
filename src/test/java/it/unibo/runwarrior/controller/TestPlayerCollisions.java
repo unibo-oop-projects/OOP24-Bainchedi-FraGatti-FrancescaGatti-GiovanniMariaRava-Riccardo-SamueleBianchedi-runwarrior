@@ -79,7 +79,7 @@ class TestPlayerCollisions {
         final float indexXtile = x / hM.getTileSize();
         final float indexYtile = y / hM.getTileSize();
         final int blockIndex = hM.getMap()[(int) indexYtile][(int) indexXtile];
-        return hM.getBlocks().get(blockIndex).getCollision();
+        return hM.getBlocks().get(blockIndex).isCollision();
     }
 
     //CAMBIA MAPPA PER RIUSARE PIù NUMERI

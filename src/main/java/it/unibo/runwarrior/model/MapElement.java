@@ -75,7 +75,7 @@ public final class MapElement {
      *
      * @return true if the element has collision.
      */
-    public boolean getCollision() {
+    public boolean isCollision() {
         return this.collision;
     }
 
@@ -84,7 +84,7 @@ public final class MapElement {
      *
      * @return true if the element is harmless.
      */
-    public boolean getHarmless() {
+    public boolean isHarmless() {
         return this.harmless;
     }
 
