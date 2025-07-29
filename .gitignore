@@ -12,3 +12,17 @@ build/*.class
 .vscode/time_log.json
 *.DS_Store
 saves
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.bbl
+*.blg
+*.brf
+*.lof
+*.lot
