@@ -23,8 +23,8 @@ import it.unibo.runwarrior.model.GameMap;
 import it.unibo.runwarrior.model.Score;
 import it.unibo.runwarrior.model.enemy.impl.EnemyImpl;
 import it.unibo.runwarrior.model.player.ArmourWarrior;
-import it.unibo.runwarrior.model.player.Character;
-import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
+import it.unibo.runwarrior.model.player.api.Character;
+import it.unibo.runwarrior.model.player.impl.AbstractCharacterImpl;
 import it.unibo.runwarrior.model.player.NakedWarrior;
 
 /**

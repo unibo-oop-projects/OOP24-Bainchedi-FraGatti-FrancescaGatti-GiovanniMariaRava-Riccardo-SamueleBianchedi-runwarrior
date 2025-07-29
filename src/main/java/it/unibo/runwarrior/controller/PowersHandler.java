@@ -7,7 +7,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.controller.player.CharacterComand;
 import it.unibo.runwarrior.model.player.ArmourWarrior;
 import it.unibo.runwarrior.model.player.ArmourWizard;

@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.powerup.api;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;

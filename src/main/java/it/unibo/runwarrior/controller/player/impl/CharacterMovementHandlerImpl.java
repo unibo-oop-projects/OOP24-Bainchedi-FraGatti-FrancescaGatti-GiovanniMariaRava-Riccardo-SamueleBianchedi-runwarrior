@@ -14,8 +14,8 @@ import it.unibo.runwarrior.controller.collisions.impl.KillDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.impl.PowerUpDetectionImpl;
 import it.unibo.runwarrior.controller.collisions.api.CoinDetection;
 import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
-import it.unibo.runwarrior.model.player.Character;
-import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
+import it.unibo.runwarrior.model.player.api.Character;
+import it.unibo.runwarrior.model.player.impl.AbstractCharacterImpl;
 
 /**
  * Class that handles player movement and his collisions.

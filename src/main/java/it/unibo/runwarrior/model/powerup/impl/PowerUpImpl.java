@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model;
+package it.unibo.runwarrior.model.powerup.impl;
 
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.GameLoopController;
+import it.unibo.runwarrior.model.powerup.api.PowerUp;
 
 /**
  * Implementation of the powerup object.

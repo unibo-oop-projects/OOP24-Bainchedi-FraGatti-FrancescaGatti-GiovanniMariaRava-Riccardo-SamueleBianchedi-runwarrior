@@ -4,9 +4,9 @@ import java.awt.Rectangle;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
-import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.view.GameMusic;
-import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
+import it.unibo.runwarrior.model.player.impl.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.collisions.api.KillDetection;

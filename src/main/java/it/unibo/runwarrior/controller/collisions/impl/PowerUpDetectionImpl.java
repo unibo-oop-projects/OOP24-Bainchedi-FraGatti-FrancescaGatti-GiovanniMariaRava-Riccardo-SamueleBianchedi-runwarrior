@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.view.GameMusic;
-import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
+import it.unibo.runwarrior.model.player.impl.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.PowerUpController;
 import it.unibo.runwarrior.controller.collisions.api.PowerUpDetection;
-import it.unibo.runwarrior.model.PowerUp;
+import it.unibo.runwarrior.model.powerup.api.PowerUp;
 
 /**
  * Class that handles the collision between the player and the powerups.

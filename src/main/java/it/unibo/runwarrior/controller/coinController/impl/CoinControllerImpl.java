@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.runwarrior.model.player.Character;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.controller.coincontroller.api.CoinController;
 import it.unibo.runwarrior.model.Coin;
 import it.unibo.runwarrior.view.GameLoopPanel;

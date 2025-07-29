@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.model.player;
+package it.unibo.runwarrior.model.player.impl;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.runwarrior.model.player.api.Character;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowerUpController;
