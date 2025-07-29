@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller.coinController.impl;
+package it.unibo.runwarrior.controller.coincontroller.impl;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import it.unibo.runwarrior.model.player.Character;
-import it.unibo.runwarrior.controller.coinController.api.CoinController;
+import it.unibo.runwarrior.controller.coincontroller.api.CoinController;
 import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.model.Coin;
 import it.unibo.runwarrior.view.GameLoopPanel;

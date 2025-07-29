@@ -5,8 +5,8 @@ import java.util.Locale;
 
 import javax.swing.JFrame;
 
-import it.unibo.runwarrior.controller.coinController.api.CoinController;
-import it.unibo.runwarrior.controller.coinController.impl.CoinControllerImpl;
+import it.unibo.runwarrior.controller.coincontroller.impl.CoinControllerImpl;
+import it.unibo.runwarrior.controller.coincontroller.api.CoinController;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.controller.player.CharacterComand;
@@ -34,22 +34,20 @@ import it.unibo.runwarrior.view.enemy.impl.WizardView;
  */
 public class GameLoopController {
     private static final int TYPE_FIVE = 5;
-    private GameLoopPanel glp;
+    private final GameLoopPanel glp;
     private Character player;
-    private CharacterComand commands;
-    private PowersHandler powerUpsHandler;
-    private PowerUpController powerController;
-    private PowerUpManager powersManager;
+    private final CharacterComand commands;
+    private final PowersHandler powerUpsHandler;
+    private final PowerUpController powerController;
+    private final PowerUpManager powersManager;
 
-    private HandlerMapElement mapHandler;
-    private EnemyHandlerImpl enemyHandler;
-    private EnemyViewFactoryImpl enemyViewFactory;
-    private EnemySpawner enemySpawner;
-    private GameMap gameMap;
-    private CoinController coinController;
-    private Score score;
-    private ScoreController scoreController;
-    private int levelIndex;
+    private final HandlerMapElement mapHandler;
+    private final EnemyHandlerImpl enemyHandler;
+    private final EnemyViewFactoryImpl enemyViewFactory;
+    private final EnemySpawner enemySpawner;
+    private final CoinController coinController;
+    private final ScoreController scoreController;
+    private final int levelIndex;
     private ShopController shopController;
 
     /**
@@ -63,7 +61,7 @@ public class GameLoopController {
      */
     public GameLoopController(final JFrame mainFrame, final String mapPath, final String themePath,
                                 final String enemiesPath, final String coinsPath) {
-        this.gameMap = GameMap.load(mapPath, themePath);
+        final GameMap gameMap = GameMap.load(mapPath, themePath);
         this.coinController = new CoinControllerImpl();
         this.levelIndex = calculateLevelIndex(mapPath);
         final List<int[]> coords = coinController.loadCoinFromFile(coinsPath);
@@ -81,10 +79,10 @@ public class GameLoopController {
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
         enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
 
-        this.score = new Score();
+        final Score score = new Score();
         this.scoreController = new ScoreControllerImpl(score);
         //this.coinController.setScoreController(scoreController);
-        this.glp = new GameLoopPanel(mainFrame, mapPath, themePath, enemiesPath, coinsPath, this);
+        this.glp = new GameLoopPanel(mainFrame, this);
         initializePlayer();
     }
 
