@@ -44,10 +44,6 @@ public class GameLoopPanel extends JPanel implements Runnable {
      * Constructor of the class. 
      *
      * @param frameMenu is the frame in which menu is shown
-     * @param mapPath the path for loading of the map
-     * @param themePath the path for loading the images of tile
-     * @param enemiesPath the path for loadin the enemies position
-     * @param coinsPath the path for loading the coin position
      * @param gameController the controller of the whole game
      */
     public GameLoopPanel(final JFrame frameMenu, final GameLoopController gameController) {
@@ -59,9 +55,9 @@ public class GameLoopPanel extends JPanel implements Runnable {
     }
 
     /**
-     * Initialize panel
+     * Initialize panel.
      */
-    private void initialize(){
+    private void initialize() {
         super.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         super.addKeyListener(gameController.getCommands());
         super.setFocusable(true);
