@@ -36,9 +36,12 @@ public class LevelCompletedPanel extends JPanel {
         initialize();
     }
 
+<<<<<<< HEAD
     /**
      * Initialize panel.
      */
+=======
+>>>>>>> b7d4d8ee28d8932ae34846323fdc6793f454a5b6
     private void initialize() {
         super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         super.add(titleLabel);

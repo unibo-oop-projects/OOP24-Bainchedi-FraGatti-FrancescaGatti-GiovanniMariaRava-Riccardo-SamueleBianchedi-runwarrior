@@ -7,9 +7,14 @@ import java.util.Locale;
 
 import javax.swing.JFrame;
 
+<<<<<<< HEAD
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.coincontroller.impl.CoinControllerImpl;
 import it.unibo.runwarrior.controller.coincontroller.api.CoinController;
+=======
+import it.unibo.runwarrior.controller.coinController.impl.CoinControllerImpl;
+import it.unibo.runwarrior.controller.coinController.api.CoinController;
+>>>>>>> b7d4d8ee28d8932ae34846323fdc6793f454a5b6
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.controller.player.CharacterComand;

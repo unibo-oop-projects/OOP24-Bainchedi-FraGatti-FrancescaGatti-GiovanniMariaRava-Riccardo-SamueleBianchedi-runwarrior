@@ -250,7 +250,6 @@ L'introduzione del pattern MVC ha permesso di ottenere una struttura più chiara
     \centering
     \includegraphics[width=0.8\textwidth]{resources/UMLshop.png}
     \caption{UML dell'MVC per la gestione dello shop}
-    \label{fig: 2.2}
 \end{figure}
 \newpage
 \textbf{Problema:} per lo sviluppo del gioco è stato necessario creare un sistema che gestisse la visualizzazione e la raccolta delle monete.
@@ -266,11 +265,16 @@ specializzate:
     \item L'interfaccia \emph{CoinDetection} (implementata da \emph{CoinDetectionImpl}) che si occupa del rilevamento delle collisioni tra player 
     e moneta.
 \end{itemize}
-Le classi sono collegate a \emph{Score}, \emph{ScoreController} e \emph{GameSaveManager} per il salvataggio del punteggio totale.
+Le classi sono collegate a \emph{Character} e \emph{ScoreController} per il salvataggio del punteggio totale.
 All'interno del \emph{CoinController} è stato necessario aggungere il metodo \emph{updatePlayer()} che permette l'aggiornamento delle monete 
 in base ai cambiamenti subiti dal player durante il gioco, quali i potenziamenti. Senza la chiamata a questo metodo nel \emph{GameLoopController}, 
 una volta acquisito il potenziamento da parte del player le monete non si caricavano più correttamente rimanendo fisse sullo schermo e non era più
 possibile raccoglierle.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/UMLcoin.png}
+    \caption{UML per la gestione delle monete.}
+\end{figure}
 
 \textbf{Problema:} nel gioco era necessario monitorare il tempo di gioco trascorso, per poterlo visualizzare durante la partita e avere un 
 resoconto finale del tempo impiegato per completare il livello.
@@ -280,6 +284,11 @@ oggetto di tipo \emph{javax.swing.Timer}. Il timer aggiorna periodicamente il te
 classe fornisce metodi per avviare, fermare e ottenere il tempo in formato numerico e in formato stringa \emph{(HH::mm::ss::d)}. Infine, il tempo 
 viene disegnato a schermo tramite la classe \emph{GameLoopPanel}, nel metodo \emph{paintComponent()}, che recupera il valore dal Chronometer e lo 
 mostra in tempo reale durante il gioco.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/UMLtimer.png}
+    \caption{UML per la gestione del timer di gioco.}
+\end{figure}
 
 \textbf{Problema:} è stato necessario implementare un sistema che permettesse di gestire il punteggio in base alle monete raccolte dal giocatore, con 
 la possibilità di salvare questi dati in modo persistente o meno su scelta del giocatore. Questo sistema doveva inoltre integrarsi con altre parti del 
@@ -293,6 +302,11 @@ salvataggio su file esterno. Le due componenti sono:
     \item L'interfaccia \emph{ScoreController} (implementata da \emph{ScoreControllerImpl}) ha il compito di aggiornare lo stato del punteggio nel file facendo 
     uso della classe \emph{GameSaveManager} come già detto sopra.
 \end{itemize}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{resources/UMLscore.png}
+    \caption{UML dell'MVC per la gestione del punteggio}
+\end{figure}
 
 \section{Giovanni Maria Rava}
 \textbf{Problema:} I nemici del gioco devono muoversi da soli, invertire direzione appena urtano un ostacolo e restare sincronizzati con 
@@ -499,7 +513,18 @@ gruppo. Il gruppo mi è stato molto di aiuto per superare le criticità incontra
 volevamo.
 \appendix
 \chapter{Guida utente}
-Per il movimento del player si usano 4 frecce della tastiera:
+Appena verrà avviato il gioco apparirà la schermata iniziale con il tasto "PLAY" da cliccare per accedere al menù di gioco.
+Successivamente la schermata cambierà e saranno visibili quattro nuovi tasti: "LEVEL1", "LEVEL2", "LEVEL3", "SHOP". A gioco appena avviato e senza
+salvataggi precedenti sarà possibile accedere solo al LEVEL1 o allo SHOP. Per poter accedere a LEVEL2 e LEVEL3 è necessario completare i livelli
+precedenti. Per iniziare il gioco selezionare LEVEL1. Per visualizzare il negozio di gioco cliccare sul tasto SHOP, si aprirà una finestra con tre pulsanti:
+\begin{itemize}
+    \item BUY SKIN: pulsante per acquistare la skin, in base alla quantità di monete possedute dall'utente l'azione andrà a buon fine o meno.
+    \item SELECT DEFAULT SKIN: pulsante per selezionare la skin base del gioco (WARRIOR), l'utente è già a disposizione di tale skin e potrà già selezionarla 
+    (nel caso in cui non lo faccia verrà impostata in automatico come skin di gioco).
+    \item SELECT WIZARD SKIN: pulsante per selezionare la skin nuova acquistata (WIZARD), l'utente dovrà prima raccogliere un totale di 50 monete per poterla 
+    comprare, nel caso in cui la skin non sia ancora selezionabile perché non ancora acquistata verrà mostrato un messaggio di tentativo fallito.s
+\end{itemize}
+Per il movimento del player si usano quattro frecce della tastiera:
 \begin{itemize}
     \item \textbf{Freccia destra}: per muoversi verso destra
     \item \textbf{Freccia sinistra}: per muoversi verso sinistra
@@ -508,6 +533,14 @@ Per il movimento del player si usano 4 frecce della tastiera:
     \item \textbf{Shift}: per attaccare con spada o bastone nel caso in cui si è giunti al secondo potenziamento.
     Attenzione, mentre si è in movimento il player può attaccare una volta ogni secondo.
 \end{itemize}
+Se il giocatore dovesse morire mentre gioca apparirà una finestra con la scritta GAMEOVER con un resoconto delle monete raccolte che segnala la fine del gioco.
+Se invece il giocatore dovesse finire il livello raggiungendo il portale si aprirà una finestra con la scritta LEVELCOMPLETED con un resoconto delle monete 
+raccolte e il tempo impiegato per raggiungere la fine. 
+In entrambi i casi cliccare la X in alto per tornare alla schermata iniziale con il tasto PLAY.
+Se si desidera terminare la sessione di gioco cliccare la X in alto del frame del videogioco, apparirà una finestra dove verrà chiesto all'utente se vuole 
+salvare o meno i dati e i progressi fatti: selezionare SI per continuare a giocare con i progressi fatti in quella sessione, altrimenti selezionare NO e i dati 
+verranno cancellati.
+\chapter{Bibliografia}
 \begin{thebibliography}{9}
 
     \bibitem{pmd-singleton}
@@ -526,7 +559,7 @@ Per il movimento del player si usano 4 frecce della tastiera:
     \bibitem{oracle-timer}
     Oracle Corporation,\\
     \emph{Timer (Java Platform SE 8)} --- Oracle Docs,\\
-    \url{https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html},\\
+    \url{https://docs.oracle.com/javase/7/docs/api/javax/swing/Timer.html},\\
     accessed May 2025
 
     \bibitem{oracle-keylistener}
