@@ -26,7 +26,6 @@ public class HandlerMapElement {
     private int shift;
     private boolean setStart;
     private int firstY;
-    private int tileSize;
 
     /**
      * Constructor of the class HandlerMapElement.
@@ -83,7 +82,7 @@ public class HandlerMapElement {
         final int cols = map[0].length;
         shift = player.getMovementHandler().getGroundX();
         final int tileHeight = GameLoopPanel.HEIGHT / rows;
-        tileSize = tileHeight;
+        final int tileSize = tileHeight;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 final BufferedImage img = this.blocks.get(map[y][x]).getImage();
@@ -117,7 +116,7 @@ public class HandlerMapElement {
      */
     public int getTileSize() {
         final int rows = map.length;
-        tileSize = GameLoopPanel.HEIGHT / rows;
+        final int tileSize = GameLoopPanel.HEIGHT / rows;
         return tileSize;
     }
 
@@ -129,7 +128,7 @@ public class HandlerMapElement {
     public int getFirstY() {
         final int rows = map.length;
         final int cols = map[0].length;
-        tileSize = GameLoopPanel.HEIGHT / rows;
+        final int tileSize = GameLoopPanel.HEIGHT / rows;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 if (x == 0 && map[y][x] == 1 && !setStart) {
