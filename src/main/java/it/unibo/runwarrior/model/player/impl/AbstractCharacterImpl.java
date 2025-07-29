@@ -165,7 +165,7 @@ public abstract class AbstractCharacterImpl implements Character {
     }
 
     /**
-     * Suppress because the update of the area are not visible in Test.
+     * Suppress because the first update of the area is not visible in Test.
      * And collisionArea is not changed in other classes.
      * {@inheritDoc}
      */

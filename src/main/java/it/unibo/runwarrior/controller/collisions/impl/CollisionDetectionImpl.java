@@ -35,7 +35,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
     private final GameMusic sound;
 
     /**
-     * Constructor of the collision detection.
+     * Constructor of the collision detection. It's necessary to make reference of the specific classes.
      *
      * @param map current map
      * @param blocks list of the block types

@@ -23,7 +23,7 @@ public class PowerUpManager {
     private final int tileSize;
 
     /**
-     * Constructor that takes powerup list and mapHandler.
+     * Constructor that takes powerup list and mapHandler of the current map.
      *
      * @param powerUps list of powerup
      * @param hM map handler

@@ -26,7 +26,7 @@ public class PowerUpImpl implements PowerUp {
     private boolean eggOpen;
 
     /**
-     * Constructor that creates powerup area and set the egg image.
+     * Constructor that creates powerup area and set the egg image. To be linked wit he current glc.
      *
      * @param glc game-loop controller
      */

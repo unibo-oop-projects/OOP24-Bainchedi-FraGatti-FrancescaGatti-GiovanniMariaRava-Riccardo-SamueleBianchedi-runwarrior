@@ -28,7 +28,7 @@ public class PowerUpDetectionImpl implements PowerUpDetection {
     private final GameMusic sound2;
 
     /**
-     * Constructor of powerup detection.
+     * Constructor of powerup detection. It's necessary to make reference of the specific classes.
      *
      * @param glc game-loop controller
      * @param pCon object that creates powerup list

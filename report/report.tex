@@ -141,7 +141,7 @@ controller.
 
 Entrambe le interfacce vengono usate da \emph{AbstractCharacterImpl} e i loro metodi vengono richiamati all'interno di \emph{update() 
 e drawPlayer(Graphics2D)}.
-Per questa architettura mi sono basato sul pattern Strategy, ma applicandone una variazione, cioè incapsulare in 2 interfacce diverse 
+Per questa architettura ho preso spunto dal pattern Strategy, ma applicandone una variazione, cioè incapsulare in 2 interfacce diverse 
 le operazioni che gestiscono animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire 
 tali comportamenti, entrambe le classi usano \emph{CharacterComand}, la classe che gestisce l'input da tastiera.
 

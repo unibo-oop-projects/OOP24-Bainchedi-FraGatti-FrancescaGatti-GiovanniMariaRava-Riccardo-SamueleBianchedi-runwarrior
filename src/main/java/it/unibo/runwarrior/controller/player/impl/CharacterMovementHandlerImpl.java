@@ -51,7 +51,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
 
     /**
      * Constructor of player movemnt that sets the following parametres, the collision with tiles, powerup and enemies
-     * and the starting position.
+     * and the starting position. Linked with keyboard.
      *
      * @param glc game-loop controller
      * @param player current player

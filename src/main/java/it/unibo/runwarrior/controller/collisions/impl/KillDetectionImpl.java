@@ -24,7 +24,7 @@ public class KillDetectionImpl implements KillDetection {
     private final GameMusic sound2;
 
     /**
-     * Constructor of kill detection.
+     * Constructor of kill detection. It's necessary to make reference of the specific classes.
      *
      * @param glc game-loop controller
      * @param hM map handler

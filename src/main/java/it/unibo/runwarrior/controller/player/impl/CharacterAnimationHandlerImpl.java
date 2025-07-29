@@ -52,7 +52,7 @@ public class CharacterAnimationHandlerImpl implements CharacterAnimationHandler 
     private BufferedImage tipL;
 
     /**
-     * Constructor of the player animation handler that sets current player images.
+     * Constructor of the player animation handler that sets current player images. Linked with keyboard.
      *
      * @param cmd keyboard handler
      * @param move player movement handler
