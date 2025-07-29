@@ -57,7 +57,6 @@ public class PowerUpController {
      *
      * @return the list of powerups
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public List<PowerUp> getPowerUps() {
         return this.powerUps;
     }
