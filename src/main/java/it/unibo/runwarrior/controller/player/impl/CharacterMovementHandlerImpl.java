@@ -1,10 +1,19 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.player.impl;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.runwarrior.controller.collisions.CoinDetectionImpl;
-import it.unibo.runwarrior.controller.collisions.CollisionDetectionImpl;
-import it.unibo.runwarrior.controller.collisions.KillDetectionImpl;
-import it.unibo.runwarrior.controller.collisions.PowerUpDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.api.CollisionDetection;
+import it.unibo.runwarrior.controller.collisions.api.PowerUpDetection;
+import it.unibo.runwarrior.controller.collisions.api.KillDetection;
+import it.unibo.runwarrior.controller.player.CharacterComand;
+import it.unibo.runwarrior.controller.GameLoopController;
+import it.unibo.runwarrior.controller.HandlerMapElement;
+import it.unibo.runwarrior.controller.PowerUpController;
+import it.unibo.runwarrior.controller.collisions.impl.CoinDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.impl.CollisionDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.impl.KillDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.impl.PowerUpDetectionImpl;
+import it.unibo.runwarrior.controller.collisions.api.CoinDetection;
+import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
 import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 
@@ -21,10 +30,10 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     private final GameLoopController glc;
     private final CharacterComand cmd;
     private final Character player;
-    private final CollisionDetectionImpl collisionDetection;
-    private final PowerUpDetectionImpl pUpDetection;
-    private final KillDetectionImpl killDetection;
-    private final CoinDetectionImpl coinDetection;
+    private final CollisionDetection collisionDetection;
+    private final PowerUpDetection pUpDetection;
+    private final KillDetection killDetection;
+    private final CoinDetection coinDetection;
     private final int startY;
     private final int endOfMap;
     private final int sizeCharacter;
@@ -215,7 +224,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     @SuppressFBWarnings("EI_EXPOSE_REP")
-    public CollisionDetectionImpl getCollisionDetection() {
+    public CollisionDetection getCollisionDetection() {
         return this.collisionDetection;
     }
 
@@ -224,7 +233,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
      */
     @Override
     @SuppressFBWarnings("EI_EXPOSE_REP")
-    public KillDetectionImpl getKillDetection() {
+    public KillDetection getKillDetection() {
         return this.killDetection;
     }
 

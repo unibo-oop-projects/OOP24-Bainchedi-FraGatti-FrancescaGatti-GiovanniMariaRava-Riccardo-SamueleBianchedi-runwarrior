@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

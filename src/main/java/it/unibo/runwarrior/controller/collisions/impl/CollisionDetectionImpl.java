@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller.collisions;
+package it.unibo.runwarrior.controller.collisions.impl;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import it.unibo.runwarrior.model.player.Character;
 import it.unibo.runwarrior.view.GameMusic;
 import it.unibo.runwarrior.model.player.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.GameLoopController;
+import it.unibo.runwarrior.controller.collisions.api.CollisionDetection;
 import it.unibo.runwarrior.model.MapElement;
 
 /**
@@ -132,8 +133,8 @@ public class CollisionDetectionImpl implements CollisionDetection {
         if (y == tileRec.y && x >= tileRec.x && x <= tileRec.x + tileRec.width) {
             direction = UP;
         } else if (isInAir(player) && y == playerArea.y 
-            && (tileRec.y + tileRec.height - y) < it.unibo.runwarrior.controller.CharacterMovementHandlerImpl.SPEED_JUMP_UP 
-            && x >= tileRec.x && x <= tileRec.x + tileRec.width || y <= 0) {
+            && (tileRec.y + tileRec.height - y) < it.unibo.runwarrior.controller.player.impl.CharacterMovementHandlerImpl
+            .SPEED_JUMP_UP && x >= tileRec.x && x <= tileRec.x + tileRec.width || y <= 0) {
             direction = DOWN;
         } else if (x - AbstractCharacterImpl.SPEED <= tileRec.x) {
             direction = RIGHT;

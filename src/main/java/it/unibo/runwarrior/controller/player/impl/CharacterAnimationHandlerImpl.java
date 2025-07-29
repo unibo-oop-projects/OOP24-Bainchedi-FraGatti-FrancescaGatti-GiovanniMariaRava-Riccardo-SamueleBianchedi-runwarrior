@@ -1,9 +1,12 @@
-package it.unibo.runwarrior.controller;
+package it.unibo.runwarrior.controller.player.impl;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.runwarrior.controller.player.CharacterComand;
+import it.unibo.runwarrior.controller.player.api.CharacterAnimationHandler;
+import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
 import it.unibo.runwarrior.model.player.PlayerFrame;
 
 /**

@@ -3,8 +3,8 @@ package it.unibo.runwarrior.model.player;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import it.unibo.runwarrior.controller.CharacterAnimationHandler;
-import it.unibo.runwarrior.controller.CharacterMovementHandler;
+import it.unibo.runwarrior.controller.player.api.CharacterAnimationHandler;
+import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
 
 /**
  * Character entity.

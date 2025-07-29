@@ -6,14 +6,14 @@ import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.runwarrior.controller.CharacterAnimationHandler;
-import it.unibo.runwarrior.controller.CharacterAnimationHandlerImpl;
-import it.unibo.runwarrior.controller.CharacterComand;
-import it.unibo.runwarrior.controller.CharacterMovementHandler;
-import it.unibo.runwarrior.controller.CharacterMovementHandlerImpl;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
 import it.unibo.runwarrior.controller.PowerUpController;
+import it.unibo.runwarrior.controller.player.CharacterComand;
+import it.unibo.runwarrior.controller.player.api.CharacterAnimationHandler;
+import it.unibo.runwarrior.controller.player.api.CharacterMovementHandler;
+import it.unibo.runwarrior.controller.player.impl.CharacterAnimationHandlerImpl;
+import it.unibo.runwarrior.controller.player.impl.CharacterMovementHandlerImpl;
 
 /**
  * Class that creates the player.
