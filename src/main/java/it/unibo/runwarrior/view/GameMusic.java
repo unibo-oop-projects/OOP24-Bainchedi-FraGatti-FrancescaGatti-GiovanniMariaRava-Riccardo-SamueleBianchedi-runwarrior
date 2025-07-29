@@ -36,19 +36,26 @@ public class GameMusic {
     }
 
     /**
-     * Playe the sound chosen.
+     * Play the sound chosen.
      *
      * @param loop boolean to play music costantly if it's true
      */
     public void play(final boolean loop) {
-        if (clip.isRunning()) {
-            clip.stop();
-        }
+        stop();
         clip.setFramePosition(0);
         if (loop) {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         } else {
             clip.start();
+        }
+    }
+
+    /**
+     * Stop the music.
+     */
+    public void stop() {
+        if (clip.isRunning()) {
+            clip.stop();
         }
     }
 }

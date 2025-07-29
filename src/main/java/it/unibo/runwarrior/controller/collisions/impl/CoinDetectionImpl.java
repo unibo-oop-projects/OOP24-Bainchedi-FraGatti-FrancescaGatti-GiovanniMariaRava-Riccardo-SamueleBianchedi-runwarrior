@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.util.Iterator;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.runwarrior.controller.coincontroller.api.CoinController;
+import it.unibo.runwarrior.controller.coinController.api.CoinController;
 import it.unibo.runwarrior.controller.collisions.api.CoinDetection;
 import it.unibo.runwarrior.controller.score.api.ScoreController;
 import it.unibo.runwarrior.model.Coin;
