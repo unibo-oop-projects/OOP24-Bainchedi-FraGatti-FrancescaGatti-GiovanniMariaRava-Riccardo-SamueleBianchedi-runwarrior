@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.runwarrior.controller.coincontroller.impl.CoinControllerImpl;
 import it.unibo.runwarrior.controller.coincontroller.api.CoinController;
+import it.unibo.runwarrior.controller.coincontroller.impl.CoinControllerImpl;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
 import it.unibo.runwarrior.controller.enemy.impl.EnemyHandlerImpl;
 import it.unibo.runwarrior.controller.player.CharacterComand;
