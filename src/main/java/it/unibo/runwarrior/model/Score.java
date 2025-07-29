@@ -13,6 +13,7 @@ public class Score {
      * Score Constructor.
      */
     public Score() {
+        // void
     }
 
     /**
