@@ -162,14 +162,14 @@ entità.
 \textbf{Problema}: gestione delle collisioni con le diverse entità: blocchi della mappa, powerups, nemici e monete. 
 Mantenere la relazione con le classi che gestiscono eventuali conseguenze di una specifica collisione.\vspace{1cm}
 
-\textbf{Soluzione}: in questo caso all'interno dell'architettura MVC , ho realizzato 4 interfacce nel controller del progetto, 
-ognuna delle quali gestisce le collisioni con 1 delle 4 entità: CollisionDetection, per i blocchi delle mappe, PowerUpDetection, 
+\textbf{Soluzione}: in questo caso all'interno dell'architettura MVC , ho realizzato quattro interfacce nel controller del progetto, 
+ognuna delle quali gestisce le collisioni con 1 delle quattro entità: CollisionDetection, per i blocchi delle mappe, PowerUpDetection, 
 per la collisione con l'uovo e i powerups, KillDetection, per i nemici, e CoinDetection, per le monete, 
 rispettivamente implementate da CollisionDetectionImpl, PowerUpDetectionImpl, KillDetectionImpl e CoinDetectionImpl.
 
-Le 4 interfacce vengono usate da CharacterMovementHandlerImpl e i loro metodi vengono richiamati all'interno di movePlayer().
-Le 4 interfacce descritte rappresentano la strategia per il pattern Strategy, che anche in questo caso non si tratta di Strategy puro, 
-ma di una definizione di 4 strategie separate, infatti ognuna di esse incapsula i metodi utili a verificare le collisioni con le 
+Le quattro interfacce vengono usate da CharacterMovementHandlerImpl e i loro metodi vengono richiamati all'interno di movePlayer().
+Le quattro interfacce descritte rappresentano la strategia per il pattern Strategy, che anche in questo caso non si tratta di Strategy puro, 
+ma di una definizione di quattro strategie separate, infatti ognuna di esse incapsula i metodi utili a verificare le collisioni con le 
 diverse entità.
 
 \begin{itemize}
@@ -420,6 +420,8 @@ https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef
     \item Implementazione della classe \textbf{GameMusic} mediante nuovi tipi AudioInputStream, AudioSystem e Clip. 
     Utilizzata per musica in background ed effetti sonori. $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/GameMusic.java#L17}
+    Per questa implementazione ho fatto riferimento al seguente sito $\rightarrow$
+    \url{https://www3.ntu.edu.sg/home/ehchua/programming/java/J8c_PlayingSound.html}
     \item Uso di \textbf{stream e lambda expression} nella classe CollisionDetectionImpl. Mi permette di organizzare gerarchicamente 
     le diverse direzioni di collisione in cui è coinvolto il player. $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/controller/collisions/impl/CollisionDetectionImpl.java#L74}
@@ -509,6 +511,18 @@ Per il movimento del player si usano 4 frecce della tastiera:
     Oracle Corporation,\\
     \emph{Timer (Java Platform SE 8)} --- Oracle Docs,\\
     \url{https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html},\\
+    accessed May 2025
+
+    \bibitem{oracle-keylistener}
+    Oracle Corporation,\\
+    \emph{KeyListener (Java Platform SE 8)} --- Oracle Docs,\\
+    \url{https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyListener.html},\\
+    accessed April 2025
+
+    \bibitem{chua-sound}
+    Chua Hock-Chuan,\\
+    \emph{Java: Playing Sound (Audio Clip, MP3, Java Sound API)} --- NTU Tutorials,\\
+    \url{https://www3.ntu.edu.sg/home/ehchua/programming/java/J8c_PlayingSound.html},\\
     accessed May 2025
 
     \end{thebibliography}
