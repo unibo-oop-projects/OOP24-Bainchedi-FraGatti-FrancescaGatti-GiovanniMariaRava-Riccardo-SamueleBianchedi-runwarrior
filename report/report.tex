@@ -222,24 +222,27 @@ Infine fornisce il metodo gameOver() che restituisce true se l'entità Character
 
 \section{Francesca Gatti}
 \textbf{Problema}: Nel gioco è previsto un sistema di personalizzazione del personaggio tramite l'acquisto e la selezione di una nuova skin.
+ALl'interno dello shop deve essere possibile selezionare a proprio piacimento la skin con cui si vuole iniziare a giocare. Infatti l'obiettivo dello
+shop, oltre all'acquisto di una nuova skin, è quello di poter selezionare o la skin di default di gioco (\emph{Warrior}) o, una volta acquistata, una skin 
+nuova (\emph{Wizard}). 
 Il problema principale affrontato è stato quello di separare la gestione della parte logica del negozio, ovvero il controllo delle monete, 
 delle skin e la selezione, dalla sua interfaccia grafica, mantenendo la possibilità di modificarlo in futuro.
-\textbf{Soluzione}: Per affrontare questo problema è stato adottato il pattern Model-View-Controller (MVC), suddividendo le responsabilità 
+\textbf{Soluzione}: Per affrontare questo problema è stato adottato il pattern \emph{Model-View-Controller} (MVC), suddividendo le responsabilità 
 tra i tre livelli:
 \begin{itemize}
-    \item Model: rappresentato dalla classe Shop, gestisce le skin disponibili, quella selezionata e lo stato di sblocco della skin (unlock). 
-    Nel model sono inoltre presenti le due classi Skin e Score che permettono la gestione degli oggetti skin e punteggio da parte dello Shop.
-    \item View: la classe ShopView è responsabile della visualizzazione delle informazioni (monete, stato skin) e della gestione dei pulsanti 
+    \item Model: rappresentato dalla classe \emph{Shop}, gestisce le skin disponibili, quella selezionata e lo stato di sblocco della skin (\emph{unlock}). 
+    Nel model sono inoltre presenti le due classi \emph{Skin} e \emph{Score} che permettono la gestione degli oggetti skin e punteggio da parte dello Shop.
+    \item View: la classe \emph{ShopView} è responsabile della visualizzazione delle informazioni (monete, stato skin) e della gestione dei pulsanti 
     che consentono l'acquisto e la selezione della nuova skin. L'utente è messo al corrente delle azioni che può fare nello shop grazie a 
-    messaggi di dialogo che appaiono una volta cliccato il pulsante desiderato.
-    \item Controller: ho implementato l'interfaccia ShopController che è responsabile della logica legata all'acquisto e alla selezione 
+    messaggi che appaiono una volta cliccato il pulsante desiderato.
+    \item Controller: ho implementato l'interfaccia \emph{ShopController} che è responsabile della logica legata all'acquisto e alla selezione 
     delle skin e all'acquisizione dei dati e delle informazioni richieste dalla View. Inizialmente avevo implementato un'unica classe 
-    all'interno del Model (la classe Shop), ma il codice risultava molto pesante e difficile da gestire.
+    all'interno del Model (la classe \emph{Shop}), ma il codice risultava molto pesante e difficile da gestire.
 \end{itemize}
 L'introduzione del pattern MVC ha permesso di ottenere una struttura più chiara, estendibile e orientata al riuso.
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{resources/UMLshopMVC.png}
+    \includegraphics[width=0.8\textwidth]{resources/UMLshop.png}
     \caption{UML dell'MVC per la gestione dello shop}
     \label{fig: 2.2}
 \end{figure}
@@ -247,23 +250,43 @@ L'introduzione del pattern MVC ha permesso di ottenere una struttura più chiara
 \textbf{Problema:} per lo sviluppo del gioco è stato necessario creare un sistema che gestisse la visualizzazione e la raccolta delle monete.
 Le diverse funzionalità implementate sono il caricamento da file, il disegno delle monete sulla mappa, il rilevamento delle collisioni e 
 l'aggiornamento di un punteggio.
+
 \textbf{Soluzione:} ho creato questo sistema facendo una separazione logica delle responsabilità, suddividendo il sistema in più componenti
 specializzate:
 \begin{itemize}
-    \item La classe Coin rappresenta l'oggetto moneta, con le informazioni sulla posizione, il suo stato di raccolta e l'immagine.
-    \item L'interfaccia CoinController (impelementata da CoinControllerImpl) gestisce il caricamento delle monete, la logica di visualizzazione
-    e il conteggio.
-    \item L'interfaccia CoinDetection (implementata da CoinDetectionImpl) che si occupa del rilevamento delle collisioni tra player e moneta.
+    \item La classe \emph{Coin} rappresenta l'oggetto moneta, con le informazioni sulla posizione, il suo stato di raccolta e l'immagine.
+    \item L'interfaccia \emph{CoinController} (impelementata da \emph{CoinControllerImpl}) gestisce il caricamento delle monete, la logica di 
+    visualizzazione e il conteggio.
+    \item L'interfaccia \emph{CoinDetection} (implementata da \emph{CoinDetectionImpl}) che si occupa del rilevamento delle collisioni tra player 
+    e moneta.
 \end{itemize}
-Le classi sono collegate a Score, ScoreController e GameSaveManager per il salvataggio del punteggio totale.
-All'interno del CoinController è stato necessario aggungere il metodo updatePlayer che si occupa dell'aggiornamento delle monete in base ai 
-cambiamenti subiti dal player durante il gioco, quali i potenziamenti.
+Le classi sono collegate a \emph{Score}, \emph{ScoreController} e \emph{GameSaveManager} per il salvataggio del punteggio totale.
+All'interno del \emph{CoinController} è stato necessario aggungere il metodo \emph{updatePlayer()} che permette l'aggiornamento delle monete 
+in base ai cambiamenti subiti dal player durante il gioco, quali i potenziamenti. Senza la chiamata a questo metodo nel \emph{GameLoopController}, 
+una volta acquisito il potenziamento da parte del player le monete non si caricavano più correttamente rimanendo fisse sullo schermo e non era più
+possibile raccoglierle.
+
 \textbf{Problema:} nel gioco era necessario monitorare il tempo di gioco trascorso, per poterlo visualizzare durante la partita e avere un 
-resoconto finale del tempo impiegato per completare il livello. 
+resoconto finale del tempo impiegato per completare il livello.
+
 \textbf{Soluzione:} Per affrontare il problema è stata creata l'interfaccia Chronometer che si occupa della gestione del tempo tramite un 
-oggetto di tipo javax.swing.Timer. Il timer aggiorna periodicamente il tempo trascorso in millisecondi rispetto al momento di avvio. La
-classe fornisce metodi per avviare, fermare e ottenere il tempo in formato numerico e in formato stringa (HH::mm::ss::d). Infine, il tempo 
-viene disegnato a schermo tramite la classe GameLoopPanel che recupera il valore dal Chronometer e lo mostra in tempo reale durante il gioco.
+oggetto di tipo \emph{javax.swing.Timer}. Il timer aggiorna periodicamente il tempo trascorso in millisecondi rispetto al momento di avvio. La
+classe fornisce metodi per avviare, fermare e ottenere il tempo in formato numerico e in formato stringa \emph{(HH::mm::ss::d)}. Infine, il tempo 
+viene disegnato a schermo tramite la classe \emph{GameLoopPanel}, nel metodo \emph{paintComponent()}, che recupera il valore dal Chronometer e lo 
+mostra in tempo reale durante il gioco.
+
+\textbf{Problema:} è stato necessario implementare un sistema che permettesse di gestire il punteggio in base alle monete raccolte dal giocatore, con 
+la possibilità di salvare questi dati in modo persistente o meno su scelta del giocatore. Questo sistema doveva inoltre integrarsi con altre parti del 
+progetto, tra cui lo shop.
+
+\textbf{Soluzione:} per gestire il punteggio ho sviluppato due componenti principali, basandomi sulla classe \emph{GameSaveManager}, ovvero un sistema di
+salvataggio su file esterno. Le due componenti sono:
+\begin{itemize}
+    \item La classe \emph{Score} è il modello per la gestione delle monete raccolte. Al suo interno si trovano metodi per l'acquisizione del numero di monete
+    salvate, per spenderle e, se necessario aggiungerne.
+    \item L'interfaccia \emph{ScoreController} (implementata da \emph{ScoreControllerImpl}) ha il compito di aggiornare lo stato del punteggio nel file facendo 
+    uso della classe \emph{GameSaveManager} come già detto sopra.
+\end{itemize}
 
 \section{Giovanni Maria Rava}
 \textbf{Problema:} I nemici del gioco devono muoversi da soli, invertire direzione appena urtano un ostacolo e restare sincronizzati con 
@@ -353,6 +376,16 @@ vengono verificate le direzioni delle collisioni. Si verifica poi se il player r
 Il cambio di skin viene verificato anche quando il player collide con un nemico; se la collisione avviene dall'alto il nemico 
 invece muore. Infine si verifica se le monete vengono raccolte.
 
+Il ChronometerTest verifica il corretto funzionamento della classe ChronometerImpl (che implementa l'interfaccia Chronometer) per la
+gestione del Timer di gioco. Il test assicura che il cronometro misuri correttamente il tempo trascorso e che la sua rappresentazione 
+testuale (che poi nel gioco si visualizza a schermo) sia corretta. In test fallisce nel caso in cui il tempo non venga misurato 
+correttamente o nel caso di una formattazione errata.
+
+Il CoinTest verifica il corretto funzionamento del caricamento delle coordinate, dell'inizializzazione degli oggetti Coin e la gestione 
+dello stato di raccolta: la moneta non deve risultare raccolta prima della chiamata a collect(). Il test è importante per garantire l'affidabilità 
+del caricamento e del disegno delle monete sulla mappa di gioco.
+
+
 \section{Note di sviluppo}
 \section{Samuele Bianchedi}
 Una delle scelte di design più importanti del progetto è stata la rigorosa applicazione dei principi di incapsulamento e immutabilità.
@@ -387,6 +420,11 @@ a riparare i miei errori. Avrei potuto essere più attivo nel gruppo e apportare
 Sicuramente mi è piaciuto e mi ha divertito e mi ha spronato a impegnarmi di più in vista di futuri esami.
 \subsection{Riccardo Cornacchia}
 \subsection{Francesca Gatti}
+\begin{itemize}
+    \item \textbf{Utilizzo di stream e lambda expression} $\rightarrow$ Permalink:
+    \url{}
+    \item 
+\end{itemize}
 \subsection{Giovanni Maria Rava}
 \begin{itemize}
     \item \textbf{Utilizzo di stream e lambda expression} $\rightarrow$ Permalink: 
