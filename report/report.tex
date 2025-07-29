@@ -277,20 +277,26 @@ la logica di collisione con la mappa e la scelta del momento in cui invertire la
 mentre il caricamento e il rendering rimangono confinati nella view; il controller non conosce i dettagli interni di nessuna delle due parti, 
 ma si limita a coordinarne l'interazione. 
 Questo assetto garantisce un codice più estendibile e manutenibile: introdurre una nuova tipologia di nemico richiede soltanto 
-di aggiungere una nuova View, senza toccare il controller, e ogni modifica grafica o comportamentale resta circoscritta al relativo livello dell'architettura.~\ref{fig:2.3}
+di aggiungere una nuova View, senza toccare il controller, e ogni modifica grafica o comportamentale resta circoscritta al relativo livello dell'architettura.~\ref{fig:2.9}
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{resources/enemyMvcUml.png}
     \caption{UML dell'MVC per la gestione dei nemici}
-    \label{fig:2.3}
+    \label{fig:2.9}
 \end{figure}
 \newpage
 \textbf{Problema:} Gestione il salvataggio del gioco e del caricamento del salvataggio all'apertura del gioco.\\
-\textbf{Soluzione:} Il salvataggio e il ripristino della partita sono gestiti da un'unica classe, GameSaveManager, progettata come singleton 
-per garantire un punto di accesso centralizzato e soprattutto per mantenere una unica istanza del file. Per rendere effettivo ciò,
-all'interno della classe viene quindi eseguito un controllo specifico, in modo da non creare più file di salvataggio.
-Quando il giocatore conclude un livello o chiude l'applicazione, i controller, \emph{ScoreController} e \emph{CoinController} invocano i relativi metodi 
-per modificare le variabili e salvare lo stato di gioco, che si compone di:
+\textbf{Soluzione:} Il salvataggio e il ripristino della partita sono gestiti da un'unica classe, GameSaveManager, implementata 
+come singleton tramite il pattern Initialization-on-demand holder idiom, una tecnica che garantisce accesso centralizzato, 
+inizializzazione lazy e sicurezza thread-safe senza costi di sincronizzazione esplicita. \footnote{Questa implementazione è stata
+ adottata per risolvere un warning PMD, come indicato in~\cite{pmd-singleton}, seguendo le linee guida descritte in~\cite{wiki-holder}.}
+
+All'interno della classe, il caricamento dello stato avviene una sola volta al primo accesso all'istanza, tramite una classe interna statica (Holder) che 
+richiama un metodo privato di inizializzazione. Questa logica garantisce che il file di salvataggio venga caricato una sola volta e 
+che non vengano mai create più istanze del file, evitando duplicazioni o corruzioni dello stato.
+
+Quando il giocatore completa un livello o chiude l’applicazione, i controller — in particolare ScoreController e CoinController — invocano i metodi pubblici del GameSaveManager 
+per aggiornare lo stato di gioco, che comprende:
 \begin{itemize}
     \item Un intero che indica i livelli completati.
     \item Un intero che indica le monete raccolte.
@@ -299,12 +305,12 @@ per modificare le variabili e salvare lo stato di gioco, che si compone di:
 \end{itemize}
 All'avvio successivo, lo stato viene ricostruito e propagato ai vari model che lo necessitano; in caso contrario viene generata una partita nuova con parametri standard. 
 L'intera logica di I/O è dunque isolata in una sola classe, priva di dipendenze dal motore di gioco; Questa architettura rende effettivo
-il singleton e semplifica i test automatizzati.~\ref{fig:2.4}
+il singleton e semplifica i test automatizzati.~\ref{fig:2.10}
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{resources/saveManagerUML.png}
     \caption{UML dell'MVC per la gestione dei nemici}
-    \label{fig:2.4}
+    \label{fig:2.10}
 \end{figure}
 \newpage
 \textbf{Problema} Nel livello di gioco occorre generare molti nemici in posizioni predefinite: ognuno deve comparire al momento giusto,
@@ -318,12 +324,12 @@ Quest'ultima contiene un metodo che riceve l'identificativo numerico del nemico 
 la sua implementazione concreta, EnemyViewFactoryImpl, contiene la mappatura fra tipologia e view corrispondente (as esempio 1 $\rightarrow$ GuardView).
 In questo modo la lettura del file, la gestione della memoria e il caricamento delle immagini restano ben separati: per aggiungere un 
 nuovo tipo di nemico è sufficiente aggiungere una riga al file di mappa e una voce nella factory, senza toccare né il game‑loop né lo 
-spawner, mantenendo il sistema estendibile e pulito.~\ref{fig:2.5}
+spawner, mantenendo il sistema estendibile e pulito.~\ref{fig:2.11}
 \begin{figure}
     \centering
     \includegraphics*[width=0.8\textwidth]{resources/spawingEnemyUML.png}
     \caption{UML gestione spawing nemici}
-    \label{fig:2.5}
+    \label{fig:2.11}
 \end{figure}
 \chapter{Sviluppo}
 \section{Testing automatizzato}
@@ -367,6 +373,10 @@ Tra le feature avanzate troviamo:
     \item API di I/O: utilizzo di java.nio.charset.StandardCharset per spcificare l’encoding UTF-8 in lettura
 https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/MapLoader.java
 \end {itemize}
+\section{Riccardo Cornacchia}
+\section{Francesca Gatti}
+\section{Giovanni Maria Rava}
+
 \chapter{Commenti finali}
 \section{Autovalutazione e lavori futuri}
 \subsection{Samuele Bianchedi}
@@ -378,6 +388,12 @@ Sicuramente mi è piaciuto e mi ha divertito e mi ha spronato a impegnarmi di pi
 \subsection{Riccardo Cornacchia}
 \subsection{Francesca Gatti}
 \subsection{Giovanni Maria Rava}
+\begin{itemize}
+    \item \textbf{Utilizzo di stream e lambda expression} $\rightarrow$ Permalink: 
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/main/java/it/unibo/runwarrior/controller/enemy/EnemySpawner.java#L55-L63}
+    \item \textbf{Utilizzo di lambda expressione} $\rightarrow$ Permalink:
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/487ae1a3598382a5eb6584d892bbe61fabc8d758/src/test/java/it/unibo/runwarrior/model/GameSaveManagerTest.java#L63}
+\end{itemize}
 \appendix
 \chapter{Guida utente}
 Per il movimento del player si usano 4 frecce della tastiera:
@@ -389,6 +405,21 @@ Per il movimento del player si usano 4 frecce della tastiera:
     \item \textbf{Shift}: per attaccare con spada o bastone nel caso in cui si è giunti al secondo potenziamento.
     Attenzione, mentre si è in movimento il player può attaccare una volta ogni secondo.
 \end{itemize}
+\chapter{Bibliografia}
+\begin{thebibliography}{9}
 
+    \bibitem{pmd-singleton}
+    PMD Project,\\
+    \emph{PMD Java Rule: NonThreadSafeSingleton},\\
+    \url{https://docs.pmd-code.org/pmd-doc-7.12.0/pmd_rules_java_multithreading.html#nonthreadsafesingleton},\\
+    accessed July 2025.
+    
+    \bibitem{wiki-holder}
+    Wikipedia contributors,\\
+    \emph{Initialization-on-demand holder idiom} --- Wikipedia,\\
+    \url{https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom},\\
+    accessed July 2025.
+
+    \end{thebibliography}
 
 \end{document}
