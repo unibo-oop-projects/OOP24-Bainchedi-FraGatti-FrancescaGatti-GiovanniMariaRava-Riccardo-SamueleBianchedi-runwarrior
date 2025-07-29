@@ -28,7 +28,7 @@ public final class ShopView extends JPanel {
     private static final int RIGID_AREA_HEIGHT_MEDIUM = 10;
     private static final int RIGID_AREA_HEIGHT_SMALL = 5;
     private static final Color COLOR_SHOP_BACKGROUND = new Color(255, 192, 203);
-    private final ShopController shopController;
+    private final transient ShopController shopController;
     private final JLabel coinLabel;
     private final JLabel skinStateLabel; 
     private final JButton buySkinButton;
