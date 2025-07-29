@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1753799839.36381 "/Users/giovannimariarava/Desktop/UNI/secondoAnno/OOP/OOP24-runwarrior/report/report.tex" "report.pdf" "report" 1753799844.8752 0
-  "/Users/giovannimariarava/Desktop/UNI/secondoAnno/OOP/OOP24-runwarrior/report/report.tex" 1753799839.05983 39735 ca86fe7f5b7eed5a5ccc6e84c8985ce6 ""
+["pdflatex"] 1753799945.65187 "/Users/giovannimariarava/Desktop/UNI/secondoAnno/OOP/OOP24-runwarrior/report/report.tex" "report.pdf" "report" 1753799950.94238 0
+  "/Users/giovannimariarava/Desktop/UNI/secondoAnno/OOP/OOP24-runwarrior/report/report.tex" 1753799941.49008 39733 4cb22c9780d8e037b01c3fe1981f1aa4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -18,8 +18,6 @@
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmti12.tfm" 1136768653 1484 ed72f8f5cf654cda15ecc8e32bfcbee5 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmtt12.tfm" 1136768653 772 9a936b7f5e2ff0557fce0f62822f0bbf ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
-  "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1248133631 36741 fa121aac0049305630cf160b86157ee4 ""
-  "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1248133631 32362 179c33bbf43f19adbb3825bb4e36e57a ""
@@ -87,10 +85,10 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1741178181.20785 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1741178132 8221446 40579e1f59218742132854149878874d ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "report.aux" 1753799844.78813 7017 15b9cdcdd7b227209d5c8c5f6b43134c "pdflatex"
-  "report.out" 1753799844.80327 3184 d16f02e3a99f3c4a5d98336a1e3b8b7f "pdflatex"
-  "report.tex" 1753799839.05983 39735 ca86fe7f5b7eed5a5ccc6e84c8985ce6 ""
-  "report.toc" 1753799844.80351 1849 67fb5634a5a84899d53bb518e8f1eed1 "pdflatex"
+  "report.aux" 1753799950.86882 7017 15b9cdcdd7b227209d5c8c5f6b43134c "pdflatex"
+  "report.out" 1753799950.88389 3184 d16f02e3a99f3c4a5d98336a1e3b8b7f "pdflatex"
+  "report.tex" 1753799941.49008 39733 4cb22c9780d8e037b01c3fe1981f1aa4 ""
+  "report.toc" 1753799950.88412 1849 67fb5634a5a84899d53bb518e8f1eed1 "pdflatex"
   "resources/Collisions.png" 1753736894.72018 267143 82102cd08798d2744d9bf1770bb33b63 ""
   "resources/PowersHandler.png" 1753736894.72149 435764 7ead2eb4c01264bb0961a778645cf53b ""
   "resources/Powerup.png" 1753736894.72215 217069 edcc2026152c1982c8f6ed9bc7ab9bac ""
