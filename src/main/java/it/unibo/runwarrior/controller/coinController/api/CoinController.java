@@ -1,4 +1,4 @@
-package it.unibo.runwarrior.controller.coinController.api;
+package it.unibo.runwarrior.controller.coincontroller.api;
 
 import java.awt.Graphics;
 import java.util.List;
