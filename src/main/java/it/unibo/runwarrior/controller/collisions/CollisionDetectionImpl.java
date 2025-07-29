@@ -22,7 +22,6 @@ public class CollisionDetectionImpl implements CollisionDetection {
     public static final String LEFT = "left";
     public static final String UP = "up";
     public static final String DOWN = "down";
-    private Character player;
     private final int[][] map;
     private final List<MapElement> blocks;
     private final int tileSize;
@@ -57,19 +56,20 @@ public class CollisionDetectionImpl implements CollisionDetection {
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings(
+    value = "NO_DANGEROUS_NON_SHORT_CIRCUIT",
+    justification = "evey touchSolid has to be checked to verify every point collision")
     @Override
-    @SuppressFBWarnings("Non dangerous on-Short-Circuit")
-    public String checkCollision(final Character pl) {
-        this.player = pl;
-        playerArea = pl.getArea();
+    public String checkCollision(final Character player) {
+        playerArea = player.getArea();
         String dir = "";
         this.directions.clear();
-        if (touchSolid(playerArea.x + playerArea.width - FEET_HEAD_TOLL, playerArea.y, true) 
-            | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height / 2, true) 
-            | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height, true) 
-            | touchSolid(playerArea.x + FEET_HEAD_TOLL, playerArea.y, true) 
-            | touchSolid(playerArea.x, playerArea.y + playerArea.height / 2, true) 
-            | touchSolid(playerArea.x, playerArea.y + playerArea.height, true)) {
+        if (touchSolid(playerArea.x + playerArea.width - FEET_HEAD_TOLL, playerArea.y, true, player) 
+            | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height / 2, true, player) 
+            | touchSolid(playerArea.x + playerArea.width, playerArea.y + playerArea.height, true, player) 
+            | touchSolid(playerArea.x + FEET_HEAD_TOLL, playerArea.y, true, player) 
+            | touchSolid(playerArea.x, playerArea.y + playerArea.height / 2, true, player) 
+            | touchSolid(playerArea.x, playerArea.y + playerArea.height, true, player)) {
                 dir = directions.stream().filter(s -> RIGHT.equals(s) | LEFT.equals(s))
                         .distinct().findFirst().orElse("");
         }
@@ -86,7 +86,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    public boolean touchSolid(final int x, final int y, final boolean checkDirections) {
+    public boolean touchSolid(final int x, final int y, final boolean checkDirections, final Character player) {
         gameOverY = y;
         int indexXtile = x / tileSize;
         int indexYtile = y / tileSize;
@@ -94,7 +94,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
         end = blocks.get(blockIndex).isPortal();
         if (blocks.get(blockIndex).getCollision() || y <= 0) {
             if (checkDirections) {
-                this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile));
+                this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
             }
             if (!blocks.get(blockIndex).getHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3) {
                 sound.play(false);
@@ -108,7 +108,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
                 indexYtile = playerArea.y / tileSize;
                 blockIndex = map[indexYtile][indexXtile];
                 if (blocks.get(blockIndex).getCollision() && checkDirections) {
-                    final String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile);
+                    final String tempDir = checkCollisionDirection(x, y, indexXtile, indexYtile, player);
                     if (RIGHT.equals(tempDir) || LEFT.equals(tempDir)) {
                         this.directions.add(tempDir);
                         return true;
@@ -123,7 +123,8 @@ public class CollisionDetectionImpl implements CollisionDetection {
      * {@inheritDoc}
      */
     @Override
-    public String checkCollisionDirection(final int x, final int y, final int indexXtile, final int indexYtile) {
+    public String checkCollisionDirection(final int x, final int y, final int indexXtile, final int indexYtile, 
+    final Character player) {
         String direction = "";
         final int tileX = indexXtile * tileSize;
         final int tileY = indexYtile * tileSize;
@@ -147,9 +148,9 @@ public class CollisionDetectionImpl implements CollisionDetection {
      */
     @Override
     public boolean isInAir(final Character pl) {
-        return !touchSolid(pl.getArea().x + FEET_HEAD_TOLL, pl.getArea().y + pl.getArea().height, false) 
+        return !touchSolid(pl.getArea().x + FEET_HEAD_TOLL, pl.getArea().y + pl.getArea().height, false, pl) 
         && !touchSolid(pl.getArea().x + pl.getArea().width - FEET_HEAD_TOLL, pl.getArea().y + pl.getArea().height, 
-        false);
+        false, pl);
     }
 
     /**

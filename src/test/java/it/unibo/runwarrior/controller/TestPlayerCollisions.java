@@ -89,23 +89,23 @@ class TestPlayerCollisions {
         mapHandler1.getBlocks(), tileSize, glc);
 
         collisionTiles.checkCollision(player);
-        assertTrue(collisionTiles.touchSolid(TWELVE * tileSize, FIFTEEN * tileSize, false));
-        assertFalse(collisionTiles.touchSolid(FIFTY * tileSize, FIFTEEN * tileSize, false));
+        assertTrue(collisionTiles.touchSolid(TWELVE * tileSize, FIFTEEN * tileSize, false, player));
+        assertFalse(collisionTiles.touchSolid(FIFTY * tileSize, FIFTEEN * tileSize, false, player));
 
         assertEquals("right", collisionTiles.checkCollisionDirection(HUNDRED * tileSize, FIVE_SIX_Z, 
-        HUNDRED + 1, FIFTEEN));
+        HUNDRED + 1, FIFTEEN, player));
         assertEquals("up", collisionTiles.checkCollisionDirection(SIX_Z_FIVE, TWELVE * tileSize, 
-        FIFTEEN + 1, TWELVE));
+        FIFTEEN + 1, TWELVE, player));
         player.getArea().setLocation(COLL_DOWN, FIVE_TWO_Z + FIFTEEN);
         assertEquals("down", collisionTiles.checkCollisionDirection(COLL_DOWN, FIVE_TWO_Z + FIFTEEN, 
-        COLL_DOWN_TILE, FIFTEEN - 1));
+        COLL_DOWN_TILE, FIFTEEN - 1, player));
 
         player.getArea().setLocation(FIFTY * tileSize, (FIFTEEN - 1) * tileSize);
         assertTrue(collisionTiles.isInAir(player));
-        player.getArea().setLocation(FIFTY * tileSize, (FIFTEEN * tileSize) + (tileSize / 2)  
+        player.getArea().setLocation(FIFTY * tileSize, (FIFTEEN * tileSize) + (tileSize / 2) 
         + AbstractCharacterImpl.TO_TOUCH_FLOOR);
         assertFalse(collisionTiles.isInAir(player));
-        player.getArea().setLocation((HUNDRED + FIFTY) * tileSize - TOLL, FIVE_SIX_Z  
+        player.getArea().setLocation((HUNDRED + FIFTY) * tileSize - TOLL, FIVE_SIX_Z 
         + AbstractCharacterImpl.TO_TOUCH_FLOOR);
         assertEquals("left", collisionTiles.checkCollision(player));
     }
@@ -139,21 +139,21 @@ class TestPlayerCollisions {
     void testCollisionEnemies() {
         final PowerUpController pCon = new PowerUpController(glc, mapHandler1, mapHandler1.getMap());
         final Character player = new NakedWarrior(glc, cmd, mapHandler1, pCon);
-        final EnemyImpl first = new EnemyImpl(1836, FIVE_SEV_SIX, tileSize, tileSize, true, glc.getEnemyHandler(), glc, 0);
-        final EnemyImpl second = new EnemyImpl(2664, FIVE_SEV_SIX, tileSize, tileSize, true, glc.getEnemyHandler(), glc, 0);
+        final EnemyImpl first = new EnemyImpl(POWERUP_X4, FIVE_SEV_SIX, tileSize, tileSize, true, glc.getEnemyHandler(), glc, 0);
+        final EnemyImpl second = new EnemyImpl(POWERUP_X3, FIVE_SEV_SIX, tileSize, tileSize, true, glc.getEnemyHandler(), glc, 0);
         glc.getEnemyHandler().addEnemy(first);
         glc.getEnemyHandler().addEnemy(second);
         final KillDetectionImpl collisionEnemies = new KillDetectionImpl(glc, mapHandler1);
 
-        assertTrue(isBehindTile(3564, SWORD_POINT, mapHandler1));
-        assertFalse(isBehindTile(9360, SWORD_POINT, mapHandler1));
+        assertTrue(isBehindTile(POWERUP_X2, SWORD_POINT, mapHandler1));
+        assertFalse(isBehindTile(POWERUP_X1, SWORD_POINT, mapHandler1));
         assertEquals(2, glc.getEnemyHandler().getEnemies().size());
-        player.getArea().setLocation(1838, FIVE_TWO_Z);
+        player.getArea().setLocation(POWERUP_X4 + TOLL, FIVE_TWO_Z);
         collisionEnemies.checkCollisionWithEnemeies(player);
         assertTrue(isTouchingUp(player.getArea(), first.getBounds()));
         assertEquals(1, glc.getEnemyHandler().getEnemies().size());
 
-        player.getArea().setLocation(2650, FIVE_SIX_Z);
+        player.getArea().setLocation(POWERUP_X3 - TOLL, FIVE_SIX_Z);
         assertTrue(player.getArea().intersects(glc.getEnemyHandler().getEnemies().getFirst().getBounds()));
         final int i = glc.getPowersHandler().getPowers();
         collisionEnemies.checkCollisionWithEnemeies(player);
@@ -170,7 +170,7 @@ class TestPlayerCollisions {
 
         coinController.addCoins(FIFTEEN + 1, FIFTY);
         assertEquals(coinController.getCoinsCollected(), 0);
-        player.getArea().setLocation(1769, FIVE_SIX_Z);
+        player.getArea().setLocation(FIFTY * tileSize, FIVE_SIX_Z);
         collisionCoins.controlCoinCollision(player);
         assertEquals(coinController.getCoinsCollected(), 1);
     }
