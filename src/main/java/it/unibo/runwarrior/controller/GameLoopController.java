@@ -1,10 +1,13 @@
 package it.unibo.runwarrior.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JFrame;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.controller.coincontroller.impl.CoinControllerImpl;
 import it.unibo.runwarrior.controller.coincontroller.api.CoinController;
 import it.unibo.runwarrior.controller.enemy.EnemySpawner;
@@ -77,7 +80,12 @@ public class GameLoopController {
         initializeEnemyViewFactory();
         this.enemyHandler = new EnemyHandlerImpl(this, this.enemyViewFactory);
         this.enemySpawner = new EnemySpawner(enemyHandler, this);
-        enemySpawner.loadEnemiesFromStream(getClass().getResourceAsStream(enemiesPath));
+        try (InputStream is = GameLoopController.class.getResourceAsStream(enemiesPath)) {
+            enemySpawner.loadEnemiesFromStream(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       
 
         final Score score = new Score();
         this.scoreController = new ScoreControllerImpl(score);
@@ -116,12 +124,13 @@ public class GameLoopController {
      *
      * @return the player
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Character getPlayer() {
         return this.player;
     }
 
     /**
-     * Sets the current player in the panel.
+     * Sets the current player in the panel. Suppress warning cause the player has to change in a reactive way.
      *
      * @param pl current player
      * @param realX x position in the map
@@ -130,6 +139,7 @@ public class GameLoopController {
      * @param shift variable to slide map
      * @param lastHit handles immortality time
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public void setPlayer(final Character pl, final int realX, final int x, final int y, final int shift, final long lastHit) {
         this.player = pl;
         this.player.getMovementHandler().setLocationAfterPowerup(x, y, realX, shift, lastHit);
@@ -141,6 +151,7 @@ public class GameLoopController {
      *
      * @return GameLoopPanel
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public GameLoopPanel getGlp() {
         return this.glp;
     }
@@ -148,6 +159,7 @@ public class GameLoopController {
     /**
      * @return the current set of character commands
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public CharacterComand getCommands() {
         return this.commands;
     }
@@ -155,6 +167,7 @@ public class GameLoopController {
     /**
      * @return the handler that controls power‑ups
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public PowersHandler getPowersHandler() {
         return this.powerUpsHandler;
     }
@@ -169,6 +182,7 @@ public class GameLoopController {
     /**
      * @return the map handler that provides tiles and collision list
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public HandlerMapElement getMapHandler() {
         return this.mapHandler;
     }
@@ -176,6 +190,7 @@ public class GameLoopController {
     /**
      * @return the component that controls enemies
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public EnemyHandlerImpl getEnemyHandler() {
         return this.enemyHandler;
     }
@@ -183,6 +198,7 @@ public class GameLoopController {
     /**
      * @return the controller that manages coins on the map
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public CoinController getCoinController() {
         return this.coinController;
     }
@@ -190,6 +206,7 @@ public class GameLoopController {
     /**
      * @return the controller that updates the score
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public ScoreController getScoreController() {
         return this.scoreController;
     }

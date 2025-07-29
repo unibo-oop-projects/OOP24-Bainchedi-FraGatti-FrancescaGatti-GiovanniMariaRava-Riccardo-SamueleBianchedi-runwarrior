@@ -109,14 +109,14 @@ dei setter, quello a cui si aspirava era un oggetto non modificabile lontano da 
 \textbf{Problema}: si deve gestire la creazione del player considerando che le 2 entità warrior e wizard possono cambiare in modo attivo 3 skin
 (senza armatura, con armatura, con armatura e spada/bastone) durante la sessione di gioco.\vspace{1cm}
 
-\textbf{Soluzione}: all'interno dell'architettura MVC, ho realizzato una classe astratta AbstractCharacterImpl che implementa l'interfaccia 
-Character per creare l'entità player, nel model del progetto. In questa classe vengono definiti metodi standard che il player esegue sempre 
+\textbf{Soluzione}: all'interno dell'architettura MVC, ho realizzato una classe astratta \emph{AbstractCharacterImpl} che implementa l'interfaccia 
+\emph{Character} per creare l'entità player, nel model del progetto. In questa classe vengono definiti metodi standard che il player esegue sempre 
 e i campi che ogni entità player deve avere.
 
-Tale classe astratta viene estesa da 6 classi concrete (NakedWarrior, NakedWizard, ArmourWarrior, ArmourWizard, SwordWarrior, 
-StickWizard). Ogni sottoclasse fa Override del metodo astratto playerImage(), per settare le immagini corrispondenti alla skin 
-attualmente in gioco, mentre SwordWarrior e StickWizard fanno Override del metodo updateAttackCollision() che setta l'eventuale area dell'arma.
-AbstractCharacterImpl implementa il metodo update(), che richiama i 2 metodi modificati ad hoc da ciascuna sottoclasse.
+Tale classe astratta viene estesa da 6 classi concrete (\emph{NakedWarrior, NakedWizard, ArmourWarrior, ArmourWizard, SwordWarrior, 
+StickWizard}). Ogni sottoclasse fa Override del metodo astratto \emph{playerImage()}, per settare le immagini corrispondenti alla skin 
+attualmente in gioco, mentre \emph{SwordWarrior e StickWizard} fanno Override del metodo \emph{updateAttackCollision()} che setta l'eventuale area dell'arma.
+AbstractCharacterImpl implementa il metodo \emph{update()}, che richiama i 2 metodi modificati ad hoc da ciascuna sottoclasse.
 
 Tramite questa architettura viene sfruttato il Template pattern che stabilisce lo scheletro dell'operazione 
 principale (update) nella classe astratta e delega alle sottoclassi la definizione di uno o più aspetti specifici dell'algoritmo 
@@ -134,21 +134,21 @@ metodi definiti dalle sottoclassi.
 \textbf{Problema}: gestione dell'animazione, ovvero il cambio continuo dei frame per ogni specifica azione del personaggio; 
 gestione del movimento del player, collegato ad input da tastiera.\vspace{1cm}
 
-\textbf{Soluzione}: all'interno dell'architettura MVC , ho realizzato due interfacce CharacterAnimationHandler e 
-CharacterMovementHandler, rispettivamente implementate da CharacterAnimationHandlerImpl e CharacterMovementHandlerImpl, nel controller 
+\textbf{Soluzione}: all'interno dell'architettura MVC , ho realizzato due interfacce \emph{CharacterAnimationHandler e 
+CharacterMovementHandler}, rispettivamente implementate da \emph{CharacterAnimationHandlerImpl e CharacterMovementHandlerImpl}, nel controller 
 del progetto. L'obbiettivo è quello di delegare i 2 comportamenti fondamentali di ogni entità player a due classi distinte nella sezione 
 controller.
 
-Entrambe le interfacce vengono usate da AbstractCharacterImpl e i loro metodi vengono richiamati all'interno di update() 
-e drawPlayer(Graphics2D).
+Entrambe le interfacce vengono usate da \emph{AbstractCharacterImpl} e i loro metodi vengono richiamati all'interno di \emph{update() 
+e drawPlayer(Graphics2D)}.
 Per questa architettura mi sono basato sul pattern Strategy, ma applicandone una variazione, cioè incapsulare in 2 interfacce diverse 
 le operazioni che gestiscono animazione e movimento del player. Queste due interfacce rappresentano la strategia. Per gestire 
-tali comportamenti, entrambe le classi usano CharacterComand, la classe che gestisce l'input da tastiera.
+tali comportamenti, entrambe le classi usano \emph{CharacterComand}, la classe che gestisce l'input da tastiera.
 
-CharacterAnimationHandler definisce metodi fondamentali come: frameChanger(), per gestire il cambiamento dei frame in base agli input 
-e imagePlayer(boolean rightDirection), che fornisce l'immagine corretta in base al frame corrente.
-CharacterMovementHandler definisce metodi fondamentali come: setLocationAfterPowerUp(), per reimpostare la posizione del player
-dopo aver guadagnato o perso una vita e movePlayer(), per gestire spostamento a destra e sinistra, salto e collisione con le diverse 
+\emph{CharacterAnimationHandler} definisce metodi fondamentali come: \emph{frameChanger()}, per gestire il cambiamento dei frame in base agli input 
+e \emph{imagePlayer(boolean rightDirection)}, che fornisce l'immagine corretta in base al frame corrente.
+\emph{CharacterMovementHandler} definisce metodi fondamentali come: \emph{setLocationAfterPowerUp()}, per reimpostare la posizione del player
+dopo aver guadagnato o perso una vita e \emph{movePlayer()}, per gestire spostamento a destra e sinistra, salto e collisione con le diverse 
 entità.
 
 \begin{figure}[H]
@@ -163,26 +163,26 @@ entità.
 Mantenere la relazione con le classi che gestiscono eventuali conseguenze di una specifica collisione.\vspace{1cm}
 
 \textbf{Soluzione}: in questo caso all'interno dell'architettura MVC , ho realizzato quattro interfacce nel controller del progetto, 
-ognuna delle quali gestisce le collisioni con 1 delle quattro entità: CollisionDetection, per i blocchi delle mappe, PowerUpDetection, 
-per la collisione con l'uovo e i powerups, KillDetection, per i nemici, e CoinDetection, per le monete, 
-rispettivamente implementate da CollisionDetectionImpl, PowerUpDetectionImpl, KillDetectionImpl e CoinDetectionImpl.
+ognuna delle quali gestisce le collisioni con 1 delle quattro entità: \emph{CollisionDetection}, per i blocchi delle mappe, \emph{PowerUpDetection}, 
+per la collisione con l'uovo e i powerups, \emph{KillDetection}, per i nemici, e \emph{CoinDetection}, per le monete, 
+rispettivamente implementate da \emph{CollisionDetectionImpl, PowerUpDetectionImpl, KillDetectionImpl e CoinDetectionImpl}.
 
-Le quattro interfacce vengono usate da CharacterMovementHandlerImpl e i loro metodi vengono richiamati all'interno di movePlayer().
+Le quattro interfacce vengono usate da \emph{CharacterMovementHandlerImpl} e i loro metodi vengono richiamati all'interno di movePlayer().
 Le quattro interfacce descritte rappresentano la strategia per il pattern Strategy, che anche in questo caso non si tratta di Strategy puro, 
 ma di una definizione di quattro strategie separate, infatti ognuna di esse incapsula i metodi utili a verificare le collisioni con le 
 diverse entità.
 
 \begin{itemize}
-    \item CollisionDetection usa checkCollision(), che verifica la collisione del player con i blocchi della mappa tenendo conto di 6 punti 
+    \item \emph{CollisionDetection} usa checkCollision(), che verifica la collisione del player con i blocchi della mappa tenendo conto di 6 punti 
     della sua area di collisione che lo "circonda". Per verificare che tipologia di blocco viene toccata e in quale direzione avviene
     la collisione richiama touchSolid() e checkCollisionDirection().
     Inoltre fornisce i metodi gameOver() e win() che restituiscono true se il player muore o arriva al portale.
-    \item PowerUpDetection usa checkCollisionWithPowers(), che permette al player di bloccarsi se collide con l'uovo, o di raccogliere un 
+    \item \emph{PowerUpDetection} usa checkCollisionWithPowers(), che permette al player di bloccarsi se collide con l'uovo, o di raccogliere un 
     powerup quando l'uovo è stato aperto; tutto ciò avviene consultando la lista di powerups creata dal PowerUpController.
-    \item KillDetection usa checkCollisionWithEnemies(), che permette di identificare 2 tipi di collisione: se il player schiaccia il nemico, 
+    \item \emph{KillDetection} usa checkCollisionWithEnemies(), che permette di identificare 2 tipi di collisione: se il player schiaccia il nemico, 
     lo uccide, se viene toccato da destra o sinistra perde una vita. La posizione dei nemici viene controllata in loop mediante 
     la lista creata da EnemyHandlerImpl.
-    \item CoinDetection usa controlCoinCollision(), che scorre la lista di monete creata da CoinController e quando l'area del player collide 
+    \item \emph{CoinDetection} usa controlCoinCollision(), che scorre la lista di monete creata da CoinController e quando l'area del player collide 
     con l'area di una moneta viene aggiornato il conteggio delle monete.
 \end{itemize}
 
@@ -196,11 +196,11 @@ diverse entità.
 \textbf{Problema}: creazione dell'entità powerup con meccanica complessa (raccolta powerup solo dopo apertura uovo) e gestione 
 delle collisioni col player.\vspace{1cm}
 
-\textbf{Soluzione}: in questo caso ho sfruttato il pattern architetturale MVC creando l'interfaccia PowerUp che realizza l'entità powerup 
-e la sua implementazione PowerUpImpl nel model del progetto. Nel controller del progetto ho creato la classe PowerUpController 
-con lo scopo di creare la lista dei powerups presenti nelle varie mappe. Infine nella view ho inserito la classe PowerUpManager, 
+\textbf{Soluzione}: in questo caso ho sfruttato il pattern architetturale MVC creando l'interfaccia \emph{PowerUp} che realizza l'entità powerup 
+e la sua implementazione \emph{PowerUpImpl} nel model del progetto. Nel controller del progetto ho creato la classe \emph{PowerUpController} 
+con lo scopo di creare la lista dei powerups presenti nelle varie mappe. Infine nella view ho inserito la classe \emph{PowerUpManager}, 
 che acquisisce la lista di tutti i powerups e si occupa di stamparli a video nel pannello di gioco. La collsione tra player e lista 
-di powerup è gestita da PowerUpDetection.
+di powerup è gestita da \emph{PowerUpDetection}.
 
 \begin{figure}[H]
     \centering
@@ -211,10 +211,10 @@ di powerup è gestita da PowerUpDetection.
 
 \textbf{Problema}: gestire il passaggio da una skin all'altra in modo reattivo, in base alle diverse collisioni.\vspace{1cm}
 
-\textbf{Soluzione}: creazione della classe PowersHandler nella sezione controller dell'MVC. La classe che gestisce l'inizializzazione del 
+\textbf{Soluzione}: creazione della classe \emph{PowersHandler} nella sezione controller dell'MVC. La classe che gestisce l'inizializzazione del 
 personaggio con cui si inzia il livello e la creazione di nuove istanze Character mantenendole in una lista. Quando il player ottiene 
-1 vita (raccolta powerup) o la perde (collisione ostacolo o nemico, se non schiacciato) vengono utilizzati i metodi setPowers() e 
-losePowers() dalle classi “Detection”; questi metodi si collegano al GameLoopController permettondo di cambiare la skin del player 
+1 vita (raccolta powerup) o la perde (collisione ostacolo o nemico, se non schiacciato) vengono utilizzati i metodi \emph{setPowers() e 
+losePowers()} dalle classi “Detection”; questi metodi si collegano al \emph{GameLoopController} permettondo di cambiare la skin del player 
 attualmente in gioco e di settare la posizione della nuova istanza all'interno della mappa. Inoltre permette di 
 gestire il tempo in cui il player è immortale non appena perde una vita, tramite la variabile lastHit.
 Infine fornisce il metodo gameOver() che restituisce true se l'entità Character è di tipo “Naked” e perde una vita.
