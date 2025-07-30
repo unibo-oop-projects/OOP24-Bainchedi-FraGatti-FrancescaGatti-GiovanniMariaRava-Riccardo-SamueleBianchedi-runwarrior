@@ -237,6 +237,7 @@ shop, oltre all'acquisto di una nuova skin, è quello di poter selezionare o la 
 nuova (\emph{Wizard}). 
 Il problema principale affrontato è stato quello di separare la gestione della parte logica del negozio, ovvero il controllo delle monete, 
 delle skin e la selezione, dalla sua interfaccia grafica, mantenendo la possibilità di modificarlo in futuro.
+
 \textbf{Soluzione}: Per affrontare questo problema è stato adottato il pattern \emph{Model-View-Controller} (MVC), suddividendo le responsabilità 
 tra i tre livelli:
 \begin{itemize}
@@ -315,7 +316,7 @@ salvataggio su file esterno. Le due componenti sono:
 \begin{figure}[H]
     \centering
     \hspace*{-0.3\textwidth}
-    \includegraphics[width=1.6\textwidth]{resources/UMLshop.png}
+    \includegraphics[width=1.6\textwidth]{resources/UMLscore.png}
     \caption{UML dell'MVC per la gestione del punteggio}
 \end{figure}
 
@@ -437,9 +438,9 @@ Si è adottata la tecnica delle copie difensive in questi seguenti modi:
 Tra le feature avanzate troviamo:
 \begin{itemize}
     \item Uso di Generics: per garantire la type safety nelle collezioni, come Map<Integer, BufferedImage> e List<MapElement>
-    https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/GameMap.java
+    \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/GameMap.java}
     \item API di I/O: utilizzo di java.nio.charset.StandardCharset per spcificare l’encoding UTF-8 in lettura
-https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/MapLoader.java
+\url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/MapLoader.java}
 \end {itemize}
 
 \section{Riccardo Cornacchia}
@@ -467,7 +468,7 @@ https://github.com/GiovanniRava/OOP24-runwarrior/blob/59f5771e783f0430bcbb4859ef
 
     $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/786d60909eb4856d26449dafa053fcec146400df/src/main/java/it/unibo/runwarrior/view/Menu.java#L205C16-L216C20}
-    
+
     $\rightarrow$ Permalink:
     \url{https://github.com/GiovanniRava/OOP24-runwarrior/blob/1177dc7188d3a96ba1165ba19e439a1417d417bf/src/main/java/it/unibo/runwarrior/view/Menu.java#L226C17-L235C20}
 \end{itemize}
