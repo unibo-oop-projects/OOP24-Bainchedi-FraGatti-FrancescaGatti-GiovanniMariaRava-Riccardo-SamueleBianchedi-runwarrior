@@ -68,7 +68,7 @@ public class Menu extends JPanel {
     private final JFrame frameMenu;
     private transient BufferedImage backGroundImage;
     private transient BufferedImage titleImage;
-    private JPanel pannelloSfondoMenu;
+    private JPanel backgroundMenuPanel;
 
     /**
      * Menu Constructor.
@@ -109,7 +109,7 @@ public class Menu extends JPanel {
             LOGGER.log(Level.SEVERE, "Cannot load images");
         }
 
-        pannelloSfondoMenu = new JPanel() {
+        backgroundMenuPanel = new JPanel() {
             @Override
             protected void paintComponent(final Graphics g) {
                 super.paintComponent(g);
@@ -118,19 +118,19 @@ public class Menu extends JPanel {
                 }
             }
         };
-        pannelloSfondoMenu.setLayout(new BoxLayout(pannelloSfondoMenu, BoxLayout.Y_AXIS));
-        pannelloSfondoMenu.setOpaque(true);
-        final JLabel titoloLabel = new JLabel(new ImageIcon(titleImage));
-        titoloLabel.setAlignmentX(CENTER_ALIGNMENT);
-        pannelloSfondoMenu.add(Box.createVerticalGlue());
-        pannelloSfondoMenu.add(titoloLabel);
+        backgroundMenuPanel.setLayout(new BoxLayout(backgroundMenuPanel, BoxLayout.Y_AXIS));
+        backgroundMenuPanel.setOpaque(true);
+        final JLabel titleLabel = new JLabel(new ImageIcon(titleImage));
+        titleLabel.setAlignmentX(CENTER_ALIGNMENT);
+        backgroundMenuPanel.add(Box.createVerticalGlue());
+        backgroundMenuPanel.add(titleLabel);
         final JPanel playButtonPanel = new JPanel();
         playButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         playButtonPanel.setOpaque(false);
         playButtonPanel.setAlignmentX(CENTER_ALIGNMENT);
-        pannelloSfondoMenu.add(Box.createVerticalStrut(VERTICAL_STRUT_MEDIUM));
-        pannelloSfondoMenu.add(playButtonPanel);
-        pannelloSfondoMenu.add(Box.createHorizontalGlue());
+        backgroundMenuPanel.add(Box.createVerticalStrut(VERTICAL_STRUT_MEDIUM));
+        backgroundMenuPanel.add(playButtonPanel);
+        backgroundMenuPanel.add(Box.createHorizontalGlue());
         playButtonPanel.setPreferredSize(new Dimension(PLAY_BUTTON_PANEL_WIDTH, PLAY_BUTTON_PANEL_HEIGHT));
 
         final JButton playButton = new JButton("PLAY");
@@ -257,9 +257,9 @@ public class Menu extends JPanel {
             }
         });
         playButtonPanel.add(playButton, BorderLayout.CENTER); 
-        pannelloSfondoMenu.add(playButtonPanel);
+        backgroundMenuPanel.add(playButtonPanel);
         super.setLayout(new BorderLayout());
-        super.add(pannelloSfondoMenu, BorderLayout.CENTER);
+        super.add(backgroundMenuPanel, BorderLayout.CENTER);
     }
 
     /**
@@ -267,6 +267,6 @@ public class Menu extends JPanel {
      */
     @SuppressFBWarnings("EI_EXPOSE_REP")
     public final JPanel getPanel() {
-        return pannelloSfondoMenu;
+        return backgroundMenuPanel;
     }
 }
