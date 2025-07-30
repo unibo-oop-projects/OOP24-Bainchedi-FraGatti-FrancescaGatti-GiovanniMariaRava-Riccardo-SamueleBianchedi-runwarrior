@@ -1,6 +1,5 @@
 package it.unibo.runwarrior.controller.coincontroller.impl;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -103,8 +102,6 @@ public class CoinControllerImpl implements CoinController {
                 final int screenX = coinX + groundX;
                 if (screenX + tileSize >= 0 && screenX <= GameLoopPanel.WIDTH) {
                     g.drawImage(coin.getCoinImage(), screenX, coinY, tileSize, tileSize, null);
-                    g.setColor(Color.RED);
-                    g.drawRect(screenX, coinY, tileSize, tileSize);
                 }
             }
         }
