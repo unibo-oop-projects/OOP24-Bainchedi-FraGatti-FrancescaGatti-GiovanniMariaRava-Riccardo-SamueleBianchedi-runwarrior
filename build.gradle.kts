@@ -19,32 +19,11 @@ repositories {
     mavenCentral()
 }
 
-val javaFXModules = listOf(
-    "base",
-    "controls",
-    "fxml",
-    "swing",
-    "graphics"
-)
-
 val supportedPlatforms = listOf("linux", "mac", "win") // All required for OOP
 
 dependencies {
     // Suppressions for SpotBugs
     compileOnly("com.github.spotbugs:spotbugs-annotations:4.9.3")
-
-    // Example library: Guava. Add what you need (and use the latest version where appropriate).
-    // implementation("com.google.guava:guava:28.1-jre")
-
-    /*
-    // JavaFX: comment out if you do not need them
-    val javaFxVersion = "23.0.2"
-    implementation("org.openjfx:javafx:$javaFxVersion")
-    for (platform in supportedPlatforms) {
-        for (module in javaFXModules) {
-            implementation("org.openjfx:javafx-$module:$javaFxVersion:$platform")
-        }
-    }*/
 
     // The BOM (Bill of Materials) synchronizes all the versions of Junit coherently.
     testImplementation(platform("org.junit:junit-bom:5.12.1"))
