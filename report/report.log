@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.7.29)  29 JUL 2025 20:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.7.29)  29 JUL 2025 21:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -237,24 +237,24 @@ LaTeX Warning: Label `@cref' multiply defined.
 )
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
  (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count284
@@ -280,13 +280,13 @@ Package grfext Info: Graphics extension search list:
  (C:\Users\Utente\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 19.
+Package hyperref Info: Link coloring OFF on input line 20.
  (report.out) (report.out)
 \@outlinefile=\write4
 \openout4 = `report.out'.
 
-LaTeX Info: Redefining \it@ocap on input line 19.
-LaTeX Info: Redefining \it@ccap on input line 19.
+LaTeX Info: Redefining \it@ocap on input line 20.
+LaTeX Info: Redefining \it@ccap on input line 20.
 
 
 File italian.ldf warning: 
@@ -294,12 +294,12 @@ italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting
-italian.ldf    on input line 19.
+italian.ldf    on input line 20.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 21.
+(Font)              <14.4> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 21.
+(Font)              <7> on input line 22.
 [1
 
 {C:/Users/Utente/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (report.toc
@@ -319,7 +319,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.22 \chapter
+l.23 \chapter
              {Analisi} [1
 
 ]
@@ -327,273 +327,289 @@ Capitolo 1.
 [2
 
 ]
-<resources/modelloDominioUML.png, id=141, 3854.4pt x 2515.3975pt>
+<resources/modelloDominioUML.png, id=140, 3854.4pt x 2515.3975pt>
 File: resources/modelloDominioUML.png Graphic file (type png)
 <use resources/modelloDominioUML.png>
-Package pdftex.def Info: resources/modelloDominioUML.png  used on input line 72.
+Package pdftex.def Info: resources/modelloDominioUML.png  used on input line 73.
 (pdftex.def)             Requested size: 390.0pt x 254.50989pt.
  [3] [4 <./resources/modelloDominioUML.png>]
 Capitolo 2.
 [5
 
 ]
-<resources/UMLMapElement.png, id=158, 3852.3925pt x 3058.42625pt>
+<resources/UMLMapElement.png, id=157, 3852.3925pt x 3058.42625pt>
 File: resources/UMLMapElement.png Graphic file (type png)
 <use resources/UMLMapElement.png>
-Package pdftex.def Info: resources/UMLMapElement.png  used on input line 100.
+Package pdftex.def Info: resources/UMLMapElement.png  used on input line 102.
 (pdftex.def)             Requested size: 312.00119pt x 247.66583pt.
  [6 <./resources/UMLMapElement.png>]
-<resources/TemplateCharacter.png, id=165, 3603.4625pt x 3854.4pt>
+<resources/TemplateCharacter.png, id=164, 3603.4625pt x 3854.4pt>
 File: resources/TemplateCharacter.png Graphic file (type png)
 <use resources/TemplateCharacter.png>
-Package pdftex.def Info: resources/TemplateCharacter.png  used on input line 128.
-(pdftex.def)             Requested size: 312.00119pt x 333.70685pt.
+Package pdftex.def Info: resources/TemplateCharacter.png  used on input line 131.
+(pdftex.def)             Requested size: 350.96504pt x 284.48009pt.
  [7] [8 <./resources/TemplateCharacter.png>]
-<resources/playerAction.png, id=177, 3854.4pt x 2296.58pt>
+<resources/playerAction.png, id=176, 3854.4pt x 2296.58pt>
 File: resources/playerAction.png Graphic file (type png)
 <use resources/playerAction.png>
-Package pdftex.def Info: resources/playerAction.png  used on input line 156.
-(pdftex.def)             Requested size: 312.00119pt x 185.86777pt.
+Package pdftex.def Info: resources/playerAction.png  used on input line 159.
+(pdftex.def)             Requested size: 350.99762pt x 209.13629pt.
  [9 <./resources/playerAction.png>]
-<resources/Collisions.png, id=184, 3854.4pt x 1617.04124pt>
+<resources/Collisions.png, id=183, 3854.4pt x 1617.04124pt>
 File: resources/Collisions.png Graphic file (type png)
 <use resources/Collisions.png>
-Package pdftex.def Info: resources/Collisions.png  used on input line 191.
-(pdftex.def)             Requested size: 312.00119pt x 130.87105pt.
- [10 <./resources/Collisions.png>]
-<resources/Powerup.png, id=191, 3854.4pt x 2736.2225pt>
+Package pdftex.def Info: resources/Collisions.png  used on input line 194.
+(pdftex.def)             Requested size: 455.2152pt x 284.51625pt.
+
+Overfull \hbox (65.2152pt too wide) in paragraph at lines 194--195
+ [][] 
+ []
+
+[10]
+<resources/Powerup.png, id=188, 3854.4pt x 2736.2225pt>
 File: resources/Powerup.png Graphic file (type png)
 <use resources/Powerup.png>
-Package pdftex.def Info: resources/Powerup.png  used on input line 207.
+Package pdftex.def Info: resources/Powerup.png  used on input line 210.
 (pdftex.def)             Requested size: 312.00119pt x 221.4491pt.
- [11 <./resources/Powerup.png>]
-<resources/PowersHandler.png, id=198, 3854.4pt x 3650.63875pt>
+ [11 <./resources/Collisions.png>]
+<resources/PowersHandler.png, id=195, 3854.4pt x 3650.63875pt>
 File: resources/PowersHandler.png Graphic file (type png)
 <use resources/PowersHandler.png>
-Package pdftex.def Info: resources/PowersHandler.png  used on input line 224.
+Package pdftex.def Info: resources/PowersHandler.png  used on input line 227.
 (pdftex.def)             Requested size: 312.00119pt x 295.45502pt.
- [12 <./resources/PowersHandler.png>]
-<resources/UMLshop.png, id=206, 2083.785pt x 1255.69125pt>
+ [12 <./resources/Powerup.png>] [13 <./resources/PowersHandler.png>]
+<resources/UMLshop.png, id=209, 2083.785pt x 1255.69125pt>
 File: resources/UMLshop.png Graphic file (type png)
 <use resources/UMLshop.png>
-Package pdftex.def Info: resources/UMLshop.png  used on input line 251.
-(pdftex.def)             Requested size: 312.00119pt x 188.00067pt.
- [13 <./resources/UMLshop.png>]
-<resources/UMLcoin.png, id=213, 2083.785pt x 1255.69125pt>
+Package pdftex.def Info: resources/UMLshop.png  used on input line 256.
+(pdftex.def)             Requested size: 624.00238pt x 376.02051pt.
+
+Overfull \hbox (119.61227pt too wide) in paragraph at lines 255--257
+ []|  [] 
+ []
+
+[14] [15 <./resources/UMLshop.png>]
+<resources/UMLcoin.png, id=220, 2083.785pt x 1255.69125pt>
 File: resources/UMLcoin.png Graphic file (type png)
 <use resources/UMLcoin.png>
-Package pdftex.def Info: resources/UMLcoin.png  used on input line 275.
+Package pdftex.def Info: resources/UMLcoin.png  used on input line 282.
 (pdftex.def)             Requested size: 312.00119pt x 188.00067pt.
- [14 <./resources/UMLcoin.png>]
-<resources/UMLtimer.png, id=220, 2083.785pt x 1255.69125pt>
+ [16 <./resources/UMLcoin.png>]
+<resources/UMLtimer.png, id=227, 2083.785pt x 1255.69125pt>
 File: resources/UMLtimer.png Graphic file (type png)
 <use resources/UMLtimer.png>
-Package pdftex.def Info: resources/UMLtimer.png  used on input line 289.
+Package pdftex.def Info: resources/UMLtimer.png  used on input line 297.
 (pdftex.def)             Requested size: 312.00119pt x 188.00067pt.
- [15 <./resources/UMLtimer.png>]
-<resources/UMLscore.png, id=227, 2083.785pt x 1255.69125pt>
+ [17 <./resources/UMLtimer.png>]
+<resources/UMLscore.png, id=234, 2083.785pt x 1255.69125pt>
 File: resources/UMLscore.png Graphic file (type png)
 <use resources/UMLscore.png>
-Package pdftex.def Info: resources/UMLscore.png  used on input line 307.
+Package pdftex.def Info: resources/UMLscore.png  used on input line 316.
 (pdftex.def)             Requested size: 312.00119pt x 188.00067pt.
-<resources/enemyMvcUml.png, id=229, 3854.4pt x 1964.33875pt>
+<resources/enemyMvcUml.png, id=236, 3854.4pt x 1964.33875pt>
 File: resources/enemyMvcUml.png Graphic file (type png)
 <use resources/enemyMvcUml.png>
-Package pdftex.def Info: resources/enemyMvcUml.png  used on input line 326.
+Package pdftex.def Info: resources/enemyMvcUml.png  used on input line 336.
 (pdftex.def)             Requested size: 312.00119pt x 158.97868pt.
- [16 <./resources/UMLscore.png>]
+ [18 <./resources/UMLscore.png>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 335.
-<resources/saveManagerUML.png, id=241, 3317.39375pt x 3854.4pt>
+(Font)              <5> on input line 345.
+ [19 <./resources/enemyMvcUml.png>]
+<resources/saveManagerUML.png, id=260, 3317.39375pt x 3854.4pt>
 File: resources/saveManagerUML.png Graphic file (type png)
 <use resources/saveManagerUML.png>
-Package pdftex.def Info: resources/saveManagerUML.png  used on input line 354.
+Package pdftex.def Info: resources/saveManagerUML.png  used on input line 365.
 (pdftex.def)             Requested size: 234.00238pt x 271.83522pt.
- [17 <./resources/enemyMvcUml.png>] [18 <./resources/saveManagerUML.png>]
-<resources/spawingEnemyUML.png, id=261, 3854.4pt x 1799.72375pt>
+ [20 <./resources/saveManagerUML.png>]
+<resources/spawingEnemyUML.png, id=269, 3854.4pt x 1799.72375pt>
 File: resources/spawingEnemyUML.png Graphic file (type png)
 <use resources/spawingEnemyUML.png>
-Package pdftex.def Info: resources/spawingEnemyUML.png  used on input line 373.
+Package pdftex.def Info: resources/spawingEnemyUML.png  used on input line 385.
 (pdftex.def)             Requested size: 312.00119pt x 145.65599pt.
- [19 <./resources/spawingEnemyUML.png>]
+ [21 <./resources/spawingEnemyUML.png>]
 Capitolo 3.
-[20
+[22
 
 ]
-Overfull \hbox (118.46422pt too wide) in paragraph at lines 424--426
+Overfull \hbox (118.46422pt too wide) in paragraph at lines 437--439
 \OT1/cmr/m/n/12 Map<Integer, Buf-fe-re-dI-ma-ge> e Li-st<MapElement> https://github.com/GiovanniRava/OOP24-
  []
 
 
-Overfull \hbox (260.95436pt too wide) in paragraph at lines 424--426
+Overfull \hbox (260.95436pt too wide) in paragraph at lines 437--439
 \OT1/cmr/m/n/12 runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/GameMap.java 
  []
 
 
-Overfull \hbox (4.57233pt too wide) in paragraph at lines 426--428
+Overfull \hbox (4.57233pt too wide) in paragraph at lines 439--441
 \OT1/cmr/m/n/12 l'en-co-ding UTF-8 in let-tu-ra https://github.com/GiovanniRava/OOP24-
  []
 
 
-Overfull \hbox (266.25708pt too wide) in paragraph at lines 426--428
+Overfull \hbox (266.25708pt too wide) in paragraph at lines 439--441
 \OT1/cmr/m/n/12 runwarrior/blob/59f5771e783f0430bcbb4859ef986df97121394a/src/main/java/it/unibo/runwarrior/model/MapLoader.java 
  []
 
 
-Overfull \hbox (4.54526pt too wide) in paragraph at lines 432--434
+Overfull \hbox (4.54526pt too wide) in paragraph at lines 445--447
 []\OT1/cmr/m/n/12 Implementazione del-la clas-se \OT1/cmr/bx/n/12 Key-Li-ste-ner \OT1/cmr/m/n/12 me-dian-te Cha-rac-ter-Co-mand
  []
 
 
-Overfull \hbox (109.17493pt too wide) in paragraph at lines 432--434
+Overfull \hbox (109.17493pt too wide) in paragraph at lines 445--447
 \OT1/cmtt/m/n/12 GiovanniRava / OOP24-[]runwarrior / blob / 786d60909eb4856d26449dafa053fcec146400df /
  []
 
 
-Overfull \hbox (59.2749pt too wide) in paragraph at lines 432--434
+Overfull \hbox (59.2749pt too wide) in paragraph at lines 445--447
 \OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / controller / player / CharacterComand .
  []
 
-[21]
-Overfull \hbox (35.78493pt too wide) in paragraph at lines 434--437
+[23]
+Overfull \hbox (35.78493pt too wide) in paragraph at lines 447--450
 \OT1/cmr/m/n/12 ground ed ef-fet-ti so-no-ri. $\OMS/cmsy/m/n/12 !$ \OT1/cmr/m/n/12 Per-ma-link: []$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava /
  []
 
 
-Overfull \hbox (28.89989pt too wide) in paragraph at lines 434--437
+Overfull \hbox (28.89989pt too wide) in paragraph at lines 447--450
 \OT1/cmtt/m/n/12 OOP24-[]runwarrior / blob / 786d60909eb4856d26449dafa053fcec146400df /
  []
 
 
-Overfull \hbox (71.62491pt too wide) in paragraph at lines 438--440
+Overfull \hbox (71.62491pt too wide) in paragraph at lines 451--453
 []$\OT1/cmtt/m/n/12 https : / / www3 . ntu . edu . sg / home / ehchua / programming / java / J8c _ PlayingSound .
  []
 
 
-Overfull \hbox (177.09996pt too wide) in paragraph at lines 440--443
+Overfull \hbox (177.09996pt too wide) in paragraph at lines 453--456
 \OT1/cmtt/m/n/12 github . com / GiovanniRava / OOP24-[]runwarrior / blob / 786d60909eb4856d26449dafa053fcec146400df /
  []
 
 
-Overfull \hbox (16.04988pt too wide) in paragraph at lines 440--443
+Overfull \hbox (16.04988pt too wide) in paragraph at lines 453--456
 \OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / controller / collisions / impl /
  []
 
 
-Overfull \hbox (109.17493pt too wide) in paragraph at lines 447--452
+Overfull \hbox (109.17493pt too wide) in paragraph at lines 460--465
 \OT1/cmtt/m/n/12 GiovanniRava / OOP24-[]runwarrior / blob / 786d60909eb4856d26449dafa053fcec146400df /
  []
 
 
-Overfull \hbox (35.07489pt too wide) in paragraph at lines 447--452
+Overfull \hbox (35.07489pt too wide) in paragraph at lines 460--465
 \OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / Menu . java # L181C17-[]L192C20$[]
  []
 
 
-Overfull \hbox (226.49998pt too wide) in paragraph at lines 447--452
+Overfull \hbox (226.49998pt too wide) in paragraph at lines 460--465
 []$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava / OOP24-[]runwarrior / blob / 786d60909eb4856d26449dafa053fcec146400df /
  []
 
 
-Overfull \hbox (35.07489pt too wide) in paragraph at lines 447--452
+Overfull \hbox (35.07489pt too wide) in paragraph at lines 460--465
 \OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / Menu . java # L193C17-[]L204C20$[]
  []
 
 
-Overfull \hbox (226.49998pt too wide) in paragraph at lines 447--452
+Overfull \hbox (226.49998pt too wide) in paragraph at lines 460--465
 []$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava / OOP24-[]runwarrior / blob / 786d60909eb4856d26449dafa053fcec146400df /
  []
 
 
-Overfull \hbox (35.07489pt too wide) in paragraph at lines 447--452
+Overfull \hbox (35.07489pt too wide) in paragraph at lines 460--465
 \OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / Menu . java # L205C16-[]L216C20$[]
  []
 
 
-Overfull \hbox (226.49998pt too wide) in paragraph at lines 447--452
+Overfull \hbox (226.49998pt too wide) in paragraph at lines 460--465
 []$\OT1/cmtt/m/n/12 https : / / github . com / GiovanniRava / OOP24-[]runwarrior / blob / 1177dc7188d3a96ba1165ba19e439a1417d417bf /
  []
 
 
-Overfull \hbox (35.07489pt too wide) in paragraph at lines 447--452
+Overfull \hbox (35.07489pt too wide) in paragraph at lines 460--465
 \OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / Menu . java # L226C17-[]L235C20$[] 
  []
 
 
-Overfull \hbox (177.09996pt too wide) in paragraph at lines 455--457
+Overfull \hbox (177.09996pt too wide) in paragraph at lines 468--470
 \OT1/cmtt/m/n/12 github . com / GiovanniRava / OOP24-[]runwarrior / blob / 487ae1a3598382a5eb6584d892bbe61fabc8d758 /
  []
 
 
-Overfull \hbox (34.57489pt too wide) in paragraph at lines 455--457
+Overfull \hbox (34.57489pt too wide) in paragraph at lines 468--470
 \OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / controller / enemy / EnemySpawner .
  []
 
-[22]
-Overfull \hbox (133.87494pt too wide) in paragraph at lines 457--459
+[24]
+Overfull \hbox (133.87494pt too wide) in paragraph at lines 470--472
 \OT1/cmtt/m/n/12 com / GiovanniRava / OOP24-[]runwarrior / blob / 487ae1a3598382a5eb6584d892bbe61fabc8d758 /
  []
 
 
-Overfull \hbox (9.87488pt too wide) in paragraph at lines 457--459
+Overfull \hbox (9.87488pt too wide) in paragraph at lines 470--472
 \OT1/cmtt/m/n/12 src / test / java / it / unibo / runwarrior / model / GameSaveManagerTest .
  []
 
 
-Overfull \hbox (177.09996pt too wide) in paragraph at lines 459--466
+Overfull \hbox (177.09996pt too wide) in paragraph at lines 472--479
 \OT1/cmtt/m/n/12 github . com / GiovanniRava / OOP24-[]runwarrior / blob / ea221779e7801710824877e7599505de2931ca1d /
  []
 
 
-Overfull \hbox (16.04988pt too wide) in paragraph at lines 459--466
+Overfull \hbox (16.04988pt too wide) in paragraph at lines 472--479
 \OT1/cmtt/m/n/12 src / main / java / it / unibo / runwarrior / view / enemy / impl / GoblinView .
  []
 
-[23]
+[25]
 Capitolo 4.
-[24
+[26
 
-] [25] [26]
+] [27] [28]
 Appendice A.
-[27
-
-] [28]
-Appendice B.
 [29
 
+] [30]
+pdfTeX warning (ext4): destination with the same identifier (name{appendix.Alph1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.574 \chapter{Bibliografia}
+                            
+Appendice A.
+[31
+
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 564--568
+Underfull \hbox (badness 10000) in paragraph at lines 578--582
 []$\OT1/cmtt/m/n/12 https : / / docs . pmd-[]code . org / pmd-[]doc-[]7 . 12 . 0 / pmd _ rules _ java _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 570--574
+Underfull \hbox (badness 10000) in paragraph at lines 584--588
 []$\OT1/cmtt/m/n/12 https : / / en . wikipedia . org / wiki / Initialization-[]on-[]demand _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 577--581
+Underfull \hbox (badness 10000) in paragraph at lines 591--595
 []$\OT1/cmtt/m/n/12 https : / / docs . oracle . com / javase / 7 / docs / api / javax / swing / Timer .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 583--587
+Underfull \hbox (badness 10000) in paragraph at lines 597--601
 []$\OT1/cmtt/m/n/12 https : / / docs . oracle . com / javase / 8 / docs / api / java / awt / event /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 589--593
+Underfull \hbox (badness 10000) in paragraph at lines 603--607
 []$\OT1/cmtt/m/n/12 https : / / www3 . ntu . edu . sg / home / ehchua / programming / java / J8c _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 595--599
+Underfull \hbox (badness 10000) in paragraph at lines 609--613
 []$\OT1/cmtt/m/n/12 https : / / docs . oracle . com / javase / 8 / docs / api / java / awt / Graphics .
  []
 
-[30
+[32
 
-] [31] (report.aux
+] [33] (report.aux
 Package cleveref Info: loaded `italian' language definitions on input line 7.
 Package cleveref Info: loaded `italian' language definitions on input line 8.
 )
@@ -606,20 +622,20 @@ L3 programming layer <2024-01-04>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 3F784ACFA3D8FC6174996A5A299565D8;3324.
+(rerunfilecheck)             Checksum: A118C804C7113123CB89F69D87AF5BCA;3324.
  ) 
 Here is how much of TeX's memory you used:
  12483 strings out of 474486
- 212951 string characters out of 5743283
- 1936542 words of memory out of 5000000
- 34560 multiletter control sequences out of 15000+600000
+ 212935 string characters out of 5743283
+ 1937542 words of memory out of 5000000
+ 34559 multiletter control sequences out of 15000+600000
  564696 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,321b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Utente\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Utente/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on report.pdf (32 pages, 2950981 bytes).
+Output written on report.pdf (34 pages, 2952148 bytes).
 PDF statistics:
- 438 PDF objects out of 1000 (max. 8388607)
- 81 named destinations out of 1000 (max. 500000)
+ 445 PDF objects out of 1000 (max. 8388607)
+ 82 named destinations out of 1000 (max. 500000)
  269 words of extra memory for PDF output out of 10000 (max. 10000000)
 
