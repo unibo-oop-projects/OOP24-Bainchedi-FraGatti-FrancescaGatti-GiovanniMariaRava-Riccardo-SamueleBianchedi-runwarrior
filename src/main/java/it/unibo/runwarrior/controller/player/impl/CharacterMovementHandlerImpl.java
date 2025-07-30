@@ -51,7 +51,7 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
 
     /**
      * Constructor of player movemnt that sets the following parametres, the collision with tiles, powerup and enemies
-     * and the starting position.
+     * and the starting position. Linked with keyboard.
      *
      * @param glc game-loop controller
      * @param player current player
@@ -275,5 +275,14 @@ public class CharacterMovementHandlerImpl implements CharacterMovementHandler {
     @Override
     public int getScX() {
         return this.screenX;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @Override
+    public Character getPlayer() {
+        return this.player;
     }
 }

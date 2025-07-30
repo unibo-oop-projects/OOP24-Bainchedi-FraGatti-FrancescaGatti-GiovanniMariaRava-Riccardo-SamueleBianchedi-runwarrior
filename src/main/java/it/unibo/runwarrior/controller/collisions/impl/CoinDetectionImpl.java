@@ -20,7 +20,8 @@ public class CoinDetectionImpl implements CoinDetection {
     private final ScoreController score;
 
     /**
-     * Constructor of coin detection to link with CoinController and ScoreController.
+     * Constructor of coin detection to link with CoinController and ScoreController. 
+     * It's necessary to make reference of the specific classes.
      *
      * @param tileSize size of tiles
      * @param coinC CoinController instance

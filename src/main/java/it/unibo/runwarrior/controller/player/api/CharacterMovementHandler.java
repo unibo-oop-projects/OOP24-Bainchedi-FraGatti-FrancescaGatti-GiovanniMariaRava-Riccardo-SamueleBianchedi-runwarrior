@@ -2,6 +2,7 @@ package it.unibo.runwarrior.controller.player.api;
 
 import it.unibo.runwarrior.controller.collisions.api.CollisionDetection;
 import it.unibo.runwarrior.controller.collisions.api.KillDetection;
+import it.unibo.runwarrior.model.player.api.Character;
 
 /**
  * Interface that handles player movement.
@@ -82,4 +83,11 @@ public interface CharacterMovementHandler {
      * @return the horizontal player position on the screen
      */
     int getScX();
+
+    /**
+     * Getters for the main player.
+     *
+     * @return the player
+     */
+    Character getPlayer();
 }
