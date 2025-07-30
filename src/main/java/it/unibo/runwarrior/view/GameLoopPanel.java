@@ -72,7 +72,7 @@ public class GameLoopPanel extends JPanel implements Runnable {
     public void startGame() {
         gameThread = new Thread(this);
         gameThread.start();
-        music.play(false);
+        music.play(true);
     }
 
     /**
