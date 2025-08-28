@@ -11,14 +11,14 @@ jobs:
     steps:
       - name: Get branch name
         id: branch-name
-        uses: tj-actions/branch-names@v8
+        uses: tj-actions/branch-names@v9
   version:
     runs-on: ubuntu-24.04
     outputs:
        version_tag: ${{ steps.version.outputs.version_tag }}
     steps:
       - name: Checkout
-        uses: DanySK/action-checkout@0.2.22
+        uses: DanySK/action-checkout@0.2.24
       - uses: paulhatch/semantic-version@v5.4.0
         id: version
         with:
@@ -50,13 +50,13 @@ jobs:
         shell: bash
         run: |
           USES=$(cat <<TRICK_RENOVATE
-          - uses: git-quick-stats/git-quick-stats@e968ef62b9934c1ee5589c1482d61d7d11bc5b81
+          - uses: git-quick-stats/git-quick-stats@261262ab4e042836444d4fd69935ffcb9227a902
           TRICK_RENOVATE
           )
           export USES="$USES"
           ruby -e 'ENV["USES"].lines.map { |line| /^\s*-\s+uses:\s+[^\s]+\/([^\s]+)@(.*)\s*$/.match(line) }.each { |match| puts "#{match[1]}=#{match[2]}" }' >> $GITHUB_OUTPUT
       - name: Checkout
-        uses: DanySK/action-checkout@0.2.22
+        uses: DanySK/action-checkout@0.2.24
       - name: Compute the git stats
         env:
           TERM: xterm
@@ -64,7 +64,7 @@ jobs:
         shell: bash
         run: |
           bash <(curl -s https://raw.githubusercontent.com/git-quick-stats/git-quick-stats/${{ steps.versions.outputs.git-quick-stats }}/git-quick-stats) -T > git-stats.txt
-      - uses: DanySK/build-check-deploy-gradle-action@4.0.1
+      - uses: DanySK/build-check-deploy-gradle-action@4.0.5
         with:
           build-command: ./gradlew blame
           check-command: ./gradlew test blame || true
@@ -93,7 +93,7 @@ jobs:
         shell: bash
         run: |
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/code-plagiarism-detector@9.1.1
+          - uses: DanySK/code-plagiarism-detector@9.1.3
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
