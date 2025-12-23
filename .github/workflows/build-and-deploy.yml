@@ -18,7 +18,7 @@ jobs:
        version_tag: ${{ steps.version.outputs.version_tag }}
     steps:
       - name: Checkout
-        uses: DanySK/action-checkout@0.2.26
+        uses: DanySK/action-checkout@0.2.27
       - uses: paulhatch/semantic-version@v5.4.0
         id: version
         with:
@@ -56,7 +56,7 @@ jobs:
           export USES="$USES"
           ruby -e 'ENV["USES"].lines.map { |line| /^\s*-\s+uses:\s+[^\s]+\/([^\s]+)@(.*)\s*$/.match(line) }.each { |match| puts "#{match[1]}=#{match[2]}" }' >> $GITHUB_OUTPUT
       - name: Checkout
-        uses: DanySK/action-checkout@0.2.26
+        uses: DanySK/action-checkout@0.2.27
       - name: Compute the git stats
         env:
           TERM: xterm
@@ -64,7 +64,7 @@ jobs:
         shell: bash
         run: |
           bash <(curl -s https://raw.githubusercontent.com/git-quick-stats/git-quick-stats/${{ steps.versions.outputs.git-quick-stats }}/git-quick-stats) -T > git-stats.txt
-      - uses: DanySK/build-check-deploy-gradle-action@4.0.12
+      - uses: DanySK/build-check-deploy-gradle-action@4.0.17
         with:
           build-command: ./gradlew blame
           check-command: ./gradlew test blame || true
@@ -93,7 +93,7 @@ jobs:
         shell: bash
         run: |
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/code-plagiarism-detector@9.1.5
+          - uses: DanySK/code-plagiarism-detector@9.2.1
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
