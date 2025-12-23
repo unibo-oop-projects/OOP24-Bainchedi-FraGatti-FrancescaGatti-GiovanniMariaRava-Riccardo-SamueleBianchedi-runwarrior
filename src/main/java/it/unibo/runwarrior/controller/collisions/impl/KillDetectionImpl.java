@@ -5,10 +5,10 @@ import java.awt.Rectangle;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.enemy.api.Enemy;
 import it.unibo.runwarrior.model.player.api.Character;
-import it.unibo.runwarrior.view.GameMusic;
 import it.unibo.runwarrior.model.player.impl.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.GameLoopController;
 import it.unibo.runwarrior.controller.HandlerMapElement;
+import it.unibo.runwarrior.controller.SoundManager;
 import it.unibo.runwarrior.controller.collisions.api.KillDetection;
 
 /**
@@ -20,8 +20,8 @@ public class KillDetectionImpl implements KillDetection {
     private final HandlerMapElement hM;
     private Enemy enemyToDie;
     private long hitWaitTime;
-    private final GameMusic sound1;
-    private final GameMusic sound2;
+    //private final GameMusic sound1;
+    //private final GameMusic sound2;
 
     /**
      * Constructor of kill detection. It's necessary to make reference of the specific classes.
@@ -33,8 +33,8 @@ public class KillDetectionImpl implements KillDetection {
     public KillDetectionImpl(final GameLoopController glc, final HandlerMapElement hM) {
         this.glc = glc;
         this.hM = hM;
-        sound1 = new GameMusic("jumpKill.wav");
-        sound2 = new GameMusic("hit.wav");
+        //sound1 = SoundManager.create("jumpKill.wav");
+        //sound2 = SoundManager.create("hit.wav");
     }
 
     /**
@@ -48,17 +48,17 @@ public class KillDetectionImpl implements KillDetection {
             if (futureArea(playerArea).intersects(enemy.getBounds())) {
                 //System.out.println("----- "+ (playerArea.y + playerArea.height) + "---- "+ enemy.getBounds().y);
                 if (isTouchingUp(playerArea, enemy.getBounds())) {
-                    sound1.play(false);
+                    SoundManager.getAllSounds().get(2).play(false);
                     player.getMovementHandler().setJumpKill();
                     enemyToDie = enemy;
                 } else if (playerArea.x + playerArea.width >= enemy.getBounds().x && playerArea.x < enemy.getBounds().x 
                         && System.currentTimeMillis() - hitWaitTime > CollisionDetectionImpl.SEC_3) {
-                    sound2.play(false);
+                    SoundManager.getAllSounds().get(1).play(false);
                     hitWaitTime = System.currentTimeMillis();
                     glc.getPowersHandler().losePower(true);
                 } else if (playerArea.x <= enemy.getBounds().x + enemy.getBounds().width 
                         && System.currentTimeMillis() - hitWaitTime > CollisionDetectionImpl.SEC_3) {
-                    sound2.play(false);
+                    SoundManager.getAllSounds().get(1).play(false);
                     hitWaitTime = System.currentTimeMillis();
                     glc.getPowersHandler().losePower(true);
                 }

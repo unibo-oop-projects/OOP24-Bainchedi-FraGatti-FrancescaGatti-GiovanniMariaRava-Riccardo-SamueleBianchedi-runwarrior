@@ -7,9 +7,9 @@ import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.runwarrior.model.player.api.Character;
-import it.unibo.runwarrior.view.GameMusic;
 import it.unibo.runwarrior.model.player.impl.AbstractCharacterImpl;
 import it.unibo.runwarrior.controller.GameLoopController;
+import it.unibo.runwarrior.controller.SoundManager;
 import it.unibo.runwarrior.controller.collisions.api.CollisionDetection;
 import it.unibo.runwarrior.model.MapElement;
 
@@ -32,7 +32,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
     private long hitWaitTime;
     private int gameOverY;
     private boolean end;
-    private final GameMusic sound;
+    //private final GameMusic sound;
 
     /**
      * Constructor of the collision detection. It's necessary to make reference of the specific classes.
@@ -51,7 +51,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
         this.glc = glc;
         this.playerArea = new Rectangle();
         this.directions = new ArrayList<>();
-        sound = new GameMusic("hit.wav");
+        //sound = SoundManager.create("hit.wav");
     }
 
     /**
@@ -98,7 +98,7 @@ public class CollisionDetectionImpl implements CollisionDetection {
                 this.directions.add(checkCollisionDirection(x, y, indexXtile, indexYtile, player));
             }
             if (!blocks.get(blockIndex).isHarmless() && System.currentTimeMillis() - hitWaitTime > SEC_3) {
-                sound.play(false);
+                SoundManager.getAllSounds().get(1).play(false);
                 hitWaitTime = System.currentTimeMillis();
                 glc.getPowersHandler().losePower(false);
             }
